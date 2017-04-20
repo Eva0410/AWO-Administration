@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpticiatnMgr.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace OpticiatnMgr.Core.Contracts
     {
         //TODO  add further repositories
 
-        //IGenericRepository<Tutor> TutorRepository { get; }
+        IGenericRepository<TestEntity> TestRepository { get; }
 
         void Save();
 

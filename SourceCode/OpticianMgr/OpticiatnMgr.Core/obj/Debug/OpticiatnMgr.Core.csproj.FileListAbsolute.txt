@@ -1,0 +1,10 @@
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\bin\Debug\OpticiatnMgr.Core.dll.config
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\bin\Debug\OpticiatnMgr.Core.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\bin\Debug\OpticiatnMgr.Core.pdb
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\bin\Debug\EntityFramework.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\bin\Debug\EntityFramework.xml
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\obj\Debug\OpticiatnMgr.Core.csprojResolveAssemblyReference.cache
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\obj\Debug\OpticiatnMgr.Core.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticiatnMgr.Core\obj\Debug\OpticiatnMgr.Core.pdb

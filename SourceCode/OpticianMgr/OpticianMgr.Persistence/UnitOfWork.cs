@@ -1,4 +1,5 @@
 ﻿using OpticiatnMgr.Core.Contracts;
+using OpticiatnMgr.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +13,21 @@ namespace OpticianMgr.Persistence
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
         private bool _disposed;
 
-         //TODO add repositories
+        //TODO add repositories
         ///// <summary>
         /////     Konkrete Repositories. Keine Ableitung erforderlich
         ///// </summary>
-        ///// TODO maybe add further Repositories
-        //private GenericRepository<Tutor> _tutorRepository;
+        private GenericRepository<TestEntity> _testRepository;
 
-        //public IGenericRepository<Tutor> TutorRepository
-        //{
-        //    get
-        //    {
-        //        if (_tutorRepository == null)
-        //            _tutorRepository = new GenericRepository<Tutor>(_context);
-        //        return _tutorRepository;
-        //    }
-        //}
+        public IGenericRepository<TestEntity> TestRepository
+        {
+            get
+            {
+                if (_testRepository == null)
+                    _testRepository = new GenericRepository<TestEntity>(_context);
+                return _testRepository;
+            }
+        }
 
         public UnitOfWork(string connectionString)
         {

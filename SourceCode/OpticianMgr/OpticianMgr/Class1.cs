@@ -8,5 +8,6 @@ namespace OpticianMgr
 {
     public class Class1
     {
+
     }
 }

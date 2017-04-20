@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpticianMgr.FillDb", "OpticianMgr\OpticianMgr.FillDb.csproj", "{4746737D-F8CC-4009-9201-DF85AECD7291}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpticiatnMgr.Core", "OpticiatnMgr.Core\OpticiatnMgr.Core.csproj", "{106FE2A8-7A23-499C-BE52-AE300A5C5A75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpticianMgr.Persistence", "OpticianMgr.Persistence\OpticianMgr.Persistence.csproj", "{966AE4C0-9863-482A-BA40-B6E14CBAC010}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpticianMgr.Wpf", "OpticianMgr.Wpf\OpticianMgr.Wpf.csproj", "{5B151D11-76F8-4D33-83EA-626C57B151C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpticianMgr.FillDb", "OpticianMgr.FillDb\OpticianMgr.FillDb.csproj", "{58912556-B259-4396-B8CF-F2339C75592F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4746737D-F8CC-4009-9201-DF85AECD7291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4746737D-F8CC-4009-9201-DF85AECD7291}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4746737D-F8CC-4009-9201-DF85AECD7291}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4746737D-F8CC-4009-9201-DF85AECD7291}.Release|Any CPU.Build.0 = Release|Any CPU
 		{106FE2A8-7A23-499C-BE52-AE300A5C5A75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{106FE2A8-7A23-499C-BE52-AE300A5C5A75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{106FE2A8-7A23-499C-BE52-AE300A5C5A75}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{5B151D11-76F8-4D33-83EA-626C57B151C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B151D11-76F8-4D33-83EA-626C57B151C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B151D11-76F8-4D33-83EA-626C57B151C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58912556-B259-4396-B8CF-F2339C75592F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58912556-B259-4396-B8CF-F2339C75592F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58912556-B259-4396-B8CF-F2339C75592F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58912556-B259-4396-B8CF-F2339C75592F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

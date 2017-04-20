@@ -56,6 +56,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpticianMgr.Persistence\OpticianMgr.Persistence.csproj">
+      <Project>{966AE4C0-9863-482A-BA40-B6E14CBAC010}</Project>
+      <Name>OpticianMgr.Persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

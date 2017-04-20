@@ -1,0 +1,14 @@
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\OpticianMgr.FillDb.exe.config
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\OpticianMgr.FillDb.exe
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\OpticianMgr.FillDb.pdb
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\OpticianMgr.Persistence.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\OpticiatnMgr.Core.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\EntityFramework.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\OpticianMgr.Persistence.pdb
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\OpticiatnMgr.Core.pdb
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\EntityFramework.xml
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\obj\Debug\OpticianMgr.FillDb.csprojResolveAssemblyReference.cache
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\obj\Debug\OpticianMgr.FillDb.exe
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\obj\Debug\OpticianMgr.FillDb.pdb
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.FillDb\bin\Debug\EntityFramework.SqlServer.xml

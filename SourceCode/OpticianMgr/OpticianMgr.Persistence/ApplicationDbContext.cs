@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpticiatnMgr.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace OpticianMgr.Persistence
     public class ApplicationDbContext : DbContext
     {
         //TODO add further DBSets
-        //public DbSet<Tutor> Tutors { get; set; }
+        public DbSet<TestEntity> Test { get; set; }
 
 
         public ApplicationDbContext() : base("name=DefaultConnection")

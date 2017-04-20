@@ -1,0 +1,12 @@
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\OpticianMgr.Persistence.dll.config
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\OpticianMgr.Persistence.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\OpticianMgr.Persistence.pdb
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\EntityFramework.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\OpticiatnMgr.Core.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\OpticiatnMgr.Core.pdb
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\EntityFramework.xml
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\obj\Debug\OpticianMgr.Persistence.csprojResolveAssemblyReference.cache
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\obj\Debug\OpticianMgr.Persistence.dll
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Persistence\obj\Debug\OpticianMgr.Persistence.pdb
