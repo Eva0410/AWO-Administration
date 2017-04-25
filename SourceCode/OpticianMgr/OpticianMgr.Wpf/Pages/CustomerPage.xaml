@@ -9,7 +9,7 @@
       Title="CustomerPage">
 
     <Grid>
-        <Label x:Name="label" Content="Kundenverwaltung"
+        <Label x:Name="label" Content="Kundenverwaltung "
               HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     </Grid>
