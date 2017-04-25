@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace OpticianMgr.Wpf
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StatisticsPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StatisticsPage : Page
     {
-        public MainWindow()
+        public StatisticsPage()
         {
             InitializeComponent();
-        }
-
-        private void Kunden_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new CustomerPage();
         }
     }
 }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Eva\Documents\Diplomarbeit\OpticianMgr\OpticianMgr.Wpf\obj\Debug\
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Wpf\obj\Debug\
 OpticianMgr.Wpf
 none
 false
 DEBUG;TRACE
-C:\Users\Eva\Documents\Diplomarbeit\OpticianMgr\OpticianMgr.Wpf\App.xaml
-11151548125
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Wpf\App.xaml
+61820717469
 
-5-2017746502
-16-1832156720
-MainWindow.xaml;
+101981721565
+16-1069335642
+Pages\CustomerPage.xaml;Pages\GlassesPage.xaml;MainWindow.xaml;Pages\StatisticsPage.xaml;Pages\StockPage.xaml;Pages\SupplierPage.xaml;
 
 False
 

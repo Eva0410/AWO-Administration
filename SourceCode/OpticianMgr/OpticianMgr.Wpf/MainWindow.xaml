@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf"
         mc:Ignorable="d"
-        Title="Verwaltungsprogramm" Height="397.728" Width="587.86">
+        Title="Augenoptik Aigner - Verwaltungsprogramm" Height="397.728" Width="587.86">
     <Grid>
         <Menu x:Name="menu" VerticalAlignment="Top" Background="#FF00CA00" FontFamily="Georgia" FontSize="14" FontStyle="Italic">
-            <Button Content="Kunden" VerticalAlignment="Center" Margin="5,10">
+            <Button Content="Kunden" VerticalAlignment="Center" Margin="5,10" Click="Kunden_Click">
                 <Button.BorderBrush>
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
@@ -49,6 +49,6 @@
                 </Button.BorderBrush>
             </Button>
         </Menu>
-
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,42,0,0"/>
     </Grid>
 </Window>

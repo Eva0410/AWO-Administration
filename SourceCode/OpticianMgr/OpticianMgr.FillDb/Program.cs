@@ -30,7 +30,7 @@ namespace OpticianMgr.FillDb
 
                 foreach (var item in test2)
                 {
-                    Console.WriteLine(item.ToString());
+                    Console.WriteLine(item.Test);
                 }
                 Console.ReadKey();
             }
