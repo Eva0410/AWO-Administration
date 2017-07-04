@@ -1,4 +1,5 @@
 using GalaSoft.MvvmLight;
+using OpticianMgr.Persistence;
 using OpticiatnMgr.Core.Contracts;
 using OpticiatnMgr.Core.Entities;
 using System.Collections.ObjectModel;
@@ -19,12 +20,13 @@ namespace OpticianMgr.Wpf.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        //private IUnitOfWork uow;
-        private ObservableCollection<TestEntity> tests;
+        private IUnitOfWork uow;
 
         public ObservableCollection<TestEntity> Testlist
         {
-            get { return new ObservableCollection<TestEntity> { new TestEntity() { Test = "LocalDbTest1" }, new TestEntity() { Test = "LocalDbTest2" } };}
+            get {
+                return new ObservableCollection<TestEntity>(this.uow.TestRepository.Get());
+            }
         }
 
         /// <summary>
@@ -32,8 +34,7 @@ namespace OpticianMgr.Wpf.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            //this.uow = _uow;
-            
+            this.uow = new UnitOfWork();
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

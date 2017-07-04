@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class LagerndeBrillenfassung
+    public class LagerndeBrillenfassung : EntityObject
     {
         public String Lieferantenbemerkung { get; set; }
         public String Marke { get; set; }

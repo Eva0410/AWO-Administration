@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Auftrag
+    public class Auftrag : EntityObject
     {
         public int Kunden_Id { get; set; }
         [ForeignKey("Kunden_Id")]

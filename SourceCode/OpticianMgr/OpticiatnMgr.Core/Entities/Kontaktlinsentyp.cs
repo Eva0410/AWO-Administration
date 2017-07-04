@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Kontaktlinsentyp
+    public class Kontaktlinsentyp : EntityObject
     {
         [Required]
         public String Bezeichnung { get; set; }

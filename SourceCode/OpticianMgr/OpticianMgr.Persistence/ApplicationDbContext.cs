@@ -12,6 +12,7 @@ namespace OpticianMgr.Persistence
     {
         //TODO add further DBSets
         public DbSet<TestEntity> Test { get; set; }
+        public DbSet<Lieferant> LieferantenRepository { get; set; }
 
 
         public ApplicationDbContext() : base("name=DefaultConnection")

@@ -1,4 +1,5 @@
 ﻿using OpticianMgr.Persistence;
+using OpticiatnMgr.Core;
 using OpticiatnMgr.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,23 +16,11 @@ namespace OpticianMgr.FillDb
             //TODO: Test Db ersetzen
             using (UnitOfWork uow = new UnitOfWork())
             {
-                uow.DeleteDatabase();
-                var test = new List<TestEntity>();
-                TestEntity t1 = new TestEntity();
-                t1.Test = "TestString 1";
-                TestEntity t2 = new TestEntity();
-                t2.Test = "TestString 2";
-                test.Add(t1);
-                test.Add(t2);
-
-                uow.TestRepository.InsertMany(test);
-                uow.Save();
-
-                var test2 = uow.TestRepository.Get();
-
-                foreach (var item in test2)
+                OpticianController controller = new OpticianController(uow);
+                controller.FillDatabaseFromCsv();
+                foreach (var item in uow.LieferantenRepository.Get())
                 {
-                    Console.WriteLine(item.Test);
+                    Console.WriteLine(item.Name);
                 }
                 Console.ReadKey();
             }

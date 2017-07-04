@@ -3,12 +3,54 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:OpticianMgr.Wpf"
+      xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="SupplierPage">
+      Title="SupplierPage"
+      DataContext="{Binding SupplierPageModel, Source={StaticResource Locator}}">
 
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Lieferanten</Label>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label>Filtern nach: </Label>
+            <ComboBox x:Name="PropertyComboBox" ItemsSource="{Binding PropertiesList}" SelectedIndex="0" SelectedValue="{Binding FilterProperty}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox Width="100" Margin="10,0,0,0" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding FilterSuppliers}" Key="Return"></KeyBinding>
+                </TextBox.InputBindings>
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <i:InvokeCommandAction Command="{Binding Filter}"/>
+                    </i:EventTrigger> -
+                </i:Interaction.Triggers>-->
+            </TextBox>
+            <Button Margin="9,0,0,0" Command="{Binding FilterSuppliers}">Filtern</Button>
+            <Button Margin="9,0,0,0" Command="{Binding DeleteFilter}">Filter zurücksetzen</Button>
+
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding SupplierList}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,30,9" VerticalAlignment="Top" IsTextSearchEnabled="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Name}" Width="2*" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Straße}" Width="2*" Header="Straße"/>
+                <DataGridTextColumn Binding="{Binding Hausnummer}" Width="*" Header="Hausnummer"/>
+                <DataGridTextColumn Binding="{Binding Land}" Width="2*" Header="Land"/>
+                <DataGridTextColumn Binding="{Binding FAX}" Width="2*" Header="Fax"/>
+                <DataGridTextColumn Binding="{Binding Telefon}" Width="2*" Header="Telefon"/>
+                <DataGridTextColumn Binding="{Binding Email}" Width="3*" Header="Email"/>
+                <DataGridTextColumn Binding="{Binding Kundennummer}" Width="*" Header="Kundennummer"/>
+                <DataGridTextColumn Binding="{Binding Kontaktperson}" Width="2*" Header="Kontaktperson"/>
+                <DataGridTextColumn Binding="{Binding Produkte}" Width="3*" Header="Produkte"/>
+                <DataGridTextColumn Binding="{Binding Sonstiges}" Width="3*" Header="Sonstiges"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Command="{Binding AddSupplier}" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Height="23" Margin="0,0,9,0">Lieferant hinzufügen</Button>
+    </DockPanel>
 </Page>

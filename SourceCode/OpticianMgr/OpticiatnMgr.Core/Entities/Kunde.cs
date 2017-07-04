@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Kunde
+    public class Kunde : EntityObject
     {
         public String Titel { get; set; }
         public String Vorname { get; set; }
@@ -16,8 +16,8 @@ namespace OpticiatnMgr.Core.Entities
         public String Nachname { get; set; }
         public String Straße { get; set; }
         public String Hausnummer { get; set; }
-        public int PLZ { get; set; }
-        [ForeignKey("PLZ")]
+        public int Ort_Id { get; set; }
+        [ForeignKey("Ort_Id")]
         public Ort Ort { get; set; }
         public String Land { get; set; }
         public String Telefon1 { get; set; }

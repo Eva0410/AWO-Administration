@@ -28,6 +28,17 @@ namespace OpticianMgr.Persistence
                 return _testRepository;
             }
         }
+        private GenericRepository<Lieferant> _lieferantenRepository;
+
+        public IGenericRepository<Lieferant> LieferantenRepository
+        {
+            get
+            {
+                if (_lieferantenRepository == null)
+                    _lieferantenRepository = new GenericRepository<Lieferant>(_context);
+                return _lieferantenRepository;
+            }
+        }
 
         public UnitOfWork(string connectionString)
         {

@@ -43,6 +43,7 @@ namespace OpticianMgr.Wpf.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<SupplierPageModel>();
         }
 
         public MainViewModel MainViewModel
@@ -52,7 +53,13 @@ namespace OpticianMgr.Wpf.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public SupplierPageModel SupplierPageModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SupplierPageModel>(); }
+        }
+
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

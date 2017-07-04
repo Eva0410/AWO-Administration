@@ -12,6 +12,7 @@ namespace OpticiatnMgr.Core.Contracts
         //TODO  add further repositories
 
         IGenericRepository<TestEntity> TestRepository { get; }
+        IGenericRepository<Lieferant> LieferantenRepository { get; }
 
         void Save();
 

@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Ort
+    public class Ort : EntityObject
     {
         [Required]
         public string OrtName { get; set; }
+        [Required]
+        public string PLZ { get; set; }
     }
 }

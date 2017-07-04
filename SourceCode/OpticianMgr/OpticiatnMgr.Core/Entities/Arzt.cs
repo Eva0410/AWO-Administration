@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Arzt
+    public class Arzt : EntityObject
     {
         [Required]
         public String Name { get; set; }
