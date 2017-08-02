@@ -28,13 +28,20 @@ namespace OpticiatnMgr.Core
         }
         public void FillDatabaseFromCsv()
         {
-
+            List<Ort> orte = GetStringMatrix("TestOrte.csv").Select(o =>
+            new Ort()
+            {
+                OrtName = o[1],
+                PLZ = o[0]
+            }
+            ).ToList();
             List<Lieferant> lieferanten = GetStringMatrix("TestLieferanten.csv").Select(l =>
             new Lieferant()
             {
-                Name = l[0],
+                Lieferantenname = l[0],
                 Straße = l[1],
                 Hausnummer = l[2],
+                Ort_Id = orte.Where(o => o.PLZ == l[3]).FirstOrDefault().Id,
                 Land = l[4],
                 FAX = l[5],
                 Telefon = l[6],
@@ -47,6 +54,7 @@ namespace OpticiatnMgr.Core
 
             _unitOfWork.DeleteDatabase();
             _unitOfWork.LieferantenRepository.InsertMany(lieferanten);
+            _unitOfWork.OrtRepository.InsertMany(orte);
             _unitOfWork.Save();
 
         }

@@ -10,14 +10,14 @@ namespace OpticiatnMgr.Core.Entities
 {
     public class Lieferant : EntityObject
     {
-        [Required ]
-        public String Name { get; set; }
+        [Required]
+        public String Lieferantenname { get; set; }
         public String Straße { get; set; }
         public String Hausnummer { get; set; }
         public int Ort_Id { get; set; }
         //TODO: Ort einfach einfügen können?
-        //[ForeignKey("Ort_Id")]
-        //public Ort Ort { get; set; }
+        [ForeignKey("Ort_Id")]
+        public Ort Ort { get; set; }
         public String Land { get; set; }
         public String FAX { get; set; }
         public String Telefon { get; set; }

@@ -13,6 +13,7 @@ namespace OpticiatnMgr.Core.Contracts
 
         IGenericRepository<TestEntity> TestRepository { get; }
         IGenericRepository<Lieferant> LieferantenRepository { get; }
+        IGenericRepository<Ort> OrtRepository { get; }
 
         void Save();
 

@@ -20,7 +20,7 @@ namespace OpticianMgr.FillDb
                 controller.FillDatabaseFromCsv();
                 foreach (var item in uow.LieferantenRepository.Get())
                 {
-                    Console.WriteLine(item.Name);
+                    Console.WriteLine(item.Lieferantenname);
                 }
                 Console.ReadKey();
             }

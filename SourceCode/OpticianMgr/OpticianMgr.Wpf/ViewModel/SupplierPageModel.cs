@@ -10,14 +10,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Collections.Specialized;
+using System.Windows.Controls;
 
 namespace OpticianMgr.Wpf.ViewModel
 { 
     public class SupplierPageModel : ViewModelBase
     {
-        private List<Lieferant> fullSuppliers { get; set; }
         private IUnitOfWork uow;
-        public ObservableCollection<Lieferant> supplierList;
+        private ObservableCollection<Lieferant> supplierList;
+
+        private Lieferant _selectedLieferant;
+
+        public Lieferant SelectedLieferant
+        {
+            get { return _selectedLieferant; }
+            set { _selectedLieferant = value; }
+        }
+        private DataGridCellInfo _selectedCell;
+
+        public DataGridCellInfo SelectedCell
+        {
+            get { return _selectedCell; }
+            set { _selectedCell = value; }
+        }
+
 
 
         public ObservableCollection<Lieferant> SupplierList
@@ -26,13 +43,18 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 return supplierList;
             }
-            set { supplierList = value; }
+            set
+            {
+                supplierList = value;
+            }
         }
         public ObservableCollection<String> PropertiesList
         {
             get
             {
-                return new ObservableCollection<string>(typeof(Lieferant).GetProperties().Select(p => p.Name).ToList());
+                var li = new ObservableCollection<string>(typeof(Lieferant).GetProperties().Select(p => p.Name).ToList());
+                li.Remove("Timestamp");
+                return li;
             }
         }
         private string filterProperty;
@@ -57,6 +79,7 @@ namespace OpticianMgr.Wpf.ViewModel
 
         public ICommand FilterSuppliers { get; set; }
         public ICommand DeleteFilter { get; set; }
+        public ICommand AddSupplier { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -64,20 +87,64 @@ namespace OpticianMgr.Wpf.ViewModel
         public SupplierPageModel()
         {
             this.uow = new UnitOfWork();
-            this.fullSuppliers = this.uow.LieferantenRepository.Get().ToList();
-            this.supplierList = new ObservableCollection<Lieferant>(this.fullSuppliers);
+            this.SupplierList = GetAllSuppliers();
             FilterSuppliers = new RelayCommand(Filter);
             DeleteFilter = new RelayCommand(DeleteF);
+            AddSupplier = new RelayCommand(AddS);
+            this.SupplierList.CollectionChanged += this.OnCollectionChanged;
+
         }
+        //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen
+        private ObservableCollection<Lieferant> GetAllSuppliers()
+        {
+            ObservableCollection<Lieferant> collection = new ObservableCollection<Lieferant>(this.uow.LieferantenRepository.Get(includeProperties:"Ort").ToList());
+            collection.CollectionChanged += this.OnCollectionChanged;
+            return collection;
+        }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+
+            if (e.OldItems != null)
+            {
+                foreach (Lieferant item in e.OldItems)
+                {
+                   this.uow.LieferantenRepository.Delete(item);
+                }
+                this.uow.Save();
+            }
+        }
+
         public void Filter()
         {
-            this.SupplierList = new ObservableCollection<Lieferant>(this.fullSuppliers.Where(s => s.GetType().GetProperty(this.filterProperty).GetValue(s, null).ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0).ToList());
+            if (this.filterText != "")
+            {
+                this.SupplierList = new ObservableCollection<Lieferant>(GetAllSuppliers().Where(s => s.GetType().GetProperty(this.filterProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                this.SupplierList.CollectionChanged += OnCollectionChanged;
+            }
+            else
+                this.SupplierList = GetAllSuppliers();
             this.RaisePropertyChanged(() => this.SupplierList);
         }
         public void DeleteF()
         {
-            this.supplierList = new ObservableCollection<Lieferant>(this.fullSuppliers);
+            this.SupplierList = GetAllSuppliers();
             this.FilterText = "";
+            this.RaisePropertyChanged(() => this.SupplierList);
+        }
+        public void AddS()
+        {
+            var k = this.SelectedCell;
+            
+            foreach (var item in this.SupplierList.Where(s => s.Id == 0))
+            {
+                if (item != null)
+                {
+                    this.uow.LieferantenRepository.Insert(item);
+                }
+            }
+            this.uow.Save();
+            this.SupplierList = GetAllSuppliers();
             this.RaisePropertyChanged(() => this.SupplierList);
         }
     }
