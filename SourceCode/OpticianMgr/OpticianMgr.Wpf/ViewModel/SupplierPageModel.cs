@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Collections.Specialized;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace OpticianMgr.Wpf.ViewModel
 { 
@@ -54,6 +55,7 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 var li = new ObservableCollection<string>(typeof(Lieferant).GetProperties().Select(p => p.Name).ToList());
                 li.Remove("Timestamp");
+                li[li.IndexOf("Ort_Id")] = "PLZ";
                 return li;
             }
         }
@@ -104,22 +106,49 @@ namespace OpticianMgr.Wpf.ViewModel
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-
+            //Delete Items
             if (e.OldItems != null)
             {
                 foreach (Lieferant item in e.OldItems)
                 {
-                   this.uow.LieferantenRepository.Delete(item);
+                    if (item.Id != 0 && uow.LieferantenRepository.GetById(item.Id) != null)
+                    {
+                        var messageBoxResult = MessageBox.Show("Wollen Sie den Lieferanten '" + item.Lieferantenname + "' wirklich löschen?", "Lieferant Löschen", MessageBoxButton.YesNo);
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            this.uow.LieferantenRepository.Delete(item);
+                        }
+                    }
                 }
                 this.uow.Save();
             }
+
+            //Initialize new Items
+            if(e.NewItems != null)
+            {
+                foreach (Lieferant item in e.NewItems)
+                {
+                    item.Ort = new Ort();
+                }
+            }
+            this.SupplierList = GetAllSuppliers();
+            this.RaisePropertyChanged(() => this.SupplierList);
         }
 
         public void Filter()
         {
+            this.FilterProperty = this.FilterProperty == "Ort" ? "OrtName" : this.FilterProperty;
             if (this.filterText != "")
             {
-                this.SupplierList = new ObservableCollection<Lieferant>(GetAllSuppliers().Where(s => s.GetType().GetProperty(this.filterProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                if (typeof(Ort).GetProperty(this.FilterProperty) != null)
+                {
+                    this.SupplierList = new ObservableCollection<Lieferant>(GetAllSuppliers().Where(s => s.Ort.GetType().GetProperty(this.filterProperty).GetValue(s.Ort, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+
+                }
+                else
+                {
+                    this.SupplierList = new ObservableCollection<Lieferant>(GetAllSuppliers().Where(s => s.GetType().GetProperty(this.filterProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                }
                 this.SupplierList.CollectionChanged += OnCollectionChanged;
             }
             else
@@ -139,7 +168,8 @@ namespace OpticianMgr.Wpf.ViewModel
             foreach (var item in this.SupplierList.Where(s => s.Id == 0))
             {
                 if (item != null)
-                {
+                { 
+                    
                     this.uow.LieferantenRepository.Insert(item);
                 }
             }

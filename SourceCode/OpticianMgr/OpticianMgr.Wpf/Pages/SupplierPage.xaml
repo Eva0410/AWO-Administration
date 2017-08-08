@@ -39,7 +39,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Lieferantenname}" Width="2*" Header="Lieferantenname"/>
-                <DataGridTextColumn Binding="{Binding PLZ}" Width="*" Header="PLZ"/>
+                <DataGridTextColumn Binding="{Binding Ort.PLZ}" Width="*" Header="PLZ"/>
                 <DataGridTextColumn Binding="{Binding Ort.OrtName}" Width="2*" Header="Ort"/>
                 <DataGridTextColumn Binding="{Binding Straße}" Width="2*" Header="Straße"/>
                 <DataGridTextColumn Binding="{Binding Hausnummer}" Width="*" Header="Hausnummer"/>
@@ -56,6 +56,6 @@
                 <KeyBinding Command="{Binding AddSupplier}" Key="Return"></KeyBinding>
             </DataGrid.InputBindings>
         </DataGrid>
-        <Button Margin="9,0,10,0" DockPanel.Dock="Right" Command="{Binding AddSupplier}" HorizontalAlignment="Right" VerticalAlignment="Top">Lieferanten anlegen</Button>
+        <!--<Button Margin="9,0,10,0" DockPanel.Dock="Right" Command="{Binding AddSupplier}" HorizontalAlignment="Right" VerticalAlignment="Top">Lieferanten anlegen</Button>-->
     </DockPanel>
 </Page>

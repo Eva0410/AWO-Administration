@@ -14,7 +14,7 @@ namespace OpticiatnMgr.Core.Entities
         public String Lieferantenname { get; set; }
         public String Straße { get; set; }
         public String Hausnummer { get; set; }
-        public int Ort_Id { get; set; }
+        public int? Ort_Id { get; set; }
         //TODO: Ort einfach einfügen können?
         [ForeignKey("Ort_Id")]
         public Ort Ort { get; set; }

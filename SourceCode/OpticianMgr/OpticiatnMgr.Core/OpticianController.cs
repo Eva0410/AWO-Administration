@@ -41,7 +41,7 @@ namespace OpticiatnMgr.Core
                 Lieferantenname = l[0],
                 Straße = l[1],
                 Hausnummer = l[2],
-                Ort_Id = orte.Where(o => o.PLZ == l[3]).FirstOrDefault().Id,
+                Ort = orte.Where(o => o.PLZ == l[3]).FirstOrDefault(),
                 Land = l[4],
                 FAX = l[5],
                 Telefon = l[6],
@@ -53,8 +53,8 @@ namespace OpticiatnMgr.Core
             }).ToList();
 
             _unitOfWork.DeleteDatabase();
-            _unitOfWork.LieferantenRepository.InsertMany(lieferanten);
             _unitOfWork.OrtRepository.InsertMany(orte);
+            _unitOfWork.LieferantenRepository.InsertMany(lieferanten);
             _unitOfWork.Save();
 
         }
