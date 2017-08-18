@@ -88,6 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\AddSupplierViewModel.cs" />
+    <Compile Include="WindowServices\IRequestClose.cs" />
+    <Compile Include="WindowServices\IWindowService.cs" />
     <Compile Include="Pages\AddSupplierWindow.xaml.cs">
       <DependentUpon>AddSupplierWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SupplierPageModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="WindowServices\AddSupplierWindowService.cs" />
     <Page Include="Pages\AddSupplierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

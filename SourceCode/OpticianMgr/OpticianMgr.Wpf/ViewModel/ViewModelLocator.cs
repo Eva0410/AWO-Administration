@@ -44,6 +44,7 @@ namespace OpticianMgr.Wpf.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SupplierPageModel>();
+            SimpleIoc.Default.Register<AddSupplierViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -57,6 +58,10 @@ namespace OpticianMgr.Wpf.ViewModel
         public SupplierPageModel SupplierPageModel
         {
             get { return ServiceLocator.Current.GetInstance<SupplierPageModel>(); }
+        }
+        public AddSupplierViewModel AddSupplierViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<AddSupplierViewModel>(); }
         }
 
 

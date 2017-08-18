@@ -163,19 +163,17 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public void AddS()
         {
-            var k = this.SelectedCell;
-            
-            foreach (var item in this.SupplierList.Where(s => s.Id == 0))
+            AddSupplierWindowService windowService = new AddSupplierWindowService();
+            AddSupplierViewModel viewModel = new AddSupplierViewModel();
+            windowService.showWindow(viewModel);
+            EventHandler<EventArgs> handler = null;
+            handler = (sender, e) =>
             {
-                if (item != null)
-                { 
-                    
-                    this.uow.LieferantenRepository.Insert(item);
-                }
-            }
-            this.uow.Save();
-            this.SupplierList = GetAllSuppliers();
-            this.RaisePropertyChanged(() => this.SupplierList);
+                viewModel.RefreshSuppliers -= handler;
+                this.SupplierList = this.GetAllSuppliers();
+                this.RaisePropertyChanged(() => this.SupplierList);
+            };
+            viewModel.RefreshSuppliers += handler;
         }
     }
 }
