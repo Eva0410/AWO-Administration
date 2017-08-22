@@ -9,6 +9,6 @@ namespace OpticianMgr.Wpf
 {
     public interface IWindowService
     {
-        void showWindow<TViewModel>(TViewModel dataContext) where TViewModel : IRequestClose;
+        void ShowWindow<TViewModel>(TViewModel dataContext) where TViewModel : IRequestClose;
     }
 }

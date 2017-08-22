@@ -22,12 +22,13 @@ namespace OpticianMgr.Wpf.ViewModel
     {
         private IUnitOfWork uow;
 
-        public ObservableCollection<TestEntity> Testlist
-        {
-            get {
-                return new ObservableCollection<TestEntity>(this.uow.TestRepository.Get());
-            }
-        }
+        //TODO
+        //public ObservableCollection<TestEntity> Testlist
+        //{
+        //    get {
+        //        return new ObservableCollection<TestEntity>(this.uow.TestRepository.Get());
+        //    }
+        //}
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.

@@ -18,10 +18,11 @@ namespace OpticianMgr.FillDb
             {
                 OpticianController controller = new OpticianController(uow);
                 controller.FillDatabaseFromCsv();
-                foreach (var item in uow.LieferantenRepository.Get())
+                foreach (var item in uow.SupplierRepository.Get())
                 {
-                    Console.WriteLine(item.Lieferantenname);
+                    Console.WriteLine(item.Name);
                 }
+                Console.WriteLine("Alle Daten wurden erfolgreich eingefügt!");
                 Console.ReadKey();
             }
         }

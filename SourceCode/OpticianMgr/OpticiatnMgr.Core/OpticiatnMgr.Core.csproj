@@ -52,16 +52,15 @@
     <Compile Include="Contracts\IEntityObject.cs" />
     <Compile Include="Contracts\IGenericRepository.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
-    <Compile Include="Entities\Arzt.cs" />
-    <Compile Include="Entities\Auftrag.cs" />
+    <Compile Include="Entities\Doctor.cs" />
+    <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\EntityObject.cs" />
-    <Compile Include="Entities\Glastyp.cs" />
-    <Compile Include="Entities\Kontaktlinsentyp.cs" />
-    <Compile Include="Entities\Kunde.cs" />
-    <Compile Include="Entities\LagerndeBrillenfassung.cs" />
-    <Compile Include="Entities\Lieferant.cs" />
-    <Compile Include="Entities\Ort.cs" />
-    <Compile Include="Entities\TestEntity.cs" />
+    <Compile Include="Entities\Glasstype.cs" />
+    <Compile Include="Entities\ContactLensType.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\EyeGlassFrame.cs" />
+    <Compile Include="Entities\Supplier.cs" />
+    <Compile Include="Entities\Town.cs" />
     <Compile Include="OpticianController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

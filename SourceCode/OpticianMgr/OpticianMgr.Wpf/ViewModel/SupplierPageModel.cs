@@ -13,21 +13,17 @@ using System.Windows.Input;
 using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows;
+using System.Resources;
+using System.Collections;
+using System.Windows.Data;
 
 namespace OpticianMgr.Wpf.ViewModel
-{ 
+{
     public class SupplierPageModel : ViewModelBase
     {
-        private IUnitOfWork uow;
-        private ObservableCollection<Lieferant> supplierList;
+        private ObservableCollection<Supplier> supplierList;
+        private ResourceManager manager = Properties.Resources.ResourceManager;
 
-        private Lieferant _selectedLieferant;
-
-        public Lieferant SelectedLieferant
-        {
-            get { return _selectedLieferant; }
-            set { _selectedLieferant = value; }
-        }
         private DataGridCellInfo _selectedCell;
 
         public DataGridCellInfo SelectedCell
@@ -36,9 +32,7 @@ namespace OpticianMgr.Wpf.ViewModel
             set { _selectedCell = value; }
         }
 
-
-
-        public ObservableCollection<Lieferant> SupplierList
+        public ObservableCollection<Supplier> SupplierList
         {
             get
             {
@@ -53,10 +47,17 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             get
             {
-                var li = new ObservableCollection<string>(typeof(Lieferant).GetProperties().Select(p => p.Name).ToList());
-                li.Remove("Timestamp");
-                li[li.IndexOf("Ort_Id")] = "PLZ";
-                return li;
+                ObservableCollection<string> props = new ObservableCollection<string>(typeof(Supplier).GetProperties().Select(p => p.Name).ToList());
+                ObservableCollection<string> newList = new ObservableCollection<string>();
+                props.Remove("Timestamp");
+                props[props.IndexOf("Town_Id")] = "ZipCode";
+                foreach (var item in props)
+                {
+                    var germanItem = manager.GetString(item);
+                    if (germanItem != null)
+                        newList.Add(germanItem);
+                }
+                return newList;
             }
         }
         private string filterProperty;
@@ -82,25 +83,33 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand FilterSuppliers { get; set; }
         public ICommand DeleteFilter { get; set; }
         public ICommand AddSupplier { get; set; }
+        public ICommand EditSupplier { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public SupplierPageModel()
         {
-            this.uow = new UnitOfWork();
-            this.SupplierList = GetAllSuppliers();
+            UpdateSuppliers();
             FilterSuppliers = new RelayCommand(Filter);
             DeleteFilter = new RelayCommand(DeleteF);
             AddSupplier = new RelayCommand(AddS);
+            EditSupplier = new RelayCommand(EditS);
             this.SupplierList.CollectionChanged += this.OnCollectionChanged;
-
+        }
+        private void UpdateSuppliers()
+        {
+            this.supplierList = this.GetAllSuppliers();
         }
         //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen
-        private ObservableCollection<Lieferant> GetAllSuppliers()
+        private ObservableCollection<Supplier> GetAllSuppliers()
         {
-            ObservableCollection<Lieferant> collection = new ObservableCollection<Lieferant>(this.uow.LieferantenRepository.Get(includeProperties:"Ort").ToList());
-            collection.CollectionChanged += this.OnCollectionChanged;
+            ObservableCollection<Supplier> collection = new ObservableCollection<Supplier>();
+            using (UnitOfWork localUOW = new UnitOfWork())
+            {
+                collection = new ObservableCollection<Supplier>(localUOW.SupplierRepository.Get(includeProperties: "Town").ToList());
+                collection.CollectionChanged += this.OnCollectionChanged;
+            }
             return collection;
         }
 
@@ -109,71 +118,197 @@ namespace OpticianMgr.Wpf.ViewModel
             //Delete Items
             if (e.OldItems != null)
             {
-                foreach (Lieferant item in e.OldItems)
+                foreach (Supplier item in e.OldItems)
                 {
-                    if (item.Id != 0 && uow.LieferantenRepository.GetById(item.Id) != null)
+                    Supplier existingItem = null;
+                    using (UnitOfWork localUOW = new UnitOfWork())
                     {
-                        var messageBoxResult = MessageBox.Show("Wollen Sie den Lieferanten '" + item.Lieferantenname + "' wirklich löschen?", "Lieferant Löschen", MessageBoxButton.YesNo);
+                        existingItem = localUOW.SupplierRepository.GetById(item.Id);
+                    }
+                    if (item.Id != 0 && existingItem != null)
+                    {
+                        var messageBoxResult = MessageBox.Show("Wollen Sie den Lieferanten '" + item.Name + "' wirklich löschen?", "Lieferant Löschen", MessageBoxButton.YesNo);
                         if (messageBoxResult == MessageBoxResult.Yes)
                         {
-                            this.uow.LieferantenRepository.Delete(item);
+                            using (UnitOfWork localUOW = new UnitOfWork())
+                            {
+                                localUOW.SupplierRepository.Delete(item);
+                                localUOW.Save(); //Sollte nach der for-schleife passieren, ist aber wegen localUOW nicht möglich
+                            }
                         }
+
                     }
                 }
-                this.uow.Save();
+                UpdateSuppliers();
+                this.RaisePropertyChanged(() => this.SupplierList);
             }
-
-            //Initialize new Items
-            if(e.NewItems != null)
-            {
-                foreach (Lieferant item in e.NewItems)
-                {
-                    item.Ort = new Ort();
-                }
-            }
-            this.SupplierList = GetAllSuppliers();
-            this.RaisePropertyChanged(() => this.SupplierList);
         }
 
         public void Filter()
         {
-            this.FilterProperty = this.FilterProperty == "Ort" ? "OrtName" : this.FilterProperty;
+            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
+            this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty;
+            string translatedProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
             if (this.filterText != "")
             {
-                if (typeof(Ort).GetProperty(this.FilterProperty) != null)
+                if (typeof(Town).GetProperty(translatedProperty) != null)
                 {
-                    this.SupplierList = new ObservableCollection<Lieferant>(GetAllSuppliers().Where(s => s.Ort.GetType().GetProperty(this.filterProperty).GetValue(s.Ort, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                    this.SupplierList = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Town?.GetType().GetProperty(translatedProperty).GetValue(s.Town, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
 
                 }
                 else
                 {
-                    this.SupplierList = new ObservableCollection<Lieferant>(GetAllSuppliers().Where(s => s.GetType().GetProperty(this.filterProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                    this.SupplierList = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.GetType().GetProperty(translatedProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
                 }
                 this.SupplierList.CollectionChanged += OnCollectionChanged;
             }
             else
-                this.SupplierList = GetAllSuppliers();
+                UpdateSuppliers();
             this.RaisePropertyChanged(() => this.SupplierList);
         }
+        //Delete filter
         public void DeleteF()
         {
-            this.SupplierList = GetAllSuppliers();
+            UpdateSuppliers();
             this.FilterText = "";
             this.RaisePropertyChanged(() => this.SupplierList);
         }
+        //add supplier
         public void AddS()
         {
             AddSupplierWindowService windowService = new AddSupplierWindowService();
             AddSupplierViewModel viewModel = new AddSupplierViewModel();
-            windowService.showWindow(viewModel);
-            EventHandler<EventArgs> handler = null;
-            handler = (sender, e) =>
+            windowService.ShowWindow(viewModel);
+            EventHandler<EventArgs> refreshSupplierHandler = null;
+            refreshSupplierHandler = (sender, e) =>
             {
-                viewModel.RefreshSuppliers -= handler;
-                this.SupplierList = this.GetAllSuppliers();
+                viewModel.RefreshSuppliers -= refreshSupplierHandler;
+                this.UpdateSuppliers();
                 this.RaisePropertyChanged(() => this.SupplierList);
             };
-            viewModel.RefreshSuppliers += handler;
+            viewModel.RefreshSuppliers += refreshSupplierHandler;
+        }
+        //Edit supplier
+        public void EditS()
+        {
+            Supplier newSupplier = (Supplier)this.SelectedCell.Item;
+            Supplier oldSupplier = null;
+            using (UnitOfWork localUow = new UnitOfWork())
+            {
+                oldSupplier = localUow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town").FirstOrDefault();
+            }
+            List<String> changedProperties = this.ChangedProperties(oldSupplier, newSupplier);
+            if (changedProperties.Count != 0)
+            {
+                if (changedProperties.Contains("ZipCode") || changedProperties.Contains("TownName"))
+                {
+                    if (CheckTown(newSupplier.Town))
+                    {
+                        var messageBoxResult = MessageBox.Show("Möchten Sie die Änderungen für alle Orte speichern?", "Lieferant Ändern", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            using (UnitOfWork localUow = new UnitOfWork())
+                            {
+                                localUow.TownRepository.Update(newSupplier.Town);
+                                localUow.Save();
+                            }
+                        }
+                        else if (messageBoxResult == MessageBoxResult.No)
+                        {
+                            using (UnitOfWork localUow = new UnitOfWork())
+                            {
+                                newSupplier.Town_Id = 0;
+                                Town existingTown = localUow.TownRepository.Get(t => t.TownName == newSupplier.Town.TownName && t.ZipCode == newSupplier.Town.ZipCode).FirstOrDefault();
+                                if (existingTown != null)
+                                {
+                                    newSupplier.Town = existingTown;
+                                    newSupplier.Town_Id = existingTown.Id;
+                                }
+                                else
+                                {
+                                    Town newTown = new Town()
+                                    {
+                                        TownName = newSupplier.Town.TownName,
+                                        ZipCode = newSupplier.Town.ZipCode
+                                    };
+                                    localUow.TownRepository.Insert(newTown);
+                                    newSupplier.Town = newTown;
+                                }
+                                localUow.SupplierRepository.Update(newSupplier);
+                                localUow.Save();
+                            }
+                        }
+                        UpdateSuppliers();
+                        this.RaisePropertyChanged(() => this.SupplierList);
+                    }
+                }
+                else
+                {
+                    SaveChanges(newSupplier);
+                }
+            }
+
+
+        }
+        private void SaveChanges(Supplier newSupplier)
+        {
+            using (UnitOfWork localUow = new UnitOfWork())
+            {
+                var messageBoxResult = MessageBox.Show(String.Format("Möchten Sie die Änderungen beim Lieferant mit der Id '{0}' speichern?", newSupplier.Id), "Lieferant Ändern", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    localUow.SupplierRepository.Update(newSupplier);
+                    localUow.Save();
+                }
+            }
+            UpdateSuppliers();
+            this.RaisePropertyChanged(() => this.SupplierList);
+        }
+        private bool CheckTown(Town town)
+        {
+            bool check = true;
+            if (String.IsNullOrEmpty(town.ZipCode) && !String.IsNullOrEmpty(town.TownName))
+            {
+                MessageBox.Show("Es muss eine Postleitzahl angegeben werden!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                check = false;
+            }
+            if (String.IsNullOrEmpty(town.TownName) && !String.IsNullOrEmpty(town.ZipCode))
+            {
+                MessageBox.Show("Es muss ein Ortsname angegeben werden!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                check = false;
+            }
+            return check;
+        }
+        private List<String> ChangedProperties(Supplier oldSupplier, Supplier newSupplier)
+        {
+            List<String> changed = new List<string>();
+            List<String> props = new List<string>(typeof(Supplier).GetProperties().Select(p => p.Name).ToList());
+            props.Remove("Timestamp");
+            props.Remove("Id");
+            props.Remove("Town_Id");
+            props.Remove("Town");
+            props.Add("TownName");
+            props.Add("ZipCode");
+            foreach (var item in props)
+            {
+                if (typeof(Town).GetProperty(item) != null)
+                {
+                    if (oldSupplier.Town?.GetType().GetProperty(item).GetValue(oldSupplier.Town, null)?.ToString() != newSupplier.Town?.GetType().GetProperty(item).GetValue(newSupplier.Town, null)?.ToString())
+                    {
+                        changed.Add(item);
+                    }
+                }
+                else
+                {
+
+                    if (oldSupplier.GetType().GetProperty(item).GetValue(oldSupplier, null)?.ToString() != (newSupplier.GetType().GetProperty(item).GetValue(newSupplier, null)?.ToString()))
+                    {
+                        changed.Add(item);
+                    }
+                }
+            }
+            return changed;
+
         }
     }
 }

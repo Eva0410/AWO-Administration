@@ -11,7 +11,7 @@ namespace OpticianMgr.Wpf
 {
     public class AddSupplierWindowService : IWindowService
     {
-        public void showWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        public void ShowWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
             AddSupplierWindow newWindow = new AddSupplierWindow();
             EventHandler<EventArgs> closeHandler = null;

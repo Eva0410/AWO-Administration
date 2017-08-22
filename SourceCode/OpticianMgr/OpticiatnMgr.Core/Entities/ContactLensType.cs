@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Ort : EntityObject
+    public class ContactLensType : EntityObject
     {
         [Required]
-        public string OrtName { get; set; }
-        [Required]
-        public string PLZ { get; set; }
+        public String Description { get; set; }
     }
 }

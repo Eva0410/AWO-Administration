@@ -7,6 +7,12 @@
         xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
         Title="Neuen Lieferant hinzufügen" Height="600" Width="600">
     <StackPanel>
+        <StackPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFD3D2D2"/>
+                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
+            </LinearGradientBrush>
+        </StackPanel.Background>
         <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Neuer Lieferant</Label>
         <Grid Margin="20,10">
             <Grid.ColumnDefinitions>
@@ -43,35 +49,35 @@
             <Label Grid.Column="0" Grid.Row="10">Kontaktperson:</Label>
             <Label Grid.Column="0" Grid.Row="11">Produkte:</Label>
             <Label Grid.Column="0" Grid.Row="12" Grid.RowSpan="2">Sonstiges:</Label>
-            <TextBox Text="{Binding Lieferant.Lieferantenname, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Lieferant.Straße, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Lieferant.Hausnummer, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Ort.PLZ, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3" Margin="0,0,0,10" Width="200">
+            <TextBox Text="{Binding Supplier.Name, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.Street, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.HouseNumber, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Town.ZipCode, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3" Margin="0,0,0,10" Width="200">
                 <TextBox.InputBindings>
-                    <KeyBinding Command="{Binding FindOrt, Mode=TwoWay}" Key="Return"></KeyBinding>
+                    <KeyBinding Command="{Binding FindTown, Mode=TwoWay}" Key="Return"></KeyBinding>
                 </TextBox.InputBindings>
             </TextBox>
-            <TextBox Text="{Binding Ort.OrtName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4" Margin="0,0,0,10" Width="200">
+            <TextBox Text="{Binding Town.TownName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4" Margin="0,0,0,10" Width="200">
                 <TextBox.InputBindings>
-                    <KeyBinding Command="{Binding FindPLZ, Mode=TwoWay}" Key="Return"></KeyBinding>
+                    <KeyBinding Command="{Binding FindZipCode, Mode=TwoWay}" Key="Return"></KeyBinding>
                 </TextBox.InputBindings>
             </TextBox>
-            <TextBox Text="{Binding Lieferant.Land, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Lieferant.FAX, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="6" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Lieferant.Telefon, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Lieferant.Email, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="8" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Lieferant.Kundennummer, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="9" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Lieferant.Kontaktperson, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="10" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.Country, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.FAX, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="6" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.Telephone, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.Email, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="8" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.CustomerId, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="9" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.ContactPerson, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="10" Margin="0,0,0,10" Width="200"></TextBox>
             <ScrollViewer Grid.Column="1" Grid.Row="11" Margin="0,0,0,10">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Lieferant.Produkte, Mode=OneWayToSource}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left"></TextBox>
+                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Products, Mode=OneWayToSource}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left"></TextBox>
             </ScrollViewer>
             <ScrollViewer Grid.Column="1" Grid.Row="12" Margin="0,0,0,10">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Lieferant.Sonstiges, Mode=OneWayToSource}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Others, Mode=OneWayToSource}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
             </ScrollViewer>
             <TextBlock Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="0" TextWrapping="WrapWithOverflow" MaxWidth="190" Text="{Binding NameWarning, Mode=OneWay}" Foreground="Red" Margin="10,0,0,0" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock Grid.RowSpan="2" Grid.Column="3" Grid.Row="3" TextWrapping="WrapWithOverflow" MaxWidth="190" Text="{Binding OrtWarning, Mode=OneWay}" Foreground="Red" Margin="10,0,29,0"></TextBlock>
-            <Button Command="{Binding FindOrt}" Content="Ort suchen" Grid.Column="2" Grid.Row="3" Width="75" HorizontalAlignment="Left" Margin="10,5,0,5"/>
-            <Button Command="{Binding FindPLZ}" Content="PLZ suchen" Grid.Column="2" Grid.Row="4" Width="75" HorizontalAlignment="Left" Margin="10,3,0,5"/>
+            <TextBlock Grid.RowSpan="2" Grid.Column="3" Grid.Row="3" TextWrapping="WrapWithOverflow" MaxWidth="190" Text="{Binding TownWarning, Mode=OneWay}" Foreground="Red" Margin="10,0,29,0"></TextBlock>
+            <Button Command="{Binding FindTown}" Content="Ort suchen" Grid.Column="2" Grid.Row="3" Width="75" HorizontalAlignment="Left" Margin="10,5,0,5"/>
+            <Button Command="{Binding FindZipCode}" Content="PLZ suchen" Grid.Column="2" Grid.Row="4" Width="75" HorizontalAlignment="Left" Margin="10,3,0,5"/>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>

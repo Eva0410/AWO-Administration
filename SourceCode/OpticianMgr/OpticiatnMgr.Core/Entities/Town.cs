@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Glastyp : EntityObject
+    public class Town : EntityObject
     {
         [Required]
-        public string Bezeichnung { get; set; }
+        public string TownName { get; set; }
+        [Required]
+        public string ZipCode { get; set; }
     }
 }

@@ -16,48 +16,44 @@ namespace OpticianMgr.Wpf.ViewModel
 {
     public class AddSupplierViewModel : ViewModelBase, IRequestClose
     {
-        private IUnitOfWork uow;
-
         public event EventHandler<EventArgs> CloseRequested;
         public event EventHandler<EventArgs> RefreshSuppliers;
 
-        public Lieferant Lieferant { get; set; }
-        public Ort Ort { get; set; }
+        public Supplier Supplier { get; set; }
+        public Town Town { get; set; }
         public String NameWarning { get; set; }
-        public String OrtWarning { get; set; }
+        public String TownWarning { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Submit { get; set; }
-        public ICommand FindOrt { get; set; }
-        public ICommand FindPLZ { get; set; }
+        public ICommand FindTown { get; set; }
+        public ICommand FindZipCode { get; set; }
         public AddSupplierViewModel()
         {
-            this.uow = new UnitOfWork();
-            this.Lieferant = new Lieferant();
-            this.Ort = new Ort();
+            this.Supplier = new Supplier();
+            this.Town = new Town();
             Cancel = new RelayCommand(CancelAddSupplier);
             Submit = new RelayCommand(AddSupplier);
-            FindOrt = new RelayCommand(FindO);
-            FindPLZ = new RelayCommand(FindP);
+            FindTown = new RelayCommand(FindO);
+            FindZipCode = new RelayCommand(FindP);
         }
         private void FindO()
         {
-            if(!String.IsNullOrEmpty(this.Ort.PLZ))
-            {
-                this.Ort.OrtName = this.uow.OrtRepository.Get(filter: o => o.PLZ == this.Ort.PLZ, orderBy: ord => ord.OrderByDescending(or => or.Id)).FirstOrDefault()?.OrtName;
-                this.RaisePropertyChanged(() => this.Ort);
+            using (UnitOfWork localUow = new UnitOfWork()) {
+                if (!String.IsNullOrEmpty(this.Town.ZipCode))
+                {
+                    this.Town.TownName = localUow.TownRepository.Get(filter: t => t.ZipCode == this.Town.ZipCode, orderBy: ord => ord.OrderByDescending(or => or.Id)).FirstOrDefault()?.TownName;
+                    this.RaisePropertyChanged(() => this.Town);
+                }
             }
         }
         private void FindP()
         {
-            if (!String.IsNullOrEmpty(this.Ort.OrtName))
+            using(UnitOfWork localUow = new UnitOfWork())
+            if (!String.IsNullOrEmpty(this.Town.TownName))
             {
-                this.Ort.PLZ = this.uow.OrtRepository.Get(filter: o => o.OrtName == this.Ort.OrtName, orderBy: ord => ord.OrderByDescending(or => or.Id)).FirstOrDefault()?.PLZ;
-                this.RaisePropertyChanged(() => this.Ort);
+                this.Town.ZipCode = localUow.TownRepository.Get(filter: t => t.TownName == this.Town.TownName, orderBy: ord => ord.OrderByDescending(or => or.Id)).FirstOrDefault()?.ZipCode;
+                this.RaisePropertyChanged(() => this.Town);
             }
-        }
-        private void updateTextBox()
-        {
-            
         }
         public void CancelAddSupplier()
         {
@@ -65,42 +61,44 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public void AddSupplier()
         {
-            this.NameWarning = "";
-            this.OrtWarning = "";
-            if(this.checkErrors())
+            using (UnitOfWork localUow = new UnitOfWork())
             {
-                if (String.IsNullOrEmpty(this.Ort.OrtName) || String.IsNullOrEmpty(this.Ort.PLZ))
+                this.NameWarning = "";
+                this.TownWarning = "";
+                if (this.CheckErrors())
                 {
-                    this.Lieferant.Ort = null;
+                        Town existingTown = localUow.TownRepository.Get(t => t.TownName == this.Town.TownName && t.ZipCode == this.Town.ZipCode).FirstOrDefault();
+                        if (existingTown != null)
+                        {
+                            this.Supplier.Town = existingTown;
+                        }
+                        else
+                            this.Supplier.Town = this.Town;
+                    localUow.SupplierRepository.Insert(this.Supplier);
+                    localUow.Save();
+                    this.CloseRequested?.Invoke(this, null);
+                    this.RefreshSuppliers?.Invoke(this, null);
                 }
-                else
-                {
-                    this.Lieferant.Ort = this.Ort;
-                }
-                this.uow.LieferantenRepository.Insert(this.Lieferant);
-                this.uow.Save();
-                this.CloseRequested?.Invoke(this,null);
-                this.RefreshSuppliers?.Invoke(this, null);
             }
             this.RaisePropertyChanged(() => this.NameWarning);
-            this.RaisePropertyChanged(() => this.OrtWarning);
+            this.RaisePropertyChanged(() => this.TownWarning);
         }
-        private  bool checkErrors()
+        private bool CheckErrors()
         {
             bool check = true;
-            if (String.IsNullOrEmpty(this.Lieferant.Lieferantenname))
+            if (String.IsNullOrEmpty(this.Supplier.Name))
             {
                 this.NameWarning = "Es muss ein Name angegeben werden!";
                 check = false;
             }
-            if (String.IsNullOrEmpty(this.Ort.PLZ) && !String.IsNullOrEmpty(this.Ort.OrtName))
+            if (String.IsNullOrEmpty(this.Town.ZipCode) && !String.IsNullOrEmpty(this.Town.TownName))
             {
-                this.OrtWarning = "Es muss eine Postleitzahl angegeben werden!";
+                this.TownWarning = "Es muss eine Postleitzahl angegeben werden!";
                 check = false;
             }
-            if (String.IsNullOrEmpty(this.Ort.OrtName) && !String.IsNullOrEmpty(this.Ort.PLZ))
+            if (String.IsNullOrEmpty(this.Town.TownName) && !String.IsNullOrEmpty(this.Town.ZipCode))
             {
-                this.OrtWarning = "Es muss ein Ort angegeben werden!";
+                this.TownWarning = "Es muss ein Ort angegeben werden!";
                 check = false;
             }
             return check;
