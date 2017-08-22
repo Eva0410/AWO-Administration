@@ -188,7 +188,7 @@ namespace OpticianMgr.Wpf.ViewModel
             };
             viewModel.RefreshSuppliers += refreshSupplierHandler;
         }
-        //Edit supplier
+        //Edit supplier 
         public void EditS()
         {
             Supplier newSupplier = (Supplier)this.SelectedCell.Item;
