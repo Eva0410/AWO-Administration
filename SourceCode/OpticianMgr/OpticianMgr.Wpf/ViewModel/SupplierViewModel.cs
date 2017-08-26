@@ -109,7 +109,7 @@ namespace OpticianMgr.Wpf.ViewModel
         //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen
         private ObservableCollection<Supplier> GetAllSuppliers()
         {
-            ObservableCollection<Supplier> collection = new ObservableCollection<Supplier>(localUow.SupplierRepository.Get(includeProperties: "Town").ToList());
+            ObservableCollection<Supplier> collection = new ObservableCollection<Supplier>(this.Uow.SupplierRepository.Get(includeProperties: "Town").ToList());
             collection.CollectionChanged += this.OnCollectionChanged;
             return collection;
         }
