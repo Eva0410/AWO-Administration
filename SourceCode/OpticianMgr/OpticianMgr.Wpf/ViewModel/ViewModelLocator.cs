@@ -15,6 +15,9 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using OpticianMgr.Persistence;
+using OpticiatnMgr.Core.Contracts;
+using Microsoft.Extensions.Configuration;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
@@ -29,6 +32,7 @@ namespace OpticianMgr.Wpf.ViewModel
         /// </summary>
         public ViewModelLocator()
         {
+            SimpleIoc.Default.Reset();
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -41,10 +45,15 @@ namespace OpticianMgr.Wpf.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-
+            SimpleIoc.Default.Register<UnitOfWork>(() =>
+            {
+                return new UnitOfWork();
+            });
+            SimpleIoc.Default.Register<IUnitOfWork, UnitOfWork>();
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<SupplierPageModel>();
+            SimpleIoc.Default.Register<SupplierViewModel>();
             SimpleIoc.Default.Register<AddSupplierViewModel>();
+            SimpleIoc.Default.Register<CustomerViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -55,13 +64,18 @@ namespace OpticianMgr.Wpf.ViewModel
             }
         }
 
-        public SupplierPageModel SupplierPageModel
+        public SupplierViewModel SupplierViewModel
         {
-            get { return ServiceLocator.Current.GetInstance<SupplierPageModel>(); }
+            get { return ServiceLocator.Current.GetInstance<SupplierViewModel>(); }
         }
-        public AddSupplierViewModel AddSupplierViewModel
+        //TODO is static okk here
+        public static AddSupplierViewModel AddSupplierViewModel
         {
             get { return ServiceLocator.Current.GetInstance<AddSupplierViewModel>(); }
+        }
+        public CustomerViewModel CustomerViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<CustomerViewModel>(); }
         }
 
 

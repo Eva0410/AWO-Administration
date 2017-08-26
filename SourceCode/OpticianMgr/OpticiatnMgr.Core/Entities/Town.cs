@@ -9,9 +9,8 @@ namespace OpticiatnMgr.Core.Entities
 {
     public class Town : EntityObject
     {
-        [Required]
+        //Keine Required-Attribute, für den Fall dass der Optiker nur schnell einen Lieferanten einfügen will und er später doch noch einen Ort einfügen will
         public string TownName { get; set; }
-        [Required]
         public string ZipCode { get; set; }
     }
 }

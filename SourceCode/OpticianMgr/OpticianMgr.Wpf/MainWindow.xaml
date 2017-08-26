@@ -16,7 +16,7 @@
             </LinearGradientBrush>
         </DockPanel.Background>
         <Menu x:Name="menu" VerticalAlignment="Top" FontFamily="Georgia" FontSize="16" FontStyle="Italic" DockPanel.Dock="Top" Background="{x:Null}">
-            <Button Content="Kunden" VerticalAlignment="Center" Margin="5,10" Click="Kunden_Click">
+            <Button Content="Kunden" VerticalAlignment="Center" Margin="5,10" Command="{Binding Customers}">
                 <Button.BorderBrush>
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
@@ -32,7 +32,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Lieferanten" Click="Button_Click">
+            <Button Content="Lieferanten"  Command="{Binding Suppliers}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -66,7 +66,7 @@
             </Button>
         </Menu>
         <Separator DockPanel.Dock="Top" Background="#FF040404"/>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" DockPanel.Dock="Top" Content="CustormerPage"></Frame>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" DockPanel.Dock="Top" Content="{Binding Page}"></Frame>
     </DockPanel>
 
 </Window>

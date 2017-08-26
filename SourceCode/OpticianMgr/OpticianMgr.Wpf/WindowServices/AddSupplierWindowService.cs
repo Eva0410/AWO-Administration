@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OpticianMgr.Wpf
 {
     public class AddSupplierWindowService : IWindowService
     {
+        //TODO nicht für jedes Fenster einen Service erstellen
         public void ShowWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
             AddSupplierWindow newWindow = new AddSupplierWindow();

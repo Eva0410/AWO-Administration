@@ -21,7 +21,7 @@ namespace OpticiatnMgr.Core.Entities
         public DateTime SaleDate { get; set; }
         [Required]
         public String State { get; set; }
-        public int Supplier_Id { get; set; }
+        public int? Supplier_Id { get; set; }
         [ForeignKey("Supplier_Id")]
         public Supplier Supplier { get; set; }
     }

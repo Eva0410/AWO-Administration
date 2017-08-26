@@ -26,5 +26,6 @@ namespace OpticiatnMgr.Core.Entities
         public String ContactPerson { get; set; }
         public String Products { get; set; }  
         public String Others { get; set; }
+        public List<EyeGlassFrame> EyeGlassFrames { get; set; }
     }
 }

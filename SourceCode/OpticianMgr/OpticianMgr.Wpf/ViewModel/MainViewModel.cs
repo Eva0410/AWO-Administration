@@ -1,8 +1,10 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using OpticianMgr.Persistence;
 using OpticiatnMgr.Core.Contracts;
 using OpticiatnMgr.Core.Entities;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
@@ -21,6 +23,11 @@ namespace OpticianMgr.Wpf.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private IUnitOfWork uow;
+        
+        public ICommand Suppliers { get; set; }
+
+        public ICommand Customers { get; set; }
+        public object Page { get; set; }
 
         //TODO
         //public ObservableCollection<TestEntity> Testlist
@@ -36,6 +43,9 @@ namespace OpticianMgr.Wpf.ViewModel
         public MainViewModel()
         {
             this.uow = new UnitOfWork();
+            Suppliers = new RelayCommand(OpenSuppliers);
+            Customers = new RelayCommand(OpenCustomers);
+            this.OpenSuppliers();
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -45,6 +55,19 @@ namespace OpticianMgr.Wpf.ViewModel
             ////    // Code runs "for real"
             ////}
 
+        }
+        //TODO Is this MVVM?
+        private void OpenSuppliers()
+        {
+            SupplierPage newPage = new SupplierPage();
+            this.Page = newPage;
+            this.RaisePropertyChanged(() => this.Page);
+        }
+        private void OpenCustomers()
+        {
+            CustomerPage newPage = new CustomerPage();
+            this.Page = newPage;
+            this.RaisePropertyChanged(() => this.Page);
         }
     }
 }

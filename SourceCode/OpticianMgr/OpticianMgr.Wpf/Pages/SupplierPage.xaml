@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
       Title="SupplierPage"
-      DataContext="{Binding SupplierPageModel, Source={StaticResource Locator}}">
+      DataContext="{Binding SupplierViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>
         <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Lieferanten</Label>
         <Grid DockPanel.Dock="Top">
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                 <Label Margin="10,0,0,0">Filtern nach:</Label>
-                <ComboBox x:Name="PropertyComboBox" ItemsSource="{Binding PropertiesList}" SelectedIndex="0" SelectedValue="{Binding FilterProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <ComboBox x:Name="PropertyComboBox" ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding FilterProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" />
@@ -27,7 +27,7 @@
                 <Button Margin="9,0,0,0" Command="{Binding FilterSuppliers}" Width="40">Filtern</Button>
                 <Button Margin="9,0,0,0" Command="{Binding DeleteFilter}" Width="105">Filter zurücksetzen</Button>
             </StackPanel>
-            <Button Margin="9,0,10,0" Command="{Binding AddSupplier}" HorizontalAlignment="Right" Width="155">Neuen Lieferant hinzufügen</Button>
+            <Button Margin="9,0,10,0" Command="{Binding AddSupplier}" HorizontalAlignment="Right" Width="155" IsEnabled="{Binding AddSupplierLock}">Neuen Lieferant hinzufügen</Button>
         </Grid>
 
         <DataGrid CanUserDeleteRows="True" SelectionMode="Extended" CanUserReorderColumns="true" ItemsSource="{Binding SupplierList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top" AutoGenerateColumns="False" CurrentCell="{Binding SelectedCell, Mode=TwoWay}" CanUserAddRows="False">

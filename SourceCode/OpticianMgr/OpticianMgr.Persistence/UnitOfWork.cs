@@ -101,12 +101,11 @@ namespace OpticianMgr.Persistence
                 return _eyeGlassFrameRepository;
             }
         }
-
-        public UnitOfWork(string connectionString)
+        //TODO due to prefered constructor in viewmodellocator (only one constructor can exist)
+        private UnitOfWork(string connectionString)
         {
             _context = new ApplicationDbContext(connectionString);
         }
-
         public UnitOfWork() : this("name=DefaultConnection")
         {
 
