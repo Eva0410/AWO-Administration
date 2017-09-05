@@ -56,7 +56,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Statistken">
+            <Button Content="Statistken" Command="{Binding Statistics}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>

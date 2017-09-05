@@ -93,8 +93,8 @@ namespace OpticianMgr.Wpf.ViewModel
         public SupplierViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
-            UpdateSuppliers();
-            FilterSuppliers = new RelayCommand(Filter);
+            this.SupplierList = GetAllSuppliers();
+            FilterSuppliers = new RelayCommand(FillSupplierList);
             DeleteFilter = new RelayCommand(DeleteF);
             AddSupplier = new RelayCommand(AddS);
             EditSupplier = new RelayCommand(EditS);
@@ -102,23 +102,29 @@ namespace OpticianMgr.Wpf.ViewModel
             this.FilterProperty = "Name";
             this.AddSupplierEnabled = true;
         }
-        private void UpdateSuppliers()
-        {
-            this.SupplierList = this.GetAllSuppliers();
-        }
         //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen
         private ObservableCollection<Supplier> GetAllSuppliers()
         {
-            ObservableCollection<Supplier> collection = new ObservableCollection<Supplier>(this.Uow.SupplierRepository.Get(includeProperties: "Town").ToList());
-            collection.CollectionChanged += this.OnCollectionChanged;
-            return collection;
+            var unitOfWorkSuppliers = this.Uow.SupplierRepository.Get().ToList();
+            ObservableCollection<Supplier> copiedSuppliers = new ObservableCollection<Supplier>(); 
+            copiedSuppliers.CollectionChanged += this.OnCollectionChanged;
+            foreach (var item in unitOfWorkSuppliers)
+            {
+                Supplier sup = new Supplier();
+                GenericRepository<Supplier>.CopyProperties(sup, item);
+                Town town = new Town();
+                GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
+                sup.Town = town;
+                copiedSuppliers.Add(sup);
+            }
+            return copiedSuppliers;
         }
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //Delete Items
             if (e.OldItems != null)
             {
+                //OldItems will always only contain one item
                 foreach (Supplier item in e.OldItems)
                 {
                     var fullItem = this.Uow.SupplierRepository.Get(filter: s => s.Id == item.Id, includeProperties: "EyeGlassFrames").FirstOrDefault();
@@ -133,12 +139,12 @@ namespace OpticianMgr.Wpf.ViewModel
                     }
                 }
                 this.Uow.Save();
-                UpdateSuppliers();
+                this.FillSupplierList();
                 this.RaisePropertyChanged(() => this.SupplierList);
             }
         }
 
-        public void Filter()
+        public void FillSupplierList()
         {
             IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
             this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty;
@@ -157,13 +163,14 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.SupplierList.CollectionChanged += OnCollectionChanged;
             }
             else
-                UpdateSuppliers();
+                this.SupplierList = GetAllSuppliers();
+            
             this.RaisePropertyChanged(() => this.SupplierList);
         }
         //Delete filter
         public void DeleteF()
         {
-            UpdateSuppliers();
+            this.SupplierList = GetAllSuppliers();
             this.FilterText = "";
             this.RaisePropertyChanged(() => this.SupplierList);
         }
@@ -181,7 +188,7 @@ namespace OpticianMgr.Wpf.ViewModel
             refreshSupplierHandler = (sender, e) =>
             {
                 viewModel.RefreshSuppliers -= refreshSupplierHandler;
-                this.UpdateSuppliers();
+                this.FillSupplierList();
                 this.AddSupplier.CanExecute(true);
                 this.AddSupplierEnabled = true;
                 this.RaisePropertyChanged(() => this.AddSupplier);
@@ -193,13 +200,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public void EditS()
         {
             Supplier newSupplier = (Supplier)this.SelectedCell.Item;
-            Supplier oldSupplier = null;
-            //Aus einem nicht erklärlichen Grund sind die Änderungen wieder in der IUnitOfWork gespeichert - obwohl ein IOC-Container verwendet wird
-            using (UnitOfWork localUow = new UnitOfWork())
-            {
-                oldSupplier = localUow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town").FirstOrDefault();
-            }
-            Supplier refreshedButOldSupplier = this.Uow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town").FirstOrDefault();
+            Supplier oldSupplier =  this.Uow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town").FirstOrDefault();
             List<String> changedProperties = this.ChangedProperties(oldSupplier, newSupplier);
             if (changedProperties.Count != 0)
             {
@@ -236,7 +237,7 @@ namespace OpticianMgr.Wpf.ViewModel
                             this.Uow.Save();
 
                         }
-                        UpdateSuppliers();
+                        this.FillSupplierList();
                         this.RaisePropertyChanged(() => this.SupplierList);
                     }
                 }
@@ -253,10 +254,12 @@ namespace OpticianMgr.Wpf.ViewModel
             var messageBoxResult = MessageBox.Show(String.Format("Möchten Sie die Änderungen beim Lieferant mit der Id '{0}' speichern?", newSupplier.Id), "Lieferant Ändern", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
+                newSupplier.Town = null;
                 this.Uow.SupplierRepository.Update(newSupplier);
                 this.Uow.Save();
             }
-            UpdateSuppliers();
+            this.FillSupplierList();
+
             this.RaisePropertyChanged(() => this.SupplierList);
         }
         private bool CheckTown(Town town)

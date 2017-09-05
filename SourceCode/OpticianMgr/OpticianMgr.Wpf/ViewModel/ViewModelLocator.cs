@@ -54,6 +54,7 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<SupplierViewModel>();
             SimpleIoc.Default.Register<AddSupplierViewModel>();
             SimpleIoc.Default.Register<CustomerViewModel>();
+            SimpleIoc.Default.Register<StatisticsViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -68,7 +69,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<SupplierViewModel>(); }
         }
-        //TODO is static okk here
+        //TODO is static okk here?
         public static AddSupplierViewModel AddSupplierViewModel
         {
             get { return ServiceLocator.Current.GetInstance<AddSupplierViewModel>(); }
@@ -77,11 +78,15 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<CustomerViewModel>(); }
         }
+        public StatisticsViewModel StatisticsViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<StatisticsViewModel>(); }
+        }
 
 
         public static void Cleanup()
         {
-            // TODO Clear the ViewModels
+                        // TODO Clear the ViewModels
         }
     }
 }

@@ -23,10 +23,14 @@ namespace OpticianMgr.Wpf.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private IUnitOfWork uow;
-        
+        private CustomerPage CustomerPage { get; set; }
+        private StatisticsPage StatisticsPage { get; set; }
+        private SupplierPage SupplierPage { get; set; }
+
         public ICommand Suppliers { get; set; }
 
         public ICommand Customers { get; set; }
+        public ICommand Statistics { get; set; }
         public object Page { get; set; }
 
         //TODO
@@ -43,9 +47,13 @@ namespace OpticianMgr.Wpf.ViewModel
         public MainViewModel()
         {
             this.uow = new UnitOfWork();
-            Suppliers = new RelayCommand(OpenSuppliers);
-            Customers = new RelayCommand(OpenCustomers);
-            this.OpenSuppliers();
+            this.CustomerPage = new CustomerPage();
+            this.SupplierPage = new SupplierPage();
+            this.StatisticsPage = new StatisticsPage();
+            Suppliers = new RelayCommand(() => this.Open(this.SupplierPage));
+            Customers = new RelayCommand(() => this.Open(this.CustomerPage));
+            Statistics = new RelayCommand(() => this.Open(this.StatisticsPage));
+            this.Open(this.SupplierPage);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -57,16 +65,9 @@ namespace OpticianMgr.Wpf.ViewModel
 
         }
         //TODO Is this MVVM?
-        private void OpenSuppliers()
+        private void Open(object page)
         {
-            SupplierPage newPage = new SupplierPage();
-            this.Page = newPage;
-            this.RaisePropertyChanged(() => this.Page);
-        }
-        private void OpenCustomers()
-        {
-            CustomerPage newPage = new CustomerPage();
-            this.Page = newPage;
+            this.Page = page;
             this.RaisePropertyChanged(() => this.Page);
         }
     }
