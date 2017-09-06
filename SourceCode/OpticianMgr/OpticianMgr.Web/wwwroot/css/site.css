@@ -1,0 +1,207 @@
+﻿body {
+    padding-top: 72px;
+    padding-bottom: 20px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* buttons and links extension to use brackets: [ click me ] */
+.btn-bracketed::before {
+    display:inline-block;
+    content: "[";
+    padding-right: 0.5em;
+}
+.btn-bracketed::after {
+    display:inline-block;
+    content: "]";
+    padding-left: 0.5em;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"]
+{
+    width: 100%;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+  /* Hide captions */
+  .carousel-caption {
+    display: none
+  }
+}
+
+
+.greyBox{
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 80px;
+    text-transform: none;
+    text-align: left;
+    background-color: #f7f7f7;
+    padding: 18px 24px 24px;
+    border: 1px solid #efefee;
+    border-radius: 2px;
+    height: 280px;
+    width: 450px;
+}
+
+.greyBox2{
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 20px;
+    text-transform: none;
+    text-align: left;
+    background-color: #f7f7f7;
+    padding: 18px 24px 24px;
+    border: 1px solid #efefee;
+    border-radius: 2px;
+    height: 400px;
+    width: 300px;
+}
+
+.icon1{
+    display: block;
+    width:70px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.icon2{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width:140px;
+    margin-top: 50px;
+}
+
+.h1Aigner{
+    font-size: 40px;
+    font-family: Arial bolt;
+    letter-spacing: 0;
+    line-height: 48px;
+    margin: 100px 0 24px;
+    left: -2px;
+    color: black;
+}
+
+.h3border{
+    padding: 20px 24px;
+    border-bottom: 1px solid #efefee;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: -18px -24px 0;
+}
+
+.h3border2{
+    
+    padding: 20px 24px;
+    border-bottom: 1px solid #efefee;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 50px -24px 0;
+    text-align: center;
+}
+
+#bodypadding{
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+#aignerLogo{
+    margin-top: 5px;
+    width:210px;
+}
+
+.öffnungszeiten{
+    text-align: right;
+    width: 100%;
+}
+
+.öffnungszeiten2{
+    padding-top: 5px;
+    text-align: right;
+    width: 100%;
+}
+
+.schriftRand{
+    padding-bottom: 10px;
+}
+
+.schriftRand2{
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.schriftRandHead{
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+.opening.open {
+    background-color: #08CF08;
+    color: #fff;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+
+.opening {
+    background-color: #efefee;
+    padding: 0 10px;
+    text-transform: uppercase;
+    line-height: 28px;
+    display: inline-block;
+}
+
+#erwartung{
+    text-align: center;
+    letter-spacing: 1px;
+    padding-top: 70px;
+    font-size: 20px;
+    color: #1A1A1A;
+    white-space: normal;
+}
+
+.page-header {
+	font-family:'Arial';
+	font-size: 31px;
+	text-align: center; 
+}
+
+.beschreibungText{
+  color: rgb(128, 128, 128);
+  font-size: 12px;
+}
+
+.form-control2 {
+  display: block;
+  width: 100%;
+  height: 120px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
