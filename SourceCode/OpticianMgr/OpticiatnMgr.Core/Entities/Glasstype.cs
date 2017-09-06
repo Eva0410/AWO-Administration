@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Arzt
+    public class Glasstype : EntityObject
     {
         [Required]
-        public String Name { get; set; }
+        public string Description { get; set; }
     }
 }

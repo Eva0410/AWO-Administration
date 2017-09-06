@@ -1,8 +1,8 @@
-\select@language {english}
 \select@language {german}
 \select@language {english}
 \select@language {german}
-\select@language {english}
+\select@language {german}
+\select@language {german}
 \contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
 \contentsline {section}{\numberline {1.1}Initial Situation}{3}{section.1.1}
 \contentsline {section}{\numberline {1.2}Goals}{3}{section.1.2}
@@ -10,7 +10,10 @@
 \contentsline {section}{\numberline {1.4}Basic Terminology}{4}{section.1.4}
 \contentsline {section}{\numberline {1.5}Related Work and Projects}{4}{section.1.5}
 \contentsline {section}{\numberline {1.6}Structure of the Thesis}{4}{section.1.6}
-\contentsline {chapter}{\numberline {2}Theoretical Background}{5}{chapter.2}
-\contentsline {chapter}{\numberline {3}Summary}{6}{chapter.3}
-\contentsline {chapter}{\numberline {A}Additional Information}{11}{appendix.A}
-\contentsline {chapter}{\numberline {B}Individual Goals}{12}{appendix.B}
+\contentsline {chapter}{\numberline {2}Hintergr\IeC {\"u}nde}{5}{chapter.2}
+\contentsline {chapter}{\numberline {3}Verwendete Technologien}{6}{chapter.3}
+\contentsline {chapter}{\numberline {4}Beschreibung des Endproduktes}{7}{chapter.4}
+\contentsline {chapter}{\numberline {5}Selbstevaluation}{8}{chapter.5}
+\contentsline {chapter}{\numberline {6}Summary}{9}{chapter.6}
+\contentsline {chapter}{\numberline {A}Additional Information}{14}{appendix.A}
+\contentsline {chapter}{\numberline {B}Individual Goals}{15}{appendix.B}

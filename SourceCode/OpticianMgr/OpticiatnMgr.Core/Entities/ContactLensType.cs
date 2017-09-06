@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace OpticiatnMgr.Core.Entities
 {
-    public class Glastyp
+    public class ContactLensType : EntityObject
     {
         [Required]
-        public string Bezeichnung { get; set; }
+        public String Description { get; set; }
     }
 }

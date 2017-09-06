@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:OpticianMgr.Wpf"
         mc:Ignorable="d"
         xmlns:vm="clr-namespace:OpticianMgr.Wpf.ViewModel"
-        Title="Augenoptik Aigner - Verwaltungsprogramm" Height="397.728" Width="587.86"
-        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+        Title="Augenoptik Aigner - Verwaltungsprogramm"
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" WindowState="Maximized">
     <DockPanel>
         <DockPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -15,8 +15,8 @@
                 <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
             </LinearGradientBrush>
         </DockPanel.Background>
-        <Menu x:Name="menu" VerticalAlignment="Top" FontFamily="Georgia" FontSize="14" FontStyle="Italic" DockPanel.Dock="Top" Background="{x:Null}">
-            <Button Content="Kunden" VerticalAlignment="Center" Margin="5,10" Click="Kunden_Click">
+        <Menu x:Name="menu" VerticalAlignment="Top" FontFamily="Georgia" FontSize="16" FontStyle="Italic" DockPanel.Dock="Top" Background="{x:Null}">
+            <Button Content="Kunden" VerticalAlignment="Center" Margin="5,10" Command="{Binding Customers}">
                 <Button.BorderBrush>
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
@@ -24,7 +24,7 @@
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
             </Button>
-            <Button Content="Brillen / Kontaktlinsen" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Aufträge" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -32,7 +32,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Lieferanten">
+            <Button Content="Lieferanten"  Command="{Binding Suppliers}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -40,7 +40,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Lager">
+            <Button Content="Lagernde Brillenfassungen">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -48,7 +48,15 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Statistken">
+            <Button Content="Massen SMS / E-Mails verschicken">
+                <Button.Background>
+                    <SolidColorBrush  Opacity="0"/>
+                </Button.Background>
+                <Button.BorderBrush>
+                    <SolidColorBrush Opacity="0"/>
+                </Button.BorderBrush>
+            </Button>
+            <Button Content="Statistken" Command="{Binding Statistics}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -58,15 +66,7 @@
             </Button>
         </Menu>
         <Separator DockPanel.Dock="Top" Background="#FF040404"/>
-        <ListBox Margin="20" ItemsSource="{Binding Testlist}" DockPanel.Dock="Left" Background="{x:Null}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Test}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" DockPanel.Dock="Top" Content="{Binding Page}"></Frame>
     </DockPanel>
-    <!--<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,42,0,0"/>-->
+
 </Window>

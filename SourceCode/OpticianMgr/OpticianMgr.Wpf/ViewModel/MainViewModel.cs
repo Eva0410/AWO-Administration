@@ -1,7 +1,10 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using OpticianMgr.Persistence;
 using OpticiatnMgr.Core.Contracts;
 using OpticiatnMgr.Core.Entities;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
@@ -19,21 +22,38 @@ namespace OpticianMgr.Wpf.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        //private IUnitOfWork uow;
-        private ObservableCollection<TestEntity> tests;
+        private IUnitOfWork uow;
+        private CustomerPage CustomerPage { get; set; }
+        private StatisticsPage StatisticsPage { get; set; }
+        private SupplierPage SupplierPage { get; set; }
 
-        public ObservableCollection<TestEntity> Testlist
-        {
-            get { return new ObservableCollection<TestEntity> { new TestEntity() { Test = "LocalDbTest1" }, new TestEntity() { Test = "LocalDbTest2" } };}
-        }
+        public ICommand Suppliers { get; set; }
+
+        public ICommand Customers { get; set; }
+        public ICommand Statistics { get; set; }
+        public object Page { get; set; }
+
+        //TODO
+        //public ObservableCollection<TestEntity> Testlist
+        //{
+        //    get {
+        //        return new ObservableCollection<TestEntity>(this.uow.TestRepository.Get());
+        //    }
+        //}
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
-            //this.uow = _uow;
-            
+            this.uow = new UnitOfWork();
+            this.CustomerPage = new CustomerPage();
+            this.SupplierPage = new SupplierPage();
+            this.StatisticsPage = new StatisticsPage();
+            Suppliers = new RelayCommand(() => this.Open(this.SupplierPage));
+            Customers = new RelayCommand(() => this.Open(this.CustomerPage));
+            Statistics = new RelayCommand(() => this.Open(this.StatisticsPage));
+            this.Open(this.SupplierPage);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -43,6 +63,12 @@ namespace OpticianMgr.Wpf.ViewModel
             ////    // Code runs "for real"
             ////}
 
+        }
+        //TODO Is this MVVM?
+        private void Open(object page)
+        {
+            this.Page = page;
+            this.RaisePropertyChanged(() => this.Page);
         }
     }
 }
