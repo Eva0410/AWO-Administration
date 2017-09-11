@@ -35,23 +35,23 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Town = new Town();
             Cancel = new RelayCommand(CancelAddSupplier);
             Submit = new RelayCommand(AddSupplier);
-            FindTown = new RelayCommand(FindO);
-            FindZipCode = new RelayCommand(FindP);
+            FindTown = new RelayCommand(FindT);
+            FindZipCode = new RelayCommand(FindZ);
         }
-        private void FindO()
+        private void FindT()
         {
             if (!String.IsNullOrEmpty(this.Town.ZipCode))
             {
-                this.Town.TownName = this.Uow.TownRepository.Get(filter: t => t.ZipCode == this.Town.ZipCode, orderBy: ord => ord.OrderByDescending(or => or.Id)).FirstOrDefault()?.TownName;
+                this.Town.TownName = this.Uow.TownRepository.Get(filter: t => t.ZipCode == this.Town.ZipCode, orderBy: ord => ord.OrderBy(or => or.Id)).FirstOrDefault()?.TownName;
                 this.RaisePropertyChanged(() => this.Town);
             }
 
         }
-        private void FindP()
+        private void FindZ()
         {
             if (!String.IsNullOrEmpty(this.Town.TownName))
             {
-                this.Town.ZipCode = this.Uow.TownRepository.Get(filter: t => t.TownName == this.Town.TownName, orderBy: ord => ord.OrderByDescending(or => or.Id)).FirstOrDefault()?.ZipCode;
+                this.Town.ZipCode = this.Uow.TownRepository.Get(filter: t => t.TownName == this.Town.TownName, orderBy: ord => ord.OrderBy(or => or.Id)).FirstOrDefault()?.ZipCode;
                 this.RaisePropertyChanged(() => this.Town);
             }
         }
@@ -77,11 +77,11 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.Uow.Save();
                 this.CloseRequested?.Invoke(this, null);
                 this.RefreshSuppliers?.Invoke(this, null);
+                this.ResetFields();
 
             }
             this.RaisePropertyChanged(() => this.NameWarning);
             this.RaisePropertyChanged(() => this.TownWarning);
-            this.ResetFields();
         }
         private bool CheckErrors()
         {
@@ -105,8 +105,7 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         private void ResetFields()
         {
-            this.Town.TownName = "";
-            this.Town.ZipCode = "";
+            this.Town = new Town();
             this.RaisePropertyChanged(() => this.Town);
         }
     }

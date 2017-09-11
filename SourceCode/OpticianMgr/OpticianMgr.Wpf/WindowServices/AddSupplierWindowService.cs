@@ -15,16 +15,23 @@ namespace OpticianMgr.Wpf
         //TODO nicht für jedes Fenster einen Service erstellen
         public void ShowWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-            AddSupplierWindow newWindow = new AddSupplierWindow();
-            EventHandler<EventArgs> closeHandler = null;
-            closeHandler = (sender, e) =>
+            if (System.Windows.Application.Current.Windows.OfType<AddSupplierWindow>().Count() == 0)
             {
-                viewModel.CloseRequested -= closeHandler;
-                newWindow.Close();
-            };
-            viewModel.CloseRequested += closeHandler;
-            newWindow.DataContext = viewModel;
-            newWindow.Show();
+                AddSupplierWindow newWindow = new AddSupplierWindow();
+                EventHandler<EventArgs> closeHandler = null;
+                closeHandler = (sender, e) =>
+                {
+                    viewModel.CloseRequested -= closeHandler;
+                    newWindow.Close();
+                };
+                viewModel.CloseRequested += closeHandler;
+                newWindow.DataContext = viewModel;
+                newWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Es ist schon ein Fenster für das Anlegen eines neuen Lieferanten geöffnet!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -10,7 +10,7 @@
     <!--xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"-->
     
     <DockPanel>
-        <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Lieferanten</Label>
+        <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="20" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Lieferanten</Label>
         <Grid DockPanel.Dock="Top">
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                 <Label Margin="10,0,0,0">Filtern nach:</Label>
@@ -34,12 +34,12 @@
 
         <DataGrid CanUserDeleteRows="True" SelectionMode="Single" CanUserReorderColumns="true" ItemsSource="{Binding SupplierList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top" AutoGenerateColumns="False" CurrentCell="{Binding SelectedCell, Mode=TwoWay}" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" Width="0.5*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Lieferantenname"/>
                 <DataGridTextColumn Binding="{Binding Town.ZipCode, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="PLZ"/>
                 <DataGridTextColumn Binding="{Binding Town.TownName, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Ort"/>
                 <DataGridTextColumn Binding="{Binding Street, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Straße"/>
-                <DataGridTextColumn Binding="{Binding HouseNumber, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Hausnummer"/>
+                <DataGridTextColumn Binding="{Binding HouseNumber, UpdateSourceTrigger=PropertyChanged}" Width="0.5*" Header="Hausnummer"/>
                 <DataGridTextColumn Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Land"/>
                 <DataGridTextColumn Binding="{Binding FAX, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Fax"/>
                 <DataGridTextColumn Binding="{Binding Telephone, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Telefon"/>

@@ -25,6 +25,7 @@ namespace OpticiatnMgr.Core.Entities
         public String Others { get; set; }
         [Required]
         public String ProcessingState { get; set; }
+        [Required]
         public String PaymentState { get; set; }
         public decimal GlassPriceLeft { get; set; }
         public decimal GlassPriceRight { get; set; }
@@ -61,7 +62,7 @@ namespace OpticiatnMgr.Core.Entities
         public String Glas_N_L_PD_NTH { get; set; }
         public String GlassOthers { get; set; }
         //B = Brille, K = Kontaktlinse
-        public char OrderType { get; set; }
+        public string OrderType { get; set; }
         public int? ContactLensType_Id { get; set; }
         [ForeignKey("ContactLensType_Id")]
         public ContactLensType ContactLensType { get; set; }

@@ -107,7 +107,7 @@ namespace OpticiatnMgr.Core
                 Glass_N_L_Prism = Convert.ToDecimal(o[38], CultureInfo.InvariantCulture),
                 Glas_N_L_PD_NTH = o[39],
                 GlassOthers = o[40],
-                OrderType = o[41][0],
+                OrderType = o[41],
                 ContactLensType = contactLensTypes.Where(c => !String.IsNullOrEmpty(o[42]) ? c.Id == Convert.ToInt32(o[42]): false).FirstOrDefault(),
                 ContactLensOthers1 = o[43],
                 ContactLensOthers2 = o[44],

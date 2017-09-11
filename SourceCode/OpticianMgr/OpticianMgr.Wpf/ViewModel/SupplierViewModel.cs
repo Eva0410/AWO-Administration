@@ -24,8 +24,6 @@ namespace OpticianMgr.Wpf.ViewModel
         public IUnitOfWork Uow { get; set; }
         private ObservableCollection<Supplier> supplierList;
         private ResourceManager manager = Properties.Resources.ResourceManager;
-        public bool AddSupplierEnabled { get; set; }
-
         private DataGridCellInfo _selectedCell;
 
         public DataGridCellInfo SelectedCell
@@ -45,14 +43,15 @@ namespace OpticianMgr.Wpf.ViewModel
                 supplierList = value;
             }
         }
+        //The properties of the supplier class are safed in English but need to be shown in German
         public ObservableCollection<String> PropertiesList
         {
             get
             {
                 ObservableCollection<string> props = new ObservableCollection<string>(typeof(Supplier).GetProperties().Select(p => p.Name).ToList());
                 ObservableCollection<string> newList = new ObservableCollection<string>();
-                props.Remove("Timestamp");
-                props[props.IndexOf("Town_Id")] = "ZipCode";
+                props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
+                props[props.IndexOf("Town_Id")] = "ZipCode"; //shouldnt be able to filter by town_id but user should be able to filter by zipcode
                 foreach (var item in props)
                 {
                     var germanItem = manager.GetString(item);
@@ -63,7 +62,7 @@ namespace OpticianMgr.Wpf.ViewModel
             }
         }
         private string filterProperty;
-
+        
         public string FilterProperty
         {
             get { return filterProperty; }
@@ -100,9 +99,13 @@ namespace OpticianMgr.Wpf.ViewModel
             EditSupplier = new RelayCommand(EditS);
             this.SupplierList.CollectionChanged += this.OnCollectionChanged;
             this.FilterProperty = "Name";
-            this.AddSupplierEnabled = true;
         }
         //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen
+        /// <summary>
+        /// Returns a list of the suppliers in the database
+        /// All properties must be copied, otherwise the list would reference the unit of work data
+        /// </summary>
+        /// <returns></returns>
         private ObservableCollection<Supplier> GetAllSuppliers()
         {
             var unitOfWorkSuppliers = this.Uow.SupplierRepository.Get().ToList();
@@ -112,7 +115,7 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 Supplier sup = new Supplier();
                 GenericRepository<Supplier>.CopyProperties(sup, item);
-                Town town = new Town();
+                Town town = new Town(); //Referenced town must be copied as well
                 GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
                 sup.Town = town;
                 copiedSuppliers.Add(sup);
@@ -122,6 +125,7 @@ namespace OpticianMgr.Wpf.ViewModel
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            //Delete a supplier
             if (e.OldItems != null)
             {
                 //OldItems will always only contain one item
@@ -143,15 +147,17 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.RaisePropertyChanged(() => this.SupplierList);
             }
         }
-
+        /// <summary>
+        /// Refreshes and filter the supplier list
+        /// </summary>
         public void FillSupplierList()
         {
             IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
-            this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty;
+            this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty; //Program filters by the name of the town and not by by town-object
             string translatedProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
             if (!String.IsNullOrEmpty(this.filterText))
             {
-                if (typeof(Town).GetProperty(translatedProperty) != null)
+                if (typeof(Town).GetProperty(translatedProperty) != null) //Does the user filter by townname or zipcode?
                 {
                     this.SupplierList = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Town?.GetType().GetProperty(translatedProperty).GetValue(s.Town, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
 
@@ -177,21 +183,15 @@ namespace OpticianMgr.Wpf.ViewModel
         //add supplier
         public void AddS()
         {
+            //MVVM says that the viewmodel shouldnt know about the view -> service, which shows new windows
             AddSupplierWindowService windowService = new AddSupplierWindowService();
             AddSupplierViewModel viewModel = ViewModelLocator.AddSupplierViewModel;
             windowService.ShowWindow(viewModel);
-            this.AddSupplier.CanExecute(false);
-            this.AddSupplierEnabled = false;
-            CommandManager.InvalidateRequerySuggested();
-            this.RaisePropertyChanged(() => this.AddSupplier);
             EventHandler<EventArgs> refreshSupplierHandler = null;
             refreshSupplierHandler = (sender, e) =>
             {
                 viewModel.RefreshSuppliers -= refreshSupplierHandler;
                 this.FillSupplierList();
-                this.AddSupplier.CanExecute(true);
-                this.AddSupplierEnabled = true;
-                this.RaisePropertyChanged(() => this.AddSupplier);
                 this.RaisePropertyChanged(() => this.SupplierList);
             };
             viewModel.RefreshSuppliers += refreshSupplierHandler;

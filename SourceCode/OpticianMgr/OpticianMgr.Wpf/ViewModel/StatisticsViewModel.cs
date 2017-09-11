@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.Windows.Controls;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
+using OpticiatnMgr.Core.Contracts;
+using System.Globalization;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
@@ -13,21 +17,50 @@ namespace OpticianMgr.Wpf.ViewModel
     {
         public int OldYear { get; set; }
         public int NewYear { get; set; }
-        public ObservableCollection<KeyValuePair<DateTime,int>> Values { get; set; }
-        public StatisticsViewModel()
+        public ObservableCollection<KeyValuePair<string, int>> NewValues { get; set; }
+        public ObservableCollection<KeyValuePair<string, int>> OldValues { get; set; }
+        private IUnitOfWork Uow { get; set; }
+        public ICommand ChangeStatistic { get; set; }
+        public string Title { get; set; }
+        public StatisticsViewModel(IUnitOfWork _uow)
         {
+            this.Uow = _uow;
             NewYear = DateTime.Now.Year;
             OldYear = NewYear - 1;
-            this.Values = new ObservableCollection<KeyValuePair<DateTime, int>>{
-        new KeyValuePair<DateTime,int>(DateTime.Now, 100),
-        new KeyValuePair<DateTime,int>(DateTime.Now.AddMonths(1), 130),
-        new KeyValuePair<DateTime,int>(DateTime.Now.AddMonths(2), 150),
-        new KeyValuePair<DateTime,int>(DateTime.Now.AddMonths(3), 125),
-        new KeyValuePair<DateTime,int>(DateTime.Now.AddMonths(4),155) };
+            this.NewValues = new ObservableCollection<KeyValuePair<string, int>>();
+            this.OldValues = new ObservableCollection<KeyValuePair<string, int>>();
+            this.ChangeStatistic = new RelayCommand<string>(ChangeStats);
+
+            this.ChangeStats("B");
+
             this.RaisePropertyChanged(() => this.NewYear);
             this.RaisePropertyChanged(() => this.OldYear);
-            this.RaisePropertyChanged(() => this.Values);
         }
-        //Bindings im LineSeries funktionieren nicht, anderes Tool?
+        private void ChangeStats(string orderType)
+        {
+            this.OldValues.Clear();
+            this.NewValues.Clear();
+            this.FillList(this.NewValues, NewYear, orderType);
+            this.FillList(this.OldValues, OldYear, orderType);
+            if (orderType == "B")
+            {
+                this.Title = "Verkaufte Brillen";
+            }
+            else
+            {
+                this.Title = "Verkaufte Kontaktlinsen";
+            }
+            this.RaisePropertyChanged(() => this.NewValues);
+            this.RaisePropertyChanged(() => this.OldValues);
+            this.RaisePropertyChanged(() => this.Title);
+        }
+        private void FillList(ObservableCollection<KeyValuePair<string, int>> list, int year, string orderType)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                int soldItems = this.Uow.OrderRepository.Count(o => o.PaymentDate.Year == year && o.PaymentDate.Month == i && o.PaymentState == "Bezahlt" && o.OrderType == orderType);
+                list.Add(new KeyValuePair<string, int>(new DateTime(2017, i, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("de")), soldItems));
+            }
+        }
     }
 }
