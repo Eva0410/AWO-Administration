@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpticianMgr.Wpf
+namespace OpticianMgr.Wpf.Pages
 {
     /// <summary>
-    /// Interaction logic for StockPage.xaml
+    /// Interaktionslogik für EyeGlassFramesPage.xaml
     /// </summary>
-    public partial class StockPage : Page
+    public partial class EyeGlassFramesPage : Page
     {
-        public StockPage()
+        public EyeGlassFramesPage()
         {
             InitializeComponent();
         }

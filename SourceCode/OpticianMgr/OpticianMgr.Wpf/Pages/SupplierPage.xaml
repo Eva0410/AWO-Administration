@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
       Title="SupplierPage"
       DataContext="{Binding SupplierViewModel, Source={StaticResource Locator}}">
     
@@ -54,7 +56,7 @@
             </DataGrid.InputBindings>
             <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="CellEditEnding">
-                    
+                    <cmd:EventToCommand PassEventArgsToCommand="True" Command="{Binding CellEditEndingCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>-->
         </DataGrid>

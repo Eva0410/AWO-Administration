@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using OpticianMgr.Persistence;
+using OpticianMgr.Wpf.Pages;
 using OpticiatnMgr.Core.Contracts;
 using OpticiatnMgr.Core.Entities;
 using System.Collections.ObjectModel;
@@ -26,20 +27,15 @@ namespace OpticianMgr.Wpf.ViewModel
         private CustomerPage CustomerPage { get; set; }
         private StatisticsPage StatisticsPage { get; set; }
         private SupplierPage SupplierPage { get; set; }
+        private EyeGlassFramesPage EyeGlassFramesPage { get; set; }
 
         public ICommand Suppliers { get; set; }
 
         public ICommand Customers { get; set; }
         public ICommand Statistics { get; set; }
+        public ICommand EyeGlassFrames { get; set; }
         public object Page { get; set; }
 
-        //TODO
-        //public ObservableCollection<TestEntity> Testlist
-        //{
-        //    get {
-        //        return new ObservableCollection<TestEntity>(this.uow.TestRepository.Get());
-        //    }
-        //}
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -50,10 +46,12 @@ namespace OpticianMgr.Wpf.ViewModel
             this.CustomerPage = new CustomerPage();
             this.SupplierPage = new SupplierPage();
             this.StatisticsPage = new StatisticsPage();
+            this.EyeGlassFramesPage = new EyeGlassFramesPage();
             Suppliers = new RelayCommand(() => this.Open(this.SupplierPage));
             Customers = new RelayCommand(() => this.Open(this.CustomerPage));
             Statistics = new RelayCommand(() => this.Open(this.StatisticsPage));
-            this.Open(this.StatisticsPage);
+            EyeGlassFrames = new RelayCommand(() => this.Open(this.EyeGlassFramesPage));
+            this.Open(this.SupplierPage);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

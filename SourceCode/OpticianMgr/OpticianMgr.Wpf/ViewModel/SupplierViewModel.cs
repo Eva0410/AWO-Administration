@@ -85,6 +85,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand DeleteFilter { get; set; }
         public ICommand AddSupplier { get; set; }
         public ICommand EditSupplier { get; set; }
+        RelayCommand<DataGridCellEditEndingEventArgs> CellEditEndingCommand { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -99,8 +100,9 @@ namespace OpticianMgr.Wpf.ViewModel
             EditSupplier = new RelayCommand(EditS);
             this.SupplierList.CollectionChanged += this.OnCollectionChanged;
             this.FilterProperty = "Name";
+            CellEditEndingCommand = new RelayCommand<DataGridCellEditEndingEventArgs>(args => this.RaisePropertyChanged(() => this.SupplierList));
         }
-        //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen
+        //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen (clear collection)
         /// <summary>
         /// Returns a list of the suppliers in the database
         /// All properties must be copied, otherwise the list would reference the unit of work data
@@ -261,6 +263,7 @@ namespace OpticianMgr.Wpf.ViewModel
             this.FillSupplierList();
 
             this.RaisePropertyChanged(() => this.SupplierList);
+            
         }
         private bool CheckTown(Town town)
         {

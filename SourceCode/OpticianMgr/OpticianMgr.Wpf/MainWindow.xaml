@@ -40,7 +40,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Lagernde Brillenfassungen">
+            <Button Content="Lagernde Brillenfassungen" Command="{Binding EyeGlassFrames}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
