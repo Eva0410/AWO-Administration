@@ -68,6 +68,7 @@ namespace OpticianMgr.Wpf.ViewModel
             get { return filterProperty; }
             set { filterProperty = value; }
         }
+        public string SortProperty { get; set; }
         private string filterText;
 
         public string FilterText
@@ -85,6 +86,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand DeleteFilter { get; set; }
         public ICommand AddSupplier { get; set; }
         public ICommand EditSupplier { get; set; }
+        public ICommand SortSuppliers { get; set; }
         RelayCommand<DataGridCellEditEndingEventArgs> CellEditEndingCommand { get; set; }
 
         /// <summary>
@@ -98,8 +100,10 @@ namespace OpticianMgr.Wpf.ViewModel
             DeleteFilter = new RelayCommand(DeleteF);
             AddSupplier = new RelayCommand(AddS);
             EditSupplier = new RelayCommand(EditS);
+            SortSuppliers = new RelayCommand(SortS);
             this.SupplierList.CollectionChanged += this.OnCollectionChanged;
             this.FilterProperty = "Name";
+            this.SortProperty = "Id";
             CellEditEndingCommand = new RelayCommand<DataGridCellEditEndingEventArgs>(args => this.RaisePropertyChanged(() => this.SupplierList));
         }
         //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen (clear collection)
@@ -124,7 +128,10 @@ namespace OpticianMgr.Wpf.ViewModel
             }
             return copiedSuppliers;
         }
-
+        private void SortS()
+        {
+            var k = this.SortProperty;
+        }
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             //Delete a supplier
