@@ -18,6 +18,7 @@ namespace OpticianMgr.Persistence
         public DbSet<ContactLensType> ContactLensTypes { get; set; }
         public DbSet<EyeGlassFrame> EyeGlassFrames { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
 
         public ApplicationDbContext() : base("name=DefaultConnection")

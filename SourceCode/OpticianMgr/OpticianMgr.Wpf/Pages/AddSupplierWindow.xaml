@@ -62,7 +62,11 @@
                     <KeyBinding Command="{Binding FindZipCode, Mode=TwoWay}" Key="Return"></KeyBinding>
                 </TextBox.InputBindings>
             </TextBox>
-            <TextBox Text="{Binding Supplier.Country, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Country.CountryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding FindCountry, Mode=TwoWay}" Key="Return"></KeyBinding>
+                </TextBox.InputBindings>
+            </TextBox>
             <TextBox Text="{Binding Supplier.FAX, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="6" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding Supplier.Telephone, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding Supplier.Email, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="8" Margin="0,0,0,10" Width="200"></TextBox>
@@ -78,6 +82,7 @@
             <TextBlock Grid.RowSpan="2" Grid.Column="3" Grid.Row="3" TextWrapping="WrapWithOverflow" MaxWidth="190" Text="{Binding TownWarning, Mode=OneWay}" Foreground="Red" Margin="10,0,29,0"></TextBlock>
             <Button Command="{Binding FindTown}" Content="Ort suchen" Grid.Column="2" Grid.Row="3" Width="75" HorizontalAlignment="Left" Margin="10,5,0,5"/>
             <Button Command="{Binding FindZipCode}" Content="PLZ suchen" Grid.Column="2" Grid.Row="4" Width="75" HorizontalAlignment="Left" Margin="10,3,0,5"/>
+            <Button Command="{Binding FindCountry}" Content="Land suchen" Grid.Column="2" Grid.Row="5" Width="75" HorizontalAlignment="Left" Margin="10,3,0,5"/>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>

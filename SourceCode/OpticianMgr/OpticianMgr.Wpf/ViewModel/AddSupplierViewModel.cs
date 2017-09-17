@@ -22,20 +22,24 @@ namespace OpticianMgr.Wpf.ViewModel
 
         public Supplier Supplier { get; set; }
         public Town Town { get; set; }
+        public Country Country { get; set; }
         public String NameWarning { get; set; }
         public String TownWarning { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Submit { get; set; }
         public ICommand FindTown { get; set; }
+        public ICommand FindCountry { get; set; }
         public ICommand FindZipCode { get; set; }
         public AddSupplierViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
             this.Supplier = new Supplier();
             this.Town = new Town();
+            this.Country = new Country();
             Cancel = new RelayCommand(CancelAddSupplier);
             Submit = new RelayCommand(AddSupplier);
             FindTown = new RelayCommand(FindT);
+            FindCountry = new RelayCommand(FindC);
             FindZipCode = new RelayCommand(FindZ);
         }
         private void FindT()
@@ -44,6 +48,20 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 this.Town.TownName = this.Uow.TownRepository.Get(filter: t => t.ZipCode == this.Town.ZipCode, orderBy: ord => ord.OrderBy(or => or.Id)).FirstOrDefault()?.TownName;
                 this.RaisePropertyChanged(() => this.Town);
+            }
+
+        }
+        private void FindC()
+        {
+            if (!String.IsNullOrEmpty(this.Country.CountryName))
+            {
+                var newCountryName = this.Uow.CountryRepository.Get(filter: c => c.CountryName.ToUpper().IndexOf(this.Country.CountryName.ToUpper()) == 0, orderBy: ord => ord.OrderBy(or => or.Id)).FirstOrDefault()?.CountryName;
+                if(newCountryName != null)
+                {
+                    this.Country.CountryName = newCountryName;
+                    this.RaisePropertyChanged(() => this.Country);
+                }
+                
             }
 
         }
@@ -73,6 +91,13 @@ namespace OpticianMgr.Wpf.ViewModel
                 }
                 else
                     this.Supplier.Town = this.Town;
+
+                Country existingCountry = this.Uow.CountryRepository.Get(c => c.CountryName == this.Country.CountryName).FirstOrDefault();
+                if (existingCountry != null)
+                    this.Supplier.Country = existingCountry;
+                else
+                    this.Supplier.Country = this.Country;
+
                 this.Uow.SupplierRepository.Insert(this.Supplier);
                 this.Uow.Save();
                 this.CloseRequested?.Invoke(this, null);
@@ -106,7 +131,9 @@ namespace OpticianMgr.Wpf.ViewModel
         private void ResetFields()
         {
             this.Town = new Town();
+            this.Country = new Country();
             this.RaisePropertyChanged(() => this.Town);
+            this.RaisePropertyChanged(() => this.Country);
         }
     }
 }

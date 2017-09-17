@@ -79,6 +79,15 @@ namespace OpticianMgr.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Landname ähnelt.
+        /// </summary>
+        internal static string CountryName {
+            get {
+                return ResourceManager.GetString("CountryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Kundennummer ähnelt.
         /// </summary>
         internal static string CustomerId {

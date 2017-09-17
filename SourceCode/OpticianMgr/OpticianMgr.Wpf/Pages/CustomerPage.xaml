@@ -47,7 +47,7 @@
                 <DataGridTextColumn Binding="{Binding Insurance, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Versicherung"/>
                 <DataGridTextColumn Binding="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged, StringFormat=d}" Width="1.5*" Header="Geburtstag"/>
                 <DataGridTextColumn Binding="{Binding InsurancePolicyNumber, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Versicherungnummer"/>
-                <DataGridTextColumn Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Land"/>
+                <DataGridTextColumn Binding="{Binding Country.Name, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Land"/>
                 <DataGridTextColumn Binding="{Binding Job, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Job"/>
                 <DataGridTextColumn Binding="{Binding Hobbies, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Hobbies"/>
                 <DataGridTextColumn Binding="{Binding Others1, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Sonstiges1"/>

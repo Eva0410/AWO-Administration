@@ -31,6 +31,7 @@ namespace OpticiatnMgr.Core
         {
             _unitOfWork.DeleteDatabase();
             _unitOfWork.TownRepository.InsertMany(GetTowns());
+            _unitOfWork.CountryRepository.InsertMany(GetCountries());
             _unitOfWork.DoctorRepository.InsertMany(GetDoctors());
             _unitOfWork.GlassTypeRepository.InsertMany(GetGlassTypes());
             _unitOfWork.ContactLensTypeRepository.InsertMany(GetContactLensTypes());
@@ -122,6 +123,14 @@ namespace OpticiatnMgr.Core
                 Description = g[0]
             }).ToList();
         }
+        private List<Country> GetCountries()
+        {
+            return GetStringMatrix("TestLaender.csv").Select(l =>
+            new Country()
+            {
+                CountryName = l[0]
+            }).ToList();
+        }
         private List<ContactLensType> GetContactLensTypes()
         {
             return GetStringMatrix("TestKontaktlinsentypen.csv").Select(c =>
@@ -133,6 +142,7 @@ namespace OpticiatnMgr.Core
         private List<Customer> GetCustomers()
         {
             var towns = _unitOfWork.TownRepository.Get();
+            var countries = _unitOfWork.CountryRepository.Get();
             return GetStringMatrix("TestKunden.csv").Select(c =>
             new Customer()
             {
@@ -142,7 +152,7 @@ namespace OpticiatnMgr.Core
                 Street = c[3],
                 HouseNumber = c[4],
                 Town = towns.Where(t => t.ZipCode == c[5]).FirstOrDefault(),
-                Country = c[6],
+                Country = countries.Where(country => country.CountryName == c[6]).FirstOrDefault(),
                 Telephone1 = c[7],
                 Telephone2 = c[8],
                 Email = c[9],
@@ -177,6 +187,7 @@ namespace OpticiatnMgr.Core
         private List<Supplier> GetSuppliers()
         {
             var towns = _unitOfWork.TownRepository.Get();
+            var countries = _unitOfWork.CountryRepository.Get();
             return GetStringMatrix("TestLieferanten.csv").Select(l =>
             new Supplier()
             {
@@ -184,7 +195,7 @@ namespace OpticiatnMgr.Core
                 Street = l[1],
                 HouseNumber = l[2],
                 Town = towns.Where(o => o.ZipCode == l[3]).FirstOrDefault(),
-                Country = l[4],
+                Country = countries.Where(c => c.CountryName == l[4]).FirstOrDefault(),
                 FAX = l[5],
                 Telephone = l[6],
                 Email = l[7],

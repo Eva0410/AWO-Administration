@@ -51,6 +51,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 ObservableCollection<string> props = new ObservableCollection<string>(typeof(Supplier).GetProperties().Select(p => p.Name).ToList());
                 ObservableCollection<string> newList = new ObservableCollection<string>();
                 props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
+                props.Remove("Country_Id"); //Shouldnt be able to filter by country_Id
                 props[props.IndexOf("Town_Id")] = "ZipCode"; //shouldnt be able to filter by town_id but user should be able to filter by zipcode
                 foreach (var item in props)
                 {
@@ -124,6 +125,9 @@ namespace OpticianMgr.Wpf.ViewModel
                 Town town = new Town(); //Referenced town must be copied as well
                 GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
                 sup.Town = town;
+                Country country = new Country();
+                GenericRepository<Country>.CopyProperties(country, this.Uow.CountryRepository.GetById(item.Country_Id));
+                sup.Country = country;
                 copiedSuppliers.Add(sup);
             }
             return copiedSuppliers;
@@ -163,6 +167,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
             this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty; //Program filters by the name of the town and not by by town-object
+            this.FilterProperty = this.FilterProperty == "Land" ? "Landname" : this.FilterProperty; 
             string translatedProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
             if (!String.IsNullOrEmpty(this.filterText))
             {
@@ -170,6 +175,10 @@ namespace OpticianMgr.Wpf.ViewModel
                 {
                     this.SupplierList = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Town?.GetType().GetProperty(translatedProperty).GetValue(s.Town, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
 
+                }
+                else if(typeof(Country).GetProperty(translatedProperty) != null) //User filters by country
+                {
+                    this.SupplierList = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Country?.GetType().GetProperty(translatedProperty).GetValue(s.Country, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
                 }
                 else
                 {
@@ -209,46 +218,17 @@ namespace OpticianMgr.Wpf.ViewModel
         public void EditS()
         {
             Supplier newSupplier = (Supplier)this.SelectedCell.Item;
-            Supplier oldSupplier =  this.Uow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town").FirstOrDefault();
+            Supplier oldSupplier =  this.Uow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town,Country").FirstOrDefault();
             List<String> changedProperties = this.ChangedProperties(oldSupplier, newSupplier);
             if (changedProperties.Count != 0)
             {
                 if (changedProperties.Contains("ZipCode") || changedProperties.Contains("TownName"))
                 {
-                    if (CheckTown(newSupplier.Town))
-                    {
-                        var messageBoxResult = MessageBox.Show("Möchten Sie die Änderungen für alle Orte speichern?", "Lieferant Ändern", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                        if (messageBoxResult == MessageBoxResult.Yes)
-                        {
-                            this.Uow.TownRepository.Update(newSupplier.Town);
-                            this.Uow.Save();
-                        }
-                        else if (messageBoxResult == MessageBoxResult.No)
-                        {
-                            newSupplier.Town_Id = 0;
-                            Town existingTown = this.Uow.TownRepository.Get(t => t.TownName == newSupplier.Town.TownName && t.ZipCode == newSupplier.Town.ZipCode).FirstOrDefault();
-                            if (existingTown != null)
-                            {
-                                newSupplier.Town = existingTown;
-                                newSupplier.Town_Id = existingTown.Id;
-                            }
-                            else
-                            {
-                                Town newTown = new Town()
-                                {
-                                    TownName = newSupplier.Town.TownName,
-                                    ZipCode = newSupplier.Town.ZipCode
-                                };
-                                this.Uow.TownRepository.Insert(newTown);
-                                newSupplier.Town = newTown;
-                            }
-                            this.Uow.SupplierRepository.Update(newSupplier);
-                            this.Uow.Save();
-
-                        }
-                        this.FillSupplierList();
-                        this.RaisePropertyChanged(() => this.SupplierList);
-                    }
+                    ChangeTown(newSupplier);
+                }
+                else if (changedProperties.Contains("CountryName"))
+                {
+                    ChangeCountry(newSupplier);
                 }
                 else
                 {
@@ -258,12 +238,86 @@ namespace OpticianMgr.Wpf.ViewModel
 
 
         }
+        private void ChangeTown(Supplier newSupplier)
+        {
+            if (CheckTown(newSupplier.Town))
+            {
+                var messageBoxResult = MessageBox.Show("Möchten Sie die Änderungen für alle Orte speichern?", "Lieferant Ändern", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    this.Uow.TownRepository.Update(newSupplier.Town);
+                    this.Uow.Save();
+                }
+                else if (messageBoxResult == MessageBoxResult.No)
+                {
+                    newSupplier.Country = null;
+                    newSupplier.Town_Id = 0;
+                    Town existingTown = this.Uow.TownRepository.Get(t => t.TownName == newSupplier.Town.TownName && t.ZipCode == newSupplier.Town.ZipCode).FirstOrDefault();
+                    if (existingTown != null)
+                    {
+                        newSupplier.Town = existingTown;
+                        newSupplier.Town_Id = existingTown.Id;
+                    }
+                    else
+                    {
+                        Town newTown = new Town()
+                        {
+                            TownName = newSupplier.Town.TownName,
+                            ZipCode = newSupplier.Town.ZipCode
+                        };
+                        this.Uow.TownRepository.Insert(newTown);
+                        newSupplier.Town = newTown;
+                    }
+                    this.Uow.SupplierRepository.Update(newSupplier);
+                    this.Uow.Save();
+
+                }
+                this.FillSupplierList();
+                this.RaisePropertyChanged(() => this.SupplierList);
+            }
+        }
+        private void ChangeCountry(Supplier newSupplier)
+        {
+                var messageBoxResult = MessageBox.Show("Möchten Sie die Änderungen für alle Länder speichern?", "Lieferant Ändern", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    this.Uow.CountryRepository.Update(newSupplier.Country);
+                    this.Uow.Save();
+                }
+                else if (messageBoxResult == MessageBoxResult.No)
+                {
+                    newSupplier.Town = null;
+                    newSupplier.Country_Id = 0;
+                    Country existingCountry = this.Uow.CountryRepository.Get(c => c.CountryName == newSupplier.Country.CountryName).FirstOrDefault();
+                    if (existingCountry != null)
+                    {
+                        newSupplier.Country = existingCountry;
+                        newSupplier.Country_Id = existingCountry.Id;
+                    }
+                    else
+                    {
+                        Country newCountry = new Country()
+                        {
+                            CountryName = newSupplier.Country.CountryName
+                        };
+                        this.Uow.CountryRepository.Insert(newCountry);
+                        newSupplier.Country = newCountry;
+                    }
+                    this.Uow.SupplierRepository.Update(newSupplier);
+                    this.Uow.Save();
+
+                }
+                this.FillSupplierList();
+                this.RaisePropertyChanged(() => this.SupplierList);
+            
+        }
         private void SaveChanges(Supplier newSupplier)
         {
             var messageBoxResult = MessageBox.Show(String.Format("Möchten Sie die Änderungen beim Lieferant mit der Id '{0}' speichern?", newSupplier.Id), "Lieferant Ändern", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 newSupplier.Town = null;
+                newSupplier.Country = null;
                 this.Uow.SupplierRepository.Update(newSupplier);
                 this.Uow.Save();
             }
@@ -295,13 +349,24 @@ namespace OpticianMgr.Wpf.ViewModel
             props.Remove("Id");
             props.Remove("Town_Id");
             props.Remove("Town");
+            props.Remove("Country");
+            props.Remove("Country_Id");
             props.Add("TownName");
+            props.Add("CountryName");
             props.Add("ZipCode");
+            
             foreach (var item in props)
             {
                 if (typeof(Town).GetProperty(item) != null)
                 {
                     if (oldSupplier.Town?.GetType().GetProperty(item).GetValue(oldSupplier.Town, null)?.ToString() != newSupplier.Town?.GetType().GetProperty(item).GetValue(newSupplier.Town, null)?.ToString())
+                    {
+                        changed.Add(item);
+                    }
+                }
+                else if(typeof(Country).GetProperty(item) != null)
+                {
+                    if (oldSupplier.Country?.GetType().GetProperty(item).GetValue(oldSupplier.Country, null)?.ToString() != newSupplier.Country?.GetType().GetProperty(item).GetValue(newSupplier.Country, null)?.ToString())
                     {
                         changed.Add(item);
                     }

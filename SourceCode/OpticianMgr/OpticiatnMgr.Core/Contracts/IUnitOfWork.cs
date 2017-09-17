@@ -17,6 +17,7 @@ namespace OpticiatnMgr.Core.Contracts
         IGenericRepository<ContactLensType> ContactLensTypeRepository { get; }
         IGenericRepository<Customer> CustomerRepository { get; }
         IGenericRepository<EyeGlassFrame> EyeGlassFrameRepository { get; }
+        IGenericRepository<Country> CountryRepository { get; }
 
         void Save();
 

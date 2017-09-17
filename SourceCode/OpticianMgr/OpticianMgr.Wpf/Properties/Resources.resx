@@ -123,6 +123,9 @@
   <data name="Country" xml:space="preserve">
     <value>Land</value>
   </data>
+  <data name="CountryName" xml:space="preserve">
+    <value>Landname</value>
+  </data>
   <data name="CustomerId" xml:space="preserve">
     <value>Kundennummer</value>
   </data>

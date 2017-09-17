@@ -57,7 +57,7 @@
                 <DataGridTextColumn Binding="{Binding Town.TownName, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Ort"/>
                 <DataGridTextColumn Binding="{Binding Street, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Straße"/>
                 <DataGridTextColumn Binding="{Binding HouseNumber, UpdateSourceTrigger=PropertyChanged}" Width="0.5*" Header="Hausnummer"/>
-                <DataGridTextColumn Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Land"/>
+                <DataGridTextColumn Binding="{Binding Country.CountryName, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Land"/>
                 <DataGridTextColumn Binding="{Binding FAX, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Fax"/>
                 <DataGridTextColumn Binding="{Binding Telephone, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Telefon"/>
                 <DataGridTextColumn Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Width="3*" Header="Email"/>

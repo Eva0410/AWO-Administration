@@ -35,6 +35,17 @@ namespace OpticianMgr.Persistence
                 return _townRepository;
             }
         }
+        private GenericRepository<Country> _countryRepository;
+
+        public IGenericRepository<Country> CountryRepository
+        {
+            get
+            {
+                if (_countryRepository == null)
+                    _countryRepository = new GenericRepository<Country>(_context);
+                return _countryRepository;
+            }
+        }
         private GenericRepository<Doctor> _doctorRepository;
 
         public IGenericRepository<Doctor> DoctorRepository

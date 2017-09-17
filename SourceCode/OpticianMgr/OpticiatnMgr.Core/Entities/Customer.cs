@@ -16,10 +16,13 @@ namespace OpticiatnMgr.Core.Entities
         public String LastName { get; set; }
         public String Street { get; set; }
         public String HouseNumber { get; set; }
-        public int Town_Id { get; set; }
+        public int? Town_Id { get; set; }
         [ForeignKey("Town_Id")]
         public Town Town { get; set; }
-        public String Country { get; set; }
+        
+        public int? Country_Id { get; set; }
+        [ForeignKey("Country_Id")]
+        public Country Country { get; set; }
         public String Telephone1 { get; set; }
         public String Telephone2 { get; set; }
         public String Email { get; set; }
