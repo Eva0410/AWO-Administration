@@ -96,15 +96,15 @@ namespace OpticianMgr.Wpf.ViewModel
         public SupplierViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
+            this.FilterProperty = "Name";
+            this.SortProperty = "Id";
             this.SupplierList = GetAllSuppliers();
             FilterSuppliers = new RelayCommand(FillSupplierList);
             DeleteFilter = new RelayCommand(DeleteF);
             AddSupplier = new RelayCommand(AddS);
             EditSupplier = new RelayCommand(EditS);
-            SortSuppliers = new RelayCommand(SortS);
+            SortSuppliers = new RelayCommand(FillSupplierList);
             this.SupplierList.CollectionChanged += this.OnCollectionChanged;
-            this.FilterProperty = "Name";
-            this.SortProperty = "Id";
             CellEditEndingCommand = new RelayCommand<DataGridCellEditEndingEventArgs>(args => this.RaisePropertyChanged(() => this.SupplierList));
         }
         //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen (clear collection)
@@ -130,11 +130,8 @@ namespace OpticianMgr.Wpf.ViewModel
                 sup.Country = country;
                 copiedSuppliers.Add(sup);
             }
+            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
             return copiedSuppliers;
-        }
-        private void SortS()
-        {
-            var k = this.SortProperty;
         }
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -160,6 +157,8 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.RaisePropertyChanged(() => this.SupplierList);
             }
         }
+        //TODO: Filter und Sort in der View machen https://msdn.microsoft.com/en-us/library/ms742542(v=vs.100).aspx, https://stackoverflow.com/questions/19112922/sort-observablecollectionstring-c-sharp
+        //TODO: extrem unperformant!!
         /// <summary>
         /// Refreshes and filter the supplier list
         /// </summary>
@@ -167,36 +166,66 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
             this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty; //Program filters by the name of the town and not by by town-object
-            this.FilterProperty = this.FilterProperty == "Land" ? "Landname" : this.FilterProperty; 
-            string translatedProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
-            if (!String.IsNullOrEmpty(this.filterText))
-            {
-                if (typeof(Town).GetProperty(translatedProperty) != null) //Does the user filter by townname or zipcode?
+            this.FilterProperty = this.FilterProperty == "Land" ? "Landname" : this.FilterProperty;
+            this.SortProperty = this.SortProperty == "Ort" ? "Ortsname" : this.SortProperty; 
+            this.SortProperty = this.SortProperty == "Land" ? "Landname" : this.SortProperty;
+            string translatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
+            string translatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
+
+            var filteredCollection = GetFilteredList(translatedFilterProperty);
+            this.SupplierList = GetSortedList(translatedSortProperty, filteredCollection);
+            
+            this.RaisePropertyChanged(() => this.SupplierList);
+        }
+        public ObservableCollection<Supplier> GetSortedList(string translatedSortProperty, ObservableCollection<Supplier> list)
+        {
+            ObservableCollection<Supplier> sortedCollection;
+                if (typeof(Town).GetProperty(translatedSortProperty) != null) //Does the user sort by townname or zipcode?
                 {
-                    this.SupplierList = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Town?.GetType().GetProperty(translatedProperty).GetValue(s.Town, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                    sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.Town?.GetType().GetProperty(translatedSortProperty).GetValue(s.Town, null)));
 
                 }
-                else if(typeof(Country).GetProperty(translatedProperty) != null) //User filters by country
+                else if (typeof(Country).GetProperty(translatedSortProperty) != null) //User sorts by country
                 {
-                    this.SupplierList = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Country?.GetType().GetProperty(translatedProperty).GetValue(s.Country, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                    sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.Country?.GetType().GetProperty(translatedSortProperty).GetValue(s.Country, null)));
                 }
                 else
                 {
-                    this.SupplierList = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.GetType().GetProperty(translatedProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                    sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.GetType().GetProperty(translatedSortProperty).GetValue(s, null)));
                 }
-                this.SupplierList.CollectionChanged += OnCollectionChanged;
+                sortedCollection.CollectionChanged += OnCollectionChanged;
+            
+            return sortedCollection;
+        }
+        public ObservableCollection<Supplier> GetFilteredList(string translatedFilterProperty)
+        {
+            ObservableCollection<Supplier> filteredCollection;
+            if (!String.IsNullOrEmpty(this.filterText))
+            {
+                if (typeof(Town).GetProperty(translatedFilterProperty) != null) //Does the user filter by townname or zipcode?
+                {
+                    filteredCollection = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Town?.GetType().GetProperty(translatedFilterProperty).GetValue(s.Town, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+
+                }
+                else if (typeof(Country).GetProperty(translatedFilterProperty) != null) //User filters by country
+                {
+                    filteredCollection = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Country?.GetType().GetProperty(translatedFilterProperty).GetValue(s.Country, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                }
+                else
+                {
+                    filteredCollection = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.GetType().GetProperty(translatedFilterProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                }
+                filteredCollection.CollectionChanged += OnCollectionChanged;
             }
             else
-                this.SupplierList = GetAllSuppliers();
-            
-            this.RaisePropertyChanged(() => this.SupplierList);
+                filteredCollection = GetAllSuppliers();
+            return filteredCollection;
         }
         //Delete filter
         public void DeleteF()
         {
-            this.SupplierList = GetAllSuppliers();
             this.FilterText = "";
-            this.RaisePropertyChanged(() => this.SupplierList);
+            this.FillSupplierList();
         }
         //add supplier
         public void AddS()
@@ -220,17 +249,20 @@ namespace OpticianMgr.Wpf.ViewModel
             Supplier newSupplier = (Supplier)this.SelectedCell.Item;
             Supplier oldSupplier =  this.Uow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town,Country").FirstOrDefault();
             List<String> changedProperties = this.ChangedProperties(oldSupplier, newSupplier);
+            bool updated = false;
             if (changedProperties.Count != 0)
             {
                 if (changedProperties.Contains("ZipCode") || changedProperties.Contains("TownName"))
                 {
                     ChangeTown(newSupplier);
+                    updated = true;
                 }
-                else if (changedProperties.Contains("CountryName"))
+                if (changedProperties.Contains("CountryName"))
                 {
                     ChangeCountry(newSupplier);
+                    updated = true;
                 }
-                else
+                if(!changedProperties.Contains("ZipCode") && !changedProperties.Contains("TownName") && !(changedProperties.Contains("CountryName")) && !updated)
                 {
                     SaveChanges(newSupplier);
                 }
