@@ -63,7 +63,7 @@ namespace OpticianMgr.Wpf.ViewModel
             }
         }
         private string filterProperty;
-        
+
         public string FilterProperty
         {
             get { return filterProperty; }
@@ -116,7 +116,7 @@ namespace OpticianMgr.Wpf.ViewModel
         private ObservableCollection<Supplier> GetAllSuppliers()
         {
             var unitOfWorkSuppliers = this.Uow.SupplierRepository.Get().ToList();
-            ObservableCollection<Supplier> copiedSuppliers = new ObservableCollection<Supplier>(); 
+            ObservableCollection<Supplier> copiedSuppliers = new ObservableCollection<Supplier>();
             copiedSuppliers.CollectionChanged += this.OnCollectionChanged;
             foreach (var item in unitOfWorkSuppliers)
             {
@@ -154,7 +154,6 @@ namespace OpticianMgr.Wpf.ViewModel
                 }
                 this.Uow.Save();
                 this.FillSupplierList();
-                this.RaisePropertyChanged(() => this.SupplierList);
             }
         }
         //TODO: Filter und Sort in der View machen https://msdn.microsoft.com/en-us/library/ms742542(v=vs.100).aspx, https://stackoverflow.com/questions/19112922/sort-observablecollectionstring-c-sharp
@@ -167,42 +166,50 @@ namespace OpticianMgr.Wpf.ViewModel
             IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
             this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty; //Program filters by the name of the town and not by by town-object
             this.FilterProperty = this.FilterProperty == "Land" ? "Landname" : this.FilterProperty;
-            this.SortProperty = this.SortProperty == "Ort" ? "Ortsname" : this.SortProperty; 
+            this.SortProperty = this.SortProperty == "Ort" ? "Ortsname" : this.SortProperty;
             this.SortProperty = this.SortProperty == "Land" ? "Landname" : this.SortProperty;
             string translatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
             string translatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
 
             var filteredCollection = GetFilteredList(translatedFilterProperty);
             this.SupplierList = GetSortedList(translatedSortProperty, filteredCollection);
-            
+
             this.RaisePropertyChanged(() => this.SupplierList);
         }
         public ObservableCollection<Supplier> GetSortedList(string translatedSortProperty, ObservableCollection<Supplier> list)
         {
-            ObservableCollection<Supplier> sortedCollection;
-                if (typeof(Town).GetProperty(translatedSortProperty) != null) //Does the user sort by townname or zipcode?
-                {
-                    sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.Town?.GetType().GetProperty(translatedSortProperty).GetValue(s.Town, null)));
+            ObservableCollection<Supplier> sortedCollection = null;
+            if (typeof(Supplier).GetProperty(translatedSortProperty) != null)
+            {
+                sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.GetType().GetProperty(translatedSortProperty).GetValue(s, null)));
+            }
+            else if (typeof(Town).GetProperty(translatedSortProperty) != null) //Does the user sort by townname or zipcode?
+            {
+                sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.Town?.GetType().GetProperty(translatedSortProperty).GetValue(s.Town, null)));
 
-                }
-                else if (typeof(Country).GetProperty(translatedSortProperty) != null) //User sorts by country
-                {
-                    sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.Country?.GetType().GetProperty(translatedSortProperty).GetValue(s.Country, null)));
-                }
-                else
-                {
-                    sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.GetType().GetProperty(translatedSortProperty).GetValue(s, null)));
-                }
-                sortedCollection.CollectionChanged += OnCollectionChanged;
-            
+            }
+            else if (typeof(Country).GetProperty(translatedSortProperty) != null) //User sorts by country
+            {
+                sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(s => s.Country?.GetType().GetProperty(translatedSortProperty).GetValue(s.Country, null)));
+            }
+            else
+            {
+                MessageBox.Show("Beim Sortieren ist ein Fehler aufgetreten");
+            }
+            sortedCollection.CollectionChanged += OnCollectionChanged;
+
             return sortedCollection;
         }
         public ObservableCollection<Supplier> GetFilteredList(string translatedFilterProperty)
         {
-            ObservableCollection<Supplier> filteredCollection;
+            ObservableCollection<Supplier> filteredCollection = null;
             if (!String.IsNullOrEmpty(this.filterText))
             {
-                if (typeof(Town).GetProperty(translatedFilterProperty) != null) //Does the user filter by townname or zipcode?
+                if (typeof(Supplier).GetProperty(translatedFilterProperty) != null)
+                {
+                    filteredCollection = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.GetType().GetProperty(translatedFilterProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                }
+                else if (typeof(Town).GetProperty(translatedFilterProperty) != null) //Does the user filter by townname or zipcode?
                 {
                     filteredCollection = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.Town?.GetType().GetProperty(translatedFilterProperty).GetValue(s.Town, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
 
@@ -213,8 +220,9 @@ namespace OpticianMgr.Wpf.ViewModel
                 }
                 else
                 {
-                    filteredCollection = new ObservableCollection<Supplier>(GetAllSuppliers().Where(s => s.GetType().GetProperty(translatedFilterProperty).GetValue(s, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
+                    MessageBox.Show("Beim Filtern ist ein Fehler aufgetreten!");
                 }
+
                 filteredCollection.CollectionChanged += OnCollectionChanged;
             }
             else
@@ -239,7 +247,6 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 viewModel.RefreshSuppliers -= refreshSupplierHandler;
                 this.FillSupplierList();
-                this.RaisePropertyChanged(() => this.SupplierList);
             };
             viewModel.RefreshSuppliers += refreshSupplierHandler;
         }
@@ -247,30 +254,39 @@ namespace OpticianMgr.Wpf.ViewModel
         public void EditS()
         {
             Supplier newSupplier = (Supplier)this.SelectedCell.Item;
-            Supplier oldSupplier =  this.Uow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town,Country").FirstOrDefault();
-            List<String> changedProperties = this.ChangedProperties(oldSupplier, newSupplier);
-            bool updated = false;
-            if (changedProperties.Count != 0)
-            {
-                if (changedProperties.Contains("ZipCode") || changedProperties.Contains("TownName"))
+            Supplier oldSupplier = this.Uow.SupplierRepository.Get(filter: s => s.Id == newSupplier.Id, includeProperties: "Town,Country").FirstOrDefault();
+            bool cancelled = false;
+            bool townChanged = false;
+            bool countryChanged = false;
+            bool othersChanged = false;
+            this.ChangedProperties(oldSupplier, newSupplier, ref townChanged, ref countryChanged, ref othersChanged);
+                if ( townChanged && !cancelled)
                 {
-                    ChangeTown(newSupplier);
-                    updated = true;
+                    ChangeTown(ref newSupplier, ref cancelled);
                 }
-                if (changedProperties.Contains("CountryName"))
+                if ( countryChanged && !cancelled)
                 {
-                    ChangeCountry(newSupplier);
-                    updated = true;
+                    ChangeCountry(ref newSupplier, ref cancelled);
                 }
-                if(!changedProperties.Contains("ZipCode") && !changedProperties.Contains("TownName") && !(changedProperties.Contains("CountryName")) && !updated)
+                if (othersChanged && !cancelled)
                 {
-                    SaveChanges(newSupplier);
+                    SaveChanges(ref newSupplier, ref cancelled);
                 }
-            }
+                if(!cancelled)
+                {
+                    if (!countryChanged)
+                        newSupplier.Country = null;
+                    if (!townChanged)
+                        newSupplier.Town = null;
+                    this.Uow.SupplierRepository.Update(newSupplier);
+                    this.Uow.Save();
+                }
+                this.FillSupplierList();
+            
 
 
         }
-        private void ChangeTown(Supplier newSupplier)
+        private void ChangeTown(ref Supplier newSupplier, ref bool cancelled)
         {
             if (CheckTown(newSupplier.Town))
             {
@@ -278,13 +294,12 @@ namespace OpticianMgr.Wpf.ViewModel
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     this.Uow.TownRepository.Update(newSupplier.Town);
-                    this.Uow.Save();
                 }
                 else if (messageBoxResult == MessageBoxResult.No)
                 {
-                    newSupplier.Country = null;
                     newSupplier.Town_Id = 0;
-                    Town existingTown = this.Uow.TownRepository.Get(t => t.TownName == newSupplier.Town.TownName && t.ZipCode == newSupplier.Town.ZipCode).FirstOrDefault();
+                    var copiedSupplier = newSupplier;
+                    Town existingTown = this.Uow.TownRepository.Get(t => t.TownName == copiedSupplier.Town.TownName && t.ZipCode == copiedSupplier.Town.ZipCode).FirstOrDefault();
                     if (existingTown != null)
                     {
                         newSupplier.Town = existingTown;
@@ -300,63 +315,58 @@ namespace OpticianMgr.Wpf.ViewModel
                         this.Uow.TownRepository.Insert(newTown);
                         newSupplier.Town = newTown;
                     }
-                    this.Uow.SupplierRepository.Update(newSupplier);
-                    this.Uow.Save();
 
                 }
-                this.FillSupplierList();
-                this.RaisePropertyChanged(() => this.SupplierList);
+                else if(messageBoxResult == MessageBoxResult.Cancel)
+                {
+                    cancelled = true;
+                }
             }
         }
-        private void ChangeCountry(Supplier newSupplier)
+        private void ChangeCountry(ref Supplier newSupplier, ref bool cancelled)
         {
-                var messageBoxResult = MessageBox.Show("Möchten Sie die Änderungen für alle Länder speichern?", "Lieferant Ändern", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    this.Uow.CountryRepository.Update(newSupplier.Country);
-                    this.Uow.Save();
-                }
-                else if (messageBoxResult == MessageBoxResult.No)
-                {
-                    newSupplier.Town = null;
-                    newSupplier.Country_Id = 0;
-                    Country existingCountry = this.Uow.CountryRepository.Get(c => c.CountryName == newSupplier.Country.CountryName).FirstOrDefault();
-                    if (existingCountry != null)
-                    {
-                        newSupplier.Country = existingCountry;
-                        newSupplier.Country_Id = existingCountry.Id;
-                    }
-                    else
-                    {
-                        Country newCountry = new Country()
-                        {
-                            CountryName = newSupplier.Country.CountryName
-                        };
-                        this.Uow.CountryRepository.Insert(newCountry);
-                        newSupplier.Country = newCountry;
-                    }
-                    this.Uow.SupplierRepository.Update(newSupplier);
-                    this.Uow.Save();
-
-                }
-                this.FillSupplierList();
-                this.RaisePropertyChanged(() => this.SupplierList);
-            
-        }
-        private void SaveChanges(Supplier newSupplier)
-        {
-            var messageBoxResult = MessageBox.Show(String.Format("Möchten Sie die Änderungen beim Lieferant mit der Id '{0}' speichern?", newSupplier.Id), "Lieferant Ändern", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var messageBoxResult = MessageBox.Show("Möchten Sie die Änderungen für alle Länder speichern?", "Lieferant Ändern", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                newSupplier.Town = null;
-                newSupplier.Country = null;
-                this.Uow.SupplierRepository.Update(newSupplier);
-                this.Uow.Save();
+                this.Uow.CountryRepository.Update(newSupplier.Country);
             }
-            this.FillSupplierList();
+            else if (messageBoxResult == MessageBoxResult.No)
+            {
+                newSupplier.Country_Id = 0;
+                var copiedSupplier = newSupplier;
+                Country existingCountry = this.Uow.CountryRepository.Get(c => c.CountryName == copiedSupplier.Country.CountryName).FirstOrDefault();
+                if (existingCountry != null)
+                {
+                    newSupplier.Country = existingCountry;
+                    newSupplier.Country_Id = existingCountry.Id;
+                }
+                else
+                {
+                    Country newCountry = new Country()
+                    {
+                        CountryName = newSupplier.Country.CountryName
+                    };
+                    this.Uow.CountryRepository.Insert(newCountry);
+                    newSupplier.Country = newCountry;
+                }
 
-            this.RaisePropertyChanged(() => this.SupplierList);
-            
+            }
+            if(messageBoxResult == MessageBoxResult.Cancel)
+            {
+                cancelled = true;
+            }
+
+        }
+        private void SaveChanges(ref Supplier newSupplier, ref bool cancelled)
+        {
+            var messageBoxResult = MessageBox.Show(String.Format("Möchten Sie die Änderungen beim Lieferant mit der Id '{0}' speichern?", newSupplier.Id), "Lieferant Ändern", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageBoxResult == MessageBoxResult.No)
+            {
+                cancelled = true;
+            }
+
+
         }
         private bool CheckTown(Town town)
         {
@@ -373,9 +383,8 @@ namespace OpticianMgr.Wpf.ViewModel
             }
             return check;
         }
-        private List<String> ChangedProperties(Supplier oldSupplier, Supplier newSupplier)
+        private void ChangedProperties(Supplier oldSupplier, Supplier newSupplier, ref bool townChanged, ref bool countryChanged, ref bool othersChanged)
         {
-            List<String> changed = new List<string>();
             List<String> props = new List<string>(typeof(Supplier).GetProperties().Select(p => p.Name).ToList());
             props.Remove("Timestamp");
             props.Remove("Id");
@@ -386,21 +395,21 @@ namespace OpticianMgr.Wpf.ViewModel
             props.Add("TownName");
             props.Add("CountryName");
             props.Add("ZipCode");
-            
+
             foreach (var item in props)
             {
                 if (typeof(Town).GetProperty(item) != null)
                 {
                     if (oldSupplier.Town?.GetType().GetProperty(item).GetValue(oldSupplier.Town, null)?.ToString() != newSupplier.Town?.GetType().GetProperty(item).GetValue(newSupplier.Town, null)?.ToString())
                     {
-                        changed.Add(item);
+                        townChanged = true;
                     }
                 }
-                else if(typeof(Country).GetProperty(item) != null)
+                else if (typeof(Country).GetProperty(item) != null)
                 {
                     if (oldSupplier.Country?.GetType().GetProperty(item).GetValue(oldSupplier.Country, null)?.ToString() != newSupplier.Country?.GetType().GetProperty(item).GetValue(newSupplier.Country, null)?.ToString())
                     {
-                        changed.Add(item);
+                        countryChanged = true;
                     }
                 }
                 else
@@ -408,12 +417,10 @@ namespace OpticianMgr.Wpf.ViewModel
 
                     if (oldSupplier.GetType().GetProperty(item).GetValue(oldSupplier, null)?.ToString() != (newSupplier.GetType().GetProperty(item).GetValue(newSupplier, null)?.ToString()))
                     {
-                        changed.Add(item);
+                        othersChanged = true;
                     }
                 }
             }
-            return changed;
-
         }
     }
 }
