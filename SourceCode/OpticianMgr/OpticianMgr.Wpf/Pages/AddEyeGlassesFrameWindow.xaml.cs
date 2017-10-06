@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpticianMgr.Wpf
+namespace OpticianMgr.Wpf.Pages
 {
     /// <summary>
-    /// Interaction logic for GlassesPage.xaml
+    /// Interaktionslogik für AddEyeGlassesFrameWindow.xaml
     /// </summary>
-    public partial class GlassesPage : Page
+    public partial class AddEyeGlassesFrameWindow : Window
     {
-        public GlassesPage()
+        public AddEyeGlassesFrameWindow()
         {
             InitializeComponent();
         }

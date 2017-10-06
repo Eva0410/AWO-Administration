@@ -210,9 +210,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\AddEyeGlassesFrameWindow.xaml.cs">
+      <DependentUpon>AddEyeGlassesFrameWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EyeGlassFramesPage.xaml.cs">
       <DependentUpon>EyeGlassFramesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddEyeGlassFrameModel.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\EyeGlassFramesViewModel.cs" />
@@ -231,7 +235,11 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SupplierViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="WindowServices\AddSupplierWindowService.cs" />
+    <Compile Include="WindowServices\WindowService.cs" />
+    <Page Include="Pages\AddEyeGlassesFrameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AddSupplierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,10 +249,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EyeGlassFramesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\GlassesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,9 +262,6 @@
     </Compile>
     <Compile Include="Pages\CustomerPage.xaml.cs">
       <DependentUpon>CustomerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\GlassesPage.xaml.cs">
-      <DependentUpon>GlassesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

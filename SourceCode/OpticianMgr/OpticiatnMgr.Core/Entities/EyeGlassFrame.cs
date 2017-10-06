@@ -15,14 +15,18 @@ namespace OpticiatnMgr.Core.Entities
         public String ModelDescription { get; set; }
         public String Color { get; set; }
         public String Size { get; set; }
-        public decimal PurchasePrice { get; set; }
-        public decimal SalePrice { get; set; }
-        public DateTime PurchaseDate { get; set; }
-        public DateTime SaleDate { get; set; }
+        public Decimal? PurchasePrice { get; set; }
+        public Decimal? SalePrice { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime? PurchaseDate { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime? SaleDate { get; set; }
         [Required]
         public String State { get; set; }
         public int? Supplier_Id { get; set; }
         [ForeignKey("Supplier_Id")]
         public Supplier Supplier { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

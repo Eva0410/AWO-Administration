@@ -87,7 +87,6 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand DeleteFilter { get; set; }
         public ICommand AddSupplier { get; set; }
         public ICommand EditSupplier { get; set; }
-        public ICommand SortSuppliers { get; set; }
         RelayCommand<DataGridCellEditEndingEventArgs> CellEditEndingCommand { get; set; }
 
         /// <summary>
@@ -103,7 +102,6 @@ namespace OpticianMgr.Wpf.ViewModel
             DeleteFilter = new RelayCommand(DeleteF);
             AddSupplier = new RelayCommand(AddS);
             EditSupplier = new RelayCommand(EditS);
-            SortSuppliers = new RelayCommand(FillSupplierList);
             this.SupplierList.CollectionChanged += this.OnCollectionChanged;
             CellEditEndingCommand = new RelayCommand<DataGridCellEditEndingEventArgs>(args => this.RaisePropertyChanged(() => this.SupplierList));
         }
@@ -130,31 +128,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 sup.Country = country;
                 copiedSuppliers.Add(sup);
             }
-            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
             return copiedSuppliers;
-        }
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            //Delete a supplier
-            if (e.OldItems != null)
-            {
-                //OldItems will always only contain one item
-                foreach (Supplier item in e.OldItems)
-                {
-                    var fullItem = this.Uow.SupplierRepository.Get(filter: s => s.Id == item.Id, includeProperties: "EyeGlassFrames").FirstOrDefault();
-                    if (fullItem != null)
-                    {
-                        var messageBoxResult = MessageBox.Show("Wollen Sie den Lieferanten '" + fullItem.Name + "' wirklich löschen?", "Lieferant Löschen", MessageBoxButton.YesNo);
-                        if (messageBoxResult == MessageBoxResult.Yes)
-                        {
-                            this.Uow.SupplierRepository.Delete(fullItem);
-                        }
-
-                    }
-                }
-                this.Uow.Save();
-                this.FillSupplierList();
-            }
         }
         //TODO: Filter und Sort in der View machen https://msdn.microsoft.com/en-us/library/ms742542(v=vs.100).aspx, https://stackoverflow.com/questions/19112922/sort-observablecollectionstring-c-sharp
         //TODO: extrem unperformant!!
@@ -229,6 +203,29 @@ namespace OpticianMgr.Wpf.ViewModel
                 filteredCollection = GetAllSuppliers();
             return filteredCollection;
         }
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //Delete a supplier
+            if (e.OldItems != null)
+            {
+                //OldItems will always only contain one item
+                foreach (Supplier item in e.OldItems)
+                {
+                    var fullItem = this.Uow.SupplierRepository.Get(filter: s => s.Id == item.Id, includeProperties: "EyeGlassFrames").FirstOrDefault();
+                    if (fullItem != null)
+                    {
+                        var messageBoxResult = MessageBox.Show("Wollen Sie den Lieferanten '" + fullItem.Name + "' wirklich löschen?", "Lieferant Löschen", MessageBoxButton.YesNo);
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            this.Uow.SupplierRepository.Delete(fullItem);
+                        }
+
+                    }
+                }
+                this.Uow.Save();
+                this.FillSupplierList();
+            }
+        }
         //Delete filter
         public void DeleteF()
         {
@@ -239,9 +236,8 @@ namespace OpticianMgr.Wpf.ViewModel
         public void AddS()
         {
             //MVVM says that the viewmodel shouldnt know about the view -> service, which shows new windows
-            AddSupplierWindowService windowService = new AddSupplierWindowService();
+            WindowService windowService = new WindowService();
             AddSupplierViewModel viewModel = ViewModelLocator.AddSupplierViewModel;
-            windowService.ShowWindow(viewModel);
             EventHandler<EventArgs> refreshSupplierHandler = null;
             refreshSupplierHandler = (sender, e) =>
             {
@@ -249,6 +245,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.FillSupplierList();
             };
             viewModel.RefreshSuppliers += refreshSupplierHandler;
+            windowService.ShowAddSupplierWindow(viewModel);
         }
         //Edit supplier 
         public void EditS()

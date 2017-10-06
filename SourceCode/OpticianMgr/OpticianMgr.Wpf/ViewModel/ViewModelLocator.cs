@@ -56,6 +56,7 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<CustomerViewModel>();
             SimpleIoc.Default.Register<StatisticsViewModel>();
             SimpleIoc.Default.Register<EyeGlassFramesViewModel>();
+            SimpleIoc.Default.Register<AddEyeGlassFrameModel>();
         }
 
         public MainViewModel MainViewModel
@@ -86,6 +87,11 @@ namespace OpticianMgr.Wpf.ViewModel
         public EyeGlassFramesViewModel EyeGlassFramesViewModel
         {
             get { return ServiceLocator.Current.GetInstance<EyeGlassFramesViewModel>(); }
+        }
+        //TODO
+        public static AddEyeGlassFrameModel AddEyeGlassFrameModel
+        {
+            get { return ServiceLocator.Current.GetInstance<AddEyeGlassFrameModel>(); }
         }
 
 

@@ -51,7 +51,7 @@ namespace OpticianMgr.Wpf.ViewModel
             Customers = new RelayCommand(() => this.Open(this.CustomerPage));
             Statistics = new RelayCommand(() => this.Open(this.StatisticsPage));
             EyeGlassFrames = new RelayCommand(() => this.Open(this.EyeGlassFramesPage));
-            this.Open(this.SupplierPage);
+            this.Open(this.EyeGlassFramesPage);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

@@ -32,6 +32,7 @@ namespace OpticiatnMgr.Core.Entities
         public String Others1 { get; set; }
         public String Others2 { get; set; }
         public String InsurancePolicyNumber { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime DateOfBirth { get; set; }
 
     }

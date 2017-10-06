@@ -13,7 +13,9 @@ namespace OpticiatnMgr.Core.Entities
         public int Customer_Id { get; set; }
         [ForeignKey("Customer_Id")]
         public Customer Customer { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime OrderDate { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime PaymentDate { get; set; }
         public int? GlassType_Id { get; set; }
         [ForeignKey("GlassType_Id")]
