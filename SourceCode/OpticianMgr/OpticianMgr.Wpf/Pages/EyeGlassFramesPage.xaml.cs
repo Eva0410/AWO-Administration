@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OpticianMgr.Persistence;
+using OpticianMgr.Wpf.ViewModel;
+using OpticiatnMgr.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +16,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpticianMgr.Wpf.Pages
+namespace OpticianMgr.Wpf
 {
     /// <summary>
-    /// Interaktionslogik für EyeGlassFramesPage.xaml
+    /// Interaction logic for SupplierPage.xaml
     /// </summary>
     public partial class EyeGlassFramesPage : Page
     {
         public EyeGlassFramesPage()
         {
             InitializeComponent();
+            //TODO fix binding
+            dgState.ItemsSource = EyeGlassFramesViewModel.States;
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                //TODO Liste von Suppliern und nicht von Namen!
+                var sups = uow.SupplierRepository.Get(orderBy: o => o.OrderBy(s => s.Name)).ToList();
+                sups.Insert(0, new Supplier() { Name = " " });
+                dgSup.ItemsSource = sups;
+            }
         }
     }
 }

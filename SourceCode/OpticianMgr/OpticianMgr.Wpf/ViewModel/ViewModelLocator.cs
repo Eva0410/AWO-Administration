@@ -94,7 +94,6 @@ namespace OpticianMgr.Wpf.ViewModel
             get { return ServiceLocator.Current.GetInstance<AddEyeGlassFrameModel>(); }
         }
 
-
         public static void Cleanup()
         {
                         // TODO Clear the ViewModels
