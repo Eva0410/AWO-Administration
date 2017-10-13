@@ -26,15 +26,6 @@ namespace OpticianMgr.Wpf
         public EyeGlassFramesPage()
         {
             InitializeComponent();
-            //TODO fix binding
-            dgState.ItemsSource = EyeGlassFramesViewModel.States;
-            using (UnitOfWork uow = new UnitOfWork())
-            {
-                //TODO Liste von Suppliern und nicht von Namen!
-                var sups = uow.SupplierRepository.Get(orderBy: o => o.OrderBy(s => s.Name)).ToList();
-                sups.Insert(0, new Supplier() { Name = " " });
-                dgSup.ItemsSource = sups;
-            }
         }
     }
 }

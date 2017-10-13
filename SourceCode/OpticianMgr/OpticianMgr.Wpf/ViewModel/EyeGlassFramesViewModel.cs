@@ -16,17 +16,17 @@ using System.Windows;
 using System.Resources;
 using System.Collections;
 using System.Windows.Data;
+using System.ComponentModel;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
     public class EyeGlassFramesViewModel : ViewModelBase
     {
-        public static string[] States = { "Bestellt", "Lagernd", "Verkauft" };
-        //public static ObservableCollection<string> States
-        //{
-        //    get { return new ObservableCollection<string>() { "Bestellt", "Lagernd", "Verkauft" }; }
-        //    set { }
-        //}
+        public static string[] States
+        {
+            get { return new string[] { "Bestellt", "Lagernd", "Verkauft" }; }
+        }
+        public ICollectionView EyeGlassFramesView { get; set; }
         public List<Supplier> Suppliers { get; set; }
 
         public IUnitOfWork Uow { get; set; }
@@ -43,10 +43,6 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.RaisePropertyChanged(() => this.CellInfo);
             }
         }
-
-        //TODO wrm geht ds nd
-        //TODO combo box failt
-
 
         //The properties of the eyeglassframes class are safed in English but need to be shown in German
         public ObservableCollection<String> PropertiesList
@@ -67,6 +63,8 @@ namespace OpticianMgr.Wpf.ViewModel
             }
         }
         public string FilterProperty { get; set; }
+        public string TranslatedFilterProperty { get; set; }
+        public string TranslatedSortProperty { get; set; }
         public string SortProperty { get; set; }
         private string filterText;
 
@@ -93,14 +91,14 @@ namespace OpticianMgr.Wpf.ViewModel
         public EyeGlassFramesViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
-            this.FilterProperty = "Name";
+            this.FilterProperty = "Modell";
             this.SortProperty = "Id";
-            this.EyeGlassFrames = GetAllEyeGlassFrames();
+            FillList();
             FilterAndSort = new RelayCommand(FillList);
             DeleteFilter = new RelayCommand(DeleteF);
             AddEyeGlassFrame = new RelayCommand(AddE);
             EditEyeGlassFrame = new RelayCommand(EditE);
-            this.EyeGlassFrames.CollectionChanged += this.OnCollectionChanged;
+            //this.EyeGlassFrames.CollectionChanged += this.OnCollectionChanged;
             CellEditEndingCommand = new RelayCommand<DataGridCellEditEndingEventArgs>(args => this.RaisePropertyChanged(() => this.EyeGlassFrames));
         }
         //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen (clear collection)
@@ -113,7 +111,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             var unitOfWorkEyeGlassFrames = this.Uow.EyeGlassFrameRepository.Get().ToList();
             ObservableCollection<EyeGlassFrame> copiedEyeGlassFrames = new ObservableCollection<EyeGlassFrame>();
-            copiedEyeGlassFrames.CollectionChanged += this.OnCollectionChanged;
+            //copiedEyeGlassFrames.CollectionChanged += this.OnCollectionChanged;
             foreach (var item in unitOfWorkEyeGlassFrames)
             {
                 EyeGlassFrame egf = new EyeGlassFrame();
@@ -136,25 +134,30 @@ namespace OpticianMgr.Wpf.ViewModel
         public void FillList()
         {
             //TODO
-            //IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
-            //this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty; //Program filters by the name of the town and not by by town-object
-            //this.FilterProperty = this.FilterProperty == "Land" ? "Landname" : this.FilterProperty;
-            //this.SortProperty = this.SortProperty == "Ort" ? "Ortsname" : this.SortProperty;
-            //this.SortProperty = this.SortProperty == "Land" ? "Landname" : this.SortProperty;
-            //string translatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
-            //string translatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
+            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
+            this.FilterProperty = this.FilterProperty == "Lieferant" ? "Name" : this.FilterProperty; //Program filters by the name of the supplier and not by by supplier-object
+            this.SortProperty = this.SortProperty == "Lieferant" ? "Name" : this.SortProperty;
+            this.TranslatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
+            this.TranslatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
 
             //var filteredCollection = GetFilteredList(translatedFilterProperty);
             //this.EyeGlassFrames = GetSortedList(translatedSortProperty, filteredCollection);
 
             this.EyeGlassFrames = new ObservableCollection<EyeGlassFrame>(GetAllEyeGlassFrames());
-            this.EyeGlassFrames.CollectionChanged += OnCollectionChanged;
+            this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
+            Filter();
+            Sort();
+            this.EyeGlassFramesView.CollectionChanged -= OnCollectionChanged;
+            this.EyeGlassFramesView.CollectionChanged += OnCollectionChanged;
+           // this.EyeGlassFrames.CollectionChanged += OnCollectionChanged;
 
             var suppliers = this.Uow.SupplierRepository.Get(orderBy: o => o.OrderBy(s => s.Name)).ToList();
             suppliers.Insert(0, new Supplier() { Name = "Bitte wählen..." });
             this.Suppliers = suppliers;
 
             this.RaisePropertyChanged(() => this.EyeGlassFrames);
+            this.RaisePropertyChanged(() => this.Suppliers);
+            this.RaisePropertyChanged(() => this.EyeGlassFramesView);
         }
         public ObservableCollection<EyeGlassFrame> GetSortedList(string translatedSortProperty, ObservableCollection<EyeGlassFrame> list)
         {
@@ -176,34 +179,35 @@ namespace OpticianMgr.Wpf.ViewModel
 
             return sortedCollection;
         }
-        public ObservableCollection<EyeGlassFrame> GetFilteredList(string translatedFilterProperty)
+        public void Filter()
         {
-            ObservableCollection<EyeGlassFrame> filteredCollection = null;
-            //if (!String.IsNullOrEmpty(this.filterText))
-            //{
-            //    if (typeof(EyeGlassFrame).GetProperty(translatedFilterProperty) != null)
-            //    {
-            //        filteredCollection = new ObservableCollection<EyeGlassFrame>(GetAllEyeGlassFrames().Where(e => e.GetType().GetProperty(translatedFilterProperty).GetValue(e, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
-            //    }
-            //    else if (typeof(Supplier).GetProperty(translatedFilterProperty) != null) //Does the user filter by townname or zipcode?
-            //    {
-            //        filteredCollection = new ObservableCollection<Supplier>(GetAllEyeGlassFrames().Where(s => s.Town?.GetType().GetProperty(translatedFilterProperty).GetValue(s.Town, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
 
-            //    }
-            //    else if (typeof(Country).GetProperty(translatedFilterProperty) != null) //User filters by country
-            //    {
-            //        filteredCollection = new ObservableCollection<Supplier>(GetAllEyeGlassFrames().Where(s => s.Country?.GetType().GetProperty(translatedFilterProperty).GetValue(s.Country, null)?.ToString().ToUpper().IndexOf(this.filterText.ToUpper()) >= 0));
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Beim Filtern ist ein Fehler aufgetreten!");
-            //    }
-
-            //    filteredCollection.CollectionChanged += OnCollectionChanged;
-            //}
-            //else
-            //    filteredCollection = GetAllEyeGlassFrames();
-            return filteredCollection;
+            if (!String.IsNullOrEmpty(this.filterText)) { 
+                this.EyeGlassFramesView.Filter = new Predicate<object>(Contains);
+            }
+            else
+                this.EyeGlassFramesView.Filter = null;
+        }
+        public void Sort()
+        {
+            
+        }
+        private bool Contains(object f)
+        {
+            EyeGlassFrame frame = f as EyeGlassFrame;
+            if (typeof(EyeGlassFrame).GetProperty(TranslatedFilterProperty) != null)
+            {
+                return frame.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(frame, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+            }
+            else if (typeof(Supplier).GetProperty(TranslatedFilterProperty) != null) //Does the user filter by suppliername?
+            {
+                return frame.Supplier?.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(frame.Supplier, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+            }
+            else
+            {
+                MessageBox.Show("Beim Filtern ist ein Fehler aufgetreten!");
+                return false;
+            }
         }
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -216,7 +220,7 @@ namespace OpticianMgr.Wpf.ViewModel
                     var fullItem = this.Uow.EyeGlassFrameRepository.Get(filter: eg => eg.Id == item.Id, includeProperties: "Orders").FirstOrDefault();
                     if (fullItem != null)
                     {
-                        var messageBoxResult = MessageBox.Show("Wollen Sie die Brillenfassung '" + fullItem.Brand + ", " + fullItem.ModelDescription + "' wirklich löschen?", "Brillenfassung Löschen", MessageBoxButton.YesNo);
+                        var messageBoxResult = MessageBox.Show("Wollen Sie die Brillenfassung '" + fullItem.Brand + " " + fullItem.ModelDescription + "' wirklich löschen?", "Brillenfassung Löschen", MessageBoxButton.YesNo);
                         if (messageBoxResult == MessageBoxResult.Yes)
                         {
                             this.Uow.EyeGlassFrameRepository.Delete(fullItem);
@@ -268,4 +272,5 @@ namespace OpticianMgr.Wpf.ViewModel
         }
 
     }
+
 }

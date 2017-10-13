@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Brand" xml:space="preserve">
+    <value>Marke</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Farbe</value>
+  </data>
   <data name="ContactPerson" xml:space="preserve">
     <value>Kontaktperson</value>
   </data>
@@ -141,6 +147,9 @@
   <data name="Id" xml:space="preserve">
     <value>Id</value>
   </data>
+  <data name="ModelDescription" xml:space="preserve">
+    <value>Modell</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -150,8 +159,32 @@
   <data name="Products" xml:space="preserve">
     <value>Produkte</value>
   </data>
+  <data name="PurchaseDate" xml:space="preserve">
+    <value>Einkaufsdatum</value>
+  </data>
+  <data name="PurchasePrice" xml:space="preserve">
+    <value>Einkaufspreis</value>
+  </data>
+  <data name="SaleDate" xml:space="preserve">
+    <value>Verkaufsdatum</value>
+  </data>
+  <data name="SalePrice" xml:space="preserve">
+    <value>Verkaufspreis</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="Street" xml:space="preserve">
     <value>Straße</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Lieferant</value>
+  </data>
+  <data name="SupplierComment" xml:space="preserve">
+    <value>Lieferantenbemerkung</value>
   </data>
   <data name="Telephone" xml:space="preserve">
     <value>Telefon</value>
