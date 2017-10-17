@@ -43,7 +43,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Margin="9,0,0,0" Command="{Binding SortSuppliers}" Width="55">Sortieren</Button>
+                <Button Margin="9,0,0,0" Command="{Binding FilterAndSort}" Width="55">Sortieren</Button>
             </StackPanel>
         </Grid>
 
@@ -113,5 +113,6 @@
                 <KeyBinding Command="{Binding EditEyeGlassFrame}" Key="Return"></KeyBinding>
             </DataGrid.InputBindings>
         </DataGrid>
+
     </DockPanel>
 </Page>

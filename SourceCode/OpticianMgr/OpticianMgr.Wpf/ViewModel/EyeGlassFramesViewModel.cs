@@ -93,15 +93,14 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Uow = _uow;
             this.FilterProperty = "Modell";
             this.SortProperty = "Id";
-            FillList();
             FilterAndSort = new RelayCommand(FillList);
             DeleteFilter = new RelayCommand(DeleteF);
             AddEyeGlassFrame = new RelayCommand(AddE);
             EditEyeGlassFrame = new RelayCommand(EditE);
-            //this.EyeGlassFrames.CollectionChanged += this.OnCollectionChanged;
-            CellEditEndingCommand = new RelayCommand<DataGridCellEditEndingEventArgs>(args => this.RaisePropertyChanged(() => this.EyeGlassFrames));
+            this.EyeGlassFrames = GetAllEyeGlassFrames();
+            this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
+            FillList();
         }
-        //TODO Immer die selbe collection verwenden und nicht jedes Mal neu erstellen (clear collection)
         /// <summary>
         /// Returns a list of the eyegalssframes in the database
         /// All properties must be copied, otherwise the list would reference the unit of work data
@@ -126,8 +125,7 @@ namespace OpticianMgr.Wpf.ViewModel
             }
             return copiedEyeGlassFrames;
         }
-        //TODO: Filter und Sort in der View machen https://msdn.microsoft.com/en-us/library/ms742542(v=vs.100).aspx, https://stackoverflow.com/questions/19112922/sort-observablecollectionstring-c-sharp
-        //TODO: extrem unperformant!!
+        
         /// <summary>
         /// Refreshes and filters the list
         /// </summary>
@@ -140,57 +138,44 @@ namespace OpticianMgr.Wpf.ViewModel
             this.TranslatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
             this.TranslatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
 
-            //var filteredCollection = GetFilteredList(translatedFilterProperty);
-            //this.EyeGlassFrames = GetSortedList(translatedSortProperty, filteredCollection);
-
-            this.EyeGlassFrames = new ObservableCollection<EyeGlassFrame>(GetAllEyeGlassFrames());
-            this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
             Filter();
             Sort();
             this.EyeGlassFramesView.CollectionChanged -= OnCollectionChanged;
             this.EyeGlassFramesView.CollectionChanged += OnCollectionChanged;
-           // this.EyeGlassFrames.CollectionChanged += OnCollectionChanged;
 
             var suppliers = this.Uow.SupplierRepository.Get(orderBy: o => o.OrderBy(s => s.Name)).ToList();
             suppliers.Insert(0, new Supplier() { Name = "Bitte wählen..." });
             this.Suppliers = suppliers;
 
-            this.RaisePropertyChanged(() => this.EyeGlassFrames);
             this.RaisePropertyChanged(() => this.Suppliers);
             this.RaisePropertyChanged(() => this.EyeGlassFramesView);
-        }
-        public ObservableCollection<EyeGlassFrame> GetSortedList(string translatedSortProperty, ObservableCollection<EyeGlassFrame> list)
-        {
-            ObservableCollection<EyeGlassFrame> sortedCollection = null;
-            //if (typeof(EyeGlassFrame).GetProperty(translatedSortProperty) != null)
-            //{
-            //    sortedCollection = new ObservableCollection<EyeGlassFrame>(list.OrderBy(e => e.GetType().GetProperty(translatedSortProperty).GetValue(e, null)));
-            //}
-            //else if (typeof(Supplier).GetProperty(translatedSortProperty) != null) //Does the user sort by townname or zipcode?
-            //{
-            //    sortedCollection = new ObservableCollection<Supplier>(list.OrderBy(e => e.Supplier?.GetType().GetProperty(translatedSortProperty).GetValue(e.Supplier, null)));
-
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Beim Sortieren ist ein Fehler aufgetreten");
-            //}
-            //sortedCollection.CollectionChanged += OnCollectionChanged;
-
-            return sortedCollection;
+            this.RaisePropertyChanged(() => this.EyeGlassFrames); //del
         }
         public void Filter()
         {
+            try
+            {
+                if (!String.IsNullOrEmpty(this.filterText))
+                {
+                    this.EyeGlassFramesView.Filter = new Predicate<object>(Contains);
+                }
+                else
+                    this.EyeGlassFramesView.Filter = null;
 
-            if (!String.IsNullOrEmpty(this.filterText)) { 
-                this.EyeGlassFramesView.Filter = new Predicate<object>(Contains);
             }
-            else
-                this.EyeGlassFramesView.Filter = null;
+            catch (Exception e) { }
         }
         public void Sort()
         {
-            
+            try
+            {
+                this.EyeGlassFramesView.SortDescriptions.Clear();
+                if(typeof(EyeGlassFrame).GetProperty(TranslatedSortProperty) != null)
+                    this.EyeGlassFramesView.SortDescriptions.Add(new SortDescription(this.TranslatedSortProperty, ListSortDirection.Ascending));
+                else if(typeof(Supplier).GetProperty(TranslatedSortProperty) != null)
+                    this.EyeGlassFramesView.SortDescriptions.Add(new SortDescription("Supplier." + TranslatedSortProperty, ListSortDirection.Ascending));
+            }
+            catch (Exception e) { }
         }
         private bool Contains(object f)
         {
@@ -253,6 +238,8 @@ namespace OpticianMgr.Wpf.ViewModel
             viewModel.Refresh += refreshEyeGlassFramesHandler;
             windowService.ShowAddEyeGlassesFrameWindow(viewModel);
         }
+        //TODO Nach dem Ändern Edit Commit oder Ähnliches aufrufen, damit später keine Exception bei Sort kommt
+        //TODO bug: wenn gefiltert wird und dann ändern -> Delete wird aufgerufen???
         //Edit supplier 
         public void EditE()
         {
@@ -268,7 +255,6 @@ namespace OpticianMgr.Wpf.ViewModel
             }
             
             this.FillList();
-
         }
 
     }
