@@ -42,6 +42,12 @@ namespace OpticianMgr.Wpf
             AddCountryWindow newWindow = new AddCountryWindow();
             this.ShowWindow(viewModel, newWindow);
         }
+        public void ShowCustomerDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+
+            CustomerDetailsWindow newWindow = new CustomerDetailsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
         public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
         {
             EventHandler<EventArgs> closeHandler = null;

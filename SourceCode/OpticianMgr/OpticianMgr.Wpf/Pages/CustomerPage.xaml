@@ -28,11 +28,13 @@
                 </TextBox>
                 <Button Margin="9,0,0,0" Command="{Binding OpenCustomer}" Width="40">Filtern</Button>
                 <Button Margin="9,0,0,0" Command="{Binding DeleteFilter}" Width="105">Filter zurücksetzen</Button>
+                <Button Margin="9,0,10,0" Command="{Binding OpenCustomer}" HorizontalAlignment="Right" Width="155">Kunde anzeigen</Button>
+
             </StackPanel>
             <Button Margin="9,0,10,0" Command="{Binding AddCustomer}" HorizontalAlignment="Right" Width="155">Neuen Kunden hinzufügen</Button>
         </Grid>
 
-        <ListView ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
+        <ListView ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />

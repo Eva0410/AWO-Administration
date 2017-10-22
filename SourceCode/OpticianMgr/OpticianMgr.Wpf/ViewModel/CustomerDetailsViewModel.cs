@@ -1,10 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
+using OpticianMgr.Persistence;
 using OpticianMgr.Wpf.WindowServices;
 using OpticiatnMgr.Core.Contracts;
 using OpticiatnMgr.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -14,29 +16,56 @@ using System.Windows.Input;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
-    public class AddCustomerViewModel : ViewModelBase, IRequestClose
+    public class CustomerDetailsViewModel : ViewModelBase, IRequestClose
     {
         public IUnitOfWork Uow { get; set; }
         public event EventHandler<EventArgs> CloseRequested;
         public event EventHandler<EventArgs> Refresh;
+        public Town Town { get; set; }
+        private Customer myVar;
 
-        public Customer Customer { get; set; }
+        public Customer Customer
+        {
+            get { return myVar; }
+            set { myVar = value;
+                this.Town = Customer.Town;
+                RaisePropertyChanged(() => Town);
+                RaisePropertyChanged(() => Customer.Country);
+                RaisePropertyChanged(() => this.Customer);
+            }
+        }
+
         public List<Town> Towns { get; set; }
         public List<Country> Countries { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Submit { get; set; }
         public ICommand AddTown { get; set; }
         public ICommand AddCountry { get; set; }
-        public AddCustomerViewModel(IUnitOfWork _uow)
+        public ICommand Delete { get; set; }
+        public CustomerDetailsViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
             Cancel = new RelayCommand(CancelAddCustomer);
             Submit = new RelayCommand(AddCustomer);
             AddTown = new RelayCommand(AddT);
             AddCountry = new RelayCommand(AddC);
+            Delete = new RelayCommand(DeleteC);
             this.InitFields();
         }
-        //TODO Bug wenn Ort angelegt wurde, wird er auf null gesetzt
+        public void DeleteC()
+        {
+            var result = MessageBox.Show("Wollen Sie den Kunden '" + this.Customer.LastName + "' wirklich löschen?", "Kunde löschen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(MessageBoxResult.Yes == result)
+            {
+                var c = this.Uow.CustomerRepository.GetById(this.Customer.Id);
+                this.Uow.CustomerRepository.Delete(c);
+                this.Uow.Save();
+                this.CloseRequested?.Invoke(this, null);
+                this.Refresh?.Invoke(this, null);
+                this.InitFields();
+            }
+        }
+        //TODO Ort und Land werden nicht angezeigt
         public void AddT()
         {
             WindowService windowService = new WindowService();
@@ -66,6 +95,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public void CancelAddCustomer()
         {
             this.CloseRequested?.Invoke(this, null);
+            this.Refresh?.Invoke(this, null);
             this.InitFields();
         }
         public void AddCustomer()
@@ -100,20 +130,14 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         private void InitFields()
         {
-            this.Customer = new Customer();
             FillTowns();
             FillCountries();
-            this.Customer.DateOfBirth = new DateTime(DateTime.Now.Year - 50, 1, 1);
-            this.RaisePropertyChanged(() => this.Customer);
         }
         private void FillTowns()
         {
             var towns = this.Uow.TownRepository.Get(orderBy: o => o.OrderBy(t => t.ZipCode)).ToList();
             towns.Insert(0, new Town() { TownName = "Bitte wählen..." });
             this.Towns = towns;
-            this.Customer.Town = Towns[0];
-            this.Customer.Town_Id = null;
-            RaisePropertyChanged(() => this.Customer);
             RaisePropertyChanged(() => this.Towns);
         }
         private void FillCountries()
@@ -121,10 +145,8 @@ namespace OpticianMgr.Wpf.ViewModel
             var countries = this.Uow.CountryRepository.Get(orderBy: o => o.OrderBy(c => c.CountryName)).ToList();
             countries.Insert(0, new Country() { CountryName = "Bitte wählen..." });
             this.Countries = countries;
-            this.Customer.Country = Countries[0];
-            this.Customer.Country_Id = null;
-            RaisePropertyChanged(() => this.Customer);
             RaisePropertyChanged(() => this.Countries);
         }
     }
 }
+

@@ -60,6 +60,7 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<AddCustomerViewModel>();
             SimpleIoc.Default.Register<AddTownViewModel>();
             SimpleIoc.Default.Register<AddCountryViewModel>();
+            SimpleIoc.Default.Register<CustomerDetailsViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -108,6 +109,10 @@ namespace OpticianMgr.Wpf.ViewModel
         public static AddCountryViewModel AddCountryViewModel
         {
             get { return ServiceLocator.Current.GetInstance<AddCountryViewModel>(); }
+        }
+        public static CustomerDetailsViewModel CustomerDetailsViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<CustomerDetailsViewModel>(); }
         }
 
         public static void Cleanup()
