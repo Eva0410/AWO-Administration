@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+     
       Title="SupplierPage"
       DataContext="{Binding EyeGlassFramesViewModel, Source={StaticResource Locator}}">
 
@@ -48,7 +49,7 @@
         </Grid>
 
 
-        <DataGrid  CanUserDeleteRows="True" SelectionMode="Single" CanUserReorderColumns="true" ItemsSource="{Binding EyeGlassFramesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top" AutoGenerateColumns="False" CurrentCell="{Binding Path=CellInfo, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" CanUserAddRows="False">
+        <DataGrid CanUserDeleteRows="True" SelectionMode="Single" CanUserReorderColumns="true" ItemsSource="{Binding EyeGlassFrames, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top" AutoGenerateColumns="False" CurrentCell="{Binding Path=CellInfo, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" CanUserAddRows="False" CanUserSortColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" Width="0.5*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding ModelDescription, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Modell"/>
@@ -112,6 +113,11 @@
             <DataGrid.InputBindings>
                 <KeyBinding Command="{Binding EditEyeGlassFrame}" Key="Return"></KeyBinding>
             </DataGrid.InputBindings>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="RowEditEnding">
+                    <cmd:EventToCommand Command="{Binding EditEyeGlassFrame}" PassEventArgsToCommand="True"></cmd:EventToCommand>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </DataGrid>
 
     </DockPanel>

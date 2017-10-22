@@ -26,13 +26,28 @@
                         <KeyBinding Command="{Binding FilterSuppliers}" Key="Return"></KeyBinding>
                     </TextBox.InputBindings>
                 </TextBox>
-                <Button Margin="9,0,0,0" Command="{Binding FilterSuppliers}" Width="40">Filtern</Button>
+                <Button Margin="9,0,0,0" Command="{Binding OpenCustomer}" Width="40">Filtern</Button>
                 <Button Margin="9,0,0,0" Command="{Binding DeleteFilter}" Width="105">Filter zurücksetzen</Button>
             </StackPanel>
-            <Button Margin="9,0,10,0" Command="{Binding AddSupplier}" HorizontalAlignment="Right" Width="155">Neuen Kunden hinzufügen</Button>
+            <Button Margin="9,0,10,0" Command="{Binding AddCustomer}" HorizontalAlignment="Right" Width="155">Neuen Kunden hinzufügen</Button>
         </Grid>
 
-        <DataGrid CanUserDeleteRows="True" SelectionMode="Extended" CanUserReorderColumns="true" ItemsSource="{Binding CustomerList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top" AutoGenerateColumns="False" CurrentCell="{Binding SelectedCell, Mode=TwoWay}" CanUserAddRows="False">
+        <ListView ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Title, UpdateSourceTrigger=PropertyChanged}"  Header="Titel"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"  Header="Vorname"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Nachname"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Street, UpdateSourceTrigger=PropertyChanged}"  Header="Straße"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding HouseNumber, UpdateSourceTrigger=PropertyChanged}" Header="Hausnummer"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Town.ZipCode, UpdateSourceTrigger=PropertyChanged}" Header="PLZ"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Town.TownName, UpdateSourceTrigger=PropertyChanged}"  Header="Ort"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Telephone1, UpdateSourceTrigger=PropertyChanged}"  Header="Telefon1"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--<DataGrid CanUserDeleteRows="True" SelectionMode="Extended" CanUserReorderColumns="true" ItemsSource="{Binding CustomerList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top" AutoGenerateColumns="False" CurrentCell="{Binding SelectedCell, Mode=TwoWay}" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" Width="0.5*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Titel"/>
@@ -56,6 +71,6 @@
             <DataGrid.InputBindings>
                 <KeyBinding Command="{Binding EditSupplier}" Key="Return"></KeyBinding>
             </DataGrid.InputBindings>
-        </DataGrid>
+        </DataGrid>-->
     </DockPanel>
 </Page>

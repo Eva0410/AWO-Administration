@@ -24,6 +24,24 @@ namespace OpticianMgr.Wpf
             AddEyeGlassesFrameWindow newWindow = new AddEyeGlassesFrameWindow();
             this.ShowWindow(viewModel, newWindow);
         }
+        public void ShowAddCustomerWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+
+            AddCustomerWindow newWindow = new AddCustomerWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowAddTownWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+
+            AddTownWindow newWindow = new AddTownWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowAddCountryWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+
+            AddCountryWindow newWindow = new AddCountryWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
         public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
         {
             EventHandler<EventArgs> closeHandler = null;

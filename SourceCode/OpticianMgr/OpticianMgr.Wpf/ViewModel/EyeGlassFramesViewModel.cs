@@ -99,8 +99,22 @@ namespace OpticianMgr.Wpf.ViewModel
             EditEyeGlassFrame = new RelayCommand(EditE);
             this.EyeGlassFrames = GetAllEyeGlassFrames();
             this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
+            this.EyeGlassFramesView.CurrentChanged += EyeGlassFramesView_CurrentChanged;
+            this.EyeGlassFramesView.CurrentChanging += EyeGlassFramesView_CurrentChanging;
             FillList();
         }
+
+        private void EyeGlassFramesView_CurrentChanging(object sender, CurrentChangingEventArgs e)
+        {
+            var k = 0;
+        }
+
+        //Why does this not work
+        private void EyeGlassFramesView_CurrentChanged(object sender, EventArgs e)
+        {
+            var k = 0;
+        }
+
         /// <summary>
         /// Returns a list of the eyegalssframes in the database
         /// All properties must be copied, otherwise the list would reference the unit of work data
@@ -110,7 +124,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             var unitOfWorkEyeGlassFrames = this.Uow.EyeGlassFrameRepository.Get().ToList();
             ObservableCollection<EyeGlassFrame> copiedEyeGlassFrames = new ObservableCollection<EyeGlassFrame>();
-            //copiedEyeGlassFrames.CollectionChanged += this.OnCollectionChanged;
+            copiedEyeGlassFrames.CollectionChanged += this.OnCollectionChanged;
             foreach (var item in unitOfWorkEyeGlassFrames)
             {
                 EyeGlassFrame egf = new EyeGlassFrame();
@@ -137,16 +151,20 @@ namespace OpticianMgr.Wpf.ViewModel
             this.SortProperty = this.SortProperty == "Lieferant" ? "Name" : this.SortProperty;
             this.TranslatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
             this.TranslatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
-
             Filter();
             Sort();
-            this.EyeGlassFramesView.CollectionChanged -= OnCollectionChanged;
-            this.EyeGlassFramesView.CollectionChanged += OnCollectionChanged;
+            //this.EyeGlassFramesView.CollectionChanged -= OnCollectionChanged;
+            //this.EyeGlassFramesView.CollectionChanged += OnCollectionChanged;
+            //this.EyeGlassFramesView.Refresh();
 
             var suppliers = this.Uow.SupplierRepository.Get(orderBy: o => o.OrderBy(s => s.Name)).ToList();
             suppliers.Insert(0, new Supplier() { Name = "Bitte wählen..." });
             this.Suppliers = suppliers;
 
+            this.EyeGlassFramesView.CurrentChanged -= EyeGlassFramesView_CurrentChanged;
+            this.EyeGlassFramesView.CurrentChanged += EyeGlassFramesView_CurrentChanged;
+            this.EyeGlassFramesView.CurrentChanging -= EyeGlassFramesView_CurrentChanging;
+            this.EyeGlassFramesView.CurrentChanging += EyeGlassFramesView_CurrentChanging;
             this.RaisePropertyChanged(() => this.Suppliers);
             this.RaisePropertyChanged(() => this.EyeGlassFramesView);
             this.RaisePropertyChanged(() => this.EyeGlassFrames); //del
@@ -253,7 +271,10 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.Uow.EyeGlassFrameRepository.Update(newEyeGlassFrame);
                 this.Uow.Save();
             }
-            
+            this.RaisePropertyChanged(() => this.EyeGlassFramesView);
+            this.RaisePropertyChanged(() => this.EyeGlassFrames);
+            this.RaisePropertyChanged(() => this.EyeGlassFramesView);
+            this.RaisePropertyChanged(() => this.EyeGlassFrames);
             this.FillList();
         }
 
