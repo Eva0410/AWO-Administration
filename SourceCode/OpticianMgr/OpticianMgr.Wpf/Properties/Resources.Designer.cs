@@ -115,6 +115,15 @@ namespace OpticianMgr.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Geburtstag.
+        /// </summary>
+        internal static string DateOfBirth {
+            get {
+                return ResourceManager.GetString("DateOfBirth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string Email {
@@ -133,6 +142,24 @@ namespace OpticianMgr.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vorname.
+        /// </summary>
+        internal static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hobbies.
+        /// </summary>
+        internal static string Hobbies {
+            get {
+                return ResourceManager.GetString("Hobbies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hausnummer.
         /// </summary>
         internal static string HouseNumber {
@@ -147,6 +174,42 @@ namespace OpticianMgr.Wpf.Properties {
         internal static string Id {
             get {
                 return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Krankenkassa.
+        /// </summary>
+        internal static string Insurance {
+            get {
+                return ResourceManager.GetString("Insurance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Versicherungsnummer.
+        /// </summary>
+        internal static string InsurancePolicyNumber {
+            get {
+                return ResourceManager.GetString("InsurancePolicyNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job.
+        /// </summary>
+        internal static string Job {
+            get {
+                return ResourceManager.GetString("Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nachname.
+        /// </summary>
+        internal static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
         
@@ -174,6 +237,24 @@ namespace OpticianMgr.Wpf.Properties {
         internal static string Others {
             get {
                 return ResourceManager.GetString("Others", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstiges1.
+        /// </summary>
+        internal static string Others1 {
+            get {
+                return ResourceManager.GetString("Others1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstiges2.
+        /// </summary>
+        internal static string Others2 {
+            get {
+                return ResourceManager.GetString("Others2", resourceCulture);
             }
         }
         
@@ -273,6 +354,33 @@ namespace OpticianMgr.Wpf.Properties {
         internal static string Telephone {
             get {
                 return ResourceManager.GetString("Telephone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon1.
+        /// </summary>
+        internal static string Telephone1 {
+            get {
+                return ResourceManager.GetString("Telephone1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon2.
+        /// </summary>
+        internal static string Telephone2 {
+            get {
+                return ResourceManager.GetString("Telephone2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Titel.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
