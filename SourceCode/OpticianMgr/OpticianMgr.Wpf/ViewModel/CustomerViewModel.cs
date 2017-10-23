@@ -58,7 +58,7 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Uow = _uow;
             this.SortProperty = "Id";
             this.FilterProperty = "Nachname";
-            FillList();
+            this.Customers = GetAllCustomers();
             this.CustomersView = CollectionViewSource.GetDefaultView(Customers);
             OpenCustomer = new RelayCommand(OpenS);
             AddCustomer = new RelayCommand(AddC);
@@ -74,8 +74,9 @@ namespace OpticianMgr.Wpf.ViewModel
         public void FillList()
         {
             this.Customers = GetAllCustomers();
-            FilterAndSortCustomers();
             this.RaisePropertyChanged(() => this.Customers);
+            this.CustomersView = CollectionViewSource.GetDefaultView(Customers);
+            FilterAndSortCustomers();
             this.RaisePropertyChanged(() => this.CustomersView);
         }
         public void FilterAndSortCustomers()

@@ -44,6 +44,10 @@ namespace OpticianMgr.Wpf.ViewModel
                 {
                     MessageBox.Show("Beide Felder sind erforderlich!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                else if(this.Uow.TownRepository.Get(t => t.TownName == this.Town.TownName && t.ZipCode == this.Town.ZipCode).Count() > 0)
+                {
+                    MessageBox.Show("Dieser Ort existert bereits!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 else
                 {
                     this.Uow.TownRepository.Insert(this.Town);

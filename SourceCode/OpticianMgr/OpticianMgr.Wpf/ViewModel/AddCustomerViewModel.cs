@@ -111,20 +111,21 @@ namespace OpticianMgr.Wpf.ViewModel
             var towns = this.Uow.TownRepository.Get(orderBy: o => o.OrderBy(t => t.ZipCode)).ToList();
             towns.Insert(0, new Town() { TownName = "Bitte wählen..." });
             this.Towns = towns;
-            this.Customer.Town = Towns[0];
-            this.Customer.Town_Id = null;
-            RaisePropertyChanged(() => this.Customer);
             RaisePropertyChanged(() => this.Towns);
+
+            this.Customer.Town = Towns[0];
+            RaisePropertyChanged(() => this.Customer);
         }
         private void FillCountries()
         {
             var countries = this.Uow.CountryRepository.Get(orderBy: o => o.OrderBy(c => c.CountryName)).ToList();
             countries.Insert(0, new Country() { CountryName = "Bitte wählen..." });
             this.Countries = countries;
-            this.Customer.Country = Countries[0];
-            this.Customer.Country_Id = null;
-            RaisePropertyChanged(() => this.Customer);
             RaisePropertyChanged(() => this.Countries);
+
+            this.Customer.Country = Countries[0];
+            RaisePropertyChanged(() => this.Customer);
+
         }
     }
 }

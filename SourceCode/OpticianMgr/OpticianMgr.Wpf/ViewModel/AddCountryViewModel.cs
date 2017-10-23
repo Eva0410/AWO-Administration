@@ -40,12 +40,18 @@ namespace OpticianMgr.Wpf.ViewModel
             try
             {
                 //TODO Lieferanten-Ansicht anpassen und dann Validation Rules zum Land hinzufügen
-                this.Uow.CountryRepository.Insert(this.Country);
-                this.Uow.Save();
-                this.CloseRequested?.Invoke(this, null);
-                this.Refresh?.Invoke(this, null);
-                this.InitFields();
-
+                if (String.IsNullOrEmpty(this.Country.CountryName))
+                    MessageBox.Show("Bitte geben Sie ein Land ein!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                else if(this.Uow.CountryRepository.Get(c => c.CountryName == this.Country.CountryName).Count() > 0)
+                    MessageBox.Show("Dieses Land existiert bereits!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    this.Uow.CountryRepository.Insert(this.Country);
+                    this.Uow.Save();
+                    this.CloseRequested?.Invoke(this, null);
+                    this.Refresh?.Invoke(this, null);
+                    this.InitFields();
+                }
             }
             catch (DbEntityValidationException dbEx)
             {
