@@ -47,7 +47,7 @@ namespace OpticiatnMgr.Core.Entities
         [MaxLength(15, ErrorMessage ="Die Versicherungsnummer ist zu lange!")]
         public String InsurancePolicyNumber { get; set; }
         [Column(TypeName = "datetime2")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
     }
 }

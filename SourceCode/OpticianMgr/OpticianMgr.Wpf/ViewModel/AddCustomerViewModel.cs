@@ -103,7 +103,7 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Customer = new Customer();
             FillTowns();
             FillCountries();
-            this.Customer.DateOfBirth = new DateTime(DateTime.Now.Year - 50, 1, 1);
+            this.Customer.DateOfBirth = null;
             this.RaisePropertyChanged(() => this.Customer);
         }
         private void FillTowns()

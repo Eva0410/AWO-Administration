@@ -146,10 +146,7 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 WindowService windowService = new WindowService();
                 CustomerDetailsViewModel viewModel = ViewModelLocator.CustomerDetailsViewModel;
-                viewModel.Customer = CopyCustomer((Customer)this.Selected);
-                viewModel.RaisePropertyChanged(() => viewModel.Customer);
-                viewModel.RaisePropertyChanged(() => viewModel.Customer.Town);
-                viewModel.RaisePropertyChanged(() => viewModel.Customer.Country);
+                viewModel.InitCustomer(((Customer)this.Selected).Id);
                 EventHandler<EventArgs> refreshCustomersHandler = null;
                 refreshCustomersHandler = (sender, e) =>
                 {
@@ -182,27 +179,23 @@ namespace OpticianMgr.Wpf.ViewModel
             ObservableCollection<Customer> copiedCustomers = new ObservableCollection<Customer>();
             foreach (var item in unitofWorkCustomers)
             {
-                copiedCustomers.Add(CopyCustomer(item));
+                Customer customer = new Customer();
+                GenericRepository<Customer>.CopyProperties(customer, item);
+                if (item.Town_Id != null)
+                {
+                    Town town = new Town(); //Referenced town must be copied as well
+                    GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
+                    customer.Town = town;
+                }
+                if (item.Country_Id != null)
+                {
+                    Country country = new Country();
+                    GenericRepository<Country>.CopyProperties(country, this.Uow.CountryRepository.GetById(item.Country_Id));
+                    customer.Country = country;
+                }
+                copiedCustomers.Add(customer);
             }
             return copiedCustomers;
-        }
-        private Customer CopyCustomer(Customer item)
-        {
-            Customer customer = new Customer();
-            GenericRepository<Customer>.CopyProperties(customer, item);
-            if (item.Town_Id != null)
-            {
-                Town town = new Town(); //Referenced town must be copied as well
-                GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
-                customer.Town = town;
-            }
-            if (item.Country_Id != null)
-            {
-                Country country = new Country();
-                GenericRepository<Country>.CopyProperties(country, this.Uow.CountryRepository.GetById(item.Country_Id));
-                customer.Country = country;
-            }
-            return customer;
         }
     }
 }

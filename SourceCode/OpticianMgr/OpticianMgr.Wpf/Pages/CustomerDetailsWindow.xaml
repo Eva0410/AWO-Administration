@@ -61,7 +61,7 @@
             <TextBox Text="{Binding Customer.LastName, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding Customer.Street, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding Customer.HouseNumber, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Margin="0,0,0,10" Width="200"></TextBox>
-            <ComboBox ItemsSource="{Binding Towns, Mode=TwoWay}" SelectedValue="{Binding Town, Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="5" Width="200">
+            <ComboBox ItemsSource="{Binding Towns, Mode=TwoWay}" SelectedValue="{Binding Customer.Town, Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="5" Width="200">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
