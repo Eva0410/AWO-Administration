@@ -211,6 +211,9 @@
     <Compile Include="Pages\AddCountryWindow.xaml.cs">
       <DependentUpon>AddCountryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EyeGlassFrameDetailsWindow.xaml.cs">
+      <DependentUpon>EyeGlassFrameDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomerDetailsWindow.xaml.cs">
       <DependentUpon>CustomerDetailsWindow.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,7 @@
     <Compile Include="ViewModel\AddCustomerViewModel.cs" />
     <Compile Include="ViewModel\AddEyeGlassFrameModel.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\EyeGlassFramesDetailsViewModel.cs" />
     <Compile Include="ViewModel\CustomerDetailsViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
@@ -251,6 +255,10 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
     <Page Include="Pages\AddCountryWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EyeGlassFrameDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -64,31 +64,9 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Country.CountryName, UpdateSourceTrigger=PropertyChanged}" Header="Land"/>
                 </GridView>
             </ListView.View>
+            <ListView.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Path=DataContext.OpenCustomer, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"/>
+            </ListView.InputBindings>
         </ListView>
-        <!--<DataGrid CanUserDeleteRows="True" SelectionMode="Extended" CanUserReorderColumns="true" ItemsSource="{Binding CustomerList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top" AutoGenerateColumns="False" CurrentCell="{Binding SelectedCell, Mode=TwoWay}" CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" Width="0.5*" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Titel"/>
-                <DataGridTextColumn Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Vorname"/>
-                <DataGridTextColumn Binding="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Nachname"/>
-                <DataGridTextColumn Binding="{Binding Street, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Straße"/>
-                <DataGridTextColumn Binding="{Binding HouseNumber, UpdateSourceTrigger=PropertyChanged}" Width="0.5*" Header="Hausnummer"/>
-                <DataGridTextColumn Binding="{Binding Town.ZipCode, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="PLZ"/>
-                <DataGridTextColumn Binding="{Binding Town.TownName, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Ort"/>
-                <DataGridTextColumn Binding="{Binding Telephone1, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Telefon1"/>
-                <DataGridTextColumn Binding="{Binding Telephone2, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Telefon2"/>
-                <DataGridTextColumn Binding="{Binding Insurance, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Versicherung"/>
-                <DataGridTextColumn Binding="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged, StringFormat=d}" Width="1.5*" Header="Geburtstag"/>
-                <DataGridTextColumn Binding="{Binding InsurancePolicyNumber, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Versicherungnummer"/>
-                <DataGridTextColumn Binding="{Binding Country.Name, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Land"/>
-                <DataGridTextColumn Binding="{Binding Job, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Job"/>
-                <DataGridTextColumn Binding="{Binding Hobbies, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Hobbies"/>
-                <DataGridTextColumn Binding="{Binding Others1, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Sonstiges1"/>
-                <DataGridTextColumn Binding="{Binding Others2, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Sonstiges2"/>
-            </DataGrid.Columns>
-            <DataGrid.InputBindings>
-                <KeyBinding Command="{Binding EditSupplier}" Key="Return"></KeyBinding>
-            </DataGrid.InputBindings>
-        </DataGrid>-->
     </DockPanel>
 </Page>

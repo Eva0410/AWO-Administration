@@ -7,7 +7,7 @@
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
      
-      Title="SupplierPage"
+      Title="EyeGlassFramesPage"
       DataContext="{Binding EyeGlassFramesViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>
@@ -35,6 +35,7 @@
                 <Button Margin="9,0,0,0" Command="{Binding DeleteFilter}" Width="105">Filter zurücksetzen</Button>
             </StackPanel>
             <Button Grid.Row="0" Margin="9,0,10,0" Command="{Binding AddEyeGlassFrame}" HorizontalAlignment="Right" IsEnabled="{Binding }" Width="175">Neue Brillenfassung hinzufügen</Button>
+            <Button Margin="9,10,10,0" Grid.Row="1" Command="{Binding OpenEyeGlassFrame}" HorizontalAlignment="Right" Width="155">Brillenfassung anzeigen</Button>
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
                 <Label Margin="10,0,0,0">Sortieren nach:</Label>
                 <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
@@ -49,76 +50,26 @@
         </Grid>
 
 
-        <DataGrid CanUserDeleteRows="True" SelectionMode="Single" CanUserReorderColumns="true" ItemsSource="{Binding EyeGlassFrames, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" DockPanel.Dock="Top" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top" AutoGenerateColumns="False" CurrentCell="{Binding Path=CellInfo, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" CanUserAddRows="False" CanUserSortColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" Width="0.5*" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding ModelDescription, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Modell"/>
-                <DataGridTextColumn Binding="{Binding Brand, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Marke"/>
-                <DataGridTextColumn Binding="{Binding Color, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Farbe"/>
-                <DataGridTextColumn Binding="{Binding Size, UpdateSourceTrigger=PropertyChanged}" Width="0.5*" Header="Größe"/>
-                <DataGridComboBoxColumn  Width="*" Header="Status" SelectedValueBinding="{Binding State,  UpdateSourceTrigger=PropertyChanged}">
-                    <DataGridComboBoxColumn.ElementStyle>
-                        <Style TargetType="{x:Type ComboBox}">
-                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.States, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" />
-                        </Style>
-                    </DataGridComboBoxColumn.ElementStyle>
-                    <DataGridComboBoxColumn.EditingElementStyle>
-                        <Style TargetType="{x:Type ComboBox}">
-                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.States, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" />
-                        </Style>
-                    </DataGridComboBoxColumn.EditingElementStyle>
-                </DataGridComboBoxColumn>
-                <DataGridTextColumn Binding="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Einkaufspreis"/>
-                <DataGridTemplateColumn Header="Einkaufsdatum" Width="*">
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Path=PurchaseDate, UpdateSourceTrigger=PropertyChanged}" 
-                                        SelectedDateFormat="Short" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=PurchaseDate, StringFormat={}{0:dd.MM.yyyy}}"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding SalePrice, UpdateSourceTrigger=PropertyChanged}" Width="*" Header="Verkaufspreis"/>
-                <DataGridTemplateColumn Header="Verkaufsdatum" Width="*">
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Path=SaleDate, UpdateSourceTrigger=PropertyChanged}" 
-                                        SelectedDateFormat="Short" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=SaleDate, StringFormat={}{0:dd.MM.yyyy}}"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridComboBoxColumn DisplayMemberPath="Name" Header="Lieferant" SelectedValuePath="Id" SelectedValueBinding="{Binding Supplier_Id,  UpdateSourceTrigger=PropertyChanged}" Width="*">
-                    <DataGridComboBoxColumn.ElementStyle>
-                        <Style TargetType="{x:Type ComboBox}">
-                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Suppliers, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" />
-                        </Style>
-                    </DataGridComboBoxColumn.ElementStyle>
-                    <DataGridComboBoxColumn.EditingElementStyle>
-                        <Style TargetType="{x:Type ComboBox}">
-                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Suppliers, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" />
-                        </Style>
-                    </DataGridComboBoxColumn.EditingElementStyle>
-                </DataGridComboBoxColumn>
-                <DataGridTextColumn Binding="{Binding SupplierComment, UpdateSourceTrigger=PropertyChanged}" Width="2*" Header="Lieferantenbemerkung"/>
-            </DataGrid.Columns>
-            <DataGrid.InputBindings>
-                <KeyBinding Command="{Binding EditEyeGlassFrame}" Key="Return"></KeyBinding>
-            </DataGrid.InputBindings>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="RowEditEnding">
-                    <cmd:EventToCommand Command="{Binding EditEyeGlassFrame}" PassEventArgsToCommand="True"></cmd:EventToCommand>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </DataGrid>
+        <ListView ItemsSource="{Binding EyeGlassFramesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
+                    <GridViewColumn DisplayMemberBinding="{Binding ModelDescription, UpdateSourceTrigger=PropertyChanged}"  Header="Modell"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Brand, UpdateSourceTrigger=PropertyChanged}"  Header="Marke"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Color, UpdateSourceTrigger=PropertyChanged}"  Header="Farbe"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Size, UpdateSourceTrigger=PropertyChanged}"  Header="Größe"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Header="Status"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged}" Header="Einkaufspreis"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy}}"  Header="Einkaufsdatum"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding SalePrice, UpdateSourceTrigger=PropertyChanged}"  Header="Verkaufspreis"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding SaleDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy}}" Header="Verkaufsdatum"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Supplier.Name, UpdateSourceTrigger=PropertyChanged}" Header="Lieferant"/>
+                </GridView>
+            </ListView.View>
+            <ListView.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Path=DataContext.OpenCustomer, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"/>
+            </ListView.InputBindings>
+        </ListView>
 
     </DockPanel>
 </Page>

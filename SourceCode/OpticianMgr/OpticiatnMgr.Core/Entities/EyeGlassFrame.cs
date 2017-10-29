@@ -10,10 +10,15 @@ namespace OpticiatnMgr.Core.Entities
 {
     public class EyeGlassFrame : EntityObject
     {
+        [MaxLength(300, ErrorMessage ="Die Lieferantenbemerkung ist zu lange!")]
         public String SupplierComment { get; set; }
+        [MaxLength(50, ErrorMessage = "Die Marke ist zu lange!")]
         public String Brand { get; set; }
+        [MaxLength(50, ErrorMessage = "Das Modell ist zu lange!")]
         public String ModelDescription { get; set; }
+        [MaxLength(50, ErrorMessage = "Die Farbe ist zu lange!")]
         public String Color { get; set; }
+        [MaxLength(50, ErrorMessage = "Die Größe ist zu lange!")]
         public String Size { get; set; }
         public Decimal? PurchasePrice { get; set; }
         public Decimal? SalePrice { get; set; }
@@ -26,7 +31,6 @@ namespace OpticiatnMgr.Core.Entities
         public int? Supplier_Id { get; set; }
         [ForeignKey("Supplier_Id")]
         public Supplier Supplier { get; set; }
-
         public List<Order> Orders { get; set; }
     }
 }

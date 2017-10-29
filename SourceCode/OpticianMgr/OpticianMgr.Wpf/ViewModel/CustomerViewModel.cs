@@ -60,7 +60,7 @@ namespace OpticianMgr.Wpf.ViewModel
             this.FilterProperty = "Nachname";
             this.Customers = GetAllCustomers();
             this.CustomersView = CollectionViewSource.GetDefaultView(Customers);
-            OpenCustomer = new RelayCommand(OpenS);
+            OpenCustomer = new RelayCommand(OpenC);
             AddCustomer = new RelayCommand(AddC);
             FilterAndSort = new RelayCommand(FilterAndSortCustomers);
             DeleteFilter = new RelayCommand(DeleteF);
@@ -140,7 +140,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 return false;
             }
         }
-        public void OpenS()
+        public void OpenC()
         {
             if (this.Selected != null)
             {
