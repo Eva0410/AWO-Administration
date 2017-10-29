@@ -23,6 +23,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public event EventHandler<EventArgs> Refresh;
         public EyeGlassFrame EyeGlassFrame { get; set; }
         public List<Supplier> Suppliers { get; set; }
+        public string[] States { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Submit { get; set; }
         public ICommand Delete { get; set; }
@@ -113,6 +114,7 @@ namespace OpticianMgr.Wpf.ViewModel
         private void InitFields()
         {
             FillSuppliers();
+            this.States = EyeGlassFramesViewModel.States;
             
         }
         private void FillSuppliers()
