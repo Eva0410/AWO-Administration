@@ -6,6 +6,7 @@ using OpticiatnMgr.Core.Contracts;
 using OpticiatnMgr.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,119 +22,109 @@ namespace OpticianMgr.Wpf.ViewModel
         public event EventHandler<EventArgs> RefreshSuppliers;
 
         public Supplier Supplier { get; set; }
-        public Town Town { get; set; }
-        public Country Country { get; set; }
-        public String NameWarning { get; set; }
-        public String TownWarning { get; set; }
+        public List<Town> Towns { get; set; }
+        public List<Country> Countries { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Submit { get; set; }
-        public ICommand FindTown { get; set; }
-        public ICommand FindCountry { get; set; }
-        public ICommand FindZipCode { get; set; }
+        public ICommand AddTown { get; set; }
+        public ICommand AddCountry { get; set; }
         public AddSupplierViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
-            this.Supplier = new Supplier();
-            this.Town = new Town();
-            this.Country = new Country();
             Cancel = new RelayCommand(CancelAddSupplier);
             Submit = new RelayCommand(AddSupplier);
-            FindTown = new RelayCommand(FindT);
-            FindCountry = new RelayCommand(FindC);
-            FindZipCode = new RelayCommand(FindZ);
+            AddTown = new RelayCommand(AddT);
+            AddCountry = new RelayCommand(AddC);
+            this.InitFields();
         }
-        private void FindT()
+        private void AddT()
         {
-            if (!String.IsNullOrEmpty(this.Town.ZipCode))
+            WindowService windowService = new WindowService();
+            AddTownViewModel viewModel = ViewModelLocator.AddTownViewModel;
+            EventHandler<EventArgs> refreshTownsEventHandler = null;
+            refreshTownsEventHandler = (sender, e) =>
             {
-                this.Town.TownName = this.Uow.TownRepository.Get(filter: t => t.ZipCode == this.Town.ZipCode, orderBy: ord => ord.OrderBy(or => or.Id)).FirstOrDefault()?.TownName;
-                this.RaisePropertyChanged(() => this.Town);
-            }
-
+                viewModel.Refresh -= refreshTownsEventHandler;
+                this.FillTowns();
+            };
+            viewModel.Refresh += refreshTownsEventHandler;
+            windowService.ShowAddTownWindow(viewModel);
         }
-        private void FindC()
+        private void AddC()
         {
-            if (!String.IsNullOrEmpty(this.Country.CountryName))
+            WindowService windowService = new WindowService();
+            AddCountryViewModel viewModel = ViewModelLocator.AddCountryViewModel;
+            EventHandler<EventArgs> refreshCountriesEventHandler = null;
+            refreshCountriesEventHandler = (sender, e) =>
             {
-                var newCountryName = this.Uow.CountryRepository.Get(filter: c => c.CountryName.ToUpper().IndexOf(this.Country.CountryName.ToUpper()) == 0, orderBy: ord => ord.OrderBy(or => or.Id)).FirstOrDefault()?.CountryName;
-                if(newCountryName != null)
-                {
-                    this.Country.CountryName = newCountryName;
-                    this.RaisePropertyChanged(() => this.Country);
-                }
-                
-            }
-
-        }
-        private void FindZ()
-        {
-            if (!String.IsNullOrEmpty(this.Town.TownName))
-            {
-                this.Town.ZipCode = this.Uow.TownRepository.Get(filter: t => t.TownName == this.Town.TownName, orderBy: ord => ord.OrderBy(or => or.Id)).FirstOrDefault()?.ZipCode;
-                this.RaisePropertyChanged(() => this.Town);
-            }
+                viewModel.Refresh -= refreshCountriesEventHandler;
+                this.FillCountries();
+            };
+            viewModel.Refresh += refreshCountriesEventHandler;
+            windowService.ShowAddCountryWindow(viewModel);
         }
         public void CancelAddSupplier()
         {
             this.CloseRequested?.Invoke(this, null);
-            this.ResetFields();
+            this.InitFields();
         }
         public void AddSupplier()
         {
-            this.NameWarning = "";
-            this.TownWarning = "";
-            if (this.CheckErrors())
+            if (this.Supplier.Town.Id == 0)
+                this.Supplier.Town = null;
+            if (this.Supplier.Country.Id == 0)
+                this.Supplier.Country = null;
+            try
             {
-                Town existingTown = this.Uow.TownRepository.Get(t => t.TownName == this.Town.TownName && t.ZipCode == this.Town.ZipCode).FirstOrDefault();
-                if (existingTown != null)
-                {
-                    this.Supplier.Town = existingTown;
-                }
-                else
-                    this.Supplier.Town = this.Town;
-
-                Country existingCountry = this.Uow.CountryRepository.Get(c => c.CountryName == this.Country.CountryName).FirstOrDefault();
-                if (existingCountry != null)
-                    this.Supplier.Country = existingCountry;
-                else
-                    this.Supplier.Country = this.Country;
-
                 this.Uow.SupplierRepository.Insert(this.Supplier);
                 this.Uow.Save();
                 this.CloseRequested?.Invoke(this, null);
                 this.RefreshSuppliers?.Invoke(this, null);
-                this.ResetFields();
+                this.InitFields();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                var message = "";
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        message += validationError.ErrorMessage;
+                        message += "\n";
+                    }
+                }
+                MessageBox.Show(message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Supplier.Town = Towns[0];
+                this.Supplier.Country = Countries[0];
+            }
+        }
+        private void InitFields()
+        {
+            this.Supplier = new Supplier();
+            FillTowns();
+            FillCountries();
+            this.RaisePropertyChanged(() => this.Supplier);
+        }
+        private void FillTowns()
+        {
+            var towns = this.Uow.TownRepository.Get(orderBy: o => o.OrderBy(t => t.ZipCode)).ToList();
+            towns.Insert(0, new Town() { TownName = "Bitte wählen..." });
+            this.Towns = towns;
+            RaisePropertyChanged(() => this.Towns);
 
-            }
-            this.RaisePropertyChanged(() => this.NameWarning);
-            this.RaisePropertyChanged(() => this.TownWarning);
+            this.Supplier.Town = Towns[0];
+            RaisePropertyChanged(() => this.Supplier);
         }
-        private bool CheckErrors()
+        private void FillCountries()
         {
-            bool check = true;
-            if (String.IsNullOrEmpty(this.Supplier.Name))
-            {
-                this.NameWarning = "Es muss ein Name angegeben werden!";
-                check = false;
-            }
-            if (String.IsNullOrEmpty(this.Town.ZipCode) && !String.IsNullOrEmpty(this.Town.TownName))
-            {
-                this.TownWarning = "Es muss eine Postleitzahl angegeben werden!";
-                check = false;
-            }
-            if (String.IsNullOrEmpty(this.Town.TownName) && !String.IsNullOrEmpty(this.Town.ZipCode))
-            {
-                this.TownWarning = "Es muss ein Ort angegeben werden!";
-                check = false;
-            }
-            return check;
-        }
-        private void ResetFields()
-        {
-            this.Town = new Town();
-            this.Country = new Country();
-            this.RaisePropertyChanged(() => this.Town);
-            this.RaisePropertyChanged(() => this.Country);
+            var countries = this.Uow.CountryRepository.Get(orderBy: o => o.OrderBy(c => c.CountryName)).ToList();
+            countries.Insert(0, new Country() { CountryName = "Bitte wählen..." });
+            this.Countries = countries;
+            RaisePropertyChanged(() => this.Countries);
+
+            this.Supplier.Country = Countries[0];
+            RaisePropertyChanged(() => this.Supplier);
+
         }
     }
 }

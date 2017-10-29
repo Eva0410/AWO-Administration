@@ -39,12 +39,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             try
             {
-                //TODO Lieferanten-Ansicht anpassen und dann Validation Rules zum Ort hinzufügen
-                if (String.IsNullOrEmpty(this.Town.TownName) || String.IsNullOrEmpty(this.Town.ZipCode))
-                {
-                    MessageBox.Show("Beide Felder sind erforderlich!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else if(this.Uow.TownRepository.Get(t => t.TownName == this.Town.TownName && t.ZipCode == this.Town.ZipCode).Count() > 0)
+                if(this.Uow.TownRepository.Get(t => t.TownName == this.Town.TownName && t.ZipCode == this.Town.ZipCode).Count() > 0)
                 {
                     MessageBox.Show("Dieser Ort existert bereits!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

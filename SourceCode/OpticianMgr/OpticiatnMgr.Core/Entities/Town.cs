@@ -9,8 +9,9 @@ namespace OpticiatnMgr.Core.Entities
 {
     public class Town : EntityObject
     {
-        //Keine Required-Attribute, für den Fall dass der Optiker nur schnell einen Lieferanten einfügen will und er später doch noch einen Ort einfügen will
+        [Required(ErrorMessage ="Bitte geben Sie einen Ortsnamen an!"), MaxLength(100, ErrorMessage ="Der Name des Ortes ist zu lange!")]
         public string TownName { get; set; }
+        [Required(ErrorMessage = "Bitte geben Sie eine Postleitzahl an!"), MaxLength(15, ErrorMessage = "Die Postleitzahl ist zu lange!")]
         public string ZipCode { get; set; }
     }
 }

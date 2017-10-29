@@ -32,7 +32,7 @@ namespace OpticiatnMgr.Core.Entities
         public String Telephone1 { get; set; }
         [MaxLength(17, ErrorMessage = "Die Telefonnummer ist zu lange!")]
         public String Telephone2 { get; set; }
-        [RegularExpression("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$", ErrorMessage ="Die E-Mail-Adresse ist nicht gültig!")]
+        [RegularExpression("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$", ErrorMessage ="Die E-Mail-Adresse ist nicht gültig!"), MaxLength(100, ErrorMessage = "Der E-Mail-Adresse des Kunden ist zu lange!")]
         public String Email { get; set; }
         [MaxLength(60, ErrorMessage ="Der Versicherungsname ist zu lange!")]
         public String Insurance { get; set; }
