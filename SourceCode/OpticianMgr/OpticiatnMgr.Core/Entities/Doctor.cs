@@ -10,6 +10,6 @@ namespace OpticiatnMgr.Core.Entities
     public class Doctor : EntityObject
     {
         [Required]
-        public String Name { get; set; }
+        public String DoctorName { get; set; }
     }
 }

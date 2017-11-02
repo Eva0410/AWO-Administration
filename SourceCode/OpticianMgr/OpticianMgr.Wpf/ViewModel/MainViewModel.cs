@@ -28,12 +28,13 @@ namespace OpticianMgr.Wpf.ViewModel
         private StatisticsPage StatisticsPage { get; set; }
         private SupplierPage SupplierPage { get; set; }
         private EyeGlassFramesPage EyeGlassFramesPage { get; set; }
+        private OrdersPage OrdersPage { get; set; }
 
         public ICommand Suppliers { get; set; }
-
         public ICommand Customers { get; set; }
         public ICommand Statistics { get; set; }
         public ICommand EyeGlassFrames { get; set; }
+        public ICommand Orders { get; set; }
         public object Page { get; set; }
 
 
@@ -47,10 +48,12 @@ namespace OpticianMgr.Wpf.ViewModel
             this.SupplierPage = new SupplierPage();
             this.StatisticsPage = new StatisticsPage();
             this.EyeGlassFramesPage = new EyeGlassFramesPage();
+            this.OrdersPage = new OrdersPage();
             Suppliers = new RelayCommand(() => this.Open(this.SupplierPage));
             Customers = new RelayCommand(() => this.Open(this.CustomerPage));
             Statistics = new RelayCommand(() => this.Open(this.StatisticsPage));
             EyeGlassFrames = new RelayCommand(() => this.Open(this.EyeGlassFramesPage));
+            Orders = new RelayCommand(() => this.Open(this.OrdersPage));
             this.Open(this.CustomerPage);
             ////if (IsInDesignMode)
             ////{

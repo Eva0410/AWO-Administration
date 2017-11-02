@@ -52,7 +52,7 @@ namespace OpticiatnMgr.Core
             return GetStringMatrix("TestAerzte.csv").Select(d =>
             new Doctor()
             {
-                Name = d[0]
+                DoctorName = d[0]
             }).ToList();
         }
         private List<Order> GetOrders()
