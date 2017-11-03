@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:OpticianMgr.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="CustomerPage"
-      DataContext="{Binding CustomerViewModel, Source={StaticResource Locator}}">
+      Title="OrderPage"
+      DataContext="{Binding OrdersViewModel, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -22,49 +22,105 @@
             </Grid.RowDefinitions>
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="0">
                     <Label Margin="10,0,0,0">Filtern nach:</Label>
-                    <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding FilterProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="16,0,0,0">
+                    <ComboBox ItemsSource="{Binding GlassesPropertiesList}" SelectedValue="{Binding FilterGlassesProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="16,0,0,0">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <TextBox Width="100" Margin="10,0,0,0" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" >
+                    <TextBox Width="100" Margin="10,0,0,0" Text="{Binding FilterGlassesText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" >
                         <TextBox.InputBindings>
-                            <KeyBinding Command="{Binding FilterAndSort}" Key="Return"></KeyBinding>
+                            <KeyBinding Command="{Binding FilterAndSortG}" Key="Return"></KeyBinding>
                         </TextBox.InputBindings>
                     </TextBox>
-                    <Button Margin="9,0,0,0" Command="{Binding FilterAndSort}" Width="40">Filtern</Button>
-                    <Button Margin="9,0,0,0" Command="{Binding DeleteFilter}" Width="105">Filter zurücksetzen</Button>
+                    <Button Margin="9,0,0,0" Command="{Binding FilterAndSortG}" Width="40">Filtern</Button>
+                    <Button Margin="9,0,0,0" Command="{Binding DeleteFilterG}" Width="105">Filter zurücksetzen</Button>
                 </StackPanel>
-                <Button Margin="9,10,10,0" Grid.Row="1" Command="{Binding OpenCustomer}" HorizontalAlignment="Right" Width="155">Anzeigen</Button>
+                <Button Margin="9,10,10,0" Grid.Row="1" Command="{Binding OpenGlasses}" HorizontalAlignment="Right" Width="155">Anzeigen</Button>
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
                 <Label Margin="10,0,0,0">Sortieren nach:</Label>
-                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <ComboBox ItemsSource="{Binding GlassesPropertiesList}" SelectedValue="{Binding SortGlassesProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Margin="9,0,0,0" Command="{Binding FilterAndSort}" Width="55">Sortieren</Button>
+                    <Button Margin="9,0,0,0" Command="{Binding FilterAndSortG}" Width="55">Sortieren</Button>
             </StackPanel>
         </Grid>
 
 
-        <ListView ItemsSource="{Binding CustomersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+            <ListView ItemsSource="{Binding GlassesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedGlasses}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Customers.FirstName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundenvorname"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Customers.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundennachname"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Customer.FirstName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundenvorname"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundennachname"/>
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}"  Header="Bearbeitungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}"  Header="Zahlungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged}" Header="Bruttopreis"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Glasstype.Description, UpdateSourceTrigger=PropertyChanged}" Header="Glastyp"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding GlassType.GlasstypeDescription, UpdateSourceTrigger=PropertyChanged}" Header="Glastyp"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}" Header="Doktor"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding EyeGlassFrame.ModelDescription, UpdateSourceTrigger=PropertyChanged}" Header="Brillenfassung"/>
                     </GridView>
                 </ListView.View>
             </ListView>
     </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Kontaktlinsen</Label>
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="0">
+                    <Label Margin="10,0,0,0">Filtern nach:</Label>
+                    <ComboBox ItemsSource="{Binding LensesPropertiesList}" SelectedValue="{Binding FilterLensesProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="16,0,0,0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox Width="100" Margin="10,0,0,0" Text="{Binding FilterLensesText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" >
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding FilterAndSortC}" Key="Return"></KeyBinding>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Button Margin="9,0,0,0" Command="{Binding FilterAndSortC}" Width="40">Filtern</Button>
+                    <Button Margin="9,0,0,0" Command="{Binding DeleteFilterC}" Width="105">Filter zurücksetzen</Button>
+                </StackPanel>
+                <Button Margin="9,10,10,0" Grid.Row="1" Command="{Binding OpenLenses}" HorizontalAlignment="Right" Width="155">Anzeigen</Button>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
+                    <Label Margin="10,0,0,0">Sortieren nach:</Label>
+                    <ComboBox ItemsSource="{Binding LensesPropertiesList}" SelectedValue="{Binding SortLensesProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Margin="9,0,0,0" Command="{Binding FilterAndSortC}" Width="55">Sortieren</Button>
+                </StackPanel>
+            </Grid>
+
+
+            <ListView ItemsSource="{Binding ContactLensesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedGlasses}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Customer.FirstName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundenvorname"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundennachname"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}"  Header="Bearbeitungsstatus"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}"  Header="Zahlungsstatus"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged}" Header="Bruttopreis"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ContactLensType.ContactLensTypeDescription, UpdateSourceTrigger=PropertyChanged}" Header="Kontaktlinsestyp"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}" Header="Doktor"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
     </Grid>
 </Page>

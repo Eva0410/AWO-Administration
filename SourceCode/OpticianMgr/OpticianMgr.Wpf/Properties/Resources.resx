@@ -157,7 +157,7 @@
     <value>Rabatt</value>
   </data>
   <data name="Doctor" xml:space="preserve">
-    <value>Arzt</value>
+    <value>Doktor</value>
   </data>
   <data name="DoctorName" xml:space="preserve">
     <value>Doktorname</value>
@@ -309,7 +309,7 @@
   <data name="PatientsContribution" xml:space="preserve">
     <value>Selbstbehalt</value>
   </data>
-  <data name="Paymentdate" xml:space="preserve">
+  <data name="PaymentDate" xml:space="preserve">
     <value>Zahlungsdatum</value>
   </data>
   <data name="PaymentState" xml:space="preserve">
@@ -368,5 +368,14 @@
   </data>
   <data name="ZipCode" xml:space="preserve">
     <value>PLZ</value>
+  </data>
+  <data name="GlasstypeDescription" xml:space="preserve">
+    <value>Glastypbezeichnung</value>
+  </data>
+  <data name="GlassType" xml:space="preserve">
+    <value>Glastyp</value>
+  </data>
+  <data name="ContactLensTypeDescription" xml:space="preserve">
+    <value>Kontaktlinsentypbeschreibung</value>
   </data>
 </root>

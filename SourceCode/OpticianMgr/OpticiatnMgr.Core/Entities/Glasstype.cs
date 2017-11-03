@@ -10,6 +10,6 @@ namespace OpticiatnMgr.Core.Entities
     public class Glasstype : EntityObject
     {
         [Required]
-        public string Description { get; set; }
+        public string GlasstypeDescription { get; set; }
     }
 }

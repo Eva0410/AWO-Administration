@@ -106,7 +106,7 @@ namespace OpticiatnMgr.Core
                 Glass_N_L_cyl = Convert.ToDecimal(o[36], CultureInfo.InvariantCulture),
                 Glass_N_L_Axis = Convert.ToInt32(o[37], CultureInfo.InvariantCulture),
                 Glass_N_L_Prism = Convert.ToDecimal(o[38], CultureInfo.InvariantCulture),
-                Glas_N_L_PD_NTH = o[39],
+                Glass_N_L_PD_NTH = o[39],
                 GlassOthers = o[40],
                 OrderType = o[41],
                 ContactLensType = contactLensTypes.Where(c => !String.IsNullOrEmpty(o[42]) ? c.Id == Convert.ToInt32(o[42]): false).FirstOrDefault(),
@@ -120,7 +120,7 @@ namespace OpticiatnMgr.Core
             return GetStringMatrix("TestGlastypen.csv").Select(g =>
             new Glasstype()
             {
-                Description = g[0]
+                GlasstypeDescription = g[0]
             }).ToList();
         }
         private List<Country> GetCountries()
@@ -136,7 +136,7 @@ namespace OpticiatnMgr.Core
             return GetStringMatrix("TestKontaktlinsentypen.csv").Select(c =>
             new ContactLensType()
             {
-                Description = c[0]
+                ContactLensTypeDescription = c[0]
             }).ToList();
         }
         private List<Customer> GetCustomers()

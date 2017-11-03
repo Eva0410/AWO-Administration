@@ -10,6 +10,6 @@ namespace OpticiatnMgr.Core.Entities
     public class ContactLensType : EntityObject
     {
         [Required]
-        public String Description { get; set; }
+        public String ContactLensTypeDescription { get; set; }
     }
 }

@@ -115,6 +115,15 @@ namespace OpticianMgr.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kontaktlinsentypbeschreibung.
+        /// </summary>
+        internal static string ContactLensTypeDescription {
+            get {
+                return ResourceManager.GetString("ContactLensTypeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kontaktperson.
         /// </summary>
         internal static string ContactPerson {
@@ -178,7 +187,7 @@ namespace OpticianMgr.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arzt.
+        ///   Looks up a localized string similar to Doktor.
         /// </summary>
         internal static string Doctor {
             get {
@@ -466,6 +475,24 @@ namespace OpticianMgr.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Glastyp.
+        /// </summary>
+        internal static string GlassType {
+            get {
+                return ResourceManager.GetString("GlassType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glastypbezeichnung.
+        /// </summary>
+        internal static string GlasstypeDescription {
+            get {
+                return ResourceManager.GetString("GlasstypeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Glastypsonstiges.
         /// </summary>
         internal static string GlassTypeOthers {
@@ -639,9 +666,9 @@ namespace OpticianMgr.Wpf.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Zahlungsdatum.
         /// </summary>
-        internal static string Paymentdate {
+        internal static string PaymentDate {
             get {
-                return ResourceManager.GetString("Paymentdate", resourceCulture);
+                return ResourceManager.GetString("PaymentDate", resourceCulture);
             }
         }
         

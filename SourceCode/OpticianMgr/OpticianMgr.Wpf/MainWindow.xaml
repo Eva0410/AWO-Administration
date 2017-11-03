@@ -24,7 +24,7 @@
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
             </Button>
-            <Button Content="Aufträge" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Aufträge" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Orders}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
