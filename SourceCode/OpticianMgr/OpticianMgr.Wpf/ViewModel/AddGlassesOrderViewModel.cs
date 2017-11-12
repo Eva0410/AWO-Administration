@@ -29,12 +29,15 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand Cancel { get; set; }
         public ICommand Submit { get; set; }
         public ICommand AddDoctor { get; set; }
+        //TODO Preise berechnen
         public AddGlassesOrderViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
             Cancel = new RelayCommand(CancelAddGlassesOrder);
             Submit = new RelayCommand(AddGlassesOrder);
             AddDoctor = new RelayCommand(AddD);
+            this.ProcessingStates = OrdersViewModel.ProcessingStates;
+            this.PaymentStates = OrdersViewModel.PaymentStates;
             this.InitFields();
         }
         public void InitCustomer(int id)
@@ -42,9 +45,7 @@ namespace OpticianMgr.Wpf.ViewModel
             var cus = this.Uow.CustomerRepository.GetById(id);
             this.Order.Customer = cus;
             this.Order.Customer_Id = id;
-
-            //InitFields();
-            //SetTownAndCountry();
+            SetFields();
             RaisePropertyChanged(() => this.Order);
         }
         public void AddD()
@@ -56,7 +57,7 @@ namespace OpticianMgr.Wpf.ViewModel
             refreshTownsEventHandler = (sender, e) =>
             {
                 viewModel.Refresh -= refreshTownsEventHandler;
-                this.FillTowns();
+                this.FillDoctors();
             };
             viewModel.Refresh += refreshTownsEventHandler;
             windowService.ShowAddTownWindow(viewModel);
@@ -102,31 +103,50 @@ namespace OpticianMgr.Wpf.ViewModel
         private void InitFields()
         {
             this.Order = new Order();
-            //FillTowns();
-            //FillCountries();
-            //this.Customer.DateOfBirth = null;
+            SetFields();
+        }
+        private void FillDoctors()
+        {
+            var docs = this.Uow.DoctorRepository.Get(orderBy: o => o.OrderBy(d => d.DoctorName)).ToList();
+            docs.Insert(0, new Doctor() { DoctorName = "Bitte wählen..." });
+            this.Doctors = docs;
+            RaisePropertyChanged(() => this.Doctors);
+
+            this.Order.Doctor = Doctors[0];
+            RaisePropertyChanged(() => this.Order);
+        }
+        private void FillGlassTypes()
+        {
+            var glasstypes = this.Uow.GlassTypeRepository.Get(orderBy: o => o.OrderBy(g => g.GlasstypeDescription)).ToList();
+            glasstypes.Insert(0, new Glasstype() { GlasstypeDescription = "Bitte wählen..." });
+            this.GlassTypes = glasstypes;
+            RaisePropertyChanged(() => this.GlassTypes);
+
+            this.Order.GlassType = GlassTypes[0];
+            RaisePropertyChanged(() => this.Order);
+        }
+        private void FillEyeGlassFrames()
+        {
+            var egf = this.Uow.EyeGlassFrameRepository.Get(orderBy: o => o.OrderBy(e => e.ModelDescription)).ToList();
+            egf.Insert(0, new EyeGlassFrame() { ModelDescription = "Bitte wählen..." });
+            this.EyeGlassFrames = egf;
+            RaisePropertyChanged(() => this.EyeGlassFrames);
+
+            this.Order.EyeGlassFrame = EyeGlassFrames[0];
+            RaisePropertyChanged(() => this.Order);
+        }
+        private void SetFields()
+        {
+            this.Order.PaymentState = this.PaymentStates[0];
+            this.Order.ProcessingState = this.ProcessingStates[0];
+            this.Order.GlassPriceLeft = 0;
+            this.Order.GlassPriceRight = 0;
+            FillDoctors();
+            FillGlassTypes();
+            FillEyeGlassFrames();
+            this.Order.PaymentDate = null;
+            this.Order.OrderDate = null;
             this.RaisePropertyChanged(() => this.Order);
-        }
-        private void FillTowns()
-        {
-            //var towns = this.Uow.TownRepository.Get(orderBy: o => o.OrderBy(t => t.ZipCode)).ToList();
-            //towns.Insert(0, new Town() { TownName = "Bitte wählen..." });
-            //this.Doctors = towns;
-            //RaisePropertyChanged(() => this.Doctors);
-
-            //this.Customer.Town = Doctors[0];
-            //RaisePropertyChanged(() => this.Customer);
-        }
-        private void FillCountries()
-        {
-            //var countries = this.Uow.CountryRepository.Get(orderBy: o => o.OrderBy(c => c.CountryName)).ToList();
-            //countries.Insert(0, new Country() { CountryName = "Bitte wählen..." });
-            //this.GlassTypes = countries;
-            //RaisePropertyChanged(() => this.GlassTypes);
-
-            //this.Customer.Country = GlassTypes[0];
-            //RaisePropertyChanged(() => this.Customer);
-
         }
     }
 }

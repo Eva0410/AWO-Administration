@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Title="AddGlassesOrder" Height="636.168" Width="946.76"  ResizeMode="NoResize">
-    <StackPanel Margin="0,0,-8,-92">
+        Title="AddGlassesOrder" Height="651.168" Width="961.76"  ResizeMode="NoResize">
+    <StackPanel Margin="0,0,-6,-29">
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FFD3D2D2"/>
@@ -47,26 +47,26 @@
                 <Label Grid.Column="0" Grid.Row="7">Zahlungsstatus:</Label>
                 <Label Grid.Column="0" Grid.Row="8">Bearbeitungsstatus:</Label>
                 <Label Grid.Column="0" Grid.Row="9">Sonstiges:</Label>
-                <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200">
+                <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,0,0,10">
                     <Run Text="{Binding Order.Customer.FirstName, Mode=TwoWay}"></Run>
                     <Run Text="{Binding Order.Customer.LastName, Mode=TwoWay}"></Run>
                 </TextBlock>
-                <ComboBox ItemsSource="{Binding GlassTypes, Mode=TwoWay}" SelectedValue="{Binding Order.GlassType,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="1" Width="200">
+                <ComboBox ItemsSource="{Binding GlassTypes, Mode=TwoWay}" SelectedValue="{Binding Order.GlassType,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding GlasstypeDescription}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBox Text="{Binding Order.GlassTypeOthers, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
-                <ComboBox ItemsSource="{Binding EyeGlassFrames, Mode=TwoWay}" SelectedValue="{Binding Order.EyeGlassFrame,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="3" Width="200">
+                <TextBox Text="{Binding Order.GlassTypeOthers, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10"></TextBox>
+                <ComboBox ItemsSource="{Binding EyeGlassFrames, Mode=TwoWay}" SelectedValue="{Binding Order.EyeGlassFrame,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="3">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding ModelDescription}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ComboBox ItemsSource="{Binding Doctors, Mode=TwoWay}" SelectedValue="{Binding Order.Doctor,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="4" Width="200">
+                <ComboBox ItemsSource="{Binding Doctors, Mode=TwoWay}" SelectedValue="{Binding Order.Doctor,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="4">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DoctorName}"/>
@@ -75,23 +75,23 @@
                 </ComboBox>
                 <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Order.PaymentDate}"  Margin="0,0,0,10"/>
                 <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate="{Binding Order.OrderDate}"  Margin="0,0,0,10"/>
-                <ComboBox ItemsSource="{Binding PaymentStates, Mode=TwoWay}" SelectedValue="{Binding Order.PaymentState,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="7" Width="200">
+                <ComboBox ItemsSource="{Binding PaymentStates, Mode=TwoWay}" SelectedValue="{Binding Order.PaymentState,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="7" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ComboBox ItemsSource="{Binding ProcessingStates, Mode=TwoWay}" SelectedValue="{Binding Order.ProcessingState,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="8" Width="200">
+                <ComboBox ItemsSource="{Binding ProcessingStates, Mode=TwoWay}" SelectedValue="{Binding Order.ProcessingState,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="8" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Command="{Binding AddDoctor}" Grid.Column="2" Grid.Row="4">Neuen Doktor hinzufügen</Button>
+                <Button Command="{Binding AddDoctor}" Grid.Column="2" Grid.Row="4" Margin="10,0">Neuer Doktor</Button>
                 <ScrollViewer Grid.Column="1" Grid.Row="9" Margin="0,0,0,10">
-                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Order.Others, Mode=OneWayToSource}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Order.Others, Mode=OneWayToSource}"  Margin="0,0,0,10" Height="50" HorizontalAlignment="Stretch" ></TextBox>
                 </ScrollViewer>
             </Grid>
             <Grid Grid.Column="1">
@@ -119,12 +119,12 @@
                 <Label Grid.Column="0" Grid.Row="7">Brutto:</Label>
                 <TextBox Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200">
                     <TextBox.Text>
-                        <Binding Path="Order.GlassPriceLeft" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                        <Binding Path="Order.GlassPriceLeft" Mode="TwoWay" TargetNullValue=""></Binding>
                     </TextBox.Text>
                 </TextBox>
                 <TextBox Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200">
                     <TextBox.Text>
-                        <Binding Path="Order.GlassPriceRight" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                        <Binding Path="Order.GlassPriceRight" Mode="TwoWay" TargetNullValue=""></Binding>
                     </TextBox.Text>
                 </TextBox>
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200">

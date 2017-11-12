@@ -10,6 +10,7 @@ using OpticiatnMgr.Core.Contracts;
 using System.Globalization;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using OpticiatnMgr.Core.Entities;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
@@ -58,9 +59,22 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             for (int i = 1; i <= 12; i++)
             {
-                int soldItems = this.Uow.OrderRepository.Count(o => o.PaymentDate.Year == year && o.PaymentDate.Month == i && o.PaymentState == "Bezahlt" && o.OrderType == orderType);
+                int soldItems = this.Uow.OrderRepository.Count(o => o.PaymentDate != null && o.PaymentDate.Value.Year == year && o.PaymentDate.Value.Month == i && o.PaymentState == "Bezahlt" && o.OrderType == orderType);
                 list.Add(new KeyValuePair<string, int>(new DateTime(2017, i, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("de")), soldItems));
             }
+        }
+        private bool Check(object o, int year, int i, string orderType)
+        {
+            bool check = false;
+            var order = (Order) o;
+            if(order.PaymentDate != null)
+            {
+                if(order.PaymentDate.Value.Year == year && order.PaymentDate.Value.Month == i && order.PaymentState == "Bezahlt" && order.OrderType == orderType)
+                {
+                    check = true;
+                }
+            }
+            return check;
         }
     }
 }

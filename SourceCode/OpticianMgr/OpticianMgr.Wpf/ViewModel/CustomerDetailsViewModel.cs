@@ -21,6 +21,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public IUnitOfWork Uow { get; set; }
         public event EventHandler<EventArgs> CloseRequested;
         public event EventHandler<EventArgs> Refresh;
+        public List<Order> Orders { get; set; }
         public Customer Customer { get; set; }
         public List<Town> Towns { get; set; }
         public List<Country> Countries { get; set; }
@@ -42,13 +43,15 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public void InitCustomer(int id)
         {
-
             var cus = CopyCustomer(this.Uow.CustomerRepository.GetById(id));
             this.Customer = cus;
+            //TODO vorher kopieren?
+            this.Orders = this.Uow.OrderRepository.Get(filter: o => o.Customer_Id == id).ToList();
 
             InitFields();
             SetTownAndCountry();
             RaisePropertyChanged(() => this.Customer);
+            RaisePropertyChanged(() => this.Orders);
         }
         private Customer CopyCustomer(Customer item)
         {

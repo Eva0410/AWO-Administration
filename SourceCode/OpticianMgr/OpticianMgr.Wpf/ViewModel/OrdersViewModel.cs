@@ -20,6 +20,14 @@ namespace OpticianMgr.Wpf.ViewModel
 {
     public class OrdersViewModel : ViewModelBase
     {
+        public static string[] PaymentStates
+        {
+            get { return new string[] { "Offen", "Bezahlt" }; }
+        }
+        public static string[] ProcessingStates
+        {
+            get { return new string[] { "Bestellt", "In Bearbeitung", "In Werkstatt", "Abgeholt" }; }
+        }
         private IUnitOfWork Uow { get; set; }
         public object SelectedGlasses { get; set; }
         public object SelectedLenses { get; set; }

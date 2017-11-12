@@ -14,12 +14,13 @@ namespace OpticiatnMgr.Core.Entities
         [ForeignKey("Customer_Id")]
         public Customer Customer { get; set; }
         [Column(TypeName = "datetime2")]
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
         [Column(TypeName = "datetime2")]
-        public DateTime PaymentDate { get; set; }
+        public DateTime? PaymentDate { get; set; }
         public int? Doctor_Id { get; set; }
         [ForeignKey("Doctor_Id")]
         public Doctor Doctor { get; set; }
+        [MaxLength(300, ErrorMessage ="Das Feld 'Sonstiges' ist zu lange!")]
         public String Others { get; set; }
         [Required(ErrorMessage ="Der Bearbeitungsstatus muss angegeben werden!")]
         public String ProcessingState { get; set; }
@@ -29,33 +30,33 @@ namespace OpticiatnMgr.Core.Entities
         public decimal GlassPriceRight { get; set; }
         public decimal NetPrice { get; set; }
         public decimal GrossPrice { get; set; }
-        public decimal OthersPrice { get; set; }
-        public decimal InsurancePrice { get; set; }
-        public decimal PatientsContribution { get; set; }
-        public decimal Discount { get; set; }
+        public decimal? OthersPrice { get; set; }
+        public decimal? InsurancePrice { get; set; }
+        public decimal? PatientsContribution { get; set; }
+        public decimal? Discount { get; set; }
         public Byte[] Bill { get; set; }
-        public decimal Glass_F_R_sph { get; set; }
-        public decimal Glass_F_R_cyl { get; set; }
-        public int Glass_F_R_Axis { get; set; }
-        public decimal Glass_F_R_Prism { get; set; }
+        public decimal? Glass_F_R_sph { get; set; }
+        public decimal? Glass_F_R_cyl { get; set; }
+        public int? Glass_F_R_Axis { get; set; }
+        public decimal? Glass_F_R_Prism { get; set; }
         public String Glass_F_R_PD_NTH { get; set; }
         public String Glass_FWS { get; set; }
-        public decimal Glass_F_L_sph { get; set; }
-        public decimal Glass_F_L_cyl { get; set; }
-        public int Glass_F_L_Axis { get; set; }
-        public decimal Glass_F_L_Prism { get; set; }
+        public decimal? Glass_F_L_sph { get; set; }
+        public decimal? Glass_F_L_cyl { get; set; }
+        public int? Glass_F_L_Axis { get; set; }
+        public decimal? Glass_F_L_Prism { get; set; }
         public String Glass_F_L_PD_NTH { get; set; }
         public String Glass_Ink { get; set; }
-        public decimal Glass_N_R_sph { get; set; }
-        public decimal Glass_N_R_cyl { get; set; }
-        public int Glass_N_R_Axis { get; set; }
-        public decimal Glass_N_R_Prism { get; set; }
+        public decimal? Glass_N_R_sph { get; set; }
+        public decimal? Glass_N_R_cyl { get; set; }
+        public int? Glass_N_R_Axis { get; set; }
+        public decimal? Glass_N_R_Prism { get; set; }
         public String Glass_N_R_PD_NTH { get; set; }
         public String Glass_HSA { get; set; }
-        public decimal Glass_N_L_sph { get; set; }
-        public decimal Glass_N_L_cyl { get; set; }
-        public int Glass_N_L_Axis { get; set; }
-        public decimal Glass_N_L_Prism { get; set; }
+        public decimal? Glass_N_L_sph { get; set; }
+        public decimal? Glass_N_L_cyl { get; set; }
+        public int? Glass_N_L_Axis { get; set; }
+        public decimal? Glass_N_L_Prism { get; set; }
         public String Glass_N_L_PD_NTH { get; set; }
         public String GlassOthers { get; set; }
         //B = Brille, K = Kontaktlinse
@@ -66,6 +67,7 @@ namespace OpticiatnMgr.Core.Entities
         public int? GlassType_Id { get; set; }
         [ForeignKey("GlassType_Id")]
         public Glasstype GlassType { get; set; }
+        [MaxLength(300, ErrorMessage = "Das Feld 'Glastypsonstiges' ist zu lange!")]
         public String GlassTypeOthers { get; set; }
         public int? EyeGlassFrame_Id { get; set; }
         [ForeignKey("EyeGlassFrame_Id")]
@@ -75,7 +77,9 @@ namespace OpticiatnMgr.Core.Entities
         public int? ContactLensType_Id { get; set; }
         [ForeignKey("ContactLensType_Id")]
         public ContactLensType ContactLensType { get; set; }
+        [MaxLength(300, ErrorMessage = "Das Feld 'Kontaktlinsensonstiges1' ist zu lange!")]
         public String ContactLensOthers1 { get; set; }
+        [MaxLength(300, ErrorMessage = "Das Feld 'Kontaktlinsensonstiges2' ist zu lange!")]
         public String ContactLensOthers2 { get; set; }
     }
 }
