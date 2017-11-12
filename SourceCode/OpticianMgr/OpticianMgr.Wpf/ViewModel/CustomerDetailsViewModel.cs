@@ -29,6 +29,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand AddTown { get; set; }
         public ICommand AddCountry { get; set; }
         public ICommand Delete { get; set; }
+        public ICommand AddGlassesOrder { get; set; }
         public CustomerDetailsViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
@@ -37,6 +38,7 @@ namespace OpticianMgr.Wpf.ViewModel
             AddTown = new RelayCommand(AddT);
             AddCountry = new RelayCommand(AddC);
             Delete = new RelayCommand(DeleteC);
+            AddGlassesOrder = new RelayCommand(AddGO);
         }
         public void InitCustomer(int id)
         {
@@ -184,7 +186,21 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Customer.Country = this.Customer.Country_Id == null ? Countries[0] : Countries.Where(c => c.Id == this.Customer.Country_Id).FirstOrDefault();
             RaisePropertyChanged(() => this.Customer);
         }
-        
+        public void AddGO()
+        {
+            WindowService windowService = new WindowService();
+            AddGlassesOrderViewModel viewModel = ViewModelLocator.AddGlassesOrderViewModel;
+            viewModel.InitCustomer(this.Customer.Id);
+            EventHandler<EventArgs> refreshGlassesOrdersEventHandler = null;
+            refreshGlassesOrdersEventHandler = (sender, e) =>
+            {
+                viewModel.Refresh -= refreshGlassesOrdersEventHandler;
+                //TODO Fill orders
+                //this.FillCountries();
+            };
+            viewModel.Refresh += refreshGlassesOrdersEventHandler;
+            windowService.ShowAddGlassesOrderWindow(viewModel);
+        }
     }
 }
 

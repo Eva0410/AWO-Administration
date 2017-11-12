@@ -211,6 +211,9 @@
     <Compile Include="Pages\AddCountryWindow.xaml.cs">
       <DependentUpon>AddCountryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddGlassesOrderWindow.xaml.cs">
+      <DependentUpon>AddGlassesOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\OrdersPage.xaml.cs">
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
@@ -236,6 +239,7 @@
       <DependentUpon>EyeGlassFramesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddCountryViewModel.cs" />
+    <Compile Include="ViewModel\AddGlassesOrderViewModel.cs" />
     <Compile Include="ViewModel\AddTownViewModel.cs" />
     <Compile Include="ViewModel\AddCustomerViewModel.cs" />
     <Compile Include="ViewModel\AddEyeGlassFrameModel.cs" />
@@ -263,6 +267,10 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
     <Page Include="Pages\AddCountryWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddGlassesOrderWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
