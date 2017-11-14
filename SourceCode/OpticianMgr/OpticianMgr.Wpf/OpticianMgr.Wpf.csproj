@@ -208,6 +208,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\AddDoctorWindow.xaml.cs">
+      <DependentUpon>AddDoctorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddCountryWindow.xaml.cs">
       <DependentUpon>AddCountryWindow.xaml</DependentUpon>
     </Compile>
@@ -238,6 +241,7 @@
     <Compile Include="Pages\EyeGlassFramesPage.xaml.cs">
       <DependentUpon>EyeGlassFramesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddDoctorViewModel.cs" />
     <Compile Include="ViewModel\AddCountryViewModel.cs" />
     <Compile Include="ViewModel\AddGlassesOrderViewModel.cs" />
     <Compile Include="ViewModel\AddTownViewModel.cs" />
@@ -266,6 +270,10 @@
     <Compile Include="ViewModel\SupplierViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
+    <Page Include="Pages\AddDoctorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\AddCountryWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

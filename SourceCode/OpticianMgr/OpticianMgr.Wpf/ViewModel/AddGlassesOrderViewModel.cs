@@ -29,13 +29,14 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand Cancel { get; set; }
         public ICommand Submit { get; set; }
         public ICommand AddDoctor { get; set; }
-        //TODO Preise berechnen
+        public ICommand Calc { get; set; }
         public AddGlassesOrderViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
             Cancel = new RelayCommand(CancelAddGlassesOrder);
             Submit = new RelayCommand(AddGlassesOrder);
             AddDoctor = new RelayCommand(AddD);
+            Calc = new RelayCommand(Calculate);
             this.ProcessingStates = OrdersViewModel.ProcessingStates;
             this.PaymentStates = OrdersViewModel.PaymentStates;
             this.InitFields();
@@ -50,55 +51,66 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public void AddD()
         {
-            //TODO Fill method
             WindowService windowService = new WindowService();
-            AddTownViewModel viewModel = ViewModelLocator.AddTownViewModel;
-            EventHandler<EventArgs> refreshTownsEventHandler = null;
-            refreshTownsEventHandler = (sender, e) =>
+            AddDoctorViewModel viewModel = ViewModelLocator.AddDoctorViewModel;
+            EventHandler<EventArgs> refreshDoctorsEventHandler = null;
+            refreshDoctorsEventHandler = (sender, e) =>
             {
-                viewModel.Refresh -= refreshTownsEventHandler;
+                viewModel.Refresh -= refreshDoctorsEventHandler;
                 this.FillDoctors();
             };
-            viewModel.Refresh += refreshTownsEventHandler;
-            windowService.ShowAddTownWindow(viewModel);
+            viewModel.Refresh += refreshDoctorsEventHandler;
+            windowService.ShowAddDoctorWindow(viewModel);
         }
         public void CancelAddGlassesOrder()
         {
             this.CloseRequested?.Invoke(this, null);
             this.InitFields();
         }
-        //TODO Fill method
         public void AddGlassesOrder()
         {
             this.Order.Customer = null;
             this.Order.OrderType = "B";
-            //if (this.Customer.Town.Id == 0)
-            //    this.Customer.Town = null;
-            //if (this.Customer.Country.Id == 0)
-            //    this.Customer.Country = null;
-            //try
-            //{
-            //    this.Uow.CustomerRepository.Insert(this.Customer);
-            //    this.Uow.Save();
-            //    this.CloseRequested?.Invoke(this, null);
-            //    this.Refresh?.Invoke(this, null);
-            //    this.InitFields();
-            //}
-            //catch (DbEntityValidationException dbEx)
-            //{
-            //    var message = "";
-            //    foreach (var validationErrors in dbEx.EntityValidationErrors)
-            //    {
-            //        foreach (var validationError in validationErrors.ValidationErrors)
-            //        {
-            //            message += validationError.ErrorMessage;
-            //            message += "\n";
-            //        }
-            //    }
-            //    MessageBox.Show(message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    this.Customer.Town = Doctors[0];
-            //    this.Customer.Country = GlassTypes[0];
-            //}
+            if (this.Order.EyeGlassFrame.Id == 0)
+                this.Order.EyeGlassFrame = null;
+            if (this.Order.GlassType.Id == 0)
+                this.Order.GlassType = null;
+            if (this.Order.Doctor.Id == 0)
+                this.Order.Doctor = null;
+            try
+            {
+                this.Uow.OrderRepository.Insert(this.Order);
+                this.Uow.Save();
+                //for debugging
+                //foreach (var prop in typeof(Order).GetProperties())
+                //{
+                //    Console.WriteLine(prop.Name + ": " + this.Order.GetType().GetProperty(prop.Name).GetValue(this.Order, null));
+                //}
+                this.CloseRequested?.Invoke(this, null);
+                this.Refresh?.Invoke(this, null);
+                this.InitFields();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                var message = "";
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        message += validationError.ErrorMessage;
+                        message += "\n";
+                    }
+                }
+                MessageBox.Show(message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        //TODO Calculate discount patientscontribution insuranceprice
+        private void Calculate()
+        {
+            decimal tmp = Order.GlassPriceLeft + Order.GlassPriceRight + Convert.ToDecimal(Order.OthersPrice);
+            this.Order.NetPrice = tmp;
+            this.Order.GrossPrice = tmp * Convert.ToDecimal(1.2);
+            RaisePropertyChanged(() => this.Order);
         }
         private void InitFields()
         {

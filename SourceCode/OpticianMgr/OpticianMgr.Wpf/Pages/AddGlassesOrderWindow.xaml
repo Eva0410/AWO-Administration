@@ -108,6 +108,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0">Linker Glaspreis:</Label>
                 <Label Grid.Column="0" Grid.Row="1">Rechter Glaspreis:</Label>
@@ -155,6 +156,7 @@
                     <Run Text="{Binding Order.GrossPrice, Mode=TwoWay}"></Run>
                     <Run Text="€"></Run>
                 </TextBlock>
+                <Button Grid.Column="1" Grid.Row="8" Command="{Binding Calc}" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Berechnen</Button>
             </Grid>
         </Grid>
         <Grid Margin="20">

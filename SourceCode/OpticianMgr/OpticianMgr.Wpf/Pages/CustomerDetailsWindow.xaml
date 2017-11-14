@@ -120,12 +120,12 @@
                     <Button  VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="10,0">Neue Kontaktlinsenbestellung</Button>
                 </StackPanel>
             </Grid>
-            <ListView ItemsSource="{Binding CustomersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+            <ListView ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
                         <GridViewColumn DisplayMemberBinding="{Binding OrderType, UpdateSourceTrigger=PropertyChanged}" Header="Typ" />
-                        <GridViewColumn DisplayMemberBinding="{Binding PayMentState, UpdateSourceTrigger=PropertyChanged}" Header="Zahlungsstatus" />
+                        <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}" Header="Zahlungsstatus" />
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}" Header="Bearbeitungsstatus" />
                         <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged}" Header="BruttoPreis" />
                         <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" Header="Bestelldatum" />
