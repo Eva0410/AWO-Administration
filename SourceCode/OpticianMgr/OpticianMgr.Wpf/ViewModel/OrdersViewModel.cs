@@ -124,6 +124,19 @@ namespace OpticianMgr.Wpf.ViewModel
             OpenLenses = new RelayCommand(OpenC);
             FilterAndSortC = new RelayCommand(FilterAndSortContactLenses);
             DeleteFilterC = new RelayCommand(DeleteLensesF);
+
+            EventHandler<EventArgs> refreshGlassesOrders = null;
+            refreshGlassesOrders = (sender, e) =>
+            {
+                this.FillGlassesList();
+            };
+            ViewModelLocator.AddGlassesOrderViewModel.Refresh += refreshGlassesOrders;
+            EventHandler<EventArgs> refreshContactLensOrders = null;
+            refreshContactLensOrders = (sender, e) =>
+            {
+                this.FillContactLensesList();
+            };
+            ViewModelLocator.AddContactLensesOrderViewModel.Refresh += refreshContactLensOrders;
         }
         public void DeleteGlassesF()
         {

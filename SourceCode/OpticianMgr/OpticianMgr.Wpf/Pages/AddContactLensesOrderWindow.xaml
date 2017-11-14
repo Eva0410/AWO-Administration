@@ -1,0 +1,315 @@
+﻿<Window x:Class="OpticianMgr.Wpf.Pages.AddContactLensesOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
+        mc:Ignorable="d"
+        Title="AddGlassesOrder" Height="651.168" Width="961.76"  ResizeMode="NoResize">
+    <StackPanel Margin="0,0,-6,-29">
+        <StackPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFD3D2D2"/>
+                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
+            </LinearGradientBrush>
+        </StackPanel.Background>
+        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Neue Brillenbestellung</Label>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0">Kunde:</Label>
+                <Label Grid.Column="0" Grid.Row="1">Kontaktlinsentyp:</Label>
+                <Label Grid.Column="0" Grid.Row="2">Kontaktlinsesntypsonstiges 1:</Label>
+                <Label Grid.Column="0" Grid.Row="3">Kontaktlinsesntypsonstiges 2:</Label>
+                <Label Grid.Column="0" Grid.Row="4">Doktor:</Label>
+                <Label Grid.Column="0" Grid.Row="5">Zahlungsdatum:</Label>
+                <Label Grid.Column="0" Grid.Row="6">Bestelldatum:</Label>
+                <Label Grid.Column="0" Grid.Row="7">Zahlungsstatus:</Label>
+                <Label Grid.Column="0" Grid.Row="8">Bearbeitungsstatus:</Label>
+                <Label Grid.Column="0" Grid.Row="9">Sonstiges:</Label>
+                <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,0,0,10">
+                    <Run Text="{Binding Order.Customer.FirstName, Mode=TwoWay}"></Run>
+                    <Run Text="{Binding Order.Customer.LastName, Mode=TwoWay}"></Run>
+                </TextBlock>
+                <ComboBox ItemsSource="{Binding ContactLensTypes, Mode=TwoWay}" SelectedValue="{Binding Order.ContactLensType,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ContactLensTypeDescription}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBox Text="{Binding Order.ContactLensOthers1, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10"></TextBox>
+                <TextBox Text="{Binding Order.ContactLensOthers2, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="3" Margin="0,0,0,10"></TextBox>
+                <ComboBox ItemsSource="{Binding Doctors, Mode=TwoWay}" SelectedValue="{Binding Order.Doctor,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="4">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DoctorName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Order.PaymentDate}"  Margin="0,0,0,10"/>
+                <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate="{Binding Order.OrderDate}"  Margin="0,0,0,10"/>
+                <ComboBox ItemsSource="{Binding PaymentStates, Mode=TwoWay}" SelectedValue="{Binding Order.PaymentState,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="7" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ComboBox ItemsSource="{Binding ProcessingStates, Mode=TwoWay}" SelectedValue="{Binding Order.ProcessingState,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="8" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Command="{Binding AddDoctor}" Grid.Column="2" Grid.Row="4" Margin="10,0">Neuer Doktor</Button>
+                <ScrollViewer Grid.Column="1" Grid.Row="9" Margin="0,0,0,10">
+                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Order.Others, Mode=OneWayToSource}"  Margin="0,0,0,10" Height="50" HorizontalAlignment="Stretch" ></TextBox>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0">Linker Glaspreis:</Label>
+                <Label Grid.Column="0" Grid.Row="1">Rechter Glaspreis:</Label>
+                <Label Grid.Column="0" Grid.Row="2">Preis von Sonstigem:</Label>
+                <Label Grid.Column="0" Grid.Row="3">Krankenkassageld:</Label>
+                <Label Grid.Column="0" Grid.Row="4">Selbstbehalt:</Label>
+                <Label Grid.Column="0" Grid.Row="5">Rabatt:</Label>
+                <Label Grid.Column="0" Grid.Row="6">Netto:</Label>
+                <Label Grid.Column="0" Grid.Row="7">Brutto:</Label>
+                <TextBox Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200">
+                    <TextBox.Text>
+                        <Binding Path="Order.GlassPriceLeft" Mode="TwoWay" TargetNullValue=""></Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200">
+                    <TextBox.Text>
+                        <Binding Path="Order.GlassPriceRight" Mode="TwoWay" TargetNullValue=""></Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200">
+                    <TextBox.Text>
+                        <Binding Path="Order.OthersPrice" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="3" Margin="0,0,0,10" Width="200">
+                    <TextBox.Text>
+                        <Binding Path="Order.InsurancePrice" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="4" Margin="0,0,0,10" Width="200">
+                    <TextBox.Text>
+                        <Binding Path="Order.PatientsContribution" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200">
+                    <TextBox.Text>
+                        <Binding Path="Order.Discount" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Grid.Column="1" Grid.Row="6" Margin="0,0,0,10" Width="200">
+                    <Run Text="{Binding Order.NetPrice, Mode=TwoWay}"></Run>
+                    <Run Text="€"></Run>
+                </TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200">
+                    <Run Text="{Binding Order.GrossPrice, Mode=TwoWay}"></Run>
+                    <Run Text="€"></Run>
+                </TextBlock>
+                <Button Grid.Column="1" Grid.Row="8" Command="{Binding Calc}" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Berechnen</Button>
+            </Grid>
+        </Grid>
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="50*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" VerticalContentAlignment="Center">F</Label>
+            <Label Grid.Column="1" Grid.Row="1">R</Label>
+            <Label Grid.Column="1" Grid.Row="2">L</Label>
+            <Label Grid.Column="0" Grid.Row="3" Grid.RowSpan="2" VerticalContentAlignment="Center">N</Label>
+            <Label Grid.Column="1" Grid.Row="3">R</Label>
+            <Label Grid.Column="1" Grid.Row="4">L</Label>
+            <Label Grid.Column="2" Grid.Row="0">sph</Label>
+            <Label Grid.Column="3" Grid.Row="0">cyl</Label>
+            <Label Grid.Column="4" Grid.Row="0">Achse</Label>
+            <Label Grid.Column="5" Grid.Row="0">Prisma</Label>
+            <Label Grid.Column="6" Grid.Row="0">PD/NTH</Label>
+            <Label Grid.Column="7" Grid.Row="1">FWS/</Label>
+            <Label Grid.Column="7" Grid.Row="2">Ink</Label>
+            <Label Grid.Column="7" Grid.Row="3">HSA</Label>
+            <TextBox Grid.Column="2" Grid.Row="1"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_R_sph" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="3" Grid.Row="1"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_R_cyl" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="4" Grid.Row="1"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_R_Axis" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="5" Grid.Row="1"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_R_Prism" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="6" Grid.Row="1"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_R_PD_NTH" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="8" Grid.Row="1" >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_FWS" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="2" Grid.Row="2"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_L_sph" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="3" Grid.Row="2"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_L_cyl" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="4" Grid.Row="2"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_L_Axis" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="5" Grid.Row="2"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_L_Prism" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="6" Grid.Row="2"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_F_L_PD_NTH" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="8" Grid.Row="2" >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_Ink" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="2" Grid.Row="3"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_R_sph" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="3" Grid.Row="3"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_R_cyl" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="4" Grid.Row="3"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_R_Axis" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="5" Grid.Row="3"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_R_Prism" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="6" Grid.Row="3"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_R_PD_NTH" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="8" Grid.Row="3" >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_HSA" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="2" Grid.Row="4"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_L_sph" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="3" Grid.Row="4"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_L_cyl" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="4" Grid.Row="4"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_L_Axis" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="5" Grid.Row="4"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_L_Prism" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="6" Grid.Row="4"  >
+                <TextBox.Text>
+                    <Binding Path="Order.Glass_N_L_PD_NTH" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Grid.Column="8" Grid.Row="4" >
+                <TextBox.Text>
+                    <Binding Path="Order.GlassOthers" Mode="OneWayToSource" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>
+            <Button Margin="20,0" Command="{Binding Submit}" Height="25" Width="55">Anlegen</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

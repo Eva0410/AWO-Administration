@@ -20,55 +20,51 @@ namespace OpticianMgr.Wpf
         }
         public void ShowAddEyeGlassesFrameWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             AddEyeGlassesFrameWindow newWindow = new AddEyeGlassesFrameWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowAddCustomerWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             AddCustomerWindow newWindow = new AddCustomerWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowAddTownWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             AddTownWindow newWindow = new AddTownWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowAddCountryWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             AddCountryWindow newWindow = new AddCountryWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowCustomerDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             CustomerDetailsWindow newWindow = new CustomerDetailsWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowEyeGlassFrameDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             EyeGlassFrameDetailsWindow newWindow = new EyeGlassFrameDetailsWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowSupplierDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             SupplierDetailsWindow newWindow = new SupplierDetailsWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowAddGlassesOrderWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             AddGlassesOrderWindow newWindow = new AddGlassesOrderWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowAddContactLensOrderWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            AddContactLensesOrderWindow newWindow = new AddContactLensesOrderWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowAddDoctorWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-
             AddDoctorWindow newWindow = new AddDoctorWindow();
             this.ShowWindow(viewModel, newWindow);
         }

@@ -117,7 +117,7 @@
                 <TextBlock Margin="20,10,0,0" FontSize="16" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold" DockPanel.Dock="Top">Bestellungen</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Command="{Binding AddGlassesOrder}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="10,0">Neue Brillenbestellung</Button>
-                    <Button  VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="10,0">Neue Kontaktlinsenbestellung</Button>
+                    <Button Command="{Binding AddContactLensOrder}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="10,0">Neue Kontaktlinsenbestellung</Button>
                 </StackPanel>
             </Grid>
             <ListView ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">

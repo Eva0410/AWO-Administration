@@ -31,6 +31,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand AddCountry { get; set; }
         public ICommand Delete { get; set; }
         public ICommand AddGlassesOrder { get; set; }
+        public ICommand AddContactLensOrder { get; set; }
         public CustomerDetailsViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
@@ -40,13 +41,12 @@ namespace OpticianMgr.Wpf.ViewModel
             AddCountry = new RelayCommand(AddC);
             Delete = new RelayCommand(DeleteC);
             AddGlassesOrder = new RelayCommand(AddGO);
+            AddContactLensOrder = new RelayCommand(AddCLO);
         }
         public void InitCustomer(int id)
         {
             var cus = CopyCustomer(this.Uow.CustomerRepository.GetById(id));
             this.Customer = cus;
-            //TODO vorher kopieren?
-            this.Orders = this.Uow.OrderRepository.Get(filter: o => o.Customer_Id == id).ToList();
 
             InitFields();
             SetTownAndCountry();
@@ -168,6 +168,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             FillTowns();
             FillCountries();
+            FillOrders();
         }
         private void FillTowns()
         {
@@ -189,6 +190,10 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Customer.Country = this.Customer.Country_Id == null ? Countries[0] : Countries.Where(c => c.Id == this.Customer.Country_Id).FirstOrDefault();
             RaisePropertyChanged(() => this.Customer);
         }
+        private void FillOrders()
+        {
+            this.Orders = this.Uow.OrderRepository.Get(filter: o => o.Customer_Id == this.Customer.Id).ToList();
+        }
         public void AddGO()
         {
             WindowService windowService = new WindowService();
@@ -198,11 +203,26 @@ namespace OpticianMgr.Wpf.ViewModel
             refreshGlassesOrdersEventHandler = (sender, e) =>
             {
                 viewModel.Refresh -= refreshGlassesOrdersEventHandler;
-                //TODO Fill orders
-                //this.FillCountries();
+                FillOrders();
+                RaisePropertyChanged(() => this.Orders);
             };
             viewModel.Refresh += refreshGlassesOrdersEventHandler;
             windowService.ShowAddGlassesOrderWindow(viewModel);
+        }
+        public void AddCLO()
+        {
+            WindowService windowService = new WindowService();
+            AddContactLensesOrderViewModel viewModel = ViewModelLocator.AddContactLensesOrderViewModel;
+            viewModel.InitCustomer(this.Customer.Id);
+            EventHandler<EventArgs> refreshContactLensOrdersEventHandler = null;
+            refreshContactLensOrdersEventHandler = (sender, e) =>
+            {
+                viewModel.Refresh -= refreshContactLensOrdersEventHandler;
+                FillOrders();
+                RaisePropertyChanged(() => this.Orders);
+            };
+            viewModel.Refresh += refreshContactLensOrdersEventHandler;
+            windowService.ShowAddContactLensOrderWindow(viewModel);
         }
     }
 }
