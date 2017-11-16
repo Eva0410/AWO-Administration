@@ -318,16 +318,16 @@ namespace OpticianMgr.Wpf.ViewModel
             if (this.SelectedGlasses != null)
             {
                 WindowService windowService = new WindowService();
-                CustomerDetailsViewModel viewModel = ViewModelLocator.CustomerDetailsViewModel;
-                viewModel.InitCustomer(((Customer)this.SelectedGlasses).Id);
-                EventHandler<EventArgs> refreshCustomersHandler = null;
-                refreshCustomersHandler = (sender, e) =>
+                GlassesOrderDetailsViewModel viewModel = ViewModelLocator.GlassesOrderDetailsViewModel;
+                viewModel.InitOrder(((Order)this.SelectedGlasses).Id);
+                EventHandler<EventArgs> refreshOrdersHandler = null;
+                refreshOrdersHandler = (sender, e) =>
                 {
-                    viewModel.Refresh -= refreshCustomersHandler;
+                    viewModel.Refresh -= refreshOrdersHandler;
                     this.FillGlassesList();
                 };
-                viewModel.Refresh += refreshCustomersHandler;
-                windowService.ShowCustomerDetailsWindow(viewModel);
+                viewModel.Refresh += refreshOrdersHandler;
+                windowService.ShowGlassesOrderDetailsWindow(viewModel);
             }
             else
                 MessageBox.Show("Bitte wählen Sie zuerst einen Kunden aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);

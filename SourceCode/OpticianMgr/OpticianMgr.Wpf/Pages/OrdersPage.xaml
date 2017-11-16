@@ -60,7 +60,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundennachname"/>
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}"  Header="Bearbeitungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}"  Header="Zahlungsstatus"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged}" Header="Bruttopreis"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Header="Bruttopreis"/>
                         <GridViewColumn DisplayMemberBinding="{Binding GlassType.GlasstypeDescription, UpdateSourceTrigger=PropertyChanged}" Header="Glastyp"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}" Header="Doktor"/>
                         <GridViewColumn DisplayMemberBinding="{Binding EyeGlassFrame.ModelDescription, UpdateSourceTrigger=PropertyChanged}" Header="Brillenfassung"/>
@@ -115,7 +115,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundennachname"/>
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}"  Header="Bearbeitungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}"  Header="Zahlungsstatus"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged}" Header="Bruttopreis"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Header="Bruttopreis"/>
                         <GridViewColumn DisplayMemberBinding="{Binding ContactLensType.ContactLensTypeDescription, UpdateSourceTrigger=PropertyChanged}" Header="Kontaktlinsestyp"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}" Header="Doktor"/>
                     </GridView>

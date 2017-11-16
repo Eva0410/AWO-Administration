@@ -21,6 +21,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public IUnitOfWork Uow { get; set; }
         public event EventHandler<EventArgs> CloseRequested;
         public event EventHandler<EventArgs> Refresh;
+        public object SelectedOrder { get; set; }
         public List<Order> Orders { get; set; }
         public Customer Customer { get; set; }
         public List<Town> Towns { get; set; }
@@ -32,6 +33,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand Delete { get; set; }
         public ICommand AddGlassesOrder { get; set; }
         public ICommand AddContactLensOrder { get; set; }
+        public ICommand Show { get; set; }
         public CustomerDetailsViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
@@ -42,6 +44,7 @@ namespace OpticianMgr.Wpf.ViewModel
             Delete = new RelayCommand(DeleteC);
             AddGlassesOrder = new RelayCommand(AddGO);
             AddContactLensOrder = new RelayCommand(AddCLO);
+            Show = new RelayCommand(ShowOrder);
         }
         public void InitCustomer(int id)
         {
@@ -89,7 +92,6 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.InitFields();
             }
         }
-        //TODO Ort und Land werden nicht angezeigt
         public void AddT()
         {
             WindowService windowService = new WindowService();
@@ -193,6 +195,7 @@ namespace OpticianMgr.Wpf.ViewModel
         private void FillOrders()
         {
             this.Orders = this.Uow.OrderRepository.Get(filter: o => o.Customer_Id == this.Customer.Id).ToList();
+            this.RaisePropertyChanged(() => this.Orders);
         }
         public void AddGO()
         {
@@ -223,6 +226,33 @@ namespace OpticianMgr.Wpf.ViewModel
             };
             viewModel.Refresh += refreshContactLensOrdersEventHandler;
             windowService.ShowAddContactLensOrderWindow(viewModel);
+        }
+        public void ShowOrder()
+        {
+            if (this.SelectedOrder != null)
+            {
+                var order = (Order)this.SelectedOrder;
+                if (order.OrderType == "B")
+                {
+                    WindowService windowService = new WindowService();
+                    GlassesOrderDetailsViewModel viewModel = ViewModelLocator.GlassesOrderDetailsViewModel;
+                    viewModel.InitOrder(order.Id);
+                    EventHandler<EventArgs> refreshOrdersHandler = null;
+                    refreshOrdersHandler = (sender, e) =>
+                    {
+                        viewModel.Refresh -= refreshOrdersHandler;
+                        this.FillOrders();
+                    };
+                    viewModel.Refresh += refreshOrdersHandler;
+                    windowService.ShowGlassesOrderDetailsWindow(viewModel);
+                }
+                else if(order.OrderType == "K")
+                {
+
+                }
+            }
+            else
+                MessageBox.Show("Bitte wählen Sie zuerst eine Bestellung aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
     }
 }

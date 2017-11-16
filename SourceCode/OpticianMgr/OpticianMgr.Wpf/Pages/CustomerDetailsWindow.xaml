@@ -116,19 +116,20 @@
             <Grid DockPanel.Dock="Top">
                 <TextBlock Margin="20,10,0,0" FontSize="16" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold" DockPanel.Dock="Top">Bestellungen</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Command="{Binding AddGlassesOrder}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="10,0">Neue Brillenbestellung</Button>
-                    <Button Command="{Binding AddContactLensOrder}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="10,0">Neue Kontaktlinsenbestellung</Button>
+                    <Button Command="{Binding AddGlassesOrder}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0">Neue Brillenbestellung</Button>
+                    <Button Command="{Binding AddContactLensOrder}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0">Neue Kontaktlinsenbestellung</Button>
+                    <Button Command="{Binding Show}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0">Bestellung anzeigen</Button>
                 </StackPanel>
             </Grid>
-            <ListView ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+            <ListView ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedOrder}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
                         <GridViewColumn DisplayMemberBinding="{Binding OrderType, UpdateSourceTrigger=PropertyChanged}" Header="Typ" />
                         <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}" Header="Zahlungsstatus" />
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}" Header="Bearbeitungsstatus" />
-                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged}" Header="BruttoPreis" />
-                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" Header="Bestelldatum" />
+                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Header="BruttoPreis" />
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy}}" Header="Bestelldatum" />
                     </GridView>
                 </ListView.View>
                 <ListView.InputBindings>

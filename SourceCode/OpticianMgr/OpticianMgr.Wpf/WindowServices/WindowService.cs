@@ -68,6 +68,11 @@ namespace OpticianMgr.Wpf
             AddDoctorWindow newWindow = new AddDoctorWindow();
             this.ShowWindow(viewModel, newWindow);
         }
+        public void ShowGlassesOrderDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            GlassesOrderDetailsWindow newWindow = new GlassesOrderDetailsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
         public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
         {
             EventHandler<EventArgs> closeHandler = null;
