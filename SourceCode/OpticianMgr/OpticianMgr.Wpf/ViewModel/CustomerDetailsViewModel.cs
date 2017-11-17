@@ -45,6 +45,13 @@ namespace OpticianMgr.Wpf.ViewModel
             AddGlassesOrder = new RelayCommand(AddGO);
             AddContactLensOrder = new RelayCommand(AddCLO);
             Show = new RelayCommand(ShowOrder);
+            EventHandler<EventArgs> refreshOrders = null;
+            refreshOrders = (sender, e) =>
+            {
+                this.FillOrders();
+            };
+            ViewModelLocator.ContactLensOrderDetailsViewModel.Refresh += refreshOrders;
+            ViewModelLocator.GlassesOrderDetailsViewModel.Refresh += refreshOrders;
         }
         public void InitCustomer(int id)
         {
@@ -246,11 +253,22 @@ namespace OpticianMgr.Wpf.ViewModel
                     viewModel.Refresh += refreshOrdersHandler;
                     windowService.ShowGlassesOrderDetailsWindow(viewModel);
                 }
-                else if(order.OrderType == "K")
+                else if (order.OrderType == "K")
                 {
-
+                    WindowService windowService = new WindowService();
+                    ContactLensOrderDetailsViewModel viewModel = ViewModelLocator.ContactLensOrderDetailsViewModel;
+                    viewModel.InitOrder(order.Id);
+                    EventHandler<EventArgs> refreshOrdersHandler = null;
+                    refreshOrdersHandler = (sender, e) =>
+                    {
+                        viewModel.Refresh -= refreshOrdersHandler;
+                        this.FillOrders();
+                    };
+                    viewModel.Refresh += refreshOrdersHandler;
+                    windowService.ShowContactLensOrderDetailsWindow(viewModel);
                 }
             }
+
             else
                 MessageBox.Show("Bitte wählen Sie zuerst eine Bestellung aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }

@@ -131,12 +131,14 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.FillGlassesList();
             };
             ViewModelLocator.AddGlassesOrderViewModel.Refresh += refreshGlassesOrders;
+            ViewModelLocator.GlassesOrderDetailsViewModel.Refresh += refreshGlassesOrders;
             EventHandler<EventArgs> refreshContactLensOrders = null;
             refreshContactLensOrders = (sender, e) =>
             {
                 this.FillContactLensesList();
             };
             ViewModelLocator.AddContactLensesOrderViewModel.Refresh += refreshContactLensOrders;
+            ViewModelLocator.ContactLensOrderDetailsViewModel.Refresh += refreshContactLensOrders;
         }
         public void DeleteGlassesF()
         {
@@ -330,26 +332,26 @@ namespace OpticianMgr.Wpf.ViewModel
                 windowService.ShowGlassesOrderDetailsWindow(viewModel);
             }
             else
-                MessageBox.Show("Bitte wählen Sie zuerst einen Kunden aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Bitte wählen Sie zuerst eine Brillenbestellung aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
         public void OpenC()
         {
-            if (this.SelectedGlasses != null)
+            if (this.SelectedLenses != null)
             {
                 WindowService windowService = new WindowService();
-                CustomerDetailsViewModel viewModel = ViewModelLocator.CustomerDetailsViewModel;
-                viewModel.InitCustomer(((Customer)this.SelectedGlasses).Id);
-                EventHandler<EventArgs> refreshCustomersHandler = null;
-                refreshCustomersHandler = (sender, e) =>
+                ContactLensOrderDetailsViewModel viewModel = ViewModelLocator.ContactLensOrderDetailsViewModel;
+                viewModel.InitOrder(((Order)this.SelectedLenses).Id);
+                EventHandler<EventArgs> refreshOrdersHandler = null;
+                refreshOrdersHandler = (sender, e) =>
                 {
-                    viewModel.Refresh -= refreshCustomersHandler;
-                    this.FillGlassesList();
+                    viewModel.Refresh -= refreshOrdersHandler;
+                    this.FillContactLensesList();
                 };
-                viewModel.Refresh += refreshCustomersHandler;
-                windowService.ShowCustomerDetailsWindow(viewModel);
+                viewModel.Refresh += refreshOrdersHandler;
+                windowService.ShowContactLensOrderDetailsWindow(viewModel);
             }
             else
-                MessageBox.Show("Bitte wählen Sie zuerst einen Kunden aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Bitte wählen Sie zuerst eine Kontaktlinsenbestellung aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
         private ObservableCollection<Order> GetAllGlassses()
         {

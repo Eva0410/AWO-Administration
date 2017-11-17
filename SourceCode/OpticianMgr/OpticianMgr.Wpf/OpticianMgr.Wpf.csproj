@@ -217,6 +217,9 @@
     <Compile Include="Pages\AddContactLensesOrderWindow.xaml.cs">
       <DependentUpon>AddContactLensesOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ContactLensOrderDetails.xaml.cs">
+      <DependentUpon>ContactLensOrderDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GlassesOrderDetailsWindow.xaml.cs">
       <DependentUpon>GlassesOrderDetailsWindow.xaml</DependentUpon>
     </Compile>
@@ -250,7 +253,8 @@
     <Compile Include="ViewModel\AddDoctorViewModel.cs" />
     <Compile Include="ViewModel\AddCountryViewModel.cs" />
     <Compile Include="ViewModel\AddContactLensesOrderViewModel.cs" />
-    <Compile Include="ViewModel\GlassesOrderDetailViewModel.cs" />
+    <Compile Include="ViewModel\ContactLensOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModel\GlassesOrderDetailsViewModel.cs" />
     <Compile Include="ViewModel\AddGlassesOrderViewModel.cs" />
     <Compile Include="ViewModel\AddTownViewModel.cs" />
     <Compile Include="ViewModel\AddCustomerViewModel.cs" />
@@ -287,6 +291,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\AddContactLensesOrderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ContactLensOrderDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

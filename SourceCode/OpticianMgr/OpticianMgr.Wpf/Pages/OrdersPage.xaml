@@ -56,11 +56,11 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Customer.FirstName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundenvorname"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundennachname"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kunde"/>
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}"  Header="Bearbeitungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}"  Header="Zahlungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Header="Bruttopreis"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:dd.MM.yyyy}}" Header="Bruttopreis"/>
                         <GridViewColumn DisplayMemberBinding="{Binding GlassType.GlasstypeDescription, UpdateSourceTrigger=PropertyChanged}" Header="Glastyp"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}" Header="Doktor"/>
                         <GridViewColumn DisplayMemberBinding="{Binding EyeGlassFrame.ModelDescription, UpdateSourceTrigger=PropertyChanged}" Header="Brillenfassung"/>
@@ -107,15 +107,15 @@
             </Grid>
 
 
-            <ListView ItemsSource="{Binding ContactLensesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedGlasses}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+            <ListView ItemsSource="{Binding ContactLensesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedLenses}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Customer.FirstName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundenvorname"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kundennachname"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}"  Header="Kunde"/>
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}"  Header="Bearbeitungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}"  Header="Zahlungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Header="Bruttopreis"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:dd.MM.yyyy}}" Header="Bruttopreis"/>
                         <GridViewColumn DisplayMemberBinding="{Binding ContactLensType.ContactLensTypeDescription, UpdateSourceTrigger=PropertyChanged}" Header="Kontaktlinsestyp"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}" Header="Doktor"/>
                     </GridView>
