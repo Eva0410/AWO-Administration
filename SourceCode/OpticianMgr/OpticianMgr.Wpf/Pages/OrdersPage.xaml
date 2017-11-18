@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:OpticianMgr.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="OrderPage"
       DataContext="{Binding OrdersViewModel, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -60,10 +59,23 @@
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}"  Header="Bearbeitungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}"  Header="Zahlungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Header="Bruttopreis"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:dd.MM.yyyy}}" Header="Bruttopreis"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:dd.MM.yyyy}}" Header="Bestelldatum"/>
                         <GridViewColumn DisplayMemberBinding="{Binding GlassType.GlasstypeDescription, UpdateSourceTrigger=PropertyChanged}" Header="Glastyp"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}" Header="Doktor"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding EyeGlassFrame.ModelDescription, UpdateSourceTrigger=PropertyChanged}" Header="Brillenfassung"/>
+                        <GridViewColumn  Header="Brillenfassung">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="EyeGlassFrame.ModelDescription" />
+                                                <Binding Path="EyeGlassFrame.Brand" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -115,7 +127,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}"  Header="Bearbeitungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}"  Header="Zahlungsstatus"/>
                         <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Header="Bruttopreis"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:dd.MM.yyyy}}" Header="Bruttopreis"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:dd.MM.yyyy}}" Header="Bestelldatum"/>
                         <GridViewColumn DisplayMemberBinding="{Binding ContactLensType.ContactLensTypeDescription, UpdateSourceTrigger=PropertyChanged}" Header="Kontaktlinsestyp"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}" Header="Doktor"/>
                     </GridView>

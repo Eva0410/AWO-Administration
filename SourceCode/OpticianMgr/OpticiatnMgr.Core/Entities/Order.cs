@@ -28,7 +28,7 @@ namespace OpticiatnMgr.Core.Entities
         public String PaymentState { get; set; }
         public decimal GlassPriceLeft { get; set; }
         public decimal GlassPriceRight { get; set; }
-        public decimal NetPrice { get; set; }
+        public decimal BettermentTax { get; set; }
         public decimal GrossPrice { get; set; }
         public decimal? OthersPrice { get; set; }
         public decimal? InsurancePrice { get; set; }

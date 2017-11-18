@@ -158,12 +158,12 @@ namespace OpticianMgr.Wpf.ViewModel
                 MessageBox.Show(message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        //TODO Calculate discount patientscontribution insuranceprice
         private void Calculate()
         {
-            decimal tmp = Order.GlassPriceLeft + Order.GlassPriceRight + Convert.ToDecimal(Order.OthersPrice);
-            this.Order.NetPrice = tmp;
-            this.Order.GrossPrice = tmp * Convert.ToDecimal(1.2);
+            decimal sum1 = Order.GlassPriceLeft + Order.GlassPriceRight + Convert.ToDecimal(Order.OthersPrice) + Convert.ToDecimal(Order.EyeGlassFrame?.SalePrice);
+            decimal sum2 = sum1 - Convert.ToDecimal(Order.InsurancePrice) + Convert.ToDecimal(Order.PatientsContribution) - Convert.ToDecimal(Order.Discount);
+            Order.GrossPrice = sum2;
+            Order.BettermentTax = Order.GrossPrice - (sum2 / Convert.ToDecimal(1.2));
             RaisePropertyChanged(() => this.Order);
         }
         private void FillDoctors()

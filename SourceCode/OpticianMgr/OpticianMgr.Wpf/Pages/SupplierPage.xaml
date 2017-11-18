@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
-      Title="SupplierPage"
       DataContext="{Binding SupplierViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>

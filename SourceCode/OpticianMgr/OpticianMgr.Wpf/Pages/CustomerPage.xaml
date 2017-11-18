@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:OpticianMgr.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="CustomerPage"
+      
       DataContext="{Binding CustomerViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>

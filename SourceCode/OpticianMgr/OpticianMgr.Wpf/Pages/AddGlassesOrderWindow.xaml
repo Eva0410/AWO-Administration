@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Title="AddGlassesOrder" Height="651.168" Width="961.76"  ResizeMode="NoResize">
+        Height="651.168" Width="961.76"  ResizeMode="NoResize">
     <StackPanel Margin="0,0,-6,-29">
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -62,7 +62,10 @@
                 <ComboBox ItemsSource="{Binding EyeGlassFrames, Mode=TwoWay}" SelectedValue="{Binding Order.EyeGlassFrame,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="3">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding ModelDescription}"/>
+                            <TextBlock>
+                                <Run Text="{Binding ModelDescription, Mode=TwoWay}"></Run>
+                                <Run Text="{Binding Brand, Mode=TwoWay}"></Run>
+                            </TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -109,6 +112,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0">Linker Glaspreis:</Label>
                 <Label Grid.Column="0" Grid.Row="1">Rechter Glaspreis:</Label>
@@ -116,8 +120,9 @@
                 <Label Grid.Column="0" Grid.Row="3">Krankenkassageld:</Label>
                 <Label Grid.Column="0" Grid.Row="4">Selbstbehalt:</Label>
                 <Label Grid.Column="0" Grid.Row="5">Rabatt:</Label>
-                <Label Grid.Column="0" Grid.Row="6">Netto:</Label>
+                <Label Grid.Column="0" Grid.Row="6">Brillenfassung:</Label>
                 <Label Grid.Column="0" Grid.Row="7">Brutto:</Label>
+                <Label Grid.Column="0" Grid.Row="8">Mehrwertsteuer:</Label>
                 <TextBox Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200">
                     <TextBox.Text>
                         <Binding Path="Order.GlassPriceLeft" Mode="TwoWay" TargetNullValue=""></Binding>
@@ -149,14 +154,18 @@
                     </TextBox.Text>
                 </TextBox>
                 <TextBlock Grid.Column="1" Grid.Row="6" Margin="0,0,0,10" Width="200">
-                    <Run Text="{Binding Order.NetPrice, Mode=TwoWay}"></Run>
+                    <Run Text="{Binding Order.EyeGlassFrame.SalePrice, Mode=TwoWay, StringFormat=N2}"></Run>
                     <Run Text="€"></Run>
                 </TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200">
-                    <Run Text="{Binding Order.GrossPrice, Mode=TwoWay}"></Run>
+                    <Run Text="{Binding Order.GrossPrice, Mode=TwoWay, StringFormat=N2}"></Run>
                     <Run Text="€"></Run>
                 </TextBlock>
-                <Button Grid.Column="1" Grid.Row="8" Command="{Binding Calc}" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Berechnen</Button>
+                <TextBlock Grid.Column="1" Grid.Row="8" Margin="0,0,0,10" Width="200">
+                    <Run Text="{Binding Order.BettermentTax, Mode=TwoWay, StringFormat=N2}"></Run>
+                    <Run Text="€"></Run>
+                </TextBlock>
+                <Button Grid.Column="1" Grid.Row="9" Command="{Binding Calc}" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Berechnen</Button>
             </Grid>
         </Grid>
         <Grid Margin="20">

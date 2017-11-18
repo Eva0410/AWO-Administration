@@ -7,7 +7,6 @@
       xmlns:toolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
       xmlns:toolkitCharting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
       mc:Ignorable="d" 
-      Title="StatisticsPage"
       DataContext="{Binding StatisticsViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>

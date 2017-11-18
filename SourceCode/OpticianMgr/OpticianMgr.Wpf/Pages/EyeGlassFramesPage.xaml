@@ -6,8 +6,6 @@
       xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
-     
-      Title="EyeGlassFramesPage"
       DataContext="{Binding EyeGlassFramesViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>
@@ -58,7 +56,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Brand, UpdateSourceTrigger=PropertyChanged}"  Header="Marke"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Color, UpdateSourceTrigger=PropertyChanged}"  Header="Farbe"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Size, UpdateSourceTrigger=PropertyChanged}"  Header="Größe"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Header="Status"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding State, UpdateSourceTrigger=PropertyChanged}" Header="Status"/>
                     <GridViewColumn DisplayMemberBinding="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged}" Header="Einkaufspreis"/>
                     <GridViewColumn DisplayMemberBinding="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy}}"  Header="Einkaufsdatum"/>
                     <GridViewColumn DisplayMemberBinding="{Binding SalePrice, UpdateSourceTrigger=PropertyChanged}"  Header="Verkaufspreis"/>

@@ -78,7 +78,7 @@ namespace OpticiatnMgr.Core
                 PaymentState = o[8],
                 GlassPriceLeft = Convert.ToDecimal(o[9], CultureInfo.InvariantCulture),
                 GlassPriceRight = Convert.ToDecimal(o[10], CultureInfo.InvariantCulture),
-                NetPrice = Convert.ToDecimal(o[11], CultureInfo.InvariantCulture),
+                BettermentTax = Convert.ToDecimal(o[12], CultureInfo.InvariantCulture) - Convert.ToDecimal(o[11], CultureInfo.InvariantCulture),
                 GrossPrice = Convert.ToDecimal(o[12], CultureInfo.InvariantCulture),
                 OthersPrice = Convert.ToDecimal(o[13], CultureInfo.InvariantCulture),
                 InsurancePrice = Convert.ToDecimal(o[14], CultureInfo.InvariantCulture),
