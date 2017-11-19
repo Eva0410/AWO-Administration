@@ -136,6 +136,12 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 this.Uow.OrderRepository.Update(this.Order);
                 this.Uow.Save();
+                if(this.Order.ProcessingState == "Abgeholt" && this.Order.EyeGlassFrame_Id != null)
+                {
+                    this.Order.EyeGlassFrame.State = "Verkauft";
+                    this.Uow.EyeGlassFrameRepository.Update(this.Order.EyeGlassFrame);
+                    this.Uow.Save();
+                }
                 //for debugging
                 //foreach (var prop in typeof(Order).GetProperties())
                 //{
@@ -188,7 +194,7 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         private void FillEyeGlassFrames()
         {
-            var egf = this.Uow.EyeGlassFrameRepository.Get(orderBy: o => o.OrderBy(e => e.ModelDescription)).ToList();
+            var egf = this.Uow.EyeGlassFrameRepository.Get(filter: e => e.State != "Verkauft").ToList();
             egf.Insert(0, new EyeGlassFrame() { ModelDescription = "Bitte wählen..." });
             this.EyeGlassFrames = egf;
             RaisePropertyChanged(() => this.EyeGlassFrames);

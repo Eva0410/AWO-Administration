@@ -74,6 +74,13 @@ namespace OpticianMgr.Wpf.ViewModel
             DeleteFilter = new RelayCommand(DeleteF);
             AddEyeGlassFrame = new RelayCommand(AddE);
             OpenEyeGlassFrame = new RelayCommand(OpenE);
+            EventHandler<EventArgs> refreshEyeGlassFrame = null;
+            refreshEyeGlassFrame = (sender, e) =>
+            {
+                this.FillList();
+            };
+            ViewModelLocator.AddGlassesOrderViewModel.Refresh += refreshEyeGlassFrame;
+            ViewModelLocator.GlassesOrderDetailsViewModel.Refresh += refreshEyeGlassFrame;
         }
 
         /// <summary>
