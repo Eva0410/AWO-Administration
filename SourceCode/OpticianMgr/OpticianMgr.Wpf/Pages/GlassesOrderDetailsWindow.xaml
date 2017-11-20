@@ -323,6 +323,7 @@
             </TextBox>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Command="{Binding SendMessage}" Margin="20,0" Width="115">Nachricht senden</Button>
             <Button Command="{Binding Delete}" Width="115">Bestellung löschen</Button>
             <Button Margin="20,0" Command="{Binding Cancel}" Width="65">Abbrechen</Button>
             <Button Margin="0,0,20,0" Command="{Binding Submit}" Height="25" Width="57">Speichern</Button>

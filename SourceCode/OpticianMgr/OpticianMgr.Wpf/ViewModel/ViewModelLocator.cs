@@ -69,6 +69,8 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<AddDoctorViewModel>();
             SimpleIoc.Default.Register<GlassesOrderDetailsViewModel>();
             SimpleIoc.Default.Register<ContactLensOrderDetailsViewModel>();
+            SimpleIoc.Default.Register<SingleEmailViewModel>();
+            SimpleIoc.Default.Register<SingleMessageViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -153,6 +155,14 @@ namespace OpticianMgr.Wpf.ViewModel
         public static ContactLensOrderDetailsViewModel ContactLensOrderDetailsViewModel
         {
             get { return ServiceLocator.Current.GetInstance<ContactLensOrderDetailsViewModel>(); }
+        }
+        public static SingleMessageViewModel SingleMessageViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SingleMessageViewModel>(); }
+        }
+        public static SingleEmailViewModel SingleEmailViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SingleEmailViewModel>(); }
         }
         public static void Cleanup()
         {

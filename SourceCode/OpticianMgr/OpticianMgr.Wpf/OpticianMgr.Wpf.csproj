@@ -208,6 +208,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\SingleEMailPage.xaml.cs">
+      <DependentUpon>SingleEMailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SingleMessageWindow.xaml.cs">
+      <DependentUpon>SingleMessageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddDoctorWindow.xaml.cs">
       <DependentUpon>AddDoctorWindow.xaml</DependentUpon>
     </Compile>
@@ -260,6 +266,8 @@
     <Compile Include="ViewModel\AddCustomerViewModel.cs" />
     <Compile Include="ViewModel\AddEyeGlassFrameModel.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\SingleEmailViewModel.cs" />
+    <Compile Include="ViewModel\SingleMessageViewModel.cs" />
     <Compile Include="ViewModel\OrdersViewModel.cs" />
     <Compile Include="ViewModel\SupplierDetailsViewModel.cs" />
     <Compile Include="ViewModel\EyeGlassFramesDetailsViewModel.cs" />
@@ -282,6 +290,14 @@
     <Compile Include="ViewModel\SupplierViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
+    <Page Include="Pages\SingleEMailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SingleMessageWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\AddDoctorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -78,6 +78,11 @@ namespace OpticianMgr.Wpf
             ContactLensOrderDetails newWindow = new ContactLensOrderDetails();
             this.ShowWindow(viewModel, newWindow);
         }
+        public void ShowSingleMessageWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            SingleMessageWindow newWindow = new SingleMessageWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
         public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
         {
             EventHandler<EventArgs> closeHandler = null;

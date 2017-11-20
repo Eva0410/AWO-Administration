@@ -32,6 +32,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand AddDoctor { get; set; }
         public ICommand Calc { get; set; }
         public ICommand Delete { get; set; }
+        public ICommand SendMessage { get; set; }
         public GlassesOrderDetailsViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
@@ -40,6 +41,7 @@ namespace OpticianMgr.Wpf.ViewModel
             AddDoctor = new RelayCommand(AddD);
             Calc = new RelayCommand(Calculate);
             Delete = new RelayCommand(DeleteGO);
+            SendMessage = new RelayCommand(OpenSendMessageWindow);
             this.ProcessingStates = OrdersViewModel.ProcessingStates;
             this.PaymentStates = OrdersViewModel.PaymentStates;
         }
@@ -110,6 +112,13 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             this.CloseRequested?.Invoke(this, null);
             this.SetFields();
+        }
+        public void OpenSendMessageWindow()
+        {
+            WindowService windowService = new WindowService();
+            SingleMessageViewModel viewModel = ViewModelLocator.SingleMessageViewModel;
+            viewModel.OrderId = this.Order.Id;
+            windowService.ShowSingleMessageWindow(viewModel);
         }
         public void EditGlassesOrder()
         {
