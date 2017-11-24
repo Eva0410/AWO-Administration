@@ -71,6 +71,7 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<ContactLensOrderDetailsViewModel>();
             SimpleIoc.Default.Register<SingleEmailViewModel>();
             SimpleIoc.Default.Register<SingleMessageViewModel>();
+            SimpleIoc.Default.Register<SingleSMSViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -163,6 +164,10 @@ namespace OpticianMgr.Wpf.ViewModel
         public static SingleEmailViewModel SingleEmailViewModel
         {
             get { return ServiceLocator.Current.GetInstance<SingleEmailViewModel>(); }
+        }
+        public static SingleSMSViewModel SingleSMSViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SingleSMSViewModel>(); }
         }
         public static void Cleanup()
         {

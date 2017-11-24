@@ -118,6 +118,7 @@ namespace OpticianMgr.Wpf.ViewModel
             WindowService windowService = new WindowService();
             SingleMessageViewModel viewModel = ViewModelLocator.SingleMessageViewModel;
             viewModel.OrderId = this.Order.Id;
+            viewModel.OpenEmailPage();
             windowService.ShowSingleMessageWindow(viewModel);
         }
         public void EditGlassesOrder()

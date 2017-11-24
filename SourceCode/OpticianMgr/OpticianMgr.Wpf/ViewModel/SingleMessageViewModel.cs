@@ -28,9 +28,9 @@ namespace OpticianMgr.Wpf.ViewModel
     public class SingleMessageViewModel : ViewModelBase, IRequestClose
     {
         private SingleEMailPage SingleEMailPage { get; set; }
-        private StatisticsPage StatisticsPage { get; set; }
+        private SingleSMSPage SingleSMSPage { get; set; }
         public ICommand EMail { get; set; }
-        public ICommand Customers { get; set; }
+        public ICommand SMS { get; set; }
         public object Page { get; set; }
         public int OrderId { get; set; }
         public event EventHandler<EventArgs> CloseRequested;
@@ -38,26 +38,34 @@ namespace OpticianMgr.Wpf.ViewModel
         public SingleMessageViewModel()
         {
             this.SingleEMailPage = new SingleEMailPage();
-            this.StatisticsPage = new StatisticsPage();
-            //Customers = new RelayCommand(() => this.Open(this.StatisticsPage));
+            this.SingleSMSPage = new SingleSMSPage();
+            SMS = new RelayCommand(OpenSMSPage);
             EMail = new RelayCommand(OpenEmailPage);
 
             EventHandler<EventArgs> closeHandler = null;
             closeHandler = (sender, e) =>
             {
-                this.CloseRequested.Invoke(this,null);
+                this.CloseRequested?.Invoke(this,null);
             };
             ViewModelLocator.SingleEmailViewModel.CloseRequested += closeHandler;
+            ViewModelLocator.SingleSMSViewModel.CloseRequested += closeHandler;
         }
 
         //TODO Is this MVVM?
-        private void OpenEmailPage()
+        public void OpenEmailPage()
         {
-            SingleEMailPage page = new SingleEMailPage();
             SingleEmailViewModel viewModel = ViewModelLocator.SingleEmailViewModel;
             viewModel.Init(this.OrderId);
-            page.DataContext = viewModel;
-            this.Page = page;
+            this.SingleEMailPage.DataContext = viewModel;
+            this.Page = this.SingleEMailPage;
+            this.RaisePropertyChanged(() => this.Page);
+        }
+        public void OpenSMSPage()
+        {
+            SingleSMSViewModel viewModel = ViewModelLocator.SingleSMSViewModel;
+            viewModel.Init(this.OrderId);
+            this.SingleSMSPage.DataContext = viewModel;
+            this.Page = this.SingleSMSPage;
             this.RaisePropertyChanged(() => this.Page);
         }
     }

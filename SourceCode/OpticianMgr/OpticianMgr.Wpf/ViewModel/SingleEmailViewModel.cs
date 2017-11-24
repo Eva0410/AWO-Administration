@@ -1,16 +1,12 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using OpticianMgr.Persistence;
-using OpticianMgr.Wpf.Pages;
-using OpticianMgr.Wpf.WindowServices;
 using OpticiatnMgr.Core.Contracts;
-using OpticiatnMgr.Core.Entities;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System;
-using System.Windows;
-using System.Net.Mail;
+using System.ComponentModel;
 using System.Net;
+using System.Net.Mail;
+using System.Windows;
+using System.Windows.Input;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
@@ -50,11 +46,11 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 case "B":
                     this.Subject = "Ihre Brillenbestellung von Augenoptik Aigner";
-                    this.Message = String.Format("Sehr geehrte/r Frau/Herr {0} {1}, {2} {2} Ihre Brillenbestellung ist nun abholbereit! {2} {2} Dies ist eine automatisch versendete Nachricht, bitte antworten Sie nicht auf diese EMail. {2} {2} Mit freundlichen Grüßen {2} Augenoptik Aigner", order.Customer.Title, order.Customer.LastName, Environment.NewLine);
+                    this.Message = String.Format("Sehr geehrte/r Frau/Herr {0} {1}, {2} {2} Ihre Brillenbestellung ist nun abholbereit! {2} {2} Dies ist eine automatisch versendete Nachricht, bitte antworten Sie nicht auf diese E-Mail. {2} {2} Mit freundlichen Grüßen {2} Augenoptik Aigner", order.Customer.Title, order.Customer.LastName, Environment.NewLine);
                     break;
                 case "K":
                     this.Subject = "Ihre Kontaktlinsenbestellung von Augenoptik Aigner";
-                    this.Message = String.Format("Sehr geehrte/r Frau/Herr {0} {1}, {2} {2} Ihre Kontaktlinsenbestellung ist nun abholbereit! {2} {2} Dies ist eine automatisch versendete Nachricht, bitte antworten Sie nicht auf diese EMail. {2} {2} Mit freundlichen Grüßen {2} Augenoptik Aigner", order.Customer.Title, order.Customer.LastName, Environment.NewLine);
+                    this.Message = String.Format("Sehr geehrte/r Frau/Herr {0} {1}, {2} {2} Ihre Kontaktlinsenbestellung ist nun abholbereit! {2} {2} Dies ist eine automatisch versendete Nachricht, bitte antworten Sie nicht auf diese E-Mail. {2} {2} Mit freundlichen Grüßen {2} Augenoptik Aigner", order.Customer.Title, order.Customer.LastName, Environment.NewLine);
                     break;
             }
             this.RaisePropertyChanged(() => this.Subject);
@@ -66,28 +62,54 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             this.CloseRequested?.Invoke(this, null);
         }
-        private void SendMessage()
+        private async void SendMessage()
         {
-            var message = new MailMessage();
-            message.To.Add(new MailAddress(this.To));
-            message.From = new MailAddress("infodienst.augenoptikaigner@gmail.com");
-            message.Subject = this.Subject;
-            message.Body = this.Message;
-
-            using (var smtp = new SmtpClient())
+            try
             {
-                var credential = new NetworkCredential
+                var message = new MailMessage();
+                message.To.Add(new MailAddress(this.To));
+                message.From = new MailAddress("infodienst.augenoptikaigner@gmail.com");
+                message.Subject = this.Subject;
+                message.Body = this.Message;
+
+                using (var smtp = new SmtpClient())
                 {
-                    UserName = "infodienst.augenoptikaigner@gmail.com",
-                    Password = "7gnRwN4U"
-                };
-                smtp.Credentials = credential;
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                smtp.SendMailAsync(message);
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "infodienst.augenoptikaigner@gmail.com",
+                        Password = "7gnRwN4U"
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
+
+                    await smtp.SendMailAsync(message);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ein Fehler ist aufgetreten!" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             this.CloseRequested.Invoke(this, null);
+        }
+        private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                MessageBox.Show("Der Versand von der E-Mail wurde abgebrochen!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (e.Error != null)
+            {
+                MessageBox.Show("Der Versand von der E-Mail ist gescheitert!" + Environment.NewLine + e.Error.ToString(), "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show("E-Mail versandt." + Environment.NewLine + "Bitte überprüfen Sie dennoch Ihren E-Mail-Eingang, falls die E-Mail-Adresse nicht existiert!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
         }
     }
 }
