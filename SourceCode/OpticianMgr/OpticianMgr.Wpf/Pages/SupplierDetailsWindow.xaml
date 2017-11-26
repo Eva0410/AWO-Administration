@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
-        Height="600" Width="600"  ResizeMode="NoResize">
+        Title="Lieferant " Height="600" Width="600"  ResizeMode="NoResize">
     <StackPanel>
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="170"></ColumnDefinition>
+
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -87,9 +87,9 @@
             <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="4" Margin="5,5,-45,10">Neues Land hinzufügen</Button>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Command="{Binding Delete}" Width="110" Margin="0,0,20,0">Lieferant löschen</Button>
-            <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>
-            <Button Margin="20,0" Command="{Binding Submit}" Height="25" Width="55">Anlegen</Button>
+            <Button Command="{Binding Delete}">Lieferant löschen</Button>
+            <Button Command="{Binding Cancel}">Abbrechen</Button>
+            <Button Command="{Binding Submit}" >Anlegen</Button>
         </StackPanel>
     </StackPanel>
 </Window>

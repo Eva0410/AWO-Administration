@@ -48,7 +48,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Massen SMS / E-Mails verschicken" Padding="5,10">
+            <Button Content="Massen SMS / E-Mails verschicken" Padding="5,10" Command="{Binding MultipleMessages}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>

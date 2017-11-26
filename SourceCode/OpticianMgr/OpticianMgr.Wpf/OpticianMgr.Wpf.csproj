@@ -208,6 +208,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\MultipleEMailPage.xaml.cs">
+      <DependentUpon>MultipleEMailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MultipleSMSPage.xaml.cs">
+      <DependentUpon>MultipleSMSPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SingleSMSPage.xaml.cs">
       <DependentUpon>SingleSMSPage.xaml</DependentUpon>
     </Compile>
@@ -259,6 +265,9 @@
     <Compile Include="Pages\EyeGlassFramesPage.xaml.cs">
       <DependentUpon>EyeGlassFramesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MultipleMessagesPage.xaml.cs">
+      <DependentUpon>MultipleMessagesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AddDoctorViewModel.cs" />
     <Compile Include="ViewModel\AddCountryViewModel.cs" />
     <Compile Include="ViewModel\AddContactLensesOrderViewModel.cs" />
@@ -269,6 +278,9 @@
     <Compile Include="ViewModel\AddCustomerViewModel.cs" />
     <Compile Include="ViewModel\AddEyeGlassFrameModel.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\MultipleMessagesViewModel.cs" />
+    <Compile Include="ViewModel\MultipleEmailViewModel.cs" />
+    <Compile Include="ViewModel\MultipleSMSViewModel.cs" />
     <Compile Include="ViewModel\SingleSMSViewModel.cs" />
     <Compile Include="ViewModel\SingleEmailViewModel.cs" />
     <Compile Include="ViewModel\SingleMessageViewModel.cs" />
@@ -294,6 +306,14 @@
     <Compile Include="ViewModel\SupplierViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
+    <Page Include="Pages\MultipleEMailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MultipleSMSPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\SingleSMSPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -386,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EyeGlassFramesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MultipleMessagesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

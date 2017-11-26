@@ -1,0 +1,25 @@
+﻿<Page x:Class="OpticianMgr.Wpf.MultipleMessagesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+      DataContext="{Binding MultipleMessagesViewModel, Source={StaticResource Locator}}">
+
+    <StackPanel>
+        <StackPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFD3D2D2"/>
+                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
+            </LinearGradientBrush>
+        </StackPanel.Background>
+        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Nachricht senden</Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+            <Button Command="{Binding SMS}">SMS</Button>
+            <Button Command="{Binding EMail}">E-Mail</Button>
+        </StackPanel>
+        <Frame NavigationUIVisibility="Hidden" Margin="20" Content="{Binding Page}"></Frame>
+    </StackPanel>
+</Page>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Height="207.055" Width="591.227"  ResizeMode="NoResize">
+        Title="Neuer Ort" Height="207.055" Width="591.227"  ResizeMode="NoResize">
     <StackPanel Margin="0,0,2,0">
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

@@ -72,6 +72,9 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<SingleEmailViewModel>();
             SimpleIoc.Default.Register<SingleMessageViewModel>();
             SimpleIoc.Default.Register<SingleSMSViewModel>();
+            SimpleIoc.Default.Register<MultipleMessagesViewModel>();
+            SimpleIoc.Default.Register<MultipleEmailViewModel>();
+            SimpleIoc.Default.Register<MultipleSMSViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -168,6 +171,18 @@ namespace OpticianMgr.Wpf.ViewModel
         public static SingleSMSViewModel SingleSMSViewModel
         {
             get { return ServiceLocator.Current.GetInstance<SingleSMSViewModel>(); }
+        }
+        public static MultipleMessagesViewModel MultipleMessagesViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<MultipleMessagesViewModel>(); }
+        }
+        public static MultipleEmailViewModel MultipleEmailViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<MultipleEmailViewModel>(); }
+        }
+        public static MultipleSMSViewModel MultipleSMSViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<MultipleSMSViewModel>(); }
         }
         public static void Cleanup()
         {
