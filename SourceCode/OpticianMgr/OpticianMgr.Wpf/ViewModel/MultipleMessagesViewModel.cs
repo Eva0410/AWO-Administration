@@ -39,6 +39,7 @@ namespace OpticianMgr.Wpf.ViewModel
             this.MultipleSMSPage = new MultipleSMSPage();
             SMS = new RelayCommand(OpenSMSPage);
             EMail = new RelayCommand(OpenEmailPage);
+            OpenEmailPage();
         }
 
         //TODO Is this MVVM?
