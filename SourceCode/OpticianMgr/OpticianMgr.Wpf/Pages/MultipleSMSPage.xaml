@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0">Nachricht:</TextBlock>
         <ScrollViewer Grid.Row="0" Grid.Column="1" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="300">
-            <TextBox Text="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+            <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
         </ScrollViewer>
         <Button Command="{Binding Send}" Grid.Row="1" Grid.Column="2">Senden</Button>
     </Grid>

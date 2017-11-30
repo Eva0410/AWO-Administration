@@ -20,7 +20,7 @@
         <TextBox Text="{Binding To, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="5"></TextBox>
         <TextBlock Grid.Row="1" Grid.Column="0">Nachricht:</TextBlock>
         <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5"  MinHeight="100" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-            <TextBox Text="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+            <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
         </ScrollViewer>
         <Button Command="{Binding Cancel}"  Grid.Row="2" Grid.Column="1" >Abbrechen</Button>
         <Button Command="{Binding Send}" Grid.Row="2" Grid.Column="2">Senden</Button>

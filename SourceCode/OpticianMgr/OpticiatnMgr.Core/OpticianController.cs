@@ -38,13 +38,13 @@ namespace OpticiatnMgr.Core
             _unitOfWork.Save();
 
             _unitOfWork.SupplierRepository.InsertMany(GetSuppliers());
-            _unitOfWork.CustomerRepository.InsertMany(GetCustomers());
+            //_unitOfWork.CustomerRepository.InsertMany(GetCustomers());
             _unitOfWork.Save();
 
             _unitOfWork.EyeGlassFrameRepository.InsertMany(GetEyeGlassFrames());
             _unitOfWork.Save();
 
-            _unitOfWork.OrderRepository.InsertMany(GetOrders());
+            //_unitOfWork.OrderRepository.InsertMany(GetOrders());
             _unitOfWork.Save();
         }
         private List<Doctor> GetDoctors()
