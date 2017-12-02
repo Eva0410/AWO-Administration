@@ -13,6 +13,18 @@ namespace OpticianMgr.Persistence
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
         private bool _disposed;
 
+        private GenericRepository<CustomMessage> _messageRepository;
+
+        public IGenericRepository<CustomMessage> MessageRepository
+        {
+            get
+            {
+                if (_messageRepository == null)
+                    _messageRepository = new GenericRepository<CustomMessage>(_context);
+                return _messageRepository;
+            }
+        }
+
         private GenericRepository<Supplier> _supplierRepository;
 
         public IGenericRepository<Supplier> SupplierRepository

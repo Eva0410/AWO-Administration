@@ -1,7 +1,9 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using OpticiatnMgr.Core.Contracts;
+using OpticiatnMgr.Core.Entities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 using System.Net.Mail;
@@ -29,6 +31,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public string To { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
+        public Order Order { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Send { get; set; }
 
@@ -41,6 +44,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public void Init(int orderId)
         {
             var order = this.Uow.OrderRepository.GetById(orderId);
+            this.Order = order;
             this.To = order.Customer.Email;
             switch (order.OrderType)
             {
@@ -95,7 +99,7 @@ namespace OpticianMgr.Wpf.ViewModel
 
             this.CloseRequested.Invoke(this, null);
         }
-        private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        private  void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Cancelled)
             {
@@ -108,8 +112,22 @@ namespace OpticianMgr.Wpf.ViewModel
             else
             {
                 MessageBox.Show("E-Mail versandt." + Environment.NewLine + "Bitte überprüfen Sie dennoch Ihren E-Mail-Eingang, falls die E-Mail-Adresse nicht existiert!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                SaveToRepository();
             }
 
+        }
+        private void SaveToRepository()
+        {
+            var m = new CustomMessage();
+            m.Date = DateTime.Now;
+            m.MessageText = this.Message;
+            m.MessageType = OpticiatnMgr.Core.Entities.MessageType.EMail;
+            m.Recipients = new List<CustomRecipient>();
+            m.Recipients.Add(new CustomRecipient() { Customer = this.Order.Customer, Address = this.To });
+            m.Order_Id = this.Order.Id;
+            m.Subject = this.Subject;
+            this.Uow.MessageRepository.Insert(m);
+            this.Uow.Save();
         }
     }
 }

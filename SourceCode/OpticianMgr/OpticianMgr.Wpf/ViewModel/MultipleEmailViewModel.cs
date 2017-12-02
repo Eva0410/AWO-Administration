@@ -1,7 +1,9 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using OpticiatnMgr.Core.Contracts;
+using OpticiatnMgr.Core.Entities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 using System.Net.Mail;
@@ -27,6 +29,7 @@ namespace OpticianMgr.Wpf.ViewModel
         private IUnitOfWork Uow { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
+        public List<CustomRecipient> Recipients { get; set; }
         public ICommand Send { get; set; }
 
         public MultipleEmailViewModel(IUnitOfWork uow)
@@ -40,6 +43,7 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Subject = String.Empty;
             this.RaisePropertyChanged(() => this.Subject);
             this.RaisePropertyChanged(() => this.Message);
+            this.Recipients = new List<CustomRecipient>();
         }
         private async void SendMessage()
         {
@@ -56,6 +60,7 @@ namespace OpticianMgr.Wpf.ViewModel
                         message.From = new MailAddress("infodienst.augenoptikaigner@gmail.com");
                         message.Subject = this.Subject;
                         message.Body = this.Message;
+                        this.Recipients.Add(new CustomRecipient() { Customer = item, Address = item.Email });
 
                         using (var smtp = new SmtpClient())
                         {
@@ -77,9 +82,21 @@ namespace OpticianMgr.Wpf.ViewModel
                         MessageBox.Show("Ein Fehler ist aufgetreten!" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+                SaveToRepository();
                 MessageBox.Show("Der Sendevorgang wurde beendet, bitte überprüfe Sie Ihren E-Mail-Eingang um sicherzustellen, dass alle E-Mails korrekt versendet wurden.", "Versendet", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             this.Init();
+        }
+        private void SaveToRepository()
+        {
+            var m = new CustomMessage();
+            m.Date = DateTime.Now;
+            m.MessageText = this.Message;
+            m.MessageType = OpticiatnMgr.Core.Entities.MessageType.EMail;
+            m.Recipients = this.Recipients;
+            m.Subject = this.Subject;
+            this.Uow.MessageRepository.Insert(m);
+            this.Uow.Save();
         }
     }
 }

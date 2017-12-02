@@ -214,6 +214,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\SentMessagesWindow.xaml.cs">
+      <DependentUpon>SentMessagesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MultipleEMailPage.xaml.cs">
       <DependentUpon>MultipleEMailPage.xaml</DependentUpon>
     </Compile>
@@ -297,6 +300,7 @@
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\EyeGlassFramesViewModel.cs" />
+    <Compile Include="ViewModel\SentMessagesViewModel.cs" />
     <Compile Include="WindowServices\IRequestClose.cs" />
     <Compile Include="WindowServices\IWindowService.cs" />
     <Compile Include="Pages\AddSupplierWindow.xaml.cs">
@@ -312,6 +316,10 @@
     <Compile Include="ViewModel\SupplierViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
+    <Page Include="Pages\SentMessagesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\MultipleEMailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

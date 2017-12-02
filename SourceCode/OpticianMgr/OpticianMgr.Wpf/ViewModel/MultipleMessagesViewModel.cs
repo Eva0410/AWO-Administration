@@ -31,6 +31,7 @@ namespace OpticianMgr.Wpf.ViewModel
         private MultipleSMSPage MultipleSMSPage { get; set; }
         public ICommand EMail { get; set; }
         public ICommand SMS { get; set; }
+        public ICommand ShowMessages { get; set; }
         public object Page { get; set; }
 
         public MultipleMessagesViewModel()
@@ -39,6 +40,7 @@ namespace OpticianMgr.Wpf.ViewModel
             this.MultipleSMSPage = new MultipleSMSPage();
             SMS = new RelayCommand(OpenSMSPage);
             EMail = new RelayCommand(OpenEmailPage);
+            ShowMessages = new RelayCommand(OpenMessages);
             OpenEmailPage();
         }
 
@@ -56,6 +58,14 @@ namespace OpticianMgr.Wpf.ViewModel
             this.MultipleSMSPage.DataContext = viewModel;
             this.Page = this.MultipleSMSPage;
             this.RaisePropertyChanged(() => this.Page);
+        }
+        public void OpenMessages()
+        {
+            WindowService windowService = new WindowService();
+            SentMessagesViewModel viewModel = ViewModelLocator.SentMessagesViewModel;
+            viewModel.InitAllMessgaes();
+            windowService.ShowSentMessagesWindow(viewModel);
+
         }
     }
 }

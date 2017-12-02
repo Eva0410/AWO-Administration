@@ -7,6 +7,7 @@
       mc:Ignorable="d" >
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition Height="34*"></RowDefinition>
             <RowDefinition Height="163*"></RowDefinition>
             <RowDefinition Height="70*"></RowDefinition>
@@ -16,12 +17,13 @@
             <ColumnDefinition Width="70*"></ColumnDefinition>
             <ColumnDefinition Width="13*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0">Betreff:</TextBlock>
-        <TextBox Text="{Binding Subject, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="5"></TextBox>
-        <TextBlock Grid.Row="1" Grid.Column="0">Nachricht:</TextBlock>
-        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="300">
+        <TextBlock Grid.Row="0" Grid.Column="1"  Margin="20,10,20,20" HorizontalAlignment="Center" FontSize="18" FontStyle="Italic">E-Mail</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0">Betreff:</TextBlock>
+        <TextBox Text="{Binding Subject, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="5"></TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="0">Nachricht:</TextBlock>
+        <ScrollViewer Grid.Row="2" Grid.Column="1" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="300">
             <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
         </ScrollViewer>
-        <Button Command="{Binding Send}" Grid.Row="2" Grid.Column="2">Senden</Button>
+        <Button Command="{Binding Send}" Grid.Row="3" Grid.Column="2">Senden</Button>
     </Grid>
 </Page>

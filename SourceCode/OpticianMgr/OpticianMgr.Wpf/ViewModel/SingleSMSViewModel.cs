@@ -5,7 +5,9 @@ using MessageBird.Exceptions;
 using MessageBird.Net.ProxyConfigurationInjector;
 using MessageBird.Objects;
 using OpticiatnMgr.Core.Contracts;
+using OpticiatnMgr.Core.Entities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 using System.Net.Mail;
@@ -32,6 +34,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public event EventHandler<EventArgs> CloseRequested;
         public string To { get; set; }
         public string Message { get; set; }
+        public Order Order { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Send { get; set; }
         const string YourAccessKey = "vrh38QWVVXeW0D1Ma3ENhmd3a"; // message bird access key
@@ -47,6 +50,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public void Init(int orderId)
         {
             var order = this.Uow.OrderRepository.GetById(orderId);
+            this.Order = order;
             this.To = String.IsNullOrEmpty(order.Customer.Telephone1) ? order.Customer.Telephone2 : order.Customer.Telephone1;
             switch (order.OrderType)
             {
@@ -74,6 +78,7 @@ namespace OpticianMgr.Wpf.ViewModel
             try
             {
                 MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, new[] { Convert.ToInt64(this.To) });
+                SaveToRepository();
                 MessageBox.Show("Nachricht gesendet!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
                 Console.WriteLine("{0}", message);
             }
@@ -100,6 +105,17 @@ namespace OpticianMgr.Wpf.ViewModel
             }
             this.CloseRequested?.Invoke(this,null);
         }
-
+        private void SaveToRepository()
+        {
+            var m = new CustomMessage();
+            m.Date = DateTime.Now;
+            m.MessageText = this.Message;
+            m.MessageType = OpticiatnMgr.Core.Entities.MessageType.SMS;
+            m.Recipients = new List<CustomRecipient>();
+            m.Recipients.Add(new CustomRecipient() { Customer = this.Order.Customer, Address = this.To });
+            m.Order_Id = this.Order.Id;
+            this.Uow.MessageRepository.Insert(m);
+            this.Uow.Save();
+        }
     }
 }

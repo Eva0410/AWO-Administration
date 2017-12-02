@@ -34,6 +34,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public event EventHandler<EventArgs> CloseRequested;
         public string Message { get; set; }
         public ICommand Send { get; set; }
+        public List<Customer> Customers { get; set; }
         const string YourAccessKey = "vrh38QWVVXeW0D1Ma3ENhmd3a"; // message bird access key
         //SBQA6BUHfbBlpRsgCGMJ4olfe für echte sms
         //vrh38QWVVXeW0D1Ma3ENhmd3a für test sms
@@ -62,6 +63,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 try
                 {
                     MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, numbers);
+                    this.SaveToRepository();
                     MessageBox.Show("Nachricht gesendet!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
                     Console.WriteLine("{0}", message);
                 }
@@ -88,6 +90,7 @@ namespace OpticianMgr.Wpf.ViewModel
         private long[] GetPhoneNumbers ()
         {
             var customers = this.Uow.CustomerRepository.Get();
+            this.Customers = new List<Customer>(customers);
             long[] numbers = new long[customers.Length];
             for (int i = 0; i < customers.Length; i++)
             {
@@ -103,6 +106,21 @@ namespace OpticianMgr.Wpf.ViewModel
                 }
             }
             return numbers;
+        }
+        private void SaveToRepository()
+        {
+            var m = new CustomMessage();
+            m.Date = DateTime.Now;
+            m.MessageText = this.Message;
+            m.MessageType = OpticiatnMgr.Core.Entities.MessageType.SMS;
+            m.Recipients = new List<CustomRecipient>();
+            var numbers = GetPhoneNumbers();
+            for (int i = 0; i < this.Customers.Count; i++)
+            {
+                m.Recipients.Add(new CustomRecipient() { Customer = this.Customers[i], Address = numbers[i].ToString() });
+            }
+            this.Uow.MessageRepository.Insert(m);
+            this.Uow.Save();
         }
     }
 }

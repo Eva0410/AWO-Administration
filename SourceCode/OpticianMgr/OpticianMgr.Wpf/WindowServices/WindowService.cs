@@ -83,6 +83,11 @@ namespace OpticianMgr.Wpf
             SingleMessageWindow newWindow = new SingleMessageWindow();
             this.ShowWindow(viewModel, newWindow);
         }
+        public void ShowSentMessagesWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            SentMessagesWindow newWindow = new SentMessagesWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
         public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
         {
             EventHandler<EventArgs> closeHandler = null;

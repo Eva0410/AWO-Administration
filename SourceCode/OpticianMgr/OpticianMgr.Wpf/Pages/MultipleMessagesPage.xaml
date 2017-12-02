@@ -20,6 +20,7 @@
             <Button Command="{Binding SMS}">SMS</Button>
             <Button Command="{Binding EMail}">E-Mail</Button>
         </StackPanel>
+        <Button DockPanel.Dock="Top" HorizontalAlignment="Center" Command="{Binding ShowMessages}">Versendete Nachrichten anzeigen</Button>
         <Frame NavigationUIVisibility="Hidden" Margin="20" Content="{Binding Page}"></Frame>
     </StackPanel>
 </Page>
