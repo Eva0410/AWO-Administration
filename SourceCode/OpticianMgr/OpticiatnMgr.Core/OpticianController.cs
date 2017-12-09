@@ -162,7 +162,8 @@ namespace OpticiatnMgr.Core
                 Others1 = c[13],
                 Others2 = c[14],
                 InsurancePolicyNumber = c[15],
-                DateOfBirth = DateTime.ParseExact(c[16], "dd.MM.yyyy", CultureInfo.InvariantCulture)
+                DateOfBirth = DateTime.ParseExact(c[16], "dd.MM.yyyy", CultureInfo.InvariantCulture),
+                NewsLetter = true
             }).ToList();
         }
         private List<EyeGlassFrame> GetEyeGlassFrames()

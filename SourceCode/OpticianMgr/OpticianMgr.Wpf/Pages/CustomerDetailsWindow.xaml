@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Title="Kunde" Height="791.168" Width="1119.76"  ResizeMode="NoResize">
+        Title="Kunde" Height="810" Width="1119.76"  ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -43,6 +43,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0">Titel:</Label>
                 <Label Grid.Column="0" Grid.Row="1">Vorname:</Label>
@@ -61,6 +62,7 @@
                 <Label Grid.Column="0" Grid.Row="14">Sonstiges 2:</Label>
                 <Label Grid.Column="0" Grid.Row="15">Versicherungsnummer:</Label>
                 <Label Grid.Column="0" Grid.Row="16">Geburtstag:</Label>
+                <Label Grid.Column="0" Grid.Row="17">Massenanchricht:</Label>
                 <TextBox Text="{Binding Customer.Title, Mode=TwoWay}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
                 <TextBox Text="{Binding Customer.FirstName, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
                 <TextBox Text="{Binding Customer.LastName, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
@@ -105,6 +107,7 @@
                 </ScrollViewer>
                 <TextBox Text="{Binding Customer.InsurancePolicyNumber, Mode=TwoWay}" Grid.Column="1" Grid.Row="15" Margin="0,0,0,10" Width="200"></TextBox>
                 <DatePicker Grid.Row="16" Grid.Column="1" SelectedDate="{Binding Customer.DateOfBirth, Mode=TwoWay}"  Margin="0,0,0,10"/>
+                <CheckBox IsChecked="{Binding Customer.NewsLetter}" Grid.Column="1" Grid.Row="17"></CheckBox>
             </Grid>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Command="{Binding ShowMessages}">Versendete Nachrichten anzeigen</Button>

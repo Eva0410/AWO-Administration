@@ -6,6 +6,24 @@
                 <Setter Property="Margin" Value="5"></Setter>
                 <Setter Property="Padding" Value="4"></Setter>
             </Style>
+            <DataTemplate x:Key="ArrowUp">
+                <DockPanel>
+                    <TextBlock HorizontalAlignment="Center" 
+                     Text="{Binding}" />
+                    <Path VerticalAlignment="Center" 
+                Fill="Black" 
+                Data="M 5,5 15,5 10,0 5,5" />
+                </DockPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="ArrowDown">
+                <DockPanel>
+                    <TextBlock HorizontalAlignment="Center" 
+                 Text="{Binding}" />
+                    <Path VerticalAlignment="Center" 
+            Fill="Black" 
+            Data="M 5,0 10,5 15,0 5,0" />
+                </DockPanel>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

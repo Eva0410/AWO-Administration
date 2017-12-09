@@ -37,7 +37,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public Order Order { get; set; }
         public ICommand Cancel { get; set; }
         public ICommand Send { get; set; }
-        const string YourAccessKey = "vrh38QWVVXeW0D1Ma3ENhmd3a"; // message bird access key
+        const string YourAccessKey = "SBQA6BUHfbBlpRsgCGMJ4olfe"; // message bird access key
         //SBQA6BUHfbBlpRsgCGMJ4olfe für echte sms
         //vrh38QWVVXeW0D1Ma3ENhmd3a für test sms
 

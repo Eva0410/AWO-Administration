@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Title="Neuer Kunde" Height="777.168" Width="583.76"  ResizeMode="NoResize">
+        Title="Neuer Kunde" Height="810" Width="583.76"  ResizeMode="NoResize">
     <StackPanel Margin="0,0,-8,-92">
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -38,6 +38,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0">Titel:</Label>
             <Label Grid.Column="0" Grid.Row="1">Vorname:</Label>
@@ -56,6 +57,7 @@
             <Label Grid.Column="0" Grid.Row="14">Sonstiges 2:</Label>
             <Label Grid.Column="0" Grid.Row="15">Versicherungsnummer:</Label>
             <Label Grid.Column="0" Grid.Row="16">Geburtstag:</Label>
+            <Label Grid.Column="0" Grid.Row="17">Massennachricht:</Label>
             <TextBox Text="{Binding Customer.Title, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding Customer.FirstName, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding Customer.LastName, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
@@ -100,6 +102,7 @@
             </ScrollViewer>
             <TextBox Text="{Binding Customer.InsurancePolicyNumber, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="15" Margin="0,0,0,10" Width="200"></TextBox>
             <DatePicker Grid.Row="16" Grid.Column="1" SelectedDate="{Binding Customer.DateOfBirth}"  Margin="0,0,0,10"/>
+            <CheckBox VerticalAlignment="Center" Grid.Row="17" Grid.Column="1" IsChecked="{Binding Customer.NewsLetter}"></CheckBox>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>

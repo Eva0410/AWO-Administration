@@ -47,7 +47,7 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         private async void SendMessage()
         {
-            var customers = this.Uow.CustomerRepository.Get();
+            var customers = this.Uow.CustomerRepository.Get(filter: c => c.NewsLetter);
             var result = MessageBox.Show("Wollen Sie diese Nachricht wirklich an " + customers.Length + " Kunden senden?", "Wollen Sie die Nachricht abschicken?", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (result == MessageBoxResult.OK)
             {

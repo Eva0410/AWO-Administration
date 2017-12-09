@@ -35,7 +35,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public string Message { get; set; }
         public ICommand Send { get; set; }
         public List<Customer> Customers { get; set; }
-        const string YourAccessKey = "vrh38QWVVXeW0D1Ma3ENhmd3a"; // message bird access key
+        const string YourAccessKey = "SBQA6BUHfbBlpRsgCGMJ4olfe"; // message bird access key
         //SBQA6BUHfbBlpRsgCGMJ4olfe für echte sms
         //vrh38QWVVXeW0D1Ma3ENhmd3a für test sms
 
@@ -89,7 +89,7 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         private long[] GetPhoneNumbers ()
         {
-            var customers = this.Uow.CustomerRepository.Get();
+            var customers = this.Uow.CustomerRepository.Get(filter: c=> c.NewsLetter);
             this.Customers = new List<Customer>(customers);
             long[] numbers = new long[customers.Length];
             for (int i = 0; i < customers.Length; i++)

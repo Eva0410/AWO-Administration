@@ -104,6 +104,7 @@ namespace OpticianMgr.Wpf.ViewModel
             FillTowns();
             FillCountries();
             this.Customer.DateOfBirth = null;
+            this.Customer.NewsLetter = true;
             this.RaisePropertyChanged(() => this.Customer);
         }
         private void FillTowns()
