@@ -92,7 +92,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Command="{Binding AddDoctor}" Grid.Column="2" Grid.Row="4" Margin="10,0">Neuer Doktor</Button>
+                <Button Command="{Binding AddDoctor}" Grid.Column="2" Grid.Row="4" >Neuer Doktor</Button>
                 <ScrollViewer Grid.Column="1" Grid.Row="9" Margin="0,0,0,10">
                     <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Order.Others, Mode=OneWayToSource}"  Margin="0,0,0,10" Height="50" HorizontalAlignment="Stretch" ></TextBox>
                 </ScrollViewer>
@@ -165,7 +165,7 @@
                     <Run Text="{Binding Order.BettermentTax, Mode=TwoWay, StringFormat=N2}"></Run>
                     <Run Text="€"></Run>
                 </TextBlock>
-                <Button Grid.Column="1" Grid.Row="9" Command="{Binding Calc}" HorizontalContentAlignment="Center" HorizontalAlignment="Center">Berechnen</Button>
+                <Button Grid.Column="1" Grid.Row="9" Command="{Binding Calc}" >Berechnen</Button>
             </Grid>
         </Grid>
         <Grid Margin="20">
@@ -323,8 +323,8 @@
             </TextBox>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>
-            <Button Margin="20,0" Command="{Binding Submit}" Height="25" Width="55">Anlegen</Button>
+            <Button Command="{Binding Cancel}" >Abbrechen</Button>
+            <Button  Command="{Binding Submit}" >Anlegen</Button>
         </StackPanel>
     </StackPanel>
 </Window>

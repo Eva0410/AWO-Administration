@@ -17,7 +17,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="16*"></ColumnDefinition>
             <ColumnDefinition Width="70*"></ColumnDefinition>
-            <ColumnDefinition Width="13*"></ColumnDefinition>
+            <ColumnDefinition Width="14*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0">An:</TextBlock>
         <TextBox Text="{Binding To, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="5"></TextBox>
@@ -27,7 +27,7 @@
         <ScrollViewer Grid.Row="2" Grid.Column="1" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
         </ScrollViewer>
-        <Button Command="{Binding Cancel}" Margin="0,6,20,9" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Height="20" Width="62">Abbrechen</Button>
-        <Button Command="{Binding Send}" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="20" Margin="0,6,0,9" Width="44">Senden</Button>
+        <Button Command="{Binding Cancel}" Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Right">Abbrechen</Button>
+        <Button Command="{Binding Send}" Grid.Row="3" Grid.Column="2">Senden</Button>
     </Grid>
 </Page>

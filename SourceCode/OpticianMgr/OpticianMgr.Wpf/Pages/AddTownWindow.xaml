@@ -30,8 +30,8 @@
             <TextBox Text="{Binding Town.TownName, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>
-            <Button Margin="20,0" Command="{Binding Submit}" Height="25" Width="55">Anlegen</Button>
+            <Button Command="{Binding Cancel}">Abbrechen</Button>
+            <Button Command="{Binding Submit}">Anlegen</Button>
         </StackPanel>
     </StackPanel>
 </Window>

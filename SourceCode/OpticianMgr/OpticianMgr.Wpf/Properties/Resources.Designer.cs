@@ -61,6 +61,15 @@ namespace OpticianMgr.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mehrwertsteuer.
+        /// </summary>
+        internal static string BettermentTax {
+            get {
+                return ResourceManager.GetString("BettermentTax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rechnung.
         /// </summary>
         internal static string Bill {

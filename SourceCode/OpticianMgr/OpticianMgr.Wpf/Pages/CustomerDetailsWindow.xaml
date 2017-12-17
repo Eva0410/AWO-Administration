@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
         Title="Kunde" Height="810" Width="1119.76"  ResizeMode="NoResize">
@@ -23,7 +25,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="170"></ColumnDefinition>
                     <ColumnDefinition Width="201"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -82,7 +84,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="5" Margin="5,5,-45,10">Neuen Ort hinzufügen</Button>
+                <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="5">Neuen Ort hinzufügen</Button>
                 <ComboBox ItemsSource="{Binding Countries, Mode=TwoWay}" SelectedValue="{Binding Customer.Country, Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="6" Width="200">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -90,7 +92,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="6" Margin="5,5,-45,10">Neues Land hinzufügen</Button>
+                <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="6" >Neues Land hinzufügen</Button>
                 <TextBox Text="{Binding Customer.Telephone1, Mode=TwoWay}" Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200"></TextBox>
                 <TextBox Text="{Binding Customer.Telephone2, Mode=TwoWay}" Grid.Column="1" Grid.Row="8" Margin="0,0,0,10" Width="200"></TextBox>
                 <TextBox Text="{Binding Customer.Email, Mode=TwoWay}" Grid.Column="1" Grid.Row="9" Margin="0,0,0,10" Width="200"></TextBox>
@@ -111,18 +113,18 @@
             </Grid>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Command="{Binding ShowMessages}">Versendete Nachrichten anzeigen</Button>
-                <Button Command="{Binding Delete}" Width="90">Kunde löschen</Button>
-                <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>
-                <Button Command="{Binding Submit}" Width="55">Speichern</Button>
+                <Button Command="{Binding Delete}">Kunde löschen</Button>
+                <Button Command="{Binding Cancel}">Abbrechen</Button>
+                <Button Command="{Binding Submit}">Speichern</Button>
             </StackPanel>
         </StackPanel>
         <DockPanel Grid.Column="1">
             <Grid DockPanel.Dock="Top">
                 <TextBlock Margin="20,10,0,0" FontSize="16" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold" DockPanel.Dock="Top">Bestellungen</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Command="{Binding AddGlassesOrder}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0">Neue Brillenbestellung</Button>
-                    <Button Command="{Binding AddContactLensOrder}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0">Neue Kontaktlinsenbestellung</Button>
-                    <Button Command="{Binding Show}" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0">Bestellung anzeigen</Button>
+                    <Button Command="{Binding AddGlassesOrder}">Neue Brillenbestellung</Button>
+                    <Button Command="{Binding AddContactLensOrder}">Neue Kontaktlinsenbestellung</Button>
+                    <Button Command="{Binding Show}">Bestellung anzeigen</Button>
                 </StackPanel>
             </Grid>
             <ListView ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedOrder}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
@@ -136,9 +138,11 @@
                         <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy}}" Header="Bestelldatum" />
                     </GridView>
                 </ListView.View>
-                <ListView.InputBindings>
-                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Path=DataContext.OpenCustomer, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"/>
-                </ListView.InputBindings>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <cmd:EventToCommand Command="{Binding Show}"></cmd:EventToCommand>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ListView>
         </DockPanel>
     </Grid>

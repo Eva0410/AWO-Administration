@@ -5,6 +5,7 @@
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="5"></Setter>
                 <Setter Property="Padding" Value="4"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             </Style>
             <DataTemplate x:Key="ArrowUp">
                 <DockPanel>

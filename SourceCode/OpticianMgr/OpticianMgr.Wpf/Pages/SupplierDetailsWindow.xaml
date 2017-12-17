@@ -18,7 +18,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -83,8 +83,8 @@
             <ScrollViewer Grid.Column="1" Grid.Row="11" Margin="0,0,0,10">
                 <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Others, Mode=TwoWay}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
             </ScrollViewer>
-            <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="3" Margin="5,5,-45,10">Neuen Ort hinzufügen</Button>
-            <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="4" Margin="5,5,-45,10">Neues Land hinzufügen</Button>
+            <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="3">Neuen Ort hinzufügen</Button>
+            <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="4">Neues Land hinzufügen</Button>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Command="{Binding Delete}">Lieferant löschen</Button>
