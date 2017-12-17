@@ -2,11 +2,6 @@
     <Application.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
-            <Style TargetType="Button">
-                <Setter Property="Margin" Value="5"></Setter>
-                <Setter Property="Padding" Value="4"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            </Style>
             <Style x:Key="HeadingStyle" TargetType="Label">
                 <Setter Property="Margin" Value="10"></Setter>
                 <Setter Property="FontSize" Value="20"></Setter>
@@ -14,9 +9,48 @@
                 <Setter Property="Background" Value="{x:Null}"></Setter>
                 <Setter Property="FontWeight" Value="Bold"></Setter>
             </Style>
-            <Style TargetType="ComboBox">
+            <Style TargetType="Button" x:Key="MenuButton" BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="Padding" Value="5,5"></Setter>
                 <Setter Property="Margin" Value="5"></Setter>
             </Style>
+            <Style TargetType="Frame" x:Key="MessageFrame">
+                <Setter Property="NavigationUIVisibility" Value="Hidden"></Setter>
+                <Setter Property="Margin" Value="20"></Setter>
+            </Style>
+            <Style TargetType="TextBox" x:Key="NewValueBox">
+                <Setter Property="Width" Value="200"></Setter>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="5"></Setter>
+                <Setter Property="Padding" Value="4"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="2"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="Margin" Value="0,5,5,5"></Setter>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="0,4,4,4"></Setter>
+                <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="Margin" Value="0,5,5,5"></Setter>
+            </Style>
+            <Style TargetType="ScrollViewer">
+                <Setter Property="Margin" Value="0,5,5,5"></Setter>
+            </Style>
+            <Style TargetType="ListView">
+                <Setter Property="Margin" Value="5,15"></Setter>
+                <Setter Property="Background" Value="{x:Null}"></Setter>
+                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            </Style>
+            
             <DataTemplate x:Key="ArrowUp">
                 <DockPanel>
                     <TextBlock HorizontalAlignment="Center" 

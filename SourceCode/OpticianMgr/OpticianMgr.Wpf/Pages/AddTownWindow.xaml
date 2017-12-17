@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Title="Neuer Ort" Height="207.055" Width="591.227"  ResizeMode="NoResize">
+        Title="Neuer Ort" Height="210" Width="591.227"  ResizeMode="NoResize">
     <StackPanel>
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -14,7 +14,7 @@
             </LinearGradientBrush>
         </StackPanel.Background>
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Neuer Ort</Label>
-        <Grid Margin="20,10">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="170"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
@@ -26,8 +26,8 @@
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0">Postleitzahl:</Label>
             <Label Grid.Column="0" Grid.Row="1">Ortsname:</Label>
-            <TextBox Text="{Binding Town.ZipCode, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Town.TownName, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Town.ZipCode, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0"></TextBox>
+            <TextBox Text="{Binding Town.TownName, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1"></TextBox>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Command="{Binding Cancel}">Abbrechen</Button>

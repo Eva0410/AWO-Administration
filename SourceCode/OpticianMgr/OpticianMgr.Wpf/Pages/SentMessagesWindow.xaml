@@ -15,8 +15,8 @@
                 <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
             </LinearGradientBrush>
         </DockPanel.Background>
-        <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Versendete Nachrichten</Label>
-        <ListView ItemsSource="{Binding Messages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Versendete Nachrichten</Label>
+        <ListView ItemsSource="{Binding Messages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Date, UpdateSourceTrigger=PropertyChanged, StringFormat='dd.MM.yyyy HH:mm:ss'}" Header="Datum"/>

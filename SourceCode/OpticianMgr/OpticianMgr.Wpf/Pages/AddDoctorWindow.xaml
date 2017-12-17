@@ -14,7 +14,7 @@
             </LinearGradientBrush>
         </StackPanel.Background>
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Neuer Doktor</Label>
-        <Grid Margin="20,10">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="170"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
@@ -24,7 +24,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0">Name:</Label>
-            <TextBox Text="{Binding Doctor.DoctorName, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Doctor.DoctorName, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="0"></TextBox>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Command="{Binding Cancel}">Abbrechen</Button>

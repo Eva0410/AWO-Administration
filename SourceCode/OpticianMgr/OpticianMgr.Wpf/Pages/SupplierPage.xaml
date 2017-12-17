@@ -9,14 +9,14 @@
       DataContext="{Binding SupplierViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>
-        <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="20" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Lieferanten</Label>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Lieferanten</Label>
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="0">
-                <Label Margin="10,0,0,0">Filtern nach:</Label>
+                <TextBlock>Filtern nach:</TextBlock>
                 <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding FilterProperty}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -24,7 +24,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBox Width="100" Margin="10,0,0,0" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" >
+                <TextBox Width="100" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" >
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding FilterAndSort}" Key="Return"></KeyBinding>
                     </TextBox.InputBindings>
@@ -35,7 +35,7 @@
             <Button Grid.Row="0" Command="{Binding AddSupplier}" HorizontalAlignment="Right" >Neuen Lieferant hinzufügen</Button>
             <Button Grid.Row="1" Command="{Binding OpenSupplier}" HorizontalAlignment="Right">Lieferant anzeigen</Button>
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1" >
-                <Label Margin="10,0,0,0">Sortieren nach:</Label>
+                <TextBlock>Sortieren nach:</TextBlock>
                 <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -47,7 +47,7 @@
             </StackPanel>
         </Grid>
 
-        <ListView ItemsSource="{Binding SuppliersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+        <ListView ItemsSource="{Binding SuppliersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}">

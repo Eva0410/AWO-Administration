@@ -16,7 +16,7 @@
             </LinearGradientBrush>
         </DockPanel.Background>
         <Menu x:Name="menu" VerticalAlignment="Top" FontFamily="Georgia" FontSize="16" FontStyle="Italic" DockPanel.Dock="Top" Background="{x:Null}">
-            <Button Content="Kunden" VerticalAlignment="Center" Padding="5,10" Command="{Binding Customers}">
+            <Button Content="Kunden" Style="{StaticResource MenuButton}" Command="{Binding Customers}">
                 <Button.BorderBrush>
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
@@ -24,7 +24,7 @@
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
             </Button>
-            <Button Content="Aufträge" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,10" Command="{Binding Orders}">
+            <Button Content="Aufträge" Style="{StaticResource MenuButton}" Command="{Binding Orders}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -32,7 +32,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Lieferanten" Padding="5,10" Command="{Binding Suppliers}">
+            <Button Content="Lieferanten" Style="{StaticResource MenuButton}" Command="{Binding Suppliers}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -40,7 +40,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Lagernde Brillenfassungen" Padding="5,10" Command="{Binding EyeGlassFrames}">
+            <Button Content="Lagernde Brillenfassungen" Command="{Binding EyeGlassFrames}" Style="{StaticResource MenuButton}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -48,7 +48,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Massen SMS / E-Mails verschicken" Padding="5,10" Command="{Binding MultipleMessages}">
+            <Button Content="Massen SMS / E-Mails verschicken" Command="{Binding MultipleMessages}" Style="{StaticResource MenuButton}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>
@@ -56,7 +56,7 @@
                     <SolidColorBrush Opacity="0"/>
                 </Button.BorderBrush>
             </Button>
-            <Button Content="Statistken" Command="{Binding Statistics}" Padding="5,10">
+            <Button Content="Statistken" Command="{Binding Statistics}" Style="{StaticResource MenuButton}">
                 <Button.Background>
                     <SolidColorBrush  Opacity="0"/>
                 </Button.Background>

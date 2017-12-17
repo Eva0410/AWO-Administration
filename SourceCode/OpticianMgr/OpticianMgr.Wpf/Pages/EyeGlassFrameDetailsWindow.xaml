@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Title="Brillenfassung" Height="532.435" Width="540.737"  ResizeMode="NoResize">
+        Title="Brillenfassung" Height="570" Width="543.584"  ResizeMode="NoResize">
     <StackPanel>
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -14,7 +14,7 @@
             </LinearGradientBrush>
         </StackPanel.Background>
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Brillenfassung bearbeiten</Label>
-        <Grid Margin="20,10">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="170"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
@@ -45,10 +45,10 @@
             <Label Grid.Column="0" Grid.Row="8">Verkaufsdatum:</Label>
             <Label Grid.Column="0" Grid.Row="9">Lieferant:</Label>
             <Label Grid.Column="0" Grid.Row="10">Lieferantenbemerkung:</Label>
-            <TextBox Text="{Binding EyeGlassFrame.ModelDescription, Mode=TwoWay}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding EyeGlassFrame.Brand, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding EyeGlassFrame.Color, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding EyeGlassFrame.Size, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding EyeGlassFrame.ModelDescription, Mode=TwoWay}"  Grid.Column="1" Grid.Row="0"></TextBox>
+            <TextBox Text="{Binding EyeGlassFrame.Brand, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"></TextBox>
+            <TextBox Text="{Binding EyeGlassFrame.Color, Mode=TwoWay}" Grid.Column="1" Grid.Row="2"></TextBox>
+            <TextBox Text="{Binding EyeGlassFrame.Size, Mode=TwoWay}" Grid.Column="1" Grid.Row="3"></TextBox>
             <ComboBox ItemsSource="{Binding States, Mode=TwoWay}" SelectedValue="{Binding EyeGlassFrame.State}" Grid.Column="1" Grid.Row="4">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -56,19 +56,19 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200">
+            <TextBox Grid.Column="1" Grid.Row="5">
                 <TextBox.Text>
                     <Binding Path="EyeGlassFrame.PurchasePrice" Mode="TwoWay" TargetNullValue=""></Binding>
                 </TextBox.Text>
             </TextBox>
-            <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate="{Binding EyeGlassFrame.PurchaseDate}"  Margin="0,0,0,10"/>
-            <TextBox Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200">
+            <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate="{Binding EyeGlassFrame.PurchaseDate}"/>
+            <TextBox Grid.Column="1" Grid.Row="7">
                 <TextBox.Text>
                     <Binding Path="EyeGlassFrame.SalePrice" Mode="TwoWay" TargetNullValue=""></Binding>
                 </TextBox.Text>
             </TextBox>
-            <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding EyeGlassFrame.SaleDate}"  Margin="0,0,0,10"/>
-            <TextBox Text="{Binding Supplier.Id, Mode=TwoWay}" Grid.Column="1" Grid.Row="9" Margin="0,0,0,10" Width="200"></TextBox>
+            <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding EyeGlassFrame.SaleDate}"/>
+            <TextBox Text="{Binding Supplier.Id, Mode=TwoWay}" Grid.Column="1" Grid.Row="9"></TextBox>
             <ComboBox ItemsSource="{Binding Suppliers, Mode=TwoWay}" SelectedItem="{Binding EyeGlassFrame.Supplier, Mode=TwoWay}" Grid.Column="1" Grid.Row="9" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -76,8 +76,8 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ScrollViewer Grid.Column="1" Grid.Row="10" Margin="0,0,0,10">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding EyeGlassFrame.SupplierComment, Mode=TwoWay}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+            <ScrollViewer Grid.Column="1" Grid.Row="10">
+                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding EyeGlassFrame.SupplierComment, Mode=TwoWay}" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
             </ScrollViewer>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">

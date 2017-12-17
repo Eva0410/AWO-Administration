@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
-        Title="Lieferant " Height="600" Width="600"  ResizeMode="NoResize">
+        Title="Lieferant " Height="650" Width="606"  ResizeMode="NoResize">
     <StackPanel>
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -14,7 +14,7 @@
             </LinearGradientBrush>
         </StackPanel.Background>
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Lieferant bearbeiten</Label>
-        <Grid Margin="20,10">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
@@ -48,9 +48,9 @@
             <Label Grid.Column="0" Grid.Row="9">Kontaktperson:</Label>
             <Label Grid.Column="0" Grid.Row="10">Produkte:</Label>
             <Label Grid.Column="0" Grid.Row="11" Grid.RowSpan="2">Sonstiges:</Label>
-            <TextBox Text="{Binding Supplier.Name, Mode=TwoWay}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.Street, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.HouseNumber, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Supplier.Name, Mode=TwoWay}"  Grid.Column="1" Grid.Row="0"></TextBox>
+            <TextBox Text="{Binding Supplier.Street, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"></TextBox>
+            <TextBox Text="{Binding Supplier.HouseNumber, Mode=TwoWay}" Grid.Column="1" Grid.Row="2"></TextBox>
             <ComboBox ItemsSource="{Binding Towns, Mode=TwoWay}" SelectedValue="{Binding Supplier.Town,Mode=TwoWay}" Grid.Column="1" Grid.Row="3">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -72,16 +72,16 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox Text="{Binding Supplier.FAX, Mode=TwoWay}" Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.Telephone, Mode=TwoWay}" Grid.Column="1" Grid.Row="6" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.Email, Mode=TwoWay}" Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.CustomerId, Mode=TwoWay}" Grid.Column="1" Grid.Row="8" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.ContactPerson, Mode=TwoWay}" Grid.Column="1" Grid.Row="9" Margin="0,0,0,10" Width="200"></TextBox>
-            <ScrollViewer Grid.Column="1" Grid.Row="10" Margin="0,0,0,10">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Products, Mode=TwoWay}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left"></TextBox>
+            <TextBox Text="{Binding Supplier.FAX, Mode=TwoWay}" Grid.Column="1" Grid.Row="5"></TextBox>
+            <TextBox Text="{Binding Supplier.Telephone, Mode=TwoWay}" Grid.Column="1" Grid.Row="6"></TextBox>
+            <TextBox Text="{Binding Supplier.Email, Mode=TwoWay}" Grid.Column="1" Grid.Row="7"></TextBox>
+            <TextBox Text="{Binding Supplier.CustomerId, Mode=TwoWay}" Grid.Column="1" Grid.Row="8"></TextBox>
+            <TextBox Text="{Binding Supplier.ContactPerson, Mode=TwoWay}" Grid.Column="1" Grid.Row="9"></TextBox>
+            <ScrollViewer Grid.Column="1" Grid.Row="10">
+                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Products, Mode=TwoWay}" Width="170" Height="50" HorizontalAlignment="Left"></TextBox>
             </ScrollViewer>
-            <ScrollViewer Grid.Column="1" Grid.Row="11" Margin="0,0,0,10">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Others, Mode=TwoWay}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+            <ScrollViewer Grid.Column="1" Grid.Row="11">
+                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Others, Mode=TwoWay}" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
             </ScrollViewer>
             <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="3">Neuen Ort hinzufügen</Button>
             <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="4">Neues Land hinzufügen</Button>

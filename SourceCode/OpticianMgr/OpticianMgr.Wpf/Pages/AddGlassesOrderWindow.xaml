@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Title="Neue Brillenbestellung" Height="651.168" Width="961.76"  ResizeMode="NoResize">
+        Title="Neue Brillenbestellung" Height="710" Width="963.26"  ResizeMode="NoResize">
     <StackPanel>
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -47,7 +47,7 @@
                 <Label Grid.Column="0" Grid.Row="7">Zahlungsstatus:</Label>
                 <Label Grid.Column="0" Grid.Row="8">Bearbeitungsstatus:</Label>
                 <Label Grid.Column="0" Grid.Row="9">Sonstiges:</Label>
-                <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,0,0,10">
+                <TextBlock Grid.Column="1" Grid.Row="0">
                     <Run Text="{Binding Order.Customer.FirstName, Mode=TwoWay}"></Run>
                     <Run Text="{Binding Order.Customer.LastName, Mode=TwoWay}"></Run>
                 </TextBlock>
@@ -58,7 +58,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBox Text="{Binding Order.GlassTypeOthers, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10"></TextBox>
+                <TextBox Text="{Binding Order.GlassTypeOthers, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2"></TextBox>
                 <ComboBox ItemsSource="{Binding EyeGlassFrames, Mode=TwoWay}" SelectedValue="{Binding Order.EyeGlassFrame,Mode=TwoWay}" Grid.Column="1" Grid.Row="3">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -76,8 +76,8 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Order.PaymentDate}"  Margin="0,0,0,10"/>
-                <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate="{Binding Order.OrderDate}"  Margin="0,0,0,10"/>
+                <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Order.PaymentDate}"/>
+                <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate="{Binding Order.OrderDate}"/>
                 <ComboBox ItemsSource="{Binding PaymentStates, Mode=TwoWay}" SelectedValue="{Binding Order.PaymentState,Mode=TwoWay}" Grid.Column="1" Grid.Row="7" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -93,8 +93,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Button Command="{Binding AddDoctor}" Grid.Column="2" Grid.Row="4" >Neuer Doktor</Button>
-                <ScrollViewer Grid.Column="1" Grid.Row="9" Margin="0,0,0,10">
-                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Order.Others, Mode=OneWayToSource}"  Margin="0,0,0,10" Height="50" HorizontalAlignment="Stretch" ></TextBox>
+                <ScrollViewer Grid.Column="1" Grid.Row="9">
+                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Order.Others, Mode=OneWayToSource}" Height="50" HorizontalAlignment="Stretch" ></TextBox>
                 </ScrollViewer>
             </Grid>
             <Grid Grid.Column="1">
@@ -123,52 +123,52 @@
                 <Label Grid.Column="0" Grid.Row="6">Brillenfassung:</Label>
                 <Label Grid.Column="0" Grid.Row="7">Brutto:</Label>
                 <Label Grid.Column="0" Grid.Row="8">Mehrwertsteuer:</Label>
-                <TextBox Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200">
+                <TextBox Grid.Column="1" Grid.Row="0">
                     <TextBox.Text>
                         <Binding Path="Order.GlassPriceLeft" Mode="TwoWay" TargetNullValue=""></Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200">
+                <TextBox Grid.Column="1" Grid.Row="1">
                     <TextBox.Text>
                         <Binding Path="Order.GlassPriceRight" Mode="TwoWay" TargetNullValue=""></Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200">
+                <TextBox Grid.Column="1" Grid.Row="2">
                     <TextBox.Text>
                         <Binding Path="Order.OthersPrice" Mode="OneWayToSource" TargetNullValue=""></Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox Grid.Column="1" Grid.Row="3" Margin="0,0,0,10" Width="200">
+                <TextBox Grid.Column="1" Grid.Row="3">
                     <TextBox.Text>
                         <Binding Path="Order.InsurancePrice" Mode="OneWayToSource" TargetNullValue=""></Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox Grid.Column="1" Grid.Row="4" Margin="0,0,0,10" Width="200">
+                <TextBox Grid.Column="1" Grid.Row="4">
                     <TextBox.Text>
                         <Binding Path="Order.PatientsContribution" Mode="OneWayToSource" TargetNullValue=""></Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200">
+                <TextBox Grid.Column="1" Grid.Row="5">
                     <TextBox.Text>
                         <Binding Path="Order.Discount" Mode="OneWayToSource" TargetNullValue=""></Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBlock Grid.Column="1" Grid.Row="6" Margin="0,0,0,10" Width="200">
+                <TextBlock Grid.Column="1" Grid.Row="6" >
                     <Run Text="{Binding Order.EyeGlassFrame.SalePrice, Mode=TwoWay, StringFormat=N2}"></Run>
                     <Run Text="€"></Run>
                 </TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200">
+                <TextBlock Grid.Column="1" Grid.Row="7">
                     <Run Text="{Binding Order.GrossPrice, Mode=TwoWay, StringFormat=N2}"></Run>
                     <Run Text="€"></Run>
                 </TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="8" Margin="0,0,0,10" Width="200">
+                <TextBlock Grid.Column="1" Grid.Row="8" >
                     <Run Text="{Binding Order.BettermentTax, Mode=TwoWay, StringFormat=N2}"></Run>
                     <Run Text="€"></Run>
                 </TextBlock>
                 <Button Grid.Column="1" Grid.Row="9" Command="{Binding Calc}" >Berechnen</Button>
             </Grid>
         </Grid>
-        <Grid Margin="20">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20*"></ColumnDefinition>
                 <ColumnDefinition Width="20*"></ColumnDefinition>

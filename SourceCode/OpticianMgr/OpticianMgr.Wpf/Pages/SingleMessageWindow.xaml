@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Title="Nachricht senden" Height="500" Width="500"  ResizeMode="NoResize">
+        Title="Nachricht senden" Height="500" Width="510"  ResizeMode="NoResize">
     <StackPanel>
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -14,10 +14,10 @@
             </LinearGradientBrush>
         </StackPanel.Background>
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Nachricht senden</Label>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Command="{Binding SMS}">SMS</Button>
             <Button Command="{Binding EMail}">E-Mail</Button>
         </StackPanel>
-        <Frame NavigationUIVisibility="Hidden" Margin="20" Content="{Binding Page}"></Frame>
+        <Frame Style="{StaticResource MessageFrame}" Content="{Binding Page}"></Frame>
     </StackPanel>
 </Window>
