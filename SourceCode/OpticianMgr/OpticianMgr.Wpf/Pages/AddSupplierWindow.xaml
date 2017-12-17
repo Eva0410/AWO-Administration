@@ -13,7 +13,7 @@
                 <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
             </LinearGradientBrush>
         </StackPanel.Background>
-        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Neuer Lieferant</Label>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Neuer Lieferant</Label>
         <Grid Margin="20,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
@@ -50,7 +50,7 @@
             <TextBox Text="{Binding Supplier.Name, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding Supplier.Street, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding Supplier.HouseNumber, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
-            <ComboBox ItemsSource="{Binding Towns, Mode=TwoWay}" SelectedValue="{Binding Supplier.Town,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="3" Width="200">
+            <ComboBox ItemsSource="{Binding Towns, Mode=TwoWay}" SelectedValue="{Binding Supplier.Town,Mode=TwoWay}" Grid.Column="1" Grid.Row="3" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -64,7 +64,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox ItemsSource="{Binding Countries, Mode=TwoWay}" SelectedValue="{Binding Supplier.Country, Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="4" Width="200">
+            <ComboBox ItemsSource="{Binding Countries, Mode=TwoWay}" SelectedValue="{Binding Supplier.Country, Mode=TwoWay}" Grid.Column="1" Grid.Row="4">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding CountryName, Mode=TwoWay}" />

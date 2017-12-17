@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
         Title="Neuer Ort" Height="207.055" Width="591.227"  ResizeMode="NoResize">
-    <StackPanel Margin="0,0,2,0">
+    <StackPanel>
         <StackPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FFD3D2D2"/>
                 <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
             </LinearGradientBrush>
         </StackPanel.Background>
-        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Neuer Ort</Label>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Neuer Ort</Label>
         <Grid Margin="20,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="170"></ColumnDefinition>

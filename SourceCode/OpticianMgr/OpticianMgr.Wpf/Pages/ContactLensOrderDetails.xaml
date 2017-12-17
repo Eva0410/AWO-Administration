@@ -13,7 +13,7 @@
                 <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
             </LinearGradientBrush>
         </StackPanel.Background>
-        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Kontaktlinsenbestellung ändern</Label>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Kontaktlinsenbestellung ändern</Label>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -51,7 +51,7 @@
                     <Run Text="{Binding Order.Customer.FirstName, Mode=TwoWay}"></Run>
                     <Run Text="{Binding Order.Customer.LastName, Mode=TwoWay}"></Run>
                 </TextBlock>
-                <ComboBox ItemsSource="{Binding ContactLensTypes, Mode=TwoWay}" SelectedValue="{Binding Order.ContactLensType,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+                <ComboBox ItemsSource="{Binding ContactLensTypes, Mode=TwoWay}" SelectedValue="{Binding Order.ContactLensType,Mode=TwoWay}" Grid.Column="1" Grid.Row="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding ContactLensTypeDescription}"/>
@@ -60,7 +60,7 @@
                 </ComboBox>
                 <TextBox Text="{Binding Order.ContactLensOthers1, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10"></TextBox>
                 <TextBox Text="{Binding Order.ContactLensOthers2, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Margin="0,0,0,10"></TextBox>
-                <ComboBox ItemsSource="{Binding Doctors, Mode=TwoWay}" SelectedValue="{Binding Order.Doctor,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="4">
+                <ComboBox ItemsSource="{Binding Doctors, Mode=TwoWay}" SelectedValue="{Binding Order.Doctor,Mode=TwoWay}"  Grid.Column="1" Grid.Row="4">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DoctorName}"/>
@@ -69,14 +69,14 @@
                 </ComboBox>
                 <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Order.PaymentDate}"  Margin="0,0,0,10"/>
                 <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate="{Binding Order.OrderDate}"  Margin="0,0,0,10"/>
-                <ComboBox ItemsSource="{Binding PaymentStates, Mode=TwoWay}" SelectedValue="{Binding Order.PaymentState,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="7" >
+                <ComboBox ItemsSource="{Binding PaymentStates, Mode=TwoWay}" SelectedValue="{Binding Order.PaymentState,Mode=TwoWay}" Grid.Column="1" Grid.Row="7" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ComboBox ItemsSource="{Binding ProcessingStates, Mode=TwoWay}" SelectedValue="{Binding Order.ProcessingState,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="8" >
+                <ComboBox ItemsSource="{Binding ProcessingStates, Mode=TwoWay}" SelectedValue="{Binding Order.ProcessingState,Mode=TwoWay}" Grid.Column="1" Grid.Row="8" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>

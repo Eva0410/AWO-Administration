@@ -7,6 +7,16 @@
                 <Setter Property="Padding" Value="4"></Setter>
                 <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             </Style>
+            <Style x:Key="HeadingStyle" TargetType="Label">
+                <Setter Property="Margin" Value="10"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontStyle" Value="Italic"></Setter>
+                <Setter Property="Background" Value="{x:Null}"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="Margin" Value="5"></Setter>
+            </Style>
             <DataTemplate x:Key="ArrowUp">
                 <DockPanel>
                     <TextBlock HorizontalAlignment="Center" 

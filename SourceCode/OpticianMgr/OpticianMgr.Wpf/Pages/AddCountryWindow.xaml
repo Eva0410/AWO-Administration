@@ -13,7 +13,7 @@
                 <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
             </LinearGradientBrush>
         </StackPanel.Background>
-        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Neues Land</Label>
+        <Label DockPanel.Dock="Top"  Style="{StaticResource HeadingStyle}">Neues Land</Label>
         <Grid Margin="20,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="170"></ColumnDefinition>

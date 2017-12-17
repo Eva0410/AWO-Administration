@@ -13,7 +13,7 @@
                 <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
             </LinearGradientBrush>
         </StackPanel.Background>
-        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Brillenfassung bearbeiten</Label>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Brillenfassung bearbeiten</Label>
         <Grid Margin="20,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="170"></ColumnDefinition>
@@ -49,7 +49,7 @@
             <TextBox Text="{Binding EyeGlassFrame.Brand, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding EyeGlassFrame.Color, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
             <TextBox Text="{Binding EyeGlassFrame.Size, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Margin="0,0,0,10" Width="200"></TextBox>
-            <ComboBox ItemsSource="{Binding States, Mode=TwoWay}" SelectedValue="{Binding EyeGlassFrame.State}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="4" Width="200">
+            <ComboBox ItemsSource="{Binding States, Mode=TwoWay}" SelectedValue="{Binding EyeGlassFrame.State}" Grid.Column="1" Grid.Row="4">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding}" />
@@ -69,7 +69,7 @@
             </TextBox>
             <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding EyeGlassFrame.SaleDate}"  Margin="0,0,0,10"/>
             <TextBox Text="{Binding Supplier.Id, Mode=TwoWay}" Grid.Column="1" Grid.Row="9" Margin="0,0,0,10" Width="200"></TextBox>
-            <ComboBox ItemsSource="{Binding Suppliers, Mode=TwoWay}" SelectedItem="{Binding EyeGlassFrame.Supplier, Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="9" Width="200">
+            <ComboBox ItemsSource="{Binding Suppliers, Mode=TwoWay}" SelectedItem="{Binding EyeGlassFrame.Supplier, Mode=TwoWay}" Grid.Column="1" Grid.Row="9" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />
