@@ -6,13 +6,7 @@
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
         Title="Neue Kontaktlinsenbestellung" Height="730" Width="963.26"  ResizeMode="NoResize">
-    <StackPanel>
-        <StackPanel.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFD3D2D2"/>
-                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
-            </LinearGradientBrush>
-        </StackPanel.Background>
+    <StackPanel Style="{StaticResource StackPanelBackground}">
         <Label DockPanel.Dock="Top"  Style="{StaticResource HeadingStyle}">Neue Kontaktlinsenbestellung</Label>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -85,7 +79,7 @@
                 </ComboBox>
                 <Button Command="{Binding AddDoctor}" Grid.Column="2" Grid.Row="4">Neuer Doktor</Button>
                 <ScrollViewer Grid.Column="1" Grid.Row="9">
-                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Order.Others, Mode=OneWayToSource}" Height="50"></TextBox>
+                    <TextBox  Style="{StaticResource BigTextBox}" Text="{Binding Order.Others, Mode=OneWayToSource}"></TextBox>
                 </ScrollViewer>
             </Grid>
             <Grid Grid.Column="1">
@@ -307,7 +301,7 @@
                 </TextBox.Text>
             </TextBox>
         </Grid>
-        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
             <Button Command="{Binding Cancel}">Abbrechen</Button>
             <Button Command="{Binding Submit}">Anlegen</Button>
         </StackPanel>

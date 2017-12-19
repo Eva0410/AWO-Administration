@@ -6,13 +6,7 @@
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
         Title="Neuer Ort" Height="210" Width="591.227"  ResizeMode="NoResize">
-    <StackPanel>
-        <StackPanel.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFD3D2D2"/>
-                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
-            </LinearGradientBrush>
-        </StackPanel.Background>
+    <StackPanel Style="{StaticResource StackPanelBackground}">
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Neuer Ort</Label>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -29,7 +23,7 @@
             <TextBox Text="{Binding Town.ZipCode, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0"></TextBox>
             <TextBox Text="{Binding Town.TownName, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1"></TextBox>
         </Grid>
-        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
             <Button Command="{Binding Cancel}">Abbrechen</Button>
             <Button Command="{Binding Submit}">Anlegen</Button>
         </StackPanel>

@@ -75,7 +75,7 @@ namespace OpticianMgr.Wpf
         }
         public void ShowContactLensOrderDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
         {
-            ContactLensOrderDetails newWindow = new ContactLensOrderDetails();
+            ContactLensOrderDetailsWindow newWindow = new ContactLensOrderDetailsWindow();
             this.ShowWindow(viewModel, newWindow);
         }
         public void ShowSingleMessageWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose

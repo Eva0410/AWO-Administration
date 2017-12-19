@@ -11,7 +11,7 @@
 
     <DockPanel>
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Statistik</Label>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
+        <StackPanel Style="{StaticResource ButtonsCenterStackPanel}" DockPanel.Dock="Top">
             <Button Command="{Binding ChangeStatistic}"  CommandParameter="B">Verkaufte Brillen</Button>
             <Button Command="{Binding ChangeStatistic}" CommandParameter="K">Verkaufte Kontaklinsen</Button>
         </StackPanel>

@@ -242,8 +242,8 @@
     <Compile Include="Pages\AddContactLensesOrderWindow.xaml.cs">
       <DependentUpon>AddContactLensesOrderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ContactLensOrderDetails.xaml.cs">
-      <DependentUpon>ContactLensOrderDetails.xaml</DependentUpon>
+    <Compile Include="Pages\ContactLensOrderDetailsWindow.xaml.cs">
+      <DependentUpon>ContactLensOrderDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GlassesOrderDetailsWindow.xaml.cs">
       <DependentUpon>GlassesOrderDetailsWindow.xaml</DependentUpon>
@@ -353,7 +353,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ContactLensOrderDetails.xaml">
+    <Page Include="Pages\ContactLensOrderDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

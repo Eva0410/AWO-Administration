@@ -17,9 +17,9 @@ namespace OpticianMgr.Wpf.Pages
     /// <summary>
     /// Interaktionslogik für AddEyeGlassesFrameWindow.xaml
     /// </summary>
-    public partial class ContactLensOrderDetails : Window
+    public partial class ContactLensOrderDetailsWindow : Window
     {
-        public ContactLensOrderDetails()
+        public ContactLensOrderDetailsWindow()
         {
             InitializeComponent();
         }

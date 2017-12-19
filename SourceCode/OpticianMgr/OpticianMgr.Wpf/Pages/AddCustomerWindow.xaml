@@ -6,13 +6,7 @@
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
         Title="Neuer Kunde" Height="886.5" Width="586.76"  ResizeMode="NoResize">
-    <StackPanel>
-        <StackPanel.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFD3D2D2"/>
-                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
-            </LinearGradientBrush>
-        </StackPanel.Background>
+    <StackPanel Style="{StaticResource StackPanelBackground}">
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Neuer Kunde</Label>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -92,19 +86,19 @@
             <TextBox Text="{Binding Customer.Insurance, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="10" ></TextBox>
             <TextBox Text="{Binding Customer.Job, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="11" ></TextBox>
             <ScrollViewer Grid.Column="1" Grid.Row="12">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Customer.Hobbies, Mode=OneWayToSource}" Width="170" Height="50"></TextBox>
+                <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Customer.Hobbies, Mode=OneWayToSource}"></TextBox>
             </ScrollViewer>
             <ScrollViewer Grid.Column="1" Grid.Row="13">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Customer.Others1, Mode=OneWayToSource}" Width="170" Height="50"></TextBox>
+                <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Customer.Others1, Mode=OneWayToSource}"></TextBox>
             </ScrollViewer>
             <ScrollViewer Grid.Column="1" Grid.Row="14">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Customer.Others2, Mode=OneWayToSource}" Width="170" Height="50"></TextBox>
+                <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Customer.Others2, Mode=OneWayToSource}" ></TextBox>
             </ScrollViewer>
             <TextBox Text="{Binding Customer.InsurancePolicyNumber, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="15" ></TextBox>
             <DatePicker Grid.Row="16" Grid.Column="1" SelectedDate="{Binding Customer.DateOfBirth}"/>
-            <CheckBox VerticalAlignment="Center" Grid.Row="17" Grid.Column="1" IsChecked="{Binding Customer.NewsLetter}"></CheckBox>
+            <CheckBox Grid.Row="17" Grid.Column="1" IsChecked="{Binding Customer.NewsLetter}"></CheckBox>
         </Grid>
-        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
             <Button Command="{Binding Cancel}" >Abbrechen</Button>
             <Button Command="{Binding Submit}">Anlegen</Button>
         </StackPanel>

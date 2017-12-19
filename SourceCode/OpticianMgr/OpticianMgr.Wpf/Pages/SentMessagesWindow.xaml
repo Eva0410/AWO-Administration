@@ -7,44 +7,39 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
         Title="Versendete Nachrichten">
-
-    <DockPanel>
-        <DockPanel.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFD3D2D2"/>
-                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
-            </LinearGradientBrush>
-        </DockPanel.Background>
-        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Versendete Nachrichten</Label>
-        <ListView ItemsSource="{Binding Messages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Date, UpdateSourceTrigger=PropertyChanged, StringFormat='dd.MM.yyyy HH:mm:ss'}" Header="Datum"/>
-                    <GridViewColumn Header="Empfänger">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <ListView ItemsSource="{Binding Recipients}" Background="{x:Null}">
-                                    <ListView.Resources>
-                                        <Style TargetType="GridViewColumnHeader">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </Style>
-                                    </ListView.Resources>
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName}"></GridViewColumn>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Address}"></GridViewColumn>
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Subject, UpdateSourceTrigger=PropertyChanged}"  Header="Betreff"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"  Header="Nachricht"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Order_Id, UpdateSourceTrigger=PropertyChanged}"  Header="Auftrags Id"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding MessageType, UpdateSourceTrigger=PropertyChanged}"  Header="Typ"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </DockPanel>
+    <StackPanel Style="{StaticResource StackPanelBackground}">
+        <DockPanel>
+            <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Versendete Nachrichten</Label>
+            <ListView ItemsSource="{Binding Messages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Date, UpdateSourceTrigger=PropertyChanged, StringFormat='dd.MM.yyyy HH:mm:ss'}" Header="Datum"/>
+                        <GridViewColumn Header="Empfänger">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListView ItemsSource="{Binding Recipients}" Background="{x:Null}">
+                                        <ListView.Resources>
+                                            <Style TargetType="GridViewColumnHeader">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </Style>
+                                        </ListView.Resources>
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName}"></GridViewColumn>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Address}"></GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Subject, UpdateSourceTrigger=PropertyChanged}"  Header="Betreff"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"  Header="Nachricht"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Order_Id, UpdateSourceTrigger=PropertyChanged}"  Header="Auftrags Id"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding MessageType, UpdateSourceTrigger=PropertyChanged}"  Header="Typ"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </StackPanel>
 </Window>

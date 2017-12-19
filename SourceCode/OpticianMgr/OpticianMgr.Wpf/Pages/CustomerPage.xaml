@@ -18,7 +18,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="0">
                 <TextBlock>Filtern nach:</TextBlock>
                 <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding FilterProperty}">
                     <ComboBox.ItemTemplate>
@@ -27,7 +27,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBox Width="100" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <TextBox Style="{StaticResource FilterTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding FilterAndSort}" Key="Return"></KeyBinding>
                     </TextBox.InputBindings>
@@ -35,9 +35,9 @@
                 <Button Command="{Binding FilterAndSort}" >Filtern</Button>
                 <Button Command="{Binding DeleteFilter}">Filter zurücksetzen</Button>
             </StackPanel>
-            <Button Command="{Binding AddCustomer}" HorizontalAlignment="Right">Neuen Kunden hinzufügen</Button>
-            <Button Grid.Row="1" Command="{Binding OpenCustomer}" HorizontalAlignment="Right">Kunde anzeigen</Button>
-            <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Command="{Binding AddCustomer}" Style="{StaticResource AddAndEditButton}">Neuen Kunden hinzufügen</Button>
+            <Button Grid.Row="1" Command="{Binding OpenCustomer}" Style="{StaticResource AddAndEditButton}">Kunde anzeigen</Button>
+            <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="1">
                 <TextBlock>Sortieren nach:</TextBlock>
                 <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}">
                     <ComboBox.ItemTemplate>

@@ -8,14 +8,9 @@
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
         Title="Kunde" Height="896" Width="1119.76"  ResizeMode="NoResize">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFD3D2D2"/>
-                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.ColumnDefinitions>
+    <StackPanel Style="{StaticResource StackPanelBackground}">
+        <Grid>
+            <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -99,19 +94,19 @@
                 <TextBox Text="{Binding Customer.Insurance, Mode=TwoWay}" Grid.Column="1" Grid.Row="10"></TextBox>
                 <TextBox Text="{Binding Customer.Job, Mode=TwoWay}" Grid.Column="1" Grid.Row="11"></TextBox>
                 <ScrollViewer Grid.Column="1" Grid.Row="12">
-                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Customer.Hobbies, Mode=TwoWay}" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+                        <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Customer.Hobbies, Mode=TwoWay}"></TextBox>
                 </ScrollViewer>
                 <ScrollViewer Grid.Column="1" Grid.Row="13">
-                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Customer.Others1, Mode=TwoWay}" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+                        <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Customer.Others1, Mode=TwoWay}"></TextBox>
                 </ScrollViewer>
                 <ScrollViewer Grid.Column="1" Grid.Row="14">
-                    <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Customer.Others2, Mode=TwoWay}" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+                        <TextBox Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Customer.Others2, Mode=TwoWay}"></TextBox>
                 </ScrollViewer>
                 <TextBox Text="{Binding Customer.InsurancePolicyNumber, Mode=TwoWay}" Grid.Column="1" Grid.Row="15"></TextBox>
                 <DatePicker Grid.Row="16" Grid.Column="1" SelectedDate="{Binding Customer.DateOfBirth, Mode=TwoWay}"/>
                 <CheckBox IsChecked="{Binding Customer.NewsLetter}" Grid.Column="1" Grid.Row="17"></CheckBox>
             </Grid>
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <StackPanel Style="{StaticResource ButtonStackPanel}">
                 <Button Command="{Binding ShowMessages}">Versendete Nachrichten anzeigen</Button>
                 <Button Command="{Binding Delete}">Kunde löschen</Button>
                 <Button Command="{Binding Cancel}">Abbrechen</Button>
@@ -120,7 +115,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
             <Label Style="{StaticResource HeadingStyle}" DockPanel.Dock="Top">Bestellungen</Label>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Style="{StaticResource ButtonStackPanel}">
                     <Button Command="{Binding AddGlassesOrder}">Neue Brillenbestellung</Button>
                     <Button Command="{Binding AddContactLensOrder}">Neue Kontaktlinsenbestellung</Button>
                     <Button Command="{Binding Show}">Bestellung anzeigen</Button>
@@ -144,4 +139,5 @@
             </ListView>
         </StackPanel>
     </Grid>
+    </StackPanel>
 </Window>

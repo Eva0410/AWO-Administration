@@ -19,8 +19,8 @@
         <TextBlock Grid.Row="0" Grid.Column="0">An:</TextBlock>
         <TextBox Text="{Binding To, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"></TextBox>
         <TextBlock Grid.Row="1" Grid.Column="0">Nachricht:</TextBlock>
-        <ScrollViewer Grid.Row="1" Grid.Column="1" MinHeight="100" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-            <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Top"></TextBox>
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Style="{StaticResource BigScrollViewer}">
+            <TextBox Style="{StaticResource MessageTextBox}" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
         </ScrollViewer>
         <Button Command="{Binding Cancel}"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">Abbrechen</Button>
         <Button Command="{Binding Send}" Grid.Row="2" Grid.Column="2">Senden</Button>

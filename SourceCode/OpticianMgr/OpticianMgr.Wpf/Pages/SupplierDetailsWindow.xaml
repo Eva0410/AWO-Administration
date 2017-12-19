@@ -6,20 +6,13 @@
         mc:Ignorable="d"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
         Title="Lieferant " Height="650" Width="606"  ResizeMode="NoResize">
-    <StackPanel>
-        <StackPanel.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFD3D2D2"/>
-                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
-            </LinearGradientBrush>
-        </StackPanel.Background>
+    <StackPanel Style="{StaticResource StackPanelBackground}">
         <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Lieferant bearbeiten</Label>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -78,15 +71,15 @@
             <TextBox Text="{Binding Supplier.CustomerId, Mode=TwoWay}" Grid.Column="1" Grid.Row="8"></TextBox>
             <TextBox Text="{Binding Supplier.ContactPerson, Mode=TwoWay}" Grid.Column="1" Grid.Row="9"></TextBox>
             <ScrollViewer Grid.Column="1" Grid.Row="10">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Products, Mode=TwoWay}" Width="170" Height="50" HorizontalAlignment="Left"></TextBox>
+                <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Supplier.Products, Mode=TwoWay}"></TextBox>
             </ScrollViewer>
             <ScrollViewer Grid.Column="1" Grid.Row="11">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Others, Mode=TwoWay}" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+                <TextBox Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Supplier.Others, Mode=TwoWay}"></TextBox>
             </ScrollViewer>
             <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="3">Neuen Ort hinzufügen</Button>
             <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="4">Neues Land hinzufügen</Button>
         </Grid>
-        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
             <Button Command="{Binding Delete}">Lieferant löschen</Button>
             <Button Command="{Binding Cancel}">Abbrechen</Button>
             <Button Command="{Binding Submit}" >Speichern</Button>
