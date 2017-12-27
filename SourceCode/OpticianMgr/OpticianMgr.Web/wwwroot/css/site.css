@@ -10,6 +10,70 @@ textarea {
     max-width: 280px;
 }
 
+
+
+#greyBox3 {
+    background-color: #F9F9F9;
+    height: auto;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+    #greyBox3:hover {
+        -webkit-transform: scale(0.99);
+        -ms-transform: scale(0.99);
+        transform: scale(0.99);
+        opacity: 0.8;
+        background-color: #E5E5E5;
+    }
+
+
+#whiteBox3 {
+    background-color: #fff;
+    height: auto;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+    #whiteBox3:hover {
+        -webkit-transform: scale(0.99);
+        -ms-transform: scale(0.99);
+        transform: scale(0.99);
+        opacity: 0.8;
+        background-color: #F0F0F0;
+    }
+
+
+
+#firstgreyBox3 {
+    background-color: #F9F9F9;
+    height: auto;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+    #firstgreyBox3:hover {
+        -webkit-transform: scale(0.99);
+        -ms-transform: scale(0.99);
+        transform: scale(0.99);
+        opacity: 0.8;
+        background-color: #E5E5E5;
+    }
+
+
+.indexImg{
+    width:80vh;
+}
+
+
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;

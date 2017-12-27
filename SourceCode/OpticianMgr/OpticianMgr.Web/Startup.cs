@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using OpticianMgr.Web.Data;
 using OpticianMgr.Web.Models;
 using OpticianMgr.Web.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace OpticianMgr.Web
 {
@@ -27,7 +28,7 @@ namespace OpticianMgr.Web
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
+          //      builder.AddUserSecrets();
 
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
@@ -59,8 +60,51 @@ namespace OpticianMgr.Web
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
+        public async void InitRoles(IServiceProvider provider)
+        {
+            var RoleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = provider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            await CreateRole(RoleManager, "Admin");
+
+            await UserManager.CreateAsync(new ApplicationUser { UserName = "orascanin.99@gmail.com" });
+
+            await AddUserRole("orascanin.99@gmail.com", "Admin", UserManager, RoleManager);
+
+        }
+
+        private async Task CreateRole(RoleManager<IdentityRole> rm, string roleName)
+        {
+            IdentityResult roleResult = null;
+
+            if (!await rm.RoleExistsAsync(roleName))
+            {
+                roleResult = await rm.CreateAsync(new IdentityRole(roleName));
+            }
+            if (roleResult == null || !roleResult.Succeeded)
+            {
+                Console.WriteLine("Fehler: Rolle " + roleName + " konnte nicht erstellt werden!");
+            }
+        }
+        private async Task AddUserRole(string name, string roleName, UserManager<ApplicationUser> um, RoleManager<IdentityRole> rm)
+        {
+            var user = await um.FindByNameAsync(name);
+            var role = await rm.FindByNameAsync(roleName);
+            var inRole = await um.IsInRoleAsync(user, roleName);
+            IdentityResult result = null;
+
+            if (user != null && !inRole)
+            {
+                result = await um.AddToRoleAsync(user, roleName);
+            }
+            if (result == null || !result.Succeeded)
+            {
+                Console.WriteLine("Fehler: User " + name + "konnte nicht zur Rolle " + roleName + " hinzugefügt werden!");
+            }
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider provider)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -92,6 +136,7 @@ namespace OpticianMgr.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            InitRoles(provider);
         }
     }
 }
