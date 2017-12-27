@@ -36,6 +36,8 @@ namespace OpticianMgr.Wpf.ViewModel
         public string TranslatedFilterProperty { get; set; }
         public string FilterText { get; set; }
         public string SortProperty { get; set; }
+        public ICommand SortCommand { get; set; }
+        public ICommand SortShift { get; set; }
 
         //The properties of the supplier class are safed in English but need to be shown in German
         public ObservableCollection<String> PropertiesList
@@ -56,6 +58,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 return newList;
             }
         }
+        public List<GridViewColumnHeader> Headers { get; set; }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -70,6 +73,86 @@ namespace OpticianMgr.Wpf.ViewModel
             DeleteFilter = new RelayCommand(DeleteF);
             AddSupplier = new RelayCommand(AddS);
             OpenSupplier = new RelayCommand(OpenS);
+            SortCommand = new RelayCommand<RoutedEventArgs>(SortS);
+            SortShift = new RelayCommand<object>(SortSh);
+            Headers = new List<GridViewColumnHeader>();
+        }
+        //Click without shift key
+        private void SortS(RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = e.Source as GridViewColumnHeader;
+            if (column == null)
+            {
+                return;
+            }
+
+            ListSortDirection dir;
+            //Same column pressed?
+            if (Headers.Count > 0 && Headers[0] == column)
+            {
+                //Change sort direction
+                dir = this.SuppliersView.SortDescriptions[0].Direction;
+                dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            }
+            else
+            {
+                //Remove arrow from old column header
+                if (Headers.Count > 0)
+                {
+                    Headers[0].Column.HeaderTemplate = null;
+                    Headers[0].Column.Width = Headers[0].ActualWidth - 20;
+                }
+                Headers.Clear();
+                Headers.Add(column);
+                //new column header must be wider
+                column.Column.Width = column.ActualWidth + 20;
+                //default sort direction is ascending
+                dir = ListSortDirection.Ascending;
+            }
+            //insert arrow
+            if (dir == ListSortDirection.Ascending)
+            {
+                column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUp") as DataTemplate;
+            }
+            else
+            {
+                column.Column.HeaderTemplate = Application.Current.FindResource("ArrowDown") as DataTemplate;
+            }
+
+            string header = string.Empty;
+
+            // get binding name for sort description 
+            Binding b = Headers[0].Column.DisplayMemberBinding as Binding;
+            if (b != null)
+            {
+                header = b.Path.Path;
+            }
+
+            this.SuppliersView.SortDescriptions.Clear();
+            this.SuppliersView.SortDescriptions.Add(new SortDescription(header, dir));
+        }
+        //Click with shift
+        private void SortSh(object p)
+        {
+            string column = p as string;
+            if(this.SuppliersView.SortDescriptions.Count >= 1)
+            {
+                ListSortDirection dir;
+                int index = this.SuppliersView.SortDescriptions.Count - 1;
+                //Change sorting direction
+                if (this.SuppliersView.SortDescriptions.Count == index + 1 && this.SuppliersView.SortDescriptions[index].PropertyName == column)
+                {
+                    dir = this.SuppliersView.SortDescriptions[index].Direction;
+                    dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                    this.SuppliersView.SortDescriptions.RemoveAt(index);
+                    this.SuppliersView.SortDescriptions.Insert(index, new SortDescription(column, dir));
+                }
+                else
+                {
+                    dir = ListSortDirection.Ascending;
+                    this.SuppliersView.SortDescriptions.Add(new SortDescription(column, dir));
+                }
+            }
         }
         /// <summary>
         /// Returns a list of the suppliers in the database
@@ -100,7 +183,6 @@ namespace OpticianMgr.Wpf.ViewModel
             }
             return copiedSuppliers;
         }
-
         /// <summary>
         /// Refreshes and filter the supplier list
         /// </summary>
@@ -114,7 +196,7 @@ namespace OpticianMgr.Wpf.ViewModel
             this.TranslatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
             this.TranslatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
             Filter();
-            Sort();
+            //Sort();
         }
         public void Sort()
         {
@@ -212,10 +294,6 @@ namespace OpticianMgr.Wpf.ViewModel
                 viewModel.RefreshSuppliers += refreshSupplierHandler;
                 windowService.ShowSupplierDetailsWindow(viewModel);
             }
-            else
-                MessageBox.Show("Bitte wählen Sie zuerst einen Lieferanten aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
-        
-
     }
 }

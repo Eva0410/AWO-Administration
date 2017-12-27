@@ -31,6 +31,9 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand AddDoctor { get; set; }
         public ICommand Calc { get; set; }
         public ICommand Delete { get; set; }
+        public ICommand SendMessage { get; set; }
+        public ICommand CreateOrderConfirmation { get; set; }
+        public ICommand CreateBill { get; set; }
         public ContactLensOrderDetailsViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
@@ -39,8 +42,84 @@ namespace OpticianMgr.Wpf.ViewModel
             AddDoctor = new RelayCommand(AddD);
             Calc = new RelayCommand(Calculate);
             Delete = new RelayCommand(DeleteCLO);
+            SendMessage = new RelayCommand(OpenSendMessageWindow);
+            CreateOrderConfirmation = new RelayCommand(CreateOC);
+            CreateBill = new RelayCommand(CreateB);
             this.ProcessingStates = OrdersViewModel.ProcessingStates;
             this.PaymentStates = OrdersViewModel.PaymentStates;
+        }
+        public void CreateB()
+        {
+            if (!String.IsNullOrEmpty(this.Order.BillPath))
+            {
+                var result = MessageBox.Show("Es existiert bereits eine Rechnung(" + Order.BillPath + "). Möchten Sie dennoch eine neue erstellen?", "Rechnung existiert bereits", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    SaveBill();
+                }
+            }
+            else
+            {
+                SaveBill();
+            }
+        }
+        public void CreateOC()
+        {
+            if (!String.IsNullOrEmpty(this.Order.OrderConfirmationPath))
+            {
+                var result = MessageBox.Show("Es existiert bereits eine Auftragsbestätigung (" + Order.OrderConfirmationPath + "). Möchten Sie dennoch eine neue erstellen?", "Auftragsbestätigung existiert bereits", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    SaveOrderConfirmation();
+                }
+            }
+            else
+            {
+                SaveOrderConfirmation();
+            }
+
+        }
+        private void SaveBill()
+        {
+            string s = FileCreater.FileCreater.CreateBill(this.Order.Id);
+            if (String.IsNullOrEmpty(s))
+            {
+                MessageBox.Show("Etwas ist schiefgelaufen!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                this.Order.BillPath = s;
+                this.Order.Doctor = null;
+                this.Order.EyeGlassFrame = null;
+                this.Order.GlassType = null;
+                this.Order.ContactLensType = null;
+                this.Order.Customer = null;
+                this.Uow.OrderRepository.Update(this.Order);
+                this.Uow.Save();
+                MessageBox.Show("Die Rechnung wurde erfolgreich unter dem Namen " + s + " abgespeichert!", "Dokument abgespeichert", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.InitOrder(this.Order.Id);
+            }
+        }
+        private void SaveOrderConfirmation()
+        {
+            string s = FileCreater.FileCreater.CreateOrderConfirmation(this.Order.Id);
+            if (String.IsNullOrEmpty(s))
+            {
+                MessageBox.Show("Etwas ist schiefgelaufen!", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                this.Order.OrderConfirmationPath = s;
+                this.Order.Doctor = null;
+                this.Order.EyeGlassFrame = null;
+                this.Order.GlassType = null;
+                this.Order.ContactLensType = null;
+                this.Order.Customer = null;
+                this.Uow.OrderRepository.Update(this.Order);
+                this.Uow.Save();
+                MessageBox.Show("Die Auftragsbestätigung wurde erfolgreich unter dem Namen " + s + " abgespeichert!", "Dokument abgespeichert", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.InitOrder(this.Order.Id);
+            }
         }
         public void InitOrder(int id)
         {
@@ -102,6 +181,14 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             this.CloseRequested?.Invoke(this, null);
             this.SetFields();
+        }
+        public void OpenSendMessageWindow()
+        {
+            WindowService windowService = new WindowService();
+            SingleMessageViewModel viewModel = ViewModelLocator.SingleMessageViewModel;
+            viewModel.OrderId = this.Order.Id;
+            viewModel.OpenEmailPage();
+            windowService.ShowSingleMessageWindow(viewModel);
         }
         public void EditContactLensOrder()
         {

@@ -3,6 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
       xmlns:local="clr-namespace:OpticianMgr.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -10,46 +12,46 @@
       DataContext="{Binding CustomerViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>
-        <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Kunden</Label>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Kunden</Label>
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="0">
-                <Label Margin="10,0,0,0">Filtern nach:</Label>
-                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding FilterProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="16,0,0,0">
+            <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="0">
+                <TextBlock>Filtern nach:</TextBlock>
+                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding FilterProperty}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBox Width="100" Margin="10,0,0,0" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" >
+                <TextBox Style="{StaticResource FilterTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding FilterAndSort}" Key="Return"></KeyBinding>
                     </TextBox.InputBindings>
                 </TextBox>
-                <Button Margin="9,0,0,0" Command="{Binding FilterAndSort}" Width="40">Filtern</Button>
-                <Button Margin="9,0,0,0" Command="{Binding DeleteFilter}" Width="105">Filter zurücksetzen</Button>
+                <Button Command="{Binding FilterAndSort}" >Filtern</Button>
+                <Button Command="{Binding DeleteFilter}">Filter zurücksetzen</Button>
             </StackPanel>
-            <Button Margin="9,0,10,0" Command="{Binding AddCustomer}" HorizontalAlignment="Right" Width="155">Neuen Kunden hinzufügen</Button>
-            <Button Margin="9,10,10,0" Grid.Row="1" Command="{Binding OpenCustomer}" HorizontalAlignment="Right" Width="155">Kunde anzeigen</Button>
-            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
-                <Label Margin="10,0,0,0">Sortieren nach:</Label>
-                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <Button Command="{Binding AddCustomer}" Style="{StaticResource AddAndEditButton}">Neuen Kunden hinzufügen</Button>
+            <Button Grid.Row="1" Command="{Binding OpenCustomer}" Style="{StaticResource AddAndEditButton}">Kunde anzeigen</Button>
+            <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="1">
+                <TextBlock>Sortieren nach:</TextBlock>
+                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Margin="9,0,0,0" Command="{Binding FilterAndSort}" Width="55">Sortieren</Button>
+                <Button Command="{Binding FilterAndSort}">Sortieren</Button>
             </StackPanel>
         </Grid>
 
 
-        <ListView ItemsSource="{Binding CustomersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+        <ListView ItemsSource="{Binding CustomersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
@@ -64,9 +66,11 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Country.CountryName, UpdateSourceTrigger=PropertyChanged}" Header="Land"/>
                 </GridView>
             </ListView.View>
-            <ListView.InputBindings>
-                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Path=DataContext.OpenCustomer, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"/>
-            </ListView.InputBindings>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <cmd:EventToCommand Command="{Binding OpenCustomer}"></cmd:EventToCommand>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
     </DockPanel>
 </Page>

@@ -10,10 +10,10 @@
       DataContext="{Binding StatisticsViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>
-        <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="20" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Statistik</Label>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,0,0,30">
-            <Button Margin="9,0,0,0" Command="{Binding ChangeStatistic}" Width="100" CommandParameter="B">Verkaufte Brillen</Button>
-            <Button Margin="9,0,0,0" Command="{Binding ChangeStatistic}" Width="130" CommandParameter="K">Verkaufte Kontaklinsen</Button>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Statistik</Label>
+        <StackPanel Style="{StaticResource ButtonsCenterStackPanel}" DockPanel.Dock="Top">
+            <Button Command="{Binding ChangeStatistic}"  CommandParameter="B">Verkaufte Brillen</Button>
+            <Button Command="{Binding ChangeStatistic}" CommandParameter="K">Verkaufte Kontaklinsen</Button>
         </StackPanel>
         <toolkitCharting:Chart Title="{Binding Title}" VerticalAlignment="Top" Margin="10,10,10,17" MinHeight="7" Height="500" BorderBrush="{x:Null}" >
             <toolkitCharting:LineSeries Title="{Binding NewYear}"  DependentValueBinding="{Binding Value}" IndependentValueBinding="{Binding Key}" ItemsSource="{Binding NewValues}" IsSelectionEnabled="True"/>

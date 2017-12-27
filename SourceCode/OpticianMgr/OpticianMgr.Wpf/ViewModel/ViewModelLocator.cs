@@ -69,6 +69,13 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<AddDoctorViewModel>();
             SimpleIoc.Default.Register<GlassesOrderDetailsViewModel>();
             SimpleIoc.Default.Register<ContactLensOrderDetailsViewModel>();
+            SimpleIoc.Default.Register<SingleEmailViewModel>();
+            SimpleIoc.Default.Register<SingleMessageViewModel>();
+            SimpleIoc.Default.Register<SingleSMSViewModel>();
+            SimpleIoc.Default.Register<MultipleMessagesViewModel>();
+            SimpleIoc.Default.Register<MultipleEmailViewModel>();
+            SimpleIoc.Default.Register<MultipleSMSViewModel>();
+            SimpleIoc.Default.Register<SentMessagesViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -153,6 +160,34 @@ namespace OpticianMgr.Wpf.ViewModel
         public static ContactLensOrderDetailsViewModel ContactLensOrderDetailsViewModel
         {
             get { return ServiceLocator.Current.GetInstance<ContactLensOrderDetailsViewModel>(); }
+        }
+        public static SingleMessageViewModel SingleMessageViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SingleMessageViewModel>(); }
+        }
+        public static SingleEmailViewModel SingleEmailViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SingleEmailViewModel>(); }
+        }
+        public static SingleSMSViewModel SingleSMSViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SingleSMSViewModel>(); }
+        }
+        public static MultipleMessagesViewModel MultipleMessagesViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<MultipleMessagesViewModel>(); }
+        }
+        public static MultipleEmailViewModel MultipleEmailViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<MultipleEmailViewModel>(); }
+        }
+        public static MultipleSMSViewModel MultipleSMSViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<MultipleSMSViewModel>(); }
+        }
+        public static SentMessagesViewModel SentMessagesViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<SentMessagesViewModel>(); }
         }
         public static void Cleanup()
         {

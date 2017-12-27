@@ -53,6 +53,9 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="MessageBird, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessageBird.1.3.4\lib\MessageBird.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
@@ -79,6 +82,9 @@
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
@@ -208,6 +214,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FileCreater\FileCreater.cs" />
+    <Compile Include="Pages\SentMessagesWindow.xaml.cs">
+      <DependentUpon>SentMessagesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MultipleEMailPage.xaml.cs">
+      <DependentUpon>MultipleEMailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MultipleSMSPage.xaml.cs">
+      <DependentUpon>MultipleSMSPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SingleSMSPage.xaml.cs">
+      <DependentUpon>SingleSMSPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SingleEMailPage.xaml.cs">
+      <DependentUpon>SingleEMailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SingleMessageWindow.xaml.cs">
+      <DependentUpon>SingleMessageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddDoctorWindow.xaml.cs">
       <DependentUpon>AddDoctorWindow.xaml</DependentUpon>
     </Compile>
@@ -217,8 +242,8 @@
     <Compile Include="Pages\AddContactLensesOrderWindow.xaml.cs">
       <DependentUpon>AddContactLensesOrderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ContactLensOrderDetails.xaml.cs">
-      <DependentUpon>ContactLensOrderDetails.xaml</DependentUpon>
+    <Compile Include="Pages\ContactLensOrderDetailsWindow.xaml.cs">
+      <DependentUpon>ContactLensOrderDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GlassesOrderDetailsWindow.xaml.cs">
       <DependentUpon>GlassesOrderDetailsWindow.xaml</DependentUpon>
@@ -250,6 +275,9 @@
     <Compile Include="Pages\EyeGlassFramesPage.xaml.cs">
       <DependentUpon>EyeGlassFramesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MultipleMessagesPage.xaml.cs">
+      <DependentUpon>MultipleMessagesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AddDoctorViewModel.cs" />
     <Compile Include="ViewModel\AddCountryViewModel.cs" />
     <Compile Include="ViewModel\AddContactLensesOrderViewModel.cs" />
@@ -260,6 +288,12 @@
     <Compile Include="ViewModel\AddCustomerViewModel.cs" />
     <Compile Include="ViewModel\AddEyeGlassFrameModel.cs" />
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\MultipleMessagesViewModel.cs" />
+    <Compile Include="ViewModel\MultipleEmailViewModel.cs" />
+    <Compile Include="ViewModel\MultipleSMSViewModel.cs" />
+    <Compile Include="ViewModel\SingleSMSViewModel.cs" />
+    <Compile Include="ViewModel\SingleEmailViewModel.cs" />
+    <Compile Include="ViewModel\SingleMessageViewModel.cs" />
     <Compile Include="ViewModel\OrdersViewModel.cs" />
     <Compile Include="ViewModel\SupplierDetailsViewModel.cs" />
     <Compile Include="ViewModel\EyeGlassFramesDetailsViewModel.cs" />
@@ -267,6 +301,7 @@
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\EyeGlassFramesViewModel.cs" />
+    <Compile Include="ViewModel\SentMessagesViewModel.cs" />
     <Compile Include="WindowServices\IRequestClose.cs" />
     <Compile Include="WindowServices\IWindowService.cs" />
     <Compile Include="Pages\AddSupplierWindow.xaml.cs">
@@ -282,6 +317,30 @@
     <Compile Include="ViewModel\SupplierViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
+    <Page Include="Pages\SentMessagesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MultipleEMailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MultipleSMSPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SingleSMSPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SingleEMailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SingleMessageWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\AddDoctorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -294,7 +353,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ContactLensOrderDetails.xaml">
+    <Page Include="Pages\ContactLensOrderDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -365,6 +424,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\MultipleMessagesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\SupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -409,6 +472,35 @@
       <Project>{106FE2A8-7A23-499C-BE52-AE300A5C5A75}</Project>
       <Name>OpticiatnMgr.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

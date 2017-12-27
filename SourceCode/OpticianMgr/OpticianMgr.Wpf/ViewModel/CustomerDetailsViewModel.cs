@@ -34,6 +34,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand AddGlassesOrder { get; set; }
         public ICommand AddContactLensOrder { get; set; }
         public ICommand Show { get; set; }
+        public ICommand ShowMessages { get; set; }
         public CustomerDetailsViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
@@ -44,6 +45,7 @@ namespace OpticianMgr.Wpf.ViewModel
             Delete = new RelayCommand(DeleteC);
             AddGlassesOrder = new RelayCommand(AddGO);
             AddContactLensOrder = new RelayCommand(AddCLO);
+            ShowMessages = new RelayCommand(ShowM);
             Show = new RelayCommand(ShowOrder);
             EventHandler<EventArgs> refreshOrders = null;
             refreshOrders = (sender, e) =>
@@ -271,6 +273,14 @@ namespace OpticianMgr.Wpf.ViewModel
 
             else
                 MessageBox.Show("Bitte wählen Sie zuerst eine Bestellung aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+        public void ShowM()
+        {
+            WindowService windowService = new WindowService();
+            SentMessagesViewModel viewModel = ViewModelLocator.SentMessagesViewModel;
+            var messages = this.Uow.MessageRepository.Get(filter: m => m.Recipients.Where(r => r.Customer.Id == this.Customer.Id).FirstOrDefault() != null, orderBy: ord => ord.OrderByDescending(m => m.Date), includeProperties: "Recipients").ToList();
+            viewModel.InitMessages(messages);
+            windowService.ShowSentMessagesWindow(viewModel);
         }
     }
 }

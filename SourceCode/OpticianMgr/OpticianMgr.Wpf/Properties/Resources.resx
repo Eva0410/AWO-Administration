@@ -378,4 +378,7 @@
   <data name="ContactLensTypeDescription" xml:space="preserve">
     <value>Kontaktlinsentypbeschreibung</value>
   </data>
+  <data name="BettermentTax" xml:space="preserve">
+    <value>Mehrwertsteuer</value>
+  </data>
 </root>

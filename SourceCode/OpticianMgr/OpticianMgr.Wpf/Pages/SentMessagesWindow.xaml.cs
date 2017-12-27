@@ -10,16 +10,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpticianMgr.Wpf.Pages
+namespace OpticianMgr.Wpf
 {
-    /// <summary>
-    /// Interaktionslogik für AddEyeGlassesFrameWindow.xaml
-    /// </summary>
-    public partial class ContactLensOrderDetails : Window
+    public partial class SentMessagesWindow : Window
     {
-        public ContactLensOrderDetails()
+        public SentMessagesWindow()
         {
             InitializeComponent();
         }

@@ -5,21 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
-        Height="600" Width="600"  ResizeMode="NoResize">
-    <StackPanel>
-        <StackPanel.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFD3D2D2"/>
-                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
-            </LinearGradientBrush>
-        </StackPanel.Background>
-        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Neuer Lieferant</Label>
-        <Grid Margin="20,10">
+        Title="Neuer Lieferant" Height="650" Width="599"  ResizeMode="NoResize">
+    <StackPanel Style="{StaticResource StackPanelBackground}">
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Neuer Lieferant</Label>
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="170"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -48,10 +41,10 @@
             <Label Grid.Column="0" Grid.Row="9">Kontaktperson:</Label>
             <Label Grid.Column="0" Grid.Row="10">Produkte:</Label>
             <Label Grid.Column="0" Grid.Row="11" Grid.RowSpan="2">Sonstiges:</Label>
-            <TextBox Text="{Binding Supplier.Name, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.Street, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.HouseNumber, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10" Width="200"></TextBox>
-            <ComboBox ItemsSource="{Binding Towns, Mode=TwoWay}" SelectedValue="{Binding Supplier.Town,Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="3" Width="200">
+            <TextBox Text="{Binding Supplier.Name, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0"></TextBox>
+            <TextBox Text="{Binding Supplier.Street, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1"></TextBox>
+            <TextBox Text="{Binding Supplier.HouseNumber, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="2"></TextBox>
+            <ComboBox ItemsSource="{Binding Towns, Mode=TwoWay}" SelectedValue="{Binding Supplier.Town,Mode=TwoWay}" Grid.Column="1" Grid.Row="3" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -65,30 +58,30 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox ItemsSource="{Binding Countries, Mode=TwoWay}" SelectedValue="{Binding Supplier.Country, Mode=TwoWay}" Margin="0,0,0,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="1" Grid.Row="4" Width="200">
+            <ComboBox ItemsSource="{Binding Countries, Mode=TwoWay}" SelectedValue="{Binding Supplier.Country, Mode=TwoWay}" Grid.Column="1" Grid.Row="4">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding CountryName, Mode=TwoWay}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox Text="{Binding Supplier.FAX, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="5" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.Telephone, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="6" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.Email, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="7" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.CustomerId, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="8" Margin="0,0,0,10" Width="200"></TextBox>
-            <TextBox Text="{Binding Supplier.ContactPerson, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="9" Margin="0,0,0,10" Width="200"></TextBox>
-            <ScrollViewer Grid.Column="1" Grid.Row="10" Margin="0,0,0,10">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Products, Mode=OneWayToSource}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left"></TextBox>
+            <TextBox Text="{Binding Supplier.FAX, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="5"></TextBox>
+            <TextBox Text="{Binding Supplier.Telephone, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="6"></TextBox>
+            <TextBox Text="{Binding Supplier.Email, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="7"></TextBox>
+            <TextBox Text="{Binding Supplier.CustomerId, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="8"></TextBox>
+            <TextBox Text="{Binding Supplier.ContactPerson, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="9"></TextBox>
+            <ScrollViewer Grid.Column="1" Grid.Row="10">
+                <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Supplier.Products, Mode=OneWayToSource}"></TextBox>
             </ScrollViewer>
-            <ScrollViewer Grid.Column="1" Grid.Row="11" Margin="0,0,0,10">
-                <TextBox  AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Supplier.Others, Mode=OneWayToSource}"  Margin="0,0,0,10" Width="170" Height="50" HorizontalAlignment="Left" ></TextBox>
+            <ScrollViewer Grid.Column="1" Grid.Row="11">
+                <TextBox Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Supplier.Others, Mode=OneWayToSource}"></TextBox>
             </ScrollViewer>
-            <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="3" Margin="5,5,-45,10">Neuen Ort hinzufügen</Button>
-            <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="4" Margin="5,5,-45,10">Neues Land hinzufügen</Button>
+            <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="3" >Neuen Ort hinzufügen</Button>
+            <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="4" >Neues Land hinzufügen</Button>
         </Grid>
-        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>
-            <Button Margin="20,0" Command="{Binding Submit}" Height="25" Width="55">Anlegen</Button>
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
+            <Button Command="{Binding Cancel}" >Abbrechen</Button>
+            <Button Command="{Binding Submit}">Anlegen</Button>
         </StackPanel>
     </StackPanel>
 </Window>

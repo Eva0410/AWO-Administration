@@ -48,6 +48,7 @@ namespace OpticiatnMgr.Core.Entities
         public String InsurancePolicyNumber { get; set; }
         [Column(TypeName = "datetime2")]
         public DateTime? DateOfBirth { get; set; }
+        public bool NewsLetter { get; set; }
 
     }
 }

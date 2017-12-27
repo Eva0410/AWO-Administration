@@ -34,7 +34,8 @@ namespace OpticiatnMgr.Core.Entities
         public decimal? InsurancePrice { get; set; }
         public decimal? PatientsContribution { get; set; }
         public decimal? Discount { get; set; }
-        public Byte[] Bill { get; set; }
+        public string BillPath { get; set; }
+        public string OrderConfirmationPath { get; set; }
         public decimal? Glass_F_R_sph { get; set; }
         public decimal? Glass_F_R_cyl { get; set; }
         public int? Glass_F_R_Axis { get; set; }

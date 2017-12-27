@@ -5,16 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
         mc:Ignorable="d"
-        Height="179.589" Width="576.437" ResizeMode="NoResize">
-    <StackPanel Margin="0,0,2,0">
-        <StackPanel.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFD3D2D2"/>
-                <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
-            </LinearGradientBrush>
-        </StackPanel.Background>
-        <Label DockPanel.Dock="Top" Margin="20,10,0,0" FontSize="18" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Neues Land</Label>
-        <Grid Margin="20,10">
+        Title="Neues Land" Height="179.589" Width="576.437" ResizeMode="NoResize">
+    <StackPanel Style="{StaticResource StackPanelBackground}">
+        <Label DockPanel.Dock="Top"  Style="{StaticResource HeadingStyle}">Neues Land</Label>
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="170"></ColumnDefinition>
                 <ColumnDefinition Width="201"></ColumnDefinition>
@@ -24,11 +18,11 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0">Name:</Label>
-            <TextBox Text="{Binding Country.CountryName, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,10" Width="200"></TextBox>
+            <TextBox Text="{Binding Country.CountryName, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0"></TextBox>
         </Grid>
-        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Command="{Binding Cancel}" Width="65">Abbrechen</Button>
-            <Button Margin="20,0" Command="{Binding Submit}" Height="25" Width="55">Anlegen</Button>
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
+            <Button Command="{Binding Cancel}">Abbrechen</Button>
+            <Button Command="{Binding Submit}">Anlegen</Button>
         </StackPanel>
     </StackPanel>
 </Window>

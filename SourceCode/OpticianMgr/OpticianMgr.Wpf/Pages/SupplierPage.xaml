@@ -9,63 +9,250 @@
       DataContext="{Binding SupplierViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>
-        <Label DockPanel.Dock="Top" Margin="10,10,0,0" FontSize="20" FontStyle="Italic" Background="{x:Null}" FontWeight="Bold">Lieferanten</Label>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Lieferanten</Label>
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="0">
-                <Label Margin="10,0,0,0">Filtern nach:</Label>
-                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding FilterProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="16,0,0,0">
+            <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="0">
+                <TextBlock>Filtern nach:</TextBlock>
+                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding FilterProperty}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBox Width="100" Margin="10,0,0,0" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" >
+                <TextBox Style="{StaticResource FilterTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding FilterAndSort}" Key="Return"></KeyBinding>
                     </TextBox.InputBindings>
                 </TextBox>
-                <Button Margin="9,0,0,0" Command="{Binding FilterAndSort}" Width="40">Filtern</Button>
-                <Button Margin="9,0,0,0" Command="{Binding DeleteFilter}" Width="105">Filter zurücksetzen</Button>
+                <Button Command="{Binding FilterAndSort}" >Filtern</Button>
+                <Button Command="{Binding DeleteFilter}" >Filter zurücksetzen</Button>
             </StackPanel>
-            <Button Grid.Row="0" Margin="9,0,10,0" Command="{Binding AddSupplier}" HorizontalAlignment="Right" Width="155">Neuen Lieferant hinzufügen</Button>
-            <Button Margin="9,10,10,0" Grid.Row="1" Command="{Binding OpenSupplier}" HorizontalAlignment="Right" Width="155">Lieferant anzeigen</Button>
-            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
-                <Label Margin="10,0,0,0">Sortieren nach:</Label>
-                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <Button Grid.Row="0" Command="{Binding AddSupplier}" Style="{StaticResource AddAndEditButton}">Neuen Lieferant hinzufügen</Button>
+            <Button Grid.Row="1" Command="{Binding OpenSupplier}" Style="{StaticResource AddAndEditButton}">Lieferant anzeigen</Button>
+            <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="1" >
+                <TextBlock>Sortieren nach:</TextBlock>
+                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Button Margin="9,0,0,0" Command="{Binding FilterAndSort}" Width="55">Sortieren</Button>
+                <Button Command="{Binding FilterAndSort}" >Sortieren</Button>
             </StackPanel>
         </Grid>
 
-        <ListView ItemsSource="{Binding SuppliersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}" Background="{x:Null}" Margin="10,13,10,9" VerticalAlignment="Top">
+        <ListView ItemsSource="{Binding SuppliersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  Header="Lieferantenname"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Town.ZipCode, UpdateSourceTrigger=PropertyChanged}"  Header="PLZ"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Town.TownName, UpdateSourceTrigger=PropertyChanged}"  Header="Ort"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Street, UpdateSourceTrigger=PropertyChanged}"  Header="Straße"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding HouseNumber, UpdateSourceTrigger=PropertyChanged}"  Header="Hausnummer"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Country.CountryName, UpdateSourceTrigger=PropertyChanged}"  Header="Land"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding FAX, UpdateSourceTrigger=PropertyChanged}"  Header="Fax"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Telephone, UpdateSourceTrigger=PropertyChanged}"  Header="Telefon"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Email, UpdateSourceTrigger=PropertyChanged}"  Header="Email"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding CustomerId, UpdateSourceTrigger=PropertyChanged}"  Header="Kundennummer"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding ContactPerson, UpdateSourceTrigger=PropertyChanged}"  Header="Kontaktperson"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Products, UpdateSourceTrigger=PropertyChanged}"  Header="Produkte"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Others, UpdateSourceTrigger=PropertyChanged}"  Header="Sonstiges"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}">
+                        <GridViewColumnHeader Content="Id">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Id" ></MouseBinding>
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Lieferantenname">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Name"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Town.ZipCode, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="PLZ">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Town.ZipCode"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Town.TownName, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Ort">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Town.TownName"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Street, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Straße">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Street"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding HouseNumber, UpdateSourceTrigger=PropertyChanged}" >
+                        <GridViewColumnHeader Content="Hausnummer">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="HouseNumber"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Country.CountryName, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Land">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Country.CountryName"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding FAX, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Fax">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="FAX"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Telephone, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Telefon" >
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Telephone"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Email, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Email">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Email"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding CustomerId, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Kundennummer">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="CustomerId"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ContactPerson, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Kontaktperson">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="ContactPerson"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Products, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Produkte">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Products"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Others, UpdateSourceTrigger=PropertyChanged}"  >
+                        <GridViewColumnHeader Content="Sonstiges">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Others"></MouseBinding>
+
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <cmd:EventToCommand Command="{Binding OpenSupplier}"></cmd:EventToCommand>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
     </DockPanel>
 </Page>
