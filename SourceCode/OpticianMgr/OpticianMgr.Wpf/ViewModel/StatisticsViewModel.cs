@@ -36,6 +36,21 @@ namespace OpticianMgr.Wpf.ViewModel
 
             this.RaisePropertyChanged(() => this.NewYear);
             this.RaisePropertyChanged(() => this.OldYear);
+
+            EventHandler<EventArgs> refreshGlassesStatistics = null;
+            refreshGlassesStatistics = (sender, e) =>
+            {
+                this.ChangeStats("B");
+            };
+            ViewModelLocator.AddGlassesOrderViewModel.Refresh += refreshGlassesStatistics;
+            ViewModelLocator.GlassesOrderDetailsViewModel.Refresh += refreshGlassesStatistics;
+            EventHandler<EventArgs> refreshContactLensStatistics = null;
+            refreshContactLensStatistics = (sender, e) =>
+            {
+                this.ChangeStats("K");
+            };
+            ViewModelLocator.AddContactLensesOrderViewModel.Refresh += refreshContactLensStatistics;
+            ViewModelLocator.ContactLensOrderDetailsViewModel.Refresh += refreshContactLensStatistics;
         }
         private void ChangeStats(string orderType)
         {
@@ -62,19 +77,6 @@ namespace OpticianMgr.Wpf.ViewModel
                 int soldItems = this.Uow.OrderRepository.Count(o => o.PaymentDate != null && o.PaymentDate.Value.Year == year && o.PaymentDate.Value.Month == i && o.PaymentState == "Bezahlt" && o.OrderType == orderType);
                 list.Add(new KeyValuePair<string, int>(new DateTime(2017, i, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("de")), soldItems));
             }
-        }
-        private bool Check(object o, int year, int i, string orderType)
-        {
-            bool check = false;
-            var order = (Order) o;
-            if(order.PaymentDate != null)
-            {
-                if(order.PaymentDate.Value.Year == year && order.PaymentDate.Value.Month == i && order.PaymentState == "Bezahlt" && order.OrderType == orderType)
-                {
-                    check = true;
-                }
-            }
-            return check;
         }
     }
 }

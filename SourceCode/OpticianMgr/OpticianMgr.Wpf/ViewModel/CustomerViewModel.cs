@@ -64,6 +64,13 @@ namespace OpticianMgr.Wpf.ViewModel
             AddCustomer = new RelayCommand(AddC);
             FilterAndSort = new RelayCommand(FilterAndSortCustomers);
             DeleteFilter = new RelayCommand(DeleteF);
+
+            EventHandler<EventArgs> refreshCustomers = null;
+            refreshCustomers = (sender, e) =>
+            {
+                this.FillList();
+            };
+            ViewModelLocator.TownDetailsViewModel.Refresh += refreshCustomers;
         }
         public void DeleteF()
         {

@@ -16,54 +16,18 @@
             </LinearGradientBrush>
         </DockPanel.Background>
         <Menu x:Name="menu" VerticalAlignment="Top" FontFamily="Georgia" FontSize="16" FontStyle="Italic" DockPanel.Dock="Top" Background="{x:Null}">
-            <Button Content="Kunden" Style="{StaticResource MenuButton}" Command="{Binding Customers}">
-                <Button.BorderBrush>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.BorderBrush>
-                <Button.Background>
-                    <SolidColorBrush  Opacity="0"/>
-                </Button.Background>
-            </Button>
-            <Button Content="Aufträge" Style="{StaticResource MenuButton}" Command="{Binding Orders}">
-                <Button.Background>
-                    <SolidColorBrush  Opacity="0"/>
-                </Button.Background>
-                <Button.BorderBrush>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.BorderBrush>
-            </Button>
-            <Button Content="Lieferanten" Style="{StaticResource MenuButton}" Command="{Binding Suppliers}">
-                <Button.Background>
-                    <SolidColorBrush  Opacity="0"/>
-                </Button.Background>
-                <Button.BorderBrush>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.BorderBrush>
-            </Button>
-            <Button Content="Lagernde Brillenfassungen" Command="{Binding EyeGlassFrames}" Style="{StaticResource MenuButton}">
-                <Button.Background>
-                    <SolidColorBrush  Opacity="0"/>
-                </Button.Background>
-                <Button.BorderBrush>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.BorderBrush>
-            </Button>
-            <Button Content="Massen SMS / E-Mails verschicken" Command="{Binding MultipleMessages}" Style="{StaticResource MenuButton}">
-                <Button.Background>
-                    <SolidColorBrush  Opacity="0"/>
-                </Button.Background>
-                <Button.BorderBrush>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.BorderBrush>
-            </Button>
-            <Button Content="Statistken" Command="{Binding Statistics}" Style="{StaticResource MenuButton}">
-                <Button.Background>
-                    <SolidColorBrush  Opacity="0"/>
-                </Button.Background>
-                <Button.BorderBrush>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.BorderBrush>
-            </Button>
+            <Button Content="Kunden" Style="{StaticResource MenuButton}" Command="{Binding Customers}"></Button>
+            <Button Content="Aufträge" Style="{StaticResource MenuButton}" Command="{Binding Orders}"></Button>
+            <Button Content="Lieferanten" Style="{StaticResource MenuButton}" Command="{Binding Suppliers}"></Button>
+            <Button Content="Lagernde Brillenfassungen" Command="{Binding EyeGlassFrames}" Style="{StaticResource MenuButton}"></Button>
+            <Button Content="Massen SMS / E-Mails verschicken" Command="{Binding MultipleMessages}" Style="{StaticResource MenuButton}"></Button>
+            <Button Content="Statistken" Command="{Binding Statistics}" Style="{StaticResource MenuButton}"></Button>
+            <MenuItem Header="Sonstiges">
+                <MenuItem Header="Orte bearbeiten" Command="{Binding OpenTowns}"></MenuItem>
+                <MenuItem Header="Länder bearbeiten"></MenuItem>
+                <MenuItem Header="Brillentypen bearbeiten"></MenuItem>
+                <MenuItem Header="Kontaktlinsentypen bearbeiten"></MenuItem>
+            </MenuItem>
         </Menu>
         <Separator DockPanel.Dock="Top" Background="#FF040404"/>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" DockPanel.Dock="Top" Content="{Binding Page}"></Frame>

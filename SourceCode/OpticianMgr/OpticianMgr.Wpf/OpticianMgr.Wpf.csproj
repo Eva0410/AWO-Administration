@@ -215,6 +215,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="FileCreater\FileCreater.cs" />
+    <Compile Include="Pages\TownDetailsWindow.xaml.cs">
+      <DependentUpon>TownDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditTownWindow.xaml.cs">
+      <DependentUpon>EditTownWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SentMessagesWindow.xaml.cs">
       <DependentUpon>SentMessagesWindow.xaml</DependentUpon>
     </Compile>
@@ -282,6 +288,8 @@
     <Compile Include="ViewModel\AddCountryViewModel.cs" />
     <Compile Include="ViewModel\AddContactLensesOrderViewModel.cs" />
     <Compile Include="ViewModel\ContactLensOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModel\TownDetailsViewModel.cs" />
+    <Compile Include="ViewModel\EditTownsViewModel.cs" />
     <Compile Include="ViewModel\GlassesOrderDetailsViewModel.cs" />
     <Compile Include="ViewModel\AddGlassesOrderViewModel.cs" />
     <Compile Include="ViewModel\AddTownViewModel.cs" />
@@ -317,6 +325,14 @@
     <Compile Include="ViewModel\SupplierViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
+    <Page Include="Pages\TownDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditTownWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\SentMessagesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

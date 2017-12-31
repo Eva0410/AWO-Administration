@@ -1,8 +1,8 @@
-\select@language {german}
+\select@language {english}
+\select@language {english}
 \select@language {english}
 \select@language {german}
-\select@language {german}
-\select@language {german}
+\select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
 \contentsline {section}{\numberline {1.1}Initial Situation}{3}{section.1.1}
 \contentsline {section}{\numberline {1.2}Goals}{3}{section.1.2}
@@ -12,6 +12,7 @@
 \contentsline {section}{\numberline {1.6}Structure of the Thesis}{4}{section.1.6}
 \contentsline {chapter}{\numberline {2}Hintergr\IeC {\"u}nde}{5}{chapter.2}
 \contentsline {chapter}{\numberline {3}Verwendete Technologien}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}Entity Framework}{6}{section.3.1}
 \contentsline {chapter}{\numberline {4}Beschreibung des Endproduktes}{7}{chapter.4}
 \contentsline {chapter}{\numberline {5}Selbstevaluation}{8}{chapter.5}
 \contentsline {chapter}{\numberline {6}Summary}{9}{chapter.6}

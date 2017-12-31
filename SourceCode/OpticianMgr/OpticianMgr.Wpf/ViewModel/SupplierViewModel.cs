@@ -76,6 +76,13 @@ namespace OpticianMgr.Wpf.ViewModel
             SortCommand = new RelayCommand<RoutedEventArgs>(SortS);
             SortShift = new RelayCommand<object>(SortSh);
             Headers = new List<GridViewColumnHeader>();
+
+            EventHandler<EventArgs> refreshSuppliers = null;
+            refreshSuppliers = (sender, e) =>
+            {
+                this.FillList();
+            };
+            ViewModelLocator.TownDetailsViewModel.Refresh += refreshSuppliers;
         }
         //Click without shift key
         private void SortS(RoutedEventArgs e)

@@ -88,6 +88,16 @@ namespace OpticianMgr.Wpf
             SentMessagesWindow newWindow = new SentMessagesWindow();
             this.ShowWindow(viewModel, newWindow);
         }
+        public void ShowEditTownsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            EditTownWindow newWindow = new EditTownWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowTownDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            TownDetailsWindow newWindow = new TownDetailsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
         public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
         {
             EventHandler<EventArgs> closeHandler = null;

@@ -37,6 +37,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand EyeGlassFrames { get; set; }
         public ICommand Orders { get; set; }
         public ICommand MultipleMessages { get; set; }
+        public ICommand OpenTowns { get; set; }
         public object Page { get; set; }
 
 
@@ -58,6 +59,7 @@ namespace OpticianMgr.Wpf.ViewModel
             EyeGlassFrames = new RelayCommand(() => this.Open(this.EyeGlassFramesPage));
             Orders = new RelayCommand(() => this.Open(this.OrdersPage));
             MultipleMessages = new RelayCommand(() => this.Open(this.MultipleMessagesPage));
+            OpenTowns = new RelayCommand(OpenT);
             this.Open(this.CustomerPage);
             ////if (IsInDesignMode)
             ////{
@@ -68,6 +70,13 @@ namespace OpticianMgr.Wpf.ViewModel
             ////    // Code runs "for real"
             ////}
 
+        }
+        public void OpenT()
+        {
+            WindowService windowService = new WindowService();
+            EditTownsViewModel viewModel = ViewModelLocator.EditTownsViewModel;
+            viewModel.FillList();
+            windowService.ShowEditTownsWindow(viewModel);
         }
         //TODO Is this MVVM?
         private void Open(object page)
