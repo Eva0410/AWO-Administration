@@ -24,9 +24,9 @@
             <Button Content="Statistken" Command="{Binding Statistics}" Style="{StaticResource MenuButton}"></Button>
             <MenuItem Header="Sonstiges">
                 <MenuItem Header="Orte bearbeiten" Command="{Binding OpenTowns}"></MenuItem>
-                <MenuItem Header="Länder bearbeiten"></MenuItem>
-                <MenuItem Header="Brillentypen bearbeiten"></MenuItem>
-                <MenuItem Header="Kontaktlinsentypen bearbeiten"></MenuItem>
+                <MenuItem Header="Länder bearbeiten" Command="{Binding OpenCountries}"></MenuItem>
+                <MenuItem Header="Brillentypen bearbeiten" Command="{Binding OpenGlasstypes}"></MenuItem>
+                <MenuItem Header="Kontaktlinsentypen bearbeiten" Command="{Binding OpenContactLensTypes}"></MenuItem>
             </MenuItem>
         </Menu>
         <Separator DockPanel.Dock="Top" Background="#FF040404"/>

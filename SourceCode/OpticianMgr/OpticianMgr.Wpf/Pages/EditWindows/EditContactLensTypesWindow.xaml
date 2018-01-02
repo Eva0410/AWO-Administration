@@ -1,4 +1,4 @@
-﻿<Window x:Class="OpticianMgr.Wpf.EditTownWindow"
+﻿<Window x:Class="OpticianMgr.Wpf.EditContactLensTypesWindow"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,13 +6,10 @@
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
       xmlns:local="clr-namespace:OpticianMgr.Wpf"
-      mc:Ignorable="d" 
-      
-      
-      DataContext="{Binding CustomerViewModel, Source={StaticResource Locator}}" Height="413.448" Width="600">
+      mc:Ignorable="d"  Height="413.448" Width="800" Title="Kontatklinsentypen bearbeiten">
     <StackPanel Style="{StaticResource StackPanelBackground}">
         <DockPanel>
-            <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Orte</Label>
+            <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Kontaktlinsentypen</Label>
             <Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -35,8 +32,8 @@
                     <Button Command="{Binding FilterAndSort}" >Filtern</Button>
                     <Button Command="{Binding DeleteFilter}">Filter zurücksetzen</Button>
                 </StackPanel>
-                <Button Command="{Binding AddTown}" Style="{StaticResource AddAndEditButton}">Neuen Ort hinzufügen</Button>
-                <Button Grid.Row="1" Command="{Binding OpenTown}" Style="{StaticResource AddAndEditButton}">Ort anzeigen</Button>
+                <Button Command="{Binding AddContactLensType}" Style="{StaticResource AddAndEditButton}">Neuen Kontaktlinsentyp hinzufügen</Button>
+                <Button Grid.Row="1" Command="{Binding OpenContactLensType}" Style="{StaticResource AddAndEditButton}">Kontaktlinsentyp anzeigen</Button>
                 <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="1">
                     <TextBlock>Sortieren nach:</TextBlock>
                     <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}">
@@ -51,17 +48,16 @@
             </Grid>
 
 
-            <ListView ItemsSource="{Binding TownsView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
+            <ListView ItemsSource="{Binding ContactLensTypesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="Id" />
-                        <GridViewColumn DisplayMemberBinding="{Binding TownName, UpdateSourceTrigger=PropertyChanged}"  Header="Ortsname"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged}"  Header="PLZ"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding ContactLensTypeDescription, UpdateSourceTrigger=PropertyChanged}"  Header="Kontaktlinsentypname"/>
                     </GridView>
                 </ListView.View>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <cmd:EventToCommand Command="{Binding OpenTown}"></cmd:EventToCommand>
+                        <cmd:EventToCommand Command="{Binding OpenContactLensType}"></cmd:EventToCommand>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ListView>

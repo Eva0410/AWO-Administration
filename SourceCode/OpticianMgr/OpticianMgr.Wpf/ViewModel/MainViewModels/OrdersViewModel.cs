@@ -132,6 +132,8 @@ namespace OpticianMgr.Wpf.ViewModel
             };
             ViewModelLocator.AddGlassesOrderViewModel.Refresh += refreshGlassesOrders;
             ViewModelLocator.GlassesOrderDetailsViewModel.Refresh += refreshGlassesOrders;
+            ViewModelLocator.GlassTypeDetailsViewModel.Refresh += refreshGlassesOrders;
+
             EventHandler<EventArgs> refreshContactLensOrders = null;
             refreshContactLensOrders = (sender, e) =>
             {
@@ -139,6 +141,7 @@ namespace OpticianMgr.Wpf.ViewModel
             };
             ViewModelLocator.AddContactLensesOrderViewModel.Refresh += refreshContactLensOrders;
             ViewModelLocator.ContactLensOrderDetailsViewModel.Refresh += refreshContactLensOrders;
+            ViewModelLocator.ContactLensTypeDetailsViewModel.Refresh += refreshContactLensOrders;
         }
         public void DeleteGlassesF()
         {

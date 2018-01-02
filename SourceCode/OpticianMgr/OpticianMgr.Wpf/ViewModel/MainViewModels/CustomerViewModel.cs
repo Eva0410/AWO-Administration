@@ -71,6 +71,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.FillList();
             };
             ViewModelLocator.TownDetailsViewModel.Refresh += refreshCustomers;
+            ViewModelLocator.CountryDetailsViewModel.Refresh += refreshCustomers;
         }
         public void DeleteF()
         {

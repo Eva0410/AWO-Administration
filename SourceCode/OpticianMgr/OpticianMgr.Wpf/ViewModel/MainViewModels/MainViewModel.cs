@@ -38,6 +38,9 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand Orders { get; set; }
         public ICommand MultipleMessages { get; set; }
         public ICommand OpenTowns { get; set; }
+        public ICommand OpenCountries { get; set; }
+        public ICommand OpenGlasstypes { get; set; }
+        public ICommand OpenContactLensTypes { get; set; }
         public object Page { get; set; }
 
 
@@ -60,6 +63,9 @@ namespace OpticianMgr.Wpf.ViewModel
             Orders = new RelayCommand(() => this.Open(this.OrdersPage));
             MultipleMessages = new RelayCommand(() => this.Open(this.MultipleMessagesPage));
             OpenTowns = new RelayCommand(OpenT);
+            OpenCountries = new RelayCommand(OpenC);
+            OpenGlasstypes = new RelayCommand(OpenG);
+            OpenContactLensTypes = new RelayCommand(OpenClt);
             this.Open(this.CustomerPage);
             ////if (IsInDesignMode)
             ////{
@@ -77,6 +83,27 @@ namespace OpticianMgr.Wpf.ViewModel
             EditTownsViewModel viewModel = ViewModelLocator.EditTownsViewModel;
             viewModel.FillList();
             windowService.ShowEditTownsWindow(viewModel);
+        }
+        public void OpenC()
+        {
+            WindowService windowService = new WindowService();
+            EditCountriesViewModel viewModel = ViewModelLocator.EditCountriesViewModel;
+            viewModel.FillList();
+            windowService.ShowEditCountriesWindow(viewModel);
+        }
+        public void OpenG()
+        {
+            WindowService windowService = new WindowService();
+            EditGlasstypesViewModel viewModel = ViewModelLocator.EditGlasstypesViewModel;
+            viewModel.FillList();
+            windowService.ShowEditGlasstypesWindow(viewModel);
+        }
+        public void OpenClt()
+        {
+            WindowService windowService = new WindowService();
+            EditContactLensTypesViewModel viewModel = ViewModelLocator.EditContactLensTypesViewModel;
+            viewModel.FillList();
+            windowService.ShowEditContactLensTypesWindow(viewModel);
         }
         //TODO Is this MVVM?
         private void Open(object page)

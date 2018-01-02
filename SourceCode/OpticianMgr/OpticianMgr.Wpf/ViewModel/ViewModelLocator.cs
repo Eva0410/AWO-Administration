@@ -78,6 +78,14 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<SentMessagesViewModel>();
             SimpleIoc.Default.Register<EditTownsViewModel>();
             SimpleIoc.Default.Register<TownDetailsViewModel>();
+            SimpleIoc.Default.Register<EditCountriesViewModel>();
+            SimpleIoc.Default.Register<CountryDetailsViewModel>();
+            SimpleIoc.Default.Register<AddGlasstypeViewModel>();
+            SimpleIoc.Default.Register<EditGlasstypesViewModel>();
+            SimpleIoc.Default.Register<GlassTypeDetailsViewModel>();
+            SimpleIoc.Default.Register<AddContactLensTypeViewModel>();
+            SimpleIoc.Default.Register<EditContactLensTypesViewModel>();
+            SimpleIoc.Default.Register<ContactLensTypeDetailsViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -199,6 +207,39 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<TownDetailsViewModel>(); }
         }
+        public static EditCountriesViewModel EditCountriesViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<EditCountriesViewModel>(); }
+        }
+        public static CountryDetailsViewModel CountryDetailsViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<CountryDetailsViewModel>(); }
+        }
+        public static AddGlasstypeViewModel AddGlasstypeViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<AddGlasstypeViewModel>(); }
+        }
+        public static EditGlasstypesViewModel EditGlasstypesViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<EditGlasstypesViewModel>(); }
+        }
+        public static GlassTypeDetailsViewModel GlassTypeDetailsViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<GlassTypeDetailsViewModel>(); }
+        }
+        public static AddContactLensTypeViewModel AddContactLensTypeViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<AddContactLensTypeViewModel>(); }
+        }
+        public static ContactLensTypeDetailsViewModel ContactLensTypeDetailsViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<ContactLensTypeDetailsViewModel>(); }
+        }
+        public static EditContactLensTypesViewModel EditContactLensTypesViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<EditContactLensTypesViewModel>(); }
+        }
+
         public static void Cleanup()
         {
                         // TODO Clear the ViewModels

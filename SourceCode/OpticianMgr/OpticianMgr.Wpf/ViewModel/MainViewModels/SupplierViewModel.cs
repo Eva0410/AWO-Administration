@@ -83,6 +83,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.FillList();
             };
             ViewModelLocator.TownDetailsViewModel.Refresh += refreshSuppliers;
+            ViewModelLocator.CountryDetailsViewModel.Refresh += refreshSuppliers;
         }
         //Click without shift key
         private void SortS(RoutedEventArgs e)

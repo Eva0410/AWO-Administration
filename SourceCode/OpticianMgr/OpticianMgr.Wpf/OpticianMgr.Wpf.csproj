@@ -215,205 +215,269 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="FileCreater\FileCreater.cs" />
-    <Compile Include="Pages\TownDetailsWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddContactLensTypeWindow.xaml.cs">
+      <DependentUpon>AddContactLensTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddGlasstypeWindow.xaml.cs">
+      <DependentUpon>AddGlasstypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWindows\EditContactLensTypesWindow.xaml.cs">
+      <DependentUpon>EditContactLensTypesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWindows\EditGlasstypesWindow.xaml.cs">
+      <DependentUpon>EditGlasstypesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\ContactLensTypeDetailsWindow.xaml.cs">
+      <DependentUpon>ContactLensTypeDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\GlasstypeDetailsWindow.xaml.cs">
+      <DependentUpon>GlasstypeDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\CountryDetailsWindow.xaml.cs">
+      <DependentUpon>CountryDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWindows\EditCountriesWindow.xaml.cs">
+      <DependentUpon>EditCountriesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\TownDetailsWindow.xaml.cs">
       <DependentUpon>TownDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EditTownWindow.xaml.cs">
+    <Compile Include="Pages\EditWindows\EditTownWindow.xaml.cs">
       <DependentUpon>EditTownWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SentMessagesWindow.xaml.cs">
+    <Compile Include="Pages\MessagesPagesAndWindows\SentMessagesWindow.xaml.cs">
       <DependentUpon>SentMessagesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MultipleEMailPage.xaml.cs">
+    <Compile Include="Pages\MessagesPagesAndWindows\MultipleEMailPage.xaml.cs">
       <DependentUpon>MultipleEMailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MultipleSMSPage.xaml.cs">
+    <Compile Include="Pages\MessagesPagesAndWindows\MultipleSMSPage.xaml.cs">
       <DependentUpon>MultipleSMSPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SingleSMSPage.xaml.cs">
+    <Compile Include="Pages\MessagesPagesAndWindows\SingleSMSPage.xaml.cs">
       <DependentUpon>SingleSMSPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SingleEMailPage.xaml.cs">
+    <Compile Include="Pages\MessagesPagesAndWindows\SingleEMailPage.xaml.cs">
       <DependentUpon>SingleEMailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SingleMessageWindow.xaml.cs">
+    <Compile Include="Pages\MessagesPagesAndWindows\SingleMessageWindow.xaml.cs">
       <DependentUpon>SingleMessageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddDoctorWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddDoctorWindow.xaml.cs">
       <DependentUpon>AddDoctorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddCountryWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddCountryWindow.xaml.cs">
       <DependentUpon>AddCountryWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddContactLensesOrderWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddContactLensesOrderWindow.xaml.cs">
       <DependentUpon>AddContactLensesOrderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ContactLensOrderDetailsWindow.xaml.cs">
+    <Compile Include="Pages\ObjectDetailsWindows\ContactLensOrderDetailsWindow.xaml.cs">
       <DependentUpon>ContactLensOrderDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GlassesOrderDetailsWindow.xaml.cs">
+    <Compile Include="Pages\ObjectDetailsWindows\GlassesOrderDetailsWindow.xaml.cs">
       <DependentUpon>GlassesOrderDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddGlassesOrderWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddGlassesOrderWindow.xaml.cs">
       <DependentUpon>AddGlassesOrderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\OrdersPage.xaml.cs">
+    <Compile Include="Pages\MainPages\OrdersPage.xaml.cs">
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SupplierDetailsWindow.xaml.cs">
+    <Compile Include="Pages\ObjectDetailsWindows\SupplierDetailsWindow.xaml.cs">
       <DependentUpon>SupplierDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EyeGlassFrameDetailsWindow.xaml.cs">
+    <Compile Include="Pages\ObjectDetailsWindows\EyeGlassFrameDetailsWindow.xaml.cs">
       <DependentUpon>EyeGlassFrameDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CustomerDetailsWindow.xaml.cs">
+    <Compile Include="Pages\ObjectDetailsWindows\CustomerDetailsWindow.xaml.cs">
       <DependentUpon>CustomerDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddTownWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddTownWindow.xaml.cs">
       <DependentUpon>AddTownWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddCustomerWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddCustomerWindow.xaml.cs">
       <DependentUpon>AddCustomerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddEyeGlassesFrameWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddEyeGlassesFrameWindow.xaml.cs">
       <DependentUpon>AddEyeGlassesFrameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EyeGlassFramesPage.xaml.cs">
+    <Compile Include="Pages\MainPages\EyeGlassFramesPage.xaml.cs">
       <DependentUpon>EyeGlassFramesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MultipleMessagesPage.xaml.cs">
+    <Compile Include="Pages\MessagesPagesAndWindows\MultipleMessagesPage.xaml.cs">
       <DependentUpon>MultipleMessagesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\AddDoctorViewModel.cs" />
-    <Compile Include="ViewModel\AddCountryViewModel.cs" />
-    <Compile Include="ViewModel\AddContactLensesOrderViewModel.cs" />
-    <Compile Include="ViewModel\ContactLensOrderDetailsViewModel.cs" />
-    <Compile Include="ViewModel\TownDetailsViewModel.cs" />
-    <Compile Include="ViewModel\EditTownsViewModel.cs" />
-    <Compile Include="ViewModel\GlassesOrderDetailsViewModel.cs" />
-    <Compile Include="ViewModel\AddGlassesOrderViewModel.cs" />
-    <Compile Include="ViewModel\AddTownViewModel.cs" />
-    <Compile Include="ViewModel\AddCustomerViewModel.cs" />
-    <Compile Include="ViewModel\AddEyeGlassFrameModel.cs" />
-    <Compile Include="ViewModel\AddSupplierViewModel.cs" />
-    <Compile Include="ViewModel\MultipleMessagesViewModel.cs" />
-    <Compile Include="ViewModel\MultipleEmailViewModel.cs" />
-    <Compile Include="ViewModel\MultipleSMSViewModel.cs" />
-    <Compile Include="ViewModel\SingleSMSViewModel.cs" />
-    <Compile Include="ViewModel\SingleEmailViewModel.cs" />
-    <Compile Include="ViewModel\SingleMessageViewModel.cs" />
-    <Compile Include="ViewModel\OrdersViewModel.cs" />
-    <Compile Include="ViewModel\SupplierDetailsViewModel.cs" />
-    <Compile Include="ViewModel\EyeGlassFramesDetailsViewModel.cs" />
-    <Compile Include="ViewModel\CustomerDetailsViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModel.cs" />
-    <Compile Include="ViewModel\StatisticsViewModel.cs" />
-    <Compile Include="ViewModel\EyeGlassFramesViewModel.cs" />
-    <Compile Include="ViewModel\SentMessagesViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddContactLensTypeViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddGlasstypeViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddDoctorViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddCountryViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddContactLensesOrderViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\ContactLensOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\ContactLensTypeDetailsViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditContactLensTypesViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditGlasstypesViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\GlassTypeDetailsViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditCountriesViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\CountryDetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\TownDetailsViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditTownsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\GlassesOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddGlassesOrderViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddTownViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddCustomerViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddEyeGlassFrameModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\MultipleMessagesViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\MultipleEmailViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\MultipleSMSViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\SingleSMSViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\SingleEmailViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\SingleMessageViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\OrdersViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\SupplierDetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\EyeGlassFramesDetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\CustomerDetailsViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\StatisticsViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\EyeGlassFramesViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\SentMessagesViewModel.cs" />
     <Compile Include="WindowServices\IRequestClose.cs" />
     <Compile Include="WindowServices\IWindowService.cs" />
-    <Compile Include="Pages\AddSupplierWindow.xaml.cs">
+    <Compile Include="Pages\AddObjectWindows\AddSupplierWindow.xaml.cs">
       <DependentUpon>AddSupplierWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\StatisticsPage.xaml.cs">
+    <Compile Include="Pages\MainPages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SupplierPage.xaml.cs">
+    <Compile Include="Pages\MainPages\SupplierPage.xaml.cs">
       <DependentUpon>SupplierPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\SupplierViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\SupplierViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="WindowServices\WindowService.cs" />
-    <Page Include="Pages\TownDetailsWindow.xaml">
+    <Page Include="Pages\AddObjectWindows\AddContactLensTypeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\EditTownWindow.xaml">
+    <Page Include="Pages\AddObjectWindows\AddGlasstypeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SentMessagesWindow.xaml">
+    <Page Include="Pages\EditWindows\EditContactLensTypesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\MultipleEMailPage.xaml">
+    <Page Include="Pages\EditWindows\EditGlasstypesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\MultipleSMSPage.xaml">
+    <Page Include="Pages\ObjectDetailsWindows\ContactLensTypeDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SingleSMSPage.xaml">
+    <Page Include="Pages\ObjectDetailsWindows\GlasstypeDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SingleEMailPage.xaml">
+    <Page Include="Pages\ObjectDetailsWindows\CountryDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SingleMessageWindow.xaml">
+    <Page Include="Pages\EditWindows\EditCountriesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddDoctorWindow.xaml">
+    <Page Include="Pages\ObjectDetailsWindows\TownDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddCountryWindow.xaml">
+    <Page Include="Pages\EditWindows\EditTownWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddContactLensesOrderWindow.xaml">
+    <Page Include="Pages\MessagesPagesAndWindows\SentMessagesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ContactLensOrderDetailsWindow.xaml">
+    <Page Include="Pages\MessagesPagesAndWindows\MultipleEMailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\GlassesOrderDetailsWindow.xaml">
+    <Page Include="Pages\MessagesPagesAndWindows\MultipleSMSPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddGlassesOrderWindow.xaml">
+    <Page Include="Pages\MessagesPagesAndWindows\SingleSMSPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\OrdersPage.xaml">
+    <Page Include="Pages\MessagesPagesAndWindows\SingleEMailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SupplierDetailsWindow.xaml">
+    <Page Include="Pages\MessagesPagesAndWindows\SingleMessageWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\EyeGlassFrameDetailsWindow.xaml">
+    <Page Include="Pages\AddObjectWindows\AddDoctorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\CustomerDetailsWindow.xaml">
+    <Page Include="Pages\AddObjectWindows\AddCountryWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddTownWindow.xaml">
+    <Page Include="Pages\AddObjectWindows\AddContactLensesOrderWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddCustomerWindow.xaml">
+    <Page Include="Pages\ObjectDetailsWindows\ContactLensOrderDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddEyeGlassesFrameWindow.xaml">
+    <Page Include="Pages\ObjectDetailsWindows\GlassesOrderDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddGlassesOrderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPages\OrdersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\SupplierDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\EyeGlassFrameDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\CustomerDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddTownWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddCustomerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddEyeGlassesFrameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AddSupplierWindow.xaml">
+    <Page Include="Pages\AddObjectWindows\AddSupplierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CustomerPage.xaml">
+    <Page Include="Pages\MainPages\CustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -425,26 +489,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pages\CustomerPage.xaml.cs">
+    <Compile Include="Pages\MainPages\CustomerPage.xaml.cs">
       <DependentUpon>CustomerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\StatisticsPage.xaml">
+    <Page Include="Pages\MainPages\StatisticsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EyeGlassFramesPage.xaml">
+    <Page Include="Pages\MainPages\EyeGlassFramesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\MultipleMessagesPage.xaml">
+    <Page Include="Pages\MessagesPagesAndWindows\MultipleMessagesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SupplierPage.xaml">
+    <Page Include="Pages\MainPages\SupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -518,6 +582,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

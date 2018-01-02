@@ -19,17 +19,17 @@ using System.Windows.Input;
 
 namespace OpticianMgr.Wpf.ViewModel
 {
-    public class EditTownsViewModel : ViewModelBase, IRequestClose
+    public class EditCountriesViewModel : ViewModelBase, IRequestClose
     {
         private IUnitOfWork Uow { get; set; }
         public object Selected { get; set; }
 
-        public ICommand OpenTown { get; set; }
-        public ICommand AddTown { get; set; }
+        public ICommand OpenCountry { get; set; }
+        public ICommand AddCountry { get; set; }
         public ICommand FilterAndSort { get; set; }
         public ICommand DeleteFilter { get; set; }
-        public ObservableCollection<Town> Towns { get; set; }
-        public ICollectionView TownsView { get; set; }
+        public ObservableCollection<Country> Countries { get; set; }
+        public ICollectionView CountriesView { get; set; }
         private ResourceManager manager = Properties.Resources.ResourceManager;
 
         public event EventHandler<EventArgs> CloseRequested;
@@ -43,7 +43,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             get
             {
-                ObservableCollection<string> props = new ObservableCollection<string>(typeof(Town).GetProperties().Select(t => t.Name).ToList());
+                ObservableCollection<string> props = new ObservableCollection<string>(typeof(Country).GetProperties().Select(c => c.Name).ToList());
                 ObservableCollection<string> newList = new ObservableCollection<string>();
                 props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
                 foreach (var item in props)
@@ -55,33 +55,33 @@ namespace OpticianMgr.Wpf.ViewModel
                 return newList;
             }
         }
-        public EditTownsViewModel(IUnitOfWork _uow)
+        public EditCountriesViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
             this.SortProperty = "Id";
-            this.FilterProperty = "Ortsname";
-            this.Towns = GetAllTowns();
-            this.TownsView = CollectionViewSource.GetDefaultView(Towns);
-            OpenTown = new RelayCommand(OpenT);
-            AddTown = new RelayCommand(AddT);
-            FilterAndSort = new RelayCommand(FilterAndSortTowns);
+            this.FilterProperty = "Landname";
+            this.Countries = GetAllCountries();
+            this.CountriesView = CollectionViewSource.GetDefaultView(Countries);
+            OpenCountry = new RelayCommand(OpenC);
+            AddCountry = new RelayCommand(AddC);
+            FilterAndSort = new RelayCommand(FilterAndSortCountries);
             DeleteFilter = new RelayCommand(DeleteF);
         }
         public void DeleteF()
         {
             this.FilterText = "";
-            FilterAndSortTowns();
+            FilterAndSortCountries();
             this.RaisePropertyChanged(() => this.FilterText);
         }
         public void FillList()
         {
-            this.Towns = GetAllTowns();
-            this.RaisePropertyChanged(() => this.Towns);
-            this.TownsView = CollectionViewSource.GetDefaultView(Towns);
-            FilterAndSortTowns();
-            this.RaisePropertyChanged(() => this.TownsView);
+            this.Countries = GetAllCountries();
+            this.RaisePropertyChanged(() => this.Countries);
+            this.CountriesView = CollectionViewSource.GetDefaultView(Countries);
+            FilterAndSortCountries();
+            this.RaisePropertyChanged(() => this.CountriesView);
         }
-        public void FilterAndSortTowns()
+        public void FilterAndSortCountries()
         {
             IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
             this.TranslatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
@@ -93,9 +93,9 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             try
             {
-                this.TownsView.SortDescriptions.Clear();
-                if (typeof(Town).GetProperty(TranslatedSortProperty) != null)
-                    this.TownsView.SortDescriptions.Add(new SortDescription(this.TranslatedSortProperty, ListSortDirection.Ascending));
+                this.CountriesView.SortDescriptions.Clear();
+                if (typeof(Country).GetProperty(TranslatedSortProperty) != null)
+                    this.CountriesView.SortDescriptions.Add(new SortDescription(this.TranslatedSortProperty, ListSortDirection.Ascending));
             }
             catch (Exception e) { }
         }
@@ -105,20 +105,20 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 if (!String.IsNullOrEmpty(this.FilterText))
                 {
-                    this.TownsView.Filter = new Predicate<object>(Contains);
+                    this.CountriesView.Filter = new Predicate<object>(Contains);
                 }
                 else
-                    this.TownsView.Filter = null;
+                    this.CountriesView.Filter = null;
 
             }
             catch (Exception e) { }
         }
-        private bool Contains(object t)
+        private bool Contains(object c)
         {
-            Town town = t as Town;
-            if (typeof(Town).GetProperty(TranslatedFilterProperty) != null)
+            Country country = c as Country;
+            if (typeof(Country).GetProperty(TranslatedFilterProperty) != null)
             {
-                return town.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(town, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+                return country.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(country, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
             }
             else
             {
@@ -126,50 +126,50 @@ namespace OpticianMgr.Wpf.ViewModel
                 return false;
             }
         }
-        public void OpenT()
+        public void OpenC()
         {
             if (this.Selected != null)
             {
                 WindowService windowService = new WindowService();
-                TownDetailsViewModel viewModel = ViewModelLocator.TownDetailsViewModel;
-                viewModel.InitTown(((Town)this.Selected).Id);
-                EventHandler<EventArgs> refreshTownsHandler = null;
-                refreshTownsHandler = (sender, e) =>
+                CountryDetailsViewModel viewModel = ViewModelLocator.CountryDetailsViewModel;
+                viewModel.InitCountry(((Country)this.Selected).Id);
+                EventHandler<EventArgs> refreshCountriesHandler = null;
+                refreshCountriesHandler = (sender, e) =>
                 {
-                    viewModel.Refresh -= refreshTownsHandler;
+                    viewModel.Refresh -= refreshCountriesHandler;
                     this.FillList();
                 };
-                viewModel.Refresh += refreshTownsHandler;
-                windowService.ShowTownDetailsWindow(viewModel);
+                viewModel.Refresh += refreshCountriesHandler;
+                windowService.ShowCountryDetailsWindow(viewModel);
             }
             else
-                MessageBox.Show("Bitte wählen Sie zuerst einen Kunden aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Bitte wählen Sie zuerst ein Land aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
-        public void AddT()
+        public void AddC()
         {
             //MVVM says that the viewmodel shouldnt know about the view -> service, which shows new windows
             WindowService windowService = new WindowService();
-            AddTownViewModel viewModel = ViewModelLocator.AddTownViewModel;
-            EventHandler<EventArgs> refreshTownsHandler = null;
-            refreshTownsHandler = (sender, e) =>
+            AddCountryViewModel viewModel = ViewModelLocator.AddCountryViewModel;
+            EventHandler<EventArgs> refreshCountriesHandler = null;
+            refreshCountriesHandler = (sender, e) =>
             {
-                viewModel.Refresh -= refreshTownsHandler;
+                viewModel.Refresh -= refreshCountriesHandler;
                 this.FillList();
             };
-            viewModel.Refresh += refreshTownsHandler;
-            windowService.ShowAddTownWindow(viewModel);
+            viewModel.Refresh += refreshCountriesHandler;
+            windowService.ShowAddCountryWindow(viewModel);
         }
-        private ObservableCollection<Town> GetAllTowns()
+        private ObservableCollection<Country> GetAllCountries()
         {
-            var unitOfWorkTowns = this.Uow.TownRepository.Get().ToList();
-            ObservableCollection<Town> copiedTowns = new ObservableCollection<Town>();
-            foreach (var item in unitOfWorkTowns)
+            var unitOfWorkCountries = this.Uow.CountryRepository.Get().ToList();
+            ObservableCollection<Country> copiedCountries = new ObservableCollection<Country>();
+            foreach (var item in unitOfWorkCountries)
             {
-                Town town = new Town();
-                GenericRepository<Customer>.CopyProperties(town, item);
-                copiedTowns.Add(town);
+                Country country = new Country();
+                GenericRepository<Country>.CopyProperties(country, item);
+                copiedCountries.Add(country);
             }
-            return copiedTowns;
+            return copiedCountries;
         }
     }
 }
