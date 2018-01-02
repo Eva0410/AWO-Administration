@@ -76,6 +76,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 this.Customer.Country = null;
             try
             {
+                this.Customer.Deleted = false;
                 this.Uow.CustomerRepository.Insert(this.Customer);
                 this.Uow.Save();
                 this.CloseRequested?.Invoke(this, null);

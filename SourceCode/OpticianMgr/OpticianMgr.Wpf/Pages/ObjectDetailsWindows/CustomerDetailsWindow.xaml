@@ -108,7 +108,7 @@
             </Grid>
             <StackPanel Style="{StaticResource ButtonStackPanel}">
                 <Button Command="{Binding ShowMessages}">Versendete Nachrichten anzeigen</Button>
-                <!--<Button Command="{Binding Delete}">Kunde löschen</Button> Kunden sollen nicht gelöscht werden-->
+                <Button Command="{Binding Delete}">Kunde löschen</Button>
                 <Button Command="{Binding Cancel}">Abbrechen</Button>
                 <Button Command="{Binding Submit}">Speichern</Button>
             </StackPanel>

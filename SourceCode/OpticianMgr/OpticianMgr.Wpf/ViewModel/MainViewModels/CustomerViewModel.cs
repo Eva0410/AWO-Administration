@@ -30,6 +30,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ObservableCollection<Customer> Customers { get; set; }
         public ICollectionView CustomersView { get; set; }
         private ResourceManager manager = Properties.Resources.ResourceManager;
+        public bool ShowDeleted { get; set; }
         public string TranslatedSortProperty { get; set; }
         public string FilterProperty { get; set; }
         public string TranslatedFilterProperty { get; set; }
@@ -58,12 +59,12 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Uow = _uow;
             this.SortProperty = "Id";
             this.FilterProperty = "Nachname";
-            this.Customers = GetAllCustomers();
-            this.CustomersView = CollectionViewSource.GetDefaultView(Customers);
+            FillList();
             OpenCustomer = new RelayCommand(OpenC);
             AddCustomer = new RelayCommand(AddC);
             FilterAndSort = new RelayCommand(FilterAndSortCustomers);
             DeleteFilter = new RelayCommand(DeleteF);
+            this.ShowDeleted = false;
 
             EventHandler<EventArgs> refreshCustomers = null;
             refreshCustomers = (sender, e) =>
@@ -122,29 +123,43 @@ namespace OpticianMgr.Wpf.ViewModel
                     this.CustomersView.Filter = new Predicate<object>(Contains);
                 }
                 else
-                    this.CustomersView.Filter = null;
+                    this.CustomersView.Filter = new Predicate<object>(IsDeleted);
 
             }
             catch (Exception e) { }
         }
+        private bool IsDeleted(object c)
+        {
+            Customer customer = c as Customer;
+            if (!(customer.Deleted == true && false == this.ShowDeleted))
+                return true;
+            return false;
+        }
         private bool Contains(object c)
         {
             Customer customer = c as Customer;
-            if (typeof(Customer).GetProperty(TranslatedFilterProperty) != null)
+
+            if(!IsDeleted(c))
             {
-                return customer.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(customer, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+                if (typeof(Customer).GetProperty(TranslatedFilterProperty) != null)
+                {
+                    return customer.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(customer, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+                }
+                else if (typeof(Country).GetProperty(TranslatedFilterProperty) != null) //Does the user filter by countryname?
+                {
+                    return customer.Country?.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(customer.Country, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+                }
+                else if (typeof(Town).GetProperty(TranslatedFilterProperty) != null) //Does the user filter by countryname?
+                {
+                    return customer.Town?.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(customer.Town, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+                }
+                else
+                {
+                    MessageBox.Show("Beim Filtern ist ein Fehler aufgetreten!");
+                    return false;
+                }
             }
-            else if (typeof(Country).GetProperty(TranslatedFilterProperty) != null) //Does the user filter by countryname?
-            {
-                return customer.Country?.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(customer.Country, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
-            }
-            else if (typeof(Town).GetProperty(TranslatedFilterProperty) != null) //Does the user filter by countryname?
-            {
-                return customer.Town?.GetType().GetProperty(this.TranslatedFilterProperty).GetValue(customer.Town, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
-            }
-            else
-            {
-                MessageBox.Show("Beim Filtern ist ein Fehler aufgetreten!");
+            else {
                 return false;
             }
         }
@@ -152,17 +167,24 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             if (this.Selected != null)
             {
-                WindowService windowService = new WindowService();
-                CustomerDetailsViewModel viewModel = ViewModelLocator.CustomerDetailsViewModel;
-                viewModel.InitCustomer(((Customer)this.Selected).Id);
-                EventHandler<EventArgs> refreshCustomersHandler = null;
-                refreshCustomersHandler = (sender, e) =>
+                if (((Customer)this.Selected).Deleted)
                 {
-                    viewModel.Refresh -= refreshCustomersHandler;
-                    this.FillList();
-                };
-                viewModel.Refresh += refreshCustomersHandler;
-                windowService.ShowCustomerDetailsWindow(viewModel);
+                    MessageBox.Show("Dieser Kunde wurde bereits gelöscht!", "Kunde gelöscht", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    WindowService windowService = new WindowService();
+                    CustomerDetailsViewModel viewModel = ViewModelLocator.CustomerDetailsViewModel;
+                    viewModel.InitCustomer(((Customer)this.Selected).Id);
+                    EventHandler<EventArgs> refreshCustomersHandler = null;
+                    refreshCustomersHandler = (sender, e) =>
+                    {
+                        viewModel.Refresh -= refreshCustomersHandler;
+                        this.FillList();
+                    };
+                    viewModel.Refresh += refreshCustomersHandler;
+                    windowService.ShowCustomerDetailsWindow(viewModel);
+                }
             }
             else
                 MessageBox.Show("Bitte wählen Sie zuerst einen Kunden aus!", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);

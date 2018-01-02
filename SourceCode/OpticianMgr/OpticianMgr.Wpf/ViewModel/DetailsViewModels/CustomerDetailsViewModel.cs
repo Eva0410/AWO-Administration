@@ -30,8 +30,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand Submit { get; set; }
         public ICommand AddTown { get; set; }
         public ICommand AddCountry { get; set; }
-        //not used anymore
-        //public ICommand Delete { get; set; }
+        public ICommand Delete { get; set; }
         public ICommand AddGlassesOrder { get; set; }
         public ICommand AddContactLensOrder { get; set; }
         public ICommand Show { get; set; }
@@ -43,7 +42,7 @@ namespace OpticianMgr.Wpf.ViewModel
             Submit = new RelayCommand(SaveCustomer);
             AddTown = new RelayCommand(AddT);
             AddCountry = new RelayCommand(AddC);
-            //Delete = new RelayCommand(DeleteC);
+            Delete = new RelayCommand(DeleteC);
             AddGlassesOrder = new RelayCommand(AddGO);
             AddContactLensOrder = new RelayCommand(AddCLO);
             ShowMessages = new RelayCommand(ShowM);
@@ -89,20 +88,34 @@ namespace OpticianMgr.Wpf.ViewModel
             this.Customer.Town = this.Customer.Town_Id == null ? Towns[0] : Towns.Where(t => t.Id == this.Customer.Town_Id).FirstOrDefault();
             this.Customer.Country = this.Customer.Country_Id == null ? Countries[0] : Countries.Where(c => c.Id == this.Customer.Country_Id).FirstOrDefault();
         }
-        //not used anymore
-        //public void DeleteC()
-        //{
-        //    var result = MessageBox.Show("Wollen Sie den Kunden '" + this.Customer.LastName + "' wirklich löschen?", "Kunde löschen", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        //    if (MessageBoxResult.Yes == result)
-        //    {
-        //        var c = this.Uow.CustomerRepository.GetById(this.Customer.Id);
-        //        this.Uow.CustomerRepository.Delete(c);
-        //        this.Uow.Save();
-        //        this.CloseRequested?.Invoke(this, null);
-        //        this.Refresh?.Invoke(this, null);
-        //        this.InitFields();
-        //    }
-        //}
+
+        public void DeleteC()
+        {
+            var result = MessageBox.Show(String.Format("Wollen Sie den Kunden {0} wirklich löschen? {1}Hinweis: Dadurch kann der Kunde zwar auf der Hauptseite angezeigt werden, aber er kann keine neuen Bestellugen mehr erhalten und nicht mehr bearbeitet werden.", this.Customer.LastName, Environment.NewLine), "Kunde löschen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (MessageBoxResult.Yes == result)
+            {
+                var c = this.Uow.CustomerRepository.GetById(this.Customer.Id);
+                c.Deleted = true;
+                c.Town = null;
+                c.Country = null;
+                this.Uow.CustomerRepository.Update(c);
+                this.Uow.Save();
+                this.CloseRequested?.Invoke(this, null);
+                this.Refresh?.Invoke(this, null);
+                this.InitFields();
+            }
+            //No customer should be deleted completely
+            //var result = MessageBox.Show("Wollen Sie den Kunden '" + this.Customer.LastName + "' wirklich löschen?", "Kunde löschen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //if (MessageBoxResult.Yes == result)
+            //{
+            //    var c = this.Uow.CustomerRepository.GetById(this.Customer.Id);
+            //    this.Uow.CustomerRepository.Delete(c);
+            //    this.Uow.Save();
+            //    this.CloseRequested?.Invoke(this, null);
+            //    this.Refresh?.Invoke(this, null);
+            //    this.InitFields();
+            //}
+        }
         public void AddT()
         {
             WindowService windowService = new WindowService();

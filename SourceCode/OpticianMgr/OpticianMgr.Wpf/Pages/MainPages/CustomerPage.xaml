@@ -17,6 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="0">
                 <TextBlock>Filtern nach:</TextBlock>
@@ -47,6 +48,10 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Button Command="{Binding FilterAndSort}">Sortieren</Button>
+            </StackPanel>
+            <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="2">
+                <TextBlock>Gelöschte Kunden anzeigen:</TextBlock>
+                <CheckBox IsChecked="{Binding ShowDeleted, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></CheckBox>
             </StackPanel>
         </Grid>
 
