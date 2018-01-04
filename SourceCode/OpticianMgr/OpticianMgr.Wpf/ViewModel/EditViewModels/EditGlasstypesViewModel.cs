@@ -97,7 +97,10 @@ namespace OpticianMgr.Wpf.ViewModel
                 if (typeof(Glasstype).GetProperty(TranslatedSortProperty) != null)
                     this.GlasstypesView.SortDescriptions.Add(new SortDescription(this.TranslatedSortProperty, ListSortDirection.Ascending));
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         public void Filter()
         {
@@ -111,7 +114,10 @@ namespace OpticianMgr.Wpf.ViewModel
                     this.GlasstypesView.Filter = null;
 
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         private bool Contains(object g)
         {

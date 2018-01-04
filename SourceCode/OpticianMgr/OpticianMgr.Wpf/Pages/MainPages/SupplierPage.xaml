@@ -13,7 +13,6 @@
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="0">
                 <TextBlock>Filtern nach:</TextBlock>
@@ -33,18 +32,6 @@
                 <Button Command="{Binding DeleteFilter}" >Filter zurücksetzen</Button>
             </StackPanel>
             <Button Grid.Row="0" Command="{Binding AddSupplier}" Style="{StaticResource AddAndEditButton}">Neuen Lieferant hinzufügen</Button>
-            <Button Grid.Row="1" Command="{Binding OpenSupplier}" Style="{StaticResource AddAndEditButton}">Lieferant anzeigen</Button>
-            <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="1" >
-                <TextBlock>Sortieren nach:</TextBlock>
-                <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <Button Command="{Binding FilterAndSort}" >Sortieren</Button>
-            </StackPanel>
         </Grid>
 
         <ListView ItemsSource="{Binding SuppliersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
@@ -65,7 +52,7 @@
 
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  >
-                        <GridViewColumnHeader Content="Lieferantenname">
+                        <GridViewColumnHeader Content="Name">
                             <GridViewColumnHeader.InputBindings>
                                 <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="Name"></MouseBinding>
 
@@ -149,7 +136,7 @@
                         </GridViewColumnHeader>
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding FAX, UpdateSourceTrigger=PropertyChanged}"  >
-                        <GridViewColumnHeader Content="Fax">
+                        <GridViewColumnHeader Content="FAX">
                             <GridViewColumnHeader.InputBindings>
                                 <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="FAX"></MouseBinding>
 
@@ -251,6 +238,10 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <cmd:EventToCommand Command="{Binding OpenSupplier}"></cmd:EventToCommand>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="Loaded">
+                    <cmd:EventToCommand Command="{Binding Initialized}"
+                                        PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>

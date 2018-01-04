@@ -132,7 +132,10 @@ namespace OpticianMgr.Wpf.ViewModel
                     this.EyeGlassFramesView.Filter = null;
 
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         public void Sort()
         {
@@ -144,7 +147,9 @@ namespace OpticianMgr.Wpf.ViewModel
                 else if(typeof(Supplier).GetProperty(TranslatedSortProperty) != null)
                     this.EyeGlassFramesView.SortDescriptions.Add(new SortDescription("Supplier." + TranslatedSortProperty, ListSortDirection.Ascending));
             }
-            catch (Exception e) { }
+            catch (Exception e) {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         private bool Contains(object f)
         {

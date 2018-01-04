@@ -1,8 +1,9 @@
-\select@language {english}
-\select@language {english}
-\select@language {english}
+\select@language {german}
 \select@language {german}
 \select@language {english}
+\select@language {german}
+\select@language {german}
+\select@language {german}
 \contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
 \contentsline {section}{\numberline {1.1}Initial Situation}{3}{section.1.1}
 \contentsline {section}{\numberline {1.2}Goals}{3}{section.1.2}
@@ -11,10 +12,14 @@
 \contentsline {section}{\numberline {1.5}Related Work and Projects}{4}{section.1.5}
 \contentsline {section}{\numberline {1.6}Structure of the Thesis}{4}{section.1.6}
 \contentsline {chapter}{\numberline {2}Hintergr\IeC {\"u}nde}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Ist-Situation}{5}{section.2.1}
 \contentsline {chapter}{\numberline {3}Verwendete Technologien}{6}{chapter.3}
 \contentsline {section}{\numberline {3.1}Entity Framework}{6}{section.3.1}
 \contentsline {chapter}{\numberline {4}Beschreibung des Endproduktes}{7}{chapter.4}
-\contentsline {chapter}{\numberline {5}Selbstevaluation}{8}{chapter.5}
-\contentsline {chapter}{\numberline {6}Summary}{9}{chapter.6}
-\contentsline {chapter}{\numberline {A}Additional Information}{14}{appendix.A}
-\contentsline {chapter}{\numberline {B}Individual Goals}{15}{appendix.B}
+\contentsline {section}{\numberline {4.1}Administrion}{7}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Statistiken}{7}{subsection.4.1.1}
+\contentsline {subsubsection}{Technischer Hintergrund}{7}{section*.5}
+\contentsline {chapter}{\numberline {5}Selbstevaluation}{10}{chapter.5}
+\contentsline {chapter}{\numberline {6}Summary}{11}{chapter.6}
+\contentsline {chapter}{\numberline {A}Additional Information}{16}{appendix.A}
+\contentsline {chapter}{\numberline {B}Individual Goals}{17}{appendix.B}

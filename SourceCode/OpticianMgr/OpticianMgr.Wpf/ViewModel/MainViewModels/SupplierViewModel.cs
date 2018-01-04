@@ -31,13 +31,12 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand DeleteFilter { get; set; }
         public ICommand AddSupplier { get; set; }
         public ICommand OpenSupplier { get; set; }
-        public string TranslatedSortProperty { get; set; }
         public string FilterProperty { get; set; }
         public string TranslatedFilterProperty { get; set; }
         public string FilterText { get; set; }
-        public string SortProperty { get; set; }
         public ICommand SortCommand { get; set; }
         public ICommand SortShift { get; set; }
+        public ICommand Initialized { get; set; }
 
         //The properties of the supplier class are safed in English but need to be shown in German
         public ObservableCollection<String> PropertiesList
@@ -58,7 +57,8 @@ namespace OpticianMgr.Wpf.ViewModel
                 return newList;
             }
         }
-        public List<GridViewColumnHeader> Headers { get; set; }
+        public List<GridViewColumnHeader> SortHeaders { get; set; }
+        public List<GridViewColumnHeader> AllHeaders { get; set; }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -66,16 +66,16 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             this.Uow = _uow;
             this.FilterProperty = "Name";
-            this.SortProperty = "Id";
             this.Suppliers = GetAllSuppliers();
             this.SuppliersView = CollectionViewSource.GetDefaultView(Suppliers);
-            FilterAndSort = new RelayCommand(FilterAndSortSuppliers);
+            FilterAndSort = new RelayCommand(FilterSuppliers);
             DeleteFilter = new RelayCommand(DeleteF);
             AddSupplier = new RelayCommand(AddS);
             OpenSupplier = new RelayCommand(OpenS);
             SortCommand = new RelayCommand<RoutedEventArgs>(SortS);
             SortShift = new RelayCommand<object>(SortSh);
-            Headers = new List<GridViewColumnHeader>();
+            SortHeaders = new List<GridViewColumnHeader>();
+            Initialized = new RelayCommand<RoutedEventArgs>(Init);
 
             EventHandler<EventArgs> refreshSuppliers = null;
             refreshSuppliers = (sender, e) =>
@@ -85,38 +85,66 @@ namespace OpticianMgr.Wpf.ViewModel
             ViewModelLocator.TownDetailsViewModel.Refresh += refreshSuppliers;
             ViewModelLocator.CountryDetailsViewModel.Refresh += refreshSuppliers;
         }
+        private void Init(RoutedEventArgs p )
+        {
+            AllHeaders = new List<GridViewColumnHeader>();
+            ListView lv = p.Source as ListView;
+            GridView gv = (GridView)lv.View;
+            foreach (var item in gv.Columns)
+            {
+                AllHeaders.Add(item.Header as GridViewColumnHeader);
+            }
+        }
         //Click without shift key
         private void SortS(RoutedEventArgs e)
         {
-            GridViewColumnHeader column = e.Source as GridViewColumnHeader;
-            if (column == null)
+            GridViewColumnHeader columnHeader = e.Source as GridViewColumnHeader;
+
+            if (columnHeader == null)
             {
                 return;
             }
 
             ListSortDirection dir;
+            string header;
             //Same column pressed?
-            if (Headers.Count > 0 && Headers[0] == column)
+            if (SortHeaders.Count > 0 && SortHeaders[0] == columnHeader)
             {
                 //Change sort direction
                 dir = this.SuppliersView.SortDescriptions[0].Direction;
                 dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                header = ChangeArrow(columnHeader, dir);
             }
             else
             {
                 //Remove arrow from old column header
-                if (Headers.Count > 0)
+                if (SortHeaders.Count > 0)
                 {
-                    Headers[0].Column.HeaderTemplate = null;
-                    Headers[0].Column.Width = Headers[0].ActualWidth - 20;
+                    foreach (var item in SortHeaders)
+                    {
+                        item.Column.HeaderTemplate = null;
+                        item.Column.Width = item.ActualWidth - 20;
+                    }
                 }
-                Headers.Clear();
-                Headers.Add(column);
-                //new column header must be wider
-                column.Column.Width = column.ActualWidth + 20;
+                SortHeaders.Clear();
+                SortHeaders.Add(columnHeader);
                 //default sort direction is ascending
                 dir = ListSortDirection.Ascending;
+                header = SetNewArrow(columnHeader, dir);
             }
+            this.SuppliersView.SortDescriptions.Clear();
+            this.SuppliersView.SortDescriptions.Add(new SortDescription(header, dir));
+        }
+        private string SetNewArrow(GridViewColumnHeader column, ListSortDirection dir)
+        {
+            //new column header must be wider
+            column.Column.Width = column.ActualWidth + 20;
+
+            return ChangeArrow(column, dir);
+        }
+        private string ChangeArrow(GridViewColumnHeader column,ListSortDirection dir)
+        {
+
             //insert arrow
             if (dir == ListSortDirection.Ascending)
             {
@@ -130,35 +158,50 @@ namespace OpticianMgr.Wpf.ViewModel
             string header = string.Empty;
 
             // get binding name for sort description 
-            Binding b = Headers[0].Column.DisplayMemberBinding as Binding;
+            Binding b = column.Column.DisplayMemberBinding as Binding;
             if (b != null)
             {
                 header = b.Path.Path;
             }
-
-            this.SuppliersView.SortDescriptions.Clear();
-            this.SuppliersView.SortDescriptions.Add(new SortDescription(header, dir));
+            return header;
         }
         //Click with shift
         private void SortSh(object p)
         {
-            string column = p as string;
-            if(this.SuppliersView.SortDescriptions.Count >= 1)
+            string columnName = p as string;
+            string germanColumnName = TranslateEnglishToGerman(columnName);
+            //Get gridviewcolumnheader
+            var columnHeader = AllHeaders.Where(h => String.Equals(h.Content.ToString(), germanColumnName)).ToList().FirstOrDefault();
+
+            if(columnHeader == null)
+            {
+                return;
+            }
+            if (this.SuppliersView.SortDescriptions.Count >= 1)
             {
                 ListSortDirection dir;
                 int index = this.SuppliersView.SortDescriptions.Count - 1;
                 //Change sorting direction
-                if (this.SuppliersView.SortDescriptions.Count == index + 1 && this.SuppliersView.SortDescriptions[index].PropertyName == column)
+                if (this.SuppliersView.SortDescriptions.Count == index + 1 && this.SuppliersView.SortDescriptions[index].PropertyName == columnName)
                 {
                     dir = this.SuppliersView.SortDescriptions[index].Direction;
                     dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
                     this.SuppliersView.SortDescriptions.RemoveAt(index);
-                    this.SuppliersView.SortDescriptions.Insert(index, new SortDescription(column, dir));
+                    this.SuppliersView.SortDescriptions.Insert(index, new SortDescription(columnName, dir));
+                    ChangeArrow(columnHeader, dir);
+                    SortHeaders.Add(columnHeader);
                 }
-                else
+                else if(this.SuppliersView.SortDescriptions.Count(s => s.PropertyName == columnName) == 0)
                 {
+                    if (this.SuppliersView.SortDescriptions.Count >= 3)
+                    {
+                        MessageBox.Show("Sie können maximal nach drei Spalten sortieren!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        return;
+                    }
                     dir = ListSortDirection.Ascending;
-                    this.SuppliersView.SortDescriptions.Add(new SortDescription(column, dir));
+                    SetNewArrow(columnHeader, dir);
+                    this.SuppliersView.SortDescriptions.Add(new SortDescription(columnName, dir));
+                    SortHeaders.Add(columnHeader);
                 }
             }
         }
@@ -191,34 +234,31 @@ namespace OpticianMgr.Wpf.ViewModel
             }
             return copiedSuppliers;
         }
+        private string TranslateEnglishToGerman(string englishName)
+        {
+            if (englishName.Contains("."))
+            {
+                englishName = englishName.Split('.')[1];
+            }
+            string german = manager.GetString(englishName);
+            german = german == "Ortsname" ? "Ort" : german;
+            german = german == "Landname" ? "Land" : german;
+            return german;
+        }
+        private string TranslateGermanToEnglish(string germanName)
+        {
+            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
+            germanName = germanName == "Ort" ? "Ortsname" : germanName; //Program filters by the name of the town and not by by town-object
+            germanName = germanName == "Land" ? "Landname" : germanName;
+            return dictionary.FirstOrDefault(e => e.Value.ToString() == germanName).Key?.ToString();
+        }
         /// <summary>
         /// Refreshes and filter the supplier list
         /// </summary>
-        public void FilterAndSortSuppliers()
+        public void FilterSuppliers()
         {
-            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
-            this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty; //Program filters by the name of the town and not by by town-object
-            this.FilterProperty = this.FilterProperty == "Land" ? "Landname" : this.FilterProperty;
-            this.SortProperty = this.SortProperty == "Ort" ? "Ortsname" : this.SortProperty;
-            this.SortProperty = this.SortProperty == "Land" ? "Landname" : this.SortProperty;
-            this.TranslatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
-            this.TranslatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
+            this.TranslatedFilterProperty = TranslateGermanToEnglish(this.FilterProperty);
             Filter();
-            //Sort();
-        }
-        public void Sort()
-        {
-            try
-            {
-                this.SuppliersView.SortDescriptions.Clear();
-                if (typeof(Supplier).GetProperty(TranslatedSortProperty) != null)
-                    this.SuppliersView.SortDescriptions.Add(new SortDescription(this.TranslatedSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Country).GetProperty(TranslatedSortProperty) != null)
-                    this.SuppliersView.SortDescriptions.Add(new SortDescription("Country." + TranslatedSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Town).GetProperty(TranslatedSortProperty) != null)
-                    this.SuppliersView.SortDescriptions.Add(new SortDescription("Town." + TranslatedSortProperty, ListSortDirection.Ascending));
-            }
-            catch (Exception e) { }
         }
         public void Filter()
         {
@@ -232,7 +272,10 @@ namespace OpticianMgr.Wpf.ViewModel
                     this.SuppliersView.Filter = null;
 
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         private bool Contains(object s)
         {
@@ -259,15 +302,21 @@ namespace OpticianMgr.Wpf.ViewModel
         public void DeleteF()
         {
             this.FilterText = "";
-            this.FilterAndSortSuppliers();
+            this.FilterSuppliers();
             this.RaisePropertyChanged(() => this.FilterText);
         }
         public void FillList()
         {
             this.Suppliers = GetAllSuppliers();
             this.RaisePropertyChanged(() => this.Suppliers);
+            var sort = this.SuppliersView.SortDescriptions;
             this.SuppliersView = CollectionViewSource.GetDefaultView(Suppliers);
-            FilterAndSortSuppliers();
+            this.SuppliersView.SortDescriptions.Clear();
+            foreach (var item in sort)
+            {
+                this.SuppliersView.SortDescriptions.Add(item);
+            }
+            FilterSuppliers();
             this.RaisePropertyChanged(() => this.SuppliersView);
         }
         //add supplier

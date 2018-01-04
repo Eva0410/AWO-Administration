@@ -112,7 +112,10 @@ namespace OpticianMgr.Wpf.ViewModel
                 else if (typeof(Town).GetProperty(TranslatedSortProperty) != null)
                     this.CustomersView.SortDescriptions.Add(new SortDescription("Town." + TranslatedSortProperty, ListSortDirection.Ascending));
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         public void Filter()
         {
@@ -123,12 +126,14 @@ namespace OpticianMgr.Wpf.ViewModel
                     this.CustomersView.Filter = new Predicate<object>(Contains);
                 }
                 else
-                    this.CustomersView.Filter = new Predicate<object>(IsDeleted);
+                    this.CustomersView.Filter = new Predicate<object>(IsCustomerShown);
 
             }
-            catch (Exception e) { }
+            catch (Exception e) {
+                Console.WriteLine(e.StackTrace);
+            }
         }
-        private bool IsDeleted(object c)
+        private bool IsCustomerShown(object c)
         {
             Customer customer = c as Customer;
             if (!(customer.Deleted == true && false == this.ShowDeleted))
@@ -139,7 +144,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             Customer customer = c as Customer;
 
-            if(!IsDeleted(c))
+            if(IsCustomerShown(c))
             {
                 if (typeof(Customer).GetProperty(TranslatedFilterProperty) != null)
                 {

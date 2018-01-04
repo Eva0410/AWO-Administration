@@ -97,7 +97,10 @@ namespace OpticianMgr.Wpf.ViewModel
                 if (typeof(ContactLensType).GetProperty(TranslatedSortProperty) != null)
                     this.ContactLensTypesView.SortDescriptions.Add(new SortDescription(this.TranslatedSortProperty, ListSortDirection.Ascending));
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         public void Filter()
         {
@@ -111,7 +114,10 @@ namespace OpticianMgr.Wpf.ViewModel
                     this.ContactLensTypesView.Filter = null;
 
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         private bool Contains(object c)
         {

@@ -217,7 +217,10 @@ namespace OpticianMgr.Wpf.ViewModel
                 else if (typeof(Glasstype).GetProperty(TranslatedGlassesSortProperty) != null)
                     this.GlassesView.SortDescriptions.Add(new SortDescription("GlassType." + TranslatedGlassesSortProperty, ListSortDirection.Ascending));
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         public void SortContactLenses()
         {
@@ -233,7 +236,10 @@ namespace OpticianMgr.Wpf.ViewModel
                 else if (typeof(ContactLensType).GetProperty(TranslatedLensesSortProperty) != null)
                     this.ContactLensesView.SortDescriptions.Add(new SortDescription("ContactLensType." + TranslatedLensesSortProperty, ListSortDirection.Ascending));
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         public void FilterGlasses()
         {
@@ -247,7 +253,10 @@ namespace OpticianMgr.Wpf.ViewModel
                     this.GlassesView.Filter = null;
 
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         public void FilterContactLenses()
         {
@@ -261,7 +270,9 @@ namespace OpticianMgr.Wpf.ViewModel
                     this.ContactLensesView.Filter = null;
 
             }
-            catch (Exception e) { }
+            catch (Exception e) {
+                Console.WriteLine(e.StackTrace);
+            }
         }
         private bool GlassesContains(object o)
         {
