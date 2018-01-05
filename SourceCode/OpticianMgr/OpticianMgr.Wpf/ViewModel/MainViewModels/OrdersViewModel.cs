@@ -37,21 +37,26 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand OpenLenses { get; set; }
         public ICommand FilterAndSortC { get; set; }
         public ICommand DeleteFilterC { get; set; }
+        public ICommand SortCommandG { get; set; }
+        public ICommand SortShiftG { get; set; }
+        public ICommand InitializedG { get; set; }
+        public SortManager SortManagerG { get; set; }
+        public ICommand SortCommandC { get; set; }
+        public ICommand SortShiftC { get; set; }
+        public ICommand InitializedC { get; set; }
+        public SortManager SortManagerC { get; set; }
         public ObservableCollection<Order> Glasses { get; set; }
         public ICollectionView GlassesView { get; set; }
         public ObservableCollection<Order> ContactLenses { get; set; }
         public ICollectionView ContactLensesView { get; set; }
         private ResourceManager manager = Properties.Resources.ResourceManager;
-        public string TranslatedGlassesSortProperty { get; set; }
+        
         public string FilterGlassesProperty { get; set; }
         public string TranslatedGlassesFilterProperty { get; set; }
         public string FilterGlassesText { get; set; }
-        public string SortGlassesProperty { get; set; }
-        public string TranslatedLensesSortProperty { get; set; }
         public string FilterLensesProperty { get; set; }
         public string TranslatedLensesFilterProperty { get; set; }
         public string FilterLensesText { get; set; }
-        public string SortLensesProperty { get; set; }
         public ObservableCollection<String> GlassesPropertiesList
         {
             get
@@ -110,20 +115,26 @@ namespace OpticianMgr.Wpf.ViewModel
         public OrdersViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
-            this.SortGlassesProperty = "Id";
             this.FilterGlassesProperty = "Kunde";
-            this.SortLensesProperty = "Id";
             this.FilterLensesProperty = "Kunde";
             this.Glasses = GetAllGlassses();
             this.GlassesView = CollectionViewSource.GetDefaultView(Glasses);
             this.ContactLenses = GetAllContactLenses();
             this.ContactLensesView = CollectionViewSource.GetDefaultView(ContactLenses);
             OpenGlasses = new RelayCommand(OpenG);
-            FilterAndSortG = new RelayCommand(FilterAndSortGlasses);
+            FilterAndSortG = new RelayCommand(FilterGlasses);
             DeleteFilterG = new RelayCommand(DeleteGlassesF);
             OpenLenses = new RelayCommand(OpenC);
-            FilterAndSortC = new RelayCommand(FilterAndSortContactLenses);
+            FilterAndSortC = new RelayCommand(FilterContactLenses);
             DeleteFilterC = new RelayCommand(DeleteLensesF);
+            SortCommandG = new RelayCommand<RoutedEventArgs>(SortSG);
+            SortShiftG = new RelayCommand<object>(SortShG);
+            InitializedG = new RelayCommand<RoutedEventArgs>(InitG);
+            SortManagerG = new SortManager();
+            SortCommandC = new RelayCommand<RoutedEventArgs>(SortSC);
+            SortShiftC = new RelayCommand<object>(SortShC);
+            InitializedC = new RelayCommand<RoutedEventArgs>(InitC);
+            SortManagerC = new SortManager();
 
             EventHandler<EventArgs> refreshGlassesOrders = null;
             refreshGlassesOrders = (sender, e) =>
@@ -143,105 +154,100 @@ namespace OpticianMgr.Wpf.ViewModel
             ViewModelLocator.ContactLensOrderDetailsViewModel.Refresh += refreshContactLensOrders;
             ViewModelLocator.ContactLensTypeDetailsViewModel.Refresh += refreshContactLensOrders;
         }
+        private void InitG(RoutedEventArgs p)
+        {
+            SortManagerG.Init(p);
+        }
+        //Click without shift key
+        private void SortSG(RoutedEventArgs e)
+        {
+            var tmp = this.GlassesView;
+            SortManagerG.SortNormal(e, ref tmp);
+        }
+
+        //Click with shift
+        private void SortShG(object p)
+        {
+            var tmp = this.GlassesView;
+            SortManagerG.SortShift(p, ref tmp);
+        }
+        private void InitC(RoutedEventArgs p)
+        {
+            SortManagerC.Init(p);
+        }
+        //Click without shift key
+        private void SortSC(RoutedEventArgs e)
+        {
+            var tmp = this.ContactLensesView;
+            SortManagerC.SortNormal(e, ref tmp);
+        }
+
+        //Click with shift
+        private void SortShC(object p)
+        {
+            var tmp = ContactLensesView;
+            SortManagerC.SortShift(p, ref tmp);
+        }
         public void DeleteGlassesF()
         {
             this.FilterGlassesText = "";
-            FilterAndSortGlasses();
+            FilterGlasses();
             this.RaisePropertyChanged(() => this.FilterGlassesText);
         }
         public void DeleteLensesF()
         {
             this.FilterLensesText = "";
-            FilterAndSortContactLenses();
+            FilterContactLenses();
             this.RaisePropertyChanged(() => this.FilterLensesText);
         }
         public void FillGlassesList()
         {
             this.Glasses = GetAllGlassses();
             this.RaisePropertyChanged(() => this.Glasses);
+            var sort = this.GlassesView.SortDescriptions;
             this.GlassesView = CollectionViewSource.GetDefaultView(Glasses);
-            FilterAndSortGlasses();
+            this.GlassesView.SortDescriptions.Clear();
+            foreach (var item in sort)
+            {
+                this.GlassesView.SortDescriptions.Add(item);
+            }
+            FilterGlasses();
             this.RaisePropertyChanged(() => this.GlassesView);
         }
         public void FillContactLensesList()
         {
             this.ContactLenses = GetAllContactLenses();
             this.RaisePropertyChanged(() => this.ContactLenses);
+            var sort = this.ContactLensesView.SortDescriptions;
             this.ContactLensesView = CollectionViewSource.GetDefaultView(ContactLenses);
-            FilterAndSortContactLenses();
+            this.ContactLensesView.SortDescriptions.Clear();
+            foreach (var item in sort)
+            {
+                this.ContactLensesView.SortDescriptions.Add(item);
+            }
+            FilterContactLenses();
             this.RaisePropertyChanged(() => this.ContactLensesView);
         }
-        public void FilterAndSortGlasses()
-        {
-            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
-            this.FilterGlassesProperty = this.FilterGlassesProperty == "Doktor" ? "Doktorname" : this.FilterGlassesProperty;
-            this.FilterGlassesProperty = this.FilterGlassesProperty == "Kunde" ? "Nachname" : this.FilterGlassesProperty;
-            this.FilterGlassesProperty = this.FilterGlassesProperty == "Brillenfassung" ? "Modell" : this.FilterGlassesProperty;
-            this.FilterGlassesProperty = this.FilterGlassesProperty == "Glastyp" ? "Glastypbezeichnung" : this.FilterGlassesProperty;
-            this.SortGlassesProperty = this.SortGlassesProperty == "Doktor" ? "Doktorname" : this.SortGlassesProperty;
-            this.SortGlassesProperty = this.SortGlassesProperty == "Kunde" ? "Nachname" : this.SortGlassesProperty;
-            this.SortGlassesProperty = this.SortGlassesProperty == "Brillenfassung" ? "Modell" : this.SortGlassesProperty;
-            this.SortGlassesProperty = this.SortGlassesProperty == "Glastyp" ? "Glastypbezeichnung" : this.SortGlassesProperty;
-            this.TranslatedGlassesFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterGlassesProperty).Key?.ToString();
-            this.TranslatedGlassesSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortGlassesProperty).Key?.ToString();
-            FilterGlasses();
-            SortGlasses();
-        }
-        public void FilterAndSortContactLenses()
-        {
-            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
-            this.FilterLensesProperty = this.FilterLensesProperty == "Doktor" ? "Doktorname" : this.FilterLensesProperty;
-            this.FilterLensesProperty = this.FilterLensesProperty == "Kunde" ? "Nachname" : this.FilterLensesProperty;
-            this.FilterLensesProperty = this.FilterLensesProperty == "Kontaktlinsentyp" ? "Kontaktlinsentypbeschreibung" : this.FilterLensesProperty;
-            this.SortLensesProperty = this.SortLensesProperty == "Doktor" ? "Doktorname" : this.SortLensesProperty;
-            this.SortLensesProperty = this.SortLensesProperty == "Kunde" ? "Nachname" : this.SortLensesProperty;
-            this.SortLensesProperty = this.SortLensesProperty == "Kontaktlinsentyp" ? "Kontaktlinsentypbeschreibung" : this.SortLensesProperty;
-            this.TranslatedLensesFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterLensesProperty).Key?.ToString();
-            this.TranslatedLensesSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortLensesProperty).Key?.ToString();
-            FilterContactLenses();
-            SortContactLenses();
-        }
-        public void SortGlasses()
-        {
-            try
-            {
-                this.GlassesView.SortDescriptions.Clear();
-                if (typeof(Order).GetProperty(TranslatedGlassesSortProperty) != null)
-                    this.GlassesView.SortDescriptions.Add(new SortDescription(this.TranslatedGlassesSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Customer).GetProperty(TranslatedGlassesSortProperty) != null)
-                    this.GlassesView.SortDescriptions.Add(new SortDescription("Customer." + TranslatedGlassesSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Doctor).GetProperty(TranslatedGlassesSortProperty) != null)
-                    this.GlassesView.SortDescriptions.Add(new SortDescription("Doctor." + TranslatedGlassesSortProperty, ListSortDirection.Ascending));
-                else if (typeof(EyeGlassFrame).GetProperty(TranslatedGlassesSortProperty) != null)
-                    this.GlassesView.SortDescriptions.Add(new SortDescription("EyeGlassFrame." + TranslatedGlassesSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Glasstype).GetProperty(TranslatedGlassesSortProperty) != null)
-                    this.GlassesView.SortDescriptions.Add(new SortDescription("GlassType." + TranslatedGlassesSortProperty, ListSortDirection.Ascending));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }
-        }
-        public void SortContactLenses()
-        {
-            try
-            {
-                this.ContactLensesView.SortDescriptions.Clear();
-                if (typeof(Order).GetProperty(TranslatedLensesSortProperty) != null)
-                    this.ContactLensesView.SortDescriptions.Add(new SortDescription(this.TranslatedLensesSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Customer).GetProperty(TranslatedLensesSortProperty) != null)
-                    this.ContactLensesView.SortDescriptions.Add(new SortDescription("Customer." + TranslatedLensesSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Doctor).GetProperty(TranslatedLensesSortProperty) != null)
-                    this.ContactLensesView.SortDescriptions.Add(new SortDescription("Doctor." + TranslatedLensesSortProperty, ListSortDirection.Ascending));
-                else if (typeof(ContactLensType).GetProperty(TranslatedLensesSortProperty) != null)
-                    this.ContactLensesView.SortDescriptions.Add(new SortDescription("ContactLensType." + TranslatedLensesSortProperty, ListSortDirection.Ascending));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }
-        }
         public void FilterGlasses()
+        {
+            TranslateGermanToEnglish(this.FilterGlassesProperty);
+            FilterG();
+        }
+        private string TranslateGermanToEnglish(string germanName)
+        {
+            IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
+            germanName = germanName == "Doktor" ? "Doktorname" : germanName;
+            germanName = germanName == "Kunde" ? "Nachname" : germanName;
+            germanName = germanName == "Brillenfassung" ? "Modell" : germanName;
+            germanName = germanName == "Glastyp" ? "Glastypbezeichnung" : germanName;
+            return dictionary.FirstOrDefault(e => e.Value.ToString() == germanName).Key?.ToString();
+        }
+        public void FilterContactLenses()
+        {
+            TranslateGermanToEnglish(this.FilterLensesProperty);
+            FilterC();
+        }
+        public void FilterG()
         {
             try
             {
@@ -258,7 +264,7 @@ namespace OpticianMgr.Wpf.ViewModel
                 Console.WriteLine(e.StackTrace);
             }
         }
-        public void FilterContactLenses()
+        public void FilterC()
         {
             try
             {

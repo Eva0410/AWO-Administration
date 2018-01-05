@@ -31,11 +31,13 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICollectionView CustomersView { get; set; }
         private ResourceManager manager = Properties.Resources.ResourceManager;
         public bool ShowDeleted { get; set; }
-        public string TranslatedSortProperty { get; set; }
         public string FilterProperty { get; set; }
         public string TranslatedFilterProperty { get; set; }
         public string FilterText { get; set; }
-        public string SortProperty { get; set; }
+        public ICommand SortCommand { get; set; }
+        public ICommand SortShift { get; set; }
+        public ICommand Initialized { get; set; }
+        public SortManager SortManager { get; set; }
         public ObservableCollection<String> PropertiesList
         {
             get
@@ -57,14 +59,19 @@ namespace OpticianMgr.Wpf.ViewModel
         public CustomerViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
-            this.SortProperty = "Id";
             this.FilterProperty = "Nachname";
-            FillList();
+            this.Customers = GetAllCustomers();
+            this.CustomersView = CollectionViewSource.GetDefaultView(Customers);
+            this.FilterCustomers();
             OpenCustomer = new RelayCommand(OpenC);
             AddCustomer = new RelayCommand(AddC);
-            FilterAndSort = new RelayCommand(FilterAndSortCustomers);
+            FilterAndSort = new RelayCommand(FilterCustomers);
             DeleteFilter = new RelayCommand(DeleteF);
             this.ShowDeleted = false;
+            SortCommand = new RelayCommand<RoutedEventArgs>(SortS);
+            SortShift = new RelayCommand<object>(SortSh);
+            Initialized = new RelayCommand<RoutedEventArgs>(Init);
+            SortManager = new SortManager();
 
             EventHandler<EventArgs> refreshCustomers = null;
             refreshCustomers = (sender, e) =>
@@ -74,48 +81,54 @@ namespace OpticianMgr.Wpf.ViewModel
             ViewModelLocator.TownDetailsViewModel.Refresh += refreshCustomers;
             ViewModelLocator.CountryDetailsViewModel.Refresh += refreshCustomers;
         }
+        private void Init(RoutedEventArgs p)
+        {
+            SortManager.Init(p);
+        }
+        //Click without shift key
+        private void SortS(RoutedEventArgs e)
+        {
+            var tmp = this.CustomersView;
+            SortManager.SortNormal(e, ref tmp);
+        }
+
+        //Click with shift
+        private void SortSh(object p)
+        {
+            var tmp = CustomersView;
+            SortManager.SortShift(p, ref tmp);
+        }
         public void DeleteF()
         {
             this.FilterText = "";
-            FilterAndSortCustomers();
+            FilterCustomers();
             this.RaisePropertyChanged(() => this.FilterText);
         }
         public void FillList()
         {
             this.Customers = GetAllCustomers();
             this.RaisePropertyChanged(() => this.Customers);
+            var sort = this.CustomersView.SortDescriptions;
             this.CustomersView = CollectionViewSource.GetDefaultView(Customers);
-            FilterAndSortCustomers();
+            this.CustomersView.SortDescriptions.Clear();
+            foreach (var item in sort)
+            {
+                this.CustomersView.SortDescriptions.Add(item);
+            }
+            FilterCustomers();
             this.RaisePropertyChanged(() => this.CustomersView);
         }
-        public void FilterAndSortCustomers()
+        public void FilterCustomers()
+        {
+            this.TranslatedFilterProperty = TranslateGermanToEnglish(this.FilterProperty);
+            Filter();
+        }
+        private string TranslateGermanToEnglish(string germanName)
         {
             IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
-            this.FilterProperty = this.FilterProperty == "Ort" ? "Ortsname" : this.FilterProperty;
-            this.FilterProperty = this.FilterProperty == "Land" ? "Landname" : this.FilterProperty;//Program filters by the name of the country and not by by country-object
-            this.SortProperty = this.SortProperty == "Ort" ? "Ortsname" : this.SortProperty;
-            this.SortProperty = this.SortProperty == "Land" ? "Landname" : this.SortProperty;
-            this.TranslatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
-            this.TranslatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
-            Filter();
-            Sort();
-        }
-        public void Sort()
-        {
-            try
-            {
-                this.CustomersView.SortDescriptions.Clear();
-                if (typeof(Customer).GetProperty(TranslatedSortProperty) != null)
-                    this.CustomersView.SortDescriptions.Add(new SortDescription(this.TranslatedSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Country).GetProperty(TranslatedSortProperty) != null)
-                    this.CustomersView.SortDescriptions.Add(new SortDescription("Country." + TranslatedSortProperty, ListSortDirection.Ascending));
-                else if (typeof(Town).GetProperty(TranslatedSortProperty) != null)
-                    this.CustomersView.SortDescriptions.Add(new SortDescription("Town." + TranslatedSortProperty, ListSortDirection.Ascending));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }
+            germanName = germanName == "Ort" ? "Ortsname" : germanName; //Program filters by the name of the town and not by by town-object
+            germanName = germanName == "Land" ? "Landname" : germanName;
+            return dictionary.FirstOrDefault(e => e.Value.ToString() == germanName).Key?.ToString();
         }
         public void Filter()
         {

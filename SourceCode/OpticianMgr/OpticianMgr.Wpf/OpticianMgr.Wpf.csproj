@@ -308,6 +308,7 @@
     <Compile Include="Pages\MessagesPagesAndWindows\MultipleMessagesPage.xaml.cs">
       <DependentUpon>MultipleMessagesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SortManager.cs" />
     <Compile Include="ViewModel\AddObjectViewModels\AddContactLensTypeViewModel.cs" />
     <Compile Include="ViewModel\AddObjectViewModels\AddGlasstypeViewModel.cs" />
     <Compile Include="ViewModel\AddObjectViewModels\AddDoctorViewModel.cs" />

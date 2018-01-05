@@ -28,11 +28,14 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public ICollectionView EyeGlassFramesView { get; set; }
         public List<Supplier> Suppliers { get; set; }
-
         public IUnitOfWork Uow { get; set; }
         public ObservableCollection<EyeGlassFrame> EyeGlassFrames { get; set; }
         private ResourceManager manager = Properties.Resources.ResourceManager;
         public object Selected { get; set; }
+        public ICommand SortCommand { get; set; }
+        public ICommand SortShift { get; set; }
+        public ICommand Initialized { get; set; }
+        public SortManager SortManager { get; set; }
 
         //The properties of the eyeglassframes class are safed in English but need to be shown in German
         public ObservableCollection<String> PropertiesList
@@ -54,8 +57,6 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public string FilterProperty { get; set; }
         public string TranslatedFilterProperty { get; set; }
-        public string TranslatedSortProperty { get; set; }
-        public string SortProperty { get; set; }
         public string FilterText { get; set; }
 
         public ICommand OpenEyeGlassFrame { get; set; }
@@ -67,20 +68,43 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             this.Uow = _uow;
             this.FilterProperty = "Modell";
-            this.SortProperty = "Id";
             this.EyeGlassFrames = GetAllEyeGlassFrames();
             this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
-            FilterAndSort = new RelayCommand(FilterAndSortEyeGlassFrames);
+            FilterAndSort = new RelayCommand(FilterEyeGlassFrames);
             DeleteFilter = new RelayCommand(DeleteF);
             AddEyeGlassFrame = new RelayCommand(AddE);
             OpenEyeGlassFrame = new RelayCommand(OpenE);
             EventHandler<EventArgs> refreshEyeGlassFrame = null;
+
+            SortCommand = new RelayCommand<RoutedEventArgs>(SortS);
+            SortShift = new RelayCommand<object>(SortSh);
+            Initialized = new RelayCommand<RoutedEventArgs>(Init);
+            SortManager = new SortManager();
+
             refreshEyeGlassFrame = (sender, e) =>
             {
                 this.FillList();
             };
             ViewModelLocator.AddGlassesOrderViewModel.Refresh += refreshEyeGlassFrame;
             ViewModelLocator.GlassesOrderDetailsViewModel.Refresh += refreshEyeGlassFrame;
+        }
+
+        private void Init(RoutedEventArgs p)
+        {
+            SortManager.Init(p);
+        }
+        //Click without shift key
+        private void SortS(RoutedEventArgs e)
+        {
+            var tmp = this.EyeGlassFramesView;
+            SortManager.SortNormal(e, ref tmp);
+        }
+
+        //Click with shift
+        private void SortSh(object p)
+        {
+            var tmp = EyeGlassFramesView;
+            SortManager.SortShift(p, ref tmp);
         }
 
         /// <summary>
@@ -110,15 +134,16 @@ namespace OpticianMgr.Wpf.ViewModel
         /// <summary>
         /// Refreshes and filters the list
         /// </summary>
-        public void FilterAndSortEyeGlassFrames()
+        public void FilterEyeGlassFrames()
+        {
+            this.TranslatedFilterProperty = TranslateGermanToEnglish(this.FilterProperty);
+            Filter();
+        }
+        private string TranslateGermanToEnglish(string germanName)
         {
             IEnumerable<DictionaryEntry> dictionary = manager.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true).OfType<DictionaryEntry>();
-            this.FilterProperty = this.FilterProperty == "Lieferant" ? "Name" : this.FilterProperty; //Program filters by the name of the supplier and not by by supplier-object
-            this.SortProperty = this.SortProperty == "Lieferant" ? "Name" : this.SortProperty;
-            this.TranslatedFilterProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.FilterProperty).Key?.ToString();
-            this.TranslatedSortProperty = dictionary.FirstOrDefault(e => e.Value.ToString() == this.SortProperty).Key?.ToString();
-            Filter();
-            Sort();
+            germanName = germanName == "Lieferant" ? "Name" : germanName;
+            return dictionary.FirstOrDefault(e => e.Value.ToString() == germanName).Key?.ToString();
         }
         public void Filter()
         {
@@ -134,20 +159,6 @@ namespace OpticianMgr.Wpf.ViewModel
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.StackTrace);
-            }
-        }
-        public void Sort()
-        {
-            try
-            {
-                this.EyeGlassFramesView.SortDescriptions.Clear();
-                if(typeof(EyeGlassFrame).GetProperty(TranslatedSortProperty) != null)
-                    this.EyeGlassFramesView.SortDescriptions.Add(new SortDescription(this.TranslatedSortProperty, ListSortDirection.Ascending));
-                else if(typeof(Supplier).GetProperty(TranslatedSortProperty) != null)
-                    this.EyeGlassFramesView.SortDescriptions.Add(new SortDescription("Supplier." + TranslatedSortProperty, ListSortDirection.Ascending));
-            }
-            catch (Exception e) {
                 Console.WriteLine(e.StackTrace);
             }
         }
@@ -172,15 +183,21 @@ namespace OpticianMgr.Wpf.ViewModel
         public void DeleteF()
         {
             this.FilterText = "";
-            this.FilterAndSortEyeGlassFrames();
+            this.FilterEyeGlassFrames();
             this.RaisePropertyChanged(() => this.FilterText);
         }
         public void FillList()
         {
             this.EyeGlassFrames = GetAllEyeGlassFrames();
             this.RaisePropertyChanged(() => this.EyeGlassFrames);
+            var sort = this.EyeGlassFramesView.SortDescriptions;
             this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
-            FilterAndSortEyeGlassFrames();
+            this.EyeGlassFramesView.SortDescriptions.Clear();
+            foreach (var item in sort)
+            {
+                this.EyeGlassFramesView.SortDescriptions.Add(item);
+            }
+            FilterEyeGlassFrames();
             this.RaisePropertyChanged(() => this.EyeGlassFramesView);
         }
         //add eyeglassframe

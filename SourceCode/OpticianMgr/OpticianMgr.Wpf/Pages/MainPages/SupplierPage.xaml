@@ -37,6 +37,7 @@
         <ListView ItemsSource="{Binding SuppliersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding Selected}">
             <ListView.View>
                 <GridView>
+
                     <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}">
                         <GridViewColumnHeader Content="Id">
                             <GridViewColumnHeader.InputBindings>
@@ -49,7 +50,6 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </GridViewColumnHeader>
-
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  >
                         <GridViewColumnHeader Content="Name">

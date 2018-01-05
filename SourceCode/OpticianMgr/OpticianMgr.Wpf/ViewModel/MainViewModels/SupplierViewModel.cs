@@ -37,6 +37,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand SortCommand { get; set; }
         public ICommand SortShift { get; set; }
         public ICommand Initialized { get; set; }
+        public SortManager SortManager { get; set; }
 
         //The properties of the supplier class are safed in English but need to be shown in German
         public ObservableCollection<String> PropertiesList
@@ -57,8 +58,6 @@ namespace OpticianMgr.Wpf.ViewModel
                 return newList;
             }
         }
-        public List<GridViewColumnHeader> SortHeaders { get; set; }
-        public List<GridViewColumnHeader> AllHeaders { get; set; }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -74,9 +73,8 @@ namespace OpticianMgr.Wpf.ViewModel
             OpenSupplier = new RelayCommand(OpenS);
             SortCommand = new RelayCommand<RoutedEventArgs>(SortS);
             SortShift = new RelayCommand<object>(SortSh);
-            SortHeaders = new List<GridViewColumnHeader>();
             Initialized = new RelayCommand<RoutedEventArgs>(Init);
-
+            SortManager = new SortManager();
             EventHandler<EventArgs> refreshSuppliers = null;
             refreshSuppliers = (sender, e) =>
             {
@@ -85,126 +83,24 @@ namespace OpticianMgr.Wpf.ViewModel
             ViewModelLocator.TownDetailsViewModel.Refresh += refreshSuppliers;
             ViewModelLocator.CountryDetailsViewModel.Refresh += refreshSuppliers;
         }
-        private void Init(RoutedEventArgs p )
+        private void Init(RoutedEventArgs p)
         {
-            AllHeaders = new List<GridViewColumnHeader>();
-            ListView lv = p.Source as ListView;
-            GridView gv = (GridView)lv.View;
-            foreach (var item in gv.Columns)
-            {
-                AllHeaders.Add(item.Header as GridViewColumnHeader);
-            }
+            SortManager.Init(p);
         }
         //Click without shift key
         private void SortS(RoutedEventArgs e)
         {
-            GridViewColumnHeader columnHeader = e.Source as GridViewColumnHeader;
-
-            if (columnHeader == null)
-            {
-                return;
-            }
-
-            ListSortDirection dir;
-            string header;
-            //Same column pressed?
-            if (SortHeaders.Count > 0 && SortHeaders[0] == columnHeader)
-            {
-                //Change sort direction
-                dir = this.SuppliersView.SortDescriptions[0].Direction;
-                dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                header = ChangeArrow(columnHeader, dir);
-            }
-            else
-            {
-                //Remove arrow from old column header
-                if (SortHeaders.Count > 0)
-                {
-                    foreach (var item in SortHeaders)
-                    {
-                        item.Column.HeaderTemplate = null;
-                        item.Column.Width = item.ActualWidth - 20;
-                    }
-                }
-                SortHeaders.Clear();
-                SortHeaders.Add(columnHeader);
-                //default sort direction is ascending
-                dir = ListSortDirection.Ascending;
-                header = SetNewArrow(columnHeader, dir);
-            }
-            this.SuppliersView.SortDescriptions.Clear();
-            this.SuppliersView.SortDescriptions.Add(new SortDescription(header, dir));
+            var tmp = this.SuppliersView;
+            SortManager.SortNormal(e, ref tmp);
         }
-        private string SetNewArrow(GridViewColumnHeader column, ListSortDirection dir)
-        {
-            //new column header must be wider
-            column.Column.Width = column.ActualWidth + 20;
-
-            return ChangeArrow(column, dir);
-        }
-        private string ChangeArrow(GridViewColumnHeader column,ListSortDirection dir)
-        {
-
-            //insert arrow
-            if (dir == ListSortDirection.Ascending)
-            {
-                column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUp") as DataTemplate;
-            }
-            else
-            {
-                column.Column.HeaderTemplate = Application.Current.FindResource("ArrowDown") as DataTemplate;
-            }
-
-            string header = string.Empty;
-
-            // get binding name for sort description 
-            Binding b = column.Column.DisplayMemberBinding as Binding;
-            if (b != null)
-            {
-                header = b.Path.Path;
-            }
-            return header;
-        }
+       
         //Click with shift
         private void SortSh(object p)
         {
-            string columnName = p as string;
-            string germanColumnName = TranslateEnglishToGerman(columnName);
-            //Get gridviewcolumnheader
-            var columnHeader = AllHeaders.Where(h => String.Equals(h.Content.ToString(), germanColumnName)).ToList().FirstOrDefault();
-
-            if(columnHeader == null)
-            {
-                return;
-            }
-            if (this.SuppliersView.SortDescriptions.Count >= 1)
-            {
-                ListSortDirection dir;
-                int index = this.SuppliersView.SortDescriptions.Count - 1;
-                //Change sorting direction
-                if (this.SuppliersView.SortDescriptions.Count == index + 1 && this.SuppliersView.SortDescriptions[index].PropertyName == columnName)
-                {
-                    dir = this.SuppliersView.SortDescriptions[index].Direction;
-                    dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                    this.SuppliersView.SortDescriptions.RemoveAt(index);
-                    this.SuppliersView.SortDescriptions.Insert(index, new SortDescription(columnName, dir));
-                    ChangeArrow(columnHeader, dir);
-                    SortHeaders.Add(columnHeader);
-                }
-                else if(this.SuppliersView.SortDescriptions.Count(s => s.PropertyName == columnName) == 0)
-                {
-                    if (this.SuppliersView.SortDescriptions.Count >= 3)
-                    {
-                        MessageBox.Show("Sie können maximal nach drei Spalten sortieren!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                        return;
-                    }
-                    dir = ListSortDirection.Ascending;
-                    SetNewArrow(columnHeader, dir);
-                    this.SuppliersView.SortDescriptions.Add(new SortDescription(columnName, dir));
-                    SortHeaders.Add(columnHeader);
-                }
-            }
+            var tmp = SuppliersView;
+            SortManager.SortShift(p, ref tmp);
         }
+
         /// <summary>
         /// Returns a list of the suppliers in the database
         /// All properties must be copied, otherwise the list would reference the unit of work data
@@ -233,17 +129,6 @@ namespace OpticianMgr.Wpf.ViewModel
                 copiedSuppliers.Add(sup);
             }
             return copiedSuppliers;
-        }
-        private string TranslateEnglishToGerman(string englishName)
-        {
-            if (englishName.Contains("."))
-            {
-                englishName = englishName.Split('.')[1];
-            }
-            string german = manager.GetString(englishName);
-            german = german == "Ortsname" ? "Ort" : german;
-            german = german == "Landname" ? "Land" : german;
-            return german;
         }
         private string TranslateGermanToEnglish(string germanName)
         {
