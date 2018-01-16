@@ -96,6 +96,7 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 var c = this.Uow.CustomerRepository.GetById(this.Customer.Id);
                 c.Deleted = true;
+                c.NewsLetter = false;
                 c.Town = null;
                 c.Country = null;
                 this.Uow.CustomerRepository.Update(c);

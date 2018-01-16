@@ -36,6 +36,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             this.Uow = uow;
             Send = new RelayCommand(SendMessage);
+            this.Recipients = new List<CustomRecipient>();
         }
         public void Init()
         {
@@ -47,43 +48,54 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         private async void SendMessage()
         {
-            var customers = this.Uow.CustomerRepository.Get(filter: c => c.NewsLetter);
-            var result = MessageBox.Show("Wollen Sie diese Nachricht wirklich an " + customers.Length + " Kunden senden?", "Wollen Sie die Nachricht abschicken?", MessageBoxButton.OKCancel, MessageBoxImage.Question);
-            if (result == MessageBoxResult.OK)
+            try
             {
-                foreach (var item in customers)
+
+                var customers = this.Uow.CustomerRepository.Get(filter: c => c.NewsLetter);
+                var result = MessageBox.Show("Wollen Sie diese Nachricht wirklich an " + customers.Length + " Kunden senden?", "Wollen Sie die Nachricht abschicken?", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if (result == MessageBoxResult.OK)
                 {
-                    try
+                    using (var smtp = new SmtpClient())
                     {
-                        var message = new MailMessage();
-                        message.To.Add(new MailAddress(item.Email));
-                        message.From = new MailAddress("infodienst.augenoptikaigner@gmail.com");
-                        message.Subject = this.Subject;
-                        message.Body = this.Message;
-                        this.Recipients.Add(new CustomRecipient() { Customer = item, Address = item.Email });
-
-                        using (var smtp = new SmtpClient())
+                        var credential = new NetworkCredential
                         {
-                            var credential = new NetworkCredential
+                            UserName = "infodienst.augenoptikaigner@gmail.com",
+                            Password = "7gnRwN4U"
+                        };
+                        smtp.Credentials = credential;
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+                        foreach (var item in customers)
+                        {
+                            try
                             {
-                                UserName = "infodienst.augenoptikaigner@gmail.com",
-                                Password = "7gnRwN4U"
-                            };
-                            smtp.Credentials = credential;
-                            smtp.Host = "smtp.gmail.com";
-                            smtp.Port = 587;
-                            smtp.EnableSsl = true;
+                                var message = new MailMessage();
+                                message.To.Add(new MailAddress(item.Email));
+                                message.From = new MailAddress("infodienst.augenoptikaigner@gmail.com");
+                                message.Subject = this.Subject;
+                                message.Body = this.Message;
+                                this.Recipients.Add(new CustomRecipient() { Customer = item, Address = item.Email });
 
-                            await smtp.SendMailAsync(message);
+                                await smtp.SendMailAsync(message);
+                            }
+
+                            catch (Exception ex)
+                            {
+                                if(ex is ArgumentNullException || ex is InvalidOperationException || ex is ArgumentException)
+                                    MessageBox.Show(String.Format("Ein Fehler beim Kunden '{0}' ist aufgetreten! Die E-Mail konnte nicht an diesen Kunden gesendet werden! {1} {2}", item.LastName, Environment.NewLine, ex.Message), "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                                else
+                                    throw;
+                            }
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Ein Fehler ist aufgetreten!" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    SaveToRepository();
+                    MessageBox.Show("Der Sendevorgang wurde beendet, bitte überprüfe Sie Ihren E-Mail-Eingang um sicherzustellen, dass alle E-Mails korrekt versendet wurden.", "Versendet", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                SaveToRepository();
-                MessageBox.Show("Der Sendevorgang wurde beendet, bitte überprüfe Sie Ihren E-Mail-Eingang um sicherzustellen, dass alle E-Mails korrekt versendet wurden.", "Versendet", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(String.Format("Beim Versenden der Emails ist ein Fehler aufgetreten! {0} {1}", Environment.NewLine, ex.Message), "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             this.Init();
         }

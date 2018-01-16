@@ -35,7 +35,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public string Message { get; set; }
         public ICommand Send { get; set; }
         public List<Customer> Customers { get; set; }
-        const string YourAccessKey = "SBQA6BUHfbBlpRsgCGMJ4olfe"; // message bird access key
+        const string AccessKey = "SBQA6BUHfbBlpRsgCGMJ4olfe"; // message bird access key
         //SBQA6BUHfbBlpRsgCGMJ4olfe für echte sms
         //vrh38QWVVXeW0D1Ma3ENhmd3a für test sms
 
@@ -54,7 +54,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             IProxyConfigurationInjector proxyConfigurationInjector = null; // for no web proxies, or web proxies not requiring authentication
 
-            Client client = Client.CreateDefault(YourAccessKey, proxyConfigurationInjector);
+            Client client = Client.CreateDefault(AccessKey, proxyConfigurationInjector);
             //TODO test ob sms auch bei mehreren kunden gehen (derzeit nur an meine telefonnummer gesendet)
             long[] numbers = GetPhoneNumbers();
             var result = MessageBox.Show(String.Format("Wollen Sie diese Nachricht wirklich an {0} Kunden schicken? {1} Achtung: Dies verursacht Kosten.", numbers.Length, Environment.NewLine), "Nachricht abschicken?", MessageBoxButton.OKCancel, MessageBoxImage.Question);
