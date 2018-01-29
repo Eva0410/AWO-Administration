@@ -57,64 +57,13 @@ namespace OpticianMgr.Wpf.ViewModel
         public string FilterLensesProperty { get; set; }
         public string TranslatedLensesFilterProperty { get; set; }
         public string FilterLensesText { get; set; }
-        public ObservableCollection<String> GlassesPropertiesList
-        {
-            get
-            {
-                ObservableCollection<string> props = new ObservableCollection<string>(typeof(Order ).GetProperties().Select(c => c.Name).ToList());
-                ObservableCollection<string> newList = new ObservableCollection<string>();
-                //shouldnt be able to filter by these properties
-                props.Remove("Timestamp");
-                props.Remove("Customer_Id");
-                props.Remove("Doctor_Id");
-                props.Remove("Bill");
-                props.Remove("OrderType");
-                props.Remove("GlassType_Id");
-                props.Remove("EyeGlassFrame_Id");
-                props.Remove("ContactLensType_Id");
-                props.Remove("ContactLensType");
-                props.Remove("ContactLensOthers1");
-                props.Remove("ContactLensOthers2");
-                foreach (var item in props)
-                {
-                    var germanItem = manager.GetString(item);
-                    if (germanItem != null)
-                        newList.Add(germanItem);
-                }
-                return newList;
-            }
-        }
-        public ObservableCollection<String> LensesPropertiesList
-        {
-            get
-            {
-                ObservableCollection<string> props = new ObservableCollection<string>(typeof(Order).GetProperties().Select(c => c.Name).ToList());
-                ObservableCollection<string> newList = new ObservableCollection<string>();
-                //shouldnt be able to filter by these properties
-                props.Remove("Timestamp");
-                props.Remove("Customer_Id");
-                props.Remove("Doctor_Id");
-                props.Remove("Bill");
-                props.Remove("OrderType");
-                props.Remove("EyeGlassFrame_Id");
-                props.Remove("ContactLensType_Id");
-                props.Remove("GlassType");
-                props.Remove("GlassTypeOthers");
-                props.Remove("GlassType_Id");
-                props.Remove("EyeGlassFrame");
- 
-                foreach (var item in props)
-                {
-                    var germanItem = manager.GetString(item);
-                    if (germanItem != null)
-                        newList.Add(germanItem);
-                }
-                return newList;
-            }
-        }
+        public ObservableCollection<String> GlassesPropertiesList { get; }
+        public ObservableCollection<String> LensesPropertiesList { get; }
         public OrdersViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
+            this.GlassesPropertiesList = GetAllGlassesProperties();
+            this.LensesPropertiesList = GetAllLensesProperties();
             this.FilterGlassesProperty = "Kunde";
             this.FilterLensesProperty = "Kunde";
             this.Glasses = GetAllGlassses();
@@ -153,6 +102,55 @@ namespace OpticianMgr.Wpf.ViewModel
             ViewModelLocator.AddContactLensesOrderViewModel.Refresh += refreshContactLensOrders;
             ViewModelLocator.ContactLensOrderDetailsViewModel.Refresh += refreshContactLensOrders;
             ViewModelLocator.ContactLensTypeDetailsViewModel.Refresh += refreshContactLensOrders;
+        }
+        private ObservableCollection<string> GetAllGlassesProperties()
+        {
+            ObservableCollection<string> props = new ObservableCollection<string>(typeof(Order).GetProperties().Select(c => c.Name).ToList());
+            ObservableCollection<string> newList = new ObservableCollection<string>();
+            //shouldnt be able to filter by these properties
+            props.Remove("Timestamp");
+            props.Remove("Customer_Id");
+            props.Remove("Doctor_Id");
+            props.Remove("Bill");
+            props.Remove("OrderType");
+            props.Remove("GlassType_Id");
+            props.Remove("EyeGlassFrame_Id");
+            props.Remove("ContactLensType_Id");
+            props.Remove("ContactLensType");
+            props.Remove("ContactLensOthers1");
+            props.Remove("ContactLensOthers2");
+            foreach (var item in props)
+            {
+                var germanItem = manager.GetString(item);
+                if (germanItem != null)
+                    newList.Add(germanItem);
+            }
+            return newList;
+        }
+        private ObservableCollection<string> GetAllLensesProperties()
+        {
+            ObservableCollection<string> props = new ObservableCollection<string>(typeof(Order).GetProperties().Select(c => c.Name).ToList());
+            ObservableCollection<string> newList = new ObservableCollection<string>();
+            //shouldnt be able to filter by these properties
+            props.Remove("Timestamp");
+            props.Remove("Customer_Id");
+            props.Remove("Doctor_Id");
+            props.Remove("Bill");
+            props.Remove("OrderType");
+            props.Remove("EyeGlassFrame_Id");
+            props.Remove("ContactLensType_Id");
+            props.Remove("GlassType");
+            props.Remove("GlassTypeOthers");
+            props.Remove("GlassType_Id");
+            props.Remove("EyeGlassFrame");
+
+            foreach (var item in props)
+            {
+                var germanItem = manager.GetString(item);
+                if (germanItem != null)
+                    newList.Add(germanItem);
+            }
+            return newList;
         }
         private void InitG(RoutedEventArgs p)
         {
@@ -230,7 +228,7 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public void FilterGlasses()
         {
-            TranslateGermanToEnglish(this.FilterGlassesProperty);
+            this.TranslatedGlassesFilterProperty = TranslateGermanToEnglish(this.FilterGlassesProperty);
             FilterG();
         }
         private string TranslateGermanToEnglish(string germanName)
@@ -244,7 +242,7 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public void FilterContactLenses()
         {
-            TranslateGermanToEnglish(this.FilterLensesProperty);
+            this.TranslatedLensesFilterProperty = TranslateGermanToEnglish(this.FilterLensesProperty);
             FilterC();
         }
         public void FilterG()

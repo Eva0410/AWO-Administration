@@ -118,7 +118,6 @@
                 <StackPanel Style="{StaticResource ButtonStackPanel}">
                     <Button Command="{Binding AddGlassesOrder}">Neue Brillenbestellung</Button>
                     <Button Command="{Binding AddContactLensOrder}">Neue Kontaktlinsenbestellung</Button>
-                    <Button Command="{Binding Show}">Bestellung anzeigen</Button>
                 </StackPanel>
                 <ListView ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedOrder}">
                 <ListView.View>

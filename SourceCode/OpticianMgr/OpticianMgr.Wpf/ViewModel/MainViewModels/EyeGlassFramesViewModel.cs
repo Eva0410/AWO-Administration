@@ -36,25 +36,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand SortShift { get; set; }
         public ICommand Initialized { get; set; }
         public SortManager SortManager { get; set; }
-
-        //The properties of the eyeglassframes class are safed in English but need to be shown in German
-        public ObservableCollection<String> PropertiesList
-        {
-            get
-            {
-                ObservableCollection<string> props = new ObservableCollection<string>(typeof(EyeGlassFrame).GetProperties().Select(p => p.Name).ToList());
-                ObservableCollection<string> newList = new ObservableCollection<string>();
-                props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
-                props.Remove("Supplier_Id"); //Shouldnt be able to filter by supplier_id
-                foreach (var item in props)
-                {
-                    var germanItem = manager.GetString(item);
-                    if (germanItem != null)
-                        newList.Add(germanItem);
-                }
-                return newList;
-            }
-        }
+        public ObservableCollection<String> PropertiesList { get; }
         public string FilterProperty { get; set; }
         public string TranslatedFilterProperty { get; set; }
         public string FilterText { get; set; }
@@ -67,6 +49,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public EyeGlassFramesViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
+            this.PropertiesList = GetAllProperties();
             this.FilterProperty = "Modell";
             this.EyeGlassFrames = GetAllEyeGlassFrames();
             this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
@@ -88,7 +71,21 @@ namespace OpticianMgr.Wpf.ViewModel
             ViewModelLocator.AddGlassesOrderViewModel.Refresh += refreshEyeGlassFrame;
             ViewModelLocator.GlassesOrderDetailsViewModel.Refresh += refreshEyeGlassFrame;
         }
-
+        //The properties of the eyeglassframes class are safed in English but need to be shown in German
+        private ObservableCollection<string> GetAllProperties()
+        {
+            ObservableCollection<string> props = new ObservableCollection<string>(typeof(EyeGlassFrame).GetProperties().Select(p => p.Name).ToList());
+            ObservableCollection<string> newList = new ObservableCollection<string>();
+            props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
+            props.Remove("Supplier_Id"); //Shouldnt be able to filter by supplier_id
+            foreach (var item in props)
+            {
+                var germanItem = manager.GetString(item);
+                if (germanItem != null)
+                    newList.Add(germanItem);
+            }
+            return newList;
+        }
         private void Init(RoutedEventArgs p)
         {
             SortManager.Init(p);

@@ -39,25 +39,11 @@ namespace OpticianMgr.Wpf.ViewModel
         public string TranslatedFilterProperty { get; set; }
         public string FilterText { get; set; }
         public string SortProperty { get; set; }
-        public ObservableCollection<String> PropertiesList
-        {
-            get
-            {
-                ObservableCollection<string> props = new ObservableCollection<string>(typeof(ContactLensType).GetProperties().Select(c => c.Name).ToList());
-                ObservableCollection<string> newList = new ObservableCollection<string>();
-                props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
-                foreach (var item in props)
-                {
-                    var germanItem = manager.GetString(item);
-                    if (germanItem != null)
-                        newList.Add(germanItem);
-                }
-                return newList;
-            }
-        }
+        public ObservableCollection<String> PropertiesList { get; }
         public EditContactLensTypesViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
+            this.PropertiesList = GetAllProperties();
             this.SortProperty = "Id";
             this.FilterProperty = "Kontaktlinsentypbeschreibung";
             this.ContactLensTypes = GetAllContactLensType();
@@ -66,6 +52,19 @@ namespace OpticianMgr.Wpf.ViewModel
             AddContactLensType = new RelayCommand(AddC);
             FilterAndSort = new RelayCommand(FilterAndSortContactLensType);
             DeleteFilter = new RelayCommand(DeleteF);
+        }
+        private ObservableCollection<string> GetAllProperties()
+        {
+            ObservableCollection<string> props = new ObservableCollection<string>(typeof(ContactLensType).GetProperties().Select(c => c.Name).ToList());
+            ObservableCollection<string> newList = new ObservableCollection<string>();
+            props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
+            foreach (var item in props)
+            {
+                var germanItem = manager.GetString(item);
+                if (germanItem != null)
+                    newList.Add(germanItem);
+            }
+            return newList;
         }
         public void DeleteF()
         {

@@ -16,16 +16,23 @@
 \contentsline {chapter}{\numberline {3}Verwendete Technologien}{6}{chapter.3}
 \contentsline {section}{\numberline {3.1}Entity Framework}{6}{section.3.1}
 \contentsline {chapter}{\numberline {4}Beschreibung des Endproduktes}{7}{chapter.4}
-\contentsline {section}{\numberline {4.1}Administrion}{7}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}E-Mail und SMS}{7}{subsection.4.1.1}
-\contentsline {subsubsection}{Massennachrichten}{7}{section*.5}
-\contentsline {subsubsection}{E-Mail}{7}{section*.6}
-\contentsline {subsubsection}{SMS}{9}{section*.7}
-\contentsline {subsubsection}{Einzelne Nachrichten}{10}{section*.8}
-\contentsline {subsubsection}{Versendete Nachrichten}{11}{section*.9}
-\contentsline {subsection}{\numberline {4.1.2}Statistiken}{12}{subsection.4.1.2}
-\contentsline {subsubsection}{Technischer Hintergrund}{12}{section*.10}
-\contentsline {chapter}{\numberline {5}Selbstevaluation}{14}{chapter.5}
-\contentsline {chapter}{\numberline {6}Summary}{15}{chapter.6}
-\contentsline {chapter}{\numberline {A}Additional Information}{20}{appendix.A}
-\contentsline {chapter}{\numberline {B}Individual Goals}{21}{appendix.B}
+\contentsline {section}{\numberline {4.1}Administration}{7}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Kundenverwaltung}{7}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Auftr\IeC {\"a}ge}{10}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Lieferantenverwaltung}{12}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Verwaltung der lagernden Brillenfassungen}{13}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}E-Mail und SMS}{13}{subsection.4.1.5}
+\contentsline {subsubsection}{Massennachrichten}{13}{section*.5}
+\contentsline {subsubsection}{E-Mail}{13}{section*.6}
+\contentsline {subsubsection}{SMS}{15}{section*.7}
+\contentsline {subsubsection}{Einzelne Nachrichten}{16}{section*.8}
+\contentsline {subsubsection}{Versendete Nachrichten}{17}{section*.9}
+\contentsline {subsection}{\numberline {4.1.6}Statistiken}{18}{subsection.4.1.6}
+\contentsline {subsubsection}{Technischer Hintergrund}{18}{section*.10}
+\contentsline {subsection}{\numberline {4.1.7}Filtern und Sortieren}{19}{subsection.4.1.7}
+\contentsline {subsubsection}{Filtern}{19}{section*.11}
+\contentsline {subsubsection}{Sortieren}{22}{section*.12}
+\contentsline {chapter}{\numberline {5}Selbstevaluation}{27}{chapter.5}
+\contentsline {chapter}{\numberline {6}Summary}{28}{chapter.6}
+\contentsline {chapter}{\numberline {A}Additional Information}{33}{appendix.A}
+\contentsline {chapter}{\numberline {B}Individual Goals}{34}{appendix.B}

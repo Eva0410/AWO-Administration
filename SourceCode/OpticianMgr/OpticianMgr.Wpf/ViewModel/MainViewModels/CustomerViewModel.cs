@@ -38,27 +38,11 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand SortShift { get; set; }
         public ICommand Initialized { get; set; }
         public SortManager SortManager { get; set; }
-        public ObservableCollection<String> PropertiesList
-        {
-            get
-            {
-                ObservableCollection<string> props = new ObservableCollection<string>(typeof(Customer).GetProperties().Select(c => c.Name).ToList());
-                ObservableCollection<string> newList = new ObservableCollection<string>();
-                props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
-                props.Remove("Town_Id"); //Shouldnt be able to filter by town_id
-                props.Remove("Country_Id");
-                foreach (var item in props)
-                {
-                    var germanItem = manager.GetString(item);
-                    if (germanItem != null)
-                        newList.Add(germanItem);
-                }
-                return newList;
-            }
-        }
+        public ObservableCollection<String> PropertiesList { get; }
         public CustomerViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
+            this.PropertiesList = GetAllProperties();
             this.FilterProperty = "Nachname";
             this.Customers = GetAllCustomers();
             this.CustomersView = CollectionViewSource.GetDefaultView(Customers);
@@ -80,6 +64,21 @@ namespace OpticianMgr.Wpf.ViewModel
             };
             ViewModelLocator.TownDetailsViewModel.Refresh += refreshCustomers;
             ViewModelLocator.CountryDetailsViewModel.Refresh += refreshCustomers;
+        }
+        private ObservableCollection<string> GetAllProperties()
+        {
+            ObservableCollection<string> props = new ObservableCollection<string>(typeof(Customer).GetProperties().Select(c => c.Name).ToList());
+            ObservableCollection<string> newList = new ObservableCollection<string>();
+            props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
+            props.Remove("Town_Id"); //Shouldnt be able to filter by town_id
+            props.Remove("Country_Id");
+            foreach (var item in props)
+            {
+                var germanItem = manager.GetString(item);
+                if (germanItem != null)
+                    newList.Add(germanItem);
+            }
+            return newList;
         }
         private void Init(RoutedEventArgs p)
         {

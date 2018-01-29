@@ -1,5 +1,95 @@
 \chapter{Beschreibung des Endproduktes}\label{cha:theoretical-background}
-\section{Administrion}
+\section{Administration}
+\subsection{Kundenverwaltung}
+Um dem Benutzer eine kompakte Übersicht über seine Kunden zu geben, gibt es die Kundenverwaltung, bei der alle Kunden in einer Liste dargestellt werden. Angezeigt wird, die Id, Titel, Vorname, Nachname, Straße, PLZ, Ort, Telefon1 und das Land des Kunden. Diese Liste kann man filtern und sortieren (siehe Kapitel 'Filtern und Sortieren'). Zusätzlich zu dem normalen Filter, kann man bei der Kundenverwaltung ebenso gelöschte Kunden ein- oder ausblenden. Der Grund dafür wird später noch näher erklärt (Referenz)
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.25]{images/Kunden.png}
+\end{center}
+	\caption{Screenshot der Kundenverwaltung}
+	\label{fig:sample}
+\end{figure}
+Beim Klick des Buttons "Neuen Kunden hinzufügen" erscheint ein neues Fenster, welches einen neuen Kunden erstellt. Hier kann der Benutzer noch mehr Daten eingeben, wie beispielsweise Hobbies, Job oder den Geburstag. Außerdem kann der Benutzer den Ort und das Land aus einer Drop-Down-List auswählen. Falls der Ort bzw. das Land noch nicht vorhanden ist, kann der Benutzer auf den danebenliegenden Knopf drücken und einen neuen Ort/Land anlegen. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.25]{images/NeuerKunde.png}
+\end{center}
+	\caption{Screenshot Neuen Kunden anlegen}
+	\label{fig:sample}
+\end{figure}
+Falls der Benutzer nach dem Anlegen des Kunden noch Änderungen vornehmen möchte, kann er dies auf der Startseite durch einen Doppelklick auf den gewünschten Kunden erledigen. Dadurch erscheint ein neues Fenster, auf welchem der Benutzer alle Daten des Kundes bearbeiten kann und zusätzlich alle Bestellungen des Kundens sieht. Außerdem besteht hier die Möglichkeit den Kunden zu löschen. Damit ist allerdings aus datenbanktechnischen Gründen gemeint, den Kunden nicht mehr bearbeitbar zu machen allerdings kann der Benutzer keinen Kunden wirklich löschen. Der Grund dafür ist, dass jede Bestellung in der Datenbank auf einen Kunden verweisen muss und wenn ein Kunde bereits mehrere Bestellungen getätigt hat und danach den Kunden löschen möchte, müssten alle seine Bestellungen mitgelöscht werden. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.25]{images/KundenDetails.png}
+\end{center}
+	\caption{Screenshot der Kundetails}
+	\label{fig:sample}
+\end{figure}
+Technischer Hintergrund:
+Damit die Kunden auf der Startseite angezeigt werden können, müssen sie zuerst aus der Datenbank in eine ObservableCollection vom Typ Customer kopiert werden. 
+\begin{lstlisting}
+private ObservableCollection<Customer> GetAllCustomers()
+        {
+            var unitofWorkCustomers = this.Uow.CustomerRepository.Get().ToList();
+            ObservableCollection<Customer> copiedCustomers = new ObservableCollection<Customer>();
+            foreach (var item in unitofWorkCustomers)
+            {
+                Customer customer = new Customer();
+                GenericRepository<Customer>.CopyProperties(customer, item);
+                if (item.Town_Id != null)
+                {
+                    Town town = new Town(); //Referenced town must be copied as well
+                    GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
+                    customer.Town = town;
+                }
+                if (item.Country_Id != null)
+                {
+                    Country country = new Country();
+                    GenericRepository<Country>.CopyProperties(country, this.Uow.CountryRepository.GetById(item.Country_Id));
+                    customer.Country = country;
+                }
+                copiedCustomers.Add(customer);
+            }
+            return copiedCustomers;
+\end{lstlisting}
+Danach wird auf Basis der kopierten Datensätze eine ICollectionView erstellt, welche die Daten dann anzeigt. Im Vergleich zur ObservableCollection bietet die ICollectionView beim Anzeigen viele Vorteile (siehe Kapitel Filtern und Sortieren). 
+Damit ein Kunde gelöscht werden kann, enthält die Klasse Kunde eine Property namens 'Deleted', welche angibt, ob der Kunde gelöscht wurde. Wenn diese auf 'true' gesetzt wird, kann der Benutzer den Kunden durch die Checkbox auf der Startseite ausblenden. Falls er dies nicht tut, wird der Kunde auf der Startseite angezeigt, allerdings erscheint eine Fehlermeldung, wenn der Benutzer versucht die Detailsseite des Kunden zu öffnen. Dadurch ist es auch unmöglich neue Bestellungen für diesen Kunden anzulegen oder die Daten des Kunden zu bearbeiten. Die Bestellungen des gelöschten Kunden werden trotzdem normal angezeigt.
+\subsection{Aufträge}
+Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen und Kontaktlinsen. Eigentlich haben beide Arten diesselben Eigenschaften, nur der Brillenauftrag sollte eine Brillenfassung haben. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwsichen Brilen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt auch zwei verschiedene Listen angezeigt. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Allerdings kann der Benutzer von dieser Sicht aus keine neuen Aufträge erfassen, dazu muss er in der Kundenverwaltung zuerst einen Kunden auswählen. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.25]{images/Auftraege.png}
+\end{center}
+	\caption{Screenshot der Auftragverwaltung}
+	\label{fig:sample}
+\end{figure}
+Wenn der Benutzer doppelt auf einen Auftrag klickt, erscheint entweder ein Detailsfenster eines Brillenauftrags oder Kontatklinsenauftrags. Im rechten Bereich des Fensters kann der Benutzer die einzelnen Preise der Komponenten angeben. Das Programm rechnet alle Preise  brutto und gibt zum Schluss die darin enthaltene Mehrwertsteuer an. Es wird nach folgender Formel gerechnet: Zuerst werden linker und rechter Glaspreis, Preis von Sonstigem und wenn vorhanden der Verkaufspreis der Brillenfassung addiert. Davon wird das Krankenkassageld abgezogen, der Selbstbehalt hinzugezählt und der Rabatt (wird in Euro angegeben) wieder subtrahiert. Zwanzig Prozent davon sind schlussendlich die Mehrwertsteuer. 
+Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung angeben. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.25]{images/Brillenauftrag.png}
+\end{center}
+	\caption{Screenshot eines Brillenauftrags}
+	\label{fig:sample}
+\end{figure}
+\subsection{Lieferantenverwaltung}
+Ebenso wie für die Kunden, gibt es auch eine Verwaltung für die Lieferanten des Benutzers. Auch die Lieferanten lassen sich filtern und sortieren (siehe Kapitel Filtern und Sortieren). Lieferanten haben folgende Attribute: Name, Ort, Land, Addresse, FAX, Telefon, E-Mail, Kundennummer (damit ist die Id des Benutzers beim jeweiligen Lieferanten gemeint), Kontaktperson, Produkte und Sonstiges. Einen neuen Lieferant kann man mittels dem Button links oben anlegen und Lieferanten bearbeiten und löschen kann der Benutzer durch einen Doppelklick auf den gewünschten Lieferanten.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.25]{images/Lieferanten.png}
+\end{center}
+	\caption{Screenshot der Lieferantenverwaltung}
+	\label{fig:sample}
+\end{figure}
+\subsection{Verwaltung der lagernden Brillenfassungen}
+Ebenso wie bei der Verwaltung der Kunden und der Lieferanten gibt es auch eine Verwaltung des lagernden Brillenfassungen. Jede Brille die der Benutzer verkauft hat eine eigene Fassung und die wird hier erfasst. Dabei hat jede Brillenfassung folgende Attribute: Modell, Marke, Farbe, Größe, Status (bestellt, lagernd oder verkauft), Einkaufspreis, Einkaufsdatum, Verkaufspreis, Verkaufsdatum und der Lieferant. Die Liste kann wie gewohnt gefiltert und sortiert werden. Um eine neue Brillenfassung zu erfassen kann der Benutzer auf den Button links oben klicken und um eine bestehende Brillenfassung zu bearbeiten oder zu löschen muss der Benutzer einen Doppelklick auf die gewünschte Brillenfassung tätigen.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.25]{images/Brillenfassungen.png}
+\end{center}
+	\caption{Screenshot der lagernden Brillenfassungen}
+	\label{fig:sample}
+\end{figure}
 \subsection{E-Mail und SMS}
 \subsubsection{Massennachrichten}
 Um regelmäßige Info- und Werbenachrichten auszusenden, bietet das Programm die Möglichkeit E-Mails oder SMS an alle Kunden zu versenden. Falls ein Kunde diese Nachrichten nicht mehr erhalten möchte, kann das der Benutzer bei dem einzelnen Kunden eintragen.
@@ -68,7 +158,7 @@ Und zum Versenden einer Nachricht:
 \begin{lstlisting}
 MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, numbers);
 \end{lstlisting}
-Der AccessKey ist ein normaler String, der von MessageBird erstellt wird. Dabei kann jeder Benutzer von MessageBird mehrere AccessKeys haben, beispielsweise einen für Test-Nachrichten, die dann nicht versendet werden oder einen Key, mit dem dann echte SMS versendet werden.
+Der AccessKey ist ein normaler String, der von MessageBird erstellt wird. Dabei kann jeder Benutzer von MessageBird mehrere AccessKeys bekommen, beispielsweise einen für Test-Nachrichten, die dann nicht versendet werden oder einen Key, mit dem dann echte SMS versendet werden.
 Für jede Nachricht die versendet wird, wird das Guthaben auf MessageBird dementsprechend verringert. Sollte das Guthaben auslaufen, wird eine Fehlermeldung angezeigt.
 
 \subsubsection{Einzelne Nachrichten}
@@ -81,7 +171,22 @@ Dieselben Vorgänge werden auch verwendet um einzelne Nachrichten zu versenden. 
 	\label{fig:sample}
 \end{figure}
 \subsubsection{Versendete Nachrichten}
-Außerdem ist es möglich, alle Nachrichten, die vom System aus gesendet worden sind, anzuzeigen. Um nur Nachrichten anzuzeigen, die an einen bestimmten Kunden gesendet worden sind, muss der Benutzer auf die Detailseite eines Kunden klicken und dann die „Versendeten Nachrichten“ anzeigen. Falls der Benutzer alle Nachrichten sehen will, die er versendet hat, kann er unter dem Menüpunkt „Massen SMS /E-Mails verschicken“ auch alle bereits versendeten Nachrichten an alle Kunden sehen.
+Außerdem ist es möglich, alle Nachrichten, die vom System aus gesendet worden sind, anzuzeigen. Um nur Nachrichten anzuzeigen, die an einen bestimmten Kunden gesendet worden sind, muss der Benutzer auf die Detailseite eines Kunden klicken und dann die „Versendeten Nachrichten“ anzeigen. Falls der Benutzer alle Nachrichten sehen will, die er versendet hat, kann er diese unter dem Menüpunkt „Massen SMS /E-Mails verschicken“ sehen.\\
+Dazu wurden in der Datenbank extra die Tabellen "CustomMessage" und "CustomRecipient" angelegt, um alle Nachrichten und deren Empfänger abspeichern zu können. Hier wird beispielsweise eine Massensms gespeichert:
+\begin{lstlisting}
+            var m = new CustomMessage();
+            m.Date = DateTime.Now;
+            m.MessageText = this.Message;
+            m.MessageType = OpticiatnMgr.Core.Entities.MessageType.SMS;
+            m.Recipients = new List<CustomRecipient>();
+            var numbers = GetPhoneNumbers();
+            for (int i = 0; i < this.Customers.Count; i++)
+            {
+                m.Recipients.Add(new CustomRecipient() { Customer = this.Customers[i], Address = numbers[i].ToString() });
+            }
+            this.Uow.MessageRepository.Insert(m);
+            this.Uow.Save();
+\end{lstlisting}
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/VersendeteNachrichten.png}
@@ -122,3 +227,219 @@ Dabei sind ''NewValues'' und ''OldValues'' vom Typ:
         public ObservableCollection<KeyValuePair<string, int>> OldValues { get; set; }
 \end{lstlisting}
 Die Daten werden mittels Linq(Referenz) erfasst.
+\subsection{Filtern und Sortieren}
+\subsubsection{Filtern}
+Auf allen Hauptseiten der Applikation (Kunden, Brillen- und Kontaktlinsenaufträge, Lieferanten, Lagernde Brillenfassungen) sowie auf den Seiten unter dem Menüpunkt „Sonstiges“ (Orte, Länder, Brillen- und Kontaktlinsentypen) ist es möglich die Datensätze zu filtern. Dies passiert immer nach demselben Schema, dennoch ist diese Funktion für jede dieser Seiten einzeln implementiert.
+Dazu muss der Benutzer das Feld aussuchen, nach welchem er gerne filtern möchte, danach einen Text eingeben und dann auf „Filtern“  oder die Taste „Enter“ drücken. Das Programm gibt nun nur jene Datensätze aus, bei denen das gewünschte Feld den eingegebenen Text enthält. Neben dem „Filtern“-Schalter befindet sich ein „Filter löschen“-Schalter, der wieder alle Datensätze zum Vorschein bringt.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.75]{images/filter.png}
+\end{center}
+	\caption{Screenshot des Filters}
+	\label{fig:sample}
+\end{figure}
+Im nachfolgenden Beispiel wird anhand der „Lagernden Brillenfassungen“ erklärt wie der Filter funktioniert. 
+Im ViewModel gibt es ein Feld, welches „PropertiesList“ heißt (vom Typ ObservableCollection<string>. In diesem werden alle Felder der jeweiligen Klasse aufgezählt. Davor werden noch Felder, nach denen der Benutzer später nicht filtern sollte, herausgestrichen. Zusätzlich wird jedes Feld in Deutsch übersetzt. Dies geschieht mittels einem ResourceManager, der ein kleines Wörterbuch verwaltet, welches eine Übersetzung für jedes Feld bereithält. Das ist die Liste der Felder aus denen der Benutzer später sein „Filterfeld“ auswählen kann. 
+\begin{lstlisting}
+public ObservableCollection<String> PropertiesList { get; }
+
+private ResourceManager manager = Properties.Resources.ResourceManager;
+
+private ObservableCollection<string> GetAllProperties()
+{
+	ObservableCollection<string> props = new 							ObservableCollection<string>(typeof(EyeGlassFrame).GetProperties()
+.Select(p => p.Name).ToList());
+	ObservableCollection<string> newList = new ObservableCollection<string>();
+	props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
+    props.Remove("Supplier_Id"); //Shouldnt be able to filter by supplier_id
+    foreach (var item in props)
+    {
+         var germanItem = manager.GetString(item);
+         if (germanItem != null)
+             newList.Add(germanItem);
+    }
+    return newList;
+}
+\end{lstlisting}
+Wenn der Benutzer einen Text eingibt und danach „Filtern“ drückt, wird das Feld, das er gewählt hat zuerst mit Hilfe des ResourceManagers auf Englisch übersetzt.  Danach wird die Mehtode Filter() aufgerufen, die den passenden Filter setzt, falls der Benutzer einen Text eingegeben hat.
+\begin{lstlisting}
+public void Filter()
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(this.FilterText))
+                {
+                    this.EyeGlassFramesView.Filter = new Predicate<object>(Contains);
+                }
+                else
+                    this.EyeGlassFramesView.Filter = null;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
+        }
+\end{lstlisting}
+Dabei muss man wissen, dass EyeGlassFramesView vom Typ ICollectionView ist. Diese Variable wird im Konstruktor aus der Liste der wirklichen Brillenfassungen erzeugt (EyeGlassFrames). Der Typ ICollectionView ist als Anzeigeelement für Listen gedacht, weshalb es auch ein Feld namens „Filter“ gibt. Durch die Methode „Contains“ wird dieser auch gesetzt.
+\begin{lstlisting}
+public ObservableCollection<EyeGlassFrame> EyeGlassFrames { get; set; }
+public ICollectionView EyeGlassFramesView { get; set; }
+this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
+private bool Contains(object f)
+        {
+            EyeGlassFrame frame = f as EyeGlassFrame;
+            if (typeof(EyeGlassFrame).GetProperty(TranslatedFilterProperty) != null)
+            {
+                return frame.GetType().GetProperty(this.TranslatedFilterProperty)
+                .GetValue(frame, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+            }
+            else if (typeof(Supplier).GetProperty(TranslatedFilterProperty) != null) //Does the user filter by suppliername?
+            {
+                return frame.Supplier?.GetType()
+                .GetProperty(this.TranslatedFilterProperty)
+                .GetValue(frame.Supplier, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+            }
+            else
+            {
+                MessageBox.Show("Beim Filtern ist ein Fehler aufgetreten!");
+                return false;
+            }
+        }
+\end{lstlisting}
+Die Methode Contains gibt zurück, ob das Objekt „f“ dem angegebenen Filter entspricht. Dazu wird zunächst überprüft, ob die Klasse EyeGlassFrame die Property enthält, nach der der Benutzer filtert. Wenn ja, gibt die Methode zurück, ob in dieser Property die Zeichenkette vorkommt, nach der der Benutzer sucht. Danach überprüft das Programm ob die gesuchte Eigenschaft eine Eigenschaft der Klasse Supplier ist. Das passiert, weil jede lagernde Brillenfassung einen Lieferanten hat. Deswegen kann es sein, dass der Benutzer nach einer Eigenschaft filtert, die gar nicht in der Klasse EyeGlassFrame enthalten ist, sondern nur in der Klasse Supplier. Wenn keiner dieser Fälle zutrifft, was nicht vorkommen sollte, wird eine Fehlermeldung zurückgegeben.
+\subsubsection{Sortieren}
+Bei den allen Hauptseiten, auf denen Daten angezeigt werden, ist eine dynamische Sortierung implementiert. Diese macht es dem Benutzer möglich, nach drei Spalten gleichzeitig auf- oder absteigend zu sortieren.  Dazu muss der Benutzer auf eine beliebige Spaltenüberschrift klicken. Das ist dann die Spalte, nach der zuerst aufsteigend sortiert wird. Drückt der Benutzer erneut auf dieselbe Spaltenübersicht, werden die Datensätze nach dieser Spalte absteigend sortiert. Wenn der Benutzer nach einer zweiten Spalte sortieren möchte, muss er zusätzlich die Shift-Taste drücken, während er die Spaltenüberschrift auswählt. Wiederrum muss der Benutzer ein zweites Mal mit der Shift-Taste die gleiche Spaltenüberschrift anklicken, um absteigend zu sortieren. Dasselbe gilt für die dritte Spalte. Um die Sortierung wieder zurücksetzen zu können, kann der Benutzer eine andere Spaltenüberschrift mit einem normalen Klick wieder sortieren. Im nachfolgenden Bild hat der Benutzer zuerst nach dem Vornamen, dann nach Ort und zum Schluss nach Nachnamen sortiert.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.75]{images/Sortieren.png}
+\end{center}
+	\caption{Screenshot des Sortierens}
+	\label{fig:sample}
+\end{figure}
+Zur Implementierung gibt es eine Klasse SortManager, die die Sortierung für alle Hauptseiten regelt. Dazu wird im Konstruktor ein neuer SortManager initialisiert.
+\begin{lstlisting}
+SortManager = new SortManager();
+public SortManager SortManager { get; set; }
+\end{lstlisting}
+Zusätzlich werden drei Events von der View abonniert. 
+\begin{lstlisting}
+<i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <cmd:EventToCommand Command="{Binding Initialized}"
+                                        PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+\end{lstlisting}
+Dieses Event wird von der ListView bereitgestellt.
+In jedem ListViewHeader werden noch Shift+LeftClick und MouseDown abonniert.
+\begin{lstlisting}
+<GridViewColumn DisplayMemberBinding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}">
+                        <GridViewColumnHeader Content="Vorname">
+                            <GridViewColumnHeader.InputBindings>
+                                <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="FirstName" ></MouseBinding>
+                            </GridViewColumnHeader.InputBindings>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+\end{lstlisting}
+
+Im ViewModel werden dann folgende Methoden aufgerufen:
+\begin{lstlisting}
+private void Init(RoutedEventArgs p)
+        {
+            SortManager.Init(p);
+        }
+        //Click without shift key
+        private void SortS(RoutedEventArgs e)
+        {
+            var tmp = this.CustomersView;
+            SortManager.SortNormal(e, ref tmp);
+        }
+
+        //Click with shift
+        private void SortSh(object p)
+        {
+            var tmp = CustomersView;
+            SortManager.SortShift(p, ref tmp);
+        }
+\end{lstlisting}
+In der Methode SortManager.Init(RoutedEventArgs p) werden durch die Variable p alle GridViewColumnHeader abgespeichert. Der Grund dafür ist, dass bei dem Event SortShift keine EventArgs mitgegeben werden können, weil es sich um ein MouseBinding handelt und nicht um ein normales Event. Dadurch kann die Methode SortShift(object p, ref ICollectionView View) nicht wissen, welche Spaltenüberschrift gedrückt wurde und daher müssen am Anfang einmal alle GridViewColumnHeaders abgespeichert werden.
+Wenn die Methode SortNormal(RoutedEventArgs e, ref ICollectionView View) aufgerufen wird, wird zunächst überprüft ob die Spaltenüberschrift schon einmal gedrückt wurde (dann soll nämlich die Sortierrichtung geändert werden). Wenn ja, werden die Suchrichtung sowie die Richtung des Pfeils neben der Spaltenüberschrift geändert. Ansonsten werden alle Pfeile neben den Überschriften gelöscht, die Suchrichtung auf aufsteigend gesetzt und ein neuer Pfeil gesetzt. Ein Auszug der SortNormal-Methode:
+\begin{lstlisting}
+//Same column pressed?
+            if (SortHeaders.Count > 0 && SortHeaders[0] == columnHeader)
+            {
+                //Change sort direction
+                dir = View.SortDescriptions[0].Direction;
+                dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                header = ChangeArrow(columnHeader, dir);
+            }
+            else
+            {
+                //Remove arrow from old column header
+                if (SortHeaders.Count > 0)
+                {
+                    foreach (var item in SortHeaders)
+                    {
+                        item.Column.HeaderTemplate = null;
+                        item.Column.Width = item.ActualWidth - 20;
+                    }
+                }
+                SortHeaders.Clear();
+                SortHeaders.Add(columnHeader);
+                //default sort direction is ascending
+                dir = ListSortDirection.Ascending;
+                header = SetNewArrow(columnHeader, dir);
+            }
+            View.SortDescriptions.Clear();
+
+            View.SortDescriptions.Add(new SortDescription(header, dir));
+\end{lstlisting}
+SortHeaders ist eine globale Variable vom Typ List<GridViewColumnHeader>, der die Spalten enthält, nach den aktuell sortiert wird. Die lokale Variable dir bezeichnet die gewünschte Sortierrichtung und ist vom Typ ListSortDirection. Der String header enthält die Property, auf die der GridViewColumnHeader bindet. Diese ist natürlich Englisch und stellt wieder ein Übersetzungsroblem dar. Wie schon weiter oben erwähnt, ist der Typ ICollectionView extra für das Darstellen von Listen gemacht, deshalb enthält er auch eine Eigenschaft SortDescriptions, in welche man beliebig viele SortDescriptions einfügen kann und nach welchen die Liste automatisch sortiert wird. In den Methoden ChangeArrow und SetNewArrow wird die Spalte entsprechend breiter gemacht und das passende vorgefertigte Template gesetzt.
+\begin{lstlisting}
+column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUp") as DataTemplate;
+\end{lstlisting}
+In diesem Beispiel wird dem GridViewColumnHeader column ein Pfeil der nach oben ausgerichtet ist beigefügt.
+In der Methode SortShift(object p, ref ICollectionView View) wird mittels dem Parameter p der Name der Property übergeben, an die sich die Spalte bindet. Dieser wird händisch in der View übergeben (siehe oben) und ist englisch, weshalb er zuerst übersetzt werden muss. Danach wird der passende GridViewColumnHeader nach der Überschrift in den am Anfang angelegten GridViewColumnHeaders gesucht.
+
+\begin{lstlisting}
+var columnHeader = AllHeaders.Where(h => String.Equals(h.Content.ToString(), germanColumnName)).ToList().FirstOrDefault();
+\end{lstlisting}
+Danach wird wieder überprüft, ob dieselbe Spalte zweimal hintereinander ausgewählt wurde, sodass dann die Sortierrichtung gewechselt werden kann. Ansonsten wird überprüft ob schon drei Spalten ausgewählt wurden und wenn nicht wird eine neue Spalte zu den Sortierspalten hinzugefügt.
+Auszug der SortShift-Methode:
+
+\begin{lstlisting}
+if (View.SortDescriptions.Count >= 1)
+            {
+                ListSortDirection dir;
+                int index = View.SortDescriptions.Count - 1;
+                //Change sorting direction
+                if (View.SortDescriptions.Count == index + 1 && View.SortDescriptions[index].PropertyName == columnName)
+                {
+                    dir = View.SortDescriptions[index].Direction;
+                    dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                    View.SortDescriptions.RemoveAt(index);
+                    View.SortDescriptions.Insert(index, new SortDescription(columnName, dir));
+                    ChangeArrow(columnHeader, dir);
+                    SortHeaders.Add(columnHeader);
+                }
+                else if (View.SortDescriptions.Count(s => s.PropertyName == columnName) == 0)
+                {
+                    if (View.SortDescriptions.Count >= 3)
+                    {
+                        MessageBox.Show("Sie k\"onnen maximal nach drei Spalten sortieren!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        return;
+                    }
+                    dir = ListSortDirection.Ascending;
+                    SetNewArrow(columnHeader, dir);
+                    View.SortDescriptions.Add(new SortDescription(columnName, dir));
+                    SortHeaders.Add(columnHeader);
+                }
+\end{lstlisting}

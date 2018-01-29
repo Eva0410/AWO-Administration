@@ -36,7 +36,6 @@ namespace OpticianMgr.Wpf.ViewModel
             AddCountry = new RelayCommand(AddC);
             this.InitFields();
         }
-        //TODO Bug wenn Ort angelegt wurde, wird er auf null gesetzt
         public void AddT()
         {
             WindowService windowService = new WindowService();

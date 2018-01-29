@@ -40,30 +40,14 @@ namespace OpticianMgr.Wpf.ViewModel
         public SortManager SortManager { get; set; }
 
         //The properties of the supplier class are safed in English but need to be shown in German
-        public ObservableCollection<String> PropertiesList
-        {
-            get
-            {
-                ObservableCollection<string> props = new ObservableCollection<string>(typeof(Supplier).GetProperties().Select(p => p.Name).ToList());
-                ObservableCollection<string> newList = new ObservableCollection<string>();
-                props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
-                props.Remove("Country_Id"); //Shouldnt be able to filter by country_Id
-                props[props.IndexOf("Town_Id")] = "ZipCode"; //shouldnt be able to filter by town_id but user should be able to filter by zipcode
-                foreach (var item in props)
-                {
-                    var germanItem = manager.GetString(item);
-                    if (germanItem != null)
-                        newList.Add(germanItem);
-                }
-                return newList;
-            }
-        }
+        public ObservableCollection<String> PropertiesList { get; }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public SupplierViewModel(IUnitOfWork _uow)
         {
             this.Uow = _uow;
+            this.PropertiesList = GetAllProperties();
             this.FilterProperty = "Name";
             this.Suppliers = GetAllSuppliers();
             this.SuppliersView = CollectionViewSource.GetDefaultView(Suppliers);
@@ -82,6 +66,21 @@ namespace OpticianMgr.Wpf.ViewModel
             };
             ViewModelLocator.TownDetailsViewModel.Refresh += refreshSuppliers;
             ViewModelLocator.CountryDetailsViewModel.Refresh += refreshSuppliers;
+        }
+        private ObservableCollection<string> GetAllProperties()
+        {
+            ObservableCollection<string> props = new ObservableCollection<string>(typeof(Supplier).GetProperties().Select(p => p.Name).ToList());
+            ObservableCollection<string> newList = new ObservableCollection<string>();
+            props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
+            props.Remove("Country_Id"); //Shouldnt be able to filter by country_Id
+            props[props.IndexOf("Town_Id")] = "ZipCode"; //shouldnt be able to filter by town_id but user should be able to filter by zipcode
+            foreach (var item in props)
+            {
+                var germanItem = manager.GetString(item);
+                if (germanItem != null)
+                    newList.Add(germanItem);
+            }
+            return newList;
         }
         private void Init(RoutedEventArgs p)
         {
