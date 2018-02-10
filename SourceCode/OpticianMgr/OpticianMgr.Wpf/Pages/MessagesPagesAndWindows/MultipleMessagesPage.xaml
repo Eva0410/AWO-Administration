@@ -8,13 +8,13 @@
       xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
       DataContext="{Binding MultipleMessagesViewModel, Source={StaticResource Locator}}">
 
-    <StackPanel Style="{StaticResource StackPanelBackground}">
-        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Nachricht senden</Label>
-        <StackPanel Style="{StaticResource ButtonsCenterStackPanel}">
+    <StackPanel>
+        <Label  Style="{StaticResource HeadingStyle}">Nachricht senden</Label>
+        <StackPanel  Style="{StaticResource ButtonsCenterStackPanel}" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Button Command="{Binding SMS}">SMS</Button>
             <Button Command="{Binding EMail}">E-Mail</Button>
         </StackPanel>
-        <Button DockPanel.Dock="Top" Command="{Binding ShowMessages}">Versendete Nachrichten anzeigen</Button>
-        <Frame Style="{StaticResource MessageFrame}" Content="{Binding Page}"></Frame>
+        <Frame Style="{StaticResource MessageFrame}" Content="{Binding Page}" MinHeight="350" Margin="5" VerticalAlignment="Top"></Frame>
+        <Button Command="{Binding ShowMessages}" HorizontalAlignment="Left">Versendete Nachrichten anzeigen</Button>
     </StackPanel>
 </Page>

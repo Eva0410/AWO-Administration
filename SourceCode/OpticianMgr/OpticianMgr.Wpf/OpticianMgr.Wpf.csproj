@@ -98,6 +98,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
     </Reference>
@@ -583,7 +584,27 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DownOne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DownTwo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UpOne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UpTwo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

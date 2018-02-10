@@ -55,21 +55,94 @@ private ObservableCollection<Customer> GetAllCustomers()
 Danach wird auf Basis der kopierten Datensätze eine ICollectionView erstellt, welche die Daten dann anzeigt. Im Vergleich zur ObservableCollection bietet die ICollectionView beim Anzeigen viele Vorteile (siehe Kapitel Filtern und Sortieren). 
 Damit ein Kunde gelöscht werden kann, enthält die Klasse Kunde eine Property namens 'Deleted', welche angibt, ob der Kunde gelöscht wurde. Wenn diese auf 'true' gesetzt wird, kann der Benutzer den Kunden durch die Checkbox auf der Startseite ausblenden. Falls er dies nicht tut, wird der Kunde auf der Startseite angezeigt, allerdings erscheint eine Fehlermeldung, wenn der Benutzer versucht die Detailsseite des Kunden zu öffnen. Dadurch ist es auch unmöglich neue Bestellungen für diesen Kunden anzulegen oder die Daten des Kunden zu bearbeiten. Die Bestellungen des gelöschten Kunden werden trotzdem normal angezeigt.
 \subsection{Aufträge}
-Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen und Kontaktlinsen. Eigentlich haben beide Arten diesselben Eigenschaften, nur der Brillenauftrag sollte eine Brillenfassung haben. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwsichen Brilen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt auch zwei verschiedene Listen angezeigt. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Allerdings kann der Benutzer von dieser Sicht aus keine neuen Aufträge erfassen, dazu muss er in der Kundenverwaltung zuerst einen Kunden auswählen. 
+Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen und Kontaktlinsen. Eigentlich haben beide Arten diesselben Eigenschaften, nur der Brillenauftrag hat eine Brillenfassung und der Kontaktlisenauftrag nicht. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer beispielsweise unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwsichen Brilen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt ''Aufträge''auch zwei verschiedene Listen angezeigt. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Allerdings kann der Benutzer von dieser Sicht aus keine neuen Aufträge erfassen, dazu muss er in der Kundenverwaltung zuerst einen Kunden auswählen. 
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/Auftraege.png}
 \end{center}
-	\caption{Screenshot der Auftragverwaltung}
+	\caption{Screenshot der Auftragsverwaltung}
 	\label{fig:sample}
 \end{figure}
 Wenn der Benutzer doppelt auf einen Auftrag klickt, erscheint entweder ein Detailsfenster eines Brillenauftrags oder Kontatklinsenauftrags. Im rechten Bereich des Fensters kann der Benutzer die einzelnen Preise der Komponenten angeben. Das Programm rechnet alle Preise  brutto und gibt zum Schluss die darin enthaltene Mehrwertsteuer an. Es wird nach folgender Formel gerechnet: Zuerst werden linker und rechter Glaspreis, Preis von Sonstigem und wenn vorhanden der Verkaufspreis der Brillenfassung addiert. Davon wird das Krankenkassageld abgezogen, der Selbstbehalt hinzugezählt und der Rabatt (wird in Euro angegeben) wieder subtrahiert. Zwanzig Prozent davon sind schlussendlich die Mehrwertsteuer. 
-Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung angeben. 
+Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung angeben. Wenn der Benutzer den Bearbeitungsstatus auf ''Abgeholt'' setzt, wird auch der Status der Brillenfassung auf ''Verkauft'' gesetzt
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/Brillenauftrag.png}
 \end{center}
 	\caption{Screenshot eines Brillenauftrags}
+	\label{fig:sample}
+\end{figure}
+\subsubsection{Dokumente erstellen}
+Unter den Angaben der Details zu den Gläsern, kann der Benutzer eine Auftragsbestätigung oder eine Rechnung erstellen. Die Dokumente werden als Word-Dokumente in einem Ordner abgespeichert. Das hat den Vorteil, dass der Benutzer selbst entscheiden kann, ob er noch etwas nachträglich ändert oder die Vorlage gleich ausdruckt oder versendet. Damit das funktioniert, muss der Benutzer  eine Word-Vorlage erstellen, die Felder enthält (MergeFields), welche das Programm ersetzen kann. In der Datenbank wird immer nur der Pfad zur jeweiligen Auftragsbestätigung/Rechnung gespeichert. Das heißt, dass der Benutzer die erstellten Dokumente nach der Erstellung bearbeiten, löschen oder neu generieren kann. Der Dokumentname der generierten Datei besteht immer aus der Bestell-Id, dem Dokumenttyp (Rechnung oder Auftragsbestätigung), dem Nachnamen des Kunden und dem aktuellen Datum. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.75]{images/MusterAuftragsbestaetigung.pdf}
+\end{center}
+	\caption{Generierte Auftragsbest\"atigung}
+	\label{fig:sample}
+\end{figure}
+Technischer Hintergrund:
+Zur Erstellung von Word-Dokumenten wird der Namespace Microsoft.Office.Interop.Word verwendet. Die Methode CreateDocument liest die Wordvorlage und ersetzt die Mergsfields. Der Parameter oTemplatePath beschreibt den Pfad der Wordvorlage und der String path den Namen, unter dem das Dokument abgespeichert werden soll. Der Code unterhalb ist nur ein Ausschnitt der Methode.
+\begin{lstlisting}
+private static bool CreateDocument(int orderId, Object oTemplatePath, string path)
+        {
+            Application wordApp = new Application();
+            Document wordDoc = new Document();
+            try
+            {
+                Order order;
+                Customer cus;
+				
+				//Ausgeschnitten: Hier werden order und cus Werte zugewiesen 
+				
+                Object oMissing = System.Reflection.Missing.Value;
+
+                wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref oMissing, ref oMissing, ref oMissing);
+
+                foreach (Field myMergeField in wordDoc.Fields)
+                {
+                    Range rngFieldCode = myMergeField.Code;
+                    String fieldText = rngFieldCode.Text;
+
+                    //only mergefields should be edited
+                    if (fieldText.StartsWith(" MERGEFIELD"))
+                    {
+                        //Text comes in in format of "MERGEFILED fieldname \\* MERGEFORMAT
+                        //Ausgeschnitten: Hier wird der Name der Property aus dem fieldText herausgeholt und auf Englisch \"ubersetzt
+                        string value = String.Empty;
+                        //Ausgeschnitten: Die Property wird in den Klassen gesucht und der Wert gespeichert z.B: Properties der Klasse Customer:
+                         if (typeof(Customer).GetProperty(translatedFieldName) != null)
+                        {
+                            value = cus.GetType().GetProperty(translatedFieldName).GetValue(cus, null)?.ToString();
+                        }
+                        
+                        myMergeField.Select();
+                        wordApp.Selection.TypeText(value);
+                    }
+                }
+                int idx = oTemplatePath.ToString().LastIndexOf("\\");
+                string p = oTemplatePath.ToString().Substring(0, idx + 1);
+                string completePath = p + path + ".docx";
+                wordDoc.SaveAs(completePath);
+                wordDoc.Close();
+                wordApp.Quit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                wordApp.Quit();
+                wordDoc.Close();
+                return false;
+            }
+        }
+\end{lstlisting}
+Genau die selbe Mehtode wird benutzt, wenn eine Rechnung erstellt wird.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.75]{images/Musterrechnung.pdf}
+\end{center}
+	\caption{Generierte Rechnung}
 	\label{fig:sample}
 \end{figure}
 \subsection{Lieferantenverwaltung}

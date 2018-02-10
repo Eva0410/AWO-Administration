@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:vm="clr-namespace:OpticianMgr.Wpf.ViewModel"
         Title="Augenoptik Aigner - Verwaltungsprogramm"
-        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" WindowState="Maximized" ResizeMode="NoResize">
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" MinHeight="600" MinWidth="1200">
     <DockPanel>
         <DockPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -15,12 +15,17 @@
                 <GradientStop Color="#FFFBF8F8" Offset="0.549"/>
             </LinearGradientBrush>
         </DockPanel.Background>
-        <Menu x:Name="menu" VerticalAlignment="Top" FontFamily="Georgia" FontSize="16" FontStyle="Italic" DockPanel.Dock="Top" Background="{x:Null}">
-            <Button Content="Kunden" Style="{StaticResource MenuButton}" Command="{Binding Customers}"></Button>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Menu x:Name="menu" VerticalAlignment="Top" FontFamily="Georgia" FontSize="16" FontStyle="Italic" DockPanel.Dock="Top" Background="{x:Null}">
+                <Button Content="Kunden" Style="{StaticResource MenuButton}" Command="{Binding Customers}"></Button>
             <Button Content="Aufträge" Style="{StaticResource MenuButton}" Command="{Binding Orders}"></Button>
             <Button Content="Lieferanten" Style="{StaticResource MenuButton}" Command="{Binding Suppliers}"></Button>
             <Button Content="Lagernde Brillenfassungen" Command="{Binding EyeGlassFrames}" Style="{StaticResource MenuButton}"></Button>
-            <Button Content="Massen SMS / E-Mails verschicken" Command="{Binding MultipleMessages}" Style="{StaticResource MenuButton}"></Button>
+            <Button Content="Massen SMS / E-Mails versenden" Command="{Binding MultipleMessages}" Style="{StaticResource MenuButton}"></Button>
             <Button Content="Statistken" Command="{Binding Statistics}" Style="{StaticResource MenuButton}"></Button>
             <MenuItem Header="Sonstiges">
                 <MenuItem Header="Orte bearbeiten" Command="{Binding OpenTowns}"></MenuItem>
@@ -29,6 +34,8 @@
                 <MenuItem Header="Kontaktlinsentypen bearbeiten" Command="{Binding OpenContactLensTypes}"></MenuItem>
             </MenuItem>
         </Menu>
+        <Image Grid.Column="1" Source="Logo.png" Width="100" Height="48" Margin="10,1" HorizontalAlignment="Right"/>
+        </Grid>
         <Separator DockPanel.Dock="Top" Background="#FF040404"/>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" DockPanel.Dock="Top" Content="{Binding Page}"></Frame>
     </DockPanel>

@@ -10,12 +10,15 @@
       DataContext="{Binding StatisticsViewModel, Source={StaticResource Locator}}">
 
     <DockPanel>
-        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Statistik</Label>
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Statistiken</Label>
         <StackPanel Style="{StaticResource ButtonsCenterStackPanel}" DockPanel.Dock="Top">
             <Button Command="{Binding ChangeStatistic}"  CommandParameter="B">Verkaufte Brillen</Button>
             <Button Command="{Binding ChangeStatistic}" CommandParameter="K">Verkaufte Kontaklinsen</Button>
         </StackPanel>
-        <toolkitCharting:Chart Title="{Binding Title}" VerticalAlignment="Top" Margin="10,10,10,17" MinHeight="7" Height="500" BorderBrush="{x:Null}" >
+        <toolkitCharting:Chart Title="{Binding Title}" Margin="10,10,10,17" MinHeight="400" DockPanel.Dock="Top" BorderBrush="{x:Null}" VerticalAlignment="Stretch">
+            <toolkitCharting:Chart.Axes>
+                <toolkitCharting:LinearAxis Orientation="Y" Minimum="0"></toolkitCharting:LinearAxis>
+            </toolkitCharting:Chart.Axes>
             <toolkitCharting:LineSeries Title="{Binding NewYear}"  DependentValueBinding="{Binding Value}" IndependentValueBinding="{Binding Key}" ItemsSource="{Binding NewValues}" IsSelectionEnabled="True"/>
             <toolkitCharting:LineSeries Title="{Binding OldYear}"  DependentValueBinding="{Binding Value}" IndependentValueBinding="{Binding Key}" ItemsSource="{Binding OldValues}" IsSelectionEnabled="True"/>
         </toolkitCharting:Chart>

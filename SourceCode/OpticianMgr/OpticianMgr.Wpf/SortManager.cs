@@ -47,7 +47,7 @@ namespace OpticianMgr.Wpf
                 //Change sort direction
                 dir = View.SortDescriptions[0].Direction;
                 dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                header = ChangeArrow(columnHeader, dir);
+                header = ChangeArrow(columnHeader, dir, 0);
             }
             else
             {
@@ -64,7 +64,7 @@ namespace OpticianMgr.Wpf
                 SortHeaders.Add(columnHeader);
                 //default sort direction is ascending
                 dir = ListSortDirection.Ascending;
-                header = SetNewArrow(columnHeader, dir);
+                header = SetNewArrow(columnHeader, dir, 0);
             }
             View.SortDescriptions.Clear();
 
@@ -73,24 +73,47 @@ namespace OpticianMgr.Wpf
                 header = "EyeGlassFrame.ModelDescription";
             View.SortDescriptions.Add(new SortDescription(header, dir));
         }
-        private string SetNewArrow(GridViewColumnHeader column, ListSortDirection dir)
+        private string SetNewArrow(GridViewColumnHeader column, ListSortDirection dir, int index)
         {
             //new column header must be wider
             column.Column.Width = column.ActualWidth + 20;
 
-            return ChangeArrow(column, dir);
+            return ChangeArrow(column, dir, index);
         }
-        private string ChangeArrow(GridViewColumnHeader column, ListSortDirection dir)
+        private string ChangeArrow(GridViewColumnHeader column, ListSortDirection dir, int index)
         {
 
             //insert arrow
             if (dir == ListSortDirection.Ascending)
             {
-                column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUp") as DataTemplate;
+                switch(index)
+                {
+                    case 0:
+                        column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUp") as DataTemplate;
+                        break;
+                    case 1:
+                        column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUpOne") as DataTemplate;
+                        break;
+                    case 2:
+                        column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUpTwo") as DataTemplate;
+                        break;
+                }
+                
             }
             else
             {
-                column.Column.HeaderTemplate = Application.Current.FindResource("ArrowDown") as DataTemplate;
+                switch(index)
+                {
+                    case 0:
+                        column.Column.HeaderTemplate = Application.Current.FindResource("ArrowDown") as DataTemplate;
+                        break;
+                    case 1:
+                        column.Column.HeaderTemplate = Application.Current.FindResource("ArrowDownOne") as DataTemplate;
+                        break;
+                    case 2:
+                        column.Column.HeaderTemplate = Application.Current.FindResource("ArrowDownTwo") as DataTemplate;
+                        break;
+                }
             }
 
             string header = string.Empty;
@@ -129,7 +152,7 @@ namespace OpticianMgr.Wpf
                     dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
                     View.SortDescriptions.RemoveAt(index);
                     View.SortDescriptions.Insert(index, new SortDescription(columnName, dir));
-                    ChangeArrow(columnHeader, dir);
+                    ChangeArrow(columnHeader, dir, index);
                     SortHeaders.Add(columnHeader);
                 }
                 else if (View.SortDescriptions.Count(s => s.PropertyName == columnName) == 0)
@@ -140,7 +163,7 @@ namespace OpticianMgr.Wpf
                         return;
                     }
                     dir = ListSortDirection.Ascending;
-                    SetNewArrow(columnHeader, dir);
+                    SetNewArrow(columnHeader, dir, index+1);
                     View.SortDescriptions.Add(new SortDescription(columnName, dir));
                     SortHeaders.Add(columnHeader);
                 }
