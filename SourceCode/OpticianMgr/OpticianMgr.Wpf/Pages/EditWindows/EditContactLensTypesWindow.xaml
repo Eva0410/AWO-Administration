@@ -33,7 +33,6 @@
                     <Button Command="{Binding DeleteFilter}">Filter zurücksetzen</Button>
                 </StackPanel>
                 <Button Command="{Binding AddContactLensType}" Style="{StaticResource AddAndEditButton}">Neuen Kontaktlinsentyp hinzufügen</Button>
-                <Button Grid.Row="1" Command="{Binding OpenContactLensType}" Style="{StaticResource AddAndEditButton}">Kontaktlinsentyp anzeigen</Button>
                 <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="1">
                     <TextBlock>Sortieren nach:</TextBlock>
                     <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}">

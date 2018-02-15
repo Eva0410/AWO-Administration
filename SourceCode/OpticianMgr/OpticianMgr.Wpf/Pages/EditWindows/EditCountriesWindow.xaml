@@ -33,7 +33,6 @@
                     <Button Command="{Binding DeleteFilter}">Filter zurücksetzen</Button>
                 </StackPanel>
                 <Button Command="{Binding AddCountry}" Style="{StaticResource AddAndEditButton}">Neues Land hinzufügen</Button>
-                <Button Grid.Row="1" Command="{Binding OpenTown}" Style="{StaticResource AddAndEditButton}">Land anzeigen</Button>
                 <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="1">
                     <TextBlock>Sortieren nach:</TextBlock>
                     <ComboBox ItemsSource="{Binding PropertiesList}" SelectedValue="{Binding SortProperty}">

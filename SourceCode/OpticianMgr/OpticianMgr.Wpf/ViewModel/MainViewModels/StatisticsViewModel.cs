@@ -74,7 +74,7 @@ namespace OpticianMgr.Wpf.ViewModel
         {
             for (int i = 1; i <= 12; i++)
             {
-                int soldItems = this.Uow.OrderRepository.Count(o => o.PaymentDate != null && o.PaymentDate.Value.Year == year && o.PaymentDate.Value.Month == i && o.PaymentState == "Bezahlt" && o.OrderType == orderType);
+                int soldItems = this.Uow.GetStatisticOfMonth(i, year, orderType);
                 list.Add(new KeyValuePair<string, int>(new DateTime(2017, i, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("de")), soldItems));
             }
         }

@@ -1,7 +1,7 @@
 \chapter{Beschreibung des Endproduktes}\label{cha:theoretical-background}
 \section{Administration}
 \subsection{Kundenverwaltung}
-Um dem Benutzer eine kompakte Übersicht über seine Kunden zu geben, gibt es die Kundenverwaltung, bei der alle Kunden in einer Liste dargestellt werden. Angezeigt wird, die Id, Titel, Vorname, Nachname, Straße, PLZ, Ort, Telefon1 und das Land des Kunden. Diese Liste kann man filtern und sortieren (siehe Kapitel 'Filtern und Sortieren'). Zusätzlich zu dem normalen Filter, kann man bei der Kundenverwaltung ebenso gelöschte Kunden ein- oder ausblenden. Der Grund dafür wird später noch näher erklärt (Referenz)
+Um dem Benutzer eine kompakte Übersicht über seine Kunden zu geben, gibt es die Kundenverwaltung, bei der alle Kunden in einer Liste dargestellt werden. Angezeigt wird, die Id, Titel, Vorname, Nachname, Straße, PLZ, Ort, Telefon1 und das Land des Kunden. Diese Liste kann man filtern und sortieren (siehe Kapitel 'Filtern und Sortieren'). Zusätzlich zu dem normalen Filter, kann man bei der Kundenverwaltung ebenso gelöschte Kunden ein- oder ausblenden. Der Grund dafür wird später noch näher erklärt.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/Kunden.png}
@@ -9,7 +9,7 @@ Um dem Benutzer eine kompakte Übersicht über seine Kunden zu geben, gibt es di
 	\caption{Screenshot der Kundenverwaltung}
 	\label{fig:sample}
 \end{figure}
-Beim Klick des Buttons "Neuen Kunden hinzufügen" erscheint ein neues Fenster, welches einen neuen Kunden erstellt. Hier kann der Benutzer noch mehr Daten eingeben, wie beispielsweise Hobbies, Job oder den Geburstag. Außerdem kann der Benutzer den Ort und das Land aus einer Drop-Down-List auswählen. Falls der Ort bzw. das Land noch nicht vorhanden ist, kann der Benutzer auf den danebenliegenden Knopf drücken und einen neuen Ort/Land anlegen. 
+Beim Klick des Buttons ''Neuen Kunden hinzufügen'' erscheint ein neues Fenster, welches einen neuen Kunden erstellt. Hier kann der Benutzer noch mehr Daten eingeben, wie beispielsweise Hobbies, Job oder den Geburtstag. Außerdem kann der Benutzer den Ort und das Land aus einer Drop-Down-List auswählen. Falls der Ort bzw. das Land noch nicht vorhanden ist, kann der Benutzer auf den danebenliegenden Knopf drücken und einen neuen Ort/Land anlegen. 
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/NeuerKunde.png}
@@ -17,45 +17,45 @@ Beim Klick des Buttons "Neuen Kunden hinzufügen" erscheint ein neues Fenster, w
 	\caption{Screenshot Neuen Kunden anlegen}
 	\label{fig:sample}
 \end{figure}
-Falls der Benutzer nach dem Anlegen des Kunden noch Änderungen vornehmen möchte, kann er dies auf der Startseite durch einen Doppelklick auf den gewünschten Kunden erledigen. Dadurch erscheint ein neues Fenster, auf welchem der Benutzer alle Daten des Kundes bearbeiten kann und zusätzlich alle Bestellungen des Kundens sieht. Außerdem besteht hier die Möglichkeit den Kunden zu löschen. Damit ist allerdings aus datenbanktechnischen Gründen gemeint, den Kunden nicht mehr bearbeitbar zu machen allerdings kann der Benutzer keinen Kunden wirklich löschen. Der Grund dafür ist, dass jede Bestellung in der Datenbank auf einen Kunden verweisen muss und wenn ein Kunde bereits mehrere Bestellungen getätigt hat und danach den Kunden löschen möchte, müssten alle seine Bestellungen mitgelöscht werden. 
+Falls der Benutzer nach dem Anlegen des Kunden noch Änderungen vornehmen möchte, kann er dies auf der Startseite durch einen Doppelklick auf den gewünschten Kunden erledigen. Dadurch erscheint ein neues Fenster, auf welchem der Benutzer alle Daten des Kunden bearbeiten kann und zusätzlich alle Bestellungen des Kunden sieht. Außerdem besteht hier die Möglichkeit den Kunden zu löschen. Damit ist allerdings aus datenbanktechnischen Gründen gemeint, den Kunden nicht mehr bearbeitbar zu machen, allerdings kann der Benutzer keinen Kunden wirklich löschen. Der Grund dafür ist, dass jede Bestellung in der Datenbank auf einen Kunden verweisen muss und wenn ein Kunde bereits mehrere Bestellungen getätigt hat und der Benutzer danach den Kunden löschen möchte, würden alle seine Bestellungen mitgelöscht werden. 
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/KundenDetails.png}
 \end{center}
-	\caption{Screenshot der Kundetails}
+	\caption{Screenshot der Kundendetails}
 	\label{fig:sample}
 \end{figure}
 Technischer Hintergrund:
-Damit die Kunden auf der Startseite angezeigt werden können, müssen sie zuerst aus der Datenbank in eine ObservableCollection vom Typ Customer kopiert werden. 
+Damit die Kunden auf der Startseite angezeigt werden können, müssen sie zuerst aus der Datenbank in eine ObservableCollection vom Typ Customer kopiert werden.
 \begin{lstlisting}
 private ObservableCollection<Customer> GetAllCustomers()
+{
+	 var unitofWorkCustomers = this.Uow.CustomerRepository.Get().ToList();
+    ObservableCollection<Customer> copiedCustomers = new ObservableCollection<Customer>();
+    foreach (var item in unitofWorkCustomers)
+  	 {
+        Customer customer = new Customer();
+        GenericRepository<Customer>.CopyProperties(customer, item);
+        if (item.Town_Id != null)
         {
-            var unitofWorkCustomers = this.Uow.CustomerRepository.Get().ToList();
-            ObservableCollection<Customer> copiedCustomers = new ObservableCollection<Customer>();
-            foreach (var item in unitofWorkCustomers)
-            {
-                Customer customer = new Customer();
-                GenericRepository<Customer>.CopyProperties(customer, item);
-                if (item.Town_Id != null)
-                {
-                    Town town = new Town(); //Referenced town must be copied as well
-                    GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
-                    customer.Town = town;
-                }
-                if (item.Country_Id != null)
-                {
-                    Country country = new Country();
-                    GenericRepository<Country>.CopyProperties(country, this.Uow.CountryRepository.GetById(item.Country_Id));
-                    customer.Country = country;
-                }
-                copiedCustomers.Add(customer);
-            }
-            return copiedCustomers;
+        	  Town town = new Town(); //Referenced town must be copied as well
+           GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
+           customer.Town = town;
+        }
+        if (item.Country_Id != null)
+        {
+         	Country country = new Country();
+        	   GenericRepository<Country>.CopyProperties(country, this.Uow.CountryRepository.GetById(item.Country_Id));
+        	   customer.Country = country;
+        }
+        copiedCustomers.Add(customer);
+}
+return copiedCustomers;
 \end{lstlisting}
 Danach wird auf Basis der kopierten Datensätze eine ICollectionView erstellt, welche die Daten dann anzeigt. Im Vergleich zur ObservableCollection bietet die ICollectionView beim Anzeigen viele Vorteile (siehe Kapitel Filtern und Sortieren). 
-Damit ein Kunde gelöscht werden kann, enthält die Klasse Kunde eine Property namens 'Deleted', welche angibt, ob der Kunde gelöscht wurde. Wenn diese auf 'true' gesetzt wird, kann der Benutzer den Kunden durch die Checkbox auf der Startseite ausblenden. Falls er dies nicht tut, wird der Kunde auf der Startseite angezeigt, allerdings erscheint eine Fehlermeldung, wenn der Benutzer versucht die Detailsseite des Kunden zu öffnen. Dadurch ist es auch unmöglich neue Bestellungen für diesen Kunden anzulegen oder die Daten des Kunden zu bearbeiten. Die Bestellungen des gelöschten Kunden werden trotzdem normal angezeigt.
-\subsection{Aufträge}
-Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen und Kontaktlinsen. Eigentlich haben beide Arten diesselben Eigenschaften, nur der Brillenauftrag hat eine Brillenfassung und der Kontaktlisenauftrag nicht. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer beispielsweise unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwsichen Brilen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt ''Aufträge''auch zwei verschiedene Listen angezeigt. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Allerdings kann der Benutzer von dieser Sicht aus keine neuen Aufträge erfassen, dazu muss er in der Kundenverwaltung zuerst einen Kunden auswählen. 
+Damit ein Kunde gelöscht werden kann, enthält die Klasse Kunde eine Property namens 'Deleted', welche angibt, ob der Kunde gelöscht wurde. Wenn diese auf 'true' gesetzt wird, kann der Benutzer den Kunden durch die Checkbox auf der Startseite ausblenden. Falls er dies nicht tut, wird der Kunde auf der Startseite angezeigt, allerdings erscheint eine Fehlermeldung, wenn der Benutzer versucht die Detailseite des Kunden zu öffnen. Dadurch ist es auch unmöglich neue Bestellungen für diesen Kunden anzulegen oder die Daten des Kunden zu bearbeiten. Die Bestellungen des gelöschten Kunden werden trotzdem normal angezeigt.
+\subsection{Auftragsverwaltung}
+Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen- und Kontaktlinsenaufträge. Eigentlich haben beide Arten dieselben Eigenschaften, nur der Brillenauftrag verweist eine Brillenfassung und der Kontaktlinsenauftrag nicht. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer beispielsweise unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwischen Brillen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt ''Aufträge'' auch zwei verschiedene Listen angezeigt. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Allerdings kann der Benutzer von dieser Sicht aus keine neuen Aufträge erfassen, dazu muss er in der Kundenverwaltung zuerst einen Kunden auswählen. 
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/Auftraege.png}
@@ -63,8 +63,8 @@ Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen und Kontaktlinsen. Eig
 	\caption{Screenshot der Auftragsverwaltung}
 	\label{fig:sample}
 \end{figure}
-Wenn der Benutzer doppelt auf einen Auftrag klickt, erscheint entweder ein Detailsfenster eines Brillenauftrags oder Kontatklinsenauftrags. Im rechten Bereich des Fensters kann der Benutzer die einzelnen Preise der Komponenten angeben. Das Programm rechnet alle Preise  brutto und gibt zum Schluss die darin enthaltene Mehrwertsteuer an. Es wird nach folgender Formel gerechnet: Zuerst werden linker und rechter Glaspreis, Preis von Sonstigem und wenn vorhanden der Verkaufspreis der Brillenfassung addiert. Davon wird das Krankenkassageld abgezogen, der Selbstbehalt hinzugezählt und der Rabatt (wird in Euro angegeben) wieder subtrahiert. Zwanzig Prozent davon sind schlussendlich die Mehrwertsteuer. 
-Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung angeben. Wenn der Benutzer den Bearbeitungsstatus auf ''Abgeholt'' setzt, wird auch der Status der Brillenfassung auf ''Verkauft'' gesetzt
+Wenn der Benutzer doppelt auf einen Auftrag klickt, erscheint entweder ein Detailfenster eines Brillenauftrags oder Kontaktlinsenauftrags. Im rechten Bereich des Fensters kann der Benutzer die einzelnen Preise der Komponenten angeben. Das Programm rechnet alle Preise  brutto und gibt zum Schluss die darin enthaltene Mehrwertsteuer an. Es wird nach folgender Formel gerechnet: Zuerst werden linker und rechter Glaspreis, Preis von Sonstigem und wenn vorhanden der Verkaufspreis der Brillenfassung addiert. Davon wird das Krankenkassageld abgezogen, der Selbstbehalt hinzugezählt und der Rabatt (dieser wird in Euro angegeben) wieder subtrahiert. Zwanzig Prozent davon sind schlussendlich die Mehrwertsteuer. 
+Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung angeben. Wenn der Benutzer den Bearbeitungsstatus auf ''Abgeholt'' setzt, wird auch der Status der Brillenfassung in der Brillenfassungsverwaltung auf ''Verkauft'' gesetzt.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/Brillenauftrag.png}
@@ -73,7 +73,8 @@ Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung a
 	\label{fig:sample}
 \end{figure}
 \subsubsection{Dokumente erstellen}
-Unter den Angaben der Details zu den Gläsern, kann der Benutzer eine Auftragsbestätigung oder eine Rechnung erstellen. Die Dokumente werden als Word-Dokumente in einem Ordner abgespeichert. Das hat den Vorteil, dass der Benutzer selbst entscheiden kann, ob er noch etwas nachträglich ändert oder die Vorlage gleich ausdruckt oder versendet. Damit das funktioniert, muss der Benutzer  eine Word-Vorlage erstellen, die Felder enthält (MergeFields), welche das Programm ersetzen kann. In der Datenbank wird immer nur der Pfad zur jeweiligen Auftragsbestätigung/Rechnung gespeichert. Das heißt, dass der Benutzer die erstellten Dokumente nach der Erstellung bearbeiten, löschen oder neu generieren kann. Der Dokumentname der generierten Datei besteht immer aus der Bestell-Id, dem Dokumenttyp (Rechnung oder Auftragsbestätigung), dem Nachnamen des Kunden und dem aktuellen Datum. 
+Unter den Angaben der Details zu den Gläsern, kann der Benutzer eine Auftragsbestätigung oder eine Rechnung erstellen. Die Dokumente werden als Word-Dokumente in einem Ordner abgespeichert. Das hat den Vorteil, dass der Benutzer selbst entscheiden kann, ob er noch etwas nachträglich ändern will oder das generierte Dokument gleich ausdruckt oder versendet. Damit das funktioniert, muss der Benutzer  eine Word-Vorlage erstellen, die Felder enthält (MergeFields), welche das Programm ersetzen kann. In der Datenbank wird immer nur der Pfad zur jeweiligen Auftragsbestätigung/Rechnung gespeichert. Das heißt, dass der Benutzer auch mehrere Dokumente zum selben Auftrag erstellen kann. In diesem Fall wird nur ein Hinweis mit dem abgespeicherten Dokumentnamen angezeigt und gefragt ob das alte Dokument wirklich überschrieben werden soll. Der Dokumentname der generierten Datei besteht immer aus der Bestell-Id, dem Dokumenttyp (Rechnung oder Auftragsbestätigung), dem Nachnamen des Kunden und dem aktuellen Datum. 
+\newline Eine generierte Auftragsbestätigung könnte so aussehen:
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.75]{images/MusterAuftragsbestaetigung.pdf}
@@ -82,7 +83,7 @@ Unter den Angaben der Details zu den Gläsern, kann der Benutzer eine Auftragsbe
 	\label{fig:sample}
 \end{figure}
 Technischer Hintergrund:
-Zur Erstellung von Word-Dokumenten wird der Namespace Microsoft.Office.Interop.Word verwendet. Die Methode CreateDocument liest die Wordvorlage und ersetzt die Mergsfields. Der Parameter oTemplatePath beschreibt den Pfad der Wordvorlage und der String path den Namen, unter dem das Dokument abgespeichert werden soll. Der Code unterhalb ist nur ein Ausschnitt der Methode.
+Zur Erstellung von Word-Dokumenten Interop verwendet (siehe Kapitel 2.6). Die Methode CreateDocument benutzt eine vom Benutzer erstellte Wordvorlage und ersetzt die Mergefields. Der Parameter oTemplatePath beschreibt den Pfad der Wordvorlage und der String path den Namen, unter dem das Dokument abgespeichert werden soll. Der Code unterhalb ist nur ein Ausschnitt der Methode.
 \begin{lstlisting}
 private static bool CreateDocument(int orderId, Object oTemplatePath, string path)
         {
@@ -92,9 +93,9 @@ private static bool CreateDocument(int orderId, Object oTemplatePath, string pat
             {
                 Order order;
                 Customer cus;
-				
-				//Ausgeschnitten: Hier werden order und cus Werte zugewiesen 
-				
+
+                //Ausgeschnitten: Hier werden order und cus Werte zugewiesen 
+
                 Object oMissing = System.Reflection.Missing.Value;
 
                 wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref oMissing, ref oMissing, ref oMissing);
@@ -111,11 +112,11 @@ private static bool CreateDocument(int orderId, Object oTemplatePath, string pat
                         //Ausgeschnitten: Hier wird der Name der Property aus dem fieldText herausgeholt und auf Englisch \"ubersetzt
                         string value = String.Empty;
                         //Ausgeschnitten: Die Property wird in den Klassen gesucht und der Wert gespeichert z.B: Properties der Klasse Customer:
-                         if (typeof(Customer).GetProperty(translatedFieldName) != null)
+                        if (typeof(Customer).GetProperty(translatedFieldName) != null)
                         {
                             value = cus.GetType().GetProperty(translatedFieldName).GetValue(cus, null)?.ToString();
                         }
-                        
+
                         myMergeField.Select();
                         wordApp.Selection.TypeText(value);
                     }
@@ -137,7 +138,7 @@ private static bool CreateDocument(int orderId, Object oTemplatePath, string pat
             }
         }
 \end{lstlisting}
-Genau die selbe Mehtode wird benutzt, wenn eine Rechnung erstellt wird.
+Genau die selbe Methode wird benutzt, wenn eine Rechnung erstellt wird, die so aussehen könnte:
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.75]{images/Musterrechnung.pdf}
@@ -146,7 +147,7 @@ Genau die selbe Mehtode wird benutzt, wenn eine Rechnung erstellt wird.
 	\label{fig:sample}
 \end{figure}
 \subsection{Lieferantenverwaltung}
-Ebenso wie für die Kunden, gibt es auch eine Verwaltung für die Lieferanten des Benutzers. Auch die Lieferanten lassen sich filtern und sortieren (siehe Kapitel Filtern und Sortieren). Lieferanten haben folgende Attribute: Name, Ort, Land, Addresse, FAX, Telefon, E-Mail, Kundennummer (damit ist die Id des Benutzers beim jeweiligen Lieferanten gemeint), Kontaktperson, Produkte und Sonstiges. Einen neuen Lieferant kann man mittels dem Button links oben anlegen und Lieferanten bearbeiten und löschen kann der Benutzer durch einen Doppelklick auf den gewünschten Lieferanten.
+Ebenso wie für die Kunden, gibt es auch eine Verwaltung für die Lieferanten des Benutzers. Auch die Lieferanten lassen sich filtern und sortieren (siehe Kapitel Filtern und Sortieren). Lieferanten haben folgende Attribute: Name, Ort, Land, Adresse, FAX, Telefon, E-Mail, Kundennummer (damit ist die Id des Benutzers beim jeweiligen Lieferanten gemeint), Kontaktperson, Produkte und Sonstiges. Einen neuen Lieferant kann man mittels dem Button links oben anlegen und Lieferanten bearbeiten und löschen kann der Benutzer durch einen Doppelklick auf den gewünschten Lieferanten.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/Lieferanten.png}
@@ -155,7 +156,7 @@ Ebenso wie für die Kunden, gibt es auch eine Verwaltung für die Lieferanten de
 	\label{fig:sample}
 \end{figure}
 \subsection{Verwaltung der lagernden Brillenfassungen}
-Ebenso wie bei der Verwaltung der Kunden und der Lieferanten gibt es auch eine Verwaltung des lagernden Brillenfassungen. Jede Brille die der Benutzer verkauft hat eine eigene Fassung und die wird hier erfasst. Dabei hat jede Brillenfassung folgende Attribute: Modell, Marke, Farbe, Größe, Status (bestellt, lagernd oder verkauft), Einkaufspreis, Einkaufsdatum, Verkaufspreis, Verkaufsdatum und der Lieferant. Die Liste kann wie gewohnt gefiltert und sortiert werden. Um eine neue Brillenfassung zu erfassen kann der Benutzer auf den Button links oben klicken und um eine bestehende Brillenfassung zu bearbeiten oder zu löschen muss der Benutzer einen Doppelklick auf die gewünschte Brillenfassung tätigen.
+Genau wie bei der Verwaltung der Kunden und der Lieferanten gibt es auch eine Verwaltung des lagernden Brillenfassungen. Jede Brille die der Benutzer verkauft, hat eine eigene Fassung und die wird hier erfasst. Dabei hat jede Brillenfassung folgende Attribute: Modell, Marke, Farbe, Größe, Status (bestellt, lagernd oder verkauft), Einkaufspreis, Einkaufsdatum, Verkaufspreis, Verkaufsdatum und der Lieferant. Die Liste kann wie gewohnt gefiltert und sortiert werden. Um eine neue Brillenfassung zu erfassen kann der Benutzer auf den Button links oben klicken und um eine bestehende Brillenfassung zu bearbeiten oder zu löschen muss der Benutzer einen Doppelklick auf die gewünschte Brillenfassung tätigen.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/Brillenfassungen.png}
@@ -167,7 +168,7 @@ Ebenso wie bei der Verwaltung der Kunden und der Lieferanten gibt es auch eine V
 \subsubsection{Massennachrichten}
 Um regelmäßige Info- und Werbenachrichten auszusenden, bietet das Programm die Möglichkeit E-Mails oder SMS an alle Kunden zu versenden. Falls ein Kunde diese Nachrichten nicht mehr erhalten möchte, kann das der Benutzer bei dem einzelnen Kunden eintragen.
 \subsubsection{E-Mail}
-Wenn der Benutzer eine Massenemail versenden möchte, kann er einen Betreff und eine Nachricht eingeben, die nachher an alle Kunden gesendet wird. Als E-Mail-Adresse, wird die abgespeicherte Adresse des Kunden verwendet. Falls keine E-Mail-Adresse angegeben wurde, wird eine entsprechende Fehlermeldung angezeigt.
+Wenn der Benutzer eine Massenmail versenden möchte, kann er einen Betreff und eine Nachricht eingeben, die nachher an alle Kunden gesendet wird. Als E-Mail-Adresse, wird die abgespeicherte Adresse des Kunden verwendet. Falls keine E-Mail-Adresse angegeben wurde, wird eine entsprechende Fehlermeldung angezeigt.
 
 \begin{figure}[H]
 \begin{center}
@@ -179,7 +180,7 @@ Wenn der Benutzer eine Massenemail versenden möchte, kann er einen Betreff und 
 \underline{Technischer Hintergrund:}
 \medskip
 \linebreak
-Es wird für jeden Kunden die gleiche Mail erstellt (Klasse MailMessage vom Namespace System.Net.Mail). Dieser Klasse werden Attribute, wie Sender, Empfänger, Betreff, Nachricht usw. übergeben und mittels eines SMTP-Clients versendet. (Klasse SmtpClient ebenfalls vom Namespace System.Net.Mail). Dem Smtp-Client müssen noch Eigenschaften wie Host, Port und natürlich die E-Mail-Adresse, von der die E-Mail weggeschickt werden soll sowie das Passwort für die E-Mail-Adresse angegeben werden. In diesem Fall wurde eine G-Mail-Adresse verwendet, die extra für diesen Zweck erstellt wurde.
+Es wird für jeden Kunden die gleiche Mail erstellt (Klasse MailMessage vom Namespace System.Net.Mail). Dieser Klasse werden Attribute, wie Sender, Empfänger, Betreff, Nachricht usw. übergeben und mittels eines SMTP-Clients versendet. (Klasse SmtpClient ebenfalls vom Namespace System.Net.Mail). Dem Smtp-Client müssen noch Eigenschaften wie Host, Port und natürlich die E-Mail-Adresse, von der die E-Mail weggeschickt werden soll, sowie das Passwort für die E-Mail-Adresse angegeben werden. In diesem Fall wurde eine G-Mail-Adresse verwendet, die extra für diesen Zweck erstellt wurde.
 
 \begin{lstlisting}
 var message = new MailMessage();
@@ -194,7 +195,7 @@ this.Recipients.Add(new CustomRecipient() { Customer = item, Address = item.Emai
     	var credential = new NetworkCredential
 		{
         	UserName = "infodienst.augenoptikaigner@gmail.com",
-            Password = "7gnRwN4U"
+            Password = //not shown here
         };
         smtp.Credentials = credential;
         smtp.Host = "smtp.gmail.com";
@@ -206,18 +207,19 @@ this.Recipients.Add(new CustomRecipient() { Customer = item, Address = item.Emai
         
 \end{lstlisting}
 \bigskip
-Danach wird die gesendete Nachricht noch in die Datenbank abgespeichert, damit der Benutzer später alle gesendeten Nachrichten ansehen kann.
+Danach wird die gesendete Nachricht noch in die Datenbank abgespeichert, damit der Benutzer später einen Überblick über alle gesendeten Nachrichten hat.
 
 \subsubsection{SMS}
-Zum Versenden der SMS wird der SMS-Dienst MessageBird verwendet (Referenz). Ähnlich wie beim Versenden einer E-Mail, gibt der Benutzer wieder eine Nachricht ein, allerdings kann er keine Betreff einfügen.
+Zum Versenden der SMS wird der SMS-Dienst MessageBird verwendet (siehe Kapitel 2.8). Ähnlich wie beim Versenden einer E-Mail, gibt der Benutzer wieder eine Nachricht ein, allerdings kann er keine Betreff einfügen.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.25]{images/Massensms.png}
 \end{center}
-	\caption{Screenshot der Massen E-SMS}
+	\caption{Screenshot der Massen SMS}
 	\label{fig:sample}
 \end{figure}
-Diese Nachricht wird dann an alle Kunden gesendet, außer jene, die keine Massennachricht mehr erhalten wollen. Als Telefonnummer wird standardmäßig die Telefonnummer 1 gewählt, außer diese ist nicht vorhanden, dann wird die Telefonnummer 2 gewählt. 
+Diese Nachricht wird dann an alle Kunden gesendet, außer jene, bei denen eingetragen ist, dass sie keine Massennachricht mehr erhalten wollen. Als Telefonnummer wird standardmäßig die Telefonnummer 1 gewählt, außer diese ist nicht vorhanden, dann wird die Telefonnummer 2 gewählt. 
+\begin{comment}
 \newpage
 \underline{Technischer Hintergrund:}
 \linebreak
@@ -233,6 +235,7 @@ MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Mes
 \end{lstlisting}
 Der AccessKey ist ein normaler String, der von MessageBird erstellt wird. Dabei kann jeder Benutzer von MessageBird mehrere AccessKeys bekommen, beispielsweise einen für Test-Nachrichten, die dann nicht versendet werden oder einen Key, mit dem dann echte SMS versendet werden.
 Für jede Nachricht die versendet wird, wird das Guthaben auf MessageBird dementsprechend verringert. Sollte das Guthaben auslaufen, wird eine Fehlermeldung angezeigt.
+\end{comment}
 
 \subsubsection{Einzelne Nachrichten}
 Dieselben Vorgänge werden auch verwendet um einzelne Nachrichten zu versenden. Dazu muss der Benutzer auf die Detailseite einer Bestellung klicken und dann auf „Nachricht senden“. Standardmäßig wird ein Text eingefügt, der dem Kunden mitteilt, dass seine Bestellung nun abholbereit ist. Sollte dies nicht der Grund sein, warum eine Nachricht gesendet werden soll, kann der Benutzer die Nachricht natürlich auch verändern.
@@ -245,7 +248,7 @@ Dieselben Vorgänge werden auch verwendet um einzelne Nachrichten zu versenden. 
 \end{figure}
 \subsubsection{Versendete Nachrichten}
 Außerdem ist es möglich, alle Nachrichten, die vom System aus gesendet worden sind, anzuzeigen. Um nur Nachrichten anzuzeigen, die an einen bestimmten Kunden gesendet worden sind, muss der Benutzer auf die Detailseite eines Kunden klicken und dann die „Versendeten Nachrichten“ anzeigen. Falls der Benutzer alle Nachrichten sehen will, die er versendet hat, kann er diese unter dem Menüpunkt „Massen SMS /E-Mails verschicken“ sehen.\\
-Dazu wurden in der Datenbank extra die Tabellen "CustomMessage" und "CustomRecipient" angelegt, um alle Nachrichten und deren Empfänger abspeichern zu können. Hier wird beispielsweise eine Massensms gespeichert:
+Dazu wurden in der Datenbank extra die Tabellen ''CustomMessage'' und ''CustomRecipient'' angelegt, um alle Nachrichten und deren Empfänger abspeichern zu können. Hier wird beispielsweise eine Massensms gespeichert:
 \begin{lstlisting}
             var m = new CustomMessage();
             m.Date = DateTime.Now;
@@ -271,7 +274,7 @@ Dazu wurden in der Datenbank extra die Tabellen "CustomMessage" und "CustomRecip
 
 
 \subsection{Statistiken}
-Unter dem Menüpunkt ''Statistiken'' erhält der Benutzer eine Übersicht über alle verkauften Brillen und Kontaktlinsen. Dazu wird ein Liniendiagramm der verkauften Brillen/Kontaktlinsen von diesem Jahr und dem Jahr davor angezeigt. Damit eine Brille/Kontaktlinse in der Statistik mitberücksichtigt wird, muss ein Zahlungsdatum angegeben werden und der Bezahlungsstatus muss auf „Bezahlt“ gesetzt werden.
+Unter dem Menüpunkt ''Statistiken'' erhält der Benutzer eine Übersicht über alle verkauften Brillen und Kontaktlinsen. Dazu wird ein Liniendiagramm der verkauften Brillen/Kontaktlinsen von diesem Jahr und dem Jahr davor angezeigt. Damit ein Brillen/Kontaktlinsenauftrag in der Statistik mitberücksichtigt wird, muss ein Zahlungsdatum angegeben werden und der Bezahlungsstatus muss auf „Bezahlt“ gesetzt werden.
 \begin{figure}[ht]
 \begin{center}
 	\includegraphics[scale=.25]{images/Statistiken.png}
@@ -280,13 +283,15 @@ Unter dem Menüpunkt ''Statistiken'' erhält der Benutzer eine Übersicht über 
 	\label{fig:sample}
 \end{figure}
 \subsubsection{Technischer Hintergrund}
-Zur Darstellung wurde das package System.Windows.Controls.DataVisualization.Toolkit 4.0.0 verwendet (hier Referenz einfügen). 
+Zur Darstellung wurde das Wpf-Toolkit verwendet (siehe Kapitel 2.7).
+\begin{comment} 
 Dazu wird in dem .xaml File der Namespace angegeben: 
 \begin{lstlisting}
 <Page xmlns:toolkitCharting="clr-namespace:System.Windows.Controls
 DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization
 .Toolkit">
 \end{lstlisting}
+\end{comment}
 Um ein Liniendiagramm zu erzeugen:
 \begin{lstlisting}
 <toolkitCharting:Chart Title="{Binding Title}">
@@ -299,11 +304,35 @@ Dabei sind ''NewValues'' und ''OldValues'' vom Typ:
         public ObservableCollection<KeyValuePair<string, int>> NewValues { get; set; }
         public ObservableCollection<KeyValuePair<string, int>> OldValues { get; set; }
 \end{lstlisting}
-Die Daten werden mittels Linq(Referenz) erfasst.
+Die Daten werden mittels Linq (Kapitel 2.1.1) erfasst.
+\subsection{Sonstiges}
+Unter dem Menüpunkt ''Sonstiges'' erscheinen vier Unterpunkte: 
+\begin{itemize}
+\item Orte bearbeiten
+\item Länder bearbeiten
+\item Brillentypen bearbeiten
+\item Kontaktlinsentypen bearbeiten
+\end{itemize}
+Wie die Überschriften schon vermuten lassen, öffnen diese vier Buttons jeweils ein eigenes Fenster, welches eine Übersicht über alle vorhandenen Objekte zeigt. Am Beispiel ''Länder'' wird nun die Verwendung gezeigt:
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.75]{images/Laender.png}
+\end{center}
+	\caption{Screenshot der L\"ander}
+	\label{fig:sample}
+\end{figure} 
+Im oberen Bereich können die Länder nach Name oder Id gefiltert werden. Anders als bei den anderen Übersichtslisten funktioniert hier das Sortieren. Der Benutzer kann auswählen, nach was er gerne sortieren möchte und danach sortiert das Programm aufsteigend nur nach dieser einen Property. Mit einem Doppelklick kann ein Land bearbeitet/gelöscht werden und rechts oben kann ein neues Land hinzugefügt werden.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.75]{images/LandBearbeiten.png}
+\end{center}
+	\caption{Land bearbeiten}
+	\label{fig:sample}
+\end{figure} 
 \subsection{Filtern und Sortieren}
 \subsubsection{Filtern}
 Auf allen Hauptseiten der Applikation (Kunden, Brillen- und Kontaktlinsenaufträge, Lieferanten, Lagernde Brillenfassungen) sowie auf den Seiten unter dem Menüpunkt „Sonstiges“ (Orte, Länder, Brillen- und Kontaktlinsentypen) ist es möglich die Datensätze zu filtern. Dies passiert immer nach demselben Schema, dennoch ist diese Funktion für jede dieser Seiten einzeln implementiert.
-Dazu muss der Benutzer das Feld aussuchen, nach welchem er gerne filtern möchte, danach einen Text eingeben und dann auf „Filtern“  oder die Taste „Enter“ drücken. Das Programm gibt nun nur jene Datensätze aus, bei denen das gewünschte Feld den eingegebenen Text enthält. Neben dem „Filtern“-Schalter befindet sich ein „Filter löschen“-Schalter, der wieder alle Datensätze zum Vorschein bringt.
+Dazu muss der Benutzer das Feld aussuchen, nach welchem er gerne filtern möchte, danach einen Text eingeben und dann auf „Filtern“  oder die Taste „Enter“ drücken. Das Programm gibt nun nur jene Datensätze aus, bei denen das gewünschte Feld den eingegebenen Text enthält. Neben dem „Filtern“-Button befindet sich ein „Filter löschen“-Button, der wieder alle Datensätze zum Vorschein bringt.
 
 \begin{figure}[H]
 \begin{center}
@@ -313,7 +342,7 @@ Dazu muss der Benutzer das Feld aussuchen, nach welchem er gerne filtern möchte
 	\label{fig:sample}
 \end{figure}
 Im nachfolgenden Beispiel wird anhand der „Lagernden Brillenfassungen“ erklärt wie der Filter funktioniert. 
-Im ViewModel gibt es ein Feld, welches „PropertiesList“ heißt (vom Typ ObservableCollection<string>. In diesem werden alle Felder der jeweiligen Klasse aufgezählt. Davor werden noch Felder, nach denen der Benutzer später nicht filtern sollte, herausgestrichen. Zusätzlich wird jedes Feld in Deutsch übersetzt. Dies geschieht mittels einem ResourceManager, der ein kleines Wörterbuch verwaltet, welches eine Übersetzung für jedes Feld bereithält. Das ist die Liste der Felder aus denen der Benutzer später sein „Filterfeld“ auswählen kann. 
+Im ViewModel gibt es ein Feld, welches „PropertiesList“ heißt (vom Typ ObservableCollection\textless string\textgreater). In diesem werden alle Felder der jeweiligen Klasse aufgezählt. Davor werden noch Felder, nach denen der Benutzer später nicht filtern sollte, herausgestrichen. Zusätzlich wird jedes Feld in Deutsch übersetzt. Dies geschieht mittels einem ResourceManager, der ein kleines Wörterbuch verwaltet, welches eine Übersetzung für jedes Feld bereithält. Das ist die Liste der Felder aus denen der Benutzer später sein „Filterfeld“ auswählen kann. 
 \begin{lstlisting}
 public ObservableCollection<String> PropertiesList { get; }
 
@@ -335,7 +364,7 @@ private ObservableCollection<string> GetAllProperties()
     return newList;
 }
 \end{lstlisting}
-Wenn der Benutzer einen Text eingibt und danach „Filtern“ drückt, wird das Feld, das er gewählt hat zuerst mit Hilfe des ResourceManagers auf Englisch übersetzt.  Danach wird die Mehtode Filter() aufgerufen, die den passenden Filter setzt, falls der Benutzer einen Text eingegeben hat.
+Wenn der Benutzer einen Text eingibt und danach „Filtern“ drückt, wird das Feld, das er gewählt hat zuerst mit Hilfe des ResourceManagers auf Englisch übersetzt.  Danach wird die Methode Filter() aufgerufen, die den passenden Filter setzt, falls der Benutzer einen Text eingegeben hat.
 \begin{lstlisting}
 public void Filter()
         {
@@ -383,7 +412,7 @@ private bool Contains(object f)
 \end{lstlisting}
 Die Methode Contains gibt zurück, ob das Objekt „f“ dem angegebenen Filter entspricht. Dazu wird zunächst überprüft, ob die Klasse EyeGlassFrame die Property enthält, nach der der Benutzer filtert. Wenn ja, gibt die Methode zurück, ob in dieser Property die Zeichenkette vorkommt, nach der der Benutzer sucht. Danach überprüft das Programm ob die gesuchte Eigenschaft eine Eigenschaft der Klasse Supplier ist. Das passiert, weil jede lagernde Brillenfassung einen Lieferanten hat. Deswegen kann es sein, dass der Benutzer nach einer Eigenschaft filtert, die gar nicht in der Klasse EyeGlassFrame enthalten ist, sondern nur in der Klasse Supplier. Wenn keiner dieser Fälle zutrifft, was nicht vorkommen sollte, wird eine Fehlermeldung zurückgegeben.
 \subsubsection{Sortieren}
-Bei den allen Hauptseiten, auf denen Daten angezeigt werden, ist eine dynamische Sortierung implementiert. Diese macht es dem Benutzer möglich, nach drei Spalten gleichzeitig auf- oder absteigend zu sortieren.  Dazu muss der Benutzer auf eine beliebige Spaltenüberschrift klicken. Das ist dann die Spalte, nach der zuerst aufsteigend sortiert wird. Drückt der Benutzer erneut auf dieselbe Spaltenübersicht, werden die Datensätze nach dieser Spalte absteigend sortiert. Wenn der Benutzer nach einer zweiten Spalte sortieren möchte, muss er zusätzlich die Shift-Taste drücken, während er die Spaltenüberschrift auswählt. Wiederrum muss der Benutzer ein zweites Mal mit der Shift-Taste die gleiche Spaltenüberschrift anklicken, um absteigend zu sortieren. Dasselbe gilt für die dritte Spalte. Um die Sortierung wieder zurücksetzen zu können, kann der Benutzer eine andere Spaltenüberschrift mit einem normalen Klick wieder sortieren. Im nachfolgenden Bild hat der Benutzer zuerst nach dem Vornamen, dann nach Ort und zum Schluss nach Nachnamen sortiert.
+Bei den allen Hauptseiten, auf denen Daten angezeigt werden, ist eine dynamische Sortierung implementiert. Diese macht es dem Benutzer möglich, nach drei Spalten gleichzeitig auf- oder absteigend zu sortieren.  Dazu muss der Benutzer auf eine beliebige Spaltenüberschrift klicken. Das ist dann die Spalte, nach der zuerst aufsteigend sortiert wird. Drückt der Benutzer erneut auf dieselbe Spaltenübersicht, werden die Datensätze nach dieser Spalte absteigend sortiert. Wenn der Benutzer nach einer zweiten Spalte sortieren möchte, muss er zusätzlich die Shift-Taste drücken, während er die Spaltenüberschrift auswählt. Wiederrum muss der Benutzer ein zweites Mal mit der Shift-Taste die gleiche Spaltenüberschrift anklicken, um absteigend zu sortieren. Dasselbe gilt für die dritte Spalte. Um die Sortierung wieder zurücksetzen zu können, kann der Benutzer eine andere Spaltenüberschrift mit einem normalen Klick wieder sortieren. Im nachfolgenden Bild hat der Benutzer zuerst nach dem Vornamen, dann nach Ort und zum Schluss nach Nachnamen sortiert. Zur besseren Übersichtlichkeit zeigt das Programm einen normalen Pfeil oder einen Pfeil mit einem oder zwei Punkten, je nachdem in welcher Reihenfolge die Spalten sortiert wurden.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=0.75]{images/Sortieren.png}
@@ -396,7 +425,7 @@ Zur Implementierung gibt es eine Klasse SortManager, die die Sortierung für all
 SortManager = new SortManager();
 public SortManager SortManager { get; set; }
 \end{lstlisting}
-Zusätzlich werden drei Events von der View abonniert. 
+Zusätzlich werden drei Events von der View abonniert. Dieses Event wird von der ListView bereitgestellt.
 \begin{lstlisting}
 <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Loaded">
@@ -405,7 +434,6 @@ Zusätzlich werden drei Events von der View abonniert.
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 \end{lstlisting}
-Dieses Event wird von der ListView bereitgestellt.
 In jedem ListViewHeader werden noch Shift+LeftClick und MouseDown abonniert.
 \begin{lstlisting}
 <GridViewColumn DisplayMemberBinding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}">
@@ -452,7 +480,7 @@ Wenn die Methode SortNormal(RoutedEventArgs e, ref ICollectionView View) aufgeru
                 //Change sort direction
                 dir = View.SortDescriptions[0].Direction;
                 dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                header = ChangeArrow(columnHeader, dir);
+                header = ChangeArrow(columnHeader, dir, 0);
             }
             else
             {
@@ -469,13 +497,13 @@ Wenn die Methode SortNormal(RoutedEventArgs e, ref ICollectionView View) aufgeru
                 SortHeaders.Add(columnHeader);
                 //default sort direction is ascending
                 dir = ListSortDirection.Ascending;
-                header = SetNewArrow(columnHeader, dir);
+                header = SetNewArrow(columnHeader, dir, 0);
             }
             View.SortDescriptions.Clear();
 
             View.SortDescriptions.Add(new SortDescription(header, dir));
 \end{lstlisting}
-SortHeaders ist eine globale Variable vom Typ List<GridViewColumnHeader>, der die Spalten enthält, nach den aktuell sortiert wird. Die lokale Variable dir bezeichnet die gewünschte Sortierrichtung und ist vom Typ ListSortDirection. Der String header enthält die Property, auf die der GridViewColumnHeader bindet. Diese ist natürlich Englisch und stellt wieder ein Übersetzungsroblem dar. Wie schon weiter oben erwähnt, ist der Typ ICollectionView extra für das Darstellen von Listen gemacht, deshalb enthält er auch eine Eigenschaft SortDescriptions, in welche man beliebig viele SortDescriptions einfügen kann und nach welchen die Liste automatisch sortiert wird. In den Methoden ChangeArrow und SetNewArrow wird die Spalte entsprechend breiter gemacht und das passende vorgefertigte Template gesetzt.
+SortHeaders ist eine globale Variable vom Typ List\textless GridViewColumnHeader\textgreater , der die Spalten enthält, nach welchen aktuell sortiert wird. Die lokale Variable ''dir'' bezeichnet die gewünschte Sortierrichtung und ist vom Typ ListSortDirection. Der String ''header'' enthält die Property, auf die der GridViewColumnHeader bindet. Diese ist natürlich Englisch und stellt wieder ein Übersetzungsproblem dar. \newline Wie schon weiter oben erwähnt, ist der Typ ICollectionView extra für das Darstellen von Listen gemacht, deshalb enthält er auch eine Eigenschaft SortDescriptions, in welche man beliebig viele SortDescriptions einfügen kann und nach welchen die Liste automatisch sortiert wird. In den Methoden ChangeArrow und SetNewArrow wird die Spalte entsprechend breiter gemacht und das passende vorgefertigte Template gesetzt.
 \begin{lstlisting}
 column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUp") as DataTemplate;
 \end{lstlisting}
@@ -485,7 +513,7 @@ In der Methode SortShift(object p, ref ICollectionView View) wird mittels dem Pa
 \begin{lstlisting}
 var columnHeader = AllHeaders.Where(h => String.Equals(h.Content.ToString(), germanColumnName)).ToList().FirstOrDefault();
 \end{lstlisting}
-Danach wird wieder überprüft, ob dieselbe Spalte zweimal hintereinander ausgewählt wurde, sodass dann die Sortierrichtung gewechselt werden kann. Ansonsten wird überprüft ob schon drei Spalten ausgewählt wurden und wenn nicht wird eine neue Spalte zu den Sortierspalten hinzugefügt.
+Dann wird wieder überprüft, ob dieselbe Spalte zweimal hintereinander ausgewählt wurde, sodass dann die Sortierrichtung gewechselt werden kann. Ansonsten wird überprüft ob schon drei Spalten ausgewählt wurden und wenn nicht wird eine neue Spalte zu den Sortierspalten hinzugefügt.
 Auszug der SortShift-Methode:
 
 \begin{lstlisting}
@@ -500,18 +528,18 @@ if (View.SortDescriptions.Count >= 1)
                     dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
                     View.SortDescriptions.RemoveAt(index);
                     View.SortDescriptions.Insert(index, new SortDescription(columnName, dir));
-                    ChangeArrow(columnHeader, dir);
+                    ChangeArrow(columnHeader, dir, index);
                     SortHeaders.Add(columnHeader);
                 }
                 else if (View.SortDescriptions.Count(s => s.PropertyName == columnName) == 0)
                 {
                     if (View.SortDescriptions.Count >= 3)
                     {
-                        MessageBox.Show("Sie k\"onnen maximal nach drei Spalten sortieren!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        MessageBox.Show("Sie koennen maximal nach drei Spalten sortieren!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         return;
                     }
                     dir = ListSortDirection.Ascending;
-                    SetNewArrow(columnHeader, dir);
+                    SetNewArrow(columnHeader, dir, index+1);
                     View.SortDescriptions.Add(new SortDescription(columnName, dir));
                     SortHeaders.Add(columnHeader);
                 }
