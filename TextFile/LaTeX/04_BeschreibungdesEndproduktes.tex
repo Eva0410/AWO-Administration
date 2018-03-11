@@ -12,7 +12,7 @@ Um dem Benutzer eine kompakte Übersicht über seine Kunden zu geben, gibt es di
 Beim Klick des Buttons ''Neuen Kunden hinzufügen'' erscheint ein neues Fenster, welches einen neuen Kunden erstellt. Hier kann der Benutzer weitere Daten eingeben, wie beispielsweise Hobbies, Job oder den Geburtstag. Außerdem kann der Benutzer den Ort und das Land aus einer Drop-Down-List auswählen. Falls der Ort bzw. das Land noch nicht vorhanden ist, kann der Benutzer auf den danebenliegenden Knopf drücken und einen neuen Ort/Land anlegen. 
 \begin{figure}[H]
 \begin{center}
-	\includegraphics[scale=.3]{images/NeuerKunde.png}
+	\includegraphics[scale=.4]{images/NeuerKunde.png}
 \end{center}
 	\caption{Screenshot Neuen Kunden anlegen}
 	\label{fig:sample}
@@ -66,7 +66,7 @@ Dennoch hat auch diese Vorgehensweise Nachteile, denn dann müsste wirklich jede
 \newline
 Damit ein Kunde gelöscht werden kann, enthält die Klasse Kunde eine Property namens 'Deleted', welche angibt, ob der Kunde gelöscht wurde. Wenn diese auf 'true' gesetzt wird, kann der Benutzer den Kunden durch die Checkbox auf der Startseite ausblenden. Falls er dies nicht tut, wird der Kunde auf der Startseite angezeigt, allerdings erscheint eine Fehlermeldung, wenn der Benutzer versucht die Detailseite des Kunden zu öffnen. Dadurch ist es auch unmöglich neue Bestellungen für diesen Kunden anzulegen oder die Daten des Kunden zu bearbeiten. Die Bestellungen des gelöschten Kunden werden trotzdem normal angezeigt.
 \subsection{Auftragsverwaltung}
-Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen- und Kontaktlinsenaufträge. Eigentlich haben beide Arten dieselben Eigenschaften, nur der Brillenauftrag verweist eine Brillenfassung und der Kontaktlinsenauftrag nicht. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer beispielsweise unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwischen Brillen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt ''Aufträge'' auch zwei verschiedene Listen angezeigt. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Allerdings kann der Benutzer von dieser Sicht aus keine neuen Aufträge erfassen, dazu muss er in der Kundenverwaltung zuerst einen Kunden auswählen. 
+Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen- und Kontaktlinsenaufträge. Eigentlich haben beide Arten dieselben Eigenschaften, nur der Brillenauftrag verweist auf eine Brillenfassung und der Kontaktlinsenauftrag nicht. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer beispielsweise unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwischen Brillen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt ''Aufträge'' auch zwei verschiedene Listen angezeigt. Jeder dieser Aufträge beinhaltet nur eine Brillen- oder Kontaktlinsenbestellung. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Allerdings kann der Benutzer von dieser Sicht aus keine neuen Aufträge erfassen, dazu muss er in der Kundenverwaltung zuerst einen Kunden auswählen. 
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.45]{images/Auftraege.png}
@@ -238,14 +238,14 @@ Client client = Client.CreateDefault(AccessKey, proxyConfigurationInjector);
 \end{lstlisting}
 Und zum Versenden einer Nachricht:
 \begin{lstlisting}
-MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, numbers);
+MessageBird.Objects.Message message = client.SendMessage(Properties.Settings.Default.SmsSenderText, this.Message, numbers);
 \end{lstlisting}
-Der AccessKey ist ein normaler String, der von MessageBird erstellt wird. Dabei kann jeder Benutzer von MessageBird mehrere AccessKeys bekommen, beispielsweise einen für Test-Nachrichten, die dann nicht versendet werden oder einen Key, mit dem dann echte SMS versendet werden.
+Der AccessKey ist ein normaler String, der von MessageBird erstellt wird. Dabei kann jeder Benutzer von MessageBird mehrere AccessKeys bekommen, beispielsweise einen für Test-Nachrichten, die dann nicht versendet werden oder einen Key, mit dem dann echte SMS versendet werden. Der erste Parameter der Methode ''SendMessage'' beschreibt der Name der angezeigt werden soll, wenn ein Kunde die Nachricht empfängt. Dieser kann vom Benutzer geändert werden (siehe Kapitel 3.1.7).
 Für jede Nachricht die versendet wird, wird das Guthaben auf MessageBird dementsprechend verringert. Sollte das Guthaben auslaufen, wird eine Fehlermeldung angezeigt.
 \end{comment}
 
 \subsubsection{Einzelne Nachrichten}
-Dieselben Vorgänge werden auch verwendet um einzelne Nachrichten zu versenden. Dazu muss der Benutzer auf die Detailseite einer Bestellung klicken und dann auf „Nachricht senden“. Standardmäßig wird ein Text eingefügt, der dem Kunden mitteilt, dass seine Bestellung nun abholbereit ist. Sollte dies nicht der Grund sein, warum eine Nachricht gesendet werden soll, kann der Benutzer die Nachricht natürlich auch verändern.
+Dieselben Vorgänge werden auch verwendet um einzelne Nachrichten zu versenden. Dazu muss der Benutzer auf die Detailseite einer Bestellung klicken und dann auf „Nachricht senden“. Standardmäßig wird ein Text eingefügt, der dem Kunden mitteilt, dass seine Bestellung nun abholbereit ist. Der Standardtext kann vom Benutzer allerdings geändert werden (siehe Kapitel 3.1.7). Falls der Benutzer jedoch einmal einen ganz anderen Text versenden wollen, kann der Benutzer die Nachricht natürlich auch verändern.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.4]{images/EinzelneNachricht.png}
@@ -317,8 +317,9 @@ Unter dem Menüpunkt ''Sonstiges'' erscheinen vier Unterpunkte:
 \item Länder bearbeiten
 \item Brillentypen bearbeiten
 \item Kontaktlinsentypen bearbeiten
+\item Vorgegebene Texte bearbeiten
 \end{itemize}
-Wie die Überschriften schon vermuten lassen, öffnen diese vier Buttons jeweils ein eigenes Fenster, welches eine Übersicht über alle vorhandenen Objekte zeigt. Am Beispiel ''Länder'' wird nun die Verwendung gezeigt:
+Wie die Überschriften schon vermuten lassen, öffnen die vier oberen Buttons jeweils ein eigenes Fenster, welches eine Übersicht über alle vorhandenen Objekte zeigt. Am Beispiel ''Länder'' wird nun die Verwendung gezeigt:
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=0.75]{images/Laender.png}
@@ -334,6 +335,38 @@ Im oberen Bereich können die Länder nach Name oder Id gefiltert werden. Allerd
 	\caption{Land bearbeiten}
 	\label{fig:sample}
 \end{figure} 
+\subsubsection{Vorgegebene Texte bearbeiten}
+Unter diesem Menüpunkt können Texte, die standardmäßig im Programm vorgeschlagen werden, bearbeitet werden. Dazu gehören sämtliche Texte und bei E-Mails auch Betreffe, die beim Versenden einer einzelnen Nachricht vorgeschlagen werden. Außerdem kann auch der Name bearbeitet werden, der Kunden angezeigt wird, wenn sie eine SMS vom Programm aus erhalten. Bei allen Texten außer dem Sendernamen von SMS, hat der Benutzer die Möglichkeit die Nachrichten zu personalisieren. Dazu muss er nur an der Stelle, an dem zum Beispiel der Nachname des Kunden eingefügt werden soll ''\{3\}'' schreiben. Außerdem kann der Benutzer auch Zeilenumbrüche einfügen, damit beispielsweise in einer E-Mail nicht nur eine einzige Zeile Text steht.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.75]{images/VorgegebeneTexteBearbeiten.png}
+\end{center}
+	\caption{Vorgegebene Texte bearbeiten}
+	\label{fig:sample}
+\end{figure} 
+\underline{Technischer Hintergrund}: Um diese Informationen zu speichern, werden sogenannte User-Settings verwendet. Diese sind in den Properties des Projektes unter dem Punkt ''Settings'' eingetragen und haben die Eigenschaft, dass sie nicht zurückgesetzt werden, sobald das Programm beendet wird. In diesen ''Settings'' kann der Name der Einstellung, der Typ (in dieser Arbeit wird nur der Typ string benötigt), der Geltungsbereich und der Wert  eingetragen werden. Der Geltungsbereich kann entweder ''Application'' oder ''User'' sein. Der Unterschied besteht darin, dass ''Application''-Einstellungen zur Laufzeit nicht verändert werden können und ''User''-Einstellungen schon. Deshalb sind alle Einstellungen dieser Arbeit ''User''-Einstellungen.
+\newline Im Code des ViewModels sind Properties zu den zu bearbeitenden Texten vorhanden, welche im Getter nur die passende Einstellung zurückliefern und im Setter diesen Text speichern. Die nachfolgende Property beschreibt den Text im Betreff, der angezeigt wird, wenn eine einzelne E-Mail an einen Kunden mit einem Brillenauftrag versendet wird.
+\begin{lstlisting}
+public string SingleEmailSubjectGlassesOrder 
+{
+	get 
+	{ 
+		return Properties.Settings.Default.SingleEmailSubjectGlassesOrder; 
+	} 
+	set 
+	{ 
+		Properties.Settings.Default.SingleEmailSubjectGlassesOrder = value; 
+	} 
+}
+\end{lstlisting}
+Bevor das Fenster mit ''Speichern'' geschlossen wird, muss unbedingt folgende Methode aufgerufen werden. Ansonsten werden die Änderungen nicht gespeichert und beim nächsten Programmstart werden wieder die alten Texte angezeigt.
+\begin{lstlisting}
+Properties.Settings.Default.Save();
+\end{lstlisting}
+Falls der Benutzer die Änderungen nicht speichern möchte kann er den ''Abbrechen''-Button betätigen. Dann muss allerdings nachfolgende Methode aufgerufen werden, ansonsten bleiben die Änderungen bis zum Schließen des Programms erhalten. Erst beim nächsten Programmstart werden sie wieder zurückgesetzt.
+\begin{lstlisting}
+Properties.Settings.Default.Reload();
+\end{lstlisting}
 \subsection{Filtern und Sortieren}
 \subsubsection{Filtern}
 Auf allen Hauptseiten der Applikation (Kunden, Brillen- und Kontaktlinsenaufträge, Lieferanten, Lagernde Brillenfassungen) sowie auf den Seiten unter dem Menüpunkt „Sonstiges“ (Orte, Länder, Brillen- und Kontaktlinsentypen) ist es möglich die Datensätze zu filtern. Dies passiert immer nach demselben Schema, dennoch ist diese Funktion für jede dieser Seiten einzeln implementiert.

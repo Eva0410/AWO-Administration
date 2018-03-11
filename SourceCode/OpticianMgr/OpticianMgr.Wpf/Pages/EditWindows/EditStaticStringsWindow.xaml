@@ -46,7 +46,7 @@
             <Label Grid.Row="6" Grid.Column="1">Text</Label>
             <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding SmsSenderText, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"></TextBox>
         </Grid>
-        <TextBlock>Hinweis: Die Änderungen werden gespeichert, sobald das Fenster geschlossen wird.<LineBreak/>{0} = Zeilenumbruch, {1} = Titel des Kunden, {2} Vorname des Kunden, {3} Nachname des Kunden</TextBlock>
+        <TextBlock>{0} = Zeilenumbruch, {1} = Titel des Kunden, {2} Vorname des Kunden, {3} Nachname des Kunden</TextBlock>
         <StackPanel Orientation="Horizontal" Style="{StaticResource ButtonStackPanel}">
             <Button Command="{Binding CloseCommand}">Abbrechen</Button>
             <Button Command="{Binding SaveCommand}">Speichern</Button>

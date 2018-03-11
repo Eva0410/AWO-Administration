@@ -34,11 +34,12 @@
 \contentsline {subsection}{\numberline {3.1.6}Statistiken}{27}{subsection.3.1.6}
 \contentsline {subsubsection}{Technischer Hintergrund}{27}{section*.11}
 \contentsline {subsection}{\numberline {3.1.7}Sonstiges}{28}{subsection.3.1.7}
-\contentsline {subsection}{\numberline {3.1.8}Filtern und Sortieren}{29}{subsection.3.1.8}
-\contentsline {subsubsection}{Filtern}{29}{section*.12}
-\contentsline {subsubsection}{Sortieren}{32}{section*.13}
-\contentsline {section}{\numberline {3.2}Datenmodell}{37}{section.3.2}
-\contentsline {section}{\numberline {3.3}Projektarchitektur}{37}{section.3.3}
-\contentsline {chapter}{\numberline {4}Selbstevaluation}{38}{chapter.4}
-\contentsline {chapter}{\numberline {5}Zusammenfassung}{39}{chapter.5}
-\contentsline {chapter}{\numberline {A}Additional Information}{43}{appendix.A}
+\contentsline {subsubsection}{Vorgegebene Texte bearbeiten}{29}{section*.12}
+\contentsline {subsection}{\numberline {3.1.8}Filtern und Sortieren}{31}{subsection.3.1.8}
+\contentsline {subsubsection}{Filtern}{31}{section*.13}
+\contentsline {subsubsection}{Sortieren}{34}{section*.14}
+\contentsline {section}{\numberline {3.2}Datenmodell}{38}{section.3.2}
+\contentsline {section}{\numberline {3.3}Projektarchitektur}{38}{section.3.3}
+\contentsline {chapter}{\numberline {4}Selbstevaluation}{39}{chapter.4}
+\contentsline {chapter}{\numberline {5}Zusammenfassung}{40}{chapter.5}
+\contentsline {chapter}{\numberline {A}Additional Information}{44}{appendix.A}
