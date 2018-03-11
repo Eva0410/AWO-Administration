@@ -1,0 +1,1500 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="https://msdn.microsoft.com/en-us/magazine/jj991965.aspx">
+<meta name="wpd_url" content="https://msdn.microsoft.com/en-us/magazine/jj991965.aspx">
+<meta name="wpd_date" content="2017-07-25T10:18Z">
+<script src="insight.min.js"></script><meta name="WT.seg_1" content="en-us"><meta content="PROD" name="ms.env"><meta content="dmc" name="ms.sitesec"><script src="ms.js" async="" type="text/javascript"></script><script async="" src="ai.0.js" type="text/javascript"></script><script src="fae308c13e963f1b06312bb5873f8d4b.js"></script><script src="1c596dec99222f85ad7e5191b3878343.js"></script><script src="69be83ef6168ee68189cce02e7bd6d8e.js" async="" type="text/javascript"></script><script src="serverComponent.php"></script><meta name="ms.pgtmplt" content="page"><meta name="ms.env" content="PROD"><meta name="ms.sitesec" content="dmc"><script type="text/javascript" src="event"></script><script type="text/javascript" async="" src="ms.js"></script><script src="insight.min.js"></script><script src="fae308c13e963f1b06312bb5873f8d4b.js"></script><script src="1c596dec99222f85ad7e5191b3878343.js"></script><script type="text/javascript" async="" src="69be83ef6168ee68189cce02e7bd6d8e.js"></script><script src="serverComponent_001.php"></script><link rel="canonical" href="https://msdn.microsoft.com/en-us/magazine/jj991965.aspx">
+    <title>MVVM - IOC Containers and MVVM</title>
+
+
+
+
+
+<meta name="DCS.dcsuri" content="/en-us/magazine/jj991965(d=default,l=en-us,v=msdn.10).aspx">
+
+<meta name="NormalizedUrl" content="https://msdn.microsoft.com/en-us/magazine/jj991965(d=default,l=en-us,v=msdn.10).aspx">
+
+<meta name="ms.normalizedurl" content="https://msdn.microsoft.com/en-us/magazine/jj991965(d=default,l=en-us,v=msdn.10).aspx">
+
+<meta name="AmbientContext" content="{&quot;layout.limit_max_width&quot;:true,&quot;AmbientContextId&quot;:&quot;922F4C4A-BC4D-44F9-A223-F8FDA94698EF&quot;,&quot;display.use_large_font&quot;:true,&quot;insight.perf_timing&quot;:true,&quot;AmbientContextDownstream&quot;:{&quot;LogTrace&quot;:false},&quot;display.high_contrast&quot;:false,&quot;insight.use_wedcs_vnext&quot;:true}">
+
+<meta name="VotingContextUrl" content="https://msdn.microsoft.com/en-us/magazine/jj991965(d=default,l=en-us,v=msdn.10).aspx">
+
+<meta name="MN" content="BF1CA93B-3:05:28 AM">
+
+<meta name="Search.ShortId" content="jj991965">
+
+<meta name="ms.shortidmsdn" content="jj991965">
+
+<meta name="ms.locale" content="en-us">
+
+<meta name="ms.prodver" content="MSDN.10">
+
+<meta name="ms.contentlang" content="EN">
+
+<meta name="ms.lang" content="EN">
+
+<meta name="ms.loc" content="US">
+
+<meta name="ms.sitever" content="2017.08.13.1">
+
+<meta name="ms.assetid" content="c73feaea-8526-4055-b6bc-c51d90a0b09a">
+
+<meta name="ms.auth" content="0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+
+
+
+
+
+    
+    <link rel="alternate" type="application/rss+xml" title="MSDN Magazine" href="http://sxp.microsoft.com/feeds/3.0/msdntn/MSDNMagazine_enus">
+    <link rel="alternate" type="application/rss+xml" title="MSDN Magazine Blog" href="http://blogs.msdn.com/msdnmagazine/rss.xml">
+    
+
+    
+
+    
+
+    
+    
+    
+    
+
+
+    <script type="text/javascript" src="ai.0.js" async=""></script><script type="text/javascript" data-do-not-move="true">
+
+        //<![CDATA[
+        window.appInsightsId = 'f1505ffb-5942-4877-9717-de45ab5d843b';
+        //]]>
+    </script>
+    
+    
+    
+    
+<script type="text/javascript" src="Loader.js" class="mtps-injected"></script><script type="text/javascript" class="mtps-injected">
+
+/*<![CDATA[*/
+(function() {
+	window.mtpsAmd = true;
+	var amdCombinedUrl = "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:Utilities,0:AppInsightsPerf,1:SearchBox,1:Layout,2:Header,1:Rating,1:NewFooterSock,2:Footer;/Areas/Epx/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Centers/Themes/StandardDevCenter/Content:2&amp;hashKey=C52133618899BEE0BBE4BEF3EE3FC4B7&amp;v=AA73E9AB025A5C03899445992AAB62F2";
+
+	require.config({ paths: { jquery: "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.0.min.js", bootstrap: "https://nexus.ensighten.com/msdn/Bootstrap.js", utilities: amdCombinedUrl, appInsightsPerf: amdCombinedUrl, searchBox: amdCombinedUrl, searchBoxJss: "https://i1.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox&btnid=HeaderSearchButton&minimumTermLength=2&pgArea=header&brand=Msdn&loc=en-us&Refinement=118&focusOnInit=false&iroot=magazine&emptyWatermark=true", layout: amdCombinedUrl, header: amdCombinedUrl, rating: amdCombinedUrl, newFooterSock: amdCombinedUrl, footer: amdCombinedUrl }, ignoreDuplicateModules: ["jquery", "utilities", "layout"] });
+
+	require.config({ shim: { "bootstrap": { deps: ["jquery"], exports: "bootstrap" }, "searchBoxJss": { exports: "searchBoxJss" }} });
+
+	require(["bootstrap"], function() {});
+	require(["appInsightsPerf"], function() {});
+	require(["searchBox"], function() {});
+	require(["searchBoxJss"], function() {});
+	require(["header"], function() {});
+	require(["rating"], function() {});
+	require(["newFooterSock"], function() {});
+	require(["footer"], function() {});
+}());
+/*]]>*/
+</script><script src="jquery-2.1.0.min.js" type="text/javascript" async="async"></script><script src="Combined.js" type="text/javascript" async="async"></script><script src="SearchBox.jss" type="text/javascript" async="async"></script><script async="async" type="text/javascript" src="jquery-2.1.0.min.js"></script><script async="async" type="text/javascript" src="Combined.js"></script><script async="async" type="text/javascript" src="SearchBox.jss"></script><script async="async" type="text/javascript" src="Bootstrap.js"></script><script class="mtps-injected">try {
+/**/
+(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { 
+	"image": "https://i-msdn.sec.s-msft.com", 
+	"js": "https://i2-msdn.sec.s-msft.com", 
+	"css": "https://i-msdn.sec.s-msft.com", 
+	"ttf": "https://i-msdn.sec.s-msft.com"
+});
+/**/
+} finally { MTPS._injectNextScript_0 && MTPS._injectNextScript_0(); }</script><script class="mtps-injected" src="Combined_001.js"></script><script type="text/javascript" id="cosymantecbfw_removeToolbar">(function () {				var toolbarElement = {},					parent = {},					interval = 0,					retryCount = 0,					isRemoved = false;				if (window.location.protocol === 'file:') {					interval = window.setInterval(function () {						toolbarElement = document.getElementById('coFrameDiv');						if (toolbarElement) {							parent = toolbarElement.parentNode;							if (parent) {								parent.removeChild(toolbarElement);								isRemoved = true;								if (document.body && document.body.style) {									document.body.style.setProperty('margin-top', '0px', 'important');								}							}						}						retryCount += 1;						if (retryCount > 10 || isRemoved) {							window.clearInterval(interval);						}					}, 10);				}			})();</script><meta name="ms.perf.timing" content=",,0,0,0,0,0,0,0,3394,3398,,,,"><script type="text/javascript" src="ms_001.js"></script><script type="text/javascript" src="jsll-4.2.0.js"></script><script src="broker.js"></script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script><script async="" src="t.js"></script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script><script class="mtps-injected">try {
+/**/
+(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { 
+	"image": "https://i-msdn.sec.s-msft.com", 
+	"js": "https://i2-msdn.sec.s-msft.com", 
+	"css": "https://i-msdn.sec.s-msft.com", 
+	"ttf": "https://i-msdn.sec.s-msft.com"
+});
+/**/
+} finally { MTPS._injectNextScript_0 && MTPS._injectNextScript_0(); }</script><script src="Combined_001.js" class="mtps-injected"></script><script src="Bootstrap.js" type="text/javascript" async="async"></script><script src="broker.js"></script><script src="ms_001.js" type="text/javascript"></script><script src="jsll-4.2.0.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="jj991965.css" media="all">
+</head>
+<body class="Chrome">
+    <div id="page">
+        
+    
+
+    
+    <link href="" type="text/css" rel="stylesheet">
+    
+        
+        
+    <input id="isHeaderBleeding" value="true" type="hidden">
+    <div id="ux-header" dir="ltr" class="ltr magazine" ms.pgarea="header" data-device-type="desktop">
+        
+
+      <header>
+        <span id="singleCol"></span>
+        <span id="doubleCol"></span>
+        <span id="isMobile"></span>
+        <div>
+          <div class="row topRow" role="banner">
+            <div class="top">
+              <div class="left">
+                <a class="msdnLogoImg" href="https://msdn.microsoft.com/en-us" title="MSDN home" ms.cmpgrp="Logo" ms.pgarea="header" ms.cmpnm="Microsoft Logo" ms.title="Microsoft" ms.index="1" ms.cmptyp="logo">
+                  <div class="clip70x15">
+                    <img alt="Microsoft Logo" id="msft-logo" class="msft-logo" src="HeaderFooterSprite.png">
+                  </div>
+                </a>
+                <div class="GrayPipeDiv clip1x18">
+                  <img alt="Gray Pipe" class="GrayPipe" src="HeaderFooterSprite.png">
+                </div>
+                  <div class="MegaBladeNavigation">
+                        <div class="megaBladeToc">
+      <nav>
+        <ul class="navL1">
+          <li class="toggle inactive">
+            <a ms.cmptyp="link" ms.index="1" ms.title="Developer Network" ms.cmpnm="Developer Network" ms.cmpgrp="megablade" ms.pgarea="header" href="javascript:void(0)" title="Developer Network" role="button" aria-expanded="false">Developer Network</a>
+            <ul class="navL2" style="display: none;">
+                <li class="inactive toggle">
+                    <a ms.cmptyp="link" ms.index="2" ms.title="Downloads" ms.cmpnm="Downloads" ms.cmpgrp="megablade" ms.pgarea="header" href="javascript:void(0)" title="Downloads" role="button" aria-expanded="false">Downloads</a>
+                                      <ul class="navL3" style="display: none;">
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="2" ms.title="Downloads:Visual Studio" ms.cmpnm="Downloads" ms.cmpgrp="megablade" ms.pgarea="header" href="https://www.visualstudio.com/downloads/download-visual-studio-vs" title="Visual Studio" role="link">Visual Studio</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="2" ms.title="Downloads:SDKs" ms.cmpnm="Downloads" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/microsoft-sdks-msdn" title="SDKs" role="link">SDKs</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="2" ms.title="Downloads:Trial software" ms.cmpnm="Downloads" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/evalcenter" title="Trial software" role="link">Trial software</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="inactive toggle">
+                    <a ms.cmptyp="link" ms.index="3" ms.title="Programs" ms.cmpnm="Programs" ms.cmpgrp="megablade" ms.pgarea="header" href="javascript:void(0)" title="Programs" role="button" aria-expanded="false">Programs</a>
+                                      <ul class="navL3" style="display: none;">
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="3" ms.title="Programs:Subscriptions" ms.cmpnm="Programs" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/msdn-subscriptions-overview" title="Subscriptions" role="link">Subscriptions</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="3" ms.title="Programs:Students" ms.cmpnm="Programs" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/students-overview-msdn" title="Students" role="link">Students</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="3" ms.title="Programs:ISV" ms.cmpnm="Programs" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/applicationbuilder" title="ISV" role="link">ISV</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="3" ms.title="Programs:Startups" ms.cmpnm="Programs" ms.cmpgrp="megablade" ms.pgarea="header" href="https://www.microsoft.com/bizspark" title="Startups" role="link">Startups</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="3" ms.title="Programs:Events" ms.cmpnm="Programs" ms.cmpgrp="megablade" ms.pgarea="header" href="https://events.microsoft.com/" title="Events" role="link">Events</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="inactive toggle">
+                    <a ms.cmptyp="link" ms.index="4" ms.title="Community" ms.cmpnm="Community" ms.cmpgrp="megablade" ms.pgarea="header" href="javascript:void(0)" title="Community" role="button" aria-expanded="false">Community</a>
+                                      <ul class="navL3" style="display: none;">
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="4" ms.title="Community:Magazine" ms.cmpnm="Community" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/magazine/dd767791" title="Magazine" role="link">Magazine</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="4" ms.title="Community:Forums" ms.cmpnm="Community" ms.cmpgrp="megablade" ms.pgarea="header" href="https://social.msdn.microsoft.com/forums/" title="Forums" role="link">Forums</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="4" ms.title="Community:Blogs" ms.cmpnm="Community" ms.cmpgrp="megablade" ms.pgarea="header" href="https://blogs.msdn.microsoft.com/" title="Blogs" role="link">Blogs</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="4" ms.title="Community:Channel 9" ms.cmpnm="Community" ms.cmpgrp="megablade" ms.pgarea="header" href="https://channel9.msdn.com/" title="Channel 9" role="link">Channel 9</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="inactive toggle">
+                    <a ms.cmptyp="link" ms.index="5" ms.title="Documentation" ms.cmpnm="Documentation" ms.cmpgrp="megablade" ms.pgarea="header" href="javascript:void(0)" title="Documentation" role="button" aria-expanded="false">Documentation</a>
+                                      <ul class="navL3" style="display: none;">
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="5" ms.title="Documentation:APIs and reference" ms.cmpnm="Documentation" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/library" title="APIs and reference" role="link">APIs and reference</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="5" ms.title="Documentation:Dev centers" ms.cmpnm="Documentation" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/developer-centers-msdn" title="Dev centers" role="link">Dev centers</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="5" ms.title="Documentation:Samples" ms.cmpnm="Documentation" ms.cmpgrp="megablade" ms.pgarea="header" href="https://code.msdn.microsoft.com/" title="Samples" role="link">Samples</a>
+                        </li>
+                        <li class="inactive">
+                          <a ms.cmptyp="link" ms.index="5" ms.title="Documentation:Retired content" ms.cmpnm="Documentation" ms.cmpgrp="megablade" ms.pgarea="header" href="https://msdn.microsoft.com/retiredcontent" title="Retired content" role="link">Retired content</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+                  </div>
+                <a ms.cmptyp="link" ms.index="1" ms.title="Developer Network" ms.cmpnm="Developer Network" ms.cmpgrp="megablade" ms.pgarea="header" class="DevCenterFullName" href="https://msdn.microsoft.com/en-us">Developer Network</a>
+                <a ms.cmptyp="link" ms.index="1" ms.title="Developer Network" ms.cmpnm="Developer Network" ms.cmpgrp="megablade" ms.pgarea="header" class="DevCenterShortName" href="https://msdn.microsoft.com/en-us">Developer</a>
+              </div>
+              <div class="right" ms.cmpgrp="aux nav">
+                <div id="signIn" aria-label="Profile button">
+
+  <div class="profileImage"></div>
+
+
+
+<a class="scarabLink" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=13&amp;ct=1503655528&amp;rver=6.7.6640.0&amp;wp=mcmbi&amp;wlcxt=msdn%24msdn%24msdn&amp;wreply=https%3a%2f%2fmsdn.microsoft.com%2fen-us%2fmagazine%2fjj991965.aspx&amp;lc=1033&amp;id=254354&amp;mkt=en-us" ms.pgarea="header" ms.cmpgrp="aux nav" ms.cmpnm="aux nav: link list" ms.title="Sign in" ms.index="1" ms.cmptyp="link">Sign in</a></div>
+
+
+
+
+                <div class="auxNav">
+                  <div>
+                    <div data-fragmentname="Subscriptions" id="Fragment_Subscriptions" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://my.visualstudio.com/?wt.mc_id=o~msft~msdn~nav~subscriber&amp;campaign=o~msft~msdn~nav~subscriber" id="Subscriptions_2153_1" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="header" ms.cmpgrp="aux nav" ms.cmpnm="aux nav: link list" ms.title="Subscriber portal" ms.index="1" ms.cmptyp="link">
+    <p xmlns="">Subscriber portal</p>
+  </a>
+</div>
+                    <div data-fragmentname="GetTools" id="Fragment_GetTools" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://www.visualstudio.com/free-developer-offers/" id="GetTools_2153_3" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="header" ms.cmpgrp="aux nav" ms.cmpnm="aux nav: link list" ms.title="Get tools" ms.index="1" ms.cmptyp="link">Get tools</a>
+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row middleRow">
+            <div class="expandTop" style="display: none;">
+              <div class="left"></div>
+              <div class="right"></div>
+            </div>
+          </div>
+        </div>
+        <div id="buttomRowWrapper" class="bg_default">
+          <div class="row buttomRow bg_default">
+            <div class="bottom">
+              <div class="left" role="navigation" aria-label="header toc" ms.cmpgrp="main nav">
+                <a id="grip" class="menu-icon" href="javascript:void(0)" role="button" aria-label="navigation menu"></a>
+                <div data-fragmentname="SiteLogo" id="Fragment_SiteLogo" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="LinkWithImage topImage">
+    <a id="SiteLogo_15654_1" href="https://msdn.microsoft.com/en-us/magazine/" title="MSDN Magazine" ms.pgarea="header" ms.cmpgrp="Logo" ms.cmpnm="MSDN Magazine" ms.title="MSDN Magazine" ms.index="2" ms.cmptyp="logo">
+      <span>magazine</span>
+    </a>
+  </div>
+</div>
+                <div id="drawer">
+                  <div class="toc">
+                    
+        <nav>
+            <ul class="navL1">
+                        <li class="inactive current toggle">
+                                <a href="javascript:void(0)" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">Issues and downloads</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+
+                                                <a href="https://msdn.microsoft.com/magazine/mt668395" role="link" title="All issues" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">All issues</a>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="2017" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2017</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt493452" title="August 2017" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2017" ms.index="1" ms.cmptyp="link">August 2017</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt784654" title="July 2017" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2017" ms.index="1" ms.cmptyp="link">July 2017</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt809110" title="June 2017" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2017" ms.index="1" ms.cmptyp="link">June 2017</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt808494" title="May 2017" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2017" ms.index="1" ms.cmptyp="link">May 2017</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt797643" title="April 2017" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2017" ms.index="1" ms.cmptyp="link">April 2017</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt795180" title="March 2017" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2017" ms.index="1" ms.cmptyp="link">March 2017</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt793263" title="February 2017" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2017" ms.index="1" ms.cmptyp="link">February 2017</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt745086" title="January 2017" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2017" ms.index="1" ms.cmptyp="link">January 2017</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="2016" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2016</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt790192" title="December 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">December 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt790178" title="Connect(); 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">Connect(); 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt788614" title="November 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">November 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt742863" title="October 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">October 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt763227" title="September 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">September 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt767689" title="August 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">August 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt736448" title="July 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">July 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt707521" title="June 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">June 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt703426" title="May 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">May 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt694071" title="April 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">April 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt683789" title="March 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">March 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt632264" title="February 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">February 2016</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt614238" title="January 2016" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2016" ms.index="1" ms.cmptyp="link">January 2016</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="2015" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2015</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt595745" title="December 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">December 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt619983" title="November 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">November 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt590962" title="Windows 10 issue" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">Windows 10 issue</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt573705" title="October 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">October 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt349016" title="September 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">September 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt185509" title="August 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">August 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt238393" title="July 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">July 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/mt147233" title="June 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">June 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn973005" title="May 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">May 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn948099" title="April 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">April 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn913157" title="March 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">March 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn904663" title="February 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">February 2015</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn890362" title="January 2015" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2015" ms.index="1" ms.cmptyp="link">January 2015</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="2014" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2014</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn879346" title="Special 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">Special 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn857348" title="December 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">December 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn818485" title="November 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">November 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn800594" title="October 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">October 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn799056" title="September 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">September 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn759433" title="August 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">August 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn768436" title="July 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">July 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn745857" title="June 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">June 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn683788" title="May 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">May 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn630420" title="April 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">April 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn605869" title="March 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">March 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn574789" title="February 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">February 2014</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn519916" title="January 2014" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2014" ms.index="1" ms.cmptyp="link">January 2014</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive current toggle">
+
+                                                <a href="javascript:void(0)" title="2013" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2013</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn463800" title="Government 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">Government 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn532197" title="December 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">December 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn463766" title="November 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">November 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn451433" title="October 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">October 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn385701" title="September 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">September 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn342861" title="August 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">August 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn296502" title="July 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">July 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn201737" title="June 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">June 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn198231" title="May 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">May 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dn166920" title="April 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">April 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj991969" title="March 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">March 2013</a>
+                                                        </li>
+                                                        <li class="inactive current">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj891014" title="February 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">February 2013</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj883946" title="January 2013" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2013" ms.index="1" ms.cmptyp="link">January 2013</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="2012" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2012</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj863125" title="December 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">December 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj721585" title="November 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">November 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj660298" title="Windows 8" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">Windows 8</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj658963" title="October 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">October 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj599578" title="September 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">September 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj553500" title="August 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">August 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj190796" title="July 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">July 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/jj133811" title="June 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">June 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh975340" title="May 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">May 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh882439" title="April 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">April 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh852583" title="March 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">March 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh781007" title="February 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">February 2012</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh708738" title="January 2012" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2012" ms.index="1" ms.cmptyp="link">January 2012</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="2011" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2011</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh580726" title="December 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">December 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh547094" title="November 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">November 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh463583" title="October 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">October 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh416747" title="September 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">September 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh339634" title="August 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">August 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh315813" title="July 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">July 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh227291" title="June 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">June 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/hh126799" title="May 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">May 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/gg749836" title="April 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">April 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/gg674897" title="March 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">March 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/gg602477" title="February 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">February 2011</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/gg547373" title="January 2011" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2011" ms.index="1" ms.cmptyp="link">January 2011</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="2010" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2010</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/gg491225" title="December 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">December 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/gg412507" title="November 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">November 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/gg232773" title="October 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">October 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ff956213" title="September 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">September 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ff899321" title="August 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">August 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ff799214" title="July 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">July 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ff727949" title="June 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">June 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ff646986" title="May 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">May 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ee336306" title="April 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">April 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ee336121" title="March 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">March 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ff383375" title="February 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">February 2010</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ee291594" title="January 2010" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2010" ms.index="1" ms.cmptyp="link">January 2010</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="2009" role="button" aria-expanded="false" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads" ms.index="1" ms.cmptyp="link">2009</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ee869324" title="December 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">December 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ee840128" title="November 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">November 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ee532478" title="October 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">October 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ee663042" title="September 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">September 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/ee310078" title="August 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">August 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dd980906" title="July 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">July 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dd876628" title="June 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">June 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dd727694" title="May 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">May 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dd578512" title="April 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">April 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dd535414" title="March 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">March 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dd326789" title="February 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">February 2009</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/magazine/dd365186" title="January 2009" role="link" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Issues and downloads" ms.title="Issues and downloads: 2009" ms.index="1" ms.cmptyp="link">January 2009</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive">
+                                    <a href="https://msdn.microsoft.com/magazine/ee358702" role="link" title="Subscribe" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Subscribe" ms.title="Subscribe" ms.index="2" ms.cmptyp="link">Subscribe</a>
+                        </li>
+                        <li class="inactive">
+                                    <a href="https://msdn.microsoft.com/magazine/ee291618" role="link" title="Submit article" ms.pgarea="header" ms.cmpgrp="main nav" ms.cmpnm="Submit article" ms.title="Submit article" ms.index="3" ms.cmptyp="link">Submit article</a>
+                        </li>
+            </ul>
+        </nav>
+
+                  </div>
+                </div>
+              </div>
+              <div class="right" ms.title="search" role="search">
+                <div data-fragmentname="SearchBox" id="Fragment_SearchBox" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="SearchBox">
+    <form action="https://msdn.microsoft.com/en-us/magazine/jj991965.aspx" id="HeaderSearchForm" name="HeaderSearchForm" method="get">
+      <button id="FakeHeaderSearchButton" value="Search" type="submit" class="header-search-button" role="button" aria-label="search finder" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="icon">
+        <div id="search-finder-div" class="clip16x20">
+          <img alt="search finder" id="search-finder" class="search-finder" src="HeaderFooterSprite.png">
+        </div>
+      </button>
+      <button id="HeaderSearchButton" style="display: none;" data-searchtype="icon" data-pgarea="header" title="" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="icon"></button>
+      <div id="searchSplitter"></div>
+      <div id="searchCloseIconDiv" class="clip16x20" tabindex="0">
+        <img alt="search clear" id="searchCloseIcon" class="search-clear-x" src="HeaderFooterSprite.png">
+      </div>
+      <div id="searchTextContainer" style="width: 0px; display: none;"><p style="height: 1px; width: 1px; overflow: hidden; position: absolute;" role="alert"></p><p style="height: 1px; width: 1px; overflow: hidden; position: absolute;" role="alert"></p><p role="alert" style="height: 1px; width: 1px; overflow: hidden; position: absolute;"></p>
+        <input id="HeaderSearchTextBox" name="query" aria-label="Search Input Box" maxlength="200" onfocus="Epx.Controls.SearchBox.watermarkFocus(event, this.title)" onblur="Epx.Controls.SearchBox.watermarkBlur(event, this.title)" autocomplete="off" data-searchtype="searchbox" role="combobox" aria-autocomplete="both" aria-owns="MSDNSearchAutoCompleteList" aria-live="polite" placeholder="" data-pgarea="header" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="enter-key" ms.cmpgrp="aux nav" ms.cmpnm="upper search box" ms.index="3" ms.cmptyp="input" type="text">
+      <div id="SearchFlyoutContainer" style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); font-family: &quot;Segoe UI&quot;,Tahoma,Helvetica,sans-serif; font-size: 16px;"><div id="SuggestionContainer"><ul data-pgarea="header" data-searchtype="search dropdown" id="MSDNSearchAutoCompleteList" role="listbox" aria-controls="HeaderSearchTextBox" style="list-style: outside none none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="suggested keyword"></ul></div></div><div style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); font-family: &quot;Segoe UI&quot;,Tahoma,Helvetica,sans-serif; font-size: 16px;" id="SearchFlyoutContainer"><div id="SuggestionContainer"><ul aria-controls="HeaderSearchTextBox" role="listbox" id="MSDNSearchAutoCompleteList" data-searchtype="search dropdown" data-pgarea="header" style="list-style: outside none none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div><div style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); font-family: &quot;Segoe UI&quot;,Tahoma,Helvetica,sans-serif; font-size: 16px;" id="SearchFlyoutContainer"><div id="SuggestionContainer"><ul aria-controls="HeaderSearchTextBox" role="listbox" id="MSDNSearchAutoCompleteList" data-searchtype="search dropdown" data-pgarea="header" style="list-style: outside none none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div></div>
+    </form>
+    
+    
+  </div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </header>
+
+    <div id="overlayMaskHeader"></div><div id="overlayMaskHeader"></div></div>
+
+    
+    
+    
+    <div id="jumpInfo" style="display: none;">We’re sorry. The content you requested has been removed. You’ll be auto redirected in 1 second.</div>
+
+
+
+
+
+
+
+
+  <div class="breadCrumb">
+        <span>Issues and downloads</span>
+        <span><a href="https://msdn.microsoft.com/en-us/magazine/jj883945.aspx" title="2013">2013</a></span>
+        <span><a href="https://msdn.microsoft.com/en-us/magazine/jj891014.aspx" title="February 2013">February 2013</a></span>
+
+    <span><a href="https://msdn.microsoft.com/en-us/magazine/jj991965.aspx" title="MVVM - IOC Containers and MVVM">MVVM - IOC Containers and MVVM</a></span>
+  </div>
+
+        <div id="content">
+            
+
+
+
+
+
+
+
+
+<div id="LeftContent">
+    <div class="navpage" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="mag">
+    <div class="allWidth issueHeader" id="">
+      <hr>
+      <div class="issueDate">February 2013</div>
+      <div class="issueNum">Volume 28 Number 02</div>
+    </div>
+    <div class="article">
+      <div class="FeatureTitle" id="">
+        <h1>MVVM - IOC Containers and MVVM</h1>
+        <p>By <a href="https://msdn.microsoft.com/en-us/magazine/mt149362?author=laurent+bugnion">Laurent Bugnion</a> | February 2013 </p>
+      </div>
+      <p>Since the early days of object-oriented programming, developers have faced the issue of creating and retrieving instances of classes in applications and libraries. Various solutions have been proposed for this problem. For the past few years, dependency injection (DI)and inversion of control (IOC) have gained popularity among coders and have taken precedence over some older solutions such as the Singleton pattern.</p>
+      <div>
+        <p>The Singleton pattern is a convenient way to create and expose an instance of a class, but it has a few disadvantages. For example, the code in <strong>Figure 1</strong> shows a class exposing a property following the Singleton pattern.</p>
+        <div class="codeCaption">Figure 1. Singleton Pattern Implementation</div>
+<div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_5feda509-a387-4bba-bb9a-e8be87214d08');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_5feda509-a387-4bba-bb9a-e8be87214d08" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>public class DataService
+{
+&nbsp; private static DataService _instance;
+&nbsp; public static DataService Instance
+&nbsp; {
+&nbsp;&nbsp;&nbsp; get
+&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return _instance ?? (_instance = new DataService());
+&nbsp;&nbsp;&nbsp; }
+&nbsp; }
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p>Here’s a few things to note about the code in <strong>Figure 1</strong>:</p><ul><li>The constructor of the class is private, meaning that the only way to create the instance is by using the Instance static property. We could change that by making the constructor internal or even public.</li><li>The instance is created on demand, which is generally a good thing, but sometimes we want the instance to be ready as soon as the application starts. We can do this by calling the Instance property as soon as possible.</li><li>More annoying, there is no way to delete the instance, and in certain circumstances this can cause memory leaks. One way to solve this issue is to add a static Delete method to the class.</li><li>Instances other than the main Instance property can be created, but each would require different accessors, either properties or methods. The Instance property does not allow any parameter to be passed to the constructor.</li></ul><p>With these improvements and a few others, we could transform this pattern into something useful and flexible. But an even cleaner approach is to remove this infrastructure code from each class we implement and instead use an external object that acts like a cache for the instances we need in various parts of our applications.</p><p>This is where IOC containers come in handy. The term <em>inversion of control</em> means that the act of creating and keeping the instance is not the responsibility of the consuming class anymore, as it is in traditional object-oriented programming, but is instead delegated to an external container. While this is not an obligation, the cached instances are often injected into the consumer class’s constructor or made available through a property of the consumer. This is why we talk about dependency injection, or DI. Note that dependency injection is not necessary for IOC containers to work, but it is a convenient way to decouple the consumer from the cached instances and from the cache itself.</p><p>For example, a classic application would be composed as shown in <strong>Figure 2</strong>. In this example, the programmer decided to provide two implementations of the service, one for run time and one for test purposes. In some cases, a developer might even want to provide a third implementation for design-time data—for example, to be used in Expression Blend or in the Visual Studio designer.</p><div class="codeCaption">Figure 2. Classic Composition of Consumer and Service</div>
+<div id="code-snippet-2" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_f85bf067-6283-4da6-baff-1c4af0465a47');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_f85bf067-6283-4da6-baff-1c4af0465a47" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>public class Consumer
+{
+&nbsp; private IDataService _service;
+&nbsp; public Consumer()
+&nbsp; {
+&nbsp;&nbsp;&nbsp; if (App.IsTestMode)
+&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _service = new TestDataService();
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; else
+&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _service = new DataService();
+&nbsp;&nbsp;&nbsp; }
+&nbsp; }
+}
+public interface IDataService
+{
+&nbsp; Task<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">DataItem</span><span style="color: Blue;">&gt;</span> GetData();
+}
+public class DataService : IDataService
+{
+&nbsp; public async Task<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">DataItem</span><span style="color: Blue;">&gt;</span> GetData()
+&nbsp; {
+&nbsp;&nbsp;&nbsp; // TODO Provide a runtime implementation
+&nbsp;&nbsp;&nbsp; // of the GetData method.
+&nbsp;&nbsp;&nbsp; // ...
+&nbsp; }
+}
+public class TestDataService : IDataService
+{
+&nbsp; public async Task<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">DataItem</span><span style="color: Blue;">&gt;</span> GetData()
+&nbsp; {
+&nbsp;&nbsp;&nbsp; // TODO Provide a test implementation
+&nbsp;&nbsp;&nbsp; // of the GetData method.
+&nbsp;&nbsp;&nbsp; // ...
+&nbsp; }
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p>With dependency injection, the code becomes much cleaner, as shown in <strong>Figure 3</strong>. This is the core principle of DI: another class, somewhere, is taking care of creating the correct implementation of the service, and injecting it.</p><div class="codeCaption">Figure 3. Dependency Injection</div>
+<div id="code-snippet-3" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_9f6970ec-79a5-44e8-88cc-1b69f94c7361');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_9f6970ec-79a5-44e8-88cc-1b69f94c7361" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>public class ConsumerWithInjection
+{
+&nbsp; private IDataService _service;
+&nbsp; public ConsumerWithInjection(IDataService service)
+&nbsp; {
+&nbsp;&nbsp;&nbsp; _service = service;
+&nbsp; }
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p>Of course, we need to take care of creating the service and injecting it into the consumer, and this is where the IOC container becomes useful.</p></div>
+      <div>
+        <h2>Using an IOC Container</h2>
+        <p>Quite a few IOC containers are available on the market. For instance, Unity (by Microsoft), StructureMap and Castle Windsor (two open source projects) are very popular .NET-based IOC containers and available for multiple platforms. In this article, I’ll use MVVM Light’s SimpleIoc to illustrate the usefulness of an IOC container in MVVM-based applications.</p>
+        <p>
+          <strong>Note:</strong> The sample application provided with this article shows all the techniques detailed using MVVM Light and the SimpleIoc container. The application is a simple RssReader that pulls a list of the latest articles from CNN.com and displays them. The app has two pages: MainPage shows the list of articles with their title. On click, the app navigates to a DetailsPage, which shows the article’s title, a summary, as well as a link to the main story on the CNN website. The sample package contains two implementations of the app, one for Windows 8 and the other for Windows Phone 8.</p>
+        <p>SimpleIoc is, like the name says, a rather simple IOC container, which allows registering and getting instances from the cache in an uncomplicated manner. It also allows composing objects with dependency injection in the constructor. With SimpleIoc, you can register the IDataService, the implementing class or classes and the consumer class, as shown in <strong>Figure 4</strong>.</p>
+        <div class="codeCaption">Figure 4. Registering the IDataService and the Consumer</div>
+<div id="code-snippet-4" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_50c75d43-82b4-443e-93b4-28ae7fe7d753');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_50c75d43-82b4-443e-93b4-28ae7fe7d753" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>if (App.IsTestMode)
+{
+&nbsp; SimpleIoc.Default.Register&lt;IDataService, TestDataService&gt;();
+}
+else
+{
+&nbsp; SimpleIoc.Default.Register&lt;IDataService, DataService&gt;();
+}
+SimpleIoc.Default.Register<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>();
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p>In clear text, the code in <strong>Figure 4</strong> means the following: if the application is in test mode, every time anyone needs an IDataService, pass the cached instance of TestDataService; otherwise, use the cached instance of DataService. Note that the action of registering does not create any instance yet—the instantiation is on demand, and only executed when the objects are actually needed.</p><p>The next step is to create the ConsumerWithInjection instance with code such as that shown in <strong>Figure 5</strong>.</p><div class="codeCaption">Figure 5. Getting the ConsumerWithInjection Instance</div>
+<div id="code-snippet-5" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_4700e5de-2e08-4d7d-b5dc-7d4c06988286');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_4700e5de-2e08-4d7d-b5dc-7d4c06988286" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>public ConsumerWithInjection ConsumerInstance
+{
+&nbsp; get
+&nbsp; {
+&nbsp;&nbsp;&nbsp; return SimpleIoc.Default.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>();
+&nbsp; }
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p>When the property in <strong>Figure 5</strong> is called, the SimpleIoc container will run the following steps:</p><ol><li>Check whether the instance of ConsumerWithInjection is already existing in the cache. If yes, the instance is returned.</li><li>If the instance doesn’t exist yet, inspect the ConsumerWithInjection’s constructor. It requires the instance of IDataService.</li><li>Check whether an instance of IDataService is already available in the cache. If yes, pass it to the ConsumerWithInjection’s constructor.</li><li>If not, create an instance of IDataService, cache it and pass it to the ConsumerWithInjection’s constructor.</li></ol><p>Of course, since the instance is cached, the call to the GetInstance method can be executed multiple times in various parts of the application. It is not strictly necessary to use the constructor injection shown earlier in <strong>Figure 3</strong>, although it is an elegant manner in which to compose objects and to decouple the dependencies between objects.</p><p>The GetInstance method can also return <em>keyed instances</em>. This means that the IOC container can create multiple instances of the same class, keeping them indexed with a key. In that way the IOC container acts as a cache, and the instances are created on demand: when GetInstance is called with a key, the IOC container checks whether an instance of that class is already saved with that key. If it is not, the instance is created before it is returned. It is then saved in the cache for later reuse. It is also possible to get all the instances of a given class, as shown in <strong>Figure 6</strong>. The last line of that code returns an IEnumerable&lt;ConsumerWithInjection&gt; containing the four instances created earlier.</p><div class="codeCaption">Figure 6. Getting Keyed Instances, and Getting All the Instances</div>
+<div id="code-snippet-6" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_39173c07-1166-4142-aeec-f309c01283c2');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_39173c07-1166-4142-aeec-f309c01283c2" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>// Default instance
+var defaultInstance = SimpleIoc.Default.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>();
+// Keyed instances
+var keyed1 = SimpleIoc.Default.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>("key1");
+var keyed2 = SimpleIoc.Default.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>("key2");
+var keyed3 = SimpleIoc.Default.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>("key3");
+// Get all the instances (four)
+var allInstances = SimpleIoc.Default.GetAllInstances<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>();
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div>
+      <div>
+        <h2>Various Ways to Register a Class</h2>
+        <p>The most interesting feature of an IOC container is the way that a class can be registered in order to create the instances. Each IOC container has certain features that make it unique in the way that classes are registered. Some of them use code-only configuration, while others can read external XML files, allowing for great flexibility in the way that classes are instantiated by the container. Others allow for powerful factories to be used. Some, like MVVM Light’s SimpleIoc, are more simple and straightforward. Which IOC container to use is a decision that rests on a few criteria, such as the team’s familiarity with a specific container, the features needed for the application, and others.</p>
+        <p>Registration can occur in a central location (often called the <em>service locator</em>), where important decisions can be taken, such as when to use the test implementation of all the services. Of course, it is also possible (and often necessary) to register some classes in other locations in the application.</p>
+        <p>In some MVVM applications (and notably apps based on the MVVM Light toolkit), a class named ViewModelLocator is used to create and expose some of the application’s ViewModels. This is a convenient location in which to register most of the services and service consumers. In fact, some ViewModels can also be registered with the IOC container. In most cases, only the ViewModels that are long-lived are registered in the ViewModelLocator class. Others may be created ad hoc. In navigation apps such as Windows 8 or Windows Phone apps, these instances may be passed to a page when the navigation occurs. In some cases, SimpleIoc may be used as a cache for keyed instances in order to make this step easier, as we will see later in this article.</p>
+        <p>To make the IOC container easier to swap with another (should the need arise), many such containers (including MVVM Light’s SimpleIoc) use the Common Service Locator implementation. This relies on a common interface (IServiceLocator) and the ServiceLocator class, which is used to abstract the IOC container’s implementation. Because SimpleIoc implements IServiceLocator, we can have the code shown in <strong>Figure 7</strong> in our application, which executes in the same manner as the code in <strong>Figure 6</strong>. If at a later point another IOC container is selected for the application, only references to the SimpleIoc class need to be swapped. The references to ServiceLocator, on the other hand, can remain as is.</p>
+        <div class="codeCaption">Figure 7. Registering the ServiceLocator</div>
+<div id="code-snippet-7" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_694a0a7d-b71f-4994-8059-7cf8fe66ed34');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_694a0a7d-b71f-4994-8059-7cf8fe66ed34" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>ServiceLocator.SetLocatorProvider(() =&gt; SimpleIoc.Default);
+// Default instance
+var defaultInstance = ServiceLocator.Current.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>();
+// Keyed instances
+var keyed1 = ServiceLocator.Current.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>("key1");
+var keyed2 = ServiceLocator.Current.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>("key2");
+var keyed3 = ServiceLocator.Current.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>("key3");
+// Get all the instances (four)
+var allInstances = ServiceLocator.Current.GetAllInstances<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">ConsumerWithInjection</span><span style="color: Blue;">&gt;</span>();
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p>Instead of registering a class and delegating the instance creation to the IOC container, it is also possible to register a factory expression. This delegate (usually expressed as a lambda expression) returns an instance. Because the delegate can contain any logic, it is possible to execute some complex creation code if needed, or even to return an instance that was created earlier in another part of the application. Note that the factory expression is only evaluated when needed.</p><p>The code in <strong>Figure 8</strong>, for example, shows how to register a DataItem that accepts a DateTime as a constructor parameter. Because the constructor is only executed when GetInstance is called (and not when Register is called), the parameter will accurately show the time at which the factory code was called the first time. Subsequent calls to GetInstance will, however, show the same time, because the instance was already created and cached.</p><div class="codeCaption">Figure 8. Registering a Factory</div>
+<div id="code-snippet-8" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_1f7b852a-563a-4fb9-92e4-1cc09b54b60e');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_1f7b852a-563a-4fb9-92e4-1cc09b54b60e" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>public async void InitiateRegistration()
+{
+&nbsp; // Registering at 0:00:00
+&nbsp; SimpleIoc.Default.Register(() =&gt; new DataItem(DateTime.Now));
+&nbsp; Debug.WriteLine("Registering at " + DateTime.Now);
+&nbsp; await Task.Delay(5000);
+&nbsp; // Getting at 0:00:05
+&nbsp; var item = ServiceLocator.Current.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">DataItem</span><span style="color: Blue;">&gt;</span>();
+&nbsp; Debug.WriteLine("Creating at " + item.CreationTime);
+&nbsp; await Task.Delay(5000);
+&nbsp; // Getting at 0:00:10. Creation time is still the same
+&nbsp; item = ServiceLocator.Current.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">DataItem</span><span style="color: Blue;">&gt;</span>();
+&nbsp; Debug.WriteLine("Still the same creation time: " + item.CreationTime);
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<h2>MVVM Light’s ViewModelLocator</h2><p>When MVVM Light is installed (using the MSI at http://mvvmlight.codeplex.com/, under the Download section), a new application can be created in Visual Studio using the project templates provided. For instance, the following steps create a new Windows 8 (WinRT) app:</p><ol><li>Install MVVM Light.</li><li>Using the Readme file that automatically opens in your favorite browser, install the VSIX file, which makes the project templates available in Visual Studio..</li><li>Start (or restart) Visual Studio 2012.</li><li>Select File, New Project.</li><li>Under Visual C#, Windows Store, select the MvvmLight (Win8) project template, enter a name and location for the project and click OK.</li></ol><p>Note that MVVM Light supports all XAML-based frameworks (Windows Presentation Foundation, Silverlight, Windows Phone, Windows 8), so the same experience can be reproduced with any of these frameworks. Once the project is created, open the file ViewModelLocator.cs in the ViewModel folder. Notice the code reproduced in <strong>Figure 9</strong>.</p><div class="codeCaption">Figure 9. ViewModelLocator Static Constructor</div>
+<div id="code-snippet-9" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_bd3aac13-cfdc-4cdc-b4be-8a0991d1674d');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_bd3aac13-cfdc-4cdc-b4be-8a0991d1674d" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>static ViewModelLocator()
+{
+&nbsp; ServiceLocator.SetLocatorProvider(() =&gt; SimpleIoc.Default);
+&nbsp; if (ViewModelBase.IsInDesignModeStatic)
+&nbsp; {
+&nbsp;&nbsp;&nbsp; SimpleIoc.Default.Register&lt;IDataService, Design.DesignDataService&gt;();
+&nbsp; }
+&nbsp; else
+&nbsp; {
+&nbsp;&nbsp;&nbsp; SimpleIoc.Default.Register&lt;IDataService, DataService&gt;();
+&nbsp; }
+&nbsp; SimpleIoc.Default.Register<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">MainViewModel</span><span style="color: Blue;">&gt;</span>();
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p>Because the MainViewModel expects an IDataService in its constructor, SimpleIoc will take care of creating and composing the service and the ViewModel on demand. A little farther along in the ViewModelLocator, the MainViewModel is exposed as a property, making it possible to data bind the MainPage’s DataContext and take advantage of the design-time service implementation (DesignDataService) or the run-time implementation (DataService). To visualize the difference, press Ctrl+F5 to run the application (in the simulator or on the local machine). The main page shows the text “Welcome to MVVM Light.” Then, in Visual Studio, right-click MainPage.xaml in Solution Explorer, and select either Open in Blend or View in Designer. The same UI is shown, this time with the text “Welcome to MVVM Light [design].”</p><p>The difference between run-time data and design-time data in this very simple, default application is made possible by the two implementations of IDataService, and the ViewModelBase.IsInDesignModeStatic property, triggering the correct service implementation to be registered. Once the MainViewModel is resolved for the first time, the IOC container is able to create the correct service, caching it and passing it to the MainViewModel constructor and then caching that instance.</p><p>Of course, the IOC container also supports unregistering a class. When some instances have already been created and cached, the Unregister method will remove those instances from the cache. If those instances are not referenced anywhere else in the application, they will be deleted by the garbage collector and memory will be reclaimed.</p><h2>Dealing with View Services</h2><p>This article already talked about services—that is, classes that provide the ViewModels with data and functionality (for example, to and from a Web service). Sometimes, however, the ViewModel also needs another kind of service in order to use functionality in the View. In this case, we talk about <em>View Services</em>.</p><p>Two typical View Services are the NavigationService and the DialogService. The first provides navigation functionality such as NavigateTo, GoBack, and so on. Windows Phone and Windows 8 Modern apps are almost always using a NavigationService because they are navigation applications using pages. The DialogService is very useful from a ViewModel because the developer doesn’t want to know how a message is going to be displayed to the user. The ViewModel merely provides the error message. The designer (or integrator) is in charge of displaying the message—for example, in a status bar or a custom dialog box. The DialogService typically offers functionality such as ShowStatus, ShowMessage, ShowError, and so on.</p><p>The implementation of NavigationService differs depending on the platform being used. On Windows 8 Modern apps, for example, the NavigationService can be a self-contained class (in a utility library), using the current window’s Frame to perform the actual navigation. This is, in fact, also how each Page performs navigation, by using its built-in NavigationService property. Of course, a ViewModel is a plain object so it does not have such a built-in property, and here again the IOC container comes handy: the NavigationService is registered in the ViewModelLocator, cached in the IOC container and can be injected into each ViewModel as needed. This operation is shown in <strong>Figure 10</strong> (taken from the reference implementation provided with this article).</p><div class="codeCaption">Figure 10. Creating and Registering the NavigationService, and Injecting in the MainViewModel</div>
+<div id="code-snippet-10" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>XML</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_a4993cb5-d0ca-4106-adf8-022965dbc63b');" ms.cmptyp="CodeSnippet">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_a4993cb5-d0ca-4106-adf8-022965dbc63b" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre>public class ViewModelLocator
+{
+&nbsp; static ViewModelLocator()
+&nbsp; {
+&nbsp;&nbsp;&nbsp; ServiceLocator.SetLocatorProvider(() =&gt; SimpleIoc.Default);
+&nbsp;&nbsp;&nbsp; if (ViewModelBase.IsInDesignModeStatic)
+&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SimpleIoc.Default.Register&lt;IRssService, Design.DesignRssService&gt;();
+&nbsp;&nbsp; &nbsp;}
+&nbsp;&nbsp;&nbsp; else
+&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SimpleIoc.Default.Register&lt;IRssService, RssService&gt;();
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; SimpleIoc.Default.Register&lt;INavigationService, NavigationService&gt;();
+&nbsp;&nbsp;&nbsp; SimpleIoc.Default.Register<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">MainViewModel</span><span style="color: Blue;">&gt;</span>();
+&nbsp; }
+&nbsp; public MainViewModel Main
+&nbsp; {
+&nbsp;&nbsp;&nbsp; get
+&nbsp;&nbsp;&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ServiceLocator.Current.GetInstance<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">MainViewModel</span><span style="color: Blue;">&gt;</span>();
+&nbsp;&nbsp;&nbsp; }
+&nbsp; }
+}
+public class MainViewModel : ViewModelBase
+{
+&nbsp; private readonly IRssService _rssService;
+&nbsp; private readonly INavigationService _navigationService;
+&nbsp; public ObservableCollection<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">RssItem</span><span style="color: Blue;">&gt;</span> Items
+&nbsp; {
+&nbsp;&nbsp;&nbsp; get;
+&nbsp;&nbsp;&nbsp; private set;
+&nbsp; }
+&nbsp; public MainViewModel(
+&nbsp;&nbsp;&nbsp; IRssService rssService,
+&nbsp;&nbsp;&nbsp; INavigationService navigationService)
+&nbsp; {
+&nbsp;&nbsp;&nbsp; _rssService = rssService;
+&nbsp;&nbsp;&nbsp; _navigationService = navigationService;
+&nbsp;&nbsp;&nbsp; Items = new ObservableCollection<span style="color: Blue;">&lt;</span><span style="color: rgb(163, 21, 21);">RssItem</span><span style="color: Blue;">&gt;</span>();
+&nbsp; }
+&nbsp; // ...
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<h2>Wrapping Up</h2><p>This article is part of a series about MVVM in Windows 8 and MVVM Light. The next article will describe some of the challenges of a decoupled architecture, such as triggering navigation between pages, displaying dialog boxes to users and working with animations. In that article, I’ll cover solutions that involve MVVM Light’s Messenger component and the use of View Services.</p><h2>References</h2><p>The MVVM Light Toolkit is available at <a href="http://mvvmlight.codeplex.com/">http://mvvmlight.codeplex.com</a></p><p><strong>Other Libraries:</strong></p><ul><li>Unity (Microsoft Patterns and Practices): <a href="http://unity.codeplex.com/">http://unity.codeplex.com/</a></li><li>StructureMap: <a href="http://docs.structuremap.net/">http://docs.structuremap.net/</a></li><li>Castle Windsor: <a href="https://github.com/castleproject/Home/blob/master/README.md">https://github.com/castleproject</a></li><li>Common Service Locator: <a href="http://commonservicelocator.codeplex.com/">http://commonservicelocator.codeplex.com/</a></li></ul></div>
+      <div>
+        <div>
+          <div>
+            <p>
+              <strong>
+                <em>Laurent Bugnion</em>
+              </strong>&nbsp;<em>is senior director for IdentityMine Inc., a Microsoft partner working with technologies such as Windows Presentation Foundation, Silverlight, Surface, Windows 8, Windows Phone and UX. He’s based in Zurich, Switzerland.</em></p>
+            <p>Thanks to the following technical experts for reviewing this article: <strong>Karl Erickson</strong> has been involved in XAML developer education for the past six years, working with WPF, Silverlight, Windows Phone and Windows 8. His most recent project is the <a href="http://code.msdn.microsoft.com/windowsapps/reversi-xamlc-sample-board-816140fa">Reversi XAML/C# sample board game app</a>.</p>
+          </div>
+        </div>
+      </div>
+      <p>&nbsp;</p>
+    </div>
+    <div class="navpage" xmlns="http://www.w3.org/1999/xhtml">
+      <div>
+        <script type="text/javascript" src="jquery-2.1.3.min.js" data-do-not-move="true" data-provides="jQuery"> </script>
+        
+        <script type="text/javascript" src="bootstrap.min.js" data-do-not-move="true"> </script>
+        <script type="text/javascript" src="main.js" data-do-not-move="true"> </script>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="RightContent">
+    <p:primary pcat:primaryformat="Mtps.Xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:asp="http://msdn2.microsoft.com/aspnet" xmlns:pcat="urn:mtpg-com:mtps/2004/1/primary/category" xmlns:p="urn:mtpg-com:mtps/2004/1/primary">
+  <div class="navpage">
+    <div>
+      <div style="margin-bottom: 10px;">
+        <iframe framespacing="0" id="4f2320cbb2378" name="4f2320cbb2378" scrolling="no" src="jj991965_1.html" style="display: none ! important;" frameborder="0" height="250" width="300">
+
+          &lt;a href="http://eleven05media-d.openx.net/w/1.0/rc?cs=4f2320cbb2378&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE"&gt;
+            &lt;img alt="" border="0" src="https://eleven05media-d.openx.net/w/1.0/ai?auid=139281&amp;amp;cs=4f2320cbb2378&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE" xmlns="http://www.w3.org/1999/xhtml" /&gt;
+          &lt;/a&gt;
+        </iframe>
+      </div>
+      <div style="margin-bottom: 10px;">
+        <iframe framespacing="0" id="4f2320971b57d" name="4f2320971b57d" scrolling="no" src="jj991965_3.html" style="display: none ! important;" frameborder="0" height="250" width="300">
+
+          &lt;a href="http://eleven05media-d.openx.net/w/1.0/rc?cs=4f2320971b57d&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE"&gt;
+            &lt;img alt="" border="0" src="http://eleven05media-d.openx.net/w/1.0/ai?auid=139280&amp;amp;cs=4f2320971b57d&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE" xmlns="http://www.w3.org/1999/xhtml" /&gt;
+          &lt;/a&gt;
+        </iframe>
+      </div>
+      <div style="margin-bottom: 10px;">
+        <iframe framespacing="0" id="d364f7da2e" name="d364f7da2e" scrolling="no" src="jj991965_4.html" style="display: none ! important;" frameborder="0" height="250" width="300">
+
+          &lt;a href="http://eleven05media-d.openx.net/w/1.0/rc?cs=d364f7da2e&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE"&gt;
+            &lt;img alt="" border="0" src="https://eleven05media-d.openx.net/w/1.0/ai?auid=538012782&amp;amp;cs=d364f7da2e&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE" xmlns="http://www.w3.org/1999/xhtml" /&gt;
+          &lt;/a&gt;
+        </iframe>
+      </div>
+      <div id="sidebarBox" style="border-width: 5px; border-color: black; border-style: solid;">
+        <div style="margin-left: 5px; margin-right: 5px;">
+          <h3>
+            <a href="http://blogs.msdn.com/msdnmagazine/">MSDN Magazine Blog</a>
+          </h3>
+          <p>
+            </p><div class="FVB_Basic">
+              <div class="FVB_link">
+                <a href="https://blogs.msdn.microsoft.com/msdnmagazine/2015/01/07/14-top-features-of-visual-basic-14-the-qa/">14 Top Features of Visual Basic 14: The Q&amp;A</a>
+              </div>
+              <div class="FVB_date">Wednesday, Jan 7</div>
+              <div class="FVB_link">
+                <a href="https://blogs.msdn.microsoft.com/msdnmagazine/2015/01/02/big-start-to-the-new-year-at-msdn-magazine/">Big Start to the New Year at MSDN Magazine</a>
+              </div>
+              <div class="FVB_date">Friday, Jan 2</div>
+            </div>
+          <p></p>
+          <p>
+            <a href="http://blogs.msdn.com/msdnmagazine/">More MSDN Magazine Blog entries &gt;</a>
+          </p>
+        </div>
+        <div class="sidebarLine" style="margin-left: 5px; margin-right: 5px; background-color: rgb(91, 104, 113); height: 12px;">
+          
+        </div>
+        <div style="margin-left: 5px; margin-right: 5px;">
+          <p>
+            <br>
+          </p>
+          <div style="text-align: left; font-family: Segoe UI; font-size: 12pt;">Current Issue</div>
+          <div style="text-align: center; display: block; height: 260px;">
+            <p>
+              <br>
+              <a href="https://msdn.microsoft.com/en-us/magazine/mt493452">
+                <img alt="August 2017 issue" src="IC872571.jpg" title="August 2017 issue" xmlns="http://www.w3.org/1999/xhtml" align="Middle" height="239" width="179">
+              </a>
+            </p>
+          </div>
+          <div style="text-align: right;">
+            <p>
+              <a href="https://msdn.microsoft.com/en-us/magazine/mt668395">Browse All MSDN Magazines</a>
+              <br>
+            </p>
+          </div>
+          <div class="sidebarLine" style="background-color: rgb(91, 104, 113); height: 12px;">
+            
+          </div>
+        </div>
+        <div style="margin-left: 5px; margin-right: 5px;">
+          <div style="text-align: right; font-family: Segoe UI; font-size: 12pt;">
+            <p>
+              <br>
+              <a href="https://msdn.microsoft.com/en-us/aa570311.aspx?ocid=msdn_magazine">Subscribe to MSDN Flash newsletter</a>
+            </p>
+          </div>
+          <div style="text-align: left;">
+            <p>
+              <br>Receive the MSDN Flash e-mail newsletter every other week, with news and information personalized to your interests and areas of focus.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 10px;">
+        <iframe framespacing="0" id="e4360aeffd" name="e4360aeffd" scrolling="no" src="jj991965_5.html" style="display: none ! important;" frameborder="0" height="250" width="300">
+
+          &lt;a href="http://eleven05media-d.openx.net/w/1.0/rc?cs=e4360aeffd&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE"&gt;
+            &lt;img alt="" border="0" src="https://eleven05media-d.openx.net/w/1.0/ai?auid=538012781&amp;amp;cs=e4360aeffd&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE" xmlns="http://www.w3.org/1999/xhtml" /&gt;
+          &lt;/a&gt;
+        </iframe>
+      </div>
+    </div>
+  </div>
+</p:primary>
+</div>
+
+        </div>
+        
+
+<input name="__RequestVerificationToken" value="DVAT2xh5EXHcdqLMAp0TCstI9_HK0LdTz5iylqvHnkf4S0atEwLknZRaJY01FJBTpu4Nr80oc3nydvfwtg81LTOf4hM1" type="hidden">
+<input id="ratingSubmitUrl" value="https://msdn.microsoft.com/en-us/library/feedback/add/jj991965.aspx" type="hidden">
+<input id="isTopicRated" value="false" type="hidden">
+
+    
+<input name="__RequestVerificationToken" value="ywk3ia9cXMqyjLDqlHcGffbzILxz4ckz0YxmOZr_Yjb2O4yIhGyv-cWPv3UX-BRrrhCDyCEIjfxX3U5jOJQgHgjctts1" type="hidden">
+<input id="ratingSubmitUrl" value="https://msdn.microsoft.com/en-us/library/feedback/add/jj991965.aspx" type="hidden">
+<input id="isTopicRated" value="false" type="hidden">
+
+
+    
+
+    
+    <link href="" type="text/css" rel="stylesheet">
+    
+        
+    <div id="ux-footer" class="" style="" dir="ltr" ms.pgarea="footer">
+            
+                
+            <div id="footerSock" class="">
+                <div id="footerSockInner" style="position: relative;">
+
+                        <div class="footerSockLeft" style="position: absolute; top: 0px; left: 0px;"><div data-fragmentname="SocialLinks" id="Fragment_SocialLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Follow us</div>
+    <ul class="links">
+      <li>
+        <a href="https://www.facebook.com/microsoftdeveloper" target="_top" id="SocialLinks_15653_18" class="facebook" xmlns="http://www.w3.org/1999/xhtml" aria-label="facebook" ms.pgarea="footer" ms.cmpgrp="footer sock" ms.cmpnm="social links" ms.title="facebook" ms.index="1" ms.cmptyp="link">https://www.facebook.com/microsoftdeveloper</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/msdev" target="_top" id="SocialLinks_15653_19" class="twitter" xmlns="http://www.w3.org/1999/xhtml" aria-label="twitter" ms.pgarea="footer" ms.cmpgrp="footer sock" ms.cmpnm="social links" ms.title="twitter" ms.index="1" ms.cmptyp="link">https://twitter.com/msdev</a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/111221966647232053570/" id="SocialLinks_15653_20" class="googlePlus" xmlns="http://www.w3.org/1999/xhtml" aria-label="googlePlus" ms.pgarea="footer" ms.cmpgrp="footer sock" ms.cmpnm="social links" ms.title="googlePlus" ms.index="1" ms.cmptyp="link">https://plus.google.com/111221966647232053570/</a>
+      </li>
+    </ul>
+  </div>
+</div></div>
+
+                        
+                    <div class="footerSockCenter" style="display: inline-block; vertical-align: top;">
+                            <a name="feedback" ms.pgarea="footer" ms.cmpgrp="footer sock" ms.cmpnm="social links" ms.title="" ms.index="1" ms.cmptyp="link"></a>
+
+<div class="rating">
+    <div id="ratingSection1" style="max-width: 580px; margin-left: -80px; margin-right: 80px;">
+        <div class="title">
+
+            Is this page helpful?
+        </div>
+        <div class="description">
+
+            Your feedback about this content is important.<br>Let us know what you think.
+        </div>
+        <div class="buttons">
+            <button class="button" id="ratingYes" aria-label="Yes, this page was helpful">Yes</button>
+            <button class="button" id="ratingNo" aria-label="No, this page was not helpful">No</button>
+        </div>
+        <input id="ratingValue" value="" type="hidden">
+    </div>
+    <div id="ratingSection2">
+        <div style="margin-bottom: 20px;" class="title left">
+
+            Additional feedback?
+        </div>
+        <textarea id="ratingText" rows="6" cols="" maxlength="1500"></textarea>
+        <div class="right">
+            <div class="counter">
+                <span id="feedbackTextCounter">1500</span> characters remaining
+            </div>
+            <div class="buttons">
+                <button class="button" id="ratingSubmit" aria-label="Submit my additional feedback">Submit</button>
+                <button class="button" id="ratingSkipThis" aria-label="Skip additional feedback">Skip this</button>
+            </div>
+        </div>
+    </div>
+    <div id="ratingSection3" style="margin-left: -80px; margin-right: 80px;">
+        <div class="title">
+
+            Thank you!
+        </div>
+        <div class="description">
+
+            We appreciate your feedback.
+        </div>
+    </div>
+    
+    
+    <div id="contentFeedbackQAContainer" style="display: none;"></div>
+</div>
+    
+                                            </div><div class="footerSockRight" style="position: absolute; top: 0px; right: 0px;"><div data-fragmentname="Newsletter" id="Fragment_Newsletter" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://msdn.microsoft.com/flashnewsletter" title="Sign up for the MSDN Newsletter" id="Newsletter_2148_19" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="footer sock" ms.cmpnm="newsletter" ms.title="newsletter signup" ms.index="3" ms.cmptyp="link">Sign up for the MSDN Newsletter</a>
+</div></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            
+
+        <footer class="top" role="navigation" aria-label="footer">
+            <div data-fragmentname="LeftLinks" id="Fragment_LeftLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Dev centers</h4>
+    <ul class="links">
+      <li>
+        <a href="https://developer.microsoft.com/en-us/windows" id="LeftLinks_2148_1" class="windowsBlue" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Dev centers" ms.index="1" ms.cmptyp="link">Windows</a>
+      </li>
+      <li>
+        <a href="https://dev.office.com/" id="LeftLinks_2148_3" class="office" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Dev centers" ms.index="1" ms.cmptyp="link">Office</a>
+      </li>
+      <li>
+        <a href="https://www.visualstudio.com/" id="LeftLinks_2148_4" class="visualStudio" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Dev centers" ms.index="1" ms.cmptyp="link">Visual Studio</a>
+      </li>
+      <li>
+        <a href="https://docs.microsoft.com/en-us/azure/" target="_top" id="LeftLinks_2148_12" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Dev centers" ms.index="1" ms.cmptyp="link">Microsoft Azure</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/developer-centers-msdn" id="LeftLinks_2148_5" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Dev centers" ms.index="1" ms.cmptyp="link">More...</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            <div id="rightLinks">
+                <div data-fragmentname="CenterLinks1" id="Fragment_CenterLinks1" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Learning resources</h4>
+    <ul class="links">
+      <li>
+        <a href="http://www.microsoftvirtualacademy.com/" id="CenterLinks1_15653_4" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Learning resources" ms.index="2" ms.cmptyp="link">Microsoft Virtual Academy</a>
+      </li>
+      <li>
+        <a href="http://channel9.msdn.com/" id="CenterLinks1_15653_5" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Learning resources" ms.index="2" ms.cmptyp="link">Channel 9</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/magazine/" id="CenterLinks1_15653_7" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Learning resources" ms.index="2" ms.cmptyp="link">MSDN Magazine</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks2" id="Fragment_CenterLinks2" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Community</h4>
+    <ul class="links">
+      <li>
+        <a href="https://social.msdn.microsoft.com/forums/en-us/home" id="CenterLinks2_15653_8" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Community" ms.index="3" ms.cmptyp="link">Forums</a>
+      </li>
+      <li>
+        <a href="https://blogs.msdn.com/b/developer-tools/" id="CenterLinks2_15653_9" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Community" ms.index="3" ms.cmptyp="link">Blogs</a>
+      </li>
+      <li>
+        <a href="https://www.codeplex.com/" id="CenterLinks2_15653_10" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Community" ms.index="3" ms.cmptyp="link">Codeplex</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks3" id="Fragment_CenterLinks3" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Support</h4>
+    <ul class="links">
+      <li>
+        <a href="https://msdn.microsoft.com/hh361695" id="CenterLinks3_15653_11" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Support" ms.index="4" ms.cmptyp="link">Self support</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks4" id="Fragment_CenterLinks4" xmlns="http://www.w3.org/1999/xhtml" class="nth-child-4n">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Programs</h4>
+    <ul class="links">
+      <li>
+        <a href="https://bizspark.microsoft.com/Startups/Index" id="CenterLinks4_15653_13" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Programs" ms.index="5" ms.cmptyp="link">BizSpark (for startups)</a>
+      </li>
+      <li>
+        <a href="https://imagine.microsoft.com/" id="CenterLinks4_15653_15" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="fat footer" ms.cmpnm="Programs" ms.index="5" ms.cmptyp="link">Microsoft Imagine (for students)</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            </div>
+        </footer>
+
+        <footer class="bottom" role="contentinfo">
+            <span class="localeContainer">
+                
+    <form class="selectLocale" id="selectLocaleForm" action="https://msdn.microsoft.com/en-us/selectlocale-dmc">
+        <input name="fromPage" value="https%3a%2f%2fmsdn.microsoft.com%2fen-us%2fmagazine%2fjj991965.aspx" type="hidden">
+        <a href="#" onclick="$('#selectLocaleForm').submit();return false;" title="Change your language" ms.pgarea="footer" ms.cmpgrp="base footer" ms.cmpnm="lang select" ms.index="1" ms.cmptyp="link">United States (English)</a>
+    </form>
+
+
+            </span>
+
+            <div data-fragmentname="BottomLinks" id="Fragment_BottomLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="https://msdn.microsoft.com/en-us/flashnewsletter" id="BottomLinks_2148_7" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="base footer" ms.cmpnm="base footer: link list" ms.index="2" ms.cmptyp="link">Newsletter</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/en-us/dn529288" id="BottomLinks_2148_8" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="base footer" ms.cmpnm="base footer: link list" ms.index="2" ms.cmptyp="link">Privacy &amp; cookies</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/en-us/cc300389" id="BottomLinks_2148_9" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="base footer" ms.cmpnm="base footer: link list" ms.index="2" ms.cmptyp="link">Terms of use</a>
+      </li>
+      <li>
+        <a href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/" id="BottomLinks_2148_10" xmlns="http://www.w3.org/1999/xhtml" ms.pgarea="footer" ms.cmpgrp="base footer" ms.cmpnm="base footer: link list" ms.index="2" ms.cmptyp="link">Trademarks</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            <span class="logoLegal">
+                <span class="logoSpan clip67x13" role="img" tabindex="0" aria-label="microsoft logo">
+                    <img alt="logo" class="logo" src="HeaderFooterSprite.png">
+                </span>
+                <span class="copyright">© 2017 Microsoft</span>
+            </span>
+        </footer>
+    </div>
+    
+
+
+
+    </div>
+
+    
+
+
+<!--[CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]-->
+<!--[CDATA[ WebTrends view model not available or IncludeLegacyWebTrendsScriptInGlobal feature flag is off]]-->
+
+
+
+
+
+    
+    
+
+<script type="text/javascript" class="mtps-injected">
+
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index];elem=document.createElement("script");elem.className="mtps-injected";elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext;script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }");parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"js\": \"https://i2-msdn.sec.s-msft.com\", \r\n\t\"css\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"ttf\": \"https://i-msdn.sec.s-msft.com\"\r\n});\r\n/**/" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:Magazine,1:JumpRedirect,2:WEDCS,3:SurveyBroker,3:CodeSnippet,3:CollapsibleArea;/Areas/Magazine/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Library/Themes/Base/Content:2,/Areas/Epx/Content/Scripts:3\u0026amp;hashKey=435C8198E7D5B46DF343C247B0DBDCDD\u0026amp;v=AFBDFCBDCBC9358E9CECE184D4362725" }
+]);
+
+/*]]>*/
+</script>
+<div id="overlayMask"></div><script src="broker-config.js"></script><iframe id="_msnFrame" src="c.gif" style="z-index: -1; height: 1px; width: 1px; display: none; visibility: hidden;"></iframe><iframe sandbox="allow-scripts allow-same-origin" title="Adobe ID Syncing iFrame" id="destination_publishing_iframe_mscom_undefined" src="jj991965_8.html" style="display: none; width: 0px; height: 0px;" class="aamIframeLoaded"></iframe><iframe id="destination_publishing_iframe_mscom_0" src="jj991965_9.html" style="display: none; width: 0px; height: 0px;" class="aamIframeLoaded"></iframe><script src="untitled" type="text/javascript"></script><img src="seg" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_001.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_002.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_003.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_004.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_005.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_006.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_007.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_008.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_009.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_010.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_011.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_012.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="seg_013.dat" alt="" style="display: none;" border="0" height="1" width="1"><img src="l" alt="" style="display: none;" border="0" height="1" width="1"><div id="coFrameDiv" style="height: 0px; display: none;"><iframe id="coToolbarFrame" src="chrome-extension://cjabmdjcfcfdmffimndhafhblfmpjdpe/toolbar/placeholder.html" style="height: 0px; width: 100%; display: none;"></iframe></div><script src="broker-config_001.js"></script><div id="overlayMask"></div><iframe src="jj991965_11.html" style="z-index: -1; height: 1px; width: 1px; display: none; visibility: hidden;" id="_msnFrame"></iframe></body>
+</html>

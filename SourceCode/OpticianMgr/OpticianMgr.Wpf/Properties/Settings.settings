@@ -1,7 +1,27 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OpticianMgr.Wpf.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SingleEmailSubjectGlassesOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ihre Brillenbestellung von Augenoptik Aigner</Value>
+    </Setting>
+    <Setting Name="SingleEmailTextGlassesOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sehr geehrte/r Frau/Herr {0} {1}, {2} {2} Ihre Brillenbestellung ist nun abholbereit! {2} {2} Dies ist eine automatisch versendete Nachricht, bitte antworten Sie nicht auf diese E-Mail. {2} {2} Mit freundlichen Grüßen {2} Augenoptik Aigner</Value>
+    </Setting>
+    <Setting Name="SingleEMailSubjectContactLensOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ihre Kontaktlinsenbestellung von Augenoptik Aigner</Value>
+    </Setting>
+    <Setting Name="SingleEmailTextContactLensOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sehr geehrte/r Frau/Herr {0} {1}, {2} {2} Ihre Kontaktlinsenbestellung ist nun abholbereit! {2} {2} Dies ist eine automatisch versendete Nachricht, bitte antworten Sie nicht auf diese E-Mail. {2} {2} Mit freundlichen Grüßen {2} Augenoptik Aigner</Value>
+    </Setting>
+    <Setting Name="SingleSMSTextGlassesOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ihre Brillenbestellung ist nun abholbereit!</Value>
+    </Setting>
+    <Setting Name="SingleSMSTextContactLensOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ihre Kontaktlinsenbestellung ist nun abholbereit!</Value>
+    </Setting>
+    <Setting Name="SmsSenderText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">OptikAigner</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

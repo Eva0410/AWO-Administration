@@ -785,6 +785,15 @@ namespace OpticianMgr.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string SingleEmailSubjectGlassesOrder {
+            get {
+                return ResourceManager.GetString("SingleEmailSubjectGlassesOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Größe.
         /// </summary>
         internal static string Size {

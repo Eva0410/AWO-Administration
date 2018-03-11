@@ -1,0 +1,357 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+Learn, Share, Build
+
+Each month, over 50 million developers come to Stack Overflow to learn, share their knowledge, and build their careers.
+
+Join the world’s largest developer community.
+Google
+Facebook
+or
+Display name
+Email address
+Password
+By registering, you agree to the privacy policy and terms of service .
+How to set a filter for a DataGrid ItemSource via MVVM
+Ask Question
+up vote 8 down vote favorite
+2
+	
+
+I have a DataGrid bound to a CollectionViewSource in XAML.
+
+ <Window.Resources> <local:MainWindowViewModel x:Key = "ViewModel" /> <CollectionViewSource x:Key = "cvsEntries" Source = "{Binding LogEntriesStore, Source={StaticResource ViewModel}}" /> </Window.Resources>  
+
+LogEntriesStore is an ObservableCollection ( LogEntry is a DTO that's not important in this discussion)
+
+The DataGrid is declared as:
+
+ <DataGrid AutoGenerateColumns = "False" Margin = "0" Name = "dataGrid1" ItemsSource = "{Binding Source={StaticResource cvsEntries}}" IsReadOnly = "True" >  
+
+Now I have context menus on various cells in this DataGrid , to kick off a request for filtering. Right click on a cell, and pick filter to filter all the rows, and show only this particular value.
+
+The MVVM gets the request to filter, but the now the tricky bit. How do I set the filter on the CollectionViewSource?
+
+(as an aside -- this would have been a walk in the park with a Silverlight PagedCollectionView but that doesn't seem to be available in WPF, is that right?)
+wpf data-binding mvvm
+share | improve this question
+	
+edited Aug 10 '15 at 16:30
+Konrad Viltersten
+1
+	
+asked Apr 27 '11 at 20:06
+Ralph Shillington
+11.4k 18 69 137
+	
+1 	 
+	
+is this what you are looking for bea.stollnitz.com/blog/?p=31 –  almog.ori Apr 27 '11 at 20:23
+add a comment  | 
+2 Answers 2
+active oldest votes
+up vote 15 down vote accepted
+	
+
+Very simple. You just need to move the collection view inside the view model:
+
+    In MainWindowViewModel define a property of type ICollectionView :
+
+     public ICollectionView LogEntriesStoreView { get; private set; }  
+
+    Right after you have initialized the LogEntriesStore property, you need to initialize the LogEntriesStoreView property with the following code:
+
+     LogEntriesStoreView = CollectionViewSource.GetDefaultView(LogEntriesStore);  
+
+    Then you need to remove the CollectionViewSource from XAML and modify the ItemsSource binding to point to the newly created collection view property:
+
+     <DataGrid AutoGenerateColumns = "False" Margin = "0" Name = "dataGrid1" ItemsSource = "{Binding LogEntriesStoreView, Source={StaticResource ViewModel}}" IsReadOnly = "True" >  
+
+That's it. Now you have the access to the collection view inside your view model, where you can modify the filter.
+share | improve this answer
+	
+edited Aug 10 '15 at 16:32
+Konrad Viltersten
+1
+	
+answered Apr 27 '11 at 20:27
+Pavlo Glazkov
+16.8k 2 40 58
+	
+   	 
+	
+The problem with that approach that ICollectionView is readonly, ergo you are going to be blocked for add/remove rows by default. Therefore I recommend using ListCollectionView instead. –  Mr.B Jun 9 '16 at 7:39
+add a comment  | 
+up vote 0 down vote
+	
+
+There are several solutions to your problem, but in my opinion, the best solutions are the ones which uses only styles with the standard WPF DataGrid control without inventing a new inherited DataGird type or depending on another third-party control. The followings are the best solutions I found:
+
+    Option 1: which I personally use: Automatic WPF Toolkit DataGrid Filtering
+    Option 2: Auto-filter for Microsoft WPF DataGrid
+
+share | improve this answer
+	
+answered Jan 8 '12 at 10:33
+Mohammed A. Fadil
+5,976 3 33 52
+	
+	
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged wpf data-binding mvvm or ask your own question .
+
+asked
+	
+
+6 years, 5 months ago
+
+viewed
+	
+
+11,043 times
+
+active
+	
+
+1 year, 4 months ago
+Blog
+The Impressive Growth of R
+
+Podcast #118 – What’s a Travel-Hacker, Anyway?
+
+Linked
+7
+WPF DataGrid: Blank Row Missing
+1
+search on data grid wpf
+Related
+3
+Does anyone have code examples of the WPF Datagrid working in a MVVM pattern?
+0
+How to set ItemSource and ItemTemplate to display a list of objects
+1
+How to set the ItemSource of a Datagrid to a collection inside an object using MVVM
+2
+WPF Datagrid - adding and deleting rows and MVVM
+0
+WPF Datagrid binding error when NOT auto-generating columns
+2
+How to Dynamically set DataContext of a View in WPF MVVM
+-1
+WPF MVVM Textbox and Datagrid binding
+3
+how to set heights of 3 DataGrids inside Extenders in one StackPanel in MVVM dynamically?
+0
+How to set template for DataGrid with ItemSource as DataTable using MVVM
+1
+WPF MVVM DataGrid filtering using ComboBox
+Hot Network Questions
+
+    How should my wife handle an engaged admirer and his fiancee?
+    Did Michael Shannon actually portray Zod's corpse or is it just CGI?
+    Why do we install software via `.dmg` files?
+    What is the Alt-Left?
+    How to respond when people mock a skill or talent they just found out you do/have?
+    How skilled does a wizard need to be to successfully perform the three Unforgivable Curses?
+    How did Google know I looked something up?
+    If you slay a deity on the Prime Material Plane does it die or does it return to its home plane?
+    Why are circuits considered loops?
+    Should I remark on errors when interviewing a potential employee?
+    Dismissed from PhD due to disability-related misconduct: how to answer question about dismissal?
+    Is it true that slavery was endemic in Sub-Saharan Africa previous to the establishment of the trans-Atlantic slave trade?
+    Port Forwarding puzzle
+    What is the foam tube on the top of bmx frame for?
+    Is there an official rule that the minimum damage can't be negative?
+    Can a lower ranking officer (Captain, for example) be in charge of a ship with a higher ranking officer (Commodore, or Rear Admiral) on board?
+    A standalone SVG editor?
+    Is there a word/ phrase to describe somebody who has devoted their life to practising something but is still not very good at it?
+    How to respond to someone who asks if they will be invited to your wedding?
+    C# LRU cache implementation
+    Why are const ints (or shorts) captured implicitly in lambdas?
+    How can Elsa's power fuel my Industrial Revolution?
+    Detect the Zeroless Numbers
+    In Search of a Soulmate
+
+question feed
+lang-xml
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Salary Calculator
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Bitcoin
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+
+    Mathematica
+    Salesforce
+    ExpressionEngine® Answers
+    Stack Overflow em Português
+    Blender
+    Network Engineering
+    Cryptography
+
+    Code Review
+    Magento
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Stack Overflow на русском
+
+    Programming Puzzles & Code Golf
+    Stack Overflow en español
+    Ethereum
+    Data Science
+    Arduino
+    more (26)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (17)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.10.12.27411
+Stack Overflow works best with JavaScript enabled

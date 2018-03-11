@@ -6,13 +6,13 @@
 \BOOKMARK [1][-]{section.2.1}{Entit\344t Framework}{chapter.2}% 6
 \BOOKMARK [2][-]{subsection.2.1.1}{Linq}{section.2.1}% 7
 \BOOKMARK [1][-]{section.2.2}{UnitOfWork Pattern}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.3}{Wpf}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.3}{WPF}{chapter.2}% 9
 \BOOKMARK [1][-]{section.2.4}{MVVM}{chapter.2}% 10
 \BOOKMARK [1][-]{section.2.5}{MVVM-Light}{chapter.2}% 11
 \BOOKMARK [1][-]{section.2.6}{Microsoft Office Interop}{chapter.2}% 12
 \BOOKMARK [1][-]{section.2.7}{WPF-Toolkit}{chapter.2}% 13
 \BOOKMARK [1][-]{section.2.8}{MessageBird}{chapter.2}% 14
-\BOOKMARK [0][-]{chapter.3}{Beschreibung des Endproduktes}{}% 15
+\BOOKMARK [0][-]{chapter.3}{Administrationsprogramm und Website}{}% 15
 \BOOKMARK [1][-]{section.3.1}{Administration}{chapter.3}% 16
 \BOOKMARK [2][-]{subsection.3.1.1}{Kundenverwaltung}{section.3.1}% 17
 \BOOKMARK [2][-]{subsection.3.1.2}{Auftragsverwaltung}{section.3.1}% 18
@@ -22,6 +22,8 @@
 \BOOKMARK [2][-]{subsection.3.1.6}{Statistiken}{section.3.1}% 22
 \BOOKMARK [2][-]{subsection.3.1.7}{Sonstiges}{section.3.1}% 23
 \BOOKMARK [2][-]{subsection.3.1.8}{Filtern und Sortieren}{section.3.1}% 24
-\BOOKMARK [0][-]{chapter.4}{Selbstevaluation}{}% 25
-\BOOKMARK [0][-]{chapter.5}{Zusammenfassung}{}% 26
-\BOOKMARK [0][-]{appendix.A}{Additional Information}{}% 27
+\BOOKMARK [1][-]{section.3.2}{Datenmodell}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.3}{Projektarchitektur}{chapter.3}% 26
+\BOOKMARK [0][-]{chapter.4}{Selbstevaluation}{}% 27
+\BOOKMARK [0][-]{chapter.5}{Zusammenfassung}{}% 28
+\BOOKMARK [0][-]{appendix.A}{Additional Information}{}% 29

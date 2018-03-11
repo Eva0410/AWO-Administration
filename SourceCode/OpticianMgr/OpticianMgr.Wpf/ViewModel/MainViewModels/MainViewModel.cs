@@ -4,6 +4,7 @@ using OpticianMgr.Persistence;
 using OpticianMgr.Wpf.Pages;
 using OpticiatnMgr.Core.Contracts;
 using OpticiatnMgr.Core.Entities;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -41,6 +42,7 @@ namespace OpticianMgr.Wpf.ViewModel
         public ICommand OpenCountries { get; set; }
         public ICommand OpenGlasstypes { get; set; }
         public ICommand OpenContactLensTypes { get; set; }
+        public ICommand OpenStaticTexts { get; set; }
         public object Page { get; set; }
 
 
@@ -66,6 +68,8 @@ namespace OpticianMgr.Wpf.ViewModel
             OpenCountries = new RelayCommand(OpenC);
             OpenGlasstypes = new RelayCommand(OpenG);
             OpenContactLensTypes = new RelayCommand(OpenClt);
+            OpenStaticTexts = new RelayCommand(OpenS);
+
             this.Open(this.CustomerPage);
             ////if (IsInDesignMode)
             ////{
@@ -75,6 +79,7 @@ namespace OpticianMgr.Wpf.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+
 
         }
         public void OpenT()
@@ -104,6 +109,12 @@ namespace OpticianMgr.Wpf.ViewModel
             EditContactLensTypesViewModel viewModel = ViewModelLocator.EditContactLensTypesViewModel;
             viewModel.FillList();
             windowService.ShowEditContactLensTypesWindow(viewModel);
+        }
+        public void OpenS()
+        {
+            WindowService windowService = new WindowService();
+            EditStaticStringsModel viewModel = ViewModelLocator.EditStaticStringsModel;
+            windowService.ShowEditStaticStringsWindow(viewModel);
         }
         //TODO Is this MVVM?
         private void Open(object page)

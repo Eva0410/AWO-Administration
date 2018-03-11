@@ -28,7 +28,7 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         public ICollectionView EyeGlassFramesView { get; set; }
         public List<Supplier> Suppliers { get; set; }
-        public IUnitOfWork Uow { get; set; }
+        private IUnitOfWork Uow;
         public ObservableCollection<EyeGlassFrame> EyeGlassFrames { get; set; }
         private ResourceManager manager = Properties.Resources.ResourceManager;
         public object Selected { get; set; }

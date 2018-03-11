@@ -222,6 +222,9 @@
     <Compile Include="Pages\AddObjectWindows\AddGlasstypeWindow.xaml.cs">
       <DependentUpon>AddGlasstypeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditWindows\EditStaticStringsWindow.xaml.cs">
+      <DependentUpon>EditStaticStringsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EditWindows\EditContactLensTypesWindow.xaml.cs">
       <DependentUpon>EditContactLensTypesWindow.xaml</DependentUpon>
     </Compile>
@@ -309,6 +312,7 @@
     <Compile Include="Pages\MessagesPagesAndWindows\MultipleMessagesPage.xaml.cs">
       <DependentUpon>MultipleMessagesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SortManager.cs" />
     <Compile Include="ViewModel\AddObjectViewModels\AddContactLensTypeViewModel.cs" />
     <Compile Include="ViewModel\AddObjectViewModels\AddGlasstypeViewModel.cs" />
@@ -317,6 +321,7 @@
     <Compile Include="ViewModel\AddObjectViewModels\AddContactLensesOrderViewModel.cs" />
     <Compile Include="ViewModel\DetailsViewModels\ContactLensOrderDetailsViewModel.cs" />
     <Compile Include="ViewModel\DetailsViewModels\ContactLensTypeDetailsViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditStaticStringsModel.cs" />
     <Compile Include="ViewModel\EditViewModels\EditContactLensTypesViewModel.cs" />
     <Compile Include="ViewModel\EditViewModels\EditGlasstypesViewModel.cs" />
     <Compile Include="ViewModel\DetailsViewModels\GlassTypeDetailsViewModel.cs" />
@@ -364,6 +369,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\AddObjectWindows\AddGlasstypeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditWindows\EditStaticStringsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -535,7 +544,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />

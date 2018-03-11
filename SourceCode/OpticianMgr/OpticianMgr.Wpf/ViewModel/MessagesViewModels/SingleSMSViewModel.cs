@@ -55,10 +55,10 @@ namespace OpticianMgr.Wpf.ViewModel
             switch (order.OrderType)
             {
                 case "B":
-                    this.Message = String.Format("Ihre Brillenbestellung ist nun abholbereit!");
+                    this.Message = String.Format(Properties.Settings.Default.SingleSMSTextGlassesOrder, Environment.NewLine, order.Customer.Title, order.Customer.FirstName, order.Customer.LastName);
                     break;
                 case "K":
-                    this.Message = String.Format("Ihre Kontaktlinsenbestellung ist nun abholbereit!");
+                    this.Message = String.Format(Properties.Settings.Default.SingleSMSTextContactLensOrder, Environment.NewLine, order.Customer.Title, order.Customer.FirstName, order.Customer.LastName);
                     break;
             }
             this.RaisePropertyChanged(() => this.To);
@@ -77,7 +77,7 @@ namespace OpticianMgr.Wpf.ViewModel
 
             try
             {
-                MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, new[] { Convert.ToInt64(this.To) });
+                MessageBird.Objects.Message message = client.SendMessage(Properties.Settings.Default.SmsSenderText, this.Message, new[] { Convert.ToInt64(this.To) });
                 SaveToRepository();
                 MessageBox.Show("Nachricht gesendet!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
                 Console.WriteLine("{0}", message);

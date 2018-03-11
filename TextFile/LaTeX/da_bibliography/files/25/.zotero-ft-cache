@@ -1,0 +1,387 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Documentation beta
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+Learn, Share, Build
+
+Each month, over 50 million developers come to Stack Overflow to learn, share their knowledge, and build their careers.
+
+Join the world’s largest developer community.
+
+Sign Up
+EntityFramewok: How to configure Cascade-Delete to nullify Foreign Keys
+Ask Question
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+up vote 30 down vote favorite
+6
+	
+
+EntityFramework's documentation states that the following behavior is possible:
+
+    If a foreign key on the dependent entity is nullable, Code First does not set cascade delete on the relationship, and when the principal is deleted the foreign key will be set to null.
+
+(from http://msdn.microsoft.com/en-us/jj591620 )
+
+However, I cannot achieve such a behavior.
+
+I have the following Entities defined with code-first:
+
+ public class TestMaster { public int Id { get ; set ; } public string Name { get ; set ; } public virtual ICollection < TestChild > Children { get ; set ; } } public class TestChild { public int Id { get ; set ; } public string Name { get ; set ; } public virtual TestMaster Master { get ; set ; } public int ? MasterId { get ; set ; } }  
+
+Here is the Fluent API mapping configuration:
+
+ protected override void OnModelCreating ( DbModelBuilder modelBuilder ) { modelBuilder . Entity < TestMaster >() . HasMany ( e => e . Children ) . WithOptional ( p => p . Master ). WillCascadeOnDelete ( false ); modelBuilder . Entity < TestChild >() . HasOptional ( e => e . Master ) . WithMany ( e => e . Children ) . HasForeignKey ( e => e . MasterId ). WillCascadeOnDelete ( false ); }  
+
+Foreign Key is nullable, navigation property is mapped as Optional, so I expect the cascade delete to work as described as MSDN - i.e. to nullify MasterID's of all children and then delete the Master object.
+
+But when I actually try to delete, I get the FK violation error:
+
+ using ( var dbContext = new TestContext ()) { var master = dbContext . Set < TestMaster >(). Find ( 1 ); dbContext . Set < TestMaster >(). Remove ( master ); dbContext . SaveChanges (); }  
+
+On SaveChanges() it throws the following:
+
+ System . Data . Entity . Infrastructure . DbUpdateException : An error occurred while updating the entries . See the inner exception for details . ----> System . Data . UpdateException : An error occurred while updating the entries . See the inner exception for details . ----> System . Data . SqlClient . SqlException : The DELETE statement conflicted with the REFERENCE constraint "FK_dbo.TestChilds_dbo.TestMasters_MasterId" . The conflict occurred in database "SCM_Test" , table "dbo.TestChilds" , column 'MasterId' . The statement has been terminated .  
+
+Am I doing something wrong or did I misunderstood what the MSDN says?
+entity-framework entity-framework-5
+share | improve this question
+	
+asked Mar 5 '13 at 14:28
+Alex
+182 1 2 6
+	
+	
+add a comment  | 
+2 Answers 2
+active oldest votes
+up vote 40 down vote accepted
+	
+
+It works indeed as described but the article on MSDN misses to emphasize that it only works if the children are loaded into the context as well, not only the parent entity. So, instead of using Find (which only loads the parent) you must use eager loading with Include (or any other way to load the children into the context):
+
+ using ( var dbContext = new TestContext ()) { var master = dbContext . Set < TestMaster >(). Include ( m => m . Children ) . SingleOrDefault ( m => m . Id == 1 ); dbContext . Set < TestMaster >(). Remove ( master ); dbContext . SaveChanges (); }  
+
+This will delete the master from the database, set all foreign keys in the Child entities to null and write UPDATE statements for the children to the database.
+share | improve this answer
+	
+answered Mar 5 '13 at 17:48
+Slauma
+131k 45 321 361
+	
+6 	 
+	
+the bold text saved me. Lazy loading is great but make sure the child objects are loaded before deleting... –  amaters Dec 17 '13 at 20:14
+   	 
+	
+I am trying this example. But got an error in "include". it says "can not convert lamba expression to type "string " because it is not a delegate type".... What am i missing? Thanks –  Diego May 19 at 12:56
+add a comment  | 
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+up vote 0 down vote
+	
+
+After following @Slauma's great answer I was still getting same error as OP.
+
+So don't be as naive as me and think that the examples below will end up with same result.
+
+ dbCtx . Entry ( principal ). State = EntityState . Deleted ; dbCtx . Dependant . Where ( d => d . PrincipalId == principalId ). Load (); // code above will give error and code below will work on dbCtx.SaveChanges() dbCtx . Dependant . Where ( d => d . PrincipalId == principalId ). Load (); dbCtx . Entry ( principal ). State = EntityState . Deleted ;  
+
+First load the children into context before setting entity state to deleted (if you are doing it that way).
+share | improve this answer
+	
+answered Jun 29 at 13:00
+Quinton Smith
+234 2 8
+	
+	
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged entity-framework entity-framework-5 or ask your own question .
+
+asked
+	
+
+4 years, 5 months ago
+
+viewed
+	
+
+12,270 times
+
+active
+	
+
+1 month ago
+Blog
+Where in the World is Mobile Development?
+
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+
+Get the weekly newsletter! In it, you'll get:
+
+    The week's top questions and answers
+    Important community announcements
+    Questions that need answers
+
+see an example newsletter
+
+By subscribing, you agree to the privacy policy and terms of service .
+Linked
+18
+Entity Framework: Set Delete Rule with CodeFirst
+4
+Does Entity Framework support when deleted a record and set the foreign key to null?
+2
+DELETE conflicts with the REFERENCE constraint while using nullable foreign key
+0
+What does entity.Items.Clear() do in EF?
+1
+Can I deliberately orphan child records in bulk using EF5+?
+Related
+29
+How can I stop Entity Framework 5 migrations adding dbo. into key names?
+2
+Entity Framework 5 Foreign Key New Record on SaveChanges
+2
+Entity Framework 5 One-to-one with named foreign key but using attributes
+1
+Does DELETE CASCADE Option for Foreign Keys delete grandchildren?
+12
+How to set foreign key in EntityTypeConfiguration Class
+0
+Foreign key is null despite being populated properly in database
+0
+How to correctly map foreign keys in a one-to-zero-or-one relationship using Fluent API?
+6
+How to enable cascading delete in Edmx Designer on many to many relation
+0
+How do I Delete Related entites in entity framework
+1
+How to connect tables together with multiple foreign and composite keys in Entity Framework 5.0
+Hot Network Questions
+
+    How do I avoid giving up my password to coworkers?
+    What good is engineering research with no practical relevance?
+    What do you call a person who is new in town?
+    Protecting a private key by spreading it over multiple places
+    Is there any difference between HTTP and HTTPS when using my home / own internet connection
+    Has ESPN removed broadcaster Robert Lee from a game, citing the name of a confederate general?
+    You have the right to remain silent, but why?
+    Applying functions to curves in TikZ
+    How did this currency exchange work?
+    Do USB Data Wires (D+/D-) have 90 ohm differential impedance and single ended 45 ohm impedance to ground and if so how is this made?
+    How do I use the exec command inside a for loop after a find command?
+    Is it acceptable to change colors on a logo to make it fit a website's theme?
+    Why does GDB need the executable as well as the core dump?
+    If 900 out of 1000 people say a car is blue, what is the probability that it is blue?
+    How can I register for IRCTC internationally (without a +91 mobile number)?
+    Is there a "clone view" functionality in Qgis like in MapInfo
+    How could Dumbledore's army ride thestrals even though only Harry and Luna could see them?
+    What is the point of weapon type resistances?
+    why to use a void pointer for dereferencing variables of datatypes?
+    Why don't they use dragonglass sword?
+    Why order a laser stencil?
+    ListContourPlot and hatched regions
+    At what point does a character's INT drop far enough to lose sentience?
+    Is there a word for the "unutterable" feeling when listening to a beautiful song?
+
+question feed
+default
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Documentation
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+    Magento
+
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Programming Puzzles & Code Golf
+    Ethereum
+    Data Science
+
+    Arduino
+    more (27)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (17)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.8.25.26854
+Stack Overflow works best with JavaScript enabled

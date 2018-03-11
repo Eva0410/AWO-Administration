@@ -1,0 +1,597 @@
+A day with .Net
+My day to day experince in .net
+
+    Home
+    Azure
+    C# and .Net
+    Design patterns
+    Parallel Library
+    Windows 8
+    About Vivek
+
+    Categories
+        AJAX (6)
+        Amazon AWS (2)
+        Android c# (1)
+        Angular2 (3)
+        Asp.net (11)
+        Azure (19)
+        BlockChain (1)
+        Bot Framework (1)
+        c#.net (26)
+        Design Patterns (9)
+        DICOM (2)
+        Entity Framework (4)
+        Facebook (1)
+        javascript (5)
+        Jquery (5)
+        LINQ (4)
+        Machine Learning (2)
+        Managed Extensibility Framework (2)
+        MCTS ASP.NET 3.5 (3)
+        Mono .Net Linux (1)
+        MVC (32)
+        Ninject (1)
+        Parallel Programming (6)
+        Sharepoint (1)
+        SignalR (4)
+        SQL (1)
+        Tensorflow (4)
+        TFS 2012 (1)
+        UI Automation (4)
+        UiPath(Robotic Process Automation) (1)
+        WCF (7)
+        Web API (2)
+        Windows 8 (3)
+        Windows Server AppFabric Caching (5)
+        WPF (1)
+    Archives
+        September 2017  (4)
+        August 2017  (2)
+        July 2017  (1)
+        June 2017  (1)
+        March 2017  (1)
+        January 2017  (1)
+        November 2016  (2)
+        October 2016  (4)
+        July 2016  (2)
+        June 2016  (5)
+        May 2016  (3)
+        July 2015  (1)
+        June 2015  (1)
+        May 2015  (1)
+        April 2015  (1)
+        February 2015  (1)
+        January 2015  (4)
+        December 2014  (1)
+        November 2014  (1)
+        June 2014  (4)
+        May 2014  (1)
+        April 2014  (2)
+        March 2014  (1)
+        February 2014  (3)
+        September 2013  (4)
+        June 2013  (4)
+        May 2013  (14)
+        April 2013  (1)
+        March 2013  (2)
+        January 2013  (1)
+        December 2012  (6)
+        November 2012  (9)
+        October 2012  (6)
+        September 2012  (9)
+        August 2012  (8)
+        July 2012  (1)
+        June 2012  (2)
+        May 2012  (4)
+        April 2012  (13)
+        March 2012  (4)
+        February 2012  (1)
+        January 2012  (1)
+        December 2011  (1)
+        November 2011  (1)
+        July 2011  (1)
+        June 2011  (1)
+        May 2011  (1)
+        April 2011  (1)
+        March 2011  (3)
+        January 2011  (1)
+        October 2009  (1)
+        August 2009  (3)
+        July 2009  (16)
+    Top Posts & Pages
+        Installing Tensorflow in Windows and Visual Studio - Deep learning.
+        Return Json from a Web Api via HttpResponseMessage
+        Using AutoMapper with WCF
+        Create a Word Document From a Template using c# (Mail Merge)
+        Simple Factory Vs Factory Method Vs Abstract Factory by Example
+        How to Get CPU and Memory usage C#.Net
+        Implement a search box using MVC 4
+        POP3 client using c#
+        Face Capture and Face Detection in c# using webcam PART 1
+
+    Blog Stats
+        312,258 hits
+    Live Users
+
+    Live Users
+    Blogroll
+        .net kidoos blog
+        Anurajs .Net thoughts
+        Csharpstar
+        dot net thoughts
+        Jinal Desai
+        JoyMons Blog
+        MVC Reference
+        ninethsense Praveen's blog
+        Ramkys Asp.net Blog
+        Renjith Ramachandrans blog
+        SankarSan Blog .NET
+        Shivprasad Koirala's Blog
+        Shoban's blog
+        talkingdotnet
+        Technopark TBI\’s Blog
+
+« Monitor Task Cancellation With Delegate
+C# Async HelloWorld »
+Create a Word Document From a Template using c# (Mail Merge)
+
+Posted by vivekcek on August 25, 2012
+
+I want to create a word document from a word template.The advantage of using template is, we can define a structure for the document and decorate the it with dynamic text.
+
+Software’s Used
+——————————–
+
+1. Word 2007.
+
+2. Visual Studio 2010
+
+Library used
+—————————–
+
+1. Microsoft Word 12.0 Object Library
+
+Steps
+———————-
+
+1. Create a Word Template.
+
+2. Create a console application using VS 2010.
+
+3. Add reference to Microsoft Word 12.0 Object Library.
+
+4. Enjoy 🙂
+
+1. Create a Word Template.
+——————————————-
+
+Word templates are created using MergeField’s in word.
+
+a. Open a new Word 2007
+
+b. Type “Name:”, Where ‘Name:’ is just a label.
+
+c. Now we need to insert a MergeField right to our label ‘Name:’
+
+d. Place cursor on the right of our label.
+
+e. Select insert tab in word.
+
+f. Select Quick Parts. Then Field.
+
+g. Select field category as MergeField. Give the MergeField name as ‘Name’.
+
+h. Save the document as WordTemplate.
+
+Now our Template contains.
+
+Name: «Name»
+
+The field inside <> is our merge Field. We will replace that field through code to create a new word document.
+
+* Note the extension of out template will be .dotx(MyTemplate.dotx)
+
+2. Create a console application using VS 2010.
+—————————————————————
+a. Create a console application.
+
+b. Add refrence to Microsoft Word 12.0 Object Library.
+
+c. Add NameSpace “using Microsoft.Office.Interop.Word;”.
+
+d. The Final document will be save in MyDocuments.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+	
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Office.Interop.Word;
+namespace WordAuto
+{
+     class Program
+     {
+         static void Main(string[] args)
+         {
+             //OBJECT OF MISSING "NULL VALUE"
+ 
+             Object oMissing = System.Reflection.Missing.Value;
+ 
+             Object oTemplatePath = "D:\\MyTemplate.dotx" ;
+ 
+              
+             Application wordApp = new Application();
+             Document wordDoc = new Document();
+ 
+             wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref oMissing, ref oMissing, ref oMissing);
+ 
+             foreach (Field myMergeField in wordDoc.Fields)
+             {
+ 
+                  
+                 Range rngFieldCode = myMergeField.Code;
+ 
+                 String fieldText = rngFieldCode.Text;
+ 
+ 
+ 
+                 // ONLY GETTING THE MAILMERGE FIELDS
+ 
+                 if (fieldText.StartsWith( " MERGEFIELD" ))
+                 {
+ 
+                     // THE TEXT COMES IN THE FORMAT OF
+ 
+                     // MERGEFIELD  MyFieldName  \\* MERGEFORMAT
+ 
+                     // THIS HAS TO BE EDITED TO GET ONLY THE FIELDNAME "MyFieldName"
+ 
+                     Int 32 endMerge = fieldText.IndexOf( "\\" );
+ 
+                     Int 32 fieldNameLength = fieldText.Length - endMerge;
+ 
+                     String fieldName = fieldText.Substring( 11 , endMerge - 11 );
+ 
+                     // GIVES THE FIELDNAMES AS THE USER HAD ENTERED IN .dot FILE
+ 
+                     fieldName = fieldName.Trim();
+ 
+                     // **** FIELD REPLACEMENT IMPLEMENTATION GOES HERE ****//
+ 
+                     // THE PROGRAMMER CAN HAVE HIS OWN IMPLEMENTATIONS HERE
+ 
+                     if (fieldName == "Name" )
+                     {
+ 
+                         myMergeField.Select();
+ 
+                         wordApp.Selection.TypeText( "Vivek" );
+ 
+                     }
+ 
+                 }
+ 
+             }
+             wordDoc.SaveAs( "myfile.doc" );
+             wordApp.Documents.Open( "myFile.doc" );
+             wordApp.Application.Quit();
+         }
+     }
+}
+
+DOWNLOAD SOURCE
+
+http://sdrv.ms/NQmKeD
+Advertisements
+Related
+
+Synchronizing SQL Server Databases using Microsoft Sync Framework In "c#.net"
+
+Android development with c# In "Android c#"
+
+Custom Form Authentication in MVC 4 with Custom Authorize Attribute and Session Variable. In "MVC"
+
+This entry was posted on August 25, 2012 at 5:13 am and is filed under c#.net . Tagged: Interop word c# , Interop word template , Word Template c# . You can follow any responses to this entry through the RSS 2.0 feed. You can leave a response , or trackback from your own site.
+30 Responses to “Create a Word Document From a Template using c# (Mail Merge)”
+
+    Umair said
+    October 1, 2012 at 11:54 am
+
+    thanks
+    Reply
+    titasix said
+    November 1, 2012 at 4:03 pm
+
+    Simple but amazing. Thx
+    Reply
+    Amit said
+    December 3, 2012 at 10:00 am
+
+    It worked but when i put IF conditions on Merge field its not working as expected, can you suggest any solution for this?
+    Reply
+    WIBI KURNIAWAN said
+    March 31, 2013 at 4:50 pm
+
+    THIS IS WHAT I NEED !!!, THANK YOU
+    Reply
+    dinesh kumar said
+    May 9, 2013 at 12:39 pm
+
+    Thanks……………………..
+    Reply
+    shubhangi said
+    May 22, 2013 at 6:26 am
+
+    hi this is amazing stuff what u have posted but i wnat number of copies of the letter for different number of agent…how do i perform this with you code plz sugggest
+    Reply
+    Sam Chang said
+    June 6, 2013 at 2:16 am
+
+    Many thanks, this is exactly what I need!
+    Reply
+    A user said
+    July 4, 2013 at 5:08 am
+
+    Hi, thanks you. May i know how to set path for below two? i try out this two line code save the file in different path…
+    wordDoc.SaveAs(“myfile.doc”);
+    wordApp.Documents.Open(“myFile.doc”);
+    Reply
+        robert said
+        November 4, 2014 at 4:02 pm
+
+        string fileName = @”C:\Users\yourUSR\Desktop\myfile.doc”;
+        wordDoc.SaveAs(fileName);
+        Process.Start(“WINWORD.EXE”, fileName);
+        Reply
+    Peter J. said
+    July 16, 2013 at 1:51 pm
+
+    If you use COM on server side (e.g. ASP.NET) you would probably have problems like this: http://support.microsoft.com/kb/257757 .
+
+    You can try out this library http://flexdoc.codeplex.com/ which is free or some good but affordable third party like http://www.docentric.com .
+    Reply
+    Arnold Wiersma said
+    August 6, 2013 at 10:23 am
+
+    Thanks, this works great for the body of the document. Does anyone here know how to access the fields in the header and footer for office 2010?
+    Reply
+    Murugavel S said
+    August 7, 2013 at 9:44 am
+
+    hi,
+    Excellent.
+
+    But how to be configured the Field names are get from DB.
+    please help me
+
+    Murugavel S
+    Reply
+    Eduardo Bessa said
+    August 7, 2013 at 6:34 pm
+
+    And to fill in various fields?
+    Help me please
+    Reply
+    Aravind said
+    November 8, 2013 at 7:27 am
+
+    Its very good for one or two fields,but I need to get a bunch of data merged by connecting to the sql server please help
+    Reply
+        Rutvij Thakar said
+        March 31, 2015 at 6:01 am
+
+        Hi,
+        its a nice stuff
+        i done it through sql data..
+        Reply
+    hossein said
+    November 12, 2013 at 12:48 pm
+
+    similiar job with image possible?
+    Reply
+    Momo said
+    February 17, 2014 at 8:06 am
+
+    Thank you very much!!!!! Very easy to learn!!
+    Reply
+    Dhananjay said
+    October 13, 2014 at 12:34 pm
+
+    Thank u but this code not working on server when i am hosting my web application on server, So please suggest me ??? what can i do???
+    Reply
+    Rajesh said
+    October 22, 2014 at 10:12 am
+
+    great great great … simply amazing !!! Just one query can i use this in table view ?
+    Reply
+    pradeep said
+    November 19, 2014 at 4:37 am
+
+    Hi all, If the fieldname consits of “\”value name \”” ..? then. What is the solution please help me.
+    Reply
+    mmc said
+    January 27, 2015 at 9:43 pm
+
+    I want to do the same for bulk . i.e. letters should open in bulk for different values for the same mergefield in one document and data in there should come from the SQL server database.
+    Reply
+    PS said
+    January 29, 2015 at 10:35 am
+
+    Thank you. It helps me over dificully
+    Reply
+    Sangeetha said
+    April 25, 2016 at 10:27 am
+
+    @dhananjay,
+    if it is not working after getting deployed to server that’s mainly because some .dll might be missing. check for msvcp…..
+    Reply
+    Sangeetha said
+    April 25, 2016 at 10:29 am
+
+    @dhananjay,
+    if its not working after getting deployed in server that’s because some dll might be missing check for msvcp…………
+    Reply
+    Hugh said
+    June 21, 2016 at 8:17 pm
+
+    How can you go about merging mailing labels which required to loop through a set of records (from Linq var List)? which is more a like real world problem?
+    Thanks
+    Reply
+    raja said
+    June 27, 2016 at 1:15 pm
+
+    showing error in
+
+    wordDoc.SaveAs(“myfile.doc”);
+    wordApp.Documents.Open(“myFile.doc”);
+    wordApp.Application.Quit();
+
+    in these lines
+    Reply
+    vibhusha said
+    September 26, 2017 at 7:50 am
+
+    is it works on web application ?
+    Reply
+        vivekcek said
+        September 27, 2017 at 3:56 pm
+
+        Nop try openxml
+        Reply
+            vibhusha said
+            November 6, 2017 at 10:51 am
+
+            i’ts working fine , thank you so much vivekcek.
+
+            now my question is,
+            how to set multiple values on word, the value is getting from database.
+    vibhusha said
+    November 6, 2017 at 10:50 am
+
+    i’ts working fine , thank you so much vivekcek.
+
+    now my question is,
+    how to set multiple values on word, the value is getting from database.
+    Reply
+
+Leave a Reply Cancel reply
+
+Fill in your details below or click an icon to log in:
+
+Gravatar
+Email (required) (Address never made public)
+Name (required)
+Website
+WordPress.com Logo
+
+You are commenting using your WordPress.com account. (  Log Out  /  Change  )
+Twitter picture
+
+You are commenting using your Twitter account. (  Log Out  /  Change  )
+Facebook photo
+
+You are commenting using your Facebook account. (  Log Out  /  Change  )
+Google+ photo
+
+You are commenting using your Google+ account. (  Log Out  /  Change  )
+Cancel
+
+Connecting to %s
+
+Notify me of new comments via email.
+
+« Monitor Task Cancellation With Delegate
+C# Async HelloWorld »
+ 
+Create a free website or blog at WordPress.com.
+Post to
+Cancel
+
+    Follow
+        A day with .Net
+        Customize
+        Follow
+        Sign up
+        Log in
+        Copy shortlink
+        Report this content
+        Manage subscriptions
+        Collapse this bar
+
+:) 

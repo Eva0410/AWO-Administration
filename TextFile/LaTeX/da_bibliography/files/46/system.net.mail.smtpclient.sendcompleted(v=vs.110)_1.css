@@ -1,0 +1,28 @@
+
+/* ::::: chrome://global/skin/netError.css ::::: */
+
+html { background: -moz-dialog none repeat scroll 0% 0%; }
+body { margin: 0px; padding: 0px 1em; color: -moz-fieldtext; font: message-box; }
+h1 { margin: 0px 0px 0.6em; border-bottom: 1px solid threedlightshadow; font-size: 160%; }
+ul, ol { margin: 0px; margin-inline-start: 1.5em; padding: 0px; }
+ul > li, ol > li { margin-bottom: 0.5em; }
+ul { list-style: outside none square; }
+#errorPageContainer { position: relative; min-width: 13em; max-width: 52em; margin: 4em auto; border: 1px solid threedshadow; border-radius: 10px; padding: 3em; padding-inline-start: 30px; background: -moz-field url('warning-large.png') no-repeat scroll left 0px content-box border-box; }
+#errorPageContainer.certerror { background-image: url('sslWarning.png'); }
+#errorPageContainer:-moz-dir(rtl) { background-position: right 0px; }
+#errorTitle { margin-inline-start: 80px; }
+#errorLongContent { margin-inline-start: 80px; }
+#errorShortDesc > p { overflow: auto; border-bottom: 1px solid threedlightshadow; padding-bottom: 1em; font-size: 130%; white-space: pre-wrap; }
+#errorLongDesc { padding-inline-end: 3em; font-size: 110%; }
+#errorLongDesc > p {  }
+#errorTryAgain { margin-top: 2em; margin-inline-start: 80px; }
+#brand { position: absolute; right: 0px; bottom: -1.5em; margin-inline-end: 10px; opacity: 0.4; }
+#brand:-moz-dir(rtl) { right: auto; left: 0px; }
+#brand > p { margin: 0px; }
+#errorContainer { display: none; }
+#securityOverrideDiv { padding-top: 10px; }
+#securityOverrideContent { background-color: infobackground; color: infotext; padding: 10px; border-radius: 10px; }
+.blacklist:root #errorTitle, .blacklist:root #errorLongContent, .blacklist:root #errorShortDesc, .blacklist:root #errorLongDesc, .blacklist:root a { background-color: rgb(119, 34, 34); color: white; }
+.blacklist:root #errorPageContainer { background-image: url('blacklist_large.png'); background-color: rgb(119, 34, 34); }
+.blacklist:root { background: rgb(51, 51, 51) none repeat scroll 0% 0%; }
+.blacklist:root #errorTryAgain { display: none; }

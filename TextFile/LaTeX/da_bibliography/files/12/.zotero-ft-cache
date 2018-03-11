@@ -1,0 +1,490 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Documentation beta
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+Learn, Share, Build
+
+Each month, over 50 million developers come to Stack Overflow to learn, share their knowledge, and build their careers.
+
+Join the world’s largest developer community.
+
+Sign Up
+Opening new window in MVVM WPF
+Ask Question
+up vote 24 down vote favorite
+6
+	
+
+I have Button and I have bind this button to command in ViewModel say OpenWindowCommand. When I click on button I want to open new window. But creating window instance and showing window from view model is violation of MVVM. I have created interface like
+
+ interface IWindowService { void showWindow(object dataContext); }  
+
+and WindowService implements this interface like
+
+ class WindowService:IWindowService { public void showWindow(object dataContext) { ChildWindow window=new ChildWindow(); window.DataContext=dataContext; window.Show(); } }  
+
+In this class I have specified ChildWindow. So this class is tightly coupled with showing ChildWindow. When I want to show another window,I have to implement another class with same interface and logic.How can I make this class generic so that I can pass just instance of any window and class will be able to open any window? I am not using any built MVVM frameworks.I have read many articles on StackOverflow but I could not found any solution for this.
+c# wpf mvvm
+share | improve this question
+	
+edited Sep 12 '15 at 16:44
+ErazerBrecht
+666 9 20
+	
+asked Sep 15 '14 at 10:15
+DT sawant
+395 1 3 14
+	
+1 	 
+	
+I've found an alternative way of opening windows in MVVM, using a behavior instead of a service. –  Mike Fuchs Sep 19 '14 at 14:28
+add a comment  | 
+6 Answers 6
+active oldest votes
+up vote 26 down vote accepted
+	
+
+You say "creating window instance and showing window from view model is violation of MVVM". This is correct.
+
+You are now trying to create an interface that takes a type of view specified by the VM. This is just as much of a violation. You may have abstracted away the creation logic behind an interface, but you are still requesting view creations from within the VM.
+
+VM's should only care about creating VM's. If you really need a new window to host the new VM, then provide an interface as you have done, but one that does NOT take a view. Why do you need the view? Most (VM first) MVVM projects use implicit datatemplates to associate a view with a particular VM. The VM knows nothing about them.
+
+Like this:
+
+ class WindowService:IWindowService { public void ShowWindow(object viewModel) { var win = new Window(); win.Content = viewModel; win.Show(); } }  
+
+Obviously you need to make sure you have your VM->View implicit templates set up in app.xaml for this to work. This is just standard VM first MVVM.
+
+eg:
+
+ <Application x:Class="My.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:vm="clr-namespace:My.App.ViewModels" xmlns:vw="clr-namespace:My.App.Views" StartupUri="MainWindow.xaml"> <Application.Resources> <DataTemplate DataType="{x:Type vm:MyVM}"> <vw:MyView/> </DataTemplate> </Application.Resources> </Application>  
+
+share | improve this answer
+	
+edited Sep 15 '14 at 11:16
+	
+answered Sep 15 '14 at 10:41
+GazTheDestroyer
+12.4k 5 37 82
+	
+   	 
+	
+How can I open a window without passing window to function? –  DT sawant Sep 15 '14 at 10:50
+1 	 
+	
+Why do you need different Window types? The window is just a container for the view. Just use a generic window and use implicit DataTemplates as normal for mapping VM->View –  GazTheDestroyer Sep 15 '14 at 10:52
+2 	 
+	
+One of the reasons the VM knows nothing about the View is because you can have multiple Views to display the data in the ViewModel in different ways. This method makes your views and viewmodels have a 1:1 mapping. –  Nick Mar 15 '15 at 16:03
+1 	 
+	
+This solution will not working if MyView is a Window. It will throw an error of 'Can't put window in style' –  Jack Frost Mar 31 '16 at 6:40
+2 	 
+	
+I hope vw:MyView should be of type UserControl and not of type Window –  Gopichandar Aug 24 '16 at 10:23
+ |  show 7 more comments
+up vote 3 down vote
+	
+
+One possibility is to have this:
+
+ class WindowService:IWindowService { public void showWindow<T>(object DataContext) where T: Window, new() { ChildWindow window=new T(); window.Datacontext=DataContext; window.show(); } }  
+
+Then you can just go something like:
+
+ windowService.showWindow<Window3>(windowThreeDataContext);  
+
+For more information on the new constraint, see http://msdn.microsoft.com/en-gb/library/sd2w2ew5.aspx
+
+Note: the new() constraint only works where the window will have a parameterless constructor (but I imagine this shouldn't be a problem in this case!) In a more general situation, see Create instance of generic type? for possibilities.
+share | improve this answer
+	
+edited May 23 at 10:31
+Community ♦
+1 1
+	
+answered Sep 15 '14 at 10:28
+David E
+888 3 11
+	
+3 	 
+	
+windowService.showWindow<Window3>(windowThreeDataContext); this statement is in viewmodel and it contains name of view.Doesn't it violet the MVVM approach? –  DT sawant Sep 15 '14 at 10:52
+   	 
+	
+Indeed - sorry, I was taking the question How can I make this class generic so that I can pass just instance of any window and class will be able to open any window? a little too strongly, and didn't properly discuss the root issue! Somewhere in an MVVM approach you will need to make windows/views, so the above can be useful - potentially you either have a mapping from ViewModel to View, or some form of convention (eg \ViewModels\MyViewModel.cs -> \Views\MyView.cs ), but it's up to you :) –  David E Sep 15 '14 at 11:22
+   	 
+	
+Personally, I'd advocate using a framework if you want to go for a hardcore MVVM approach, which usually wraps all this up for you :). I've used Caliburn Micro which I really like, but it's up to you ^^ –  David E Sep 15 '14 at 11:23
+add a comment  | 
+up vote 2 down vote
+	
+
+use a contentpresenter in your Window where you bind your DataConext to. And then define a Datatemplate for your DataContext so wpf can render your DataContext. something similar to my DialogWindow Service
+
+so all you need is your one ChildWindow with a ContentPresenter:
+
+ <Window x:Class="ChildWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight"> <ContentPresenter Content="{Binding .}"> </ContentPresenter> </Window>  
+
+share | improve this answer
+	
+edited May 23 at 10:31
+Community ♦
+1 1
+	
+answered Sep 15 '14 at 10:35
+blindmeis
+16.5k 6 34 67
+	
+	
+add a comment  | 
+up vote 1 down vote
+	
+
+You could write a function like this:
+
+ class ViewManager { void ShowView<T>(ViewModelBase viewModel) where T : ViewBase, new() { T view = new T(); view.DataContext = viewModel; view.Show(); // or something similar } } abstract class ViewModelBase { public void ShowView(string viewName, object viewModel) { MessageBus.Post( new Message { Action = "ShowView", ViewName = viewName, ViewModel = viewModel }); } }  
+
+Make sure the ViewBase has a DataContext property. (You could inherit UserControl)
+
+In general I would make some kind of message bus and have a ViewManager listen for messages asking for a view. ViewModels would send a message asking for a view to be shown and the data to show. The ViewManager would then use the code above.
+
+To prevent the calling ViewModel to know about the View types you could pass a string/logical name of the view to the ViewManager and have the ViewManager translate the logical name into a type.
+share | improve this answer
+	
+edited Sep 15 '14 at 11:27
+	
+answered Sep 15 '14 at 10:24
+Erno de Weerd
+40.8k 8 55 91
+	
+   	 
+	
+I may be wrong, but I'm fairly sure you need the where T: ViewBase, new() in order to create a new object of generic type in your function? a la: msdn.microsoft.com/en-gb/library/sd2w2ew5.aspx –  David E Sep 15 '14 at 10:30
+   	 
+	
+@DavidEdey - yes indeed. No need to copy my answer... –  Erno de Weerd Sep 15 '14 at 10:37
+   	 
+	
+It was a case of simultaneous answering - yours wasn't there when I wrote mine, then I refreshed to find you had beaten me to it! Apologies Erno :) –  David E Sep 15 '14 at 10:39
+   	 
+	
+@DavidEdey - :) np it is not a race –  Erno de Weerd Sep 15 '14 at 10:41
+   	 
+	
+@ErnodeWeerd In your case I will still need to refer view from viewmodel. I don't have to create instance there but at least I have to refer to View.So doesn't it violet MVVM? –  DT sawant Sep 15 '14 at 11:14
+ |  show 2 more comments
+up vote 0 down vote
+	
+
+Maybe you could pass the window type.
+
+Try using Activator.CreateInstance() .
+
+See the following question: Instantiate an object with a runtime-determined type .
+
+Solution by chakrit:
+
+ // determine type here var type = typeof(MyClass); // create an object of the type var obj = (MyClass)Activator.CreateInstance(type);  
+
+share | improve this answer
+	
+edited May 23 at 10:31
+Community ♦
+1 1
+	
+answered Sep 15 '14 at 10:22
+Hellin
+47 8
+	
+	
+add a comment  | 
+up vote 0 down vote
+	
+
+I find the accepted solution very useful, but when trying it practically, I found that it lacks the ability to make the UserControl (the View that results from the VM -> View mapping) dock within the hosting window in order to occupy the whole area provided by it. So I extended the solution to include this ability:
+
+ public Window CreateWindowHostingViewModel(object viewModel, bool sizeToContent) { ContentControl contentUI = new ContentControl(); contentUI.Content = viewModel; DockPanel dockPanel = new DockPanel(); dockPanel.Children.Add(contentUI); Window hostWindow = new Window(); hostWindow.Content = dockPanel; if (sizeToContent) hostWindow.SizeToContent = SizeToContent.WidthAndHeight; return hostWindow; }  
+
+The trick here is using a DockPanel to host the view converted from the VM.
+
+Then you use the previous method as follows, if you want the size of the window to match the size of its contents:
+
+ var win = CreateWindowHostingViewModel(true, viewModel) win.Title = "Window Title"; win.Show();  
+
+or as follows if you have a fixed size for the window:
+
+ var win = CreateWindowHostingViewModel(false, viewModel) win.Title = "Window Title"; win.Width = 500; win.Height = 300; win.Show();  
+
+share | improve this answer
+	
+answered Jan 10 at 15:15
+Ghareeb Falazi
+59 5
+	
+	
+add a comment  | 
+Your Answer
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged c# wpf mvvm or ask your own question .
+
+asked
+	
+
+2 years, 11 months ago
+
+viewed
+	
+
+34,091 times
+
+active
+	
+
+7 months ago
+Linked
+151
+Create instance of generic type?
+44
+Instantiate an object with a runtime-determined type
+119
+Good or bad practice for Dialogs in wpf with MVVM?
+12
+Give some command to View in MVVM
+0
+Opening multiple window with same viewmodel using MVVM
+1
+MVVM Caliburn.micro with ribbon control
+1
+How can I create new instance of window from ViewModel with Unity?
+4
+Creating a child Window without an MVVM framework
+2
+c# MVVM open new window with mediaelement as contentcontrol
+0
+How to add style in Xaml for a Window created from code with mvvm?
+see more linked questions…
+Related
+139
+Binding WPF ComboBox to a Custom List
+54
+The best approach to create new window in WPF using MVVM
+119
+Good or bad practice for Dialogs in wpf with MVVM?
+0
+Opening WPF Window MVVM and Closing it
+3
+What is the recommended way to open a new window using MVVM in WPF
+0
+How to open new window following MVVM structure?
+1
+WPF MVVM open new window and pass ID to it
+1
+Opening new window in MVVM WPF The window is a window, not a user control
+3
+Opening a new window on button click WPF MVVM
+2
+c# MVVM open new window with mediaelement as contentcontrol
+Hot Network Questions
+
+    Where do bad papers go to die?
+    Reliably Broken Sort
+    Why is the movie titled The Phantom Menace?
+    Audible difference between "audio grade" capacitors in the same range?
+    Seeing something from only one angle means you have only seen (what?)% of its surface area at most?
+    Is receiving fake torrent data possible?
+    First 30 solutions of Pell's equation.
+    How do I set the region (selection) programmatically in Emacs Lisp using indices?
+    Why isn't this C program printing anything?
+    Story about humanity realizing they are in a simulation
+    Lable line points with geographical coordinates in QGIS
+    How to get a raise I am denied to because of sick leaves
+    Should all books have page numbers?
+    How does curl protect a password from appearing in ps output?
+    Was Russia the only country in WWII that succeeded in expansionist war aims?
+    how many cores should I utilize for calculations? #cores or #cores -1?
+    Proving that the limit of an abstract function with certain properties is zero.
+    How did people know how to build the first space ship?
+    Markov country name generator
+    Creature that swims in the solid ground
+    Can US embassy help a broke American citizen overstayed in Emirates?
+    Why did the Slytherin team opt for size over skill, given their many defeats?
+    Script that outputs a script that prints a given input
+    Can Blessings of Knowledge be applied twice, to different skills?
+
+question feed
+default
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Documentation
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+    Magento
+
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Programming Puzzles & Code Golf
+    Ethereum
+    Data Science
+
+    Arduino
+    more (26)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (17)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.8.11.26777
+Stack Overflow works best with JavaScript enabled

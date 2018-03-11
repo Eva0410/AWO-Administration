@@ -62,7 +62,7 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 try
                 {
-                    MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, numbers);
+                    MessageBird.Objects.Message message = client.SendMessage(Properties.Settings.Default.SmsSenderText, this.Message, numbers);
                     this.SaveToRepository();
                     MessageBox.Show("Nachricht gesendet!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
                     Console.WriteLine("{0}", message);
@@ -89,7 +89,7 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         private long[] GetPhoneNumbers ()
         {
-            var customers = this.Uow.CustomerRepository.Get(filter: c=> c.NewsLetter);
+            var customers = this.Uow.CustomerRepository.Get(filter: c => c.NewsLetter && c.Deleted == false);
             this.Customers = new List<Customer>(customers);
             long[] numbers = new long[customers.Length];
             for (int i = 0; i < customers.Length; i++)

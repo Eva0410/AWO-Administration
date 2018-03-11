@@ -222,27 +222,29 @@ namespace OpticianMgr.Wpf.ViewModel
         }
         private ObservableCollection<Customer> GetAllCustomers()
         {
-            var unitofWorkCustomers = this.Uow.CustomerRepository.Get().ToList();
-            ObservableCollection<Customer> copiedCustomers = new ObservableCollection<Customer>();
-            foreach (var item in unitofWorkCustomers)
-            {
-                Customer customer = new Customer();
-                GenericRepository<Customer>.CopyProperties(customer, item);
-                if (item.Town_Id != null)
-                {
-                    Town town = new Town(); //Referenced town must be copied as well
-                    GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
-                    customer.Town = town;
-                }
-                if (item.Country_Id != null)
-                {
-                    Country country = new Country();
-                    GenericRepository<Country>.CopyProperties(country, this.Uow.CountryRepository.GetById(item.Country_Id));
-                    customer.Country = country;
-                }
-                copiedCustomers.Add(customer);
-            }
-            return copiedCustomers;
+            //no need anymore
+            //var unitofWorkCustomers = this.Uow.CustomerRepository.Get().ToList();
+            //ObservableCollection<Customer> copiedCustomers = new ObservableCollection<Customer>();
+            //foreach (var item in unitofWorkCustomers)
+            //{
+            //    Customer customer = new Customer();
+            //    GenericRepository<Customer>.CopyProperties(customer, item);
+            //    if (item.Town_Id != null)
+            //    {
+            //        Town town = new Town(); //Referenced town must be copied as well
+            //        GenericRepository<Town>.CopyProperties(town, this.Uow.TownRepository.GetById(item.Town_Id));
+            //        customer.Town = town;
+            //    }
+            //    if (item.Country_Id != null)
+            //    {
+            //        Country country = new Country();
+            //        GenericRepository<Country>.CopyProperties(country, this.Uow.CountryRepository.GetById(item.Country_Id));
+            //        customer.Country = country;
+            //    }
+            //    copiedCustomers.Add(customer);
+            //}
+            //return copiedCustomers;
+            return new ObservableCollection<Customer>(this.Uow.CustomerRepository.Get(includeProperties: String.Format("{0},{1}",nameof(Customer.Town), nameof(Customer.Country))));
         }
     }
 }

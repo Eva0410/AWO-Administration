@@ -138,6 +138,11 @@ namespace OpticianMgr.Wpf
             EditContactLensTypesWindow newWindow = new EditContactLensTypesWindow();
             this.ShowWindow(viewModel, newWindow);
         }
+        public void ShowEditStaticStringsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            EditStaticStringsWindow newWindow = new EditStaticStringsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
         public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
         {
             EventHandler<EventArgs> closeHandler = null;

@@ -42,7 +42,7 @@ namespace OpticianMgr.Wpf
             string header;
 
             //Same column pressed?
-            if (SortHeaders.Count > 0 && SortHeaders[0] == columnHeader)
+            if (SortHeaders.Count == 1 && SortHeaders[0] == columnHeader)
             {
                 //Change sort direction
                 dir = View.SortDescriptions[0].Direction;

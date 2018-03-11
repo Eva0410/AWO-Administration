@@ -51,7 +51,7 @@ namespace OpticianMgr.Wpf.ViewModel
             try
             {
 
-                var customers = this.Uow.CustomerRepository.Get(filter: c => c.NewsLetter);
+                var customers = this.Uow.CustomerRepository.Get(filter: c => c.NewsLetter && c.Deleted == false);
                 var result = MessageBox.Show("Wollen Sie diese Nachricht wirklich an " + customers.Length + " Kunden senden?", "Wollen Sie die Nachricht abschicken?", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (result == MessageBoxResult.OK)
                 {

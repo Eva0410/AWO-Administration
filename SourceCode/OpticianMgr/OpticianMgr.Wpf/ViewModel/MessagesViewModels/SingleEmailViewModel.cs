@@ -49,12 +49,12 @@ namespace OpticianMgr.Wpf.ViewModel
             switch (order.OrderType)
             {
                 case "B":
-                    this.Subject = "Ihre Brillenbestellung von Augenoptik Aigner";
-                    this.Message = String.Format("Sehr geehrte/r Frau/Herr {0} {1}, {2} {2} Ihre Brillenbestellung ist nun abholbereit! {2} {2} Dies ist eine automatisch versendete Nachricht, bitte antworten Sie nicht auf diese E-Mail. {2} {2} Mit freundlichen Grüßen {2} Augenoptik Aigner", order.Customer.Title, order.Customer.LastName, Environment.NewLine);
+                    this.Subject = Properties.Settings.Default.SingleEmailSubjectGlassesOrder;
+                    this.Message = String.Format(Properties.Settings.Default.SingleEmailTextGlassesOrder, Environment.NewLine, order.Customer.Title, order.Customer.FirstName, order.Customer.LastName);
                     break;
                 case "K":
-                    this.Subject = "Ihre Kontaktlinsenbestellung von Augenoptik Aigner";
-                    this.Message = String.Format("Sehr geehrte/r Frau/Herr {0} {1}, {2} {2} Ihre Kontaktlinsenbestellung ist nun abholbereit! {2} {2} Dies ist eine automatisch versendete Nachricht, bitte antworten Sie nicht auf diese E-Mail. {2} {2} Mit freundlichen Grüßen {2} Augenoptik Aigner", order.Customer.Title, order.Customer.LastName, Environment.NewLine);
+                    this.Subject = Properties.Settings.Default.SingleEMailSubjectContactLensOrder;
+                    this.Message = String.Format(Properties.Settings.Default.SingleEmailTextContactLensOrder, Environment.NewLine, order.Customer.Title, order.Customer.FirstName, order.Customer.LastName);
                     break;
             }
             this.RaisePropertyChanged(() => this.Subject);

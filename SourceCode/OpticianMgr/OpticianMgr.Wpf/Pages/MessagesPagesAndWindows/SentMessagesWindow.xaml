@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:OpticianMgr.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-        Title="Versendete Nachrichten">
+        Title="Versendete Nachrichten" MinWidth="600" MinHeight="300">
     <StackPanel Style="{StaticResource StackPanelBackground}">
         <DockPanel>
             <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Versendete Nachrichten</Label>

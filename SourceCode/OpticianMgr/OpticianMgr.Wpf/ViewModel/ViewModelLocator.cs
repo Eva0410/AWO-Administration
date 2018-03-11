@@ -86,6 +86,7 @@ namespace OpticianMgr.Wpf.ViewModel
             SimpleIoc.Default.Register<AddContactLensTypeViewModel>();
             SimpleIoc.Default.Register<EditContactLensTypesViewModel>();
             SimpleIoc.Default.Register<ContactLensTypeDetailsViewModel>();
+            SimpleIoc.Default.Register<EditStaticStringsModel>();
         }
 
         public MainViewModel MainViewModel
@@ -238,6 +239,10 @@ namespace OpticianMgr.Wpf.ViewModel
         public static EditContactLensTypesViewModel EditContactLensTypesViewModel
         {
             get { return ServiceLocator.Current.GetInstance<EditContactLensTypesViewModel>(); }
+        }
+        public static EditStaticStringsModel EditStaticStringsModel
+        {
+            get { return ServiceLocator.Current.GetInstance<EditStaticStringsModel>(); }
         }
 
         public static void Cleanup()

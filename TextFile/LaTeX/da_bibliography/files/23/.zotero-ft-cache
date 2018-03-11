@@ -1,0 +1,344 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Documentation beta
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+Learn, Share, Build
+
+Each month, over 50 million developers come to Stack Overflow to learn, share their knowledge, and build their careers.
+
+Join the world’s largest developer community.
+
+Sign Up
+MVVM SimpleIoc, how to use an interface when the interface implementation requires construction parameters
+Ask Question
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+up vote 19 down vote favorite
+7
+	
+
+Using MVVM's SimpleIoc, I would like to register an implementation for a given interface, but the implementation requires one parameter in its constructor:
+
+ public class MyServiceImplementation : IMyService { public MyServiceImplementation ( string contructorString ) { ... } }  
+
+I was hoping that registering the implementation of the interface would work, but SimpleIoc doesn't consider the hint when it tries to resolve the interface.
+
+ SimpleIoc . Default . Register < MyServiceImplementation >(() => { return new MyServiceImplementation ( "Hello World" ); }); SimpleIoc . Default . Register < IMyService , MyServiceImplementation >();  
+
+Would there be a way to do this with SimpleIoc, or should I consider using a more complete Ioc?
+
+Edit: This does the trick, but I still wonder why the form above doesn't work.
+
+ SimpleIoc . Default . Register < IMyService >(() => { return new MyServiceImplementation ( "Hello World" ); });  
+
+c# mvvm-light
+share | improve this question
+	
+edited Jan 18 '12 at 8:40
+AxelEckenberger
+12.6k 1 36 60
+	
+asked Jan 13 '12 at 11:48
+Berthier Lemieux
+623 6 13
+	
+	
+add a comment  | 
+1 Answer 1
+active oldest votes
+up vote 22 down vote accepted
+	
+
+The reason why your first approach is not working is that SimpleIOC does not use itself to construct the objects.
+
+Given your declaration
+
+ SimpleIoc . Default . Register < MyServiceImplementation >(() => { return new MyServiceImplementation ( "Hello World" ); }); SimpleIoc . Default . Register < IMyService , MyServiceImplementation >();  
+
+The call to SimpleIoc.Default.GetInstance<MyServiceImplementation>() will execute the factory method, while the call to SimpleIoc.Default.GetInstance<IMyService>() won't.
+
+A possible way to chain the calls could be to specify a factory method for both types, IMyService and MyServiceImplementation , i.e.
+
+ SimpleIoc . Default . Register < MyServiceImplementation >(() => { return new MyServiceImplementation ( "Hello World" ); }); SimpleIoc . Default . Register < IMyService >(() => { return SimpleIoc . Default . GetInstance < MyServiceImplementation >(); });  
+
+share | improve this answer
+	
+edited Dec 29 '13 at 12:29
+Andras Csehi
+3,863 1 19 34
+	
+answered Jan 18 '12 at 8:59
+AxelEckenberger
+12.6k 1 36 60
+	
+1 	 
+	
+Thanks @Obalix, that's certainly a nicer workaround than my own! –  Berthier Lemieux Jan 19 '12 at 6:13
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged c# mvvm-light or ask your own question .
+
+asked
+	
+
+5 years, 7 months ago
+
+viewed
+	
+
+8,042 times
+
+active
+	
+
+3 years, 7 months ago
+Blog
+Where in the World is Mobile Development?
+
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+Linked
+0
+Passing runtime arguments to constructor using SimpleIoc
+8
+Cannot supply endpoint address while registering WCF service client with SimpleIOC in ViewModel Locator
+Related
+0
+SimpleIoc (MVVMlight) Dependency Inject a List of Interfaces C# Windows Store
+1
+Register service implementation in SimpleIOC in PCL
+0
+SimpleIoc (mvvmlight) - how to automatically register all classes implementing a particular interface
+1
+MVVM Light - SimpleIoC. Removing an instance from the cache unregisters the class
+2
+Invoke constuctor with parameter in MVVM light SimpleIOC
+4
+How to register a class that implements multiple interfaces in MVVM Light's SimpleIoc?
+6
+MVVMLight and platform specific service implementations
+1
+How do I restrict view instances with SimpleIoC (mvvm-light)
+1
+How to use SimpleIoC and Messenger for Lifetime Object(s) / ViewModels?
+2
+How to register a range of dependencies in MVVM Light SimpleIoc
+Hot Network Questions
+
+    Should I include controversial achievements in my resume?
+    What's the generic word for weekly/monthly etc. service?
+    Is it possible for two symbiotic lifeforms to be born from the same egg?
+    Is there any difference between HTTP and HTTPS when using my home / own internet connection
+    What could limit geographically a resource such as an ore to a specific spot on a planet?
+    How to compress all files from several subfolders?
+    How can I explain a one-shot, slow-to-reload laser sidearm?
+    How to handle a troublesome player even before the game is on the run
+    Do "if everybody did it" arguments commit a fallacy?
+    Why do some universities not provide marking schemes for mock exams?
+    why to use a void pointer for dereferencing variables of datatypes?
+    Remove the blank lines in a text file
+    Delete ytick dashes in pgfplots
+    Why doesn't Facebook allow users to change its theme?
+    How do I get the ID of the current Discussion Item using Javascript?
+    Book or series with 7 layers of worlds, where each layer's inhabitants are like gods to the layer below
+    Why do strict designs of theses exist?
+    Prime numbers the rank of which is also a prime.
+    Is it safe to wear a helmet without a plastic covering?
+    How do I avoid giving up my password to coworkers?
+    If 900 out of 1000 people say a car is blue, what is the probability that it is blue?
+    Why don't they use dragonglass sword?
+    How did they make cars fall apart in old movies?
+    Output diagonal positions of me squared
+
+more hot questions
+question feed
+lang-cs
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Documentation
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+    Magento
+
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Programming Puzzles & Code Golf
+    Ethereum
+    Data Science
+
+    Arduino
+    more (27)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (17)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.8.25.26854
+Stack Overflow works best with JavaScript enabled

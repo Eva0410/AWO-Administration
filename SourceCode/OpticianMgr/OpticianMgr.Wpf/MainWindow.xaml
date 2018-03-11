@@ -32,6 +32,7 @@
                 <MenuItem Header="Länder bearbeiten" Command="{Binding OpenCountries}"></MenuItem>
                 <MenuItem Header="Brillentypen bearbeiten" Command="{Binding OpenGlasstypes}"></MenuItem>
                 <MenuItem Header="Kontaktlinsentypen bearbeiten" Command="{Binding OpenContactLensTypes}"></MenuItem>
+                    <MenuItem Header="Vorgegebene Texte bearbeiten" Command="{Binding OpenStaticTexts}"></MenuItem>
             </MenuItem>
         </Menu>
         <Image Grid.Column="1" Source="Logo.png" Width="100" Height="48" Margin="10,1" HorizontalAlignment="Right"/>

@@ -1,0 +1,1038 @@
+body {
+    color: #454545 !important;
+    font-size: 14px !important;
+    margin: 0;
+    line-height: 135%;
+}
+
+.contentLeft  p ,
+#controls ul.menu > li ,
+span.date {
+	color: #454545 !important;
+	font-family: 'Segoe UI Semibold','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+	line-height: 20px;
+}
+
+span.date {
+	font-style: normal !important;
+	font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+}
+
+li.thread a.lastReply,
+li.forum a.lastReply,
+li.thread a.author span,
+li.forum a.author span  {
+	font-size: 12px !important;
+}
+
+#BodyBackground {
+    background: #fff;
+    min-width: 1%;
+    margin-top: 0;
+}
+
+#JelloSizer {
+    max-width: 1180px !important;
+    width: 1180px !important;
+}
+#JelloExpander {
+    min-width: inherit;
+}
+
+#ux-header hr {
+    width: 100%;
+    color: #dedede;
+}
+
+div#ux-header #signIn > a {
+    color: #000 !important;
+}
+
+#ux-footer #fourColumnFooter {
+    margin-top: 40px;
+}
+
+#ux-footer #footerContainer, #ux-footer #footerSockInner {
+    position: relative;
+    overflow: hidden;
+}
+
+.alley {
+    padding: 0;
+}
+
+.Forums .alley {
+    margin-top: 40px;
+}
+
+div#MainContent a,
+div#MainContent a:link {
+    color: #1e75bb;
+}
+
+div#MainContent a:hover {
+    color: #00bcf2;
+}
+
+div#MainContent a:active,
+div#MainContent a:visited {
+    color: #00188f;
+}
+#MainContent.Msdn {
+    font-size: inherit !important;
+}
+
+.topleftcorner,
+.toprightcorner, 
+.bottomleftcorner,
+.bottomrightcorner {
+    display: none !important;
+}
+
+.inner {
+    min-height: 293px;
+    padding: 0;
+}
+
+#rail .SystemMessage {
+    font-weight: normal;
+    padding: 6px;
+}
+
+#ux-footer {
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+/* Boston Styles */
+.box h1,
+.box h2,
+.box h3,
+.box h5,
+.box h6 {
+    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+    font-weight: normal;
+    line-height: 130%;
+    height: auto;
+    background: none;
+}
+
+.box h1 a,
+.box h2 a,
+.box h5 a,
+.box h6 a {
+    color: #2a2a2a !important;
+}
+
+#ux-header div.internav, .createProfileLink[href=""][title=""]  {
+    background:none !important;
+}
+
+/*forums styles*/
+
+.Forums #msdn-technet-en-home,
+.Forums #msdn-technet-en-thread {
+    margin-top: 15px;
+}
+
+.Forums #MainContent input[type="submit"] {
+    margin:0 !important;
+}
+
+#controls .menu {
+    background-color: #f1f1f1 !important;
+}
+
+#content ul.category {
+    padding-top: 30px !important;
+}
+
+#content .box h4 {
+    background-color: #fff;
+    color: #00749e;
+    font-size: 14px !important;
+}
+
+.bread {
+    font-size: 10px;
+    margin-top: 3px;
+    margin-left: -3px;
+}
+
+.IE7 .bread {
+    margin-top: 10px;
+}
+
+.bread a,
+.bread a:link,
+.bread a:visited,
+.bread a:active {
+    color: #2a2a2a !important;
+    margin: 0 2px;
+}
+
+.bread a:hover {
+    color: #707070 !important;
+    text-decoration: none;
+}
+
+div.discover {
+    border: none !important;
+}
+
+div.box > .content {
+    margin: 0 !important;
+}
+
+.discover a.btn {
+    padding-top: 0 !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+}
+
+a.btn:hover,
+a.popup:hover {
+    border: 1px solid transparent !important;
+}
+
+.discover .search {
+    clear: both;
+    float: left !important;
+    padding: 0 !important;
+}
+
+div#announcement {
+    font-size: 100% !important;
+}
+
+div#announcement h2 {
+    font-size: 36px;
+    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 100;
+    line-height: 130%;
+    height: auto;
+    margin: 0 0 35px;
+}
+
+img.alltypes { background: url('//i1.social.s-msft.com/contentservice/e94ee267-707b-41a5-9ad9-9f5c011d3cf5/icons_windows.png') no-repeat -740px 0 !important;width: 20px; }
+img.ask { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat 0 0 !important;width: 20px; }
+img.assign { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -300px !important;width: 20px; }
+img.changetype { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -260px !important;width: 20px; }
+img.delete { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -160px 0 !important;width: 20px; }
+img.edit { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -140px 0 !important;width: 20px; }
+img.escalate { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -380px 0 !important;width: 20px; }
+img.folder { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -480px 0 !important;width: 20px; }
+img.hascode { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -360px 0 !important;width: 20px; }
+img.join { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -440px 0 !important;width: 20px; }
+img.locked { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -220px 0 !important;width: 20px; }
+img.medalon { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -180px 0 !important;width: 20px; }
+img.merge { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -280px 0 !important;width: 20px; }
+img.move { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -240px 0 !important;width: 20px; }
+img.nntp { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -460px 0 !important;width: 20px; }
+img.split { background: url('//i1.social.s-msft.com/contentservice/c2afadb0-5d34-489a-bf31-9f5c011d3cd4/icon_strip_windows.png') no-repeat -320px 0 !important;width: 20px; }
+
+img.voteup {
+    margin-bottom: 10px;
+}
+
+a.author span,
+a.author:hover span {
+    color: #00749e !important;
+    font-size: 10px !important;
+}
+
+li.forumheader a.author abbr,
+li.forum a.author abbr,
+li.thread a.author abbr {
+    margin-left: 0;
+}
+
+.author > .affil {
+    margin-right: 0 !important;
+}
+
+/*.Forums a.arrowdown:hover {
+    background: url('/Forums/resources/images/homepage_icon_sprite.png') no-repeat -80px -2px;
+    display: inline-block;
+}*/
+
+ul.category li.category > h2,
+ul.category li.category > h3,
+ul.category li.category > h4,
+ul.category li.category > h5,
+ul.category li.category > h6 {
+    background-color: #fff;
+    color: #db7100 !important;
+    float: left;
+    width: auto;
+}
+
+ul.category li.category h2 A,
+ul.category li.category h2 A:link, 
+ul.category li.category h2 A:hover,
+ul.category li.category h2 A:Active {
+    color: #000 !important;
+    height: auto;
+    margin: 0 0 3px 0;
+	font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+}
+
+ul.category ul.forum li.forum h3,
+li.thread > h3 {
+    font-size: 14px !important;
+}
+
+li.category {
+    padding-bottom: 1em !important;
+}
+
+ul.forum {
+    float: left;
+    margin-bottom: 1.5em;
+    width: 100%;
+}
+
+li.forum {
+    margin: 1em 0 0 !important;
+}
+
+li.forum h3 {
+    padding: 0 0 0 !important;
+	font-size: 16px;
+}
+ul.threadList li.threadblock h3 {
+	font-size: 16px;
+}
+
+li.forum div.statsHeader {
+    float: right;
+    margin: -2.75em 0 0 !important;
+    width: 40%;
+}
+
+li.forum .stat {
+    margin-left: 1em !important;
+}
+
+li.forum .stat {
+    margin-left: 0 !important;
+}
+
+li.thread {
+    border: 1px solid #FFF !important;
+}
+
+li.message div.voting {
+    border: 1px solid #FFF !important;
+}
+
+li.message > div.head {
+    height: 5em !important;
+}
+
+span.fullbadge > span.affil {
+    display: block !important;
+    margin-left: 0 !important;
+}
+
+span.fullbadge a.author span {
+    font-size: 18px !important;
+}
+
+div.replies {
+    border-top: 2px solid #FFF !important;
+}
+
+a.help {
+    font-size: 14px !important;
+    font-weight: normal !important;
+}
+
+.leaderboards img {
+    height: 21px;
+    margin: .1em 0;
+    width: 21px;
+}
+
+#controls.box > h4 {
+    background-color: #fff;
+    color: #2a2a2a;
+}
+
+#content ul.announcement li.announcement h4 {
+    background-color: #fff;
+}
+
+ul.announcement li.announcement h4 {
+    color: #2a2a2a;
+}
+
+li.category .categoryStatsCol {
+    width: 30% !important;
+    margin-top: 3px !important;
+}
+
+li.category .categoryName {
+    width: 70% !important;	
+}
+
+li.category .categoryStatsCol .statsCategoryHeader .threadsHeader {
+	width: 55% !important;
+}
+
+li.category .categoryStatsCol .statsCategoryHeader .messagesHeader {
+	width: 89px !important;
+}
+
+li.category .categoryStatsCol .statsCategoryHeader,
+li.category .categoryStatsCol,
+li.category .categoryName ,
+.box  h2,.box h4 {
+	color: #000 !important;
+	line-height: 20px;
+	font-family: 'Segoe UI', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif !important;
+	font-size: 20px !important;
+	background-color: #fff;
+	font-weight: normal;
+}
+
+#rail .leaderboards .box .seeMore  h4,
+#rail .leaderboards .box .seeMore  h4 a,
+#rail .leaderboards .box .leaderBoardTitle  h4 {
+	font-family: 'Segoe UI', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif !important;
+	color: #000 !important;
+	line-height: 20px;
+	font-size: 14px !important;
+}
+
+li.category .categoryStatsCol .statsCategoryHeader .messagesHeader {
+	height: 27px !important;
+}
+
+.forumContent h3 {
+	line-height: 20px !important;
+	font-family: 'Segoe UI Semibold', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+.forumContent p {
+	color: #454545;
+	font-size: 14px;
+	line-height: 20px;
+	font-family: 'Segoe UI', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif !important;
+	margin:0 !important;
+}
+
+li.forum .forumSpace .forumStats {
+    margin-top: 3px !important;
+}
+
+#MainContent div#homePageContentContainer {
+    width: 942px;
+}
+
+.Forums #threadPageActionsContainer .quickActions, 
+.Forums #homePageQuickActions {
+    z-index: 999;
+}
+
+.Forums #threadPageActionsContainer .quickActions, 
+.Forums #homePageQuickActions {
+    height: 80px;
+    width: 200px;
+}
+
+.Forums #categoryFilterSection #categoryFilter h3, 
+.Forums #homepageLeaderboard h4 {
+	font-size: 1.2em !important;
+    font-family: "Segoe UI","Helvetica",Garuda,Arial,sans-serif !important;
+	font-weight: normal;
+	color: #000;
+}
+#categoryFilter .categoryArea a:link {
+	color:#959595;
+}
+#categoryFilter .categoryArea a.current, 
+#categoryFilter .categoryArea a:hover, 
+#categoryFilter .categoryArea a:active {
+	color: #000;
+}
+
+.Forums div#MainContent #askaquestion a, 
+.Forums #msdn-technet-en-home .tags .forumtag {
+    color: #fff;
+}
+.Forums #threadPageActionsContainer  #askaquestion a.askQuestionLink {
+    padding: 9px 20px;
+}
+.Forums #askaquestion a.askQuestionLink:hover {
+	background-color:#06d;
+}
+.Forums #allCategoryPopupContainer #forumDetailsContainer a#submitAllCategories {
+    background-color: #34c6f3;
+}
+.Forums #allCategoryPopupContainer #forumDetailsContainer a#submitAllCategories:hover {
+    background-color: #06d;
+}
+#quickLinks {
+    margin-top: 3px;
+}
+
+.Forums #askaquestion, 
+.status.answered, 
+.status.answeredLock,
+.status.answeredPrivate, 
+.status.answeredlocked, 
+.Forums .status.sticky, .Forums #stickyThreads .threadsnippet .status.sticky, 
+div#msdn-technet-en-thread h1 div.threadIcon.sticky, 
+.Forums div.messageIcon.question.root, 
+.Forums #msdn-technet-en-thread #threadPageContentContainer li.answer div.messageIcon, 
+.Forums #msdn-technet-en-home #homePageResultsContainer div.messageIcon.answer, 
+.Forums a#rssFeed img.rss,  
+.Forums #allCategoryPopupContainer img.icon.rss, 
+div.forumDetailsTip img.icon.rss,
+.Forums .threadsnippet .details .detailscontainer h3 em,
+.Forums .threadsnippet .details .detailscontainer .threadSummary em,
+li.answer .messageSidebar div.messageIcon, 
+.messageSidebar div.messageIcon.answer, 
+#msdn-technet-en-home div.tagcontainer {
+	background-color: #1e75bb;
+}
+
+.Forums #MainContent #msdn-technet-en-home a#seeAnnouncementsLink, 
+.Forums #MainContent #msdn-technet-en-thread a#seeAnnouncementsLink, 
+.Forums #MainContent #msdn-technet-en-thread a#seeAnnouncementsText, 
+.Forums #msdn-technet-en-thread #threadPageActionsContainer #relatedThreadCountContainer a {
+    padding-top: 0.7em;
+    padding-bottom: 0.8em;
+}
+#searchActionsContainer {
+    width: 79.7%;
+}
+.Forums .searchboxinnercontainer {
+    padding-top: 4px;
+}
+#searchActions div#announcementsContainer {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+div#searchActions .announcement.popup {
+	width: 76.8%;
+}
+
+.Forums #msdn-technet-en-home div.expandedThreadContainer .messageContent {
+    width: 85%;
+}
+
+input, textarea {
+    background-color: transparent;
+}
+
+div#homePageFilterBarContainer {
+    margin-top: -33px;
+}
+
+.Forums li.threadblock .threadsnippet .details {
+    width: 90%;
+}
+.Forums .expandedContent li.threadblock .threadsnippet .details {
+    width: 92%;
+}
+
+div#msdn-technet-en-thread div#threadPageContentContainer {
+    width: 939px !important;
+}
+div#msdn-technet-en-thread div#threadPageContentContainer.expandedContent {
+    width: 100% !important;
+}
+
+.Forums div#msdn-technet-en-thread #threadPageContainer .messageContent {
+    width: 90%;
+}
+
+.Forums div#msdn-technet-en-thread #threadPageContainer .children .messageContent {
+    width: 86%;
+}
+.Forums div#msdn-technet-en-thread #threadPageContainer .children .children .messageContent {
+    width: 82%;
+}
+
+.Forums #msdn-technet-en-home .expandedContent #homePageResultsContainer div.expandedThreadContainer .messageContent {
+    width: 92%;
+}
+.Forums #msdn-technet-en-home .expandedContent #homePageResultsContainer div.expandedThreadContainer .children .messageContent {
+    width: 88%;
+}
+.Forums #msdn-technet-en-home .expandedContent #homePageResultsContainer div.expandedThreadContainer .children .children .messageContent {
+    width: 85%;
+}
+
+.Forums #msdn-technet-en-home #homePageContentContainer div.expandedThreadContainer .messageContent {
+    width: 90%;
+}
+.Forums #msdn-technet-en-home #homePageContentContainer div.expandedThreadContainer .children .messageContent {
+    width: 87%;
+}
+.Forums #msdn-technet-en-home #homePageContentContainer div.expandedThreadContainer .children .children .messageContent {
+    width: 84%;
+}
+
+/* other forums pages */
+
+.Forums #mySettingsContentContainer {
+    margin-bottom: 30px;
+}
+
+.Forums #newThreadPage button#btnSubmit, 
+.Forums #mySettingsContentContainer #myForumsPreferences input[type="submit"] {
+    background-color: #1e75bb;
+}
+.Forums #newThreadPage button#btnSubmit:hover, 
+.Forums #mySettingsContentContainer #myForumsPreferences input[type="submit"]:hover {
+    background-color: #06d;
+}
+
+.contentFull > table.users {
+    margin: 1em 0;
+}
+
+div#mySettingsContentContainer {
+    width: 872px;
+}
+
+/*End forums styles*/
+
+/*Gallery styles*/
+
+.Samples #sideNav {
+    width: 218px !important;
+}
+
+div#searchPage div#mainContentContainer {
+    margin: 0 !important;
+    float: right;
+    width: 884px;
+}
+
+#searchPage .dirSubHeading h1, 
+#projectPage h1.projectTitle {
+    font-family: 'Segoe UI Light','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+}
+
+.Samples #projectDetails, 
+.Samples #projectBody {
+    float: right;
+    width: 884px;
+}
+
+.Samples #projectDetails > div:first-child {
+    margin: 16px 0 0;
+}
+
+.Samples #projectBody > div:first-child {
+    margin: 20px 0 0 0;
+}
+
+.EyebrowContainer {
+    font-size: 10px;
+    margin-top: 2px !important;
+    margin-bottom: 30px !important;
+    margin-left: -2px !important;
+}
+
+.EyebrowContainer a, .EyebrowContainer a:link, .EyebrowContainer a:visited, .EyebrowContainer a:active {
+    color: #2a2a2a !important;
+    margin: 0 2px;
+}
+
+.EyebrowContainer a:hover {
+    color: #707070 !important;
+    text-decoration: none;
+}
+
+#extraActions {
+    width: 210px !important;
+}
+
+#searchPage #mainContentContainer {
+    margin: 0 230px 0 210px !important;
+}
+
+.subMenu > h2 {
+    color: #707070;
+    font-size: 36px !important;
+    margin: 0 0 35px !important;
+    padding-bottom: 0;
+}
+
+#searchPage h2 {
+    font-size: 18px !important;
+}
+
+#searchPage h3 {
+    font-family: 'Segoe UI','Lucida Grande' ,Verdana,Arial,Helvetica,sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 100 !important;
+}
+
+#projectPage .sidebar .section .titleBar {
+    border-bottom: none !important;
+    margin: 0 !important;
+}
+
+#projectPage .sidebar .section .titleBar h3 {
+    font-size: 14px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.itemRow .itemTitle {
+    font-size: 14px !important;
+}
+
+#legalDisclaimer {
+    color: inherit !important;
+}
+
+#editorPicksSection ul {
+    padding-top: 8px;
+}
+/*End Gallery styles*/
+
+/*Search styles*/
+
+#searchText {
+    font-family: 'Segoe UI Light' , 'Lucida Grande' , Verdana, Arial, Helvetica, sans-serif;
+    margin: 30px 0;
+}
+
+.search .RefinementListContainer {
+    font-size: 12px !important;
+}
+
+.search .SearchHelpContainer {
+    padding-right: 230px !important;
+}
+
+.search .inlineRtl {
+    font-size: 12px !important;
+    font-weight: normal !important;
+}
+
+.search .NoResultsMessage strong {
+    color: #DB7100 !important;
+    font-size: 18px !important;
+}
+
+.search .NoResultsMessage li a {
+    font-weight: normal !important;
+}
+
+.search .RefinementListContainer ,
+.search .RefinementListContainer .HeaderContainer {
+    color: #454545 !important;
+    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    padding-bottom: 10px;
+}
+
+.search .labelSourceTopic {
+    color: #454545 !important;
+}
+
+.search #ResultsMessageDiv .ResultsMessage {
+    color: #454545 !important;
+	line-height: 20px;
+}
+
+.Msdn .search div#ResultsMessageDiv b {
+    font-size: 18px !important;
+}
+
+.search #ResultsMessageDiv .Elapsed {
+    color: #2a2a2a !important;
+    font-size: 12px !important;
+    margin: 7px 10px 0 5px !important;
+}
+
+.search .ResultItemsContainer {
+    font-size: 125% !important;
+}
+
+.search .result a {
+    font-size: 14px !important;
+}
+
+.search .ResultUrl:active {
+    color: #00b0e0 !important;
+    cursor: pointer !important;
+}
+
+.search .ResultMetaData {
+    font-size: inherit !important;
+    min-width: 540px !important;
+}
+
+.search .ResultMetaDataItem {
+    min-width: 10em !important;
+}
+
+.Msdn #instantAnswer ,
+.search .ResultDescription {
+	font-size: 14px !important;
+	color: #454545;
+	line-height: 20px;
+	padding: 0;
+}
+
+.search .ResultSeperator {
+	height: 1.35em !important;
+}
+
+.search .ResultUrl {
+	color: #539C00 !important;
+	font-size: 14px !important;
+	line-height: 20px;
+}
+
+.search .resultTitleLink {
+	font-family: 'Segoe UI Semibold','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+	line-height: 20px;
+}
+
+.Msdn #instantAnswer .ResultItem {
+    background-image: none !important;
+    margin: 0 0 0.75em !important;
+}
+
+#instantAnswerTitle, #instantAnswerTitle a {
+	color: #454545 !important;
+}
+
+.RefinementLabel {
+	color: #1e75bb;
+}
+.RefinementLabel:hover {
+    color: #00bcf2;
+}
+
+div#Search .sidebar {
+    padding-right: 24px !important;
+    width: 194px;
+}
+
+div#Search .content {
+    padding-left: 24px !important;
+}
+
+.SearchResult {
+    position: relative;
+    overflow: hidden;
+}
+
+.SearchResult div.result {
+    float: left;
+    width: 524px;
+}
+
+div.ResultItemRight {
+    width: 157px;
+    color: #454545;
+    padding-left: 0;
+}
+
+div.ResultItemSourceRefinement {
+    width: 100%;
+}
+
+/* End Search styles*/
+
+/* Application Styles */
+
+h1,
+.title {
+    color: #707070 !important;
+    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+    font-weight: 100 !important;
+    line-height: 130%;
+    height: auto !important;
+}
+
+h1 {
+    font-size: 36px;
+    margin: 0 0 35px;
+}
+
+h3 {
+	font-family: 'Segoe UI Semibold','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+	line-height: 20px;
+}
+
+h4, h5, h6 {
+    color: #2a2a2a;
+    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+    font-weight: normal !important;
+    line-height: 130%;
+    height: auto !important;
+    margin: 0px;
+}
+
+p {
+    margin: 0 0 5px 0 !important;
+}
+
+/*-----FOOTER-----*/
+#Footer {
+    border-top: solid 1px #dbdbdb;
+    margin: 136px auto 48px;
+    padding: 29px 0 0 0;
+}
+
+.FooterLogoContainer {
+    background-image: url('common.png');
+    background-position: -119px -1px;
+    display: block;
+    height: 17px;
+    margin-bottom: 7px;
+    width: 104px;
+}
+
+.FooterLinks {
+    color: #707070;
+    float: right;
+    font-size: 10px;
+    margin: 0 0 48px;
+    padding: 0px 0 12px 0px;
+}
+
+.FooterLinks a,
+.FooterLinks a:link,
+.FooterLinks a:visited {
+    color: #707070;
+    float: right;
+}
+
+.FooterLinks a:hover {
+    color: #2a2a2a !important;
+    float: right;
+}
+
+.FooterAnchorList a,
+.FooterAnchorList a:link,
+.FooterAnchorList a:visited {
+    color: #707070;
+    float: left;
+}
+
+.FooterAnchorList a:hover {
+    color: #2a2a2a !important;
+    float: left;
+}
+
+.FooterAnchorList {
+    float: right;
+}
+
+.FooterCopyright {
+    color: #707070;
+    font-size: 12px;
+    float: left;
+    margin-top: 1px;
+}
+
+.Pipe {
+    color: #707070;
+    float: right;
+    font-size: 10px;
+    padding: 0 10px 0 11px;
+}
+
+.FooterAnchorList .Pipe {
+    color: #707070;
+    float: left;
+    font-size: 10px;
+    padding: 0 10px 0 11px;
+}
+
+.IE7 .discover .search {
+    width: 350px;
+}
+
+.IE7 .statsThreads .statGroup a.stat {
+    margin-right: 3px;
+}
+
+.IE7 DIV.threads > SPAN {
+    padding: 0 2em !important;
+    width: auto;
+}
+
+
+/*---------- Begin RTL ----------*/
+
+.rtl #ux-header .Search {
+    float: left;
+}
+
+.rtl body,
+.rtl #ux-footer {
+    direction: rtl;
+}
+
+.rtl .siteLogo {
+    float: right;
+}
+
+.rtl #ux-footer {
+    text-align: right;
+}
+
+.rtl .Search .TextBoxSearch,
+.rtl .Search .TextBoxSearchLoaded {
+    margin: 0 0 0 5px;
+    float: right;
+}
+
+.rtl #ux-header .SearchButton {
+    margin: 3px 0 0 5px;
+}
+
+.rtl #ux-header #HeaderSearchTextBox {
+    width: 225px;
+}
+
+.rtl .createProfileLink[href=""][title=""] {
+    left: -34px;
+    float: right;
+}
+
+.rtl #ux-header .PassportScarab {
+    padding: 0 7px 0 0;
+}
+
+.IE7 .rtl #JelloExpander {
+    min-width: 943px;
+    background: #fff;
+}
+
+.rtl #Search .sidebar {
+    padding: 0 0 0 10px !important;
+}
+
+.rtl .search #searchBoxContainer {
+    padding: 2px 0 0 !important;
+}
+
+.rtl .ResultItemRight {
+    padding: 0 35px 0 0 !important;
+}
+
+.rtl input#ErrorSearchBox {
+    float: right !important;
+    border-right: solid 1px #849CB1 !important;
+}
+
+/*---------- Begin RTL ----------*/
