@@ -25,5 +25,7 @@
 \BOOKMARK [1][-]{section.3.2}{Datenmodell}{chapter.3}% 25
 \BOOKMARK [1][-]{section.3.3}{Projektarchitektur}{chapter.3}% 26
 \BOOKMARK [0][-]{chapter.4}{Selbstevaluation}{}% 27
-\BOOKMARK [0][-]{chapter.5}{Zusammenfassung}{}% 28
-\BOOKMARK [0][-]{appendix.A}{Additional Information}{}% 29
+\BOOKMARK [1][-]{section.4.1}{Probleme bei der Entwicklung}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.1.1}{Event-Handling mit MVVM-Light}{section.4.1}% 29
+\BOOKMARK [2][-]{subsection.4.1.2}{UnitOfWork-Instanzen}{section.4.1}% 30
+\BOOKMARK [0][-]{appendix.A}{Additional Information}{}% 31

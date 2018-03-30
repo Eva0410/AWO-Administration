@@ -27,7 +27,7 @@ Falls der Benutzer nach dem Anlegen des Kunden noch Änderungen vornehmen möcht
 \end{figure}
 Technischer Hintergrund:
 Damit die Kunden auf der Startseite angezeigt werden können, müssen sie zuerst aus der Datenbank in eine ObservableCollection vom Typ Customer geladen werden. 
-Danach wird auf Basis der Datensätze eine ICollectionView erstellt, welche die Daten dann anzeigt. Im Vergleich zur ObservableCollection bietet die ICollectionView beim Anzeigen viele Vorteile (siehe Kapitel Filtern und Sortieren). 
+Danach wird auf Basis der Datensätze eine ICollectionView erstellt, welche die Daten dann anzeigt. Im Vergleich zur ObservableCollection bietet die ICollectionView beim Anzeigen viele Vorteile (siehe Kapitel 3.1.8). 
 Um einen Kunden zu bearbeiten, muss das Objekt zuerst lokal kopiert werden.
 \begin{lstlisting}
 private Customer CopyCustomer(Customer item)
@@ -49,21 +49,10 @@ private Customer CopyCustomer(Customer item)
 	return customer;
 }
 \end{lstlisting}
-Der Grund dafür ist, dass immer dieselbe Instanz von ''UnitOfWork'' verwendet wird. Wenn nur eine Referenz auf das Objekt erstellt werden würde, könnten die Änderungen nie rückgängig macht werden, weil sie ja immer sofort in die ''UnitOfWork'' übertragen werden würden.
+Der Grund dafür ist, dass immer dieselbe Instanz von ''UnitOfWork'' verwendet wird. Wenn nur eine Referenz auf das Objekt erstellt werden würde, könnten die Änderungen nie rückgängig macht werden, weil sie ja immer sofort in die UnitOfWork-Instanz übertragen werden würden (siehe Kapitel 4.1.2).
 \begin{lstlisting}
 Customer cus = uow.CustomerRepository.GetById(1);
 \end{lstlisting}
-Beispiel: Der Benutzer öffnet einen Kunden und möchte den Vornamen von 'Max' auf 'Maxi' ändern. Bevor er die Änderung speichert, beschließt er allerdings, dass er die Änderung doch nicht vornehmen möchte und klickt statt 'Speichern' auf 'Abbrechen'. Wenn er nun auf zurück auf der Startseite ist, wurde der Vorname aber trotzdem auf 'Maxi' geändert.
-Das würde passieren, wenn zuvor keine lokale Kopie erstellt worden wäre und somit der alte Vorname überschrieben worden wäre.
-\newline Eine andere Möglichkeit wäre, für jeden Datenbankzugriff eine neue Instanz von ''UnitOfWork'' in einem Using-Block zu benutzen. Dann müsste man nur eine Referenz auf einen Kunden erstellen und könnte trotzdem den vorherigen Zustand wiederherstellen.
-\begin{lstlisting}
-using(UnitOfWork uow = new UnitOfWork())
-{
-	Customer cus = uow.CustomerRepository.GetById(1);
-}
-\end{lstlisting}
-Dennoch hat auch diese Vorgehensweise Nachteile, denn dann müsste wirklich jeder einzelner Datenbankzugriff von einem Using-Block umgeben sein und das würde den Code wesentlich verlängern und unverständlicher machen.
-\newline
 Damit ein Kunde gelöscht werden kann, enthält die Klasse Kunde eine Property namens 'Deleted', welche angibt, ob der Kunde gelöscht wurde. Wenn diese auf 'true' gesetzt wird, kann der Benutzer den Kunden durch die Checkbox auf der Startseite ausblenden. Falls er dies nicht tut, wird der Kunde auf der Startseite angezeigt, allerdings erscheint eine Fehlermeldung, wenn der Benutzer versucht die Detailseite des Kunden zu öffnen. Dadurch ist es auch unmöglich neue Bestellungen für diesen Kunden anzulegen oder die Daten des Kunden zu bearbeiten. Die Bestellungen des gelöschten Kunden werden trotzdem normal angezeigt.
 \subsection{Auftragsverwaltung}
 Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen- und Kontaktlinsenaufträge. Eigentlich haben beide Arten dieselben Eigenschaften, nur der Brillenauftrag verweist auf eine Brillenfassung und der Kontaktlinsenauftrag nicht. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer beispielsweise unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwischen Brillen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt ''Aufträge'' auch zwei verschiedene Listen angezeigt. Jeder dieser Aufträge beinhaltet nur eine Brillen- oder Kontaktlinsenbestellung. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Allerdings kann der Benutzer von dieser Sicht aus keine neuen Aufträge erfassen, dazu muss er in der Kundenverwaltung zuerst einen Kunden auswählen. 
@@ -75,7 +64,7 @@ Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen- und Kontaktlinsenauft
 	\label{fig:sample}
 \end{figure}
 Wenn der Benutzer doppelt auf einen Auftrag klickt, erscheint entweder ein Detailfenster eines Brillenauftrags oder Kontaktlinsenauftrags. Im rechten Bereich des Fensters kann der Benutzer die einzelnen Preise der Komponenten angeben. Das Programm rechnet alle Preise  brutto und gibt zum Schluss die darin enthaltene Mehrwertsteuer an. Es wird nach folgender Formel gerechnet: Zuerst werden linker und rechter Glaspreis, Preis von Sonstigem und wenn vorhanden der Verkaufspreis der Brillenfassung addiert. Davon wird das Krankenkassageld abgezogen, der Selbstbehalt hinzugezählt und der Rabatt (dieser wird in Euro angegeben) wieder subtrahiert. Zwanzig Prozent davon sind schlussendlich die Mehrwertsteuer. 
-Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung angeben. Wenn der Benutzer den Bearbeitungsstatus auf ''Abgeholt'' setzt, wird auch der Status der Brillenfassung in der Brillenfassungsverwaltung auf ''Verkauft'' gesetzt.
+Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung angeben. Wenn der Benutzer den Bearbeitungsstatus auf ''Abgeholt'' setzt, wird auch der Status der Brillenfassung in der Brillenfassungsverwaltung auf ''Verkauft'' gesetzt. \newline Der Benutzer hat die Möglichkeit zu jedem Auftrag einen Augenarzt zu vermerken. Von diesem Arzt wird allerdings nur der Name gespeichert. Der Benutzer kann nur aus einer Liste von Ärzten auswählen, welche er  selbst mittels dem Button 'Neuer Doktor' angelegt hat.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.3]{images/Brillenauftrag.png}
@@ -561,7 +550,7 @@ else
 View.SortDescriptions.Clear();
 View.SortDescriptions.Add(new SortDescription(header, dir));
 \end{lstlisting}
-SortHeaders ist eine globale Variable vom Typ List\textless GridViewColumnHeader\textgreater , der die Spalten enthält, nach welchen aktuell sortiert wird. Die lokale Variable ''dir'' bezeichnet die gewünschte Sortierrichtung und ist vom Typ ListSortDirection. Der String ''header'' enthält die Property, auf die der GridViewColumnHeader bindet. Diese ist natürlich Englisch und stellt wieder ein Übersetzungsproblem dar. \newline Wie schon weiter oben erwähnt, ist der Typ ICollectionView extra für das Darstellen von Listen gemacht, deshalb enthält er auch eine Eigenschaft SortDescriptions, in welche man beliebig viele SortDescriptions einfügen kann und nach welchen die Liste automatisch sortiert wird. In den Methoden ChangeArrow und SetNewArrow wird die Spalte entsprechend breiter gemacht und das passende vorgefertigte Template gesetzt.
+SortHeaders ist eine globale Variable vom Typ List\textless GridViewColumnHeader\textgreater , der die Spalten enthält, nach welchen aktuell sortiert wird. Die lokale Variable ''dir'' bezeichnet die gewünschte Sortierrichtung und ist vom Typ ListSortDirection. Der String ''header'' enthält die Property, auf die der GridViewColumnHeader bindet. Diese ist natürlich Englisch und stellt wieder ein Übersetzungsproblem dar. \newline Wie schon weiter oben erwähnt, ist der Typ ICollectionView extra für das Darstellen von Listen gemacht, deshalb enthält er auch eine Eigenschaft SortDescriptions, in welche man beliebig viele SortDescriptions einfügen kann und nach welchen die Liste automatisch sortiert wird. In den Methoden ChangeArrow und SetNewArrow wird die Spalte entsprechend breiter gemacht und das passende vorgefertigte Template gesetzt. Dieses enthält selbst designete Bilder von Pfeilen, die unter den Ressourcen des Projektes abgespeichert sind.
 \begin{lstlisting}
 column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUp") as DataTemplate;
 \end{lstlisting}
@@ -603,4 +592,59 @@ if (View.SortDescriptions.Count >= 1)
 }
 \end{lstlisting}
 \section{Datenmodell}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=1.1]{images/db.png}
+\end{center}
+	\caption{Datenmodell}
+	\label{fig:sample}
+\end{figure}
+Wie auch der Rest der Diplomarbeit, wurde auch das Datenmodell des Administrationsprogramms und der Website strikt getrennt. Dabei gehören die Tabellen TODO ..  der Website an und der Rest der Tabellen dem Administrationsprogramm. \newline Die Tabelle, die die meisten Felder enthält ist Tabelle der Aufträge (Order). In einem Datensatz dieser Tabelle kann entweder einen Brillenauftrag oder einen Kontaktlinsenauftrag enthalten,  was mit dem Attribut 'OrderType' gekennzeichnet ist. Falls es sich um einen Brillenauftrag handelt nimmt 'OrderType' den Wert 'B' an, ansonsten 'K'. Je nach dem um welchen Auftrag es sich handelt, kann ein Glas- bzw. Kontaktlinsentyp mit dem Auftrag verknüpft werden. In jeder der beiden Tabellen wird nur der Name des Glastyps/Kontaktlinsentyps gespeichert. Mit dem Glastyp kann beispielsweise angegeben werden, ob es sich um eine Nah- oder Fernbrille handelt. Werte in der Tabelle Kontaktlinsentyp könnten 'Weich 6 Monate' oder 'Formstabil 12 Monate' sein. \newline Falls der Auftrag ein Brillenauftrag ist, kann zusätzlich auch eine Brillenfassung vermerkt werden. In der Tabelle werden auch sämtliche Werte der Gläser gespeichert, welche die meisten Attribute in der Tabelle in Anspruch nehmen. Unter dem Attribut 'BillPath' bzw. 'OrderConfirmationPath' wird jeweils der Pfad zur letzten erstellten Rechnung/Auftragsbestätigung gespeichert. Falls der Kunde den Auftrag mit einem Augenarzt ('Doctor') in Verbindung bringen möchte, ist das ebenfalls möglich. \newline Jeder Auftrag muss einem Kunden zugewiesen werden. Die Tabelle Kunde enthält alle Grunddaten des Kunden, wobei Ort und Land in eigene Tabellen ausgelagert sind. Außerdem kann der Benutzer sonstige Informationen sowie Job oder Hobbys des Kunden speichern. Zusätzlich ist auch vermerkt, ob der Kunde Massennachrichten erhalten soll ('Newsletter') und ob der Kunde gelöscht wurde ('Deleted', siehe Kapitel 3.1.1).\newline Weiters gibt es noch die Tabellen Lieferant ('Supplier'), in der alle Informationen über einen Lieferanten gespeichert werden, wobei Ort und Land wieder in eigene Tabellen ausgelagert sind, und die Tabelle der Brillenfassungen ('EyeGlassFrame'). Diese enthält alle Informationen zu einer lagernden Brillenfassung. \newline Damit alle versendeten Nachrichten nach dem Versenden noch einmal angezeigt werden können, gibt es die Tabellen 'CustomMessage' und 'CustomRecipient'. In der Tabelle 'CustomMessage' wird das Datum sowie die Uhrzeit der Nachricht, der Text, der Typ der Nachricht (SMS oder E-Mail), der Betreff (falls es sich um eine E-Mail handelt) und die Id des Auftrages (falls es eine einzelne Nachricht ist) gespeichert. Eine solche Nachricht kann beliebig viele Empfänger haben. Die Empfänger der Nachricht müssen gesichert werden, da sonst im Nachhinein unklar ist, wer die Nachricht erhalten hat und an welche Telefonnummer bzw. E-Mail Adresse die Mitteilung versendet worden ist. Diese könnte ja seit dem Versenden der Nachricht verändert worden sein. Jeder der gespeicherten  Empfänger muss einem Kunden in der Datenbank zugeordnet sein.
 \section{Projektarchitektur}
+Um die Diplomarbeit so übersichtlich wie möglich zu halten, wurden fünf Projekte kombiniert.
+\begin{itemize}
+\item 'OpticianMgr.FillDb': Es handelt sich um eine Konsolenapplikation, welche den ConnectionString zur Datenbank enthält. Beim Start dieses Projektes wird der Inhalt der gesamten Datenbank gelöscht und mit Testdatensätzen gefüllt. Diese Daten werden zuvor in CSV-Files abgespeichert. Für jede Tabelle in der Datenbank gibt es ein CSV-File, welches eben solche selbst geschriebenen Testdatensätze beinhaltet. Ein Testdatensatz für einen Kunden könnte beispielsweise so aussehen: \newline ''Mag.;Susi;Sonne;Sonnenstraße;3;4020;Österreich;0650789456123;07242456123789; susi@gmail.com;Gebietskrankenkassa;Polizistin;Fußball;Arbeitet in Wels;Hat vormittags keine Zeit;7789031098;03.10.1998'' \newline Die einzelnen Werte der Attribute werden durch Strichpunkte getrennt. Die Reihenfolge der Werte muss für alle Datensätze dieselbe sein, deshalb wird sie meisten am Beginn des Files angeführt.
+\item 'OpticianMgr.Core': Dieses Projekt enthält alle Entitäten der Datenbank, einige Interfaces sowie eine Klasse, die das Einlesen und Einfügen der Testdatensätze in die Datenbank übernimmt. \newline In dem Unterordner ''Entities'' sind die Entitäten der Datenbank sowie die Klasse ''EntityObject'' enthalten. Wie im Kapitel 2.2 schon beschrieben, erben alle Entitäten von dieser Basisklasse, sodass jede Entität eine Id und einen Timestamp besitzt. Die Klasse ''Town'' wurde beispielsweise so implementiert:
+\begin{lstlisting}
+namespace OpticiatnMgr.Core.Entities
+{
+    public class Town : EntityObject
+    {
+        [Required(ErrorMessage ="Bitte geben Sie einen Ortsnamen an!"), MaxLength(100, ErrorMessage ="Der Name des Ortes ist zu lange!")]
+        public string TownName { get; set; }
+        [Required(ErrorMessage = "Bitte geben Sie eine Postleitzahl an!"), MaxLength(15, ErrorMessage = "Die Postleitzahl ist zu lange!")]
+        public string ZipCode { get; set; }
+    }
+}
+\end{lstlisting}
+Dieser Code gibt an, dass jeder Ort obligatorisch eine Bezeichnung und eine Postleitzahl haben muss. Außerdem darf die Ortsbezeichnung maximal 100 Zeichen haben und der Postleitzahl nur 15. Das ist für Fälle außerhalb von Österreich gedacht. \newline Zusätzlich beinhaltet dieses Projekt auch noch die Interfaces ''IGenericRepository'' und ''IUnitOfWork''. Deren Aufgaben wurden allerdings schon im Kapitel 2.2 beschrieben. \newline Zuletzt enthält das 'Core'-Projekt auch noch eine Klasse namens 'OpticianController'. Diese implementiert wiederum eine Methode 'FillDatabaseFromCsv()', welche die Testdatensätze der CSV-Files einlest, per LINQ konvertiert und in der Datenbank abspeichert. Um beispielsweise Testdatensätze für Orte einzulesen wird folgende Methode verwendet: 
+\begin{lstlisting} 
+private List<Town> GetTowns()
+{
+	return GetStringMatrix("TestOrte.csv").Select(o =>
+	new Town()
+	{
+		TownName = o[1],
+		ZipCode = o[0]
+	}
+).ToList();
+}\end{lstlisting} Die Methode 'GetStringMatrix' sucht im Projektverzeichnis nach einem File mit dem übergebenen Namen und gibt ein zweidimensionales String-Array mit den Daten zurück. Mittels Linq wird jede Zeile dieses Arrays dann in einen Ort verwandelt, dessen Postleitzahl die erste Spalte des Arrays ist und die Bezeichnung die Zweite.
+\item 'OpticianMgr.Persistence': Dieses Projekt beinhaltet die Klassen 'ApplicationDbContext', 'GenericRepository' und 'UnitOfWork'. Die beiden letzteren sind wesentlich Bestandteile des Data-Acces-Layers des UnitOfWork-Patterns und deshalb im Kapitel 2.2 gut beschrieben. Die Klasse 'ApplicationDbContext' beinhaltet alle DbSets der Entitäten und den ConnectionString, über welchen die Datenbank erstellt werden soll (Kapitel 2.1).
+\item 'OpticianMgr.Wpf': Diese Projekt führt das Administrationsprogramm der Diplomarbeit aus. Zu den dazu notwendigen Klassen zählen in erster Linie alle Views, also alle Fenster, die der Benutzer sieht, sobald er das Programm startet. Zu jede dieser Views wurde ein ViewModel erstellt, welches den logischen Code zur View enthält. Neben den vielen ViewModels gehören dem Projekt auch alle Ressourcen und Einstellungen an, welche zur Ausführung der WPF-Applikation notwendig sind (siehe Kapitel 3.1.7 Vorgegebene Texte bearbeiten - User-Settings, 3.1.8 Filtern-'ResourceManager', 3.1.8 Sortieren - Bilder der Pfeile). \newline Weiters enthält das Projekt Klassen wie den 'VieModelLocator', welcher Referenzen zu allen ViewModels zur Verfügung stellt (Kapitel 2.5).  Außerdem gibt es noch den 'SortManager', der die Sortierung der Daten übernimmt (Kapitel 3.1.8) und den 'FileCreater', welcher zur Erstellung von Word-Dokumenten notwendig ist (Kapitel 3.1.2). \newline Um neue Fenster anzuzeigen und wieder zu schließen, wurden die Klasse 'WindowService' sowie die Interfaces 'IRequestClose' und 'IWindowService' benötigt. Der WindowService enthält für jedes Fenster, das man aus dem Programm öffnen können soll, eine Methode, welche dann wiederum die generische Methode 'ShowWindow' aufruft.
+\begin{lstlisting}
+public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
+{
+	EventHandler<EventArgs> closeHandler = null;
+	closeHandler = (sender, e) =>
+	{
+		viewModel.CloseRequested -= closeHandler;
+		newWindow.Close();
+	};
+	viewModel.CloseRequested += closeHandler;
+	newWindow.DataContext = viewModel;
+	newWindow.ShowDialog();
+}
+\end{lstlisting}
+Wichtig ist dabei, dass das ViewModel vom Interface IRequestClose ableitet, damit das ViewModel das Event CloseRequested enthält. Diese dient dazu, dass das ViewModel, welches ein weiteres Fenster öffnet, auf das Schließen des neuen Fensters reagieren kann. 
+\item 'OpticianMgr.Web': TODO
+\end{itemize} 

@@ -3,43 +3,45 @@
 \select@language {english}
 \select@language {german}
 \select@language {german}
-\contentsline {chapter}{\numberline {1}Einleitung}{2}{chapter.1}
-\contentsline {section}{\numberline {1.1}Ist-Situation}{2}{section.1.1}
-\contentsline {section}{\numberline {1.2}Zielsetzung}{2}{section.1.2}
-\contentsline {section}{\numberline {1.3}Aufgabenstellung}{2}{section.1.3}
-\contentsline {chapter}{\numberline {2}Verwendete Technologien}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}Entit\IeC {\"a}t Framework}{3}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Linq}{3}{subsection.2.1.1}
-\contentsline {section}{\numberline {2.2}UnitOfWork Pattern}{4}{section.2.2}
-\contentsline {section}{\numberline {2.3}WPF}{5}{section.2.3}
-\contentsline {section}{\numberline {2.4}MVVM}{6}{section.2.4}
-\contentsline {section}{\numberline {2.5}MVVM-Light}{7}{section.2.5}
-\contentsline {section}{\numberline {2.6}Microsoft Office Interop}{9}{section.2.6}
-\contentsline {section}{\numberline {2.7}WPF-Toolkit}{10}{section.2.7}
-\contentsline {section}{\numberline {2.8}MessageBird}{10}{section.2.8}
-\contentsline {subsubsection}{Andere M\IeC {\"o}glichkeiten}{11}{section*.4}
-\contentsline {chapter}{\numberline {3}Administrationsprogramm und Website}{12}{chapter.3}
-\contentsline {section}{\numberline {3.1}Administration}{12}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Kundenverwaltung}{12}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Auftragsverwaltung}{15}{subsection.3.1.2}
+\contentsline {chapter}{\numberline {1}Einleitung}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Ist-Situation}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}Zielsetzung}{3}{section.1.2}
+\contentsline {section}{\numberline {1.3}Aufgabenstellung}{3}{section.1.3}
+\contentsline {chapter}{\numberline {2}Verwendete Technologien}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}Entit\IeC {\"a}t Framework}{4}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Linq}{4}{subsection.2.1.1}
+\contentsline {section}{\numberline {2.2}UnitOfWork Pattern}{5}{section.2.2}
+\contentsline {section}{\numberline {2.3}WPF}{6}{section.2.3}
+\contentsline {section}{\numberline {2.4}MVVM}{7}{section.2.4}
+\contentsline {section}{\numberline {2.5}MVVM-Light}{8}{section.2.5}
+\contentsline {section}{\numberline {2.6}Microsoft Office Interop}{10}{section.2.6}
+\contentsline {section}{\numberline {2.7}WPF-Toolkit}{11}{section.2.7}
+\contentsline {section}{\numberline {2.8}MessageBird}{11}{section.2.8}
+\contentsline {subsubsection}{Andere M\IeC {\"o}glichkeiten}{12}{section*.4}
+\contentsline {chapter}{\numberline {3}Administrationsprogramm und Website}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Administration}{13}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Kundenverwaltung}{13}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Auftragsverwaltung}{16}{subsection.3.1.2}
 \contentsline {subsubsection}{Dokumente erstellen}{17}{section*.5}
-\contentsline {subsection}{\numberline {3.1.3}Lieferantenverwaltung}{22}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Verwaltung der lagernden Brillenfassungen}{22}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}E-Mail und SMS}{23}{subsection.3.1.5}
-\contentsline {subsubsection}{Massennachrichten}{23}{section*.6}
-\contentsline {subsubsection}{E-Mail}{23}{section*.7}
-\contentsline {subsubsection}{SMS}{25}{section*.8}
-\contentsline {subsubsection}{Einzelne Nachrichten}{25}{section*.9}
-\contentsline {subsubsection}{Versendete Nachrichten}{26}{section*.10}
-\contentsline {subsection}{\numberline {3.1.6}Statistiken}{27}{subsection.3.1.6}
-\contentsline {subsubsection}{Technischer Hintergrund}{27}{section*.11}
-\contentsline {subsection}{\numberline {3.1.7}Sonstiges}{28}{subsection.3.1.7}
-\contentsline {subsubsection}{Vorgegebene Texte bearbeiten}{29}{section*.12}
-\contentsline {subsection}{\numberline {3.1.8}Filtern und Sortieren}{31}{subsection.3.1.8}
-\contentsline {subsubsection}{Filtern}{31}{section*.13}
-\contentsline {subsubsection}{Sortieren}{34}{section*.14}
-\contentsline {section}{\numberline {3.2}Datenmodell}{38}{section.3.2}
-\contentsline {section}{\numberline {3.3}Projektarchitektur}{38}{section.3.3}
-\contentsline {chapter}{\numberline {4}Selbstevaluation}{39}{chapter.4}
-\contentsline {chapter}{\numberline {5}Zusammenfassung}{40}{chapter.5}
-\contentsline {chapter}{\numberline {A}Additional Information}{44}{appendix.A}
+\contentsline {subsection}{\numberline {3.1.3}Lieferantenverwaltung}{23}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Verwaltung der lagernden Brillenfassungen}{23}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}E-Mail und SMS}{24}{subsection.3.1.5}
+\contentsline {subsubsection}{Massennachrichten}{24}{section*.6}
+\contentsline {subsubsection}{E-Mail}{24}{section*.7}
+\contentsline {subsubsection}{SMS}{26}{section*.8}
+\contentsline {subsubsection}{Einzelne Nachrichten}{26}{section*.9}
+\contentsline {subsubsection}{Versendete Nachrichten}{27}{section*.10}
+\contentsline {subsection}{\numberline {3.1.6}Statistiken}{28}{subsection.3.1.6}
+\contentsline {subsubsection}{Technischer Hintergrund}{28}{section*.11}
+\contentsline {subsection}{\numberline {3.1.7}Sonstiges}{29}{subsection.3.1.7}
+\contentsline {subsubsection}{Vorgegebene Texte bearbeiten}{30}{section*.12}
+\contentsline {subsection}{\numberline {3.1.8}Filtern und Sortieren}{32}{subsection.3.1.8}
+\contentsline {subsubsection}{Filtern}{32}{section*.13}
+\contentsline {subsubsection}{Sortieren}{35}{section*.14}
+\contentsline {section}{\numberline {3.2}Datenmodell}{41}{section.3.2}
+\contentsline {section}{\numberline {3.3}Projektarchitektur}{42}{section.3.3}
+\contentsline {chapter}{\numberline {4}Selbstevaluation}{46}{chapter.4}
+\contentsline {section}{\numberline {4.1}Probleme bei der Entwicklung}{46}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Event-Handling mit MVVM-Light}{46}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}UnitOfWork-Instanzen}{47}{subsection.4.1.2}
+\contentsline {chapter}{\numberline {A}Additional Information}{51}{appendix.A}
