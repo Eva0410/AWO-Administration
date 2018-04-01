@@ -1,0 +1,2657 @@
+<!DOCTYPE html>
+<html itemtype="http://schema.org/QAPage" itemscope="">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm">
+<meta name="wpd_url" content="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm">
+<meta name="wpd_date" content="2017-09-28T11:11Z">
+
+
+<title>Firing a double click event from a WPF ListView item using MVVM - Stack Overflow</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="https://stackoverflow.com/opensearch.xml">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:domain" content="stackoverflow.com">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Firing a double click event from a WPF ListView item using MVVM">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="In a WPF application using MVVM, I have a usercontrol with a listview item. In run time, it will use databinding to fill the listview with a collection of objects.
+
+What is the correct way to attac...">
+    <meta property="og:url" content="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm">
+    <link rel="canonical" href="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm">
+
+    
+    
+    <script src="rules-p-c1rF4kxgLUzNc.js"></script><script src="quant.js" async=""></script><script src="beacon.js" async=""></script><script src="analytics.js" async=""></script><script src="jquery.min.js"></script>
+    <script src="stub.en.js"></script>
+    
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question 'Firing a double click event from a WPF ListView item using MVVM'" href="https://stackoverflow.com/feeds/question/1035023">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+
+        
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:1035023});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '1035023');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', true); });
+
+            });
+        </script>
+
+
+    <script>
+
+        StackExchange.init({"locale":"en","serverTime":1509189090,"routeName":"Questions/Show","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"c418a61c7232a88b0bcb0cb48987e57e","tid":"5d8653d5-734b-1de5-7111-a6b225fb9152","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"canSeeNewHeaderDesign":true},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300},"jobPreferences":{"maxNumDeveloperRoles":2,"maxNumIndustries":4}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"topBar":{"showNewFeatureNotice":true},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"5824c9915297","js/moderator.en.js":"f2fc83d763a4","js/full-anon.en.js":"f0d61a62e14d","js/full.en.js":"f6ab2875d2f4","js/wmd.en.js":"b83084e5904f","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"cbcfabbe625c","js/help.en.js":"118cb359bcc6","js/tageditor.en.js":"9c6df10dabc4","js/tageditornew.en.js":"041eb699b0cd","js/inline-tag-editing.en.js":"51e3b8dc46d2","js/revisions.en.js":"47de10a8358f","js/review.en.js":"e32525dcdee4","js/tagsuggestions.en.js":"d1ff9b84abe5","js/post-validation.en.js":"164e6d28a39c","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"741c962e2405","js/keyboard-shortcuts.en.js":"5deba3e9d275","js/external-editor.en.js":"3e5baf662544","js/adops.en.js":"9a6a7812a212","js/external-editor.en.js":"3e5baf662544","js/snippet-javascript.en.js":"a8c4ccffb387","js/snippet-javascript-codemirror.en.js":"58827fb3626a"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+
+        <script>
+
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css"><style>body,.top-bar{margin-top:1.9em}</style></noscript>
+<script src="full-anon.en.js" async=""></script><script src="snippet-javascript.en.js" async=""></script><script src="post-validation.en.js" async=""></script><script src="prettify-full.en.js" async=""></script><script src="external-editor.en.js" async=""></script><script async="" src="pubads_impl_162.js"></script><link href="https://tpc.googlesyndication.com/safeframe/1-0-13/html/container.html" rel="prefetch"><link href="https://securepubads.g.doubleclick.net/static/3p_cookie.html" rel="prefetch">
+<link rel="stylesheet" type="text/css" href="firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm.css" media="all">
+</head>
+<body class="question-page new-topbar">
+            <script async="" src="185901-159836282584097.js"></script>
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+
+
+<header class="top-bar js-top-bar _fixed">
+    <div class="-container">
+        <div class="-main">
+            
+                <a href="https://stackoverflow.com/" class="-logo js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+                   <span class="-img">Stack Overflow</span>
+                </a>
+
+            <nav class="navigation" role="navigation" aria-label="site navigation">
+                <ol class="-list">
+    <li class="-item _current">
+        <a id="nav-questions" href="https://stackoverflow.com/questions" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">Questions</a>
+    </li>
+    <li class="-item">
+        <a id="nav-jobs" href="https://stackoverflow.com/jobs?med=site-ui&amp;ref=jobs-tab" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">Developer Jobs</a>
+    </li>
+    <li class="-item">
+        <a id="nav-tags" href="https://stackoverflow.com/tags" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">Tags</a>
+    </li>
+    <li class="-item">
+        <a id="nav-users" href="https://stackoverflow.com/users" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">Users</a>
+    </li>
+                </ol>
+            </nav>
+
+        </div>
+        
+            <form id="search" action="https://stackoverflow.com/search" method="get" class="searchbar" autocomplete="off" role="search">
+                <input name="q" placeholder="Search…" value="" tabindex="1" autocomplete="off" maxlength="240" class="f-input js-search-field" type="text">
+                <button type="submit" aria-label="Search..." class="btn-topbar-primary js-search-submit"><svg aria-hidden="true" class="svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M12.86 11.32L18 16.5 16.5 18l-5.18-5.14v-.35a7 7 0 1 1 1.19-1.19h.35zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg></button>
+            </form>
+
+        
+
+
+    
+
+<div class="-actions">
+    <nav class="secondary-nav">
+        <div class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://stackoverflow.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+            <a href="https://stackoverflow.com/help" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })">help</a>
+                    <a href="https://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+    <a href="https://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="favicon favicon-stackoverflow site-icon" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                            <a href="https://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="favicon favicon-stackoverflowmeta site-icon" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1035023%2ffiring-a-double-click-event-from-a-wpf-listview-item-using-mvvm" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+                <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="https://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+
+                            Tour
+                            <span class="item-summary">
+
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="https://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+
+                        Help Center
+                        <span class="item-summary">
+
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+
+                                Meta
+                                <span class="item-summary">
+
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+
+                                About Us
+                                <span class="item-summary">
+
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+
+                                Business
+                                <span class="item-summary">
+
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+        </div>
+        <ol class="-list">
+
+
+    <li class="-item"><a href="#" class="-link js-help-button" title="Help Center and other resources">
+        <svg aria-hidden="true" class="svg-icon iconHelp" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zm.81 12.13c-.02.71-.55 1.15-1.24 1.13-.66-.02-1.17-.49-1.15-1.2.02-.72.56-1.18 1.22-1.16.7.03 1.2.51 1.17 1.23zM11.77 8a5.8 5.8 0 0 1-1.02.91l-.53.37c-.26.2-.42.43-.5.69a4 4 0 0 0-.09.75c0 .05-.03.16-.18.16H7.88c-.16 0-.18-.1-.18-.15.03-.66.12-1.21.4-1.66a5.29 5.29 0 0 1 1.43-1.22c.16-.12.28-.25.38-.39a1.34 1.34 0 0 0 .02-1.71c-.24-.31-.51-.46-1.03-.46-.51 0-.8.26-1.02.6-.21.33-.18.73-.18 1.1H5.75c0-1.38.35-2.25 1.1-2.76.52-.35 1.17-.5 1.93-.5 1 0 1.79.18 2.49.71.64.5.98 1.18.98 2.12 0 .57-.2 1.05-.48 1.44z"></path></svg>
+    </a></li>
+                <li class="-item">
+        <a href="https://stackexchange.com/" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 171 Stack Exchange sites">
+            <svg aria-hidden="true" class="svg-icon iconStackExchange" width="18" height="18" viewBox="0 0 18 18"><path d="M1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2zM15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2zM1 6h16v4H1V6z"></path></svg>
+        </a>
+    </li>
+
+        </ol>
+    </nav>
+        <div class="-ctas">
+                <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1035023%2ffiring-a-double-click-event-from-a-wpf-listview-item-using-mvvm" class="login-link btn-clear" rel="nofollow">Log In</a>
+                    <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;utm_source=stackoverflow.com&amp;utm_medium=dev-story&amp;utm_campaign=signup-redirect" class="login-link btn-topbar-primary" rel="nofollow">Sign Up</a>
+
+        </div>
+</div>
+    </div>
+</header>
+
+    <script>
+
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+        StackExchange.scrollPadding.setPaddingTop(60, 10);     </script>
+
+    <div class="container _full ">
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+
+
+
+
+<div class="s-hero hero-container">
+    <div class="-container g-row jc-sp-between ai-center">
+        <div class="g-col6">
+            <h1 class="-title">Learn, Share, Build</h1>
+            <p class="-paragraph">Each month, over 50 million developers come to Stack Overflow to learn, share their knowledge, and build their careers.</p>
+            <p class="-paragraph">Join the world’s largest developer community.</p>
+        </div>
+        
+        <div class="s-signup _hero g-col5">
+
+            <div id="openid-buttons" class="-social">
+                    <div class="major-provider btn _block _medium _google" data-provider="google" data-oauthserver="https://accounts.google.com/o/oauth2/auth" data-oauthversion="2.0">Google</div>
+                    <div class="major-provider btn _block _medium _facebook" data-provider="facebook" data-oauthserver="https://www.facebook.com/v2.0/dialog/oauth" data-oauthversion="2.0">Facebook</div>
+                            </div>
+
+
+            <small class="-divider text-centered">or</small>
+
+            <form id="login-form" action="https://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1035023%2ffiring-a-double-click-event-from-a-wpf-listview-item-using-mvvm" method="POST">
+        
+                <input name="fkey" value="c418a61c7232a88b0bcb0cb48987e57e" type="hidden">
+
+                <input name="ssrc" value="" type="hidden">
+
+                <input value="" id="oauth_version" name="oauth_version" type="hidden">
+                <input value="" id="oauth_server" name="oauth_server" type="hidden">
+
+                    <div id="se-login-fields">
+
+                        <input name="legalLinksShown" value="1" type="hidden">
+
+                        <div class="input-group">
+                            <div class="g-row">
+                                <label for="display-name" class="g-col -fill">Display name</label>
+                                <div class="g-col">
+                                    <input id="display-name" name="inline-display-name" class="f-input" placeholder="J. Doe" data-error-my="right top" data-error-at="left center" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="g-row">
+                                <label for="email" class="g-col -fill">Email address</label>
+                                <div class="g-col">
+                                    <input id="email" name="inline-email" maxlength="100" class="f-input" placeholder="you@example.com" data-error-my="right top" data-error-at="left center" type="email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="g-row">
+                                <label for="password" class="g-col -fill">Password</label>
+                                <div class="g-col">
+                                    <input id="password" name="inline-password" class="js-inline-signup f-input" placeholder="********" data-error-my="right top" data-error-at="left center" type="password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-group g-row ai-center jc-sp-between">
+                            <input id="submit-button" name="submit-button" class="btn-outlined -white _medium _block" value="Sign Up" type="button">
+
+                            <small class="g-col -policy js-terms">By registering, you agree to the <a href="https://stackexchange.com/legal/privacy-policy" name="privacy" target="_top" class="-link">privacy policy</a> and <a href="https://stackexchange.com/legal/terms-of-service" name="tos" target="_top" class="-link">terms of service</a>.</small>
+                        </div>
+                    </div>
+            </form>
+            <script>
+
+                StackExchange.ready(function () {
+                    StackExchange.InlineAuth.init();
+                })
+            </script>
+        </div>
+
+            <a id="close" href="#" class="js-dismiss -dismiss" title="dismiss"><svg aria-hidden="true" class="svg-icon iconClear" width="18" height="18" viewBox="0 0 18 18"><path d="M15 4.41L13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9z"></path></svg></a>
+    </div>
+</div><script>
+
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 7;
+        } else if ($("body").hasClass("question-page")) {
+            location = 7;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;
+        } else if ($("body").hasClass("home-page")) {
+            location = 6;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('.hero-container #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $(".hero-container").fadeOut("fast", function () {
+                        $(".hero-container").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>    <div class="inner-content">
+        <div id="question-header">
+                <h1 itemprop="name"><a href="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm" class="question-hyperlink">Firing a double click event from a WPF ListView item using MVVM</a></h1>
+
+            
+<div class="aside-cta" role="navigation" aria-label="ask new question">
+    <a href="https://stackoverflow.com/questions/ask" class="btn-outlined">Ask Question</a>
+</div>
+        </div>
+            <div id="mainbar" role="main" aria-label="question and answers">
+
+            
+
+<div class="question" data-questionid="1035023" id="question">
+
+    <div id="dfp-tlb" class="everyonelovesstackoverflow"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="1035023" type="hidden">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">90</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="#">favorite</a>
+        <div class="favoritecount"><b>37</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>In a WPF application using MVVM, I have a usercontrol with a listview item. In run time, it will use databinding to fill the listview with a collection of objects.</p>
+
+<p>What is the correct way to attach a double click event to the items in the listview so that when an item in the list view is doubleclicked, A corresponding event in the view model is fired and has a reference to the item clicked?</p>
+
+<p>How can it be done in a clean MVVM way i.e. no code behind in the View?</p>
+    </div>
+    <div class="post-taglist">
+        <a href="https://stackoverflow.com/questions/tagged/wpf" class="post-tag js-gps-track" title="show questions tagged 'wpf'" rel="tag">wpf</a> <a href="https://stackoverflow.com/questions/tagged/mvvm" class="post-tag js-gps-track" title="show questions tagged 'mvvm'" rel="tag">mvvm</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/q/1035023" title="short permalink to this question" class="short-link" id="link-post-1035023">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/1035023/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        <div class="user-info user-hover">
+    <div class="user-action-time">
+
+        asked <span title="2009-06-23 20:35:04Z" class="relativetime">Jun 23 '09 at 20:35</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/120885/emad"><div class="gravatar-wrapper-32"><img src="58b4d98462847173fe4eed3272b520c4" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/120885/emad">Emad</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,600</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="26 silver badges"><span class="badge2"></span><span class="badgecount">26</span></span><span title="45 bronze badges"><span class="badge3"></span><span class="badgecount">45</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1035023" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-1035023" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+            <div id="answers">
+
+                <a name="tab-top"></a>
+                <div id="answers-header">
+                    <div class="subheader answers-subheader">
+                        <h2>
+
+                                8 Answers
+                                <span style="display: none;" itemprop="answerCount">8</span>
+                        </h2>
+                        <div>
+                            <div id="tabs">
+        <a href="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+
+            active</a>
+        <a href="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+
+            oldest</a>
+        <a class="youarehere" href="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+
+            votes</a>
+</div>
+                        </div>
+                    </div>    
+                </div>    
+
+
+
+
+  
+<a name="1510592"></a>
+<div id="answer-1510592" class="answer" data-answerid="1510592" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="1510592" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">72</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Please, code behind is not a bad thing at all. Unfortunately, quite a lot people in the WPF community got this wrong.</p>
+
+<p>MVVM is not a pattern to eliminate the code behind. It is to separate the view part (appearance, animations, etc.) from the logic part (workflow). Furthermore, you are able to unit test the logic part.</p>
+
+<p>I know enough scenarios where you have to write code behind because data binding is not a solution to everything. In your scenario I would handle the DoubleClick event in the code behind file and delegate this call to the ViewModel.</p>
+
+<p>Sample applications that use code behind and still fulfill the MVVM separation can be found here:</p>
+
+<p>WPF Application Framework (WAF) - <a href="http://waf.codeplex.com/" rel="noreferrer">http://waf.codeplex.com</a></p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/1510592" title="short permalink to this answer" class="short-link" id="link-post-1510592">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/1510592/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+
+        answered <span title="2009-10-02 16:25:18Z" class="relativetime">Oct 2 '09 at 16:25</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/103988/jbe"><div class="gravatar-wrapper-32"><img src="00049b3ab58ccbe94fd0b42635f00ef9" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/103988/jbe">jbe</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">5,914</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="32 silver badges"><span class="badge2"></span><span class="badgecount">32</span></span><span title="31 bronze badges"><span class="badge3"></span><span class="badgecount">31</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1510592" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="1" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-1518242" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Well said, I refuse to use all that code and an extra DLL just to do a double-click!</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/2385/eduardo-molteni" title="29,865 reputation" class="comment-user">Eduardo Molteni</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment1518242_1510592"><span title="2009-10-30 01:51:49Z" class="relativetime-clean">Oct 30 '09 at 1:51</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-2731263" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This only use Binding thing is giving me a real headache. It's like being asked to code with 1 arm, 1 eye on an eye patch, and standing on 1 leg. Double click should be simple, and I don't see how all this additional code is worth it.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/42536/echiban" title="430 reputation" class="comment-user">Echiban</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment2731263_1510592"><span title="2010-04-25 06:31:33Z" class="relativetime-clean">Apr 25 '10 at 6:31</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-3388222" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I'm afraid I do not totally agree with you. If you say 'code behind is not bad', then I have a question about that: Why don't we delegate the click event for button but often using the binding (using Command property) instead?</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/248616/nam-g-vu" title="11,254 reputation" class="comment-user">Nam G VU</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment3388222_1510592"><span title="2010-07-18 08:15:21Z" class="relativetime-clean">Jul 18 '10 at 8:15</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-3391022" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="hot">21</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Nam Gi VU: I would always prefer a Command Binding when it is supported by the WPF Control. A Command Binding does more than just relaying the ‘Click’ event to the ViewModel (e.g. CanExecute). But Commands are only available for the most common scenarios. For other scenarios we can use the code-behind file and there we delegate non-UI related concerns to the ViewModel or the Model.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/103988/jbe" title="5,914 reputation" class="comment-user">jbe</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment3391022_1510592"><span title="2010-07-18 20:14:05Z" class="relativetime-clean">Jul 18 '10 at 20:14</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-3392718" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Now I understand you more! Nice discussion with you!</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/248616/nam-g-vu" title="11,254 reputation" class="comment-user">Nam G VU</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment3392718_1510592"><span title="2010-07-19 03:55:04Z" class="relativetime-clean">Jul 19 '10 at 3:55</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-1510592" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="#" onclick="">show <b>1</b> more comment</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<div id="dfp-mlb" class="everyonelovesstackoverflow"></div>
+  
+<a name="20138901"></a>
+<div id="answer-20138901" class="answer" data-answerid="20138901" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="20138901" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">48</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I am able to get this to work with .NET 4.5.  Seems straight forward and no third party or code behind needed.</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;ListView</span><span class="pln"> </span><span class="atn">ItemsSource</span><span class="pun">=</span><span class="atv">"{Binding Data}"</span><span class="tag">&gt;</span><span class="pln">
+        </span><span class="tag">&lt;ListView.ItemsPanel&gt;</span><span class="pln">
+            </span><span class="tag">&lt;ItemsPanelTemplate&gt;</span><span class="pln">
+                </span><span class="tag">&lt;StackPanel</span><span class="pln"> </span><span class="atn">Orientation</span><span class="pun">=</span><span class="atv">"Horizontal"</span><span class="tag">/&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/ItemsPanelTemplate&gt;</span><span class="pln">
+        </span><span class="tag">&lt;/ListView.ItemsPanel&gt;</span><span class="pln">
+        </span><span class="tag">&lt;ListView.ItemTemplate&gt;</span><span class="pln">
+            </span><span class="tag">&lt;DataTemplate&gt;</span><span class="pln">
+                </span><span class="tag">&lt;Grid</span><span class="pln"> </span><span class="atn">Margin</span><span class="pun">=</span><span class="atv">"2"</span><span class="tag">&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;Grid.InputBindings&gt;</span><span class="pln">
+                        </span><span class="tag">&lt;MouseBinding</span><span class="pln"> </span><span class="atn">Gesture</span><span class="pun">=</span><span class="atv">"LeftDoubleClick"</span><span class="pln"> </span><span class="atn">Command</span><span class="pun">=</span><span class="atv">"{Binding ShowDetailCommand}"</span><span class="tag">/&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;/Grid.InputBindings&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;Grid.RowDefinitions&gt;</span><span class="pln">
+                        </span><span class="tag">&lt;RowDefinition/&gt;</span><span class="pln">
+                        </span><span class="tag">&lt;RowDefinition/&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;/Grid.RowDefinitions&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;Image</span><span class="pln"> </span><span class="atn">Source</span><span class="pun">=</span><span class="atv">"..\images\48.png"</span><span class="pln"> </span><span class="atn">Width</span><span class="pun">=</span><span class="atv">"48"</span><span class="pln"> </span><span class="atn">Height</span><span class="pun">=</span><span class="atv">"48"</span><span class="tag">/&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;TextBlock</span><span class="pln"> </span><span class="atn">Grid</span><span class="pln">.</span><span class="atn">Row</span><span class="pun">=</span><span class="atv">"1"</span><span class="pln"> </span><span class="atn">Text</span><span class="pun">=</span><span class="atv">"{Binding Name}"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+                </span><span class="tag">&lt;/Grid&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/DataTemplate&gt;</span><span class="pln">
+        </span><span class="tag">&lt;/ListView.ItemTemplate&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/ListView&gt;</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/20138901" title="short permalink to this answer" class="short-link" id="link-post-20138901">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/20138901/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+
+        answered <span title="2013-11-22 06:57:01Z" class="relativetime">Nov 22 '13 at 6:57</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/584803/rushui-guan"><div class="gravatar-wrapper-32"><img src="ADYiF.jpg" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/584803/rushui-guan">Rushui Guan</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,655</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="14 silver badges"><span class="badge2"></span><span class="badgecount">14</span></span><span title="20 bronze badges"><span class="badge3"></span><span class="badgecount">20</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20138901" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="3" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-33152939" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">+1 for InputBindings.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/284743/system-cats-lol" title="718 reputation" class="comment-user">System.Cats.Lol</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment33152939_20138901"><span title="2014-02-19 21:33:47Z" class="relativetime-clean">Feb 19 '14 at 21:33</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-37443714" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Doesn't seem to work for the entire area, e.g. I do this on a dock panel and it only works where there is something within the dock panel (e.g. textblock, image) but not the blank space.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/191254/stephen-drew" title="885 reputation" class="comment-user">Stephen Drew</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment37443714_20138901"><span title="2014-06-16 11:41:48Z" class="relativetime-clean">Jun 16 '14 at 11:41</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-37443821" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">3</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">OK - this old chestnut again...need to set the background to transparent to receive mouse events, as per <a href="http://stackoverflow.com/questions/7991314/mouse-event-on-transparent-background" title="mouse event on transparent background">stackoverflow.com/questions/7991314/…</a></span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/191254/stephen-drew" title="885 reputation" class="comment-user">Stephen Drew</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment37443821_20138901"><span title="2014-06-16 11:44:35Z" class="relativetime-clean">Jun 16 '14 at 11:44</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-37443861" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">PS this is the best answer here...</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/191254/stephen-drew" title="885 reputation" class="comment-user">Stephen Drew</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment37443861_20138901"><span title="2014-06-16 11:45:32Z" class="relativetime-clean">Jun 16 '14 at 11:45</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-43999822" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">3</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I was scratching my head trying to figure out why it was working for all of you and not for me. I suddenly realised that within the context of the item template the data context is the current item from the itemssource and not the main window's view model. So I used the following to get it working  &lt;MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Path=DataContext.EditBandCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/&gt;  In my case the EditBandCommand is the command on the page's viewmodel not on the bound entity.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/1153583/naskew" title="1,030 reputation" class="comment-user">naskew</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment43999822_20138901"><span title="2015-01-06 09:20:30Z" class="relativetime-clean">Jan 6 '15 at 9:20</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-20138901" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="#" onclick="">show <b>3</b> more comments</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="1035120"></a>
+<div id="answer-1035120" class="answer" data-answerid="1035120" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="1035120" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">44</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I like to use <a href="http://blogs.msdn.com/johngossman/archive/2008/05/07/the-attached-behavior-pattern.aspx" rel="noreferrer">Attached Command Behaviors</a> and Commands. <a href="http://marlongrech.wordpress.com/2008/12/13/attachedcommandbehavior-v2-aka-acb/" rel="noreferrer">Marlon Grech</a> has a very good implementation of the Attached Command Behaviors. Using these, we could then assign a style to the ListView's <a href="http://msdn.microsoft.com/en-us/library/system.windows.controls.itemscontrol.itemcontainerstyle.aspx" rel="noreferrer">ItemContainerStyle</a> property that will set the command for each ListViewItem.</p>
+
+<p>Here we set the command to be fired on the MouseDoubleClick event, and the CommandParameter, will be the data object that we click on. Here I'm traveling up the visual tree to get the command that I'm using, but you could just as easily create application wide commands.</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;Style</span><span class="pln"> </span><span class="atn">x:Key</span><span class="pun">=</span><span class="atv">"Local_OpenEntityStyle"</span><span class="pln">
+       </span><span class="atn">TargetType</span><span class="pun">=</span><span class="atv">"{x:Type ListViewItem}"</span><span class="tag">&gt;</span><span class="pln">
+    </span><span class="pun">&lt;</span><span class="pln">Setter Property</span><span class="pun">=</span><span class="str">"acb:CommandBehavior.Event"</span><span class="pln">
+
+            Value</span><span class="pun">=</span><span class="str">"MouseDoubleClick"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+    </span><span class="pun">&lt;</span><span class="pln">Setter Property</span><span class="pun">=</span><span class="str">"acb:CommandBehavior.Command"</span><span class="pln">
+
+            Value</span><span class="pun">=</span><span class="str">"{Binding ElementName=uiEntityListDisplay, Path=DataContext.OpenEntityCommand}"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+    </span><span class="pun">&lt;</span><span class="pln">Setter Property</span><span class="pun">=</span><span class="str">"acb:CommandBehavior.CommandParameter"</span><span class="pln">
+
+            Value</span><span class="pun">=</span><span class="str">"{Binding}"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+</span><span class="tag">&lt;/Style&gt;</span></code></pre>
+
+<p>For the commands, you can either implement an <a href="http://msdn.microsoft.com/en-us/library/ms752308.aspx" rel="noreferrer">ICommand</a> directly, or use some of the helpers like those that come in the <a href="http://www.codeplex.com/wpf" rel="noreferrer">MVVM Toolkit</a>.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/1035120" title="short permalink to this answer" class="short-link" id="link-post-1035120">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/1035120/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+
+        answered <span title="2009-06-23 20:52:02Z" class="relativetime">Jun 23 '09 at 20:52</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/90435/rmoore"><div class="gravatar-wrapper-32"><img src="8bb6b928345a9da67f1d2ceb29a6c57e" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/90435/rmoore">rmoore</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 12,783" dir="ltr">12.8k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="50 silver badges"><span class="badge2"></span><span class="badgecount">50</span></span><span title="52 bronze badges"><span class="badge3"></span><span class="badgecount">52</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1035120" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-2125672" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">+1 I've found this to be my preferred solution when working with Composite Application Guidance for WPF (Prism).</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/175094/travis-heseman" title="7,926 reputation" class="comment-user">Travis Heseman</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment2125672_1035120"><span title="2010-02-01 18:26:01Z" class="relativetime-clean">Feb 1 '10 at 18:26</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-3388299" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">What does the namespace 'acb:' stand for in your code sampleabove?</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/248616/nam-g-vu" title="11,254 reputation" class="comment-user">Nam G VU</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment3388299_1035120"><span title="2010-07-18 08:44:35Z" class="relativetime-clean">Jul 18 '10 at 8:44</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-9456078" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@NamGiVU <code>acb:</code> = AttachedCommandBehavior. The code can be found in the first link in the answer</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/302677/rachel" title="85,939 reputation" class="comment-user">Rachel</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment9456078_1035120"><span title="2011-10-14 11:58:54Z" class="relativetime-clean">Oct 14 '11 at 11:58</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-38249434" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">i tried just that and getting null pointer exception from class CommandBehaviorBinding line 99. variable "strategy" is null. whats wrong?</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/1788838/etwas77" title="147 reputation" class="comment-user">etwas77</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment38249434_1035120"><span title="2014-07-10 08:12:36Z" class="relativetime-clean">Jul 10 '14 at 8:12</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-57840940" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@etwas77 same problem here did you solve somehow?</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/711061/sam" title="1,534 reputation" class="comment-user">sam</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment57840940_1035120"><span title="2016-01-28 10:33:09Z" class="relativetime-clean">Jan 28 '16 at 10:33</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-1035120" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="6296210"></a>
+<div id="answer-6296210" class="answer" data-answerid="6296210" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="6296210" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">12</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I have found a very easy and clean way to do this with the Blend SDK Event triggers. Clean MVVM, reusable and no code-behind.</p>
+
+<p>You probably already have something like this:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;Style</span><span class="pln"> </span><span class="atn">x:Key</span><span class="pun">=</span><span class="atv">"MyListStyle"</span><span class="pln"> </span><span class="atn">TargetType</span><span class="pun">=</span><span class="atv">"{x:Type ListViewItem}"</span><span class="tag">&gt;</span></code></pre>
+
+<p>Now include a ControlTemplate for the ListViewItem like this if you don't already use one:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;Setter</span><span class="pln"> </span><span class="atn">Property</span><span class="pun">=</span><span class="atv">"Template"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;Setter.Value&gt;</span><span class="pln">
+    </span><span class="tag">&lt;ControlTemplate</span><span class="pln"> </span><span class="atn">TargetType</span><span class="pun">=</span><span class="atv">"{x:Type ListViewItem}"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;GridViewRowPresenter</span><span class="pln"> </span><span class="atn">Content</span><span class="pun">=</span><span class="atv">"{TemplateBinding Content}"</span><span class="pln">
+                            </span><span class="atn">Columns</span><span class="pun">=</span><span class="atv">"{TemplateBinding GridView.ColumnCollection}"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/ControlTemplate&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/Setter.Value&gt;</span><span class="pln">
+ </span><span class="tag">&lt;/Setter&gt;</span></code></pre>
+
+<p>The GridViewRowPresenter will be the visual root of all elements "inside" making up a list row element. Now we could insert a trigger there to look for MouseDoubleClick routed events and call a command via InvokeCommandAction like this:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;Setter</span><span class="pln"> </span><span class="atn">Property</span><span class="pun">=</span><span class="atv">"Template"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;Setter.Value&gt;</span><span class="pln">
+    </span><span class="tag">&lt;ControlTemplate</span><span class="pln"> </span><span class="atn">TargetType</span><span class="pun">=</span><span class="atv">"{x:Type ListViewItem}"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;GridViewRowPresenter</span><span class="pln"> </span><span class="atn">Content</span><span class="pun">=</span><span class="atv">"{TemplateBinding Content}"</span><span class="pln">
+                            </span><span class="atn">Columns</span><span class="pun">=</span><span class="atv">"{TemplateBinding GridView.ColumnCollection}"</span><span class="tag">&gt;</span><span class="pln">
+        </span><span class="tag">&lt;i:Interaction.Triggers&gt;</span><span class="pln">
+          </span><span class="tag">&lt;i:EventTrigger</span><span class="pln"> </span><span class="atn">EventName</span><span class="pun">=</span><span class="atv">"MouseDoubleClick"</span><span class="tag">&gt;</span><span class="pln">
+            </span><span class="tag">&lt;i:InvokeCommandAction</span><span class="pln"> </span><span class="atn">Command</span><span class="pun">=</span><span class="atv">"{Binding DoubleClickCommand}"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+          </span><span class="tag">&lt;/i:EventTrigger&gt;</span><span class="pln">
+        </span><span class="tag">&lt;/i:Interaction.Triggers&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/GridViewRowPresenter&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/ControlTemplate&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/Setter.Value&gt;</span><span class="pln">
+ </span><span class="tag">&lt;/Setter&gt;</span></code></pre>
+
+<p>If you have visual elements "above" the GridRowPresenter (probalby starting with a grid) you can also put the Trigger there.</p>
+
+<p>Unfortunately MouseDoubleClick events are not generated from every visual element (they are from Controls, but not from FrameworkElements for example). A workaround is to derive a class from EventTrigger and look for MouseButtonEventArgs with a ClickCount of 2. This effectively filters out all non-MouseButtonEvents and all MoseButtonEvents with a ClickCount != 2.</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="pln">class DoubleClickEventTrigger : EventTrigger
+{
+    protected override void OnEvent(EventArgs eventArgs)
+    {
+        var e = eventArgs as MouseButtonEventArgs;
+        if (e == null)
+        {
+            return;
+        }
+        if (e.ClickCount == 2)
+        {
+            base.OnEvent(eventArgs);
+        }
+    }
+}</span></code></pre>
+
+<p>Now we can write this ('h' is the Namespace of the helper class above):</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;Setter</span><span class="pln"> </span><span class="atn">Property</span><span class="pun">=</span><span class="atv">"Template"</span><span class="tag">&gt;</span><span class="pln">
+  </span><span class="tag">&lt;Setter.Value&gt;</span><span class="pln">
+    </span><span class="tag">&lt;ControlTemplate</span><span class="pln"> </span><span class="atn">TargetType</span><span class="pun">=</span><span class="atv">"{x:Type ListViewItem}"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;GridViewRowPresenter</span><span class="pln"> </span><span class="atn">Content</span><span class="pun">=</span><span class="atv">"{TemplateBinding Content}"</span><span class="pln">
+                            </span><span class="atn">Columns</span><span class="pun">=</span><span class="atv">"{TemplateBinding GridView.ColumnCollection}"</span><span class="tag">&gt;</span><span class="pln">
+        </span><span class="tag">&lt;i:Interaction.Triggers&gt;</span><span class="pln">
+          </span><span class="tag">&lt;h:DoubleClickEventTrigger</span><span class="pln"> </span><span class="atn">EventName</span><span class="pun">=</span><span class="atv">"MouseDown"</span><span class="tag">&gt;</span><span class="pln">
+            </span><span class="tag">&lt;i:InvokeCommandAction</span><span class="pln"> </span><span class="atn">Command</span><span class="pun">=</span><span class="atv">"{Binding DoubleClickCommand}"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+          </span><span class="tag">&lt;/h:DoubleClickEventTrigger&gt;</span><span class="pln">
+        </span><span class="tag">&lt;/i:Interaction.Triggers&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/GridViewRowPresenter&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/ControlTemplate&gt;</span><span class="pln">
+  </span><span class="tag">&lt;/Setter.Value&gt;</span><span class="pln">
+ </span><span class="tag">&lt;/Setter&gt;</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/6296210" title="short permalink to this answer" class="short-link" id="link-post-6296210">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/6296210/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://stackoverflow.com/posts/6296210/revisions" title="show all edits to this post">edited <span title="2011-06-10 07:03:01Z" class="relativetime">Jun 10 '11 at 7:03</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+
+        answered <span title="2011-06-09 16:33:52Z" class="relativetime">Jun 9 '11 at 16:33</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/624791/gunter"><div class="gravatar-wrapper-32"><img src="f3db3b0474abc4378f6cba848af29eee" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/624791/gunter">Gunter</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">249</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6296210" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-7353953" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">As i found out if you put the Trigger directly on the GridViewRowPresenter there could be a problem. The empty spaces between the colums probably don't receive mouse events at all (probably a workaround would be to style them with alignment stretch).</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/624791/gunter" title="249 reputation" class="comment-user">Gunter</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment7353953_6296210"><span title="2011-06-09 16:39:57Z" class="relativetime-clean">Jun 9 '11 at 16:39</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-7353960" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">In this case it is probably better to put an empty grid around the GridViewRowPresenter and put the trigger there. This seems to work.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/624791/gunter" title="249 reputation" class="comment-user">Gunter</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment7353960_6296210"><span title="2011-06-09 16:40:36Z" class="relativetime-clean">Jun 9 '11 at 16:40</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-7363663" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Note that you lose the default style for the ListViewItem if you replace the template like this. It didn't matter for the application i was working on as it was using a heavily customized styling anyway.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/624791/gunter" title="249 reputation" class="comment-user">Gunter</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment7363663_6296210"><span title="2011-06-10 07:01:49Z" class="relativetime-clean">Jun 10 '11 at 7:01</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-6296210" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="3673612"></a>
+<div id="answer-3673612" class="answer" data-answerid="3673612" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="3673612" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">5</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I realize that this discussion is a year old, but with .NET 4, are there any thoughts on this solution?  I absolutely agree that the point of MVVM is NOT to eliminate a code behind file.  I also feel very strongly that just because something is complicated, doesn't mean it's better.  Here is what I put in the code behind:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="pln">    private void ButtonClick(object sender, RoutedEventArgs e)
+    {
+        dynamic viewModel = DataContext;
+        viewModel.ButtonClick(sender, e);
+    }</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/3673612" title="short permalink to this answer" class="short-link" id="link-post-3673612">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/3673612/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+
+        answered <span title="2010-09-09 03:40:41Z" class="relativetime">Sep 9 '10 at 3:40</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/443035/aaron"><div class="gravatar-wrapper-32"><img src="28b0e9d6f3f581bfa62ae206c52b5425" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/443035/aaron">Aaron</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">51</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3673612" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-4556577" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of 'useful comment' votes received" class="warm">11</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">You should viewmodel should have names representing the actions you can perform in your domain. What is a "ButtonClick" action in your domain? ViewModel represents the logic of the domain in a view-friendly context, its not just a helper to the view. So: ButtonClick should never be on the viewmodel, use viewModel.DeleteSelectedCustomer or whatever this action actually represents instead.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/240040/marius" title="4,467 reputation" class="comment-user">Marius</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment4556577_3673612"><span title="2010-11-18 08:01:52Z" class="relativetime-clean">Nov 18 '10 at 8:01</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-3673612" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="1036663"></a>
+<div id="answer-1036663" class="answer" data-answerid="1036663" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="1036663" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>You can use <a href="http://www.codeplex.com/caliburn" rel="nofollow noreferrer">Caliburn</a>'s Action feature to map events to methods on your ViewModel. Assuming you have an <code>ItemActivated</code> method on your <code>ViewModel</code>, then corresponding XAML would look like:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;ListView</span><span class="pln"> </span><span class="atn">x:Name</span><span class="pun">=</span><span class="atv">"list"</span><span class="pln"> 
+   </span><span class="atn">Message</span><span class="pln">.</span><span class="atn">Attach</span><span class="pun">=</span><span class="atv">"[Event MouseDoubleClick] = [Action ItemActivated(list.SelectedItem)]"</span><span class="pln"> </span><span class="tag">&gt;</span></code></pre>
+
+<p>For further details you can examine Caliburn's documentation and samples.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/1036663" title="short permalink to this answer" class="short-link" id="link-post-1036663">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/1036663/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+
+        answered <span title="2009-06-24 06:16:35Z" class="relativetime">Jun 24 '09 at 6:16</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/5984/idursun"><div class="gravatar-wrapper-32"><img src="0d75735ed1574bba97c5f58dfc0aae52" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/5984/idursun">idursun</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">5,194</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="27 silver badges"><span class="badge2"></span><span class="badgecount">27</span></span><span title="45 bronze badges"><span class="badge3"></span><span class="badgecount">45</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1036663" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-1036663" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="6090404"></a>
+<div id="answer-6090404" class="answer" data-answerid="6090404" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="6090404" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I am finding it simpler to link the command when the view is created:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="pln">var r = new MyView();
+r.MouseDoubleClick += (s, ev) =&gt; ViewModel.MyCommand.Execute(null);
+BindAndShow(r, ViewModel);</span></code></pre>
+
+<p>In my case <code>BindAndShow</code> looks like this (updatecontrols+avalondock):</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="pln">private void BindAndShow(DockableContent view, object viewModel)
+{
+    view.DataContext = ForView.Wrap(viewModel);
+    view.ShowAsDocument(dockManager);
+    view.Focus();
+}</span></code></pre>
+
+<p>Though the approach should work with whatever method you have of opening new views.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/6090404" title="short permalink to this answer" class="short-link" id="link-post-6090404">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/6090404/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="https://stackoverflow.com/posts/6090404/revisions" title="show all edits to this post">edited <span title="2013-01-08 08:52:24Z" class="relativetime">Jan 8 '13 at 8:52</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/238902/default"><div class="gravatar-wrapper-32"><img src="74583b0a110fb3b87a0a0b2e182569e9" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/238902/default">Default</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">7,199</span><span title="7 gold badges"><span class="badge1"></span><span class="badgecount">7</span></span><span title="44 silver badges"><span class="badge2"></span><span class="badgecount">44</span></span><span title="81 bronze badges"><span class="badge3"></span><span class="badgecount">81</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+
+        answered <span title="2011-05-22 20:00:16Z" class="relativetime">May 22 '11 at 20:00</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/158334/timothy-pratley"><div class="gravatar-wrapper-32"><img src="4760033c5184e6ad1e6c9b3f05a5876b" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/158334/timothy-pratley">Timothy Pratley</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">8,083</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="23 silver badges"><span class="badge2"></span><span class="badgecount">23</span></span><span title="51 bronze badges"><span class="badge3"></span><span class="badgecount">51</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6090404" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-7880917" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">It seems to me that this is the simplest solution, rather than trying to make it work in XAML only.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/197911/mas" title="2,717 reputation" class="comment-user">Mas</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment7880917_6090404"><span title="2011-07-12 14:12:17Z" class="relativetime-clean">Jul 12 '11 at 14:12</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-6090404" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="28697131"></a>
+<div id="answer-28697131" class="answer" data-answerid="28697131" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input name="_id_" value="28697131" type="hidden">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I saw the solution from <em>rushui</em> with the InuptBindings but I was still unable to hit the area of the ListViewItem where there was no text - even after setting the background to transparent, so I solved it by using different templates.</p>
+
+<p>This template is for when the ListViewItem has been selected and is active:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;ControlTemplate</span><span class="pln"> </span><span class="atn">x:Key</span><span class="pun">=</span><span class="atv">"SelectedActiveTemplate"</span><span class="pln"> </span><span class="atn">TargetType</span><span class="pun">=</span><span class="atv">"{x:Type ListViewItem}"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;Border</span><span class="pln"> </span><span class="atn">Background</span><span class="pun">=</span><span class="atv">"LightBlue"</span><span class="pln"> </span><span class="atn">HorizontalAlignment</span><span class="pun">=</span><span class="atv">"Stretch"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="com">&lt;!-- Bind the double click to a command in the parent view model --&gt;</span><span class="pln">
+      </span><span class="tag">&lt;Border.InputBindings&gt;</span><span class="pln">
+         </span><span class="tag">&lt;MouseBinding</span><span class="pln"> </span><span class="atn">Gesture</span><span class="pun">=</span><span class="atv">"LeftDoubleClick"</span><span class="pln"> 
+                       </span><span class="atn">Command</span><span class="pun">=</span><span class="atv">"{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemSelectedCommand}"</span><span class="pln">
+                       </span><span class="atn">CommandParameter</span><span class="pun">=</span><span class="atv">"{Binding}"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+      </span><span class="tag">&lt;/Border.InputBindings&gt;</span><span class="pln">
+      </span><span class="tag">&lt;TextBlock</span><span class="pln"> </span><span class="atn">Text</span><span class="pun">=</span><span class="atv">"{Binding TextToShow}"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/Border&gt;</span><span class="pln">
+</span><span class="tag">&lt;/ControlTemplate&gt;</span></code></pre>
+
+<p>This template is for when the ListViewItem has been selected and is inactive:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;ControlTemplate</span><span class="pln"> </span><span class="atn">x:Key</span><span class="pun">=</span><span class="atv">"SelectedInactiveTemplate"</span><span class="pln"> </span><span class="atn">TargetType</span><span class="pun">=</span><span class="atv">"{x:Type ListViewItem}"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;Border</span><span class="pln"> </span><span class="atn">Background</span><span class="pun">=</span><span class="atv">"Lavender"</span><span class="pln"> </span><span class="atn">HorizontalAlignment</span><span class="pun">=</span><span class="atv">"Stretch"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;TextBlock</span><span class="pln"> </span><span class="atn">Text</span><span class="pun">=</span><span class="atv">"{Binding TextToShow}"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/Border&gt;</span><span class="pln">
+</span><span class="tag">&lt;/ControlTemplate&gt;</span></code></pre>
+
+<p>This is the Default style used for the ListViewItem:</p>
+
+<pre style="" class="lang-xml prettyprint prettyprinted"><code><span class="tag">&lt;Style</span><span class="pln"> </span><span class="atn">TargetType</span><span class="pun">=</span><span class="atv">"{x:Type ListViewItem}"</span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">Setter Property</span><span class="pun">=</span><span class="str">"Template"</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">Setter</span><span class="pun">.</span><span class="pln">Value</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="pun">&lt;</span><span class="pln">ControlTemplate</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="pun">&lt;</span><span class="pln">Border HorizontalAlignment</span><span class="pun">=</span><span class="str">"Stretch"</span><span class="pun">&gt;</span><span class="pln">
+               </span><span class="pun">&lt;</span><span class="pln">TextBlock Text</span><span class="pun">=</span><span class="str">"{Binding TextToShow}"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+            </span><span class="pun">&lt;/</span><span class="pln">Border</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="pun">&lt;/</span><span class="pln">ControlTemplate</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;/</span><span class="pln">Setter</span><span class="pun">.</span><span class="pln">Value</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;/</span><span class="pln">Setter</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="pun">&lt;</span><span class="pln">Style</span><span class="pun">.</span><span class="pln">Triggers</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">MultiTrigger</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="pun">&lt;</span><span class="pln">MultiTrigger</span><span class="pun">.</span><span class="pln">Conditions</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="pun">&lt;</span><span class="pln">Condition Property</span><span class="pun">=</span><span class="str">"IsSelected"</span><span class="pln"> Value</span><span class="pun">=</span><span class="str">"True"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+            </span><span class="pun">&lt;</span><span class="pln">Condition Property</span><span class="pun">=</span><span class="str">"Selector.IsSelectionActive"</span><span class="pln"> Value</span><span class="pun">=</span><span class="str">"True"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+         </span><span class="pun">&lt;/</span><span class="pln">MultiTrigger</span><span class="pun">.</span><span class="pln">Conditions</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="pun">&lt;</span><span class="pln">Setter Property</span><span class="pun">=</span><span class="str">"Template"</span><span class="pln"> Value</span><span class="pun">=</span><span class="str">"{StaticResource SelectedActiveTemplate}"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+      </span><span class="pun">&lt;/</span><span class="pln">MultiTrigger</span><span class="pun">&gt;</span><span class="pln">
+      </span><span class="pun">&lt;</span><span class="pln">MultiTrigger</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="pun">&lt;</span><span class="pln">MultiTrigger</span><span class="pun">.</span><span class="pln">Conditions</span><span class="pun">&gt;</span><span class="pln">
+            </span><span class="pun">&lt;</span><span class="pln">Condition Property</span><span class="pun">=</span><span class="str">"IsSelected"</span><span class="pln"> Value</span><span class="pun">=</span><span class="str">"True"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+            </span><span class="pun">&lt;</span><span class="pln">Condition Property</span><span class="pun">=</span><span class="str">"Selector.IsSelectionActive"</span><span class="pln"> Value</span><span class="pun">=</span><span class="str">"False"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+         </span><span class="pun">&lt;/</span><span class="pln">MultiTrigger</span><span class="pun">.</span><span class="pln">Conditions</span><span class="pun">&gt;</span><span class="pln">
+         </span><span class="pun">&lt;</span><span class="pln">Setter Property</span><span class="pun">=</span><span class="str">"Template"</span><span class="pln"> Value</span><span class="pun">=</span><span class="str">"{StaticResource SelectedInactiveTemplate}"</span><span class="pln"> </span><span class="pun">/&gt;</span><span class="pln">
+      </span><span class="pun">&lt;/</span><span class="pln">MultiTrigger</span><span class="pun">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/Style.Triggers&gt;</span><span class="pln">
+</span><span class="tag">&lt;/Style&gt;</span></code></pre>
+
+<p>What I don't like is the repetition of the TextBlock and its text binding, I don't know I I can get around declaring that in just the one location.</p>
+
+<p>I hope this helps someone!</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://stackoverflow.com/a/28697131" title="short permalink to this answer" class="short-link" id="link-post-28697131">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/28697131/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+
+        answered <span title="2015-02-24 13:31:15Z" class="relativetime">Feb 24 '15 at 13:31</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/3235445/user3235445"><div class="gravatar-wrapper-32"><img src="eacdcc9f4217fe1d2646ca64299d337a" alt="" height="32" width="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/3235445/user3235445">user3235445</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">67</span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-28697131" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-28697131" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+                                    <a name="new-answer"></a>
+                        <form id="post-form" action="https://stackoverflow.com/questions/1035023/answer/submit" method="post" class="post-form">
+                            <input id="post-id" value="1035023" type="hidden">
+                            <input id="qualityBanWarningShown" name="qualityBanWarningShown" value="false" type="hidden">
+                            <input name="referrer" value="" type="hidden">
+                            <h2 class="space">Your Answer</h2>
+
+
+            <script>
+
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;"> 
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li style="left: 0px;" class="wmd-button" id="wmd-bold-button"><span style="background-position: 0px -20px;"></span></li><li style="left: 25px;" class="wmd-button" id="wmd-italic-button"><span style="background-position: -20px -20px;"></span></li><li style="left: 50px;" class="wmd-spacer" id="wmd-spacer1"><span style="background-position: -40px -20px;"></span></li><li style="left: 75px;" class="wmd-button" id="wmd-link-button"><span style="background-position: -40px -20px;"></span></li><li style="left: 100px;" class="wmd-button" id="wmd-quote-button"><span style="background-position: -60px -20px;"></span></li><li style="left: 125px;" class="wmd-button" id="wmd-code-button"><span style="background-position: -80px -20px;"></span></li><li style="left: 150px;" class="wmd-button" id="wmd-image-button"><span style="background-position: -100px -20px;"></span></li><li style="left: 175px;" class="wmd-spacer" id="wmd-spacer2"><span style="background-position: -120px -20px;"></span></li><li style="left: 200px;" class="wmd-button" id="wmd-olist-button"><span style="background-position: -120px -20px;"></span></li><li style="left: 225px;" class="wmd-button" id="wmd-ulist-button"><span style="background-position: -140px -20px;"></span></li><li style="left: 250px;" class="wmd-button" id="wmd-heading-button"><span style="background-position: -160px -20px;"></span></li><li style="left: 275px;" class="wmd-button" id="wmd-hr-button"><span style="background-position: -180px -20px;"></span></li><li style="left: 300px;" class="wmd-spacer" id="wmd-spacer3"><span style="background-position: -200px -20px;"></span></li><li style="left: 325px;" class="wmd-button" id="wmd-undo-button"><span style="background-position: -200px -20px;"></span></li><li style="left: 350px;" class="wmd-button" id="wmd-redo-button"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height: 24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height: 24px; display: none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height: 24px; display: none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" value="c418a61c7232a88b0bcb0cb48987e57e" type="hidden">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+
+                            <div style="position: relative;">
+                                
+                                            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="https://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f1035023%2ffiring-a-double-click-event-from-a-wpf-listview-item-using-mvvm%23new-answer">log in</a></h3>
+                        <script>
+
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input name="manual-openid" class="manual-openid" type="hidden">
+                    <input name="use-facebook" class="use-facebook" value="false" type="hidden">
+                    <input name="use-google" class="use-google" value="false" type="hidden">
+                    <input class="submit-openid" value="Submit" style="display: none;" type="button">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" size="30" maxlength="30" value="" tabindex="105" type="text">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" type="email">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'https%3a%2f%2fstackoverflow.com%2fquestions%2f1035023%2ffiring-a-double-click-event-from-a-wpf-listview-item-using-mvvm%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+
+                            </div>
+           
+                                                            <div class="form-submit cbt">
+                                    <input id="submit-button" value="Post Your Answer" tabindex="110" type="submit">
+                                    <a href="#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+
+By posting your answer, you agree to the <a href="https://stackexchange.com/legal/privacy-policy" name="privacy" target="_top">privacy policy</a> and <a href="https://stackexchange.com/legal/terms-of-service" name="tos" target="_top">terms of service</a>.</p>
+<input name="legalLinksShown" value="1" type="hidden">                                </div>
+                        </form>
+
+
+
+                        <h2 class="bottom-notice" data-loc="1">
+
+Not the answer you're looking for?                            Browse other questions tagged <a href="https://stackoverflow.com/questions/tagged/wpf" class="post-tag" title="show questions tagged 'wpf'" rel="tag">wpf</a> <a href="https://stackoverflow.com/questions/tagged/mvvm" class="post-tag" title="show questions tagged 'mvvm'" rel="tag">mvvm</a>  or <a href="https://stackoverflow.com/questions/ask">ask your own question</a>.                        </h2>
+            </div>
+        </div>
+                <div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+                            <div class="module question-stats">
+                    <table id="qinfo">
+                        <tbody><tr>
+                            <td>
+                                <p class="label-key">asked</p>
+                            </td>
+                            <td style="padding-left: 10px;">
+                                <p class="label-key" title="2009-06-23 20:35:04Z"><b>8 years, 4 months ago</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="label-key">viewed</p>
+                            </td>
+
+                            <td style="padding-left: 10px;">
+                                <p class="label-key">
+                                    <b>64,331 times</b>
+                                </p>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td>
+                                    <p class="label-key">active</p>
+                                </td>
+                                <td style="padding-left: 10px;">
+                                    <p class="label-key"><b><a href="https://stackoverflow.com/questions/1035023/firing-a-double-click-event-from-a-wpf-listview-item-using-mvvm?lastactivity" class="lastactivity-link" title="2015-02-24 13:31:15Z">2 years, 8 months ago</a></b></p>
+                                </td>
+                            </tr>
+                    </tbody></table>
+                </div>
+                        
+            <div id="dfp-tsb" class="everyonelovesstackoverflow"></div>
+            <div id="hireme"></div>
+                <script>var clc={options:{svc:'dfp'}};</script>
+<script>;window.clc=window.clc||{},window.clc.init=window.clc.init||function(a){var b=window,c=b.document;try{if("function"!=typeof[].indexOf||!window.addEventListener||!a.allowed)return;var d=new RegExp(a.allowed);if(!d.test(location.hostname))return;if(b.clc.options)for(var e in b.clc.options)a[e]=b.clc.options[e];b.clc.cmd="undefined"==typeof b.clc.cmd?[]:b.clc.cmd,b.clc.autoload=b.clc.autoload||function(){"function"==typeof b.clc.load?b.clc.load():b.clc.cmd.push(function(a){a.load()})};var f=a.wv;if(c.hidden&&f)return void c.addEventListener("visibilitychange",function b(){c.hidden||(window.clc.init(a),c.removeEventListener("visibilitychange",b))});b.clc.options=a,a.al&&b.clc.autoload();var g=c.createElement("script");g.async=!0,g.src=a.lib,c.body.appendChild(g)}catch(a){}},window.clc.loadDisplayAds=window.clc.loadDisplayAds||function(){function a(b){b.style.height=b.style.maxHeight=b.style.minHeight="auto",b.style.display="IFRAME"===b.tagName?"none":"block",[].forEach.call(b.children,a)}function b(a){new Image().src="https://"+e+"/stalled.gif?"+a}var c=window,d=c.document,e="clc.stackoverflow.com",f={slots:{lb:[[728,90]],mlb:[[728,90]],sb:[[300,250],[300,600]],"tag-sponsorship":[[730,135]]},ids:{"dfp-tlb":"lb","dfp-mlb":"mlb","dfp-tsb":"sb","dfp-tag":"tag-sponsorship","clc-tlb":"lb","clc-mlb":"mlb","clc-tsb":"sb"}},g=/^\/tags\//.test(location.pathname)||/^\/questions\/tagged\//.test(location.pathname)?"tag-pages":"question-pages",h=location.hostname;/^clc\./.test(location.hostname)&&(h="test/dev.stackoverflow.com");return function(e){var i=(e&&0<e.length?e:Object.keys(f.ids)).map(function(a){return d.getElementById(a)}).filter(function(a){return!!a&&/^\s*$/.test(a.innerHTML)}).map(function(a){return a.id});if(0!==i.length){c.googletag=c.googletag||{},c.googletag.cmd=c.googletag.cmd||[],c.googletag.cmd.push(function(){var e=c.googletag,j=d.createElement("div");j.className="adsbox",j.id="clc-abd",j.style.position="absolute",j.style.pointerEvents="none",j.innerHTML="&nbsp;",d.body.appendChild(j);var k=e.pubads();k.enableSingleRequest(),k.addEventListener("slotRenderEnded",function(c){var e=c.serviceName,f=c.slot,g=c.lineItemId;try{var h=f.getSlotElementId(),i=[];h||i.push("id=0");var j=d.getElementById(h);if(!h||j?j.hasAttribute("data-clc-stalled")&&i.push("st=1"):i.push("el=0"),0!==i.length)return void b(i.join("&"));-1===[4385506061,4386578282,4386579572].indexOf(g)?j.setAttribute("data-clc-prefilled","true"):a(j),j.setAttribute("data-clc-ready","true")}catch(a){var k=d.getElementById("dfp-tsb")||d.getElementById("clc-tsb");k&&k.setAttribute("data-clc-ready","true"),b("e=1")}});var l=c.dfp_targeting||{};l&&Object.keys(l).forEach(function(a){k.setTargeting(a,l[a])});for(var m=0,n=i;m<n.length;m++){var o=n[m],p=f.ids[o],q=f.slots[p],r="/"+"248424177"+"/"+h+"/"+p+"/"+g,s=e.defineSlot(r,q,o);("tag-sponsorship"===p||"sb"==p)&&s.setCollapseEmptyDiv(!0,!0),s.addService(k),!1}e.enableServices();for(var o,t=0,u=i;t<u.length;t++)o=u[t],e.display(o)});var j=d.createElement("script");j.async=!0,j.src="https://www.googletagservices.com/tag/js/gpt.js",document.body.appendChild(j)}}}(),window.clc.init.call(null, {"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=96bc0285e9e9","style":"https://cdn.sstatic.net/clc/styles/clc.min.css?v=531226691d5e","u":"https://clc.stackoverflow.com/markup.js","wa":true,"kt":2000,"tto":true,"h":"clc.stackoverflow.com","allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$","wv":true,"al":false});</script>            <script>
+
+window.clc_request='AlhrB6T0HdUIAAAAAA_LDwACAAAAAgAAAAA0AAAAfHdwZnxtdnZtfHgtY3Jvc3Mtc2l0ZS1jb2RlcmV2aWV3LnN0YWNrZXhjaGFuZ2UuY29tfADVbVeIU6v84Myh';                    clc.autoload();
+                var dfp_targeting={Registered:['false'],'so-tag':['wpf','mvvm'],'X-Site':['codereview.stackexchange.com']};                                    clc.loadDisplayAds();
+            </script>
+            
+
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/821564?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">40</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/821564/double-click-a-listbox-item-to-open-a-browser?noredirect=1&amp;lq=1" class="question-hyperlink">Double Click a ListBox item to open a browser</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/4497825?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">25</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/4497825/wpf-mvvm-how-to-handle-double-click-on-treeviewitems-in-the-viewmodel?noredirect=1&amp;lq=1" class="question-hyperlink">WPF/MVVM - how to handle double-click on TreeViewItems in the ViewModel?</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/2547442?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">22</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/2547442/wpf-listboxitem-double-click?noredirect=1&amp;lq=1" class="question-hyperlink">WPF ListBoxItem double-click?</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/5545187?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">22</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/5545187/wpf-how-to-bind-a-command-to-the-listboxitem-using-mvvm?noredirect=1&amp;lq=1" class="question-hyperlink">WPF: How to bind a command to the ListBoxItem using MVVM?</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/7991314?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">9</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/7991314/mouse-event-on-transparent-background?noredirect=1&amp;lq=1" class="question-hyperlink">Mouse event on transparent background</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/2927153?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">12</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/2927153/wpf-handling-events-from-user-control-in-view-model?noredirect=1&amp;lq=1" class="question-hyperlink">WPF - Handling events from user control in View Model</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/11172443?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">6</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/11172443/how-to-fire-a-command-on-double-click-listbox-item-using-mvvm?noredirect=1&amp;lq=1" class="question-hyperlink">How to fire a command on double-click listbox item using MVVM?</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/4629862?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">8</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/4629862/attached-behavior-to-execute-command-for-listviewitem?noredirect=1&amp;lq=1" class="question-hyperlink">Attached Behavior to execute command for ListViewItem</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/3784017?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/3784017/mvvm-c-sharp-wpf-binding-mouse-double-click?noredirect=1&amp;lq=1" class="question-hyperlink">MVVM C# WPF binding mouse double click</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/2133282?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">3</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/2133282/adding-mousebindings-to-items-in-a-databound-wpf-listview?noredirect=1&amp;lq=1" class="question-hyperlink">Adding MouseBindings to Items in a databound WPF ListView</a>
+</div>					<div class="spacer more">
+				<a href="https://stackoverflow.com/questions/linked/1035023?lq=1">see more linked questions…</a>
+			</div>
+	</div>
+</div>
+
+                <div class="module sidebar-related">
+                    <h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/454868?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">215</div></a><a href="https://stackoverflow.com/questions/454868/handling-dialogs-in-wpf-with-mvvm?rq=1" class="question-hyperlink">Handling Dialogs in WPF with MVVM</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/798964?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">20</div></a><a href="https://stackoverflow.com/questions/798964/wpf-mvvm-correct-way-to-fire-event-on-view-from-viewmodel?rq=1" class="question-hyperlink">WPF MVVM Correct way to fire event on view from ViewModel</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/1405739?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">243</div></a><a href="https://stackoverflow.com/questions/1405739/mvvm-tutorial-from-start-to-finish?rq=1" class="question-hyperlink">MVVM: Tutorial from start to finish?</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/3228523?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="https://stackoverflow.com/questions/3228523/mvvm-question-event-fire-in-the-view?rq=1" class="question-hyperlink">MVVM question, Event fire in the View</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/3379725?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">2</div></a><a href="https://stackoverflow.com/questions/3379725/wpf-listview-double-click?rq=1" class="question-hyperlink">WPF ListView double click</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/4497825?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">25</div></a><a href="https://stackoverflow.com/questions/4497825/wpf-mvvm-how-to-handle-double-click-on-treeviewitems-in-the-viewmodel?rq=1" class="question-hyperlink">WPF/MVVM - how to handle double-click on TreeViewItems in the ViewModel?</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/10457554?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://stackoverflow.com/questions/10457554/double-click-on-a-wpf-listview-how-to-fire-a-command-and-not-use-an-event-hand?rq=1" class="question-hyperlink">Double Click on a WPF ListView - how to fire a command and not use an event handler</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/13176948?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="https://stackoverflow.com/questions/13176948/in-wpf-mvvm-how-do-you-transfer-an-item-from-one-listbox-to-another-using-a-dou?rq=1" class="question-hyperlink">In WPF MVVM, how do you transfer an item from one listbox to another using a double-click?</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/15051763?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">2</div></a><a href="https://stackoverflow.com/questions/15051763/selected-items-of-listview-checkbox-in-mvvm-wpf?rq=1" class="question-hyperlink">Selected items of listview checkbox in MVVM WPF</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/21015816?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="https://stackoverflow.com/questions/21015816/using-attached-commands-to-fire-a-double-click-event-for-listview-mvvm?rq=1" class="question-hyperlink">using Attached Commands to fire a double click event for listview - MVVM</a></div>
+                    </div>
+                </div>
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/172274/can-i-get-a-public-key-from-an-rsa-private-key" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Can I get a public key from an RSA private key?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="https://mathoverflow.net/questions/284230/what-does-it-mean-to-suspect-that-two-conjectures-are-logically-equivalent" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    What does it mean to suspect that two conjectures are logically equivalent?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/45110/is-it-possible-to-accurately-measure-airspeed-without-pitot-tube" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Is it possible to accurately measure airspeed without pitot tube?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-writers" title="Writers Stack Exchange"></div><a href="https://writers.stackexchange.com/questions/31075/does-misspelling-words-for-the-sake-of-bad-english-improve-the-immersion-or-dist" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:166 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Does misspelling words for the sake of bad English improve the immersion or distract the reader?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-diy" title="Home Improvement Stack Exchange"></div><a href="https://diy.stackexchange.com/questions/125902/how-much-pressure-should-you-apply-when-rolling-on-paint" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:73 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    How much pressure should you apply when rolling on paint?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/172722/what-was-the-first-gift-given-by-harry-potter" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    What was the first gift given by Harry Potter?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="https://rpg.stackexchange.com/questions/108911/what-do-primitive-npcs-do-with-treasure-and-gold" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    What do primitive NPCs do with treasure and gold?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-bicycles" title="Bicycles Stack Exchange"></div><a href="https://bicycles.stackexchange.com/questions/50705/why-do-the-majority-of-people-on-an-ebike-ride-at-a-fairly-low-cadence" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:126 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Why do the majority of people on an ebike ride at a fairly low cadence?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/398428/letters-in-foreach" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Letters in foreach
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/96218/are-there-any-good-alternates-to-iron" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Are there any good alternates to iron?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/45109/what-are-the-advantages-of-towbarless-pushback-tugs" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    What are the advantages of towbarless pushback tugs?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2493482/sum-of-negative-and-positive-consective-numbers" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Sum of negative and positive consective numbers
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/97843/our-instructor-threw-together-freely-available-youtube-videos-and-wikipedia-arti" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Our instructor threw together freely available YouTube videos and Wikipedia articles instead of lectures. What should I do?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/172776/how-many-genies-are-there-in-disneys-aladdin-canon" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    How many genies are there in Disney's Aladdin canon?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-interpersonal" title="Interpersonal Skills Stack Exchange"></div><a href="https://interpersonal.stackexchange.com/questions/5873/co-tenants-set-up-an-inflatable-pool-outside-my-window-its-now-breeding-bugs" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:680 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Co-tenants set up an inflatable pool outside my window. It's now breeding bugs. What can I do?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/96049/how-long-would-it-take-to-travel-approximately-170-miles-by-foot" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    How long would it take to travel approximately 170 miles by foot?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-interpersonal" title="Interpersonal Skills Stack Exchange"></div><a href="https://interpersonal.stackexchange.com/questions/5900/how-do-i-politely-tell-a-stranger-to-stop-making-annoying-noises-i-cant-name" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:680 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    How do I politely tell a stranger to stop making annoying noises I can't name?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-cooking" title="Seasoned Advice"></div><a href="https://cooking.stackexchange.com/questions/85244/why-can-i-have-an-indoor-pizza-wood-oven-but-not-a-bbq-or-smoker-or-can-i" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:49 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Why can I have an indoor pizza/wood oven, but not a BBQ or smoker? (or can I...?)
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-gaming" title="Arqade"></div><a href="https://gaming.stackexchange.com/questions/320302/how-can-i-get-honesty-in-succubox" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:41 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    How can I get honesty in Succubox?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/104273/took-airline-plane-blanket-by-accident-didnt-realize-it-was-forbidden-what-sh" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Took airline plane blanket by accident; didn't realize it was forbidden. What should I do?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-history" title="History Stack Exchange"></div><a href="https://history.stackexchange.com/questions/41249/when-did-people-decide-that-all-caps-means-the-writer-is-shouting" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:324 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    When did people decide that all caps means the writer is shouting?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/398442/how-to-change-the-distance-between-toprule-and-midrule-in-a-table" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    How to change the distance between toprule and midrule in a table
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="https://askubuntu.com/questions/969879/is-a-command" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    is ./ a command?
+                </a>
+
+            </li>
+            <li style="display: list-item;" class="dno js-hidden">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="https://physics.stackexchange.com/questions/365462/is-this-animated-gif-an-accurate-representation-of-em-waves" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+
+                    Is this animated gif an accurate representation of EM waves?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+        </div>
+    <div id="feed-link">
+    <div id="feed-link-text">
+        <a href="https://stackoverflow.com/feeds/question/1035023" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>    </div>
+<script>
+
+StackExchange.ready(function(){$.get('/posts/1035023/ivc/4f11');});
+</script>
+<noscript>
+
+    <div><img src="/posts/1035023/ivc/4f11" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display: none;" id="prettify-lang">lang-xml</div></div>
+
+
+        </div>
+    </div><script src="clc.min.js" async=""></script><script src="gpt.js" async=""></script>
+
+    <footer id="footer" class="s-footer js-footer" role="contentinfo">
+        <div class="-container">
+            <div class="g-row">
+                    <div class="-logo">
+
+                        <a href="https://stackoverflow.com/"><svg aria-hidden="true" class="svg-icon native iconLogo" width="150" height="30" viewBox="0 0 150 30"><g><path d="M33.9 18.6l-1.7-.2c-1.3-.1-1.9-.6-1.9-1.6 0-1.1.8-1.8 2.4-1.8 1.1 0 2.1.3 2.8.8l1-1c-1-.8-2.3-1.1-3.8-1.1-2.3 0-3.9 1.2-3.9 3.1 0 1.8 1.1 2.7 3.2 2.9l1.8.2c1.2.1 1.8.6 1.8 1.6 0 1.3-1.1 1.9-2.8 1.9-1.3 0-2.5-.3-3.3-1.2l-1 1c1.2 1.1 2.6 1.5 4.4 1.5 2.6 0 4.3-1.2 4.3-3.2-.2-2-1.5-2.7-3.3-2.9zm13.3-4.8c-1.7 0-2.8.3-3.7 1.5l1 1c.6-.9 1.3-1.2 2.7-1.2 1.9 0 2.7.8 2.7 2.3v1h-3.2c-2.4 0-3.7 1.2-3.7 3.1 0 .8.3 1.6.8 2.2.7.7 1.5 1 3 1 1.4 0 2.2-.3 3.1-1.1v1h1.6v-7.2c-.1-2.4-1.5-3.6-4.3-3.6zm2.7 7c0 .9-.2 1.5-.5 1.8-.7.6-1.5.7-2.4.7-1.7 0-2.4-.6-2.4-1.8 0-1.2.8-1.9 2.4-1.9h3l-.1 1.2zm7.6-5.6c1 0 1.6.3 2.4 1.2l1-1c-1.1-1.2-2-1.6-3.5-1.6-2.7 0-4.7 1.8-4.7 5.5 0 3.6 2 5.5 4.7 5.5 1.5 0 2.4-.4 3.5-1.6l-1.1-1c-.8.9-1.4 1.2-2.4 1.2s-1.9-.4-2.5-1.2c-.5-.7-.7-1.5-.7-2.9 0-1.3.2-2.2.7-2.9.7-.8 1.6-1.2 2.6-1.2zm13.4-1.3H69l-4.8 4.7V9.1h-1.6v15.4h1.6v-3.9l1.9-1.9 3.6 5.8h1.9l-4.4-6.9 3.7-3.7zm7.3-.33c-1.6 0-2.7.6-3.4 1.4-1 1-1.3 2.3-1.3 4.3s.3 3.3 1.3 4.3c.7.7 1.8 1.4 3.4 1.4 1.6 0 2.8-.6 3.4-1.4 1-1 1.3-2.3 1.3-4.3s-.3-3.3-1.3-4.3c-.6-.8-1.7-1.4-3.4-1.4zm1.3 8.3c-.3.3-.7.5-1.3.5-.6 0-1-.2-1.3-.5-.6-.6-.6-1.6-.6-2.7 0-1.2.1-2.1.6-2.7.3-.3.7-.5 1.3-.5.6 0 1 .2 1.3.5.6.6.6 1.5.6 2.7.1 1.2 0 2.2-.6 2.7zm10.8-8.2l-2.2 6.9-2.3-6.9h-2.9l4.1 11.1h2.2l4.1-11.1h-3zm7.6-.1c-2.9 0-4.8 2-4.8 5.7 0 4.5 2.5 5.7 5.1 5.7 2 0 3.1-.6 4.2-1.7l-1.7-1.6c-.7.7-1.3 1-2.5 1-1.6 0-2.4-1-2.4-2.5h6.9v-1.2c0-3.2-1.7-5.4-4.8-5.4zm-2.1 4.6c0-.5.1-.8.3-1.2.3-.7.9-1.2 1.9-1.2.9 0 1.6.5 1.9 1.2.2.4.2.7.3 1.2h-4.4zm11-3.4v-1.1h-2.7v11.1h2.8v-6.7c0-1.4.9-2 1.8-2 .7 0 1 .2 1.5.7l2.1-2.1c-.8-.8-1.5-1-2.6-1-1.3-.1-2.3.4-2.9 1.1zm6.3-2.3v12.3h2.8v-8.8h2v-2.1h-2v-1.2c0-.6.3-1 1-1h1.1v-2.3h-1.6c-2.3 0-3.3 1.6-3.3 3.1zm16.2 1.1c-1.6 0-2.7.6-3.4 1.4-1 1-1.3 2.3-1.3 4.3s.3 3.3 1.3 4.3c.7.7 1.8 1.4 3.4 1.4 1.6 0 2.8-.6 3.4-1.4 1-1 1.3-2.3 1.3-4.3s-.3-3.3-1.3-4.3c-.6-.8-1.8-1.4-3.4-1.4zm1.3 8.3c-.3.3-.7.5-1.3.5-.6 0-1-.2-1.3-.5-.6-.6-.6-1.6-.6-2.7 0-1.2.1-2.1.6-2.7.3-.3.7-.5 1.3-.5.6 0 1 .2 1.3.5.6.6.6 1.5.6 2.7 0 1.2 0 2.2-.6 2.7zm16.5-8.2l-1.8 6.9-2.3-6.9h-2l-2.3 6.9-1.8-6.9H134l3.4 11.1h2.3l2.3-7 2.3 7h2.3l3.4-11.1h-2.9zm-25.1 7.7V9.27h-2.8v12.3c0 1.6 1 3.2 3.2 3.2h1.6v-2.3h-1c-.7 0-1-.4-1-1.1zM41.3 15.6l1.4-1.4h-3v-3.5h-1.6v11.1c0 1.6.9 2.9 2.7 2.9h1.1v-1.3h-.8c-1 0-1.5-.6-1.5-1.6v-6.1h1.7v-.1z" fill="#222426"></path><path fill="#BCBBBB" d="M21 27v-8h3v11H0V19h3v8z"></path><path d="M5.4 19.1l13.56 1.96.17-2.38-13.26-2.55-.47 2.97zm1.8-6.8l12 5.6 1.1-2.4-12-5.6-1.1 2.4zm3.4-5.9l10.2 8.5 1.7-2-10.2-8.5-1.7 2zM17.1.2L15 1.8l7.9 10.6 2.1-1.6L17.1.2zM5 25h14v-3H5v3z" fill="#F48024"></path></g></svg></a>
+                    </div>
+                
+                    <nav class="-nav js-category _visible" data-name="default">
+                        <h5 class="-title"><a href="https://stackoverflow.com/" class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 15})">Stack Overflow</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://stackoverflow.com/questions" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 16})">Questions</a></li>
+                                <li class="-item"><a href="https://stackoverflow.com/jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 17})">Jobs</a></li>
+                                <li class="-item"><a href="https://stackoverflow.com/jobs/directory/developer-jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 11})">Developer Jobs Directory</a></li>
+                                     <li class="-item"><a href="https://stackoverflow.com/jobs/salary" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 28})">Salary Calculator</a></li>
+                                                            <li class="-item"><a href="https://stackoverflow.com/help" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })">Help</a></li>
+                                <li class="-item"><a onclick="StackExchange.switchMobile(&quot;on&quot;)" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 12 })">Mobile</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="-nav js-category _visible" data-name="default">
+                        <h5 class="-title"><a href="https://www.stackoverflowbusiness.com/?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation&amp;utm_term=sotob2b-footer-business-category" class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 19 })">Stack Overflow<br> Business</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/talent?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation&amp;utm_term=sotob2b-footer-talent" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 20 })">Talent</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/advertise?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation&amp;utm_term=sotob2b-footer-advertise" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 21 })">Ads</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/enterprise?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation&amp;utm_term=sotob2b-footer-enterprise" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 22 })">Enterprise</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/insights?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation&amp;utm_term=sotob2b-footer-insights" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 23 })">Insights</a></li>
+                        </ul>
+                    </nav>
+                <nav class="-nav js-category _visible" data-name="default">
+                    <h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">Company</a></h5>
+                    <ul class="-list">
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">About</a></li>
+                                                <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href="https://stackoverflow.com/company/press">Press</a></li>
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 9 })" href="https://stackoverflow.com/company/work-here">Work Here</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href="https://stackexchange.com/legal">Legal</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href="https://stackexchange.com/legal/privacy-policy">Privacy Policy</a></li>
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href="https://stackoverflow.com/company/contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+                <div class="-network g-row">
+                    <a href="#" class="-back-trigger js-back"><svg aria-hidden="true" class="svg-icon iconArrowLeftAlt" width="18" height="18" viewBox="0 0 18 18"><path d="M10.58 16L12 14.59 6.4 9 12 3.41 10.57 2l-7 7z"></path></svg></a>
+                    <div>
+                        <h5 class="-title"><a href="https://stackexchange.com/">Stack Exchange<br> Network</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Technology">Technology</a></li>
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Life / Arts">Life / Arts</a></li>
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Culture / Recreation">Culture / Recreation</a></li>
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Science">Science</a></li>
+                            <li class="-item"><a href="#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Other">Other</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <nav class="-nav js-category" data-name="Technology">
+        <ul class="-list">
+                <li class="-item"><a href="https://stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                <li class="-item"><a href="https://serverfault.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="system and network administrators">Server Fault</a></li>
+                <li class="-item"><a href="https://superuser.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="computer enthusiasts and power users">Super User</a></li>
+                <li class="-item"><a href="https://webapps.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of web applications">Web Applications</a></li>
+                <li class="-item"><a href="https://askubuntu.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                <li class="-item"><a href="https://webmasters.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="pro webmasters">Webmasters</a></li>
+                <li class="-item"><a href="https://gamedev.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and independent game developers">Game Development</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://tex.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                <li class="-item"><a href="https://softwareengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professionals, academics, and students working within the systems development life cycle">Software Engineering</a></li>
+                <li class="-item"><a href="https://unix.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                <li class="-item"><a href="https://apple.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                <li class="-item"><a href="https://wordpress.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="WordPress developers and administrators">WordPress Development</a></li>
+                <li class="-item"><a href="https://gis.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                <li class="-item"><a href="https://electronics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://android.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                <li class="-item"><a href="https://security.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="information security professionals">Information Security</a></li>
+                <li class="-item"><a href="https://dba.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                <li class="-item"><a href="https://drupal.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Drupal developers and administrators">Drupal Answers</a></li>
+                <li class="-item"><a href="https://sharepoint.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="SharePoint enthusiasts">SharePoint</a></li>
+                <li class="-item"><a href="https://ux.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="user experience researchers and experts">User Experience</a></li>
+                <li class="-item"><a href="https://mathematica.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Wolfram Mathematica">Mathematica</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://salesforce.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                <li class="-item"><a href="https://expressionengine.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                <li class="-item"><a href="https://pt.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programadores profissionais e entusiastas">Stack Overflow em Português</a></li>
+                <li class="-item"><a href="https://blender.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who use Blender to create 3D graphics, animations, or games">Blender</a></li>
+                <li class="-item"><a href="https://networkengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="network engineers">Network Engineering</a></li>
+                <li class="-item"><a href="https://crypto.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                <li class="-item"><a href="https://codereview.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="peer programmer code reviews">Code Review</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://magento.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of the Magento e-Commerce platform">Magento</a></li>
+                <li class="-item"><a href="https://softwarerecs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people seeking specific software recommendations">Software Recommendations</a></li>
+                <li class="-item"><a href="https://dsp.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                <li class="-item"><a href="https://emacs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those using, extending or developing Emacs">Emacs</a></li>
+                <li class="-item"><a href="https://raspberrypi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                <li class="-item"><a href="https://ru.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="программистов">Stack Overflow на русском</a></li>
+                <li class="-item"><a href="https://codegolf.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://es.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programadores y profesionales de la informática">Stack Overflow en español</a></li>
+                <li class="-item"><a href="https://ethereum.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Ethereum, the decentralized application platform and smart contract enabled blockchain">Ethereum</a></li>
+                <li class="-item"><a href="https://datascience.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Data science professionals, Machine Learning specialists, and those interested in learning more about the field">Data Science</a></li>
+                <li class="-item"><a href="https://arduino.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="developers of open-source hardware and software that is compatible with Arduino">Arduino</a></li>
+                <li class="-item"><a href="https://bitcoin.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Bitcoin crypto-currency enthusiasts">Bitcoin</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#technology" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+
+                            more (26)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Life / Arts">
+        <ul class="-list">
+                <li class="-item"><a href="https://photo.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                <li class="-item"><a href="https://scifi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                <li class="-item"><a href="https://graphicdesign.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                <li class="-item"><a href="https://movies.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                <li class="-item"><a href="https://music.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                <li class="-item"><a href="https://worldbuilding.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="writers/artists using science, geography and culture to construct imaginary worlds and settings">Worldbuilding</a></li>
+                <li class="-item"><a href="https://cooking.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Life / Arts"><ul class="-list">
+                <li class="-item"><a href="https://diy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="contractors and serious DIYers">Home Improvement</a></li>
+                <li class="-item"><a href="https://money.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                <li class="-item"><a href="https://academia.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="academics and those enrolled in higher education">Academia</a></li>
+                <li class="-item"><a href="https://law.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="legal professionals, students, and others with experience or interest in law">Law</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#lifearts" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+
+                            more (16)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Culture / Recreation">
+        <ul class="-list">
+                <li class="-item"><a href="https://english.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                <li class="-item"><a href="https://skeptics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientific skepticism">Skeptics</a></li>
+                <li class="-item"><a href="https://judaism.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                <li class="-item"><a href="https://travel.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="road warriors and seasoned travelers">Travel</a></li>
+                <li class="-item"><a href="https://christianity.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                <li class="-item"><a href="https://ell.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="speakers of other languages learning English">English Language Learners</a></li>
+                <li class="-item"><a href="https://japanese.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Culture / Recreation"><ul class="-list">
+                <li class="-item"><a href="https://gaming.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                <li class="-item"><a href="https://bicycles.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                <li class="-item"><a href="https://rpg.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                <li class="-item"><a href="https://anime.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="anime and manga fans">Anime &amp; Manga</a></li>
+                <li class="-item"><a href="https://puzzling.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who create, solve, and study puzzles">Puzzling</a></li>
+                <li class="-item"><a href="https://mechanics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#culturerecreation" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+
+                            more (32)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Science">
+        <ul class="-list">
+                <li class="-item"><a href="https://mathoverflow.net/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional mathematicians">MathOverflow</a></li>
+                <li class="-item"><a href="https://math.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                <li class="-item"><a href="https://stats.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                <li class="-item"><a href="https://cstheory.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                <li class="-item"><a href="https://physics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="active researchers, academics and students of physics">Physics</a></li>
+                <li class="-item"><a href="https://chemistry.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientists, academics, teachers and students">Chemistry</a></li>
+                <li class="-item"><a href="https://biology.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="biology researchers, academics, and students">Biology</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Science"><ul class="-list">
+                <li class="-item"><a href="https://cs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                <li class="-item"><a href="https://philosophy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#science" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+
+                            more (10)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Other">
+        <ul class="-list">
+                <li class="-item"><a href="https://meta.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                <li class="-item"><a href="https://stackapps.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                <li class="-item"><a href="https://api.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programmatic interaction with Stack Exchange sites">API</a></li>
+                <li class="-item"><a href="https://data.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="querying Stack Exchange data using SQL">Data</a></li>
+                <li class="-item"><a href="https://area51.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                    </ul>
+    </nav>
+                <div class="-copyright g-row jc-end">
+                    <div class="g-column jc-sp-between">
+                        <ul class="-list">
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog/?blb=1">Blog</a></li>
+                            <li class="-item"><a href="https://www.facebook.com/officialstackoverflow/" class="-link">Facebook</a></li>
+                            <li class="-item"><a href="https://twitter.com/stackoverflow" class="-link">Twitter</a></li>
+                            <li class="-item"><a href="https://linkedin.com/company/stack-overflow" class="-link">LinkedIn</a></li>
+                        </ul>
+
+                        <div>
+                            <p>
+
+                                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license" class="-link">cc by-sa 3.0</a>
+                                with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license" class="-link">attribution required</a>.
+                                <span id="svnrev">rev 2017.10.27.27587</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+    </footer>
+
+    <noscript>
+
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled
+            <img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno">
+        </div>
+    </noscript>
+        <script> setTimeout(function() { $("#adzerk-user-match").remove(); }, 2000);</script>
+
+    <script>
+
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-1');
+                ga('create', 'UA-5620270-59', {name: 'pageData', sampleRate: 5 });
+                ga('set', 'dimension2', '|wpf|mvvm|');
+                ga('pageData.set', 'dimension2', '|wpf|mvvm|');
+                ga('send', 'pageview');
+                ga('pageData.send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+
+<div style="position: absolute; pointer-events: none;" id="clc-abd" class="adsbox">&nbsp;</div></body>
+</html>

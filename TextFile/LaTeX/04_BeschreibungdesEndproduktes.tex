@@ -1,4 +1,4 @@
-\chapter{Administrationsprogramm und Website}\label{cha:theoretical-background}
+\chapter{Implementierung}\label{cha:theoretical-background}
 \section{Administration}
 \subsection{Kundenverwaltung}
 Um dem Benutzer eine kompakte Übersicht über seine Kunden zu geben, gibt es die Kundenverwaltung, bei der alle Kunden in einer Liste dargestellt werden. Angezeigt wird, die Id, Titel, Vorname, Nachname, Straße, PLZ, Ort, Telefon1 und das Land des Kunden. Diese Liste kann man filtern und sortieren (siehe Kapitel 'Filtern und Sortieren'). Zusätzlich zu dem normalen Filter, kann man bei der Kundenverwaltung ebenso gelöschte Kunden ein- oder ausblenden. Der Grund dafür wird später noch näher erklärt.
@@ -410,7 +410,7 @@ public void Filter()
 	}
 }
 \end{lstlisting}
-Dabei muss man wissen, dass EyeGlassFramesView vom Typ ICollectionView ist. Diese Property wird im Konstruktor aus der Liste der wirklichen Brillenfassungen erzeugt (EyeGlassFrames). Der Typ ICollectionView ist als Anzeigeelement für Listen gedacht, weshalb es auch ein Feld namens „Filter“ gibt. Durch die Methode „Contains“ wird dieser auch gesetzt. Der folgende Code stammt aus dem ViewModel der lagernden Brillenfassung.
+Dabei muss man wissen, dass EyeGlassFramesView vom Typ ICollectionView ist. Diese Property wird im Konstruktor aus der Liste der wirklichen Brillenfassungen erzeugt (EyeGlassFrames). Der Typ ICollectionView ist als Anzeigeelement für Listen gedacht, weshalb es auch ein Feld namens „Filter“ gibt (Mehr dazu: \cite{microsoft_collectionview.filter-eigenschaft_2017}). Durch die Methode „Contains“ wird dieser auch gesetzt. Der folgende Code stammt aus dem ViewModel der lagernden Brillenfassung.
 Properties:
 \begin{lstlisting}
 public ObservableCollection<EyeGlassFrame> EyeGlassFrames { get; set; }
@@ -454,7 +454,7 @@ Bei den allen Hauptseiten, auf denen Daten angezeigt werden, ist eine dynamische
 	\caption{Screenshot des Sortierens}
 	\label{fig:sample}
 \end{figure}
-Zur Implementierung gibt es eine Klasse SortManager, die die Sortierung für alle Hauptseiten regelt.
+Als Grundlage zur Implementierung war ein Beispiel von Microsoft sehr hilfreich (\cite{microsoft_windows_2017}). \newline Es eine Klasse SortManager, die die Sortierung für alle Hauptseiten regelt.
 \begin{lstlisting}
 public SortManager SortManager { get; set; }
 \end{lstlisting} 

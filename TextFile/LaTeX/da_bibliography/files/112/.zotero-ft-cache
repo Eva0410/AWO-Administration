@@ -1,0 +1,214 @@
+ 
+ 
+No unread comment. loading...
+
+View All Comments
+ 
+No unread message.
+
+View All Messages
+ 
+No unread notification. loading...
+
+View All Notifications
+ 
+
+ 
+Email : *
+Password : *
+  Remember me
+please wait...   Forgot password?
+Login using      
+C# Corner
+In Focus
+Blockchain Conference Announced
+C# Corner
+C# Corner
+Contribute
+
+    An Article
+    A Blog
+    A News
+    A Video
+    A Link
+    An Interview Question
+
+Ask a Question
+
+     
+    TECHNOLOGIES
+    .NET C, C++, MFC HoloLens Networking SignalR
+    .NET Core Career Advice How do I Node.js Software Testing
+    ADO.NET Chapters Internet & Web Office Development SQL Language
+    Agile Development CIO Internet of Things OOP/OOD SQL Server
+    AJAX Cloud iOS Operating Systems Swift
+    Android Coding Best Practices Java Philosophy TypeScript
+    Angular Cognitive Services Java and .NET PHP UWP
+    Architecture Cyber Security JavaScript Power BI Visual Studio
+    Artificial Intelligence Databases & DBA JQuery Printing in C# WCF
+    ASP.NET Design Patterns & Practices JSON Progressive Web Apps Web Development
+    ASP.NET Core DevOps kotlin Project Management Web Services
+    Azure Dynamics CRM Leadership Python Windows Controls
+    Big Data Enterprise Development LINQ Q# Windows Forms
+    Blockchain Entity Framework Machine Learning R Windows PowerShell
+    Bot Framework Google Development Microsoft 365 React WPF
+    C# Graphics Design Microsoft Office Servers Xamarin
+    C# Corner Hiring and Recruitment Mobile Development SharePoint XML
+    Request a new Category | View All
+    ANSWERS
+    BLOGS
+    VIDEOS
+    INTERVIEWS
+    BOOKS
+    NEWS
+    EVENTS
+        CHAPTERS
+        ANNUAL CONFERENCE
+        Mathura Conference
+        Xamarin DevCon
+        Delhi Conference
+        Startup Conference
+        Hyderabad Conference
+        Chandigarh Conference
+    CAREER
+    JOBS
+    TRAINING
+    MORE
+        Consultants
+        IDEAS
+        LINKS
+        STUDENTS
+        MEMBERS
+        STORIES
+        Certifications
+
+Design Patterns & Practices
+Unit of Work in Repository Pattern
+
+    Jasminder Singh
+    Jasminder Singh
+    Sep 20 2014
+    Article
+
+    13
+    0
+    425k
+
+    facebook
+    twitter
+    linkedIn
+    google Plus
+    Reddit
+    WhatsApp
+        Email
+        Bookmark
+        Print
+        Other Artcile
+    Expand
+
+Unit of Work is the concept related to the effective implementation of the Repository Pattern. To understand this concept in better it is important to understand the concept of the Repository Pattern. We will not get into the details of the Repository Pattern in this discussion. But a small idea of this concept is necessary to proceed further.
+
+The Repository Pattern
+
+A repository is nothing but a class defined for an entity, with all the operations possible on that specific entity. For example, a repository for an entity Customer, will have basic CRUD operations and any other possible operations related to it. A Repository Pattern can be implemented in Following ways:
+
+    One repository per entity (non-generic) : This type of implementation involves the use of one repository class for each entity. For example, if you have two entities Order and Customer, each entity will have its own repository.
+    Generic repository : A generic repository is the one that can be used for all the entities, in other words it can be either used for Order or Customer or any other entity.
+
+Unit of Work in the Repository Pattern
+
+Unit of Work is referred to as a single transaction that involves multiple operations of insert/update/delete and so on kinds. To say it in simple words, it means that for a specific user action (say registration on a website), all the transactions like insert/update/delete and so on are done in one single transaction, rather then doing multiple database transactions. This means, one unit of work here involves insert/update/delete operations, all in one single transaction.
+
+To understand this concept, consider the following implementation of the Repository Pattern using a non-generic repository, for a Customer entity.
+
+
+
+The code above seems to be fine. The issue arises when we add a repository for another entity, say Order. In that case, both repositories will generate and maintain their own instance of the DbContext. This may lead to issues in the future, since each DbContext will have its own in-memory list of changes of the records, of the entities, that are being added/updated/modified, in a single transaction/operation. In such a case, if the SaveChanges of one of the repository fails and other one succeeds, it will result in database in-consistency. This is where the concept of UnitOfWork is relevant.
+
+To avoid this, we will add another layer or intermediate between the controller and the Customer repository. This layer will act as a centralized store for all the repositories to receive the instance of the DbContext. This will ensure that, for a unit of transaction, that spans across multiple repositories, should either complete for all entities or should fail entirely, as all of them will share the same instance of the DbContext. In our above example, while adding data for the Order and Customer entities, in a single transaction, both will use the same DbContext instance. This situation, without and with Unit of work, can be represented as in the following :
+
+
+
+In the above representation, during a single operation, that involves Customer and Order entities, both of them use the same DbContext instance. This will ensure that even if one of them breaks, the other one is also not saved, thus maintaining the database consistency. So when SaveChanges is executed, it will be done for both of the repositories.
+
+Let us implement this concept in our example. We add a new class called UnitOfWork and this class will receive the instance of the DbContext. The same class will further generate the required repository instances, in other words repository instances for Order and Customer and pass the same DbContext to both the repositories. So our UnitOfWork will be like the following:
+
+
+
+And, our Customer Repository will be changed, to receive the instance of DbContext from the unit of work class. See the code below:
+
+
+
+Similarly, we can have the code for the Order repository. Finally, our controller code will be like the following :
+
+
+
+Here, both the Order and Customer repository use the same instance of DbContext and we are executing the save changes using the instance unit of work class. So the changes of a single transaction are either done for both or none. Run the code and see the results.
+
+So this was about the concept of unit of work in the Repository Pattern. Any suggestions are welcome.
+
+    Generic repository
+    One repository per entity
+    Repository Pattern
+
+TRENDING UP
+
+    01
+    SQL Coding Best Practices
+    02
+    Angular 2 - CRUD Operations With Web API And Entity Framework
+    03
+    Microsoft Operations Management Suite (OMS) - A Beginner's Guide
+    04
+    A Beginners Guide To Microsoft BizTalk Server - Part 1
+    05
+    A Beginners Guide To Microsoft BizTalk Server - Part Two
+    06
+    Web Services Using C# - Creating Web Services
+    07
+    ASP.NET MVC - Sending SMS Messages Using Nexmo API
+    08
+    Liquid Templates In Logic Apps
+    09
+    Azure Logic Apps - Hello World
+    10
+    Dependency Injection In ASP.NET Core 2.0
+
+View All
+C# Corner Logo
+
+    Philadelphia
+    New York
+    London
+    Delhi
+
+Join C# Corner
+and millions of developer friends worldwide.
+Sign Up
+
+    Learn ASP.NET MVC
+    Learn ASP.NET Core
+    Learn Python
+    Learn JavaScript
+    Learn Xamarin
+    Learn Oracle
+    More...
+
+    Home
+    Events
+    Consultants
+    Jobs
+    Career Advice
+    Stories
+    Partners
+
+    About Us
+    Contact Us
+    Privacy Policy
+    Terms
+    Media Kit
+    Sitemap
+    Report a Bug
+    FAQ
+
+©2018 C# Corner. All contents are copyright of their authors.

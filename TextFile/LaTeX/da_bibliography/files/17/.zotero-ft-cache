@@ -1,0 +1,469 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Documentation beta
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+x Dismiss
+Join the Stack Overflow Community
+Stack Overflow is a community of 7.6 million programmers, just like you, helping each other.
+Join them; it only takes a minute:
+Sign up
+WPF Datagrid Get Selected Cell Value
+Ask Question
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+up vote 9 down vote favorite
+3
+	
+
+I want to get value for selected cell in datagrid , please anyone tell how to do this. i used SelectedCell changed event , how can i do that?
+
+ dataGrid1 . CurrentCell  
+
+c# wpf datagrid
+share | improve this question
+	
+edited Sep 16 '14 at 17:10
+	
+asked Oct 7 '13 at 12:58
+Abdulsalam Elsharif
+799 2 12 31
+	
+	
+add a comment  | 
+7 Answers 7
+active oldest votes
+up vote 13 down vote accepted
+	
+
+Please refer to the DataGrid Class page on MSDN. From that page:
+
+    Selection
+
+    By default, the entire row is selected when a user clicks a cell in a DataGrid, and a user can select multiple rows. You can set the SelectionMode property to specify whether a user can select cells, full rows, or both. Set the SelectionUnit property to specify whether multiple rows or cells can be selected, or only single rows or cells.
+
+    You can get information about the cells that are selected from the SelectedCells property. You can get information about cells for which selection has changed in the SelectedCellsChangedEventArgs of the SelectedCellsChanged event. Call the SelectAllCells or UnselectAllCells methods to programmatically select or unselect all cells. For more information, see Default Keyboard and Mouse Behavior in the DataGrid Control.
+
+I have added links to the relevant properties for you, but I'm out of time now, so I hope you can follow the links to get your solution.
+share | improve this answer
+	
+edited Oct 7 '13 at 16:27
+	
+answered Oct 7 '13 at 16:20
+Sheridan
+49.2k 13 96 135
+	
+	
+add a comment  | 
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+up vote 12 down vote
+	
+
+When I faced this problem, I approached it like this: I created a DataRowView , grabbed the column index, and then used that in the row's ItemArray
+
+ DataRowView dataRow = ( DataRowView ) dataGrid1 . SelectedItem ; int index = dataGrid1 . CurrentCell . Column . DisplayIndex ; string cellValue = dataRow . Row . ItemArray [ index ]. ToString ();  
+
+share | improve this answer
+	
+edited Mar 13 at 14:50
+Masoud
+41 1 9
+	
+answered Dec 11 '13 at 21:48
+Drew Sands
+136 1 7
+	
+2 	 
+	
+This only works when SelectionUnit is set to DataGridSelectionUnit.FullRow –  Bahman_Aries May 23 '15 at 6:05
+   	 
+	
+@Bahman_Aries See my answer for when SelectionUnit is Cell . –  Charles Clayton Sep 23 '15 at 17:17
+   	 
+	
+Thankyou very much john you solved my big problem ! –  DumpsterDiver Dec 2 '16 at 7:56
+add a comment  | 
+up vote 6 down vote
+	
+
+If you are selecting only one cell then get selected cell content like this
+
+ var cellInfo = dataGrid1 . SelectedCells [ 0 ]; var content = cellInfo . Column . GetCellContent ( cellInfo . Item );  
+
+Here content will be your selected cells value
+
+And if you are selecting multiple cells then you can do it like this
+
+ var cellInfos = dataGrid1 . SelectedCells ; var list1 = new List <string> (); foreach ( DataGridCellInfo cellInfo in cellInfos ) { if ( cellInfo . IsValid ) { //GetCellContent returns FrameworkElement var content = cellInfo . Column . GetCellContent ( cellInfo . Item ); //Need to add the extra lines of code below to get desired output //get the datacontext from FrameworkElement and typecast to DataRowView var row = ( DataRowView ) content . DataContext ; //ItemArray returns an object array with single element object [] obj = row . Row . ItemArray ; //store the obj array in a list or Arraylist for later use list1 . Add ( obj [ 0 ]. ToString ()); } }  
+
+share | improve this answer
+	
+edited Nov 12 '16 at 6:51
+Massimiliano Kraus
+2,037 1 10 31
+	
+answered Oct 7 '13 at 18:15
+Rushi Soni
+214 1 5 14
+	
+	
+add a comment  | 
+up vote 3 down vote
+	
+
+If SelectionUnit="Cell" try this:
+
+ string cellValue = GetSelectedCellValue ();  
+
+Where:
+
+ public string GetSelectedCellValue () { DataGridCellInfo cellInfo = MyDataGrid . SelectedCells [ 0 ]; if ( cellInfo == null ) return null ; DataGridBoundColumn column = cellInfo . Column as DataGridBoundColumn ; if ( column == null ) return null ; FrameworkElement element = new FrameworkElement () { DataContext = cellInfo . Item }; BindingOperations . SetBinding ( element , TagProperty , column . Binding ); return element . Tag . ToString (); }  
+
+Seems like it shouldn't be that complicated, I know...
+
+Edit: This doesn't seem to work on DataGridTemplateColumn type columns. You could also try this if your rows are made up of a custom class and you've assigned a sort member path:
+
+ public string GetSelectedCellValue () { DataGridCellInfo cells = MyDataGrid . SelectedCells [ 0 ]; YourRowClass item = cells . Item as YourRowClass ; string columnName = cells . Column . SortMemberPath ; if ( item == null || columnName == null ) return null ; object result = item . GetType (). GetProperty ( columnName ). GetValue ( item , null ); if ( result == null ) return null ; return result . ToString (); }  
+
+share | improve this answer
+	
+edited Sep 23 '15 at 21:31
+	
+answered Sep 23 '15 at 17:15
+Charles Clayton
+4,864 4 33 70
+	
+	
+add a comment  | 
+up vote 1 down vote
+	
+
+These are 2 methods that can be used to take a value from the selected row
+
+ /// <summary> /// Take a value from a the selected row of a DataGrid /// ATTENTION : The column's index is absolute : if the DataGrid is reorganized by the user, /// the index must change /// </summary> /// <param name="dGrid">The DataGrid where we take the value</param> /// <param name="columnIndex">The value's line index</param> /// <returns>The value contained in the selected line or an empty string if nothing is selected</returns> public static string getDataGridValueAt ( DataGrid dGrid , int columnIndex ) { if ( dGrid . SelectedItem == null ) return "" ; string str = dGrid . SelectedItem . ToString (); // Take the selected line str = str . Replace ( "}" , "" ). Trim (). Replace ( "{" , "" ). Trim (); // Delete useless characters if ( columnIndex < 0 || columnIndex >= str . Split ( ',' ). Length ) // case where the index can't be used return "" ; str = str . Split ( ',' )[ columnIndex ]. Trim (); str = str . Split ( '=' )[ 1 ]. Trim (); return str ; } /// <summary> /// Take a value from a the selected row of a DataGrid /// </summary> /// <param name="dGrid">The DataGrid where we take the value.</param> /// <param name="columnName">The column's name of the searched value. Be careful, the parameter must be the same as the shown on the dataGrid</param> /// <returns>The value contained in the selected line or an empty string if nothing is selected or if the column doesn't exist</returns> public static string getDataGridValueAt ( DataGrid dGrid , string columnName ) { if ( dGrid . SelectedItem == null ) return "" ; for ( int i = 0 ; i < columnName . Length ; i ++) if ( columnName . ElementAt ( i ) == '_' ) { columnName = columnName . Insert ( i , "_" ); i ++; } string str = dGrid . SelectedItem . ToString (); // Get the selected Line str = str . Replace ( "}" , "" ). Trim (). Replace ( "{" , "" ). Trim (); // Remove useless characters for ( int i = 0 ; i < str . Split ( ',' ). Length ; i ++) if ( str . Split ( ',' )[ i ]. Trim (). Split ( '=' )[ 0 ]. Trim () == columnName ) // Check if the searched column exists in the dataGrid. return str . Split ( ',' )[ i ]. Trim (). Split ( '=' )[ 1 ]. Trim (); return str ; }  
+
+share | improve this answer
+	
+answered Jun 11 '15 at 8:39
+Trikasus
+11 4
+	
+	
+add a comment  | 
+up vote 1 down vote
+	
+
+I struggled with this one for a long time! (Using VB.NET) Basically you get the row index and column index of the selected cell, and then use that to access the value.
+
+ Private Sub LineListDataGrid_SelectedCellsChanged ( sender As Object , e As SelectedCellsChangedEventArgs ) Handles LineListDataGrid . SelectedCellsChanged Dim colInd As Integer = LineListDataGrid . CurrentCell . Column . DisplayIndex Dim rowInd As Integer = LineListDataGrid . Items . IndexOf ( LineListDataGrid . CurrentItem ) Dim item As String Try item = LLDB . LineList . Rows ( rowInd )( colInd ) Catch Exit Sub End Try End Sub  
+
+End Class
+share | improve this answer
+	
+answered Sep 14 '16 at 17:55
+Thomas Bailey
+24 3
+	
+	
+add a comment  | 
+up vote 1 down vote
+	
+
+ //Xaml Code < DataGrid . Columns > < DataGridTextColumn Binding = "{Binding Path=Date, Converter={StaticResource dateconverter}, Mode=OneWay}" Header = "Date" Width = "100" /> < DataGridTextColumn Binding = "{Binding Path=Prescription}" Header = "Prescription" Width = "900" /> </ DataGrid . Columns > //C# Code DataRowView row = ( DataRowView ) grid1 . SelectedItem ; MessageBox . Show ( row [ "Prescription" ]. toString () + " " + row [ "Date" ]. toString ());  
+
+As WPF provides binding in DataGrids, this should be rather transparent. However, the following method only works, if you have used SQLDataAdapter and provided a binding path to your DataGridColoumns. For eg. Let's say the above datagrid is named grid1, which has auto generate columns set to false, and is using binding to bind column names to Headers. In this case, we use the 'row' variable of type 'DataRowView' and store the selected row in it. Now, use your Binding Paths, and reference individual columns of the selected row. Hope this helps! Cheers!
+
+PS: Works if SelectionUnit = 'Row'
+share | improve this answer
+	
+edited Feb 3 at 13:36
+	
+answered Feb 2 at 22:47
+Ketan Dubey
+277 1 15
+	
+	
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged c# wpf datagrid or ask your own question .
+
+asked
+	
+
+3 years, 10 months ago
+
+viewed
+	
+
+56,243 times
+
+active
+	
+
+3 months ago
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+47 People Chatting
+JavaScript
+1 hour ago - Madara Uchiha
+[Madara Uchiha: 1 hour ago] [Niing: 1 hour ago] [hexicle: 1 hour ago] [towc: 1 hour ago] [Benjamin Gruenbaum: 1 hour ago] [little pootis: 1 hour ago] [Cat Boss: 2 hours ago]
+Lounge<C++>
+2 hours ago - Telkitty
+[Telkitty: 2 hours ago] [Mikhail: 6 hours ago] [little pootis: 6 hours ago] [Luc Danton: 10 hours ago] [nwp: 11 hours ago] [wilx: 13 hours ago] [Horttanainen: 16 hours ago]
+Linked
+24
+DataGrid get selected rows' column values
+0
+Move Focus to next Control in WPF
+2
+WPF Different ItemsSource for a Combobox
+1
+Unable to get selected cell value from wpf DataGridView
+0
+WPF VS2015 Accessing Datgrid cells when datagrid datacontext is query result
+Related
+3
+How can I get WPF DataGrid Selected Cell Value?
+0
+Get Value of other cells DataGrid WPF
+1
+How to get all the Selected Cells in WPF datagrid
+3
+How to get value of a cell from datagrid in WPF?
+0
+Get selected value of ComboBoxColumn in Datagrid (WPF)
+5
+WPF : Get index of clicked / selected cell on DataGrid
+4
+how to get row header value in wpf datagrid for the selected cell?
+0
+how to get selected item value of a DataGridHyperlinkColumn in wpf datagrid
+0
+WPF DataGrid, getting cell value
+1
+Selective selecting cells in Datagrid WPF
+Hot Network Questions
+
+    Why use "where 1=2" on a SQL CREATE TABLE syntax?
+    Automatically calculate height of tallest line in list
+    What seemingly simple results in mathematics require advanced proofs?
+    Can wet paper completely regain its strength after drying?
+    Why is it that the last two digits of a perfect square are never both odd?
+    Are BJT's suitable for level-shifters? It seems FET's are more common,how do they compare?
+    SLDS Grid layout 40-60 ratio
+    Has there ever been a case when a traitorous military commander took command again for the side he betrayed?
+    file for current date in unix
+    How big a deal is blocking copy-pasting on a website?
+    Should I quit my PhD?
+    Determine your language's version
+    How does North Korea prevent their ambassadors/diplomats living abroad from defecting?
+    Can I save up spell learning "for later"?
+    What is this device attached to a high-voltage power line?
+    Letting refrigerator sit after moving...?
+    Who is responsible for security on an airplane?
+    Using slang in a Scientific Paper
+    Should you play games with a toddler that they're very good at and always win?
+    Benefit from using 3400 MHz RAM on a CPU that's only rated for 2400 MHz RAM
+    Can sum of a rational number and its reciprocal be an integer?
+    I know what a bad photo is, so why do I keep taking them?
+    Is it okay to point out someone's keeping quiet in a discussion/meeting?
+    If I've been prosecuted for a crime by another country can the US prosecute me for the same crime afterwards?
+
+question feed
+lang-cs
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Documentation
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+    Magento
+
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Programming Puzzles & Code Golf
+    Ethereum
+    Data Science
+
+    Arduino
+    more (26)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (17)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.8.19.26817
+Stack Overflow works best with JavaScript enabled

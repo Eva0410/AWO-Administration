@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://blog.galasoft.ch/posts/2015/09/mvvm-light-v5-2-is-live/">
+<meta name="wpd_url" content="http://blog.galasoft.ch/posts/2015/09/mvvm-light-v5-2-is-live/">
+<meta name="wpd_date" content="2018-02-10T15:58Z">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>MVVM Light V5.2 is live! | Laurent Bugnion (GalaSoft)</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://feeds.feedburner.com/galasoft">
+
+
+
+<link rel="pingback" href="http://blog.galasoft.ch/posts/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="http://blog.galasoft.ch/posts/wp-content/themes/galasoft/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="Laurent Bugnion (GalaSoft) » Feed" href="http://blog.galasoft.ch/posts/feed/">
+<link rel="alternate" type="application/rss+xml" title="Laurent Bugnion (GalaSoft) » Comments Feed" href="http://blog.galasoft.ch/posts/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Laurent Bugnion (GalaSoft) » MVVM Light V5.2 is live! Comments Feed" href="http://blog.galasoft.ch/posts/2015/09/mvvm-light-v5-2-is-live/feed/">
+<script src="widgets.js" id="twitter-wjs"></script><script src="all.js" id="facebook-jssdk"></script><script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery-migrate.min.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.galasoft.ch/posts/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.galasoft.ch/posts/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Solving the Wifi issues in Windows 10 build 10158" href="http://blog.galasoft.ch/posts/2015/06/solving-the-wifi-issues-in-windows-10-build-10158/">
+<link rel="next" title="What is the “ApplicationInsights” package in Windows 10 universal apps, and do you need it?" href="http://blog.galasoft.ch/posts/2015/09/what-is-the-applicationinsights-package-in-windows-10-universal-apps-and-do-you-need-it/">
+<meta name="generator" content="WordPress 4.1.22">
+<link rel="canonical" href="http://blog.galasoft.ch/posts/2015/09/mvvm-light-v5-2-is-live/">
+<link rel="shortlink" href="http://blog.galasoft.ch/posts/?p=1134">
+
+    <script type="text/javascript" src="shCore.js"></script>
+    <script type="text/javascript" src="shBrushCSharp.js"></script>
+    <script type="text/javascript" src="shBrushCss.js"></script>
+    <script type="text/javascript" src="shBrushJScript.js"></script>
+    <script type="text/javascript" src="shBrushPlain.js"></script>
+    <script type="text/javascript" src="shBrushXml.js"></script>
+    <script type="text/javascript" src="shBrushPowerShell.js"></script>
+
+    <script type="text/javascript">
+
+        SyntaxHighlighter.config.bloggerMode = true;
+        SyntaxHighlighter.defaults["auto-links"] = false;
+        SyntaxHighlighter.defaults["tab-size"] = 2;
+        SyntaxHighlighter.defaults["toolbar"] = false;
+        SyntaxHighlighter.all();
+    </script>
+
+    <script type="text/javascript">
+
+        function fbs_click() {
+            u = location.href;
+            t = document.title;
+            window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436');
+            return false;
+        }
+    </script>
+
+    
+
+<script src="a.min.js" async="" type="text/javascript"></script><script src="button.5f64a1a5864e1229f84c8defd65341b4.js" async="" charset="utf-8" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="mvvm-light-v5-2-is-live.css" media="all">
+</head>
+<body class="single single-post postid-1134 single-format-standard single-author">
+
+<div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="mvvm-light-v5-2-is-live_1.html" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0"></iframe></div></div></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="page" class="hfeed">
+
+	<div id="header">
+		<div id="headerimg">
+			<h1><a href="http://blog.galasoft.ch/posts/" title="Laurent Bugnion (GalaSoft)" rel="home">Laurent Bugnion (GalaSoft)</a></h1>
+			<div class="description">Diary of a Code Trotter</div>
+		</div>
+
+		<ul id="nav">
+            <li class="selectedlink"><a href="http://blog.galasoft.ch/posts">Blog</a></li>
+			<li><a href="http://www.galasoft.ch/articles_en.html">Programming</a></li>
+			<li><a href="http://www.galasoft.ch/About/">About</a></li>
+			<li><a href="http://galasoft.ch/yt">Drone Vids</a></li>
+			<li><a href="http://instagram.com/lbugnion">Photos</a></li>
+		</ul>
+            
+        <div id="rssheaderbadge">
+            <a href="http://feeds.feedburner.com/galasoft"><img src="MB_0015_rss.png" alt="RSS feed" title="Subscribe to RSS" height="40" width="40"></a>
+        </div>
+	</div>
+
+	<div id="main">
+		<div id="primary">
+			<div id="content" role="main">
+
+			
+                <div class="post">
+                    <div class="post-date">
+                        <span class="post-month">
+
+                            Sep                        </span>
+                        <span class="post-day">
+
+                            4                        </span>
+                        <span class="post-year">
+
+                            2015                        </span>
+                    </div>
+                    <div class="post-title">
+                        <h2>
+                            <a href="http://blog.galasoft.ch/posts/2015/09/mvvm-light-v5-2-is-live/" rel="bookmark" title="Permanent Link to MVVM Light V5.2 is live!">MVVM Light V5.2 is live!</a>
+                        </h2>
+                        <span class="post-cat">
+                            <a href="http://blog.galasoft.ch/posts/category/net/" rel="category tag">.NET</a>, <a href="http://blog.galasoft.ch/posts/category/blend/" rel="category tag">Blend</a>, <a href="http://blog.galasoft.ch/posts/category/mvvm/" rel="category tag">MVVM</a>, <a href="http://blog.galasoft.ch/posts/category/technical-stuff/" rel="category tag">Technical stuff</a>, <a href="http://blog.galasoft.ch/posts/category/universal-platform-uwp/" rel="category tag">Universal Windows Platform UWP</a>, <a href="http://blog.galasoft.ch/posts/category/windows-10/" rel="category tag">Windows 10</a>, <a href="http://blog.galasoft.ch/posts/category/xamarin/" rel="category tag">Xamarin</a>, <a href="http://blog.galasoft.ch/posts/category/xaml/" rel="category tag">XAML</a>                        </span>
+                        <br>
+                        <span class="post-comments">
+                            <a href="http://blog.galasoft.ch/posts/2015/09/mvvm-light-v5-2-is-live/#comments" title="Comment on MVVM Light V5.2 is live!">17 Comments</a>                        </span>
+                    </div>
+                    <div class="entry">
+                        <p>This week I published MVVM Light V5.2 to Nuget and to the Visual Studio Gallery.</p>
+<p>There are a few highlights which are described as always <a href="http://www.mvvmlight.net/installing/changes">in the Change Log</a>. See further below for a more detailed explanation of some of the changes.</p>
+<p><span id="more-1134"></span><br>
+</p><h2>Using Nuget to install MVVM Light</h2>
+<p>It is possible to add MVVM Light to an existing application using the Nuget package manager. This can be done over command line, or using the UI included in Visual Studio. There are two packages to consider when selecting MVVM Light in an existing application: MVVM Light “libraries only” (<strong>mvvmlightlibs</strong>) and MVVM Light “full package” (<strong>mvvmlight</strong>) which also adds some files and scaffolding to the application.</p>
+<h3>Installing using Visual Studio</h3>
+<p>In order to install either MVVM Light package using Visual Studio, follow the steps:</p>
+<ul>
+<li>Open your existing application in Visual Studio.
+</li><li>In the Solution Explorer, right click on the project you want to add the references to, and select Manage Nuget Packages from the context menu.<br><em>Note: You can also manage Nuget packages in multiple projects by right-clicking on the Solution and selecting Manage Nuget Packages for Solution.</em> </li>
+</ul>
+<p><img alt="2015-09-02_23-18-43" src="20954892860_538b21e4eb_o.png"></p>
+<ul>
+<li>In the Nuget package manager window, make sure that Package source is set to Nuget.org. Set Filter to All, and Search for “mvvmlight”.
+</li><li>Select either MvvmLight or MvvmLightLibs, and click on the Install button.<br><em>Note: using the Nuget package manager window, you can also remove MVVM Light from your application later, if needed, or upgrade to a newer version.</em> </li>
+</ul>
+<p><a title="2015-09-03_00-00-08" href="https://www.flickr.com/photos/36917929@N06/21132826642/in/dateposted-public/"><img alt="2015-09-03_00-00-08" src="21132826642_e6442ef815_z.jpg"></a> <br>(click for full size)</p>
+<p>This action installs the selected package in your application.</p>
+<h3>Libraries only</h3>
+<p>If you select the “mvvmlightlibs” package, this installs the GalaSoft.MvvmLight assemblies in your application. In addition, it installs the CommonServiceLocator package, which is a reference needed by MVVM Light. No other changes are made to the application.</p>
+<h3>Full package</h3>
+<p><em>Note: if you add MVVM Light to a class library, you should use the “mvvmlightlibs” package only!</em></p>
+<p>If you select the “mvvmlight” package, it installs the “mvvmlightlibs” package to your application, and in addition adds two files to your project:</p>
+<ul>
+<li>ViewModelLocator.cs
+</li><li>MainViewModel.cs </li>
+</ul>
+<p>If your application is a Windows XAML-based app, it also executes a script to modify the App.xaml to add the ViewModelLocator to the application in a way that makes it possible to use design time data in Blend.</p>
+<p><em>Note: The script is only executed in applications containing an App.xaml. In Xamarin.Android, Xamarin.iOS and Xamarin.Forms, the script doesn’t modify the application.</em></p>
+<h3>Caution: Full package in Windows 10 Universal applications (UWP)</h3>
+<p>There is a known issue when you install the “mvvmlight” package in Windows 10 universal applications. The Nuget team unfortunately changed the way that Nuget works for this framework, and it doesn’t allow installing additional files, or running scripts anymore. Because of this, installing the “mvvmlight” package in Windows 10 UWP applications creates the exact same result as installing the “mvvmlightlibs” package. Because running a script is not allowed, it is not even possible to warn the user.</p>
+<p>I will publish more detailed information on how to add the scaffolding to a Windows 10 UWP application manually. Stay tuned.</p>
+<h3>Caution: Portable.MvvmLightLibs is discontinued</h3>
+<p>If you search in Nuget for “mvvmlight”, you may notice a package named “portable.mvvmlight”. This package’s description mentioned that it is discontinued. Use the “mvvmlightlibs” package instead, which is also featuring portable class libraries, and is actively maintained.</p>
+<h2>Using the Visual Studio extension VSIX</h2>
+<p>If you wish to start with a fresh new template with all the scaffolding in place, and in addition get code snippets right into Visual Studio, then the VSIX is for you!! This is a simple installer that will install MVVM Light templates and snippets into your favorite IDE. Currently, we support <strong>Visual Studio 2012, 2013 and 2015</strong>.</p>
+<h3>Installing from the Visual Studio gallery</h3>
+<p>The easiest way to install the MVVM Light extension is directly from within Visual Studio with the following steps:</p>
+<ul>
+<li>Open the menu Tools / Extensions and Updates. </li>
+</ul>
+<p><img alt="2015-09-03_22-53-41" src="21143019115_bfd8f2b63a.jpg"></p>
+<ul>
+<li>In the Extensions and Updates windows, select Online on the left.
+</li><li>Select Visual Studio Gallery.
+</li><li>Enter the search string “mvvmlight” in the search box.
+</li><li>Select the MVVM Light extension and press Download. </li>
+</ul>
+<p><a title="2015-09-03_22-55-30" href="https://www.flickr.com/photos/36917929@N06/20955121608/in/dateposted-public/"><img alt="2015-09-03_22-55-30" src="20955121608_e698c31350.jpg"></a> <br>(click for full size)</p>
+<ul>
+<li>After installation, you need to restart Visual Studio (this is standard procedure for all VSIX installations). </li>
+</ul>
+<h3>Installing from Codeplex</h3>
+<p>If for some reason you don’t have access to the Visual Studio gallery, or if you want to save the VSIX file for offline installation, you can head to the <a href="http://mvvmlight.codeplex.com/releases/view/617098">MVVM Light Codeplex repository</a>.</p>
+<p>Make sure to download the correct VSIX for your favorite Visual Studio edition. Currently we support Visual Studio 2012, 2013 and 2015.</p>
+<p><img alt="2015-09-04_09-57-59" src="20955121418_00eb5bd657_o.png">&nbsp;</p>
+<h2>The new project templates</h2>
+<p>After you install MVVM Light, you will immediately see project templates in the File, New Project dialog. Creating interesting project templates is a challenge, because you also don’t want to overload the “empty template” with too much stuff that needs to be deleted. However a project template is also a good place to add a few simple samples to teach the basics to the new users.</p>
+<p><a title="2015-09-03_23-26-10" href="https://www.flickr.com/photos/36917929@N06/21143019065/in/dateposted-public/"><img alt="2015-09-03_23-26-10" src="21143019065_6367c78913.jpg"></a> <br>(click for full size)</p>
+<p>In this spirit, I created new project templates for Windows 10 (Universal), Xamarin.iOS, Xamarin.Android and Windows Phone 8.1 with a set of features that demonstrates how the components of MVVM Light can be used. It is not intended as a complete tutorial (please <a href="http://www.pluralsight.com/courses/mvvm-light-toolkit-fundamentals">head to the Pluralsight course for that</a>), but it should give you a good idea of how MVVM Light can enhance your application.</p>
+<h3>The features</h3>
+<p>The new project templates for Windows Phone 8.1, Windows 10, Xamarin.iOS and Xamarin.Android feature&nbsp; most of the MVVM Light components and a small sample for each of these components.</p>
+<p><em>Note: I will gradually update the project templates for other platforms too.</em></p>
+<p>The user interface looks like this:</p>
+<p><img alt="2015-09-04_15-37-50" src="21132826302_b02ea01941.jpg"> <br><strong>Application in Windows 10 (desktop)</strong></p>
+<p>The application features the following features:</p>
+<ul>
+<li>Standard MVVM Light <strong>scaffolding</strong>: ViewModelLocator, MainViewModel
+</li><li><strong>Design mode</strong>: In ViewModelLocator and DesignDataService
+</li><li><strong>ViewModelBase</strong> and PropertyChanged (with the Set method): In MainViewModel.cs
+<ul>
+<li>Databinding in MainPage.xaml </li>
+</ul>
+</li><li><strong>RelayCommand</strong>: In MainViewModel.cs
+<ul>
+<li>Databinding in MainPage.xaml </li>
+</ul>
+</li><li><strong>DispatcherHelper</strong>
+<ul>
+<li>Initialization in App.xaml.cs (Win10 and WinPhone), App.cs (Android), AppDelegate.cs (iOS)
+</li><li>Usage in MainViewModel (RunClock method) </li>
+</ul>
+</li><li><strong>Messenger</strong>
+<ul>
+<li>Registration in App.xaml.cs (Win10 and WinPhone), MainActivity.cs (Android), AppDelegate.cs (iOS)
+</li><li>Sending message in MainViewModel.cs </li>
+</ul>
+</li><li><strong>SimpleIoc</strong>
+<ul>
+<li>Initialization in ViewModelLocator
+</li><li>Resolution in MainViewModel.cs </li>
+</ul>
+</li><li><strong>NavigationService</strong>
+<ul>
+<li>Configuration in ViewModelLocator
+</li><li>Navigation with parameter from MainViewModel
+</li><li>Back navigation, Retrieving parameter in SecondPage (Win10 and WinPhone), SecondActivity (Android), SecondViewController (iOS) </li>
+</ul>
+</li><li><strong>DialogService</strong>
+<ul>
+<li>Registration in ViewModelLocator
+</li><li>Usage in MainViewModel </li>
+</ul>
+</li>
+</ul>
+<p><img alt="2015-09-04_23-40-34" src="21120753676_19d88b4201_o.png"> <br><strong>Design mode: see DesignDataService and ViewModelLocator</strong></p>
+<h3>Android, iOS, Windows Phone 8.1, Windows 10</h3>
+<p>The new template is available for Windows 10 Universal, Windows Phone 8.1, Xamarin.Android and Xamarin.iOS. In addition, there are still the “old” template available for Windows Phone 8.0 and 8.1 Silverlight, Windows 8.1, WPF, Silverlight 5.</p>
+<p><img alt="2015-09-04_16-19-44" src="21150793011_6c6aa858cd_o.png"> <br><strong>Application in Windows 10 (phone)</strong></p>
+<p>&nbsp;<img alt="2015-09-04_16-16-19" src="20520526444_5189e75181_o.png"> <br><strong>Application in Windows Phone</strong></p>
+<p>&nbsp;<img alt="2015-09-04_15-54-43" src="20955120948_187f1485ee_o.png"> <br><strong>Application in iOS</strong></p>
+<p><img alt="2015-09-04_18-25-17" src="21143018365_d026e71b4f_o.png"> <br><strong>Application in Android</strong></p>
+<h2>The Code Snippets</h2>
+<p>Like in previous versions, the Visual Studio extension is also installing code snippets. You can see the list of code snippets by placing the cursor anywhere in the code, and typing “mvvm”.</p>
+<p><img alt="2015-09-04_21-50-24" src="20525588633_786dca9b8e_o.png"></p>
+<p>The following code snippets are available:</p>
+<ul>
+<li><strong>mvvmdroidelement</strong> (Xamarin.Android only): A property with backing field exposing a UI element retrieved from the resources.
+</li><li><strong>mvvmformsbprop</strong> (Xamarin.Forms only): Create a Bindable Property for Xamarin Forms. See below for details.
+</li><li><strong>mvvminpc*</strong> (multiple variants): A property raising PropertyChanged with a string. The class using this property should inherit GalaSoft.MvvmLight.ObservableObject.
+</li><li><strong>mvvmlocatorproperty</strong>: A ViewModel property to be added to a GalaSoft.MvvmLight.ViewModelLocator class.
+</li><li><strong>mvvmpropa</strong>: Registers an Attached DependencyProperty (WPF).
+</li><li><strong>mvvmpropdp</strong>: Registers a DependencyProperty (WPF).
+</li><li><strong>mvvmrelay*</strong> (multiple variants): Creates and initializes a new RelayCommand
+</li><li><strong>mvvmslpropa</strong>: Registers an Attached DependencyProperty (Silverlight).
+</li><li><strong>mvvmslpropdp</strong>: Registers a DependencyProperty (Silverlight).
+</li><li><strong>mvvmvm</strong>: A property allowing easy access to a view’s DataContext. </li>
+</ul>
+<h2>A few new features in the spotlight</h2>
+<p>V5.2 fixes quite a number of issues reported by users. In addition, the two following features are new:</p>
+<h3>DispatcherHelper in Android and iOS</h3>
+<p>DispatcherHelper is a convenient helper class that can be used to “dispatch” instructions from a background thread to the main thread. This is needed when, for example, a UI element needs to be updated from a worker thread. This is also the case if a worker thread updates a property which raises the PropertyChanged event, and a databinding is connecting this property to a UI element’s property (for example a TextBlock.Text property).</p>
+<p>In the new project templates in Windows 10 Universal, Windows Phone 8.1, Xamarin.Android and Xamarin.iOS, this is demonstrated by implementing a clock. A worker thread is started in the MainViewModel’s RunClock method. This worker thread updates the Clock property (of type string) every second. Because a databinding is set between the Clock property and a label on the user interface, the DispatcherHelper needs to be used.</p>
+<p>In V5.2, this class is made available to the Xamarin.Android and Xamarin.iOS frameworks too (it was already available in the XAML-based frameworks before).</p>
+<p><em>Note: At this time, DispatcherHelper cannot be used in a portable class library. I am working on a solution.</em></p>
+<h3>Xamarin.Forms “bindable property” code snippet (mvvmformsbprop)</h3>
+<p>In Xamarin.Forms, a concept similar to XAML’s DependencyProperty exists under the name “BindableProperty”. Declaring a BindableProperty is tedious and repetitive. This is why I made a code snippet available in V5.2 which helps the developer to declare a new BindableProperty. This snippet is similar to the previously existing</p>
+<h1>Conclusion</h1>
+<p>Hopefully you will find that MVVM Light is as useful in Windows 10 universal applications than in all other supported frameworks. With Windows 10 and Xamarin support, the range of devices that your applications can reach is greater than ever (I cannot wait to see MVVM Light applications running on HoloLens for instance <img src="icon_smile.gif" alt=":)" class="wp-smiley"></p>
+<p>Happy coding <br>Laurent</p>
+<div id="post-post1"><a href="http://www.galasoft.ch/"><img title="GalaSoft Laurent Bugnion" alt="GalaSoft Laurent Bugnion" src="logo_120x30.png"></a> </div>
+<div id="post-post2"><strong><a href="http://www.galasoft.ch/contact_en.html">Laurent Bugnion (GalaSoft)</a></strong>
+<div style="margin-top: -3px;"><a href="http://feeds.feedburner.com/galasoft">Subscribe</a> | <a href="http://twitter.com/lbugnion">Twitter</a> | <a href="http://ch.linkedin.com/in/lbugnion/">LinkedIn</a> </div>
+</div>
+<div id="post-post3"><a data-twitter-extracted-i1520697481625573127="true" class="twitter-share-button" href="https://twitter.com/share" data-count="none" data-size="small" data-via="LBugnion">Tweet</a> <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script></div>
+<div id="post-post4"><a onclick="return fbs_click()" class="fb_share_link2" href="http://www.facebook.com/share.php?u=%3Curl%3E" target="_top">Share on Facebook</a> </div>
+<div style="clear: both;"></div>
+<div>&nbsp;</div>
+<div data-type="ad" data-publisher="lqm.galasoftlaurent.site" data-zone="ron" data-format="300x250"></div>
+                    </div>
+                </div>
+
+				
+<!-- You can start editing here. -->
+
+	<h3 id="comments">17 Responses to “MVVM Light V5.2 is live!”</h3>
+
+	<ol class="commentlist">
+
+	
+		<li class="comment even thread-even depth-1" id="comment-29281">
+			<img alt="" src="a613c55feb51f402582d82218c5b2c68" class="avatar avatar-32 photo" height="32" width="32">			<cite><a href="http://www.laurentkempe.com/" rel="external nofollow" class="url">Laurent Kempé</a></cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-29281" title="">September 5th, 2015 at 07:35</a> </small>
+
+			<p>Again an AWESOME work Laurent! Thanks for your great framework, tooling and templates which makes our life much simpler.</p>
+
+		</li>
+
+	
+	
+		<li class="comment byuser comment-author-lbugnion bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-29284">
+			<img alt="" src="749bf0fc447ba1650d2e7e273c6a73c9" class="avatar avatar-32 photo" height="32" width="32">			<cite>lbugnion</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-29284" title="">September 5th, 2015 at 07:44</a> </small>
+
+			<p>Merci l’ami <img src="icon_wink.gif" alt=";)" class="wp-smiley"></p>
+
+		</li>
+
+	
+	
+		<li class="comment even thread-even depth-1" id="comment-29288">
+			<img alt="" src="5e385adf2aca841d63bedab64edb3629" class="avatar avatar-32 photo" height="32" width="32">			<cite>Krunal</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-29288" title="">September 5th, 2015 at 09:26</a> </small>
+
+			<p>Anything new for WPF developers? I was looking for Navigation Service implementation…</p>
+
+		</li>
+
+	
+	
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-29291">
+			<img alt="" src="d077011c5122db1571438043093735be" class="avatar avatar-32 photo" height="32" width="32">			<cite><a href="http://www.davidezordan.net/" rel="external nofollow" class="url">Davide Zordan</a></cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-29291" title="">September 5th, 2015 at 10:08</a> </small>
+
+			<p>Awesome work as always, Laurent! <img src="icon_smile.gif" alt=":)" class="wp-smiley"></p>
+
+		</li>
+
+	
+	
+		<li class="pingback even thread-even depth-1" id="comment-29710">
+						<cite><a href="http://xamgeek.com/blog/httpswww-syntaxismyui-comweekly-xamarin-newsletter-issue-57/" rel="external nofollow" class="url">Adam J Wolf: Weekly Xamarin Newsletter Issue #57 | XamGeek.com</a></cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-29710" title="">September 11th, 2015 at 14:47</a> </small>
+
+			<p>[…] MVVM Light V5.2 is live! Laurent Bugnion announces the release of MVVM Light V5.2. […]</p>
+
+		</li>
+
+	
+	
+		<li class="pingback odd alt thread-odd thread-alt depth-1" id="comment-29787">
+						<cite><a href="https://chevenix.wordpress.com/2015/09/12/szumma-007-2015-37-het/" rel="external nofollow" class="url">Szumma #007 – 2015 37. hét | d/fuel</a></cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-29787" title="">September 12th, 2015 at 14:31</a> </small>
+
+			<p>[…] MVVM Light V5.2 is live! – UWP-támogatással, mindennel. […]</p>
+
+		</li>
+
+	
+	
+		<li class="comment even thread-even depth-1" id="comment-29959">
+			<img alt="" src="35253429863b86b21989c6a6474fda20" class="avatar avatar-32 photo" height="32" width="32">			<cite>Richard</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-29959" title="">September 15th, 2015 at 20:59</a> </small>
+
+			<p>Having some issues with back navigation is there some kind of Forum where it’s possible to ask some questions?</p>
+
+		</li>
+
+	
+	
+		<li class="comment byuser comment-author-lbugnion bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-29960">
+			<img alt="" src="749bf0fc447ba1650d2e7e273c6a73c9" class="avatar avatar-32 photo" height="32" width="32">			<cite>lbugnion</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-29960" title="">September 15th, 2015 at 21:02</a> </small>
+
+			<p>Hi,</p>
+<p>You can write in <a href="http://mvvmlight.codeplex.com/discussions" rel="nofollow">http://mvvmlight.codeplex.com/discussions</a></p>
+<p>Greetings<br>
+Laurent</p>
+
+		</li>
+
+	
+	
+		<li class="comment even thread-even depth-1" id="comment-31394">
+			<img alt="" src="40ad07eac9b2dbf727a356e26583e4a2" class="avatar avatar-32 photo" height="32" width="32">			<cite>Markus</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-31394" title="">October 3rd, 2015 at 19:51</a> </small>
+
+			<p>Hello,</p>
+<p>first I want to say – thank you for your mvvm lib!<br>
+I like the new Navigation Service especially in use with Xamarin. But why is the navigateTo Method not virtual? When it would be virtual I could extend the service and override it to pass custom link (custom://detail/1). Then I can manipulate it and call the base method. Now I have to call a custom method (NavigateToCustom)… Or is this thought completly shit and this would be done with an other technique?</p>
+<p>bye<br>
+Markus</p>
+
+		</li>
+
+	
+	
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-36598">
+			<img alt="" src="4e4c333360ed75a256dbffe1d39f2159" class="avatar avatar-32 photo" height="32" width="32">			<cite>Ben Rees</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-36598" title="">January 31st, 2016 at 01:19</a> </small>
+
+			<p>Hi Laurent,<br>
+Thanks for all your hard efforts over the years, I’m a long time user of Mvvm Light – I enjoy the simplicity and pragmatism.</p>
+<p>I’ve just started experimenting with Windows 10 Universal and am trying to use your new Mvvm Light Vs2015 extension.  When I create a new project using the Mvvm Light Win10 Universal template, the resulting project (with no user changes) doesn’t build.  The build error is:<br>
+Oject reference not set to an instance of an object.<br>
+   at Microsoft.NuGet.Build.Tasks.ResolveNuGetPackageAssets.GetAnalyzers(JObject lockFile)<br>
+   at Microsoft.NuGet.Build.Tasks.ResolveNuGetPackageAssets.ExecuteCore()<br>
+   at Microsoft.NuGet.Build.Tasks.ResolveNuGetPackageAssets.Execute()	MvvmLight1			</p>
+<p>Is this a pre-release version, or a localised problem do you think?</p>
+<p>Thanks<br>
+Cheers<br>
+Ben</p>
+
+		</li>
+
+	
+	
+		<li class="comment even thread-even depth-1" id="comment-36600">
+			<img alt="" src="4e4c333360ed75a256dbffe1d39f2159" class="avatar avatar-32 photo" height="32" width="32">			<cite>Ben Rees</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-36600" title="">January 31st, 2016 at 03:32</a> </small>
+
+			<p>Further to my message above, here’s a little more information.<br>
+I’m using Visual Studio 2015 Community.<br>
+I’ve created a blank Windows 10 Universal app using the standard Vs2015 template, which builds ok after creation. Then I add Mvvm Light 5.2, right after which the project no longer builds with the above exception.<br>
+My Nuget.exe version is 3.3.0.212</p>
+<p>Hope that helps. Let me know if I can help in any way.</p>
+<p>Cheers</p>
+
+		</li>
+
+	
+	
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-36621">
+			<img alt="" src="4e4c333360ed75a256dbffe1d39f2159" class="avatar avatar-32 photo" height="32" width="32">			<cite>Ben Rees</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-36621" title="">February 1st, 2016 at 02:05</a> </small>
+
+			<p>Hi,<br>
+I’ve managed to resolve this by uninstalling and reinstalling the Mvvm Light VSIX Extension.  All is working fine now <img src="icon_smile.gif" alt=":-)" class="wp-smiley"></p>
+<p>Cheers<br>
+Ben</p>
+
+		</li>
+
+	
+	
+		<li class="comment byuser comment-author-lbugnion bypostauthor even thread-even depth-1" id="comment-36676">
+			<img alt="" src="749bf0fc447ba1650d2e7e273c6a73c9" class="avatar avatar-32 photo" height="32" width="32">			<cite>lbugnion</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-36676" title="">February 4th, 2016 at 10:20</a> </small>
+
+			<p>Whew, happy to hear that. Thanks!</p>
+
+		</li>
+
+	
+	
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-37670">
+			<img alt="" src="7c2c491f0958a5d43994ce13689b92c8" class="avatar avatar-32 photo" height="32" width="32">			<cite>Leonardo Porto</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-37670" title="">March 16th, 2016 at 20:11</a> </small>
+
+			<p>Does anybody else had a problem with EventToCommand on .Net 4.5 WPF solution running on VS 2015 update 1 on a Windows 10 machine?<br>
+I got this error: The type ‘EventToCommand’ from assembly ‘GalaSoft.MvvmLight.Platform’ is built with an older version of the Blend SDK, and is not supported in a Windows Presentation Framework 4 project.</p>
+
+		</li>
+
+	
+	
+		<li class="comment even thread-even depth-1" id="comment-38702">
+			<img alt="" src="5bbdfae0d2134a074e065f9190f94aaf" class="avatar avatar-32 photo" height="32" width="32">			<cite>Dennis Burnham</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-38702" title="">April 5th, 2016 at 00:58</a> </small>
+
+			<p>Hello Laurent,<br>
+I’ve spent so long on this issue of mine and I don’t know what I’m missing. I cannot get the ‘Get’ property to fire on a Textbox change in UWP. I built the exact same code in WPF and it works like a charm. I’m using MvvmLight version 5.2. I created a simple Textbox app, here is my xaml…..</p>
+<p>And here is my ViewModel code….</p>
+<p>        private string homeUserName;<br>
+        public string HomeUserName<br>
+        {<br>
+            get { return homeUserName; }<br>
+            set<br>
+            {<br>
+                if (this.homeUserName != value)<br>
+                {<br>
+                    this.homeUserName = value;<br>
+                    RaisePropertyChanged(() =&gt; this.HomeUserName);<br>
+                }<br>
+            }<br>
+        }</p>
+<p>When I type a letter in the textbox, it triggers the Set but not the Get. This is the same behavior in a Listbox. Is there something about UWP that’s different than WPF?  It works normal in WPF.</p>
+
+		</li>
+
+	
+	
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-38703">
+			<img alt="" src="5bbdfae0d2134a074e065f9190f94aaf" class="avatar avatar-32 photo" height="32" width="32">			<cite>Dennis Burnham</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-38703" title="">April 5th, 2016 at 00:59</a> </small>
+
+			<p>Sorry here is my Xaml code</p>
+
+		</li>
+
+	
+	
+		<li class="comment even thread-even depth-1" id="comment-38704">
+			<img alt="" src="5bbdfae0d2134a074e065f9190f94aaf" class="avatar avatar-32 photo" height="32" width="32">			<cite>Dennis Burnham</cite> Says:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-38704" title="">April 5th, 2016 at 01:00</a> </small>
+
+			<p>*excluding the tags since they won’t printout in the comments…</p>
+<p>TextBox x:Name=”txUsername” Text=”{Binding HomeUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}” Width=”350″ Height=”35″</p>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h3 id="respond">Leave a Reply</h3>
+
+
+<form action="http://blog.galasoft.ch/posts/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input name="author" id="author" value="" size="22" tabindex="1" aria-required="true" type="text">
+<label for="author">Name (required)</label></p>
+
+<p><input name="email" id="email" value="" size="22" tabindex="2" aria-required="true" type="text">
+<label for="email">Mail (will not be published) (required)</label></p>
+
+<p><input name="url" id="url" value="" size="22" tabindex="3" type="text">
+<label for="url">Website</label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" id="submit" tabindex="5" value="Submit Comment" type="submit">
+<input name="comment_post_ID" value="1134" type="hidden">
+</p>
+<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="1d185b294b" type="hidden"></p><p style="display: none;"></p>
+<input id="ak_js" name="ak_js" value="1520697481108" type="hidden"></form>
+
+
+
+			
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+<div id="secondary" class="widget-area" role="complementary">
+    <aside id="search-2" class="widget widget_search">
+<form role="search" method="get" id="searchform" class="searchform" action="http://blog.galasoft.ch/posts/">
+    <table id="search-form-table" cellpadding="0" cellspacing="0">
+        <tbody><tr>
+            <td id="search-form-td1">
+                <input value="" name="s" id="s" type="text">
+            </td>
+            
+            <td id="search-form-td2">
+                <input id="searchsubmit" value="" type="submit">
+            </td>
+        </tr>
+    </tbody></table>
+</form>
+</aside>
+
+        <aside id="text-3" class="widget widget_text"><h1 class="widget-title">Sponsors</h1>			<div class="textwidget"><!-- ---------------------------------------------------------------------------
+  Place this tag where you want the advertisement to display. 
+  To add keyword targeting add the attribute lqm_tags="<your tags>"
+  where <your tags> us a URI ENCODED, comma separated list of tags.
+
+  For example to tag with 'ASP.NET MVC', 'dependency injection', 'DI' and 'TDD':
+      lqm_tags="ASP.NET%20MVC%2cdependency%20injection%2cDI%2cIOC%2cTDD"
+---------------------------------------------------------------------------- -->
+<div data-type="ad" data-publisher="lqm.galasoftlaurent.site" data-zone="ron" data-format="160x600" style="margin-left: 20px;"></div>  </div>
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget">    <div id="mvp" class="narrowboxnoborder" style="padding-bottom: 15px;">
+
+<!--Copy from here for blog-->
+
+    <h2>See me soon at:</h2>
+
+        <a href="https://www.microsoft.com/de-ch/events/techsummit.aspx"><img style="margin: 0px 10px 0px 0px;" alt="Tech Summit Switzerland, Baden, Switzerland" src="25264998847_a0d389487c.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="https://confoo.ca/en/yul2018/sessions"><img style="margin: 0px 10px 0px 0px;" alt="Confoo, Montreal Canada" src="25264999107_a4805b3e0d.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="https://www.meetup.com/MontrealMobileDevelopers/events/247593766/?eventId=247593766"><img style="margin: 0px 10px 0px 0px;" alt="Montreal Mobile .NET Developers, Montreal Canada" src="39766251554_e7630fba4c.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="https://vslive.com/events/las-vegas-2018/home.aspx"><img style="margin: 0px 10px 0px 0px;" alt="Visual Studio Live, Las Vegas" src="25264999527_0e14f690f1.jpg" width="192"></a>
+        <br>
+        <br>
+
+    <h2>Past shows:</h2>
+
+        <a href="http://blog.galasoft.ch/presentations/2018006" title="Tech Summit Frankfurt, Frankfurt Germany"><img style="margin: 0px 10px 0px 0px;" alt="Tech Summit Frankfurt, Frankfurt Germany" src="25264999727_613052c134.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2018009" title="Microsoft Azure Zurich User Group, Zurich Switzerland"><img style="margin: 0px 10px 0px 0px;" alt="Microsoft Azure Zurich User Group, Zurich Switzerland" src="25264999327_da09933d51.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2018005" title="Cross-Platform Mobile Dev in Paris, Paris France"><img style="margin: 0px 10px 0px 0px;" alt="Cross-Platform Mobile Dev in Paris, Paris France" src="38552036765_b3582a8a03.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017024" title="Xamarin Meetup Zurich, Zurich Switzerland"><img style="margin: 0px 10px 0px 0px;" alt="Xamarin Meetup Zurich, Zurich Switzerland" src="27389982179_e560f01939_o.png" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017023" title="Microsoft Tech Summit, Toronto, Canada"><img style="margin: 0px 10px 0px 0px;" alt="Microsoft Tech Summit, Toronto, Canada" src="24437777848_cf069975fe_o.png" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017020" title="ISTA 2017, Sofia, Bulgaria"><img style="margin: 0px 10px 0px 0px;" alt="ISTA 2017, Sofia, Bulgaria" src="38306987471_b3f9baed40_o.png" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017018" title="Oredev 2017, Malmo, Sweden"><img style="margin: 0px 10px 0px 0px;" alt="Oredev 2017, Malmo, Sweden" src="34459256823_0c1d6d071d.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017022" title="MVP Connection, Hyderabad, India"><img style="margin: 0px 10px 0px 0px;" alt="MVP Connection, Hyderabad, India" src="16441282055_fd0e7254fe_n.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017021" title="MVP Connection, Lima, Peru"><img style="margin: 0px 10px 0px 0px;" alt="MVP Connection, Lima, Peru" src="16441282055_fd0e7254fe_n.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017019" title="Expert Day for Xamarin, Koeln, Germany"><img style="margin: 0px 10px 0px 0px;" alt="Expert Day for Xamarin, Koeln, Germany" src="36729050293_fffaf76bfe_m.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017017" title="MonkeyFest 2017, Singapore"><img style="margin: 0px 10px 0px 0px;" alt="MonkeyFest 2017, Singapore" src="35342522755_f44faf1772.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017016" title="MVVM Cross Hackfest (Lightning talk), Amsterdam, Netherlands"><img style="margin: 0px 10px 0px 0px;" alt="MVVM Cross Hackfest (Lightning talk), Amsterdam, Netherlands" src="36940032222_0382025bcc_m.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/all#vsliveredmond17" title="Visual Studio Live 2017, Redmond, WA, USA"><img style="margin: 0px 10px 0px 0px;" alt="Visual Studio Live 2017, Redmond, WA, USA" src="36552084822_fdf6820826.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017013" title="DevSum, Stockholm, Sweden"><img style="margin: 0px 10px 0px 0px;" alt="DevSum, Stockholm, Sweden" src="32708177445_e80df8b530_m.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017012" title="Techorama, Antwerp, Belgium"><img style="margin: 0px 10px 0px 0px;" alt="Techorama, Antwerp, Belgium" src="32569130570_deb805ed33_m.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017011" title="Experts Live Switzerland 2017, Bern, Switzerland"><img style="margin: 0px 10px 0px 0px;" alt="Experts Live Switzerland 2017, Bern, Switzerland" src="33963611431_fe51473089.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/all#xamarinday17" title="Xamarin Day Zurich, Zurich, Switzerland"><img style="margin: 0px 10px 0px 0px;" alt="Xamarin Day Zurich, Zurich, Switzerland" src="34002058860_1e4f7b932d.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017008" title="AppBuilders 2017, Lausanne, Switzerland"><img style="margin: 0px 10px 0px 0px;" alt="AppBuilders 2017, Lausanne, Switzerland" src="34093755375_e6d0b303d5.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017007" title="International Investment Forum in Virtual Augmented Mixed Reality, Zurich, Switzerland"><img style="margin: 0px 10px 0px 0px;" alt="International Investment Forum in Virtual Augmented Mixed Reality, Zurich, Switzerland" src="34093755725_4b6a987cf3.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/2017006" title="Mobcon Europe 2017, Sofia, Bulgaria"><img style="margin: 0px 10px 0px 0px;" alt="Mobcon Europe 2017, Sofia, Bulgaria" src="31708180523_d229bdccd2_m.jpg" width="192"></a>
+        <br>
+        <br>
+        <a href="http://blog.galasoft.ch/presentations/all#vslivevegas17" title="Visual Studio Live 2017, Las Vegas, NV, USA"><img style="margin: 0px 10px 0px 0px;" alt="Visual Studio Live 2017, Las Vegas, NV, USA" src="33419376876_2f076ab8b4_m.jpg" width="192"></a>
+        <br>
+        <br>
+
+<!--Copy until here for blog-->
+
+    </div></div>
+		</aside><aside id="text-5" class="widget widget_text"><h1 class="widget-title">What I do</h1>			<div class="textwidget">        <a href="http://www.galasoft.ch/mvvm/" title="MVVM Light Toolkit" style="margin: 0px 0px 20px 10px;"><img src="MVVM_BlackText_170x124.png" alt="MVVM Light"></a>
+
+        <br><br>
+
+        <a href="http://blog.galasoft.ch/mvvm/donate/"><img src="btn_donate_LG.gif" alt="Donate to MVVM Light Toolkit" style="margin-bottom: 0px;">
+        <br>to MVVM Light Toolkit</a>
+</div>
+		</aside><aside id="text-8" class="widget widget_text"><h1 class="widget-title">License</h1>			<div class="textwidget"><a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width: 0px;" src="somerights20.png"></a>
+<div style="line-height: 140%; margin: 8px 10px 10px; font-size: 0.9em;" xmlns:dc="http://purl.org/dc/elements/1.1/" property="dc:title">GalaSoft by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.galasoft.ch/" property="cc:attributionName" rel="cc:attributionURL">Laurent Bugnion</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a></div>
+
+<hr style="width: 170px; margin-top: 8px; margin-bottom: 8px;">
+
+<div style="line-height: 140%; margin: 8px 10px 10px; font-size: 0.9em;">All source code on this site is licensed under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.
+<br><br><strong>Copyright (c) 2000 - 2017 Laurent Bugnion (GalaSoft)</strong></div>
+</div>
+		</aside><aside id="text-9" class="widget widget_text"><h1 class="widget-title">Syndication / Sharing</h1>			<div class="textwidget"><p style="text-align: center;"><a href="http://feeds.feedburner.com/galasoft" rel="alternate" type="application/rss+xml"><img src="feed-icon16x16.png" alt="" style="vertical-align: middle; border: 0px none;"></a>&nbsp;<a href="http://feeds.feedburner.com/galasoft" rel="alternate" type="application/rss+xml">Subscribe in a reader</a></p>
+
+<a href="http://www.facebook.com/share.php?u=%3Curl%3E" onclick="return fbs_click()" target="_top" class="fb_share_link">Share on Facebook</a>
+
+</div>
+		</aside><aside id="text-12" class="widget widget_text">			<div class="textwidget"></div>
+		</aside><aside id="categories-2" class="widget widget_categories"><h1 class="widget-title">Categories</h1>		<ul>
+	<li class="cat-item cat-item-7"><a href="http://blog.galasoft.ch/posts/category/net/">.NET</a> (375)
+</li>
+	<li class="cat-item cat-item-57"><a href="http://blog.galasoft.ch/posts/category/net-standard/">.NET Standard</a> (2)
+</li>
+	<li class="cat-item cat-item-46"><a href="http://blog.galasoft.ch/posts/category/adc/">ADC</a> (1)
+</li>
+	<li class="cat-item cat-item-37"><a href="http://blog.galasoft.ch/posts/category/amazon-fire-tv/">Amazon Fire TV</a> (1)
+</li>
+	<li class="cat-item cat-item-38"><a href="http://blog.galasoft.ch/posts/category/asp-net/">ASP.NET</a> (14)
+</li>
+	<li class="cat-item cat-item-52"><a href="http://blog.galasoft.ch/posts/category/azure/">Azure</a> (5)
+</li>
+	<li class="cat-item cat-item-53"><a href="http://blog.galasoft.ch/posts/category/azure-functions/">Azure Functions</a> (3)
+</li>
+	<li class="cat-item cat-item-56"><a href="http://blog.galasoft.ch/posts/category/azure-storage-explorer/">Azure Storage Explorer</a> (1)
+</li>
+	<li class="cat-item cat-item-55"><a href="http://blog.galasoft.ch/posts/category/azure-tables/">Azure Tables</a> (1)
+</li>
+	<li class="cat-item cat-item-10"><a href="http://blog.galasoft.ch/posts/category/blend/">Blend</a> (134)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://blog.galasoft.ch/posts/category/blog/">Blog</a> (6)
+</li>
+	<li class="cat-item cat-item-22"><a href="http://blog.galasoft.ch/posts/category/build/">Build</a> (39)
+</li>
+	<li class="cat-item cat-item-54"><a href="http://blog.galasoft.ch/posts/category/cloud-developer-advocate/">Cloud Developer Advocate</a> (2)
+</li>
+	<li class="cat-item cat-item-48"><a href="http://blog.galasoft.ch/posts/category/conferences/">Conferences</a> (9)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://blog.galasoft.ch/posts/category/design/">Design</a> (6)
+</li>
+	<li class="cat-item cat-item-19"><a href="http://blog.galasoft.ch/posts/category/do-it-yourself/">Do it yourself</a> (1)
+</li>
+	<li class="cat-item cat-item-43"><a href="http://blog.galasoft.ch/posts/category/hololens/">HoloLens</a> (11)
+</li>
+	<li class="cat-item cat-item-21"><a href="http://blog.galasoft.ch/posts/category/identitymine/">IdentityMine</a> (49)
+</li>
+	<li class="cat-item cat-item-16"><a href="http://blog.galasoft.ch/posts/category/javascript/">JavaScript</a> (9)
+</li>
+	<li class="cat-item cat-item-51"><a href="http://blog.galasoft.ch/posts/category/microsoft/">Microsoft</a> (6)
+</li>
+	<li class="cat-item cat-item-45"><a href="http://blog.galasoft.ch/posts/category/microsoftband/">MicrosoftBand</a> (2)
+</li>
+	<li class="cat-item cat-item-26"><a href="http://blog.galasoft.ch/posts/category/mix/">MIX</a> (68)
+</li>
+	<li class="cat-item cat-item-17"><a href="http://blog.galasoft.ch/posts/category/mvp/">MVP</a> (17)
+</li>
+	<li class="cat-item cat-item-11"><a href="http://blog.galasoft.ch/posts/category/mvvm/">MVVM</a> (135)
+</li>
+	<li class="cat-item cat-item-28"><a href="http://blog.galasoft.ch/posts/category/ndc/">NDC</a> (2)
+</li>
+	<li class="cat-item cat-item-30"><a href="http://blog.galasoft.ch/posts/category/nokia-e71/">Nokia E71</a> (3)
+</li>
+	<li class="cat-item cat-item-47"><a href="http://blog.galasoft.ch/posts/category/open-live-writer/">Open Live Writer</a> (1)
+</li>
+	<li class="cat-item cat-item-32"><a href="http://blog.galasoft.ch/posts/category/pdc/">PDC</a> (22)
+</li>
+	<li class="cat-item cat-item-18"><a href="http://blog.galasoft.ch/posts/category/personal/">Personal</a> (103)
+</li>
+	<li class="cat-item cat-item-12"><a href="http://blog.galasoft.ch/posts/category/phone/">Phone</a> (70)
+</li>
+	<li class="cat-item cat-item-34"><a href="http://blog.galasoft.ch/posts/category/pluralsight/">Pluralsight</a> (2)
+</li>
+	<li class="cat-item cat-item-14"><a href="http://blog.galasoft.ch/posts/category/silverlight/">Silverlight</a> (235)
+</li>
+	<li class="cat-item cat-item-31"><a href="http://blog.galasoft.ch/posts/category/silverlight-2-unleashed/">Silverlight 2 Unleashed</a> (16)
+</li>
+	<li class="cat-item cat-item-29"><a href="http://blog.galasoft.ch/posts/category/silverlight-4-unleashed/">Silverlight 4 Unleashed</a> (3)
+</li>
+	<li class="cat-item cat-item-20"><a href="http://blog.galasoft.ch/posts/category/surface/">Surface</a> (1)
+</li>
+	<li class="cat-item cat-item-27"><a href="http://blog.galasoft.ch/posts/category/techdays/">TechDays</a> (14)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://blog.galasoft.ch/posts/category/technical-stuff/">Technical stuff</a> (466)
+</li>
+	<li class="cat-item cat-item-44"><a href="http://blog.galasoft.ch/posts/category/techorama/">Techorama</a> (3)
+</li>
+	<li class="cat-item cat-item-23"><a href="http://blog.galasoft.ch/posts/category/touch/">Touch</a> (8)
+</li>
+	<li class="cat-item cat-item-39"><a href="http://blog.galasoft.ch/posts/category/tweetmypage/">TweetMyPage</a> (2)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://blog.galasoft.ch/posts/category/uncategorized/">Uncategorized</a> (6)
+</li>
+	<li class="cat-item cat-item-49"><a href="http://blog.galasoft.ch/posts/category/unity/">Unity</a> (1)
+</li>
+	<li class="cat-item cat-item-42"><a href="http://blog.galasoft.ch/posts/category/universal-platform-uwp/">Universal Windows Platform UWP</a> (22)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://blog.galasoft.ch/posts/category/ux/">UX</a> (25)
+</li>
+	<li class="cat-item cat-item-50"><a href="http://blog.galasoft.ch/posts/category/valorem/">Valorem</a> (2)
+</li>
+	<li class="cat-item cat-item-33"><a href="http://blog.galasoft.ch/posts/category/visual-studio/">Visual Studio</a> (15)
+</li>
+	<li class="cat-item cat-item-40"><a href="http://blog.galasoft.ch/posts/category/vslive/">VSLive</a> (4)
+</li>
+	<li class="cat-item cat-item-24"><a href="http://blog.galasoft.ch/posts/category/wcf/">WCF</a> (9)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://blog.galasoft.ch/posts/category/website/">Website</a> (40)
+</li>
+	<li class="cat-item cat-item-41"><a href="http://blog.galasoft.ch/posts/category/windows-10/">Windows 10</a> (33)
+</li>
+	<li class="cat-item cat-item-25"><a href="http://blog.galasoft.ch/posts/category/windows-7/">Windows 7</a> (11)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://blog.galasoft.ch/posts/category/windows-8/">Windows 8</a> (61)
+</li>
+	<li class="cat-item cat-item-13"><a href="http://blog.galasoft.ch/posts/category/windows-phone/">Windows Phone</a> (83)
+</li>
+	<li class="cat-item cat-item-2"><a href="http://blog.galasoft.ch/posts/category/work/">Work</a> (365)
+</li>
+	<li class="cat-item cat-item-15"><a href="http://blog.galasoft.ch/posts/category/wpf/">WPF</a> (221)
+</li>
+	<li class="cat-item cat-item-36"><a href="http://blog.galasoft.ch/posts/category/xamarin/">Xamarin</a> (39)
+</li>
+	<li class="cat-item cat-item-35"><a href="http://blog.galasoft.ch/posts/category/xaml/">XAML</a> (32)
+</li>
+		</ul>
+</aside><aside id="archives-2" class="widget widget_archive"><h1 class="widget-title">Archives</h1>		<ul>
+	<li><a href="http://blog.galasoft.ch/posts/2018/02/">February 2018</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2018/01/">January 2018</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2017/10/">October 2017</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2017/09/">September 2017</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2017/08/">August 2017</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2017/05/">May 2017</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2017/04/">April 2017</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2017/03/">March 2017</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2017/02/">February 2017</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2017/01/">January 2017</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/12/">December 2016</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/11/">November 2016</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/10/">October 2016</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/08/">August 2016</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/06/">June 2016</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/05/">May 2016</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/04/">April 2016</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/03/">March 2016</a>&nbsp;(10)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/02/">February 2016</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2016/01/">January 2016</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/12/">December 2015</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/11/">November 2015</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/10/">October 2015</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/09/">September 2015</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/06/">June 2015</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/05/">May 2015</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/04/">April 2015</a>&nbsp;(8)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/03/">March 2015</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/02/">February 2015</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2015/01/">January 2015</a>&nbsp;(4)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/12/">December 2014</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/11/">November 2014</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/10/">October 2014</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/09/">September 2014</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/07/">July 2014</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/06/">June 2014</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/05/">May 2014</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/04/">April 2014</a>&nbsp;(10)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/03/">March 2014</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/02/">February 2014</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2014/01/">January 2014</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2013/12/">December 2013</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2013/11/">November 2013</a>&nbsp;(6)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2013/03/">March 2013</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2013/02/">February 2013</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2013/01/">January 2013</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/11/">November 2012</a>&nbsp;(4)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/10/">October 2012</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/09/">September 2012</a>&nbsp;(4)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/08/">August 2012</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/06/">June 2012</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/05/">May 2012</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/04/">April 2012</a>&nbsp;(9)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/03/">March 2012</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/02/">February 2012</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2012/01/">January 2012</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/12/">December 2011</a>&nbsp;(6)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/10/">October 2011</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/09/">September 2011</a>&nbsp;(14)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/08/">August 2011</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/06/">June 2011</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/05/">May 2011</a>&nbsp;(6)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/04/">April 2011</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/03/">March 2011</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/02/">February 2011</a>&nbsp;(4)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2011/01/">January 2011</a>&nbsp;(2)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/12/">December 2010</a>&nbsp;(4)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/11/">November 2010</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/10/">October 2010</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/07/">July 2010</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/06/">June 2010</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/05/">May 2010</a>&nbsp;(1)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/04/">April 2010</a>&nbsp;(6)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/03/">March 2010</a>&nbsp;(6)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/02/">February 2010</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2010/01/">January 2010</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/12/">December 2009</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/11/">November 2009</a>&nbsp;(10)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/10/">October 2009</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/09/">September 2009</a>&nbsp;(7)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/08/">August 2009</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/07/">July 2009</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/06/">June 2009</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/05/">May 2009</a>&nbsp;(4)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/04/">April 2009</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/03/">March 2009</a>&nbsp;(14)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/02/">February 2009</a>&nbsp;(8)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2009/01/">January 2009</a>&nbsp;(9)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/12/">December 2008</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/11/">November 2008</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/10/">October 2008</a>&nbsp;(26)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/09/">September 2008</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/08/">August 2008</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/06/">June 2008</a>&nbsp;(3)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/05/">May 2008</a>&nbsp;(8)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/04/">April 2008</a>&nbsp;(12)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/03/">March 2008</a>&nbsp;(31)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/02/">February 2008</a>&nbsp;(5)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2008/01/">January 2008</a>&nbsp;(8)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/12/">December 2007</a>&nbsp;(6)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/11/">November 2007</a>&nbsp;(7)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/10/">October 2007</a>&nbsp;(7)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/09/">September 2007</a>&nbsp;(11)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/08/">August 2007</a>&nbsp;(10)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/07/">July 2007</a>&nbsp;(9)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/06/">June 2007</a>&nbsp;(20)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/05/">May 2007</a>&nbsp;(14)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/04/">April 2007</a>&nbsp;(14)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/03/">March 2007</a>&nbsp;(13)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/02/">February 2007</a>&nbsp;(6)</li>
+	<li><a href="http://blog.galasoft.ch/posts/2007/01/">January 2007</a>&nbsp;(4)</li>
+		</ul>
+</aside><aside id="twitter-profile-tracker-2" class="widget widget_twitter-profile-tracker  "><h1 class="widget-title">Twitter @LBugnion</h1></aside><aside id="twitter-tracker-2" class="widget widget_twitter-tracker  "><h1 class="widget-title">Twitter MVVM Light</h1></aside><aside id="text-4" class="widget widget_text">			<div class="textwidget"><!-- ---------------------------------------------------------------------------- 
+ Place the following near the bottom of the body of the html content to load the 
+ script and execute the ad load method. 
+ Only place ONE copy at the bottom of the file, NOT one for each tag.  The script 
+ finds all the tags and then make the requests to the Ad Server for each of them.
+-----------------------------------------------------------------------------  -->
+<script type="text/javascript">
+
+    function _dmBootstrap(file) {
+        var _dma = document.createElement('script');
+        _dma.type = 'text/javascript';
+        _dma.async = true;
+        _dma.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + file;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(_dma);
+    }
+    function _dmFollowup(file) { if (typeof DMAds === 'undefined') _dmBootstrap('cdn2.DeveloperMedia.com/a.min.js'); }
+    (function () { _dmBootstrap('cdn1.DeveloperMedia.com/a.min.js'); setTimeout(_dmFollowup, 2000); })();
+</script></div>
+		</aside></div>
+<!-- #secondary .widget-area -->
+
+
+	</div><!-- #main -->
+</div><!-- #page -->
+
+<script type="text/javascript" src="form.js"></script>
+<script type="text/javascript" src="comment-reply.min.js"></script>
+
+
+<iframe style="display: none;" src="mvvm-light-v5-2-is-live_2.html" allowtransparency="true" scrolling="no" frameborder="0"></iframe></body>
+</html>
