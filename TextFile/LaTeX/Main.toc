@@ -8,9 +8,9 @@
 \contentsline {section}{\numberline {1.2}Zielsetzung}{3}{section.1.2}
 \contentsline {section}{\numberline {1.3}Aufgabenstellung}{3}{section.1.3}
 \contentsline {chapter}{\numberline {2}Verwendete Technologien}{4}{chapter.2}
-\contentsline {section}{\numberline {2.1}Entit\IeC {\"a}t Framework}{4}{section.2.1}
+\contentsline {section}{\numberline {2.1}Entity Framework}{4}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Linq}{6}{subsection.2.1.1}
-\contentsline {section}{\numberline {2.2}UnitOfWork Pattern}{7}{section.2.2}
+\contentsline {section}{\numberline {2.2}UnitOfWork-Pattern}{6}{section.2.2}
 \contentsline {section}{\numberline {2.3}WPF}{8}{section.2.3}
 \contentsline {section}{\numberline {2.4}MVVM}{9}{section.2.4}
 \contentsline {section}{\numberline {2.5}MVVM-Light}{10}{section.2.5}
@@ -22,26 +22,26 @@
 \contentsline {section}{\numberline {3.1}Administration}{15}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Kundenverwaltung}{15}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Auftragsverwaltung}{18}{subsection.3.1.2}
-\contentsline {subsubsection}{Dokumente erstellen}{19}{section*.5}
-\contentsline {subsection}{\numberline {3.1.3}Lieferantenverwaltung}{25}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Verwaltung der lagernden Brillenfassungen}{25}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}E-Mail und SMS}{26}{subsection.3.1.5}
-\contentsline {subsubsection}{Massennachrichten}{26}{section*.6}
-\contentsline {subsubsection}{E-Mail}{26}{section*.7}
-\contentsline {subsubsection}{SMS}{28}{section*.8}
-\contentsline {subsubsection}{Einzelne Nachrichten}{28}{section*.9}
-\contentsline {subsubsection}{Versendete Nachrichten}{29}{section*.10}
-\contentsline {subsection}{\numberline {3.1.6}Statistiken}{30}{subsection.3.1.6}
-\contentsline {subsubsection}{Technischer Hintergrund}{30}{section*.11}
-\contentsline {subsection}{\numberline {3.1.7}Sonstiges}{31}{subsection.3.1.7}
-\contentsline {subsubsection}{Vorgegebene Texte bearbeiten}{32}{section*.12}
-\contentsline {subsection}{\numberline {3.1.8}Filtern und Sortieren}{34}{subsection.3.1.8}
-\contentsline {subsubsection}{Filtern}{34}{section*.13}
-\contentsline {subsubsection}{Sortieren}{37}{section*.14}
-\contentsline {section}{\numberline {3.2}Datenmodell}{43}{section.3.2}
-\contentsline {section}{\numberline {3.3}Projektarchitektur}{44}{section.3.3}
-\contentsline {chapter}{\numberline {4}Selbstevaluation}{48}{chapter.4}
-\contentsline {section}{\numberline {4.1}Probleme bei der Entwicklung}{48}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Event-Handling mit MVVM-Light}{48}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}UnitOfWork-Instanzen}{49}{subsection.4.1.2}
-\contentsline {chapter}{\numberline {A}Additional Information}{54}{appendix.A}
+\contentsline {subsubsection}{Dokumente erstellen}{20}{section*.5}
+\contentsline {subsection}{\numberline {3.1.3}Lieferantenverwaltung}{22}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Verwaltung der lagernden Brillenfassungen}{22}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}E-Mail und SMS}{23}{subsection.3.1.5}
+\contentsline {subsubsection}{Massennachrichten}{23}{section*.6}
+\contentsline {subsubsection}{E-Mail}{23}{section*.7}
+\contentsline {subsubsection}{SMS}{25}{section*.8}
+\contentsline {subsubsection}{Einzelne Nachrichten}{25}{section*.9}
+\contentsline {subsubsection}{Versendete Nachrichten}{26}{section*.10}
+\contentsline {subsection}{\numberline {3.1.6}Statistiken}{27}{subsection.3.1.6}
+\contentsline {subsubsection}{Technischer Hintergrund}{28}{section*.11}
+\contentsline {subsection}{\numberline {3.1.7}Sonstiges}{28}{subsection.3.1.7}
+\contentsline {subsubsection}{Vorgegebene Texte bearbeiten}{30}{section*.12}
+\contentsline {subsection}{\numberline {3.1.8}Filtern und Sortieren}{31}{subsection.3.1.8}
+\contentsline {subsubsection}{Filtern}{31}{section*.13}
+\contentsline {subsubsection}{Sortieren}{34}{section*.14}
+\contentsline {section}{\numberline {3.2}Datenmodell}{39}{section.3.2}
+\contentsline {section}{\numberline {3.3}Projektarchitektur}{41}{section.3.3}
+\contentsline {chapter}{\numberline {4}Selbstevaluation}{44}{chapter.4}
+\contentsline {section}{\numberline {4.1}Probleme bei der Entwicklung}{44}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Event-Handling mit MVVM-Light}{44}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}UnitOfWork-Instanzen}{45}{subsection.4.1.2}
+\contentsline {chapter}{\numberline {A}Generierte Dokumente des Verwaltungsprogrammes}{50}{appendix.A}
