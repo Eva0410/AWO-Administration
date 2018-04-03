@@ -128,7 +128,7 @@ PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 Im Gegenzug kann die View folgendermaßen auf eine Property im ViewModel binden:
 \begin{lstlisting}
 <ListView ItemsSource="{Binding CustomersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-\end{lstlisting} \newpage
+\end{lstlisting}
 Vorteile von MVVM:
 \begin{itemize}
 \item Logik sowie Darstellung können unabhängig voneinander bearbeitet werden. Dadurch kann die Darstellung von Designern und die Logik von Entwicklern erstellt werden.

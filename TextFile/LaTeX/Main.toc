@@ -1,7 +1,5 @@
 \select@language {german}
 \select@language {german}
-\select@language {german}
-\select@language {german}
 \contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
 \contentsline {section}{\numberline {1.1}Ist-Situation}{4}{section.1.1}
 \contentsline {section}{\numberline {1.2}Zielsetzung}{4}{section.1.2}
@@ -13,7 +11,7 @@
 \contentsline {section}{\numberline {2.4}UnitOfWork-Pattern}{8}{section.2.4}
 \contentsline {section}{\numberline {2.5}WPF}{9}{section.2.5}
 \contentsline {section}{\numberline {2.6}MVVM}{10}{section.2.6}
-\contentsline {section}{\numberline {2.7}MVVM-Light}{12}{section.2.7}
+\contentsline {section}{\numberline {2.7}MVVM-Light}{11}{section.2.7}
 \contentsline {section}{\numberline {2.8}MVC}{14}{section.2.8}
 \contentsline {section}{\numberline {2.9}HTML}{15}{section.2.9}
 \contentsline {section}{\numberline {2.10}CSS}{15}{section.2.10}
@@ -27,7 +25,7 @@
 \contentsline {section}{\numberline {2.15}SMTP}{19}{section.2.15}
 \contentsline {section}{\numberline {2.16}Base64}{19}{section.2.16}
 \contentsline {chapter}{\numberline {3}Implementierung}{20}{chapter.3}
-\contentsline {section}{\numberline {3.1}Administration}{20}{section.3.1}
+\contentsline {section}{\numberline {3.1}Administrationprogramm}{20}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Kundenverwaltung}{20}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Auftragsverwaltung}{23}{subsection.3.1.2}
 \contentsline {subsubsection}{Dokumente erstellen}{25}{section*.5}
