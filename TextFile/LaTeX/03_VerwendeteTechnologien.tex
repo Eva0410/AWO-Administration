@@ -1,4 +1,13 @@
 \chapter{Verwendete Technologien}\label{cha:theoretical-background}
+
+\section{Visual Studio}
+Visual Studio ist eine Entwicklungsumgebung von Microsoft. Sie wird verwendet um Computerprogramme sowie Webseiten, Webapps, Webservices und mobile Apps herzustellen. Die aktuellste Version des Programmes unterstützt eine vielzahl von Programmiersprachen: Visual Basic, .NET, C, C++, C++/CLI, C++/CX, C\#, F\#, SQL Server, TypeScript, Python, HTML, JavaScript und CSS.
+Weiters verfügt Visual Studio über einen Code editor mit IntelliSense(unterstützt den Programmierer mittels Vervollständigung des Codes).
+
+\section{C-Sharp}
+C\# ist eine objektorientierte Programmiersprache. Sie wurde von Microsoft entwickelt ist jedoch mittlerweile Plattform unabhängig. Sie unterstützt zahlreiche Funktionen wie Lambda Expressions, Delegates, Enumerationen und auch einem direkten Speicherzugriff. Außerdem werden generische Methoden und Typen von C\# unterstützt.
+
+
 \section{Entity Framework}
 Zum Nutzen einer Datenbank in Programmen gibt es das von Microsoft entwickelte Entity Framework. Dabei handelt es sich um ein Framework zur Erstellung von objektrelationalen Abbildungen auf .NET-Objektstrukturen. Das wird auch als ORM (object relational mapping) bezeichnet. In anderen Worten ermöglicht es Programmieren in der Applikation mit Objekten zu arbeiten, anstatt sich auf die wirkliche Datenbank mit ihren Tabellen und den Zugriff darauf konzentrieren zu müssen. Der Grund der Notwendigkeit eines solchen Frameworks ist, dass objektorientierte Programmiersprachen wie .NET Daten in Objekten speichern und relationale Datenbanken Daten in Tabellen ablegen. Diese beiden Arten der Speicherung sind grundlegend verschieden, weshalb ein Framework benötigt wird um diese miteinander verwenden zu können.
 \begin{figure}[H]
@@ -178,70 +187,6 @@ private void Init(RoutedEventArgs p)
 \end{lstlisting}
 Eine weiteres Feature von MVVM-Light ist der Messenger. Diese Klasse erlaubt den Austausch von Nachrichten zwischen zwei ViewModels. Die ViewModels müssen dabei keine spezielle Verbindung zueinander haben.
 \newline Quellen: \cite{dotnetcurry_using_2018}, \cite{dotnetpattern_mvvm_2018}, \cite{microsoft_mvvm_2018}
-\section{Microsoft Office Interop}
-Um aus einem Programm Word-Dokumente zu erstellen, gibt es das Assembly Microsoft.Office.Interop.Word auf welches eine Referenz hinzugefügt wurde. Damit kann der Benutzer im Programm Word-Dokumente bearbeiten, oder Informationen aus diesen herauslesen. Zur Nutzung benötigt der Computer allerdings eine gültige Microsoft Office Lizenz.  Außerdem lädt Interop das Word-Dokument im Hintergrund, wenn es bearbeitet wird, was den ganzen Vorgang etwas langsam macht.
-Dennoch bietet sich der Gebrauch von Interop an, weil es die einfachste Variante ist, auf Word-Dokumente zuzugreifen.
-Im folgenden Abschnitt wird erklärt wie aus einer Vorlage ein individuelles Word-Dokument erstellt werden kann.
-\begin{lstlisting}
-Application wordApp = new Application();
-Document wordDoc = new Document();
-
-Object oMissing = System.Reflection.Missing.Value;
-wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref oMissing, ref oMissing, ref oMissing);
-foreach (Field myMergeField in wordDoc.Fields)
-{
-	Range rngFieldCode = myMergeField.Code;
-	String fieldText = rngFieldCode.Text;
-
-	//only mergefields should be edited
-	if (fieldText.StartsWith(" MERGEFIELD"))
-	{
-		myMergeField.Select();
-		wordApp.Selection.TypeText("Test");
-	}
-}
-wordDoc.SaveAs(completePath);
-wordDoc.Close();
-wordApp.Quit();
-\end{lstlisting}
-Über den String ''oTemplatePath'' wird der Pfad des gewünschten Templates übergeben. Danach werden alle MergeFields der Vorlage (diese kann man beim Erstellen der Vorlage einfügen: Einfügen -\textgreater Schnellbaustein -\textgreater Mergefield) mit der Zeichenkette ''Test'' ersetzt. Im Endeffekt simuliert Interop einen Klick auf das Feld und mit der Methode TypeText(''Test'') wird der Text eingefügt. Zum Abschluss wird das Dokument unter einem angegeben Pfad abgespeichert (completePath) und die geöffnete Vorlage sowie die Applikation geschlossen. \newline
-Quellen: \cite{gembox_microsoft_2018}
-\section{WPF-Toolkit}
-Zur grafischen Darstellung der Statistiken wurde ebenfalls ein eigenes Assembly installiert:  System.Windows.Controls.DataVisualization.Toolkit (Version 4.0.0). Dieses Assembly kann einfach über den NuGetPackage-Manager heruntergeladen werden. Es ermöglicht die Veranschaulichung verschiedener Diagramme, wie zum Beispiel Linien-, Torten oder Balkendiagrammen. Zur Verwendung muss der Benutzer den Namespace in der View definieren.
-\begin{lstlisting}
-xmlns:toolkitCharting="clr-namespace:System.Windows.Controls.DataVisualization
-.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
-\end{lstlisting}
-Im folgenden Code wird ein Liniendiagramm mit einer Linie erstellt:
-\begin{lstlisting}
-<toolkitCharting:Chart Title="{Binding Title}">
-            <toolkitCharting:LineSeries Title="{Binding LineTitle}"  DependentValueBinding="{Binding Value}" IndependentValueBinding="{Binding Key}" ItemsSource="{Binding DataValues}"/>
-</toolkitCharting:Chart>
-\end{lstlisting}
-In der Property ''Title'' wird der Titel des Diagramms übergeben und ''LineTitle'' beschriftet die Linie mit dem gewünschten Text. ''DataValues'' (Typ ''ObservableCollection\textless KeyValuePair\textless string, int\textgreater \textgreater'') beinhaltet die Daten, welche im Diagramm dargestellt werden sollen. ''DependentValueBinding=''\{Binding Value\}'''' beschreibt, dass die abhängigen Werte des Diagramms jeweils vom ''Value'' bezogen werden. In ''DataValues'' ist das der int. \newline
-Quellen: \cite{c-sharpcorner_charting_2017}
-\section{MessageBird}
-MessageBird ist ein Unternehmen, welches einen Online-Dienst anbietet mit dem  Unternehmen oder auch einzelne Personen, kostenpflichtig SMS aus einem Programm versenden können. Dazu meldet sich der Benutzer auf der Website ''https://www.messagebird.com'' an und sucht sich das passende Angebot. Danach kann man sein Guthaben aufladen und bekommt im Gegenzug einen AccessKey, über den man Nachrichten versenden kann. Dabei kann jeder Benutzer von MessageBird mehrere AccessKeys haben, beispielsweise einen für Test-Nachrichten, die nicht wirklich versendet werden, oder einen AccessKey, mit dem dann echte SMS versendet werden. Für Nachrichten, die nach Österreich gesendet werden, muss der Benutzer derzeit 4,6 Cent (Stand März 2018) bezahlen. Sobald die SMS versendet wurde, wird der Betrag automatisch vom Guthaben des Benutzers abgezogen. Wenn das Guthaben aufgebraucht ist, versendet MessageBird keine SMS mehr und der Benutzer kann sein Guthaben gegebenenfalls wieder aufladen. Auf der Website hat man einen Überblick über die versendeten SMS, verschiedene angelegte Nummern und vieles mehr. \newline Über den NuGet-Manager kann man das Package ''MessageBird'' installieren und im Code dann so verwenden:
-\begin{lstlisting}
-IProxyConfigurationInjector proxyConfigurationInjector = null; // for no web proxies, or web proxies not requiring authentication
-
-Client client = Client.CreateDefault(AccessKey, proxyConfigurationInjector);
-
-MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, new[] { Convert.ToInt64(this.To) });
-\end{lstlisting}
-''AccessKey'' im zweiten Befehl ist der String, den man von der Website bekommt, über den abgerechnet wird. ''OptikAigner'' wird als Sendernamen angegeben. Der zweite Parameter des letzten Befehls, gibt den Text der Nachricht an. Der letzte Parameter ist ein ''long''-Array mit einem Wert, nämlich der Telefonnummer, an die die SMS versendet werden soll.
-
-\subsubsection{Andere Möglichkeiten}
-Im Vergleich zum Versand von E-Mails, gibt es keine Möglichkeit kostenfrei und ohne Anbieter SMS zu versenden. Als Alternative hätte sich das Unternehmen ''Twilio'' angeboten, allerdings hätte dort eine SMS ca. 9 Cent gekostet. Aus Kostengründen und aus Benutzerfreundlichkeit ist die Wahl des Anbieters auf MessageBird gefallen.
-\newline Quellen: \cite{messagebird_sms_2018}, \cite{messagebird_preise_2018}, \cite{twilio_sms_2018}
-
-
-\section{Visual Studio}
-Visual Studio ist eine Entwicklungsumgebung von Microsoft. Sie wird verwendet um Computerprogramme sowie Webseiten, Webapps, Webservices und mobile Apps herzustellen. Die aktuellste Version des Programmes unterstützt eine vielzahl von Programmiersprachen: Visual Basic, .NET, C, C++, C++/CLI, C++/CX, C\#, F\#, SQL Server, TypeScript, Python, HTML, JavaScript und CSS.
-Weiters verfügt Visual Studio über einen Code editor mit IntelliSense(unterstützt den Programmierer mittels Vervollständigung des Codes).
-
-\section{C-Sharp}
-C\# ist eine objektorientierte Programmiersprache. Sie wurde von Microsoft entwickelt ist jedoch mittlerweile Plattform unabhängig. Sie unterstützt zahlreiche Funktionen wie Lambda Expressions, Delegates, Enumerationen und auch einem direkten Speicherzugriff. Außerdem werden generische Methoden und Typen von C\# unterstützt.
 
 
 \section{MVC}
@@ -313,6 +258,65 @@ Die Bootstrap Grid-Systeme sind mobile responsive was bedeutet das sie ihr Layou
   </div>
 </div>
 \end{lstlisting}
+
+
+\section{Microsoft Office Interop}
+Um aus einem Programm Word-Dokumente zu erstellen, gibt es das Assembly Microsoft.Office.Interop.Word auf welches eine Referenz hinzugefügt wurde. Damit kann der Benutzer im Programm Word-Dokumente bearbeiten, oder Informationen aus diesen herauslesen. Zur Nutzung benötigt der Computer allerdings eine gültige Microsoft Office Lizenz.  Außerdem lädt Interop das Word-Dokument im Hintergrund, wenn es bearbeitet wird, was den ganzen Vorgang etwas langsam macht.
+Dennoch bietet sich der Gebrauch von Interop an, weil es die einfachste Variante ist, auf Word-Dokumente zuzugreifen.
+Im folgenden Abschnitt wird erklärt wie aus einer Vorlage ein individuelles Word-Dokument erstellt werden kann.
+\begin{lstlisting}
+Application wordApp = new Application();
+Document wordDoc = new Document();
+
+Object oMissing = System.Reflection.Missing.Value;
+wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref oMissing, ref oMissing, ref oMissing);
+foreach (Field myMergeField in wordDoc.Fields)
+{
+	Range rngFieldCode = myMergeField.Code;
+	String fieldText = rngFieldCode.Text;
+
+	//only mergefields should be edited
+	if (fieldText.StartsWith(" MERGEFIELD"))
+	{
+		myMergeField.Select();
+		wordApp.Selection.TypeText("Test");
+	}
+}
+wordDoc.SaveAs(completePath);
+wordDoc.Close();
+wordApp.Quit();
+\end{lstlisting}
+Über den String ''oTemplatePath'' wird der Pfad des gewünschten Templates übergeben. Danach werden alle MergeFields der Vorlage (diese kann man beim Erstellen der Vorlage einfügen: Einfügen -\textgreater Schnellbaustein -\textgreater Mergefield) mit der Zeichenkette ''Test'' ersetzt. Im Endeffekt simuliert Interop einen Klick auf das Feld und mit der Methode TypeText(''Test'') wird der Text eingefügt. Zum Abschluss wird das Dokument unter einem angegeben Pfad abgespeichert (completePath) und die geöffnete Vorlage sowie die Applikation geschlossen. \newline
+Quellen: \cite{gembox_microsoft_2018}
+\section{WPF-Toolkit}
+Zur grafischen Darstellung der Statistiken wurde ebenfalls ein eigenes Assembly installiert:  System.Windows.Controls.DataVisualization.Toolkit (Version 4.0.0). Dieses Assembly kann einfach über den NuGetPackage-Manager heruntergeladen werden. Es ermöglicht die Veranschaulichung verschiedener Diagramme, wie zum Beispiel Linien-, Torten oder Balkendiagrammen. Zur Verwendung muss der Benutzer den Namespace in der View definieren.
+\begin{lstlisting}
+xmlns:toolkitCharting="clr-namespace:System.Windows.Controls.DataVisualization
+.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+\end{lstlisting}
+Im folgenden Code wird ein Liniendiagramm mit einer Linie erstellt:
+\begin{lstlisting}
+<toolkitCharting:Chart Title="{Binding Title}">
+            <toolkitCharting:LineSeries Title="{Binding LineTitle}"  DependentValueBinding="{Binding Value}" IndependentValueBinding="{Binding Key}" ItemsSource="{Binding DataValues}"/>
+</toolkitCharting:Chart>
+\end{lstlisting}
+In der Property ''Title'' wird der Titel des Diagramms übergeben und ''LineTitle'' beschriftet die Linie mit dem gewünschten Text. ''DataValues'' (Typ ''ObservableCollection\textless KeyValuePair\textless string, int\textgreater \textgreater'') beinhaltet die Daten, welche im Diagramm dargestellt werden sollen. ''DependentValueBinding=''\{Binding Value\}'''' beschreibt, dass die abhängigen Werte des Diagramms jeweils vom ''Value'' bezogen werden. In ''DataValues'' ist das der int. \newline
+Quellen: \cite{c-sharpcorner_charting_2017}
+\section{MessageBird}
+MessageBird ist ein Unternehmen, welches einen Online-Dienst anbietet mit dem  Unternehmen oder auch einzelne Personen, kostenpflichtig SMS aus einem Programm versenden können. Dazu meldet sich der Benutzer auf der Website ''https://www.messagebird.com'' an und sucht sich das passende Angebot. Danach kann man sein Guthaben aufladen und bekommt im Gegenzug einen AccessKey, über den man Nachrichten versenden kann. Dabei kann jeder Benutzer von MessageBird mehrere AccessKeys haben, beispielsweise einen für Test-Nachrichten, die nicht wirklich versendet werden, oder einen AccessKey, mit dem dann echte SMS versendet werden. Für Nachrichten, die nach Österreich gesendet werden, muss der Benutzer derzeit 4,6 Cent (Stand März 2018) bezahlen. Sobald die SMS versendet wurde, wird der Betrag automatisch vom Guthaben des Benutzers abgezogen. Wenn das Guthaben aufgebraucht ist, versendet MessageBird keine SMS mehr und der Benutzer kann sein Guthaben gegebenenfalls wieder aufladen. Auf der Website hat man einen Überblick über die versendeten SMS, verschiedene angelegte Nummern und vieles mehr. \newline Über den NuGet-Manager kann man das Package ''MessageBird'' installieren und im Code dann so verwenden:
+\begin{lstlisting}
+IProxyConfigurationInjector proxyConfigurationInjector = null; // for no web proxies, or web proxies not requiring authentication
+
+Client client = Client.CreateDefault(AccessKey, proxyConfigurationInjector);
+
+MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, new[] { Convert.ToInt64(this.To) });
+\end{lstlisting}
+''AccessKey'' im zweiten Befehl ist der String, den man von der Website bekommt, über den abgerechnet wird. ''OptikAigner'' wird als Sendernamen angegeben. Der zweite Parameter des letzten Befehls, gibt den Text der Nachricht an. Der letzte Parameter ist ein ''long''-Array mit einem Wert, nämlich der Telefonnummer, an die die SMS versendet werden soll.
+
+\subsubsection{Andere Möglichkeiten}
+Im Vergleich zum Versand von E-Mails, gibt es keine Möglichkeit kostenfrei und ohne Anbieter SMS zu versenden. Als Alternative hätte sich das Unternehmen ''Twilio'' angeboten, allerdings hätte dort eine SMS ca. 9 Cent gekostet. Aus Kostengründen und aus Benutzerfreundlichkeit ist die Wahl des Anbieters auf MessageBird gefallen.
+\newline Quellen: \cite{messagebird_sms_2018}, \cite{messagebird_preise_2018}, \cite{twilio_sms_2018}
+
 
 \section{SMTP}
 Simple Mail Transfer Protocol ist ein standard Internetprotokoll zur Übertragung von emails. SMTP wird vorrangig für das versenden von Mails benutzt, da zum Empfang von Mails andere Protokolle wie zum Beispiel POP3 oder IMAP verwendet werden.
