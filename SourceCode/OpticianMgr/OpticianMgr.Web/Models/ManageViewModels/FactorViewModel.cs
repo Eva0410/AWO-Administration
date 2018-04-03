@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpticianMgr.Web.Models.ManageViewModels
+namespace OpticianMgr.WebIdentity.Models.ManageViewModels
 {
     public class FactorViewModel
     {

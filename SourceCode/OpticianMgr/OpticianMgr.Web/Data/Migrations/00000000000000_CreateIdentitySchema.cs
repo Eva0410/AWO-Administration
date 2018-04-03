@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OpticianMgr.Web.Data.Migrations
+namespace OpticianMgr.WebIdentity.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

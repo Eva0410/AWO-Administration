@@ -124,8 +124,23 @@ namespace OpticianMgr.Persistence
                 return _eyeGlassFrameRepository;
             }
         }
+
+
+        private GenericRepository<Glasses> _glassesRepository;
+
+        public IGenericRepository<Glasses> GlassesRepository
+        {
+            get
+            {
+                if (_glassesRepository == null)
+                    _glassesRepository = new GenericRepository<Glasses>(_context);
+                return _glassesRepository;
+            }
+        }
+
+
         //TODO due to prefered constructor in viewmodellocator (only one constructor can exist)
-        private UnitOfWork(string connectionString)
+        public UnitOfWork(string connectionString)
         {
             _context = new ApplicationDbContext(connectionString);
         }

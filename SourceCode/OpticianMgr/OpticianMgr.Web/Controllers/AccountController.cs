@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using OpticianMgr.Web.Models;
-using OpticianMgr.Web.Models.AccountViewModels;
-using OpticianMgr.Web.Services;
+using OpticianMgr.WebIdentity.Models;
+using OpticianMgr.WebIdentity.Models.AccountViewModels;
+using OpticianMgr.WebIdentity.Services;
 
-namespace OpticianMgr.Web.Controllers
+namespace OpticianMgr.WebIdentity.Controllers
 {
     [Authorize]
     public class AccountController : Controller

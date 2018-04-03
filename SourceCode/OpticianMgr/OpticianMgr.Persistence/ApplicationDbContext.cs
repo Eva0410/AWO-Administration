@@ -20,6 +20,7 @@ namespace OpticianMgr.Persistence
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<CustomMessage> Messages { get; set; }
+        public DbSet<Glasses> Glasses2 { get; set; }
 
 
         public ApplicationDbContext() : base("name=DefaultConnection")

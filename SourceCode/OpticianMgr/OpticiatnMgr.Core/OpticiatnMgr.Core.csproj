@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\CustomMessage.cs" />
+    <Compile Include="Entities\Glasses.cs" />
     <Compile Include="Properties\IEntityObject.cs" />
     <Compile Include="Contracts\IGenericRepository.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />

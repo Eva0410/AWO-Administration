@@ -1,0 +1,58 @@
+@model OpticianMgr.Web.Models.NewGlasses
+@{
+    ViewData["Title"] = "NewGlasses";
+}
+
+<h1 style="font-size:55px;" align="center">Neue Brille hinzuf&uuml;gen</h1>
+
+<body>
+    <div align="center">
+
+        <form method="post" enctype="multipart/form-data" accept-charset="UTF-8" asp-action="NewGlasses">
+            <input type="hidden" asp-for="ImageAsString" value="@Model.ImageAsString" />
+            <div>
+                <div class="form-group">
+                    <div>
+                        <p>Bilder nur im Format .jpg:</p>
+                        <input style="margin-bottom:10px;" asp-for="@Model.Image" accept="image/*" type="file" />
+                        <span asp-validation-for="@Model.ImageFileName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Name"></label>
+                    <input type="text" placeholder="Name*" class="form-control" asp-for="@Model.Glasses.Name">
+                    <span asp-validation-for="@Model.Glasses.Name" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Marke"></label>
+                    <input type="text" placeholder="Marke*" class="form-control" asp-for="@Model.Glasses.Marke">
+                    <span asp-validation-for="@Model.Glasses.Marke" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Price"></label>
+                    <input type="number" placeholder="Preis*" class="form-control" asp-for="@Model.Glasses.Price">
+                    <span asp-validation-for="@Model.Glasses.Price" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Category"></label>
+                    <select asp-items="@Model.Kategorie" asp-for="@Model.Glasses.Category"></select>
+                </div>
+
+                <footer>
+                    <input type="hidden" id="idField" name="id" value="0" />
+                    <input type="submit" class="myButton" value="Einreichen" onclick="document.getElementById('idField').value = '1'";/>
+                    <a class="myButton" asp-action="Index">Zur&uuml;ck</a>
+                </footer>
+
+            </div>
+        </div>
+    </form>
+    </div>
+</body>
