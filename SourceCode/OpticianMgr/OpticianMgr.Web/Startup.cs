@@ -9,12 +9,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using OpticianMgr.Web.Data;
-using OpticianMgr.Web.Models;
-using OpticianMgr.Web.Services;
+using OpticianMgr.WebIdentity.Data;
+using OpticianMgr.WebIdentity.Models;
+using OpticianMgr.WebIdentity.Services;
 using Microsoft.AspNetCore.Identity;
+using OpticiatnMgr.Core.Contracts;
+using OpticianMgr.Persistence;
 
-namespace OpticianMgr.Web
+namespace OpticianMgr.WebIdentity
 {
     public class Startup
     {
@@ -46,15 +48,17 @@ namespace OpticianMgr.Web
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<Data.ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultIdentityConnection")));
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>(p => new UnitOfWork(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<Data.ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-
+                
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();

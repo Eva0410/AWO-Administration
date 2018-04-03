@@ -11,7 +11,6 @@ textarea {
 }
 
 
-
 #greyBox3 {
     background-color: #F9F9F9;
     height: auto;
@@ -47,6 +46,41 @@ textarea {
         background-color: #F0F0F0;
     }
 
+#blackFilter1 {
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
+    background-color: #f5f5f5;
+    float: right;
+    height: 100%;
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 250px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#h3filterFach {
+    margin: 11px 0 5px 0px;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: black;
+    border: none;
+    background: none;
+}
+
+#greyBox {
+    background-color:white;
+
+    width: 23%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+    -webkit-box-shadow: 5px 5px 11px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 11px -3px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 11px -3px rgba(0,0,0,0.75);
+}
 
 
 #firstgreyBox3 {

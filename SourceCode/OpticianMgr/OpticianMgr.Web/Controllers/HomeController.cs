@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OpticianMgr.Web.Models;
+using OpticianMgr.WebIdentity.Models;
 using System.Net;
 using System.Net.Mail;
-using OpticianMgr.Web.Models.ViewModels;
+using OpticianMgr.WebIdentity.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using OpticiatnMgr.Core.Contracts;
 using System.IO;
 using System.Web;
+using OpticianMgr.Web.Models;
+using Microsoft.AspNetCore.Http;
+using OpticiatnMgr.Core.Entities;
 
-namespace OpticianMgr.Web.Controllers
+namespace OpticianMgr.WebIdentity.Controllers
 {
     public class HomeController : Controller
     {
-      //  IUnitOfWork uow;
+        IUnitOfWork uow;
         UserManager<ApplicationUser> um;
         SignInManager<ApplicationUser> sim;
-        public HomeController(/*IUnitOfWork _uow,*/ UserManager<ApplicationUser> _um, SignInManager<ApplicationUser> _sm)
+        public HomeController(IUnitOfWork _uow, UserManager<ApplicationUser> _um, SignInManager<ApplicationUser> _sm)
         {
-          //  uow = _uow;
+            uow = _uow;
             um = _um;
             sim = _sm;
         }
@@ -32,26 +35,7 @@ namespace OpticianMgr.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Index(HttpPostedFileBase file)
-        {
-            var path = "";
-            if(file!=null)
-            {
-                if(file.ContentLength>0)
-                {
-                    if(Path.GetExtension(file.FileName).ToLower()==".jpg"
-                        || Path.GetExtension(file.FileName).ToLower() == ".png"
-                            || Path.GetExtension(file.FileName).ToLower() == ".jpeg")
-                    {
-                        path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/wwwroot/images"), file.FileName);
-                        file.SaveAs(path);
-                        ViewBag.UploadSuccess = true;
-                    }
-                }
-            }
-            return View();
-        }
+        
 
         public IActionResult About()
         {
@@ -64,6 +48,33 @@ namespace OpticianMgr.Web.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
+            return View();
+        }
+
+        public IActionResult AdminBrillen()
+        {
+            GlassesModel model = new GlassesModel();
+            model.FillGlasses(uow);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult AdminBrillen(HttpPostedFileBase file)
+        {
+            var path = "";
+            if (file != null)
+            {
+                if (file.ContentLength > 0)
+                {
+                    if (Path.GetExtension(file.FileName).ToLower() == ".jpg"
+                        || Path.GetExtension(file.FileName).ToLower() == ".png"
+                            || Path.GetExtension(file.FileName).ToLower() == ".jpeg")
+                    {
+                        path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/wwwroot/images"), file.FileName);
+                        file.SaveAs(path);
+                        ViewBag.UploadSuccess = true;
+                    }
+                }
+            }
             return View();
         }
 
@@ -120,15 +131,98 @@ namespace OpticianMgr.Web.Controllers
 
         public IActionResult Herrenbrillen()
         {
-            return View();
+            GlassesModel model = new GlassesModel();
+            model.FillGlasses(uow);
+            return View(model);
         }
         public IActionResult Frauenbrillen()
         {
-            return View();
+            GlassesModel model = new GlassesModel();
+            model.FillGlasses(uow);
+            return View(model);
         }
         public IActionResult Kinderbrillen()
         {
-            return View();
+            GlassesModel model = new GlassesModel();
+            model.FillGlasses(uow);
+            return View(model);
+        }
+        public async Task<IActionResult> NewGlasses()
+        {
+            NewGlasses model = new NewGlasses();
+            await model.Init();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> NewGlasses(NewGlasses model, int id)
+        {
+
+            //preview
+            if (id == 0)
+            {
+                if (ModelState.Where(k => k.Key == nameof(model.ImageFileName)).Count() == 0 || ModelState.Where(k => k.Key == nameof(model.ImageFileName)).FirstOrDefault().Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
+                {
+                    //save the filename of the picture, and the image as base64 string
+                    model.ImageAsString = ConvertImage(model.Image, model.ImageAsString);
+                }
+                await model.FillList();
+                return View(model);
+            }
+            else if (id == 1)
+            {
+                if (ModelState.IsValid)
+                {
+                    //Save image
+                    model.Glasses.Image = ConvertImage(model.Image, model.ImageAsString);
+
+
+                    this.uow.GlassesRepository.Insert(model.Glasses);
+                    this.uow.Save();
+
+                    return RedirectToAction("AdminBrillen");
+
+                }
+                else
+                {
+                    await model.FillList();
+                    //save image as string
+                    model.ImageAsString = ConvertImage(model.Image, model.ImageAsString);
+                    return View(model);
+                }
+            }
+            else if (id == 2)
+            {
+                await model.FillList();
+                model.ImageAsString = string.Empty;
+                return View(model);
+            }
+            return NotFound();
+        }
+
+        public string ConvertImage(IFormFile Image, string ImageAsString)
+        {
+            if (Image != null && Image.Length > 0)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    Image.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    return Convert.ToBase64String(fileBytes);
+                }
+            }
+            return ImageAsString;
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteGlasses(int id)
+        {
+            var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+            if (g == null)
+                return NotFound();
+            uow.GlassesRepository.Delete(g);
+            uow.Save();
+            return RedirectToAction("AdminBrillen");
         }
 
         public IActionResult Error()

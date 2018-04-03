@@ -1,14 +1,28 @@
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Initial Situation}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{Goals}{chapter.1}% 3
-\BOOKMARK [1][-]{section.1.3}{Overview}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.4}{Basic Terminology}{chapter.1}% 5
-\BOOKMARK [1][-]{section.1.5}{Related Work and Projects}{chapter.1}% 6
-\BOOKMARK [1][-]{section.1.6}{Structure of the Thesis}{chapter.1}% 7
-\BOOKMARK [0][-]{chapter.2}{Hintergr\374nde}{}% 8
-\BOOKMARK [0][-]{chapter.3}{Verwendete Technologien}{}% 9
-\BOOKMARK [0][-]{chapter.4}{Beschreibung des Endproduktes}{}% 10
-\BOOKMARK [0][-]{chapter.5}{Selbstevaluation}{}% 11
-\BOOKMARK [0][-]{chapter.6}{Summary}{}% 12
-\BOOKMARK [0][-]{appendix.A}{Additional Information}{}% 13
-\BOOKMARK [0][-]{appendix.B}{Individual Goals}{}% 14
+\BOOKMARK [1][-]{section.1.1}{Ist-Situation}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Zielsetzung}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Aufgabenstellung}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Verwendete Technologien}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Visual Studio}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{C-Sharp}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{MVC}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.4}{HTML}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.5}{CSS}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.5.1}{Media Query}{section.2.5}% 11
+\BOOKMARK [1][-]{section.2.6}{Bootstrap}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.6.1}{Grid-Systeme}{section.2.6}% 13
+\BOOKMARK [1][-]{section.2.7}{SMTP}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.8}{Base64}{chapter.2}% 15
+\BOOKMARK [0][-]{chapter.3}{Beschreibung des Endproduktes}{}% 16
+\BOOKMARK [1][-]{section.3.1}{Brillenkategorien}{chapter.3}% 17
+\BOOKMARK [2][-]{subsection.3.1.1}{Brillenmodelle}{section.3.1}% 18
+\BOOKMARK [1][-]{section.3.2}{Wunschzettel}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.2.1}{Kaufinteresse}{section.3.2}% 20
+\BOOKMARK [1][-]{section.3.3}{Administration}{chapter.3}% 21
+\BOOKMARK [2][-]{subsection.3.3.1}{Administratoren}{section.3.3}% 22
+\BOOKMARK [2][-]{subsection.3.3.2}{Brillen}{section.3.3}% 23
+\BOOKMARK [1][-]{section.3.4}{Allgemeine Informationen}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.5}{Kontakt}{chapter.3}% 25
+\BOOKMARK [0][-]{chapter.4}{Selbstevaluation}{}% 26
+\BOOKMARK [0][-]{chapter.5}{Zusammenfassung}{}% 27
+\BOOKMARK [0][-]{appendix.A}{Additional Information}{}% 28

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpticianMgr.Web.Models.ViewModels
+namespace OpticianMgr.WebIdentity.Models.ViewModels
 {
     public class AdministrationsAreaModel
     {

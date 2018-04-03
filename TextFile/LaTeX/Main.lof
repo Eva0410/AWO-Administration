@@ -1,14 +1,16 @@
 \select@language {german}
+\select@language {german}
 \select@language {english}
 \select@language {german}
-\select@language {german}
-\select@language {german}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Don Knuth, the inventor of T\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor \@m {}}}{4}{figure.1.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Model-View-Controller Konzept}}{6}{figure.2.1}
 \addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Brillenkategorien}}{9}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Model-View-Controller Konzept}}{10}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Model-View-Controller Konzept}}{12}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Model-View-Controller Konzept}}{14}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Model-View-Controller Konzept}}{15}{figure.3.5}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

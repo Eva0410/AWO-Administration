@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace OpticianMgr.Web.Models
+namespace OpticianMgr.WebIdentity.Models
 {
     public class EmailFormModel
     {

@@ -7,21 +7,6 @@
     <a class="btn btn-default" asp-action="AdministrationArea">Administrationsbereich</a>
 }
 
-@using (Html.BeginForm("Index","Home",FormMethod.Post,new { enctype = "multipart/form-data" }))
-{
-    <label for="file">Upload Image:</label>
-    <input type="file" name="file" value="Browse" />
-    <br>
-    <input type="submit" value="Upload"/>
-    <br>
-    if (ViewBag.UploadSuccess == true)
-    {
-        <span>Upload Completed Successfully</span>
-    }
-
-}
-
-
 <div id="firstgreyBox3">
     <table width="100%">
         <tr>

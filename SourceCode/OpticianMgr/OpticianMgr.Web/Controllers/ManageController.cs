@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OpticianMgr.Web.Models;
-using OpticianMgr.Web.Models.ManageViewModels;
-using OpticianMgr.Web.Services;
+using OpticianMgr.WebIdentity.Models;
+using OpticianMgr.WebIdentity.Models.ManageViewModels;
+using OpticianMgr.WebIdentity.Services;
 
-namespace OpticianMgr.Web.Controllers
+namespace OpticianMgr.WebIdentity.Controllers
 {
     [Authorize]
     public class ManageController : Controller

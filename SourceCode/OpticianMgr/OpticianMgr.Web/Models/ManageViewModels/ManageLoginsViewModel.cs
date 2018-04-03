@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace OpticianMgr.Web.Models.ManageViewModels
+namespace OpticianMgr.WebIdentity.Models.ManageViewModels
 {
     public class ManageLoginsViewModel
     {

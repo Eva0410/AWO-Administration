@@ -30,6 +30,7 @@ namespace OpticiatnMgr.Core
         public void FillDatabaseFromCsv()
         {
             _unitOfWork.DeleteDatabase();
+     //       _unitOfWork.GlassesRepository.InsertMany(GetGlasses());
             _unitOfWork.TownRepository.InsertMany(GetTowns());
             _unitOfWork.CountryRepository.InsertMany(GetCountries());
             _unitOfWork.DoctorRepository.InsertMany(GetDoctors());
@@ -55,6 +56,16 @@ namespace OpticiatnMgr.Core
                 DoctorName = d[0]
             }).ToList();
         }
+
+        private List<Glasses> GetGlasses()
+        {
+            return GetStringMatrix("TestGlasses.csv").Select(g =>
+            new Glasses()
+            {
+                Name = g[0]
+            }).ToList();
+        }
+
         private List<Order> GetOrders()
         {
             var customers = _unitOfWork.CustomerRepository.Get();

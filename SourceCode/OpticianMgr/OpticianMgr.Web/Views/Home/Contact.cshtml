@@ -1,4 +1,4 @@
-﻿@model OpticianMgr.Web.Models.EmailFormModel
+﻿@model OpticianMgr.WebIdentity.Models.EmailFormModel
 @{
     ViewData["Title"] = "Contact";
 }
@@ -29,7 +29,9 @@
         <div class="col-md-10">
             @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Message)
+            <p class="beschreibungText">Please enter some details. </p>
         </div>
+
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

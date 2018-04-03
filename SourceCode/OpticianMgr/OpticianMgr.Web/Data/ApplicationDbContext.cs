@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using OpticianMgr.Web.Models;
+using OpticianMgr.WebIdentity.Models;
 
-namespace OpticianMgr.Web.Data
+namespace OpticianMgr.WebIdentity.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
