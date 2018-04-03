@@ -1,0 +1,503 @@
+    Home
+    C#
+        Versions and Features
+        C# Params
+        C# Array List
+        C# Using Statement
+        C# Hashtable
+        C# Generics
+        C# Reflection
+        C# Action Delegate
+        C# Func Delegate
+        C# Predicate Delegate
+        C# Interface
+    .Net Threading
+        Threading Tutorial
+        Interview Questions
+    WPF
+        Architecture
+        WPF Dispatcher
+        MVVM Light Toolkit
+        WPF ListView
+        WPF DataGrid
+        WPF TabControl
+        Background Worker
+        WPF Label
+        Grid Splitter
+        Interview Questions
+    Design Patterns
+    LINQ
+    AngularJS
+    TypeScript
+    Testing
+        NUnit Tutorial
+        Rhino Mocks Tutorial
+    Interview Questions
+        LINQ Questions
+        C# OOPS Questions
+        MultiThreading
+        SQL Questions
+        WPF Questions
+        Threading Questions
+
+MENU
+
+    Home
+    C#
+        Versions and Features
+        C# Params
+        C# Array List
+        C# Using Statement
+        C# Hashtable
+        C# Generics
+        C# Reflection
+        C# Action Delegate
+        C# Func Delegate
+        C# Predicate Delegate
+        C# Interface
+    .Net Threading
+        Threading Tutorial
+        Interview Questions
+    WPF
+        Architecture
+        WPF Dispatcher
+        MVVM Light Toolkit
+        WPF ListView
+        WPF DataGrid
+        WPF TabControl
+        Background Worker
+        WPF Label
+        Grid Splitter
+        Interview Questions
+    Design Patterns
+    LINQ
+    AngularJS
+    TypeScript
+    Testing
+        NUnit Tutorial
+        Rhino Mocks Tutorial
+    Interview Questions
+        LINQ Questions
+        C# OOPS Questions
+        MultiThreading
+        SQL Questions
+        WPF Questions
+        Threading Questions
+
+MVVM
+
+    Introduction
+    MVVM Light Toolkit Introduction
+    Examples
+    Messenger
+
+Tags
+wpf C# interview reflection mvvm mvvm light interface generics arraylist hashtable using design patterns visitor template flyweight strategy memento mediator command wcf instance management application architecture ajax angularjs forms validations nested forms filters controllers directives bindings expressions ng-app ng-model environment setup threading synchronization entity framework rhino mocks test doubles oops app android linq testing nunit testcase typescript javascript abstract
+MVVM Light Messenger
+WPF   MVVM   wpf   mvvm   mvvm light  
+
+MVVM Light Messenger is a class that allows exchange messages between objects. Messenger class is mainly used for sending messages between viewmodels. Messenger class decreases coupling between viewmodels. Every viewmodel can communicate with another viewmodel without any association between them.
+
+MVVM-Light-Messenger-Message-Flow
+
+Messenger is an implementation of Mediator pattern in MVVM Light toolkit. You can know more about Mediator pattern here .
+
+Messenger classes in MVVM Light Toolkit
+
+    IMessenger
+    Interface which all the Messenger classes must inherit. Some methods are Register, Send, and Unregister.
+
+    Messenger
+    Messenger class is the implementation of IMessenger interface. This class is used for send and receive messages between objects. 
+
+Messenger Class Important Properties and Methods
+
+    Default (static) : IMessenger
+    Provides default instance of Messenger, allowing registering and sending messages in a static manner.
+
+    Reset (static) : void
+    Delete the default instance of Messenger. When you again use Default property of Messenger, it creates new Messenger class.
+
+    Register<TMessage>(object recipient, object token, bool receiveDerivedMessagesToo, Action<TMessage> action) : void
+    This method  registers a recipient for a type of message TMessage. TMessage can be anything like int, string or custom class. MVVM Light toolkit also provides some classes which can be used for sending the message like NotificationMessage, PropertyChangedMessage<T> etc. I described these classes later in this section.  ?
+    All four parameters usage are:
+
+        object recipient :  ?The object which will receive the message. You can use "this" for registering current object for receiving messages or you can specify other objects.
+
+        object token :  Token is a keyword for sending the message to those objects who register with that particular keyword. For example, if two recipients register with the "ViewModelA" token and "ViewModelB" token and message is send using "ViewModelA" token then only that object got the message that register with "ViewModelA" token.
+
+        bool receiveDerivedMessagesToo :  If we set this flag to "true", then the recipient also gets message types which inherit from <TMessage>. For example, if bike and car both implement the interface IAutomobile, then registering with the type <IAutomobile> and set the receiveDerivedMessagesToo flag to true, allows recipient to get bike and car messages too.
+
+        Action<TMessage> action :  The action delegate will be executed when message of <TMessage> is sent from the Send message.
+
+    Unregister<TMessage>(object recipient, object token, Action<TMessage> action): void
+    This method un-register a recipient for a type of message TMessage.
+
+    Send<TMessage>(TMessage message, object token) : void
+    This method sends messages to registered recipients. Only those recipients will receive messages that register for that particular <TMessage>.?
+    All two parameters usage are:
+        TMessage message : Message parameter is an instance of type TMessage.
+        object token : Token as explained earlier is a keyword for sending the messages to only those recipients that register for that particular keyword.?
+
+    Cleanup : void 
+    This method scans the recipients list for the dead recipients. All recipients are stores as  WeakReferences , they can be claimed during the garbage collection process. Cleanup method removes those recipients that are collected by garbage collector.
+
+Messages Classes in MVVM Light Toolkit
+
+    MessageBase
+    Base class for all messages types used by the Messenger for sending messages. There are only two properties exists in this class Sender and Target. You can only set both properties in the constructor. Both properties are of type object. Setting both properties are not necessary. These exist only for sending indications to recipients.
+
+    NotificationMessage
+    Use for sending "string" message notification to recipient(s).
+
+    NotificationMessage<T>
+    Use for sending "string" message notification and a generic value <T> to recipient(s).
+
+    NotificationMessageAction
+    Use for sending "string" message notification with a callback Action. When the recipient processed the message, it can execute the callback Action.
+
+    NotificationMessageAction<TCallbackParameter>
+    Use for sending "string" message notification with a callback Action with one <TCallbackParamter> parameter. When the recipient processed with message, it can execute the callback Action with one parameter.
+
+    PropertyChangedMessage<T>
+    Use for sending the property name along with its old value and new value.
+
+    DialogMessage  [deprecated]
+    Use for requesting to display the messagebox. This class also provides a callback Action. This callback is used for notify the sender about the user's choice in the message box.
+
+    GenericMessage<T>
+    Use for sending generic value to a recipient. Recipient can access the generic value using Content property.
+
+You can create your own custom messages classes by inherit from the MessageBase class.
+ViewModel support for Messenger
+
+Every viewmodel inherits from ViewModelBase in MVVM Light Toolkit. ViewModelBase provides a MessengerInstance property which by default returns the default instance of Messenger.
+
+ protected IMessenger MessengerInstance
+{
+	get
+	{
+		return this._messengerInstance ?? Messenger.Default;
+	}
+	set
+	{
+		this._messengerInstance = value;
+	}
+}
+
+If you don't want to use default instance of Messenger and want to create your own messenger then you can pass that your custom messenger class in the constructor of ViewModelBase class.
+
+ public class CustomMessengerForModuelAandB : Messenger
+{
+}
+
+ public class ViewModelLocator
+{
+	public ViewModelLocator()
+	{
+		ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+		SimpleIoc.Default.Register<SearchViewModel>();
+		SimpleIoc.Default.Register<CustomMessengerForModuelAandB>();
+
+		SimpleIoc.Default.Register<MainViewModel>();
+	}
+	
+	public MainViewModel MainViewModel
+	{
+		get
+		{
+			return ServiceLocator.Current.GetInstance<MainViewModel>();
+		}
+	}
+}
+	
+ public class SearchViewModel : ViewModelBase
+{
+	
+	public SearchViewModel(CustomMessengerForModuelAandB customMessenger)
+		: base(customMessenger)
+	{
+	}
+	
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send<GenericMessage<int>>(new GenericMessage<int>(99));
+	}
+	...
+}
+
+MVVM-Light-Messenger
+MVVM Light Messenger Classes Usage/Examples
+NotificationMessage Usage/Example
+
+ public class ViewModelA : ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send<NotificationMessage>(new NotificationMessage("notification message"));
+	}
+}
+
+public class ViewModelB : ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register<NotificationMessage>(this, NotifyMe);
+	}
+
+	public void NotifyMe(NotificationMessage notificationMessage)
+	{
+		string notification = notificationMessage.Notification;
+		//do your work
+	}
+}
+
+NotificationMessage<T> Usage/Example
+
+ public class ViewModelA : ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send<NotificationMessage<string>>(new NotificationMessage<string>("Generic Value", "notification message"));
+	}
+}
+
+public class ViewModelB : ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register<NotificationMessage<string>>(this, NotifyMe);
+	}
+
+	public void NotifyMe(NotificationMessage notificationMessage)
+	{
+		string notification = notificationMessage.Notification;
+		string genericValue = notificationMessage.Content;
+		//do your work
+	}
+}
+
+NotificationMessageAction Usage/Example
+
+ public class ViewModelA : ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send<NotificationMessageAction>(new NotificationMessageAction("notification message", SenderAction));
+	}
+
+	/// <summary>
+	/// I am callback
+	/// </summary>
+	public void SenderAction()
+	{
+
+	}
+}
+
+public class ViewModelB : ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register<NotificationMessageAction>(this, NotifyMe);
+	}
+
+	public void NotifyMe(NotificationMessageAction notificationMessageAction)
+	{
+		string notification = notificationMessageAction.Notification;
+		//do your work
+		notificationMessageAction.Execute(); //Execute the callback
+	}
+}
+
+NotificationMessageAction<TCallbackParameter> Usage/Example
+
+ public class ViewModelA : ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send<NotificationMessageAction<string>>(new NotificationMessageAction<string>("notification message", SenderAction));
+	}
+
+	/// <summary>
+	/// I am callback
+	/// </summary>
+	public void SenderAction(string messageFromRecipient)
+	{
+
+	}
+}
+
+public class ViewModelB : ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register<NotificationMessageAction<string>>(this, NotifyMe);
+	}
+
+	public void NotifyMe(NotificationMessageAction<string> notificationMessageAction)
+	{
+		string notification = notificationMessageAction.Notification;
+		//do your work
+		notificationMessageAction.Execute("callback parameter"); //Execute the callback
+	}
+}
+
+PropertyChangedMessage<T> Usage/Example
+
+ public class ViewModelA : ViewModelBase
+{
+	public string SearchText
+	{
+		get
+		{
+			return searchText;
+		}
+		set
+		{
+			Set<string>(() => this.SearchText, ref searchText, value);
+		}
+	}
+
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send<PropertyChangedMessage<string>>(new PropertyChangedMessage<string>("", this.SearchText, "SearchText"));
+	}
+}
+
+public class ViewModelB : ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register<PropertyChangedMessage<string>>(this, SearchViewModelChanged);
+	}
+
+	private void SearchViewModelChanged(PropertyChangedMessage<string> propertyDetails)
+	{
+		if (propertyDetails.PropertyName == "SearchText")
+		{
+			LoadEmployees(propertyDetails.NewValue);
+		}
+	}
+}
+
+DialogMessage Usage/Example
+
+ public class ViewModelA : ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send<DialogMessage>(new DialogMessage("Do you want to continue?", DialogResultCallback));
+	}
+
+	public void DialogResultCallback(System.Windows.MessageBoxResult result)
+	{
+		if (result == System.Windows.MessageBoxResult.OK)
+		{
+		}
+	}
+}
+
+public class ViewModelB : ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register<DialogMessage>(this, ShowDialog);
+	}
+
+	public void ShowDialog(DialogMessage dialogMessage)
+	{
+		MessageBox.Show(dialogMessage.Content, dialogMessage.Caption);
+	}
+}
+
+GenericMessage<T> Usage/Example
+
+ public class ViewModelA : ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send<GenericMessage<int>>(new GenericMessage<int>(99));
+	}
+}
+
+public class ViewModelB : ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register<GenericMessage<int>>(this, NotifyMe);
+	}
+
+	public void NotifyMe(GenericMessage<int> genericMessage)
+	{
+		int result = genericMessage.Content;
+		//do your work
+	}
+}
+
+MVVM Light Toolkit Example Previous
+SHARE THIS POST  
+Please enable JavaScript to view the comments powered by Disqus.
+Go!
+
+Join our newsletter and get an occasional email with a technology and DotNetPattern.com news update.
+Error! Invalid Email
+Success! Successfully subscribed.
+Error! Email already registered.
+RECENT POSTS
+
+    TypeScript Abstract Class
+    TypeScript Interfaces
+    TypeScript Rest Parameters
+    Typescript Optional Parameters
+    TypeScript Switch Case
+
+POPULAR POSTS
+
+    MVVM Light Toolkit Example
+    WPF Dispatcher - Introduction and How to use?
+    .NET Threading Interview Questions Series - Part 1
+    ManualResetEvent
+    MVVM Light Messenger
+
+Archives
+
+    January 2018
+    December 2017
+    November 2017
+    June 2017
+    April 2017
+    March 2017
+    February 2017
+    November 2016
+    August 2016
+    June 2016
+    April 2016
+    March 2016
+    February 2016
+    January 2016
+
+CATEGORIES
+
+    C#
+    WPF
+    WCF
+    Design Patterns
+    Javascript Frameworks
+    Interview Questions
+    AngularJS
+    MVVM
+    Testing
+    Rhino Mocks
+    Android and iOS Apps
+    LINQ
+    NUnit
+    TypeScript
+
+    Terms and Conditions
+    Privacy Policy
+
+© 2018 - DotNetPattern.com
+
+Clicky

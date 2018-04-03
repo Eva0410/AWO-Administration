@@ -1,0 +1,359 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Documentation beta
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+x Dismiss
+Join the Stack Overflow Community
+Stack Overflow is a community of 7.6 million programmers, just like you, helping each other.
+Join them; it only takes a minute:
+Sign up
+ICommand - RelayCommand CanExecute method does not update button IsEnabled property
+Ask Question
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+up vote 3 down vote favorite
+	
+
+I have the following implementation of an RelayCommand in my viewModel:
+
+ RelayCommand _resetCounter ; private void ResetCounterExecute () { _data . ResetCounter (); } private bool CanResetCounterExecute () { if ( _data . Counter > 0 ) { return true ; } else { return false ; } } public ICommand ResetCounter { get { if ( _resetCounter == null ) { _resetCounter = new RelayCommand ( this . ResetCounterExecute , this . CanResetCounterExecute ); } return _resetCounter ; } }  
+
+By calling _data.ResetCounter(); in the ResetCounterExecute method i reset the counter value to 0 in my model.
+
+And this is the implementation of my RealyCommand Class that i use based on samples.
+
+ internal class RelayCommand : ICommand { readonly Action _execute ; readonly Func <bool> _canExecute ; public RelayCommand ( Action execute ) : this ( execute , null ) { } public RelayCommand ( Action execute , Func <bool> canExecute ) { if ( execute == null ) throw new ArgumentNullException ( "execute" ); _execute = execute ; _canExecute = canExecute ; } [ DebuggerStepThrough ] public bool CanExecute ( object parameter ) { return _canExecute == null ? true : _canExecute (); } public event EventHandler CanExecuteChanged { add { if ( _canExecute != null ) CommandManager . RequerySuggested += value ; } remove { if ( _canExecute != null ) CommandManager . RequerySuggested -= value ; } } public void Execute ( object parameter ) { _execute (); } }  
+
+In XAML i bind the comman to a button:
+
+ < Button Name = "btnResetCount" Content = "Reset" Command = "{Binding Path=CounterViewModel.ResetCounter}" Click = "btnResetCount_Click" >  
+
+My Problem is that the button just gets enabled once i click on any control in the UI. But what i need is that the button gets enabled once my _data.Counter > 0 applies. So from my research it seems that i need to implement CommandManager.InvalidateRequerySuggested(); or use the RelayCommand.RaiseCanExecuteChanged() .
+
+I would like to know if this two ways are the only ways to notify the UI to refresh the bindings.
+
+Also i would like to ask how i would have to implement the RelayCommand.RaiseCanExecuteChanged() in my current case. Where and how should i raise it to ensure that the UI changes the button state if the condition is given.
+
+Thanks in advance.
+c# wpf binding icommand relaycommand
+share | improve this question
+	
+asked Sep 18 '14 at 4:38
+ck84vi
+400 2 12 32
+	
+	
+add a comment  | 
+1 Answer 1
+active oldest votes
+up vote 0 down vote accepted
+	
+
+when using CommandManager.RequerySuggested you can force CommandManager to invoke RequerySuggested event by calling CommandManager.InvalidateRequerySuggested()
+
+or you may perhaps implement RaiseCanExecuteChanged . this may be more reliable method to trigger the same.
+
+example
+
+ internal class RelayCommand : ICommand { ... public event EventHandler CanExecuteChanged ; public void RaiseCanExecuteChanged () { EventHandler handler = CanExecuteChanged ; if ( handler != null ) handler ( this , EventArgs . Empty ); } ... }  
+
+and when you want to invalidate or _data.Counter changes, call
+
+ ResetCounter . RaiseCanExecuteChanged ();  
+
+additionally you may also want to read How does CommandManager.RequerySuggested work?
+share | improve this answer
+	
+edited May 23 at 11:59
+Community ♦
+1 1
+	
+answered Sep 18 '14 at 4:44
+pushpraj
+10.8k 3 16 35
+	
+   	 
+	
+@pushraj: Thanks for the hint. But i dont understand how to implement the RaiseCanExecuteChanged to my code. How and where do i have to add the nested class? –  ck84vi Sep 18 '14 at 5:15
+   	 
+	
+you may simply replace the CanExecuteChanged in your code with the code in the answer, it is not a nested class, it is your class with ... representing the common code. –  pushpraj Sep 18 '14 at 6:00
+   	 
+	
+Dont know why i didnt get it. Thanks so much. It works perfect now! –  ck84vi Sep 18 '14 at 6:14
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged c# wpf binding icommand relaycommand or ask your own question .
+
+asked
+	
+
+2 years, 11 months ago
+
+viewed
+	
+
+3,072 times
+
+active
+	
+
+2 years, 11 months ago
+No problem. We won't show you that ad again. Why didn't you like it?
+
+    Uninteresting
+    Misleading
+    Offensive
+    Repetitive
+    Other
+
+Oops! I didn't mean to do this.
+Want a c# job?
+
+    Graphics Engine Developer-Casino platform (m/f) Vienna or Graz
+    Greentube Vienna, Austria
+    c# .net
+    dismiss this job
+    C# / .NET Software Developer Client Applications (f/m)
+    PALFINGER AG Bergheim, Austria
+    €45k - €49k
+    wpf c#
+
+    High response rate
+    dismiss this job
+
+Linked
+30
+How does CommandManager.RequerySuggested work?
+Related
+0
+WPF ICommand over a button
+1
+ICommand - canexecute can not disable Button with image content
+0
+Binding a RelayCommand AND an additional condition
+3
+ICommand doesn't update the IsEnabled on a button using CanExecute
+0
+ArgumentNullException when binding menuitem IsEnabled to ICommand CanExecute
+4
+Button Command CanExecute not called when property changed
+2
+WPF ICommand CanExecute(): RaiseCanExecuteChanged() or automatic handling via DispatchTimer?
+0
+Updating a Label during an ICommand Action
+0
+C# ICommand / RelayCommand
+0
+WPF MVVM RelayCommand Action, canExecute, parameter
+Hot Network Questions
+
+    Why did the DC-3 have wing sweep?
+    What could you possibly say to a friend who cooked a meal you didn't enjoy at all?
+    How is the night king not at the wall yet?
+    Get thee behind me Satan-Prime!
+    In The Matrix, why is Neo confusing left and right?
+    Did any 8-bit computer system / OS have concepts for concurrency and multitasking like we know from today?
+    What is meant by "System Programming"?
+    Is it rude to refer to someone as "he" or "she" in their presence?
+    if condition always evaluating true
+    What is the point of "we are not scared"-responses to terror?
+    How to confront friend who won't give back borrowed money?
+    Czechia or Czech Republic (or both)?
+    Deflating inflating balloon
+    What are these large, empty towers made of connected metal girders, bars or pipes in London?
+    Pick up your phone! It's vibrating!
+    Is there any difference between HTTP and HTTPS when using my home / own internet connection
+    Is it professional to use personal contacts in other companies to solve problems at work?
+    Is it acceptable to change colors on a logo to make it fit a website's theme?
+    Should I include controversial achievements in my resume?
+    Find Primes in Pi
+    What could limit geographically a resource such as an ore to a specific spot on a planet?
+    Euler's Totient Function Problem
+    Why didn't Voldemort perform Priori Incantatem with Dumbledore's wand to see if he had discovered or destroyed any of his Horcruxes, after Gringotts?
+    What is the purpose of the "Good Morning" dialogue from The Hobbit?
+
+question feed
+lang-cs
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Documentation
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+    Magento
+
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Programming Puzzles & Code Golf
+    Ethereum
+    Data Science
+
+    Arduino
+    more (27)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (17)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.8.25.26865
+Stack Overflow works best with JavaScript enabled

@@ -1,0 +1,1069 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx">
+<meta name="wpd_url" content="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx">
+<meta name="wpd_date" content="2017-10-24T08:29Z">
+<meta name="WT.seg_1" content="de-de"><link rel="canonical" href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx">
+    <title>SmtpClient.SendCompleted-Ereignis (System.Net.Mail)</title>
+
+
+
+
+
+
+
+<meta name="DCS.dcsuri" content="/de-de/library/yt1fk8wf(d=default,l=de-de,v=vs.110).aspx">
+
+<meta name="NormalizedUrl" content="https://msdn.microsoft.com/de-de/library/yt1fk8wf(d=default,l=de-de,v=vs.110).aspx">
+
+<meta name="ms.normalizedurl" content="https://msdn.microsoft.com/de-de/library/yt1fk8wf(d=default,l=de-de,v=vs.110).aspx">
+
+<meta name="ms.prod" content=".net-framework-4.6">
+
+<meta name="ms.devlang" content="csharp">
+
+<meta name="ms.topic" content="managed-reference">
+
+<meta name="VotingContextUrl" content="https://msdn.microsoft.com/de-de/library/yt1fk8wf(d=default,l=de-de,v=vs.110).aspx">
+
+<meta name="MN" content="FB361397-12:27:21 AM">
+
+<meta name="Search.ShortId" content="yt1fk8wf">
+
+<meta name="ms.shortidmsdn" content="yt1fk8wf">
+
+<meta name="ms.locale" content="de-de">
+
+<meta name="ms.prodver" content="VS.110">
+
+<meta name="ms.contentlang" content="DE">
+
+<meta name="ms.lang" content="DE">
+
+<meta name="ms.loc" content="DE">
+
+<meta name="ms.sitever" content="2017.11.07.1">
+
+<meta name="ms.assetid" content="E:System.Net.Mail.SmtpClient.SendCompleted">
+
+<meta name="ms.auth" content="0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+        
+
+
+
+
+
+
+
+
+
+    <script async="" src="ai.0.js" type="text/javascript"></script><script async="" src="ai.0.js" type="text/javascript"></script><script type="text/javascript" src="ai.0.js" async=""></script><script type="text/javascript" data-do-not-move="true">
+
+        //<![CDATA[
+        var AmbientContext = null;
+
+        (function(){
+            var root = (function(){return this;}).call(null);
+
+            var GetCookie = function(name){
+                var cookies = root.document.cookie ? root.document.cookie.split('; ') : [];
+                for (var i = 0; i < cookies.length; i++) {
+                    var pos = cookies[i].indexOf('=');
+                    if (name === root.decodeURIComponent(cookies[i].slice(0, pos)))
+                    {
+                        var cookie = cookies[i].slice(pos + 1).replace(/\+/g, ' ');
+                        cookie = root.decodeURIComponent(cookie);
+                        return cookie;
+                    }
+                }
+            };
+
+            var JsonDeserialize = function(content) {
+                return root.JSON && root.JSON.parse ? root.JSON.parse(content) : (new Function('return (' + content + ')'))();
+            };
+
+            try {
+                AmbientContext = GetCookie('AmbientContext');
+                AmbientContext = AmbientContext && JsonDeserialize(AmbientContext);
+            } catch(ex) {
+            } finally {
+                AmbientContext = AmbientContext || null;
+            }
+        })();
+        //]]>
+    </script>
+
+    <script type="text/javascript" src="jquery-1.9.1.min.js" data-do-not-move="true" data-provides="jQuery"></script>
+    
+<script class="mtps-injected">try {
+/**/
+(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { 
+	"image": "https://i-msdn.sec.s-msft.com", 
+	"js": "https://i2-msdn.sec.s-msft.com", 
+	"css": "https://i-msdn.sec.s-msft.com", 
+	"ttf": "https://i-msdn.sec.s-msft.com"
+});
+/**/
+} finally { MTPS._injectNextScript_0 && MTPS._injectNextScript_0(); }</script><script class="mtps-injected">try {
+//
+
+        window.appInsightsId = '5eb1b2eb-c47a-497a-a7ac-a1c230b2882f';
+        //
+} finally { MTPS._injectNextScript_1 && MTPS._injectNextScript_1(); }</script><script class="mtps-injected" src="Combined.js"></script><script src="jsll-4.2.1.js" type="text/javascript"></script><script type="text/javascript" id="cosymantecbfw_removeToolbar">(function () {				var toolbarElement = {},					parent = {},					interval = 0,					retryCount = 0,					isRemoved = false;				if (window.location.protocol === 'file:') {					interval = window.setInterval(function () {						toolbarElement = document.getElementById('coFrameDiv');						if (toolbarElement) {							parent = toolbarElement.parentNode;							if (parent) {								parent.removeChild(toolbarElement);								isRemoved = true;								if (document.body && document.body.style) {									document.body.style.setProperty('margin-top', '0px', 'important');								}							}						}						retryCount += 1;						if (retryCount > 10 || isRemoved) {							window.clearInterval(interval);						}					}, 10);				}			})();</script><script type="text/javascript" src="jsll-4.2.1.js"></script><script src="t.js" async=""></script><meta name="ms.perf.timing" content=",,0,0,0,0,0,0,0,2836,3141,3452,,,"><script type="text/javascript" src="ms.js"></script><script class="mtps-injected" src="mscc-0.3.6.min.js"></script><script class="mtps-injected" src="SearchBox.js"></script><script class="mtps-injected" src="SearchBox.jss"></script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script><script async="" src="t_001.js"></script><script class="mtps-injected" src="JumpRedirect.js"></script><script class="mtps-injected">try {
+//
+    MTPS = window.MTPS || {};
+    MTPS.Translation = window.MTPS.Translation || {};
+
+    MTPS.Translation.TranslationType =  0;
+    
+    
+        
+        MTPS.Translation.EditorLink = {
+            includeEditor : 0,
+            editLink: "https://msdn.microsoft.com/de-de/library/translation/edit/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx",
+            editLinkText: "Bessere &#220;bersetzung vorschlagen"
+        };
+        
+    //
+} finally { MTPS._injectNextScript_7 && MTPS._injectNextScript_7(); }</script><script class="mtps-injected" src="Combined_001.js"></script><script class="mtps-injected">try {
+MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = 'Expand'; MTPS.LocalizedStrings.CollapseButtonTooltip = 'Collapse'; MTPS.LocalizedStrings.EnhancedExpandTooltip = 'Zum Erweitern hier klicken. Doppelklicken, um alles zu erweitern.'; MTPS.LocalizedStrings.EnhancedCollapseTooltip = 'Zum Reduzieren hier klicken. Doppelklicken, um alles zu reduzieren.'; MTPS.LocalizedStrings.ExpandAllButtonTooltip = 'Alle erweitern'; MTPS.LocalizedStrings.CollapseAllButtonTooltip = 'Alle reduzieren';
+} finally { MTPS._injectNextScript_9 && MTPS._injectNextScript_9(); }</script><script class="mtps-injected" src="Combined_002.js"></script><script src="broker.js"></script><script src="broker.js"></script><script class="mtps-injected">try {
+$(document).ready(function() {
+        try {
+            var token = $("#globalRequestVerification input[name='__RequestVerificationToken']").clone();
+            $("#siteFeedbackForm").append(token);
+        } catch(err) {
+            
+        }
+    });
+} finally { MTPS._injectNextScript_11 && MTPS._injectNextScript_11(); }</script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script><script class="mtps-injected">try {
+/**/
+(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { 
+	"image": "https://i-msdn.sec.s-msft.com", 
+	"js": "https://i2-msdn.sec.s-msft.com", 
+	"css": "https://i-msdn.sec.s-msft.com", 
+	"ttf": "https://i-msdn.sec.s-msft.com"
+});
+/**/
+} finally { MTPS._injectNextScript_0 && MTPS._injectNextScript_0(); }</script><script class="mtps-injected">try {
+//
+
+        window.appInsightsId = '5eb1b2eb-c47a-497a-a7ac-a1c230b2882f';
+        //
+} finally { MTPS._injectNextScript_1 && MTPS._injectNextScript_1(); }</script><script src="Combined.js" class="mtps-injected"></script><script src="ms.js" type="text/javascript"></script><script src="jsll-4.2.1.js" type="text/javascript"></script><script src="ms.js" type="text/javascript"></script><script src="mscc-0.3.6.min.js" class="mtps-injected"></script><script src="SearchBox.js" class="mtps-injected"></script><script src="SearchBox.jss" class="mtps-injected"></script><script src="t_002.js" async=""></script><script src="JumpRedirect.js" class="mtps-injected"></script><script class="mtps-injected">try {
+//
+    MTPS = window.MTPS || {};
+    MTPS.Translation = window.MTPS.Translation || {};
+
+    MTPS.Translation.TranslationType =  0;
+    
+    
+        
+        MTPS.Translation.EditorLink = {
+            includeEditor : 0,
+            editLink: "https://msdn.microsoft.com/de-de/library/translation/edit/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx",
+            editLinkText: "Bessere &#220;bersetzung vorschlagen"
+        };
+        
+    //
+} finally { MTPS._injectNextScript_7 && MTPS._injectNextScript_7(); }</script><script src="Combined_001.js" class="mtps-injected"></script><script class="mtps-injected">try {
+MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = 'Expand'; MTPS.LocalizedStrings.CollapseButtonTooltip = 'Collapse'; MTPS.LocalizedStrings.EnhancedExpandTooltip = 'Zum Erweitern hier klicken. Doppelklicken, um alles zu erweitern.'; MTPS.LocalizedStrings.EnhancedCollapseTooltip = 'Zum Reduzieren hier klicken. Doppelklicken, um alles zu reduzieren.'; MTPS.LocalizedStrings.ExpandAllButtonTooltip = 'Alle erweitern'; MTPS.LocalizedStrings.CollapseAllButtonTooltip = 'Alle reduzieren';
+} finally { MTPS._injectNextScript_9 && MTPS._injectNextScript_9(); }</script><script src="Combined_002.js" class="mtps-injected"></script><script src="broker.js"></script><script class="mtps-injected">try {
+$(document).ready(function() {
+        try {
+            var token = $("#globalRequestVerification input[name='__RequestVerificationToken']").clone();
+            $("#siteFeedbackForm").append(token);
+        } catch(err) {
+            
+        }
+    });
+} finally { MTPS._injectNextScript_11 && MTPS._injectNextScript_11(); }</script>
+<link rel="stylesheet" type="text/css" href="system.net.mail.smtpclient.sendcompleted(v=vs.110).css" media="all">
+</head>
+<body class="library Chrome">
+    <div id="page">
+
+        
+
+        
+    
+
+
+    
+    <link href="" type="text/css" rel="stylesheet">
+    
+        
+        
+    <input id="isHeaderBleeding" value="true" type="hidden">
+    <div id="ux-header" dir="ltr" class="ltr msdn" ms.pgarea="header" data-device-type="desktop">
+        
+            
+            
+        <div id="ux-banner">
+            <div id="msccBanner" dir="ltr" data-site-name="msdn.microsoft.com" data-mscc-version="0.3.6" data-nver="aspnet-2.0.6" data-sver="0.1.2" class="cc-banner active" role="alert"><div class="cc-container"><svg class="cc-icon cc-v-center" x="0px" y="0px" viewBox="0 0 44 44" height="30px" fill="none" stroke="currentColor"><circle cx="22" cy="22" r="20" stroke-width="2"></circle><line x1="22" x2="22" y1="18" y2="33" stroke-width="3"></line><line x1="22" x2="22" y1="12" y2="15" stroke-width="3"></line></svg> <span class="cc-v-center cc-text">Diese Website verwendet Cookies für Analysen, personalisierte Inhalte und Werbung. Indem Sie diese Website nutzen, erklären Sie sich mit dieser Verwendung einverstanden.</span> <a href="https://go.microsoft.com/fwlink/?linkid=845480" aria-label="Weitere Informationen über die Microsoft Cookie-Richtlinie" id="msccLearnMore" class="cc-link cc-v-center cc-float-right" data-mscc-ic="false">Weitere Informationen</a></div></div>
+        </div>
+
+      <header ms.pgarea="header">
+        <span id="singleCol"></span>
+        <span id="doubleCol"></span>
+        <span id="isMobile"></span>
+        <div>
+          <div class="row topRow" role="banner">
+            <div class="top">
+              <div class="left">
+                <a class="msdnLogoImg" href="https://msdn.microsoft.com/de-de" title="MSDN home" ms.cmpgrp="mslogo">
+                  <div class="clip70x15">
+                    <img alt="Microsoft Logo" id="msft-logo" class="msft-logo" src="HeaderFooterSprite.png">
+                  </div>
+                </a>
+                <div class="GrayPipeDiv clip1x18">
+                  <img alt="Gray Pipe" class="GrayPipe" src="HeaderFooterSprite.png">
+                </div>
+                  <a class="DevCenterFullNameNonMegaBlade" href="https://msdn.microsoft.com/de-de">Developer Network</a>
+                <a class="DevCenterFullName" href="https://msdn.microsoft.com/de-de">Developer Network</a>
+                <a class="DevCenterShortName" href="https://msdn.microsoft.com/de-de">Developer</a>
+              </div>
+              <div class="right" ms.cmpgrp="aux nav">
+                <div id="signIn" aria-label="Profile button">
+
+  <div class="profileImage"></div>
+
+
+
+<a class="scarabLink" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=13&amp;ct=1511512041&amp;rver=6.7.6640.0&amp;wp=mcmbi&amp;wlcxt=msdn%24msdn%24msdn&amp;wreply=https%3a%2f%2fmsdn.microsoft.com%2fde-de%2flibrary%2fsystem.net.mail.smtpclient.sendcompleted%2528v%3dvs.110%2529.aspx&amp;lc=1031&amp;id=254354&amp;mkt=de-de">Anmelden</a></div>
+
+
+
+
+                <div class="auxNav">
+                  <div>
+                    <div data-fragmentname="Subscriptions" id="Fragment_Subscriptions" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://msdn.microsoft.com/subscriptions/manage/hh442900" id="Subscriptions_2153_1" xmlns="http://www.w3.org/1999/xhtml">MSDN-Abonnements</a>
+</div>
+                    <div data-fragmentname="GetTools" id="Fragment_GetTools" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://go.microsoft.com/fwlink/?LinkId=309297&amp;clcid=0x407&amp;slcid=0x407&amp;campaign=o~msft~msdn~gettools-header~dn308572" id="GetTools_2153_3" xmlns="http://www.w3.org/1999/xhtml">Tools herunterladen</a>
+</div>
+                  </div>
+                        <div>
+                            
+                        </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row middleRow">
+            <div class="expandTop" style="display: none;">
+              <div class="left"></div>
+              <div class="right"></div>
+            </div>
+          </div>
+        </div>
+        <div id="buttomRowWrapper" class="bg_default">
+          <div class="row buttomRow bg_default">
+            <div class="bottom">
+              <div class="left" role="navigation" aria-label="header toc" ms.cmpgrp="main nav">
+                <a id="grip" class="menu-icon" href="javascript:void(0)" role="button" aria-label="navigation menu" data-mscc-ic="false"></a>
+                
+                <div id="drawer">
+                  <div class="toc">
+                    
+        <nav>
+            <ul class="navL1" ms.cmpgrp="main nav">
+                        <li class="inactive toggle">
+                                <a href="javascript:void(0)" role="button" aria-expanded="false" data-mscc-ic="false">Downloads</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+
+                                                <a href="https://www.visualstudio.com/downloads/download-visual-studio-vs" role="link" title="Visual Studio">Visual Studio</a>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="https://msdn.microsoft.com/microsoft-sdks-msdn" role="link" title="SDKs">SDKs</a>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="Testsoftware" role="button" aria-expanded="false" data-mscc-ic="false">Testsoftware</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/evalcenter" title="Kostenlose Downloads" role="link">Kostenlose Downloads</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/officeevaluationresources" title="Office-Ressourcen" role="link">Office-Ressourcen</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/sharepoint2013resources" title="SharePoint Server 2013-Ressourcen" role="link">SharePoint Server 2013-Ressourcen</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/sqlserver2014expressresources" title="SQL Server 2014 Express-Ressourcen" role="link">SQL Server 2014 Express-Ressourcen</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/windowsserver2012r2resources" title="Windows Server 2012-Ressourcen" role="link">Windows Server 2012-Ressourcen</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                                <a href="javascript:void(0)" role="button" aria-expanded="false" data-mscc-ic="false">Programme</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="Abonnements" role="button" aria-expanded="false" data-mscc-ic="false">Abonnements</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/msdn-subscriptions-administration" title="Administratoren" role="link">Administratoren</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive toggle">
+
+                                                <a href="javascript:void(0)" title="Students" role="button" aria-expanded="false" data-mscc-ic="false">Students</a>
+                                                <ul class="navL3" style="display: none;">
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/imagine/imagine-home" title="Microsoft Imagine" role="link">Microsoft Imagine</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="https://msdn.microsoft.com/microsoftstudentpartners" title="Microsoft Student Partners" role="link">Microsoft Student Partners</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="https://msdn.microsoft.com/applicationbuilder" role="link" title="ISV">ISV</a>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="https://www.microsoft.com/bizspark" role="link" title="Start-ups">Start-ups</a>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="https://events.microsoft.com/" role="link" title="Veranstaltungen">Veranstaltungen</a>
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                                <a href="javascript:void(0)" role="button" aria-expanded="false" data-mscc-ic="false">Community</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive">
+
+                                                <a href="https://msdn.microsoft.com/magazine/dd767791" role="link" title="Magazine">Magazine</a>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="https://social.msdn.microsoft.com/forums/" role="link" title="Foren">Foren</a>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="https://blogs.msdn.microsoft.com/" role="link" title="Blogs">Blogs</a>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="http://channel9.msdn.com/" role="link" title="Channel 9">Channel 9</a>
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive current toggle">
+                                <a href="javascript:void(0)" role="button" aria-expanded="false" data-mscc-ic="false">Dokumentation</a>
+                                <ul class="navL2" style="display: none;">
+                                        <li class="inactive current">
+
+                                                <a href="https://msdn.microsoft.com/library/" role="link" title="Microsoft API- und Referenzkatalog">Microsoft API- und Referenzkatalog</a>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="https://msdn.microsoft.com/developer-centers-msdn" role="link" title="Entwicklungscenter">Entwicklungscenter</a>
+                                        </li>
+                                        <li class="inactive">
+
+                                                <a href="https://msdn.microsoft.com/mt703209" role="link" title="Zurückgezogene Inhalte">Zurückgezogene Inhalte</a>
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive">
+                                    <a href="https://code.msdn.microsoft.com/" role="link" title="Code">Code</a>
+                        </li>
+            </ul>
+        </nav>
+
+                  </div>
+                </div>
+              </div>
+              <div class="right" ms.title="search" role="search">
+                <div data-fragmentname="SearchBox" id="Fragment_SearchBox" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="SearchBox">
+    <form action="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx" id="HeaderSearchForm" name="HeaderSearchForm" method="get">
+      <button id="FakeHeaderSearchButton" value="Search" type="submit" class="header-search-button" role="button" aria-label="search finder" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="icon">
+        <div id="search-finder-div" class="clip16x20">
+          <img alt="search finder" id="search-finder" class="search-finder" src="HeaderFooterSprite.png">
+        </div>
+      </button>
+      <button id="HeaderSearchButton" style="display: none;" data-searchtype="icon" data-pgarea="header" title="In MSDN suchen" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="icon"></button>
+      <div id="searchSplitter"></div>
+      <div id="searchCloseIconDiv" class="clip16x20" tabindex="0">
+        <img alt="search clear" id="searchCloseIcon" class="search-clear-x" src="HeaderFooterSprite.png">
+      </div>
+      <div id="searchTextContainer" style="width: 0px; display: none;"><p style="height: 1px; width: 1px; overflow: hidden; position: absolute;" role="alert"></p><p style="height: 1px; width: 1px; overflow: hidden; position: absolute;" role="alert"></p><p role="alert" style="height: 1px; width: 1px; overflow: hidden; position: absolute;"></p>
+        <input id="HeaderSearchTextBox" name="query" aria-label="Search Input Box" maxlength="200" onfocus="Epx.Controls.SearchBox.watermarkFocus(event, this.title)" onblur="Epx.Controls.SearchBox.watermarkBlur(event, this.title)" autocomplete="off" data-searchtype="searchbox" role="combobox" aria-autocomplete="both" aria-owns="MSDNSearchAutoCompleteList" aria-live="polite" placeholder="" data-pgarea="header" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="enter-key" type="text">
+      <div id="SearchFlyoutContainer" style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); font-family: Arial; font-size: 16px;"><div id="SuggestionContainer"><ul data-pgarea="header" data-searchtype="search dropdown" id="MSDNSearchAutoCompleteList" role="listbox" aria-controls="HeaderSearchTextBox" style="list-style: outside none none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;" ms.interactiontype="2" ms.title="search" ms.pgarea="header" ms.searchtype="suggested keyword"></ul></div></div><div style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); font-family: MS Shell Dlg \32 ; font-size: 16px;" id="SearchFlyoutContainer"><div id="SuggestionContainer"><ul ms.searchtype="suggested keyword" ms.pgarea="header" ms.title="search" ms.interactiontype="2" aria-controls="HeaderSearchTextBox" role="listbox" id="MSDNSearchAutoCompleteList" data-searchtype="search dropdown" data-pgarea="header" style="list-style: outside none none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div><div style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); font-family: MS Shell Dlg \32 ; font-size: 16px;" id="SearchFlyoutContainer"><div id="SuggestionContainer"><ul aria-controls="HeaderSearchTextBox" role="listbox" id="MSDNSearchAutoCompleteList" data-searchtype="search dropdown" data-pgarea="header" style="list-style: outside none none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div></div>
+    </form>
+    
+    
+  </div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </header>
+
+    <div id="overlayMaskHeader"></div><div id="overlayMaskHeader"></div><div id="overlayMaskHeader"></div></div>
+
+    
+    
+    
+    <div id="jumpInfo" style="display: none;">Es tut uns leid. Der angeforderte Inhalt wurde entfernt. Sie werden in 1 Sekunde automatisch umgeleitet.</div>
+
+
+
+
+
+<link href="" type="text/css" rel="stylesheet">
+<link href="" type="text/css" rel="stylesheet">
+
+
+    <div id="breadcrumbs" ms.pgarea="body" ms.cmpgrp="breadcrumbs">
+        <div id="breadcrumbDesktop" class="breadCrumb">
+                        <span class="breadcrumbEllipsis"><a href="https://msdn.microsoft.com/de-de/library/mt481553(v=vs.110).aspx" title="System.Net Namespaces"></a></span>
+                        <span><a href="https://msdn.microsoft.com/de-de/library/system.net.mail(v=vs.110).aspx" title="System.Net.Mail"><span>System.Net.Mail</span></a></span>
+                        <span><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient(v=vs.110).aspx" title="SmtpClient Klasse"><span>SmtpClient Klasse</span></a></span>
+                        <span class="breadcrumbDropSmall">
+                            <a id="breadcrumbDropDownButton" href="#" targethref="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient(v=vs.110).aspx" title="SmtpClient Ereignisse" role="button" aria-expanded="false"><span>SmtpClient Ereignisse</span></a>
+                        </span>
+        </div>
+        <div id="breadcrumbDropDownMenu" style="display: none;"></div>
+
+        <div id="breadcrumbTablet" class="breadCrumb">
+                        <span class="breadcrumbEllipsis"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient(v=vs.110).aspx" title="SmtpClient Klasse"></a></span>
+                    <span><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient_events(v=vs.110).aspx" title="SmtpClient Ereignisse"><span>SmtpClient Ereignisse</span></a></span>
+                <span class="breadcrumbDropSmall"><a id="tocDropDownButton" href="#" title="SendCompleted Ereignis" role="button" aria-expanded="false"><span>SendCompleted Ereignis</span></a></span>
+        <div id="navigationButtons">
+            <a id="isd_print" href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(d=printer,v=vs.110).aspx" rel="nofollow"><ins class="print"></ins>Drucken </a>
+            <a id="isd_printABook" href="https://msdn.microsoft.com/de-de/library/export/help/?returnurl=%2fde-de%2flibrary%2fsystem.net.mail.smtpclient.sendcompleted(v%3dvs.110).aspx">
+                <ins class="export"></ins>Exportieren (<span class="count">0</span>)
+            </a>
+        </div></div>
+        <div id="tocDropDownMenu" style="display: none;"></div>
+        <div id="breadcrumbMobile" class="breadCrumb">
+                <span class="breadcrumbEllipsis"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient_events(v=vs.110).aspx" title="SmtpClient Ereignisse"></a></span>
+            <span class="breadcrumbDropSmall"><a id="tocPopupButton" href="#" title="SendCompleted Ereignis" role="button" aria-expanded="false"><span>SendCompleted Ereignis</span></a></span>
+        <div id="navigationButtons">
+            <a id="isd_print" href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(d=printer,v=vs.110).aspx" rel="nofollow"><ins class="print"></ins>Drucken </a>
+            <a id="isd_printABook" href="https://msdn.microsoft.com/de-de/library/export/help/?returnurl=%2fde-de%2flibrary%2fsystem.net.mail.smtpclient.sendcompleted(v%3dvs.110).aspx">
+                <ins class="export"></ins>Exportieren (<span class="count">0</span>)
+            </a>
+        </div><div id="navigationButtons">
+            <a id="isd_print" href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(d=printer,v=vs.110).aspx" rel="nofollow"><ins class="print"></ins>Drucken </a>
+            <a id="isd_printABook" href="https://msdn.microsoft.com/de-de/library/export/help/?returnurl=%2fde-de%2flibrary%2fsystem.net.mail.smtpclient.sendcompleted(v%3dvs.110).aspx">
+                <ins class="export"></ins>Exportieren (<span class="count">0</span>)
+            </a>
+        </div><div id="navigationButtons">
+            <a id="isd_print" href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(d=printer,v=vs.110).aspx" rel="nofollow"><ins class="print"></ins>Drucken </a>
+            <a id="isd_printABook" href="https://msdn.microsoft.com/de-de/library/export/help/?returnurl=%2fde-de%2flibrary%2fsystem.net.mail.smtpclient.sendcompleted(v%3dvs.110).aspx">
+                <ins class="export"></ins>Exportieren (<span class="count">0</span>)
+            </a>
+        </div></div>
+    </div>
+    <div id="tocPopupMenu" style="display: none;">
+        <div id="tocPopMenuClose" class="tocCloseLarge" role="button" aria-label="Close Popup Menu" tabindex="0"></div>
+        <div id="tocTitle">SendCompleted Ereignis</div>        
+    </div>
+
+    
+
+
+        <div id="body" ms.pgarea="body" class="">
+            <span id="tabletView_large"></span>
+            <span id="tabletView_small"></span>
+            <span id="mobileView"></span>
+            
+
+
+
+
+
+
+
+
+
+    <div id="leftNav" ms.cmpgrp="left toc" role="navigation" aria-label="left toc" style="height: auto;">
+
+    
+
+
+<div id="tocnav" class="ArchiveV2" style="">
+    <div class="tocunselected">
+        <div id="tocExpandArea">
+            <span class="toc_empty"></span>
+            <span id="tocExpandButton"><a href="javascript:void(0)" aria-label="expand sibling toc" role="button"></a></span>
+        </div>
+        <div id="tocExpand"></div>
+    </div>
+    <div class="tocselected"><div class="tocPadding"></div><div class="tocPadding"></div><div class="toclevel current" data-toclevel="1">
+<span class="toc_empty"></span><span class="toc_empty"></span><span class="toc_empty"></span><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="SendCompleted Ereignis">SendCompleted Ereignis</a>                </div><div class="tocPadding"></div></div>
+    <div class="tocunselected">
+                
+    </div>
+    <a id="tocMenuToggler" href="javascript:void(0)" role="button">
+        <span id="tocMenuTogglerIcon" class="tocMenuCollapse" role="button" aria-expanded="true" aria-label="Table of contents menu"></span>
+        <div id="tocMenuTogglerLabel">TOC</div>
+    </a>
+</div>            <div style="display: none;">
+                <div id="CollapseLocalizeString">Inhaltsverzeichnis reduzieren</div>
+                <div id="ExpandLocalizeString">Inhaltsverzeichnis erweitern</div>
+            </div>
+        <div>
+            <a id="isd_archiveControlResponsive" style="display: none;" href="javascript:void(0)" role="button" aria-label="Archivierte Versionen ausblenden" data-include-archive="Archivierte Versionen anzeigen" data-exclude-archive="Archivierte Versionen ausblenden">
+            </a>
+            <div id="isd_archiveInstrument" style="display: none;">Diese Dokumentation wurde archiviert und wird nicht länger gepflegt.</div>
+        </div>
+    </div>
+     <div id="content" class="content" ms.cmpgrp="content body" role="main">
+
+
+
+<div id="MTPSTranslator" class="MTPSTranslator">
+    <table class="MTPSTranslatorTable" style="width: 100%;">
+        <tbody><tr>
+            <td class="TranslationAlertBox">
+                <div>Dieser Artikel wurde maschinell übersetzt. Wenn Sie die englische Version des Artikels anzeigen möchten, aktivieren Sie das Kontrollkästchen Englisch. Sie können den englischen Text auch in einem Popupfenster anzeigen, indem Sie den Mauszeiger über den Text bewegen.</div>
+            </td>
+                <td class="TranslationViewSwitcher">
+                    <div>
+                        <input title="Übersetzten Text anzeigen" value="0" name="TrnaslatorView" class="translatechoice" checked="checked" ms.title="translated" ms.cmptyp="language selector" ms.interactiontype="16" type="radio"><span>Übersetzung</span>
+                    </div>
+                    <div>
+                        <input title="Englischen Text anzeigen " value="1" name="TrnaslatorView" class="translatechoice" ms.title="original" ms.cmptyp="language selector" ms.interactiontype="16" type="radio"><span>Englisch</span>
+                    </div>
+                </td>
+        </tr>
+    </tbody></table>
+</div>
+    
+    
+    
+     
+
+
+
+
+
+
+
+    <div id="archiveDisclaimerText" style="display: none;">Diese Dokumentation wurde archiviert und wird nicht länger gepflegt.</div>
+
+
+
+<div xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="topic">
+    <h1 class="title">SmtpClient<span xmlns="">.</span>SendCompleted-Ereignis</h1>
+    
+    <div class="lw_vs">
+      <div id="curversion">
+        <strong>
+
+                .NET Framework (current version)
+            </strong>
+      </div>
+      <div id="versionclick">
+        <div id="vsseperator" class="cl_lw_vs_seperator"></div>
+        <div>
+          <div>
+            <a id="vsLink" href="javascript:void(0)" role="button" aria-label="Andere Versionen" aria-expanded="false">
+
+                        Andere Versionen
+                    </a>
+          </div>
+          <div class="cl_vs_arrow clip10x10">
+            <img class="cl_lw_vs_arrow" id="vsArrow" alt="" src="ImageSprite.png">
+          </div>
+        </div>
+        <ul id="vsPanel">
+          <li class="archived"><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a>
+            <a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.100).aspx">Visual Studio 2010</a>
+          </li>
+          <li class="archived"><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a>
+            <a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.100).aspx">.NET Framework 4</a>
+          </li>
+          <li class="archived"><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a>
+            <a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.90).aspx">Visual Studio 2008</a>
+          </li>
+          <li class="archived"><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a>
+            <a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.90).aspx">.NET Framework 3.5</a>
+          </li>
+          <li class="archived"><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a>
+            <a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.85).aspx">.NET Framework 3.0</a>
+          </li>
+          <li class="archived"><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a><a href="javascript:void(0)" role="img" title="Diese Dokumentation wurde archiviert und wird nicht länger gepflegt."></a>
+            <a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.80).aspx">.NET Framework 2.0</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div id="mainSection">
+      <div id="mainBody">&nbsp;<p>Veröffentlicht: Oktober 2016</p><div class="section"><div class="section"><p><span id="mt1" class="sentence" data-guid="1dfbfb9dec1462e5b47dceab8d8aa2a9" data-source="Occurs when an asynchronous e-mail send operation completes." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">Tritt auf, wenn ein asynchrone e-Mail-Send-Vorgang abgeschlossen ist.</sentencetext></span></p></div><strong>Namespace:
+      </strong>
+      &nbsp;
+      <a href="https://msdn.microsoft.com/de-de/library/system.net.mail(v=vs.110).aspx">System.Net.Mail</a><br><strong>Assembly:
+        </strong>&nbsp;System (in System.dll)<br><br><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a class="LW_CollapsibleArea_TitleAhref" title="" role="heading"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Syntax</span></a><div id="Anchor_0" class="LW_CollapsibleArea_Anchor_Div active"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx#Anchor_0" class="LW_CollapsibleArea_Anchor_Img" title="Klicken Sie mit der rechten Maustaste, um den Link für diesen Abschnitt zu kopieren und zu teilen"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock">
+<div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabActive" dir="ltr"><a>C#</a></div><div class="codeSnippetContainerTab" dir="ltr"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx?cs-save-lang=1&amp;cs-lang=cpp#code-snippet-1">C++</a></div><div class="codeSnippetContainerTab" dir="ltr"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx?cs-save-lang=1&amp;cs-lang=fsharp#code-snippet-1">F#</a></div><div class="codeSnippetContainerTab" dir="ltr"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx?cs-save-lang=1&amp;cs-lang=vb#code-snippet-1">VB</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="In&nbsp;Zwischenablage&nbsp;kopieren" href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_e9e1e433-3aed-481f-b8f7-4673974d22a7');" ms.cmptyp="CodeSnippet">Kopieren</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_e9e1e433-3aed-481f-b8f7-4673974d22a7" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre><span style="color: Blue;">public</span> <span style="color: Blue;">event</span> SendCompletedEventHandler SendCompleted
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a class="LW_CollapsibleArea_TitleAhref" title="" role="heading"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Hinweise</span></a><div id="Anchor_1" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx#Anchor_1" class="LW_CollapsibleArea_Anchor_Img" title="Klicken Sie mit der rechten Maustaste, um den Link für diesen Abschnitt zu kopieren und zu teilen"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><div class="section"><p><span id="mt2" class="sentence" data-guid="7480424cc1b686d220337913cf1f3b44" data-source="The <span class=&quot;selflink&quot;>SendCompleted</span> event is raised each time an e-mail message is sent asynchronously when the send operation completes." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">Die <span class="selflink" xmlns="http://www.w3.org/1999/xhtml">SendCompleted</span> -Ereignis jedes Mal eine e-Mail-Nachricht asynchron gesendet wird, wenn der Sendevorgang abgeschlossen wurde.</sentencetext></span><span id="mt3" class="sentence" data-guid="bb6eb6a5aa5f3dc980f4352a2a8115e7" data-source=" To send an e-mail message asynchronously, use the <span class=&quot;mtpsTagOuterHtml&quot; ><span>SendAsync</span></span> methods." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml"> Um eine e-Mail-Nachricht asynchron zu senden, verwenden die <a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendasync(v=vs.110).aspx">SendAsync</a> Methoden.</sentencetext></span></p><p><span id="mt4" class="sentence" data-guid="495fa1d52856a1eaa740b59cf6620eb7" data-source="<span class=&quot;mtpsTagOuterHtml&quot; ><span>SendCompletedEventHandler</span></span> is the delegate for <span class=&quot;selflink&quot;>SendCompleted</span>." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://msdn.microsoft.com/de-de/library/system.net.mail.sendcompletedeventhandler(v=vs.110).aspx">SendCompletedEventHandler</a> ist der Delegat für <span class="selflink" xmlns="http://www.w3.org/1999/xhtml">SendCompleted</span>.</sentencetext></span><span id="mt5" class="sentence" data-guid="2acf1b452ad5415664f809f3c221e0d4" data-source=" The <span class=&quot;mtpsTagOuterHtml&quot; ><span>AsyncCompletedEventArgs</span></span> class provides the event handler with event data." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml"> Die <a href="https://msdn.microsoft.com/de-de/library/system.componentmodel.asynccompletedeventargs(v=vs.110).aspx">AsyncCompletedEventArgs</a> -Klasse stellt den Ereignishandler mit Ereignisdaten bereit.</sentencetext></span></p></div></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a class="LW_CollapsibleArea_TitleAhref" title="" role="heading"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Beispiele</span></a><div id="Anchor_2" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx#Anchor_2" class="LW_CollapsibleArea_Anchor_Img" title="Klicken Sie mit der rechten Maustaste, um den Link für diesen Abschnitt zu kopieren und zu teilen"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><div class="section"><div class="section"><div class="section"><p><span id="mt6" class="sentence" data-guid="d06991917ab29a76601aa44e8e19d5be" data-source="The following code example demonstrates sending an e-mail message asynchronously." xml:space="preserve"><sentencetext xmlns="http://www.w3.org/1999/xhtml">Im folgenden Codebeispiel wird veranschaulicht, senden eine e-Mail-Nachricht asynchron.</sentencetext></span></p>
+<div id="code-snippet-2" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabActive" dir="ltr"><a>C#</a></div><div class="codeSnippetContainerTab" dir="ltr"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx?cs-save-lang=1&amp;cs-lang=cpp#code-snippet-2">C++</a></div><div class="codeSnippetContainerTab" dir="ltr"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx?cs-save-lang=1&amp;cs-lang=vb#code-snippet-2">VB</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="In&nbsp;Zwischenablage&nbsp;kopieren" href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_35648b06-d141-400e-9d18-57243c88642b');" ms.cmptyp="CodeSnippet">Kopieren</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_35648b06-d141-400e-9d18-57243c88642b" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color: Black;"><pre><span style="color: Blue;">using</span> System;
+<span style="color: Blue;">using</span> System.Net;
+<span style="color: Blue;">using</span> System.Net.Mail;
+<span style="color: Blue;">using</span> System.Net.Mime;
+<span style="color: Blue;">using</span> System.Threading;
+<span style="color: Blue;">using</span> System.ComponentModel;
+<span style="color: Blue;">namespace</span> Examples.SmptExamples.Async
+{
+    <span style="color: Blue;">public</span> <span style="color: Blue;">class</span> SimpleAsynchronousExample
+    {
+        <span style="color: Blue;">static</span> <span style="color: Blue;">bool</span> mailSent = <span style="color: Blue;">false</span>;
+        <span style="color: Blue;">private</span> <span style="color: Blue;">static</span> <span style="color: Blue;">void</span> SendCompletedCallback(<span style="color: Blue;">object</span> sender, AsyncCompletedEventArgs e)
+        {
+            <span style="color: Green;">// Get the unique identifier for this asynchronous operation.</span>
+             String token = (<span style="color: Blue;">string</span>) e.UserState;
+
+            <span style="color: Blue;">if</span> (e.Cancelled)
+            {
+                 Console.WriteLine(<span style="color: rgb(163, 21, 21);">"[{0}] Send canceled."</span>, token);
+            }
+            <span style="color: Blue;">if</span> (e.Error != <span style="color: Blue;">null</span>)
+            {
+                 Console.WriteLine(<span style="color: rgb(163, 21, 21);">"[{0}] {1}"</span>, token, e.Error.ToString());
+            } <span style="color: Blue;">else</span>
+            {
+                Console.WriteLine(<span style="color: rgb(163, 21, 21);">"Message sent."</span>);
+            }
+            mailSent = <span style="color: Blue;">true</span>;
+        }
+        <span style="color: Blue;">public</span> <span style="color: Blue;">static</span> <span style="color: Blue;">void</span> Main(<span style="color: Blue;">string</span>[] args)
+        {
+            <span style="color: Green;">// Command line argument must the the SMTP host.</span>
+            SmtpClient client = <span style="color: Blue;">new</span> SmtpClient(args[0]);
+            <span style="color: Green;">// Specify the e-mail sender.</span>
+            <span style="color: Green;">// Create a mailing address that includes a UTF8 character</span>
+            <span style="color: Green;">// in the display name.</span>
+            MailAddress <span style="color: Blue;">from</span> = <span style="color: Blue;">new</span> MailAddress(<span style="color: rgb(163, 21, 21);">"jane@contoso.com"</span>, 
+               <span style="color: rgb(163, 21, 21);">"Jane "</span> + (<span style="color: Blue;">char</span>)0xD8+ <span style="color: rgb(163, 21, 21);">" Clayton"</span>, 
+            System.Text.Encoding.UTF8);
+            <span style="color: Green;">// Set destinations for the e-mail message.</span>
+            MailAddress to = <span style="color: Blue;">new</span> MailAddress(<span style="color: rgb(163, 21, 21);">"ben@contoso.com"</span>);
+            <span style="color: Green;">// Specify the message content.</span>
+            MailMessage message = <span style="color: Blue;">new</span> MailMessage(<span style="color: Blue;">from</span>, to);
+            message.Body = <span style="color: rgb(163, 21, 21);">"This is a test e-mail message sent by an application. "</span>;
+            <span style="color: Green;">// Include some non-ASCII characters in body and subject.</span>
+            <span style="color: Blue;">string</span> someArrows = <span style="color: Blue;">new</span> <span style="color: Blue;">string</span>(<span style="color: Blue;">new</span> <span style="color: Blue;">char</span>[] {<span style="color: rgb(163, 21, 21);">'\u2190'</span>, <span style="color: rgb(163, 21, 21);">'\u2191'</span>, <span style="color: rgb(163, 21, 21);">'\u2192'</span>, <span style="color: rgb(163, 21, 21);">'\u2193'</span>});
+            message.Body += Environment.NewLine + someArrows;
+            message.BodyEncoding =  System.Text.Encoding.UTF8;
+            message.Subject = <span style="color: rgb(163, 21, 21);">"test message 1"</span> + someArrows;
+            message.SubjectEncoding = System.Text.Encoding.UTF8;
+            <span style="color: Green;">// Set the method that is called back when the send operation ends.</span>
+            client.SendCompleted += <span style="color: Blue;">new</span> 
+            SendCompletedEventHandler(SendCompletedCallback);
+            <span style="color: Green;">// The userState can be any object that allows your callback </span>
+            <span style="color: Green;">// method to identify this send operation.</span>
+            <span style="color: Green;">// For this example, the userToken is a string constant.</span>
+            <span style="color: Blue;">string</span> userState = <span style="color: rgb(163, 21, 21);">"test message1"</span>;
+            client.SendAsync(message, userState);
+            Console.WriteLine(<span style="color: rgb(163, 21, 21);">"Sending message... press c to cancel mail. Press any other key to exit."</span>);
+            <span style="color: Blue;">string</span> answer = Console.ReadLine();
+            <span style="color: Green;">// If the user canceled the send, and mail hasn't been sent yet,</span>
+            <span style="color: Green;">// then cancel the pending operation.</span>
+            <span style="color: Blue;">if</span> (answer.StartsWith(<span style="color: rgb(163, 21, 21);">"c"</span>) &amp;&amp; mailSent == <span style="color: Blue;">false</span>)
+            {
+                client.SendAsyncCancel();
+            }
+            <span style="color: Green;">// Clean up.</span>
+            message.Dispose();
+            Console.WriteLine(<span style="color: rgb(163, 21, 21);">"Goodbye."</span>);
+        }
+    }
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div></div></div></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a class="LW_CollapsibleArea_TitleAhref" title="" role="heading"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Versionsinformationen</span></a><div id="Anchor_3" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx#Anchor_3" class="LW_CollapsibleArea_Anchor_Img" title="Klicken Sie mit der rechten Maustaste, um den Link für diesen Abschnitt zu kopieren und zu teilen"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock">
+        <strong>.NET Framework</strong>
+      <br>Verfügbar seit&nbsp;2.0<br></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a class="LW_CollapsibleArea_TitleAhref" title="" role="heading"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Siehe auch</span></a><div id="Anchor_4" class="LW_CollapsibleArea_Anchor_Div"><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx#Anchor_4" class="LW_CollapsibleArea_Anchor_Img" title="Klicken Sie mit der rechten Maustaste, um den Link für diesen Abschnitt zu kopieren und zu teilen"></a></div><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><p><a href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient(v=vs.110).aspx">SmtpClient-Klasse</a><br><a href="https://msdn.microsoft.com/de-de/library/system.net.mail(v=vs.110).aspx">System.Net.Mail-Namespace</a><br></p></div></div><a href="#mainBody">Zurück zum Anfang</a><br></div></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="libraryMemberFilter">
+    <div class="filterContainer">
+        <span>Anzeigen:</span>
+        <label>
+            <input class="libraryFilterInherited" checked="checked" value="Inherit" type="checkbox">Geerbt
+        </label>
+        <label>
+            <input class="libraryFilterProtected" checked="checked" value="Protected" type="checkbox">Geschützt
+        </label>
+    </div>
+</div>
+    
+<input id="libraryMemberFilterEmptyWarning" value="Es gibt keine Member, die den aktuellen Filtereinstellungen entsprechen." type="hidden">
+
+
+
+    </div>
+<div id="rightNavigationMenu" ms.cmpgrp="right nav" style="">
+    <div id="mobileButtons">
+        
+    </div>
+    <div id="navMain">
+        <div id="closeNavigation">
+            <a class="tocCloseSmall" id="closeButton"></a>
+        </div>
+        <div id="navigationButtons">
+            <a id="isd_print" href="https://msdn.microsoft.com/de-de/library/system.net.mail.smtpclient.sendcompleted(d=printer,v=vs.110).aspx" rel="nofollow"><ins class="print"></ins>Drucken </a>
+            <a id="isdShare" href="#" role="button" aria-expanded="false">
+                <ins class="share"></ins>Teilen
+            </a>
+            <div id="socials" style="display: none;">
+                <a class="isdFacebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmsdn.microsoft.com%2Fde-de%2Flibrary%2Fsystem.net.mail.smtpclient.sendcompleted(v%3Dvs.110).aspx" aria-label="Auf Facebook teilen">
+                    <ins class="facebook"></ins>
+                </a>
+                <a class="isdTwitter" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmsdn.microsoft.com%2Fde-de%2Flibrary%2Fsystem.net.mail.smtpclient.sendcompleted(v%3Dvs.110).aspx&amp;text=SmtpClient.SendCompleted-Ereignis%20(System.Net.Mail)&amp;tw_p=tweetbutton&amp;url=https%3A%2F%2Fmsdn.microsoft.com%2Fde-de%2Flibrary%2Fsystem.net.mail.smtpclient.sendcompleted(v%3Dvs.110).aspx" aria-label="Auf Twitter teilen">
+                    <ins class="twitter"></ins>
+                </a>
+                <a class="isdGooglePlus" href="https://plus.google.com/share?url=https%3A%2F%2Fmsdn.microsoft.com%2Fde-de%2Flibrary%2Fsystem.net.mail.smtpclient.sendcompleted(v%3Dvs.110).aspx" aria-label="Auf Google+ teilen">
+                    <ins class="googlePlus"></ins>
+                </a>
+            </div>
+        </div>
+        <div id="indoc_toc" style="" ms.cmpgrp="indoc toc">
+            <div id="indoc_title">IN DIESEM ARTIKEL</div>
+            <ul id="indoc_toclist"><li data-index="0" class="active"><a href="#Syntax">Syntax</a></li><li data-index="1" class=""><a href="#Hinweise">Hinweise</a></li><li data-index="2" class=""><a href="#Beispiele">Beispiele</a></li><li data-index="3" class=""><a href="#Versionsinformationen">Versionsinformationen</a></li><li data-index="4"><a href="#Siehe auch">Siehe auch</a></li><li class="active" data-index="0"><a href="#Syntax">Syntax</a></li><li data-index="1"><a href="#Hinweise">Hinweise</a></li><li data-index="2"><a href="#Beispiele">Beispiele</a></li><li data-index="3"><a href="#Versionsinformationen">Versionsinformationen</a></li><li data-index="4"><a href="#Siehe auch">Siehe auch</a></li><li class="active" data-index="0"><a href="#Syntax">Syntax</a></li><li data-index="1"><a href="#Hinweise">Hinweise</a></li><li data-index="2"><a href="#Beispiele">Beispiele</a></li><li data-index="3"><a href="#Versionsinformationen">Versionsinformationen</a></li><li data-index="4"><a href="#Siehe auch">Siehe auch</a></li></ul>
+        </div>
+    </div>
+</div>
+<div id="rightNavigationMenuThumbnail" class="rightNavigationMenuThumbnail">
+</div>
+
+
+
+
+
+        </div>
+        <div class="clear"></div>
+
+        
+
+<input name="__RequestVerificationToken" value="9aJAsZYI6KCBkzJlWafxaStFB16GWD8qxWGAf2YhQZSZJO0uDObEjo4llAdGAjzQAko7IVPJND1NGrbYj2Ain4H4x8U1" type="hidden">
+<input id="ratingValueSubmitUrl" value="https://msdn.microsoft.com/de-de/library/feedback/rate/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx" type="hidden">
+<input id="ratingAdditionalSubmitUrl" value="https://msdn.microsoft.com/de-de/library/feedback/additional/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx" type="hidden">
+<input id="isTopicRated" value="false" type="hidden">
+
+
+
+
+    <div id="lib-footer">
+        
+
+    
+    <link href="" type="text/css" rel="stylesheet">
+    
+        
+    <div id="ux-footer" class="" style="" dir="ltr" ms.pgarea="footer">
+
+
+    <div id="standardRatingBefore" class="clear stdr-container-before"></div>
+    <div id="standardRating" class="stdr-container" ms.pgarea="body" style="width: 1600px; margin-left: 0px; display: block;">
+        <div class="stdr-close" style="display: none;"></div>
+        <div class="stdr-vote stdr-content">
+            <div class="stdr-content">
+                <span class="stdr-votetitle">Ist diese Seite hilfreich?</span>
+                <button class="stdr-yes" aria-label="Ja, diese Seite war hilfreich">Ja</button>
+                <button class="stdr-no" aria-label="Nein, diese Seite war nicht hilfreich">Nein</button>
+                <input id="s_ratingValue" value="" type="hidden">
+            </div>
+        </div>
+        <div class="stdr-feedback" style="display: none;">
+            <div class="stdr-form">
+                <div class="stdr-fieldtitle">Weiteres Feedback?</div>
+                <textarea class="stdr-detail" rows="6" maxlength="1500"></textarea>
+                <div>
+                    <span class="stdr-count"><span class="stdr-charcnt">1500</span> verbleibende Zeichen</span>
+                    <div class="stdr-buttons">
+                        <button class="stdr-provide" aria-label="Mein weiteres Feedback senden">Absenden</button>
+                        <button class="stdr-skip" aria-label="Weiteres Feedback überspringen">Überspringen</button>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="stdr-thanks" style="display: none;">
+            <div class="stdr-content">
+                <span class="stdr-thankyou">Vielen Dank!</span>
+                <span class="stdr-appreciate">Vielen Dank für Ihr Feedback.</span>
+            </div>
+        </div>
+
+        
+        <div id="contentFeedbackQAContainer" style="display: none;"></div>
+    </div>
+    <div id="standardRatingPlaceholder" style="height: 60px; display: none;"></div>
+    
+
+        <footer class="top" role="navigation" aria-label="footer">
+            <div data-fragmentname="LeftLinks" id="Fragment_LeftLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Entwicklungscenter</h4>
+    <ul class="links">
+      <li>
+        <a href="https://dev.windows.com/" id="LeftLinks_2148_1" class="windowsBlue" xmlns="http://www.w3.org/1999/xhtml">Windows</a>
+      </li>
+      <li>
+        <a href="https://dev.office.com/" id="LeftLinks_2148_3" class="office" xmlns="http://www.w3.org/1999/xhtml">Office</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/vstudio" id="LeftLinks_2148_4" class="visualStudio" xmlns="http://www.w3.org/1999/xhtml">Visual Studio</a>
+      </li>
+      <li>
+        <a href="https://azure.microsoft.com/de-de/documentation/" target="_top" id="LeftLinks_2148_12" xmlns="http://www.w3.org/1999/xhtml">Microsoft Azure</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/developer-centers-msdn" id="LeftLinks_2148_5" xmlns="http://www.w3.org/1999/xhtml">Mehr...</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            <div id="rightLinks">
+                <div data-fragmentname="CenterLinks1" id="Fragment_CenterLinks1" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Lernressourcen</h4>
+    <ul class="links">
+      <li>
+        <a href="https://mva.microsoft.com/" id="CenterLinks1_2151_4" xmlns="http://www.w3.org/1999/xhtml">Microsoft Virtual Academy</a>
+      </li>
+      <li>
+        <a href="https://channel9.msdn.com/" id="CenterLinks1_2151_5" xmlns="http://www.w3.org/1999/xhtml">Channel 9</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/magazine/" id="CenterLinks1_2151_7" xmlns="http://www.w3.org/1999/xhtml">MSDN&nbsp;Magazine</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks2" id="Fragment_CenterLinks2" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Community</h4>
+    <ul class="links">
+      <li>
+        <a href="https://social.msdn.microsoft.com/forums/de-de/home" id="CenterLinks2_2151_8" xmlns="http://www.w3.org/1999/xhtml">Foren</a>
+      </li>
+      <li>
+        <a href="https://blogs.msdn.com/b/developer-tools/" id="CenterLinks2_2151_9" xmlns="http://www.w3.org/1999/xhtml">Blogs</a>
+      </li>
+      <li>
+        <a href="https://www.codeplex.com/" id="CenterLinks2_2151_10" xmlns="http://www.w3.org/1999/xhtml">CodePlex</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks3" id="Fragment_CenterLinks3" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Support</h4>
+    <ul class="links">
+      <li>
+        <a href="https://msdn.microsoft.com/hh361695" id="CenterLinks3_2151_11" xmlns="http://www.w3.org/1999/xhtml">Selbsthilfe</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks4" id="Fragment_CenterLinks4" xmlns="http://www.w3.org/1999/xhtml" class="nth-child-4n">
+  
+  <div class="linkList">
+    <h4 class="linkListTitle">Programme</h4>
+    <ul class="links">
+      <li>
+        <a href="https://bizspark.microsoft.com/" id="CenterLinks4_2151_13" xmlns="http://www.w3.org/1999/xhtml">BizSpark (für Startups)</a>
+      </li>
+      <li>
+        <a href="https://imagine.microsoft.com/de-de" id="CenterLinks4_2151_21" xmlns="http://www.w3.org/1999/xhtml">Microsoft Imagine (for students)</a>
+      </li>
+      <li>
+        <a href="https://www.microsoft.com/de-de/education" id="CenterLinks4_2151_22" xmlns="http://www.w3.org/1999/xhtml">FacultyConnection</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            </div>
+        </footer>
+
+        <footer class="bottom" role="contentinfo">
+            <span class="localeContainer">
+                
+    <form class="selectLocale" id="selectLocaleForm" action="https://msdn.microsoft.com/de-de/selectlocale-dmc">
+        <input name="fromPage" value="https%3a%2f%2fmsdn.microsoft.com%2fde-de%2flibrary%2fsystem.net.mail.smtpclient.sendcompleted(v%3dvs.110).aspx" type="hidden">
+        <a href="#" onclick="$('#selectLocaleForm').submit();return false;" title="Sprache ändern">Deutschland (Deutsch)</a>
+    </form>
+
+
+            </span>
+
+            <div data-fragmentname="BottomLinks" id="Fragment_BottomLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="https://www.microsoft.com/de-de/corporate/rechtliche-hinweise/impressum.aspx" title="Impressum" id="BottomLinks_2148_18" xmlns="http://www.w3.org/1999/xhtml">Impressum</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/newsletter.aspx" id="BottomLinks_2148_7" xmlns="http://www.w3.org/1999/xhtml">Newsletter</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/dn529288" id="BottomLinks_2148_8" xmlns="http://www.w3.org/1999/xhtml" data-mscc-ic="false">Datenschutz &amp; Cookies</a>
+      </li>
+      <li>
+        <a href="https://msdn.microsoft.com/cc300389" id="BottomLinks_2148_9" xmlns="http://www.w3.org/1999/xhtml" data-mscc-ic="false">Nutzungsbedingungen</a>
+      </li>
+      <li>
+        <a href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/" id="BottomLinks_2148_10" xmlns="http://www.w3.org/1999/xhtml" data-mscc-ic="false">Marken</a>
+      </li>
+    </ul>
+  </div>
+</div>
+            <span class="logoLegal">
+                <span class="logoSpan clip67x13" role="img" tabindex="0" aria-label="microsoft logo">
+                    <img alt="logo" class="logo" src="HeaderFooterSprite.png">
+                </span>
+                <span class="copyright">© 2017 Microsoft</span>
+            </span>
+        </footer>
+    </div>
+    
+
+    </div>
+
+
+        <div class="footerPrintView">
+            <div class="footerCopyrightPrintView">© 2017 Microsoft</div>
+        </div>
+
+        
+        
+
+        
+        
+        
+
+    <input id="tocPaddingPerLevel" value="17" type="hidden">
+
+
+
+        <input id="MtpsDevice" value="Default" type="hidden">
+
+
+<!--[CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]-->
+
+        
+        
+        
+            
+        
+
+<!--[CDATA[ WebTrends view model not available or IncludeLegacyWebTrendsScriptInGlobal feature flag is off]]-->
+        
+
+ 
+        
+
+<div id="globalRequestVerification">
+    <input name="__RequestVerificationToken" value="ITIhOmDjZPpZ1P3-i_xeJGxaN4UkY6fj-xYMfT2tBFNgaTMC1yOpsUxmXzjn5lKY19AKT6TIw0hUK0i9azJw9NY_EqI1" type="hidden">
+</div>
+
+
+    </div>
+
+    
+        
+
+    
+
+    
+<script type="text/javascript" class="mtps-injected">
+
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index];elem=document.createElement("script");elem.className="mtps-injected";elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext;script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }");parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"js\": \"https://i2-msdn.sec.s-msft.com\", \r\n\t\"css\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"ttf\": \"https://i-msdn.sec.s-msft.com\"\r\n});\r\n/**/" },
+	{ txt: "//\n\n        window.appInsightsId = \u00275eb1b2eb-c47a-497a-a7ac-a1c230b2882f\u0027;\n        //" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:Utilities,1:Layout,2:Header,3:Breadcrumbs,4:LibraryRightNavigationMenu,4:PrintExportButton,5:StandardRating,2:Footer,0:Topic,3:ResponsiveSupport,6:JSLLRecord,0:AppInsightsPerf,3:ResponsiveToc,0:ABTestControl,4:WEDCS,3:CmpgrpForHeader;/Areas/Epx/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Centers/Themes/StandardDevCenter/Content:2,/Areas/Library/Content:3,/Areas/Library/Themes/Base/Content:4,/Areas/Global/Content:5,/Areas/Centers/Themes/Base/Content:6\u0026amp;hashKey=0DA87CCFB0E9C3716418D24897056EA3\u0026amp;v=14007E04F1FE82E6AE453AEA57901500" },
+	{ url: "https://uhf.microsoft.com/mscc/statics/mscc-0.3.6.min.js" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Areas/Epx/Themes/Base/Content/SearchBox.js" },
+	{ url: "https://i1.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox\u0026btnid=HeaderSearchButton\u0026minimumTermLength=2\u0026pgArea=header\u0026brand=Msdn\u0026loc=de-de\u0026focusOnInit=false\u0026emptyWatermark=true\u0026searchButtonTooltip=In MSDN suchen" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Areas/Epx/Themes/Base/Content/JumpRedirect.js" },
+	{ txt: "//\n    MTPS = window.MTPS || {};\n    MTPS.Translation = window.MTPS.Translation || {};\n\n    MTPS.Translation.TranslationType =  0;\n    \n    \n        \n        MTPS.Translation.EditorLink = {\n            includeEditor : 0,\n            editLink: \"https://msdn.microsoft.com/de-de/library/translation/edit/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx\",\n            editLinkText: \"Bessere \u0026#220;bersetzung vorschlagen\"\n        };\n        \n    //" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:jquery.popup,0:Translator;/Areas/Library/Content:0\u0026amp;hashKey=16D24150BAC1A18066CEC17E9B28E03E\u0026amp;v=14007E04F1FE82E6AE453AEA57901500" },
+	{ txt: "MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = \u0027Expand\u0027; MTPS.LocalizedStrings.CollapseButtonTooltip = \u0027Collapse\u0027; MTPS.LocalizedStrings.EnhancedExpandTooltip = \u0027Zum Erweitern hier klicken. Doppelklicken, um alles zu erweitern.\u0027; MTPS.LocalizedStrings.EnhancedCollapseTooltip = \u0027Zum Reduzieren hier klicken. Doppelklicken, um alles zu reduzieren.\u0027; MTPS.LocalizedStrings.ExpandAllButtonTooltip = \u0027Alle erweitern\u0027; MTPS.LocalizedStrings.CollapseAllButtonTooltip = \u0027Alle reduzieren\u0027;" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:LibraryMemberFilter,1:Toc_Fixed,1:CodeSnippet,1:TopicNotInScope,1:VersionSelector,1:SurveyBroker;/Areas/Library/Content:0,/Areas/Epx/Content/Scripts:1\u0026amp;hashKey=D8D1FFAA6CA68460B7EFA5923975CA44\u0026amp;v=14007E04F1FE82E6AE453AEA57901500" },
+	{ txt: "$(document).ready(function() {\n        try {\n            var token = $(\"#globalRequestVerification input[name=\u0027__RequestVerificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").append(token);\n        } catch(err) {\n            \n        }\n    });" }
+]);
+
+/*]]>*/
+</script>
+
+<div id="overlayMask"></div><div id="popup-loading0" class="popup-loading" style="display: none; z-index: 210; width: auto; height: auto; left: 431.5px; top: 632px;">loading...</div><div id="popup0" class="MTPopup" style="z-index: 210; width: auto; height: auto; max-width: 777px; left: 431.5px; top: 632px; display: none;"><div class="popup-main" style="z-index: 210;"><div class="popup-inner">The <span class="selflink">SendCompleted</span> event is raised each time an e-mail message is sent asynchronously when the send operation completes.<div class="EditTranslation"><a href="https://msdn.microsoft.com/de-de/library/translation/edit/system.net.mail.smtpclient.sendcompleted(v=vs.110).aspx?sentenceGuid=7480424cc1b686d220337913cf1f3b44">Bessere Übersetzung vorschlagen</a></div></div></div></div><script src="broker-config.js"></script><div id="coFrameDiv" style="height: 0px; display: none;"><iframe id="coToolbarFrame" src="system.net.mail.smtpclient.sendcompleted(v=vs.110)_1.html" style="height: 0px; width: 100%; display: none;"></iframe></div><div id="overlayMask"></div><div style="display: none; z-index: 210; width: auto; height: auto;" id="popup-loading0" class="popup-loading">loading...</div><div style="display: none; z-index: 210; width: auto; height: auto;" id="popup0" class="MTPopup"><div style="z-index: 210;" class="popup-main"><div class="popup-inner"></div></div></div><script src="broker-config_001.js"></script><div id="overlayMask"></div><div style="display: none; z-index: 210; width: auto; height: auto;" id="popup-loading1" class="popup-loading">loading...</div><div style="display: none; z-index: 210; width: auto; height: auto;" id="popup1" class="MTPopup"><div style="z-index: 210;" class="popup-main"><div class="popup-inner"></div></div></div></body>
+</html>

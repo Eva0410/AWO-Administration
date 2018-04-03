@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr" class="client-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;oldid=168867092">
+<meta name="wpd_url" content="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;oldid=168867092">
+<meta name="wpd_date" content="2018-01-13T16:41Z">
+
+<meta charset="UTF-8">
+<title>Model View ViewModel – Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Model_View_ViewModel","wgTitle":"Model View ViewModel","wgCurRevisionId":168867092,"wgRevisionId":168867092,"wgArticleId":6827135,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Entwurfsmuster","Softwarearchitektur"],"wgBreakFrames":false,"wgPageContentLanguage":"de","wgPageContentModel":"wikitext","wgSeparatorTransformTable":[",\t.",".\t,"],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],"wgMonthNamesShort":["","Jan.","Feb.","Mär.","Apr.","Mai","Jun.","Jul.","Aug.","Sep.","Okt.","Nov.","Dez."],"wgRelevantPageName":"Model_View_ViewModel","wgRelevantArticleId":6827135,"wgRequestId":"WoMVLgpAICEAAGjUewcAAAAE","wgIsProbablyEditable":true,"wgRelevantPageIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{"accuracy":{"levels":1,"quality":2,"pristine":4}}},"wgStableRevisionId":168867092,"wgWikiEditorEnabledModules":[],"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgPopupsShouldSendModuleToUser":true,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"de","pageLanguageDir":"ltr","pageVariantFallbacks":"de","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"de","wgMFExpandAllSectionsUserOption":false,"wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"Deutsch","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q1247905","wgScoreNoteLanguages":{"arabic":"العربية","catalan":"català","deutsch":"Deutsch","english":"English","espanol":"español","italiano":"italiano","nederlands":"Nederlands","norsk":"norsk","portugues":"português","suomi":"suomi","svenska":"svenska","vlaams":"West-Vlams"},"wgScoreDefaultNoteLanguage":"nederlands","wgCentralAuthMobileDomain":false,"wgCodeMirrorEnabled":false,"wgVisualEditorToolbarScrollOffset":0,"wgVisualEditorUnsupportedEditParams":["undo","undoafter","veswitched"],"wgEditSubmitButtonLabelPublish":true});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","ext.flaggedRevs.basic":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@1wzrrbt",function($,jQuery,require,module){/*@nomin*/mw.user.options.set({"variant":"de"});
+});mw.loader.implement("user.tokens@1dqfd7l",function($,jQuery,require,module){/*@nomin*/mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});
+});mw.loader.load(["ext.cite.a11y","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.gadget.WikiMiniAtlas","ext.gadget.OpenStreetMap","ext.gadget.CommonsDirekt","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.popups","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.compactlinks","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","ext.flaggedRevs.advanced","skins.vector.js"]);});</script>
+
+<script async="" src="load.php"></script>
+<meta name="ResourceLoaderDynamicStyles" content="">
+
+<meta name="generator" content="MediaWiki 1.31.0-wmf.20">
+<meta name="referrer" content="origin">
+<meta name="referrer" content="origin-when-crossorigin">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="robots" content="noindex,nofollow">
+<link rel="alternate" type="application/x-wiki" title="Seite bearbeiten" href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit">
+<link rel="edit" title="Seite bearbeiten" href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit">
+<link rel="apple-touch-icon" href="https://de.wikipedia.org/static/apple-touch/wikipedia.png">
+<link rel="shortcut icon" href="wikipedia.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://de.wikipedia.org/w/opensearch_desc.php" title="Wikipedia (de)">
+<link rel="EditURI" type="application/rsd+xml" href="https://de.wikipedia.org/w/api.php?action=rsd">
+<link rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">
+<link rel="alternate" type="application/atom+xml" title="Atom-Feed für „Wikipedia“" href="https://de.wikipedia.org/w/index.php?title=Spezial:Letzte_%C3%84nderungen&amp;feed=atom">
+<link rel="canonical" href="https://de.wikipedia.org/wiki/Model_View_ViewModel">
+<link rel="dns-prefetch" href="https://login.wikimedia.org/">
+<link rel="dns-prefetch" href="https://meta.wikimedia.org/">
+<!--[if lt IE 9]><script src="/w/load.php?debug=false&amp;lang=de&amp;modules=html5shiv&amp;only=scripts&amp;skin=vector&amp;sync=1"></script><![endif]-->
+<script src="load_001.php"></script>
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body class="mediawiki ltr sitedir-ltr capitalize-all-nouns mw-hide-empty-elt ns-0 ns-subject page-Model_View_ViewModel rootpage-Model_View_ViewModel skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="siteNotice" class="mw-body-content"><div id="centralNotice"></div><!-- CentralNotice --></div><div class="mw-indicators mw-body-content">
+</div>
+<h1 id="firstHeading" class="firstHeading" lang="de">Model View ViewModel</h1>			<div id="bodyContent" class="mw-body-content">
+				<div id="siteSub" class="noprint">aus Wikipedia, der freien Enzyklopädie</div>				<div id="contentSub"><div class="mw-revision"><div id="mw-revision-info-current">Dies ist die <a href="https://de.wikipedia.org/wiki/Hilfe:Versionen" title="Hilfe:Versionen">aktuelle Version</a> dieser Seite, zuletzt bearbeitet am 7. September 2017 um 13:26 Uhr durch <a href="https://de.wikipedia.org/wiki/Spezial:Beitr%C3%A4ge/213.182.139.42" class="mw-userlink mw-anonuserlink" title="Spezial:Beiträge/213.182.139.42"><bdi>213.182.139.42</bdi></a> <span class="mw-usertoollinks">(<a href="https://de.wikipedia.org/w/index.php?title=Benutzer_Diskussion:213.182.139.42&amp;action=edit&amp;redlink=1" class="new mw-usertoollinks-talk" title="Benutzer Diskussion:213.182.139.42 (Seite nicht vorhanden)">Diskussion</a>)</span> <span class="comment">(<a href="#Beschreibung">→</a>‎<span dir="auto"><span class="autocomment">Beschreibung</span></span>)</span>.</div><div id="mw-revision-nav">(<a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;diff=prev&amp;oldid=168867092" title="Model View ViewModel">Unterschied</a>) <a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;direction=prev&amp;oldid=168867092" title="Model View ViewModel">← Nächstältere Version</a> | Aktuelle Version (Unterschied) | Nächstjüngere Version → (Unterschied)</div></div></div>
+								<div id="jump-to-nav" class="mw-jump">
+
+					Wechseln zu:					<a href="#mw-head">Navigation</a>, 					<a href="#p-search">Suche</a>
+				</div>
+				<div id="mw-content-text" dir="ltr" class="mw-content-ltr" lang="de"><div id="mw-fr-revisiontag-old" class="flaggedrevs_notice plainlinks noprint">Eine <a class="external text" href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;stableid=168867092">markierte Version</a> dieser Seite, die am <i>7. September 2017</i> <a class="external text" href="https://de.wikipedia.org/w/index.php?title=Spezial:Logbuch&amp;type=review&amp;page=Model_View_ViewModel">freigegeben</a> wurde, basiert auf dieser Version.</div><div class="mw-parser-output"><div class="thumb tright"><div class="thumbinner" style="width: 442px;"><a href="https://de.wikipedia.org/wiki/Datei:MVVMPattern.png" class="image"><img alt="" src="440px-MVVMPattern.png" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/87/MVVMPattern.png/660px-MVVMPattern.png 1.5x, //upload.wikimedia.org/wikipedia/commons/8/87/MVVMPattern.png 2x" data-file-width="771" data-file-height="232" height="132" width="440"></a>  <div class="thumbcaption"><div class="magnify"><a href="https://de.wikipedia.org/wiki/Datei:MVVMPattern.png" class="internal" title="vergrößern und Informationen zum Bild anzeigen"></a></div>MVVM-Konzept: Die Datenbindung (Data Binding) ermöglicht die Trennung von View (z. B. XAML-Markup oder HTML) und Model für die Darstellung.</div></div></div>
+<p><b>Model View ViewModel</b> (<b>MVVM</b>) ist ein <a href="https://de.wikipedia.org/wiki/Entwurfsmuster" title="Entwurfsmuster">Entwurfsmuster</a> und eine Variante des <a href="https://de.wikipedia.org/wiki/Model_View_Controller" title="Model View Controller">Model-View-Controller</a>-Musters (MVC). Es dient zur Trennung von Darstellung und Logik der <a href="https://de.wikipedia.org/wiki/Benutzerschnittstelle" title="Benutzerschnittstelle">Benutzerschnittstelle</a> (UI). Es zielt auf moderne UI-Plattformen wie <a href="https://de.wikipedia.org/wiki/Windows_Presentation_Foundation" title="Windows Presentation Foundation">Windows Presentation Foundation</a> (WPF), <a href="https://de.wikipedia.org/wiki/JavaFX" title="JavaFX">JavaFX</a>, <a href="https://de.wikipedia.org/wiki/Silverlight" class="mw-redirect" title="Silverlight">Silverlight</a> und <a href="https://de.wikipedia.org/wiki/HTML5" title="HTML5">HTML5</a> ab, da ein Datenbindungsmechanismus erforderlich ist. Gegenüber dem MVC-Muster kann die Testbarkeit verbessert und der Implementierungsaufwand reduziert werden, da keine separaten <a href="https://de.wikipedia.org/wiki/Model_View_Controller#Steuerung" title="Model View Controller">Controller-Instanzen</a> erforderlich sind. MVVM erlaubt eine Rollentrennung von UI-Designern und Entwicklern, wodurch <a href="https://de.wikipedia.org/wiki/Schichtenarchitektur" title="Schichtenarchitektur">Anwendungsschichten</a> von verschiedenen Arbeitsgruppen entwickelt werden können. Designer können einen Fokus auf <a href="https://de.wikipedia.org/wiki/User_Experience" title="User Experience">User Experience</a> setzen und Entwickler die UI- und <a href="https://de.wikipedia.org/wiki/Gesch%C3%A4ftslogik" title="Geschäftslogik">Geschäftslogik</a> schreiben.
+</p>
+<div id="toc" class="toc"><div class="toctitle" dir="ltr" lang="de"><h2>Inhaltsverzeichnis</h2><span class="toctoggle">&nbsp;[<a role="button" tabindex="0" class="togglelink">Verbergen</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Geschichte"><span class="tocnumber">1</span> <span class="toctext">Geschichte</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Beschreibung"><span class="tocnumber">2</span> <span class="toctext">Beschreibung</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#.NET_und_JavaFX"><span class="tocnumber">2.1</span> <span class="toctext">.NET und JavaFX</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#JavaScript/HTML"><span class="tocnumber">2.2</span> <span class="toctext">JavaScript/HTML</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Android"><span class="tocnumber">2.3</span> <span class="toctext">Android</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Vor-_und_Nachteile"><span class="tocnumber">3</span> <span class="toctext">Vor- und Nachteile</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="#Vorteile"><span class="tocnumber">3.1</span> <span class="toctext">Vorteile</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Nachteile"><span class="tocnumber">3.2</span> <span class="toctext">Nachteile</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="#MVVM-Frameworks"><span class="tocnumber">4</span> <span class="toctext">MVVM-Frameworks</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#Siehe_auch"><span class="tocnumber">5</span> <span class="toctext">Siehe auch</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#Literatur"><span class="tocnumber">6</span> <span class="toctext">Literatur</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="#Weblinks"><span class="tocnumber">7</span> <span class="toctext">Weblinks</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="#Einzelnachweise"><span class="tocnumber">8</span> <span class="toctext">Einzelnachweise</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Geschichte">Geschichte</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=1" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Geschichte">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=1" title="Abschnitt bearbeiten: Geschichte">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Das MVVM wurde 2005 von <a href="https://de.wikipedia.org/wiki/Microsoft_MVP" title="Microsoft MVP">Microsoft MVP</a> John Gossman veröffentlicht. Es ist eine Spezialisierung des <a href="https://de.wikipedia.org/wiki/Model_View_Presenter" class="mw-redirect" title="Model View Presenter">Presentation Model</a> von <a href="https://de.wikipedia.org/wiki/Martin_Fowler" title="Martin Fowler">Martin Fowler</a><sup id="cite_ref-1" class="reference"><a href="#cite_note-1">[1]</a></sup> und ist mit diesem insofern identisch, als beide Muster Zustand und Verhalten der View in ein separates UI-Model (Presentation bzw. View Model) verschieben. Das <i>Presentation Model</i> ermöglicht allerdings das Erzeugen einer View unabhängig von der UI-Plattform, wohingegen das MVVM ursprünglich auf UIs mittels WPF abzielt. Es findet allerdings inzwischen auch in anderen Bereichen Anwendung, ähnlich wie bei MVC.
+</p>
+<h2><span class="mw-headline" id="Beschreibung">Beschreibung</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=2" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Beschreibung">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=2" title="Abschnitt bearbeiten: Beschreibung">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Das MVVM nutzt die funktionale Trennung des <a href="https://de.wikipedia.org/wiki/Model_View_Controller" title="Model View Controller">MVC-Musters</a> von Model und View. Zum Erreichen einer <a href="https://de.wikipedia.org/wiki/Lose_Kopplung" title="Lose Kopplung">losen Kopplung</a> zwischen diesen Komponenten wird ein Datenbindungsmechanismus verwendet. Das MVVM-Muster enthält folgende drei Komponenten:
+</p>
+<ul><li> <i>Model:</i> <a href="https://de.wikipedia.org/wiki/Schichtenarchitektur#Datenzugriffsschicht" title="Schichtenarchitektur">Datenzugriffsschicht</a> für die Inhalte, die dem Benutzer angezeigt und von ihm manipuliert werden. Dazu benachrichtigt es über Datenänderungen und führt eine <a href="https://de.wikipedia.org/wiki/Datenvalidierung" title="Datenvalidierung">Validierung</a> der vom Benutzer übergebenen Daten durch. Es enthält die gesamte <a href="https://de.wikipedia.org/wiki/Gesch%C3%A4ftslogik" title="Geschäftslogik">Geschäftslogik</a> und ist für sich alleine durch <a href="https://de.wikipedia.org/wiki/Modultest" title="Modultest">Unit Tests</a> überprüfbar.</li></ul>
+<ul><li> <i>View:</i> Alle durch die <i>grafische Benutzeroberfläche</i> (<a href="https://de.wikipedia.org/wiki/Grafische_Benutzeroberfl%C3%A4che" title="Grafische Benutzeroberfläche">GUI</a>) angezeigten Elemente. Es bindet sich an Eigenschaften des ViewModel, um Inhalte darzustellen und zu manipulieren sowie Benutzereingaben weiterzuleiten. Durch die Datenbindung ist die View einfach austauschbar und ihr <a href="https://de.wikipedia.org/wiki/ASP.NET#Code-Behind-Modell" title="ASP.NET">Code-Behind</a> gering.</li></ul>
+<ul><li> <i>ViewModel:</i> Enthält die UI-Logik (Model der View) und dient als Bindeglied zwischen View und obigem Model. Einerseits tauscht es Information mit dem Model aus, ruft also <a href="https://de.wikipedia.org/wiki/Methode_(Programmierung)" title="Methode (Programmierung)">Methoden</a> oder <a href="https://de.wikipedia.org/wiki/Dienst_(Informatik)" title="Dienst (Informatik)">Dienste</a> auf. Andererseits stellt es der View öffentliche <a href="https://de.wikipedia.org/wiki/Sprachelemente_von_C-Sharp#Eigenschaften_.28Schl.C3.BCsselw.C3.B6rter_get.2C_set_und_value.29" title="Sprachelemente von C-Sharp">Eigenschaften</a> und <a href="https://de.wikipedia.org/wiki/Kommando_(Entwurfsmuster)" title="Kommando (Entwurfsmuster)">Befehle</a> zur Verfügung. Diese werden von der View an <a href="https://de.wikipedia.org/wiki/Steuerelement" title="Steuerelement">Steuerelemente</a> gebunden, um Inhalte auszugeben bzw. UI-Ereignisse weiterzuleiten. Das ViewModel darf dabei keinerlei Kenntnis der View besitzen.</li></ul>
+<p>Das MVVM-Muster kann als technologie-spezifisch bezeichnet werden, da für die Verknüpfung von View und ViewModel ein Datenbindungsmechanismus benötigt wird. Diese Infrastruktur wird häufig als <i>Binder</i> bezeichnet <sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[2]</a></sup>. Im Detail handelt es sich hierbei um einen bidirektionalen Einsatz des <a href="https://de.wikipedia.org/wiki/Beobachter_(Entwurfsmuster)" title="Beobachter (Entwurfsmuster)">Beobachter-Musters</a>. <i>Binder</i>, welche eine Datenbindung auf Basis von deklarativen Angaben etablieren können, sind für verschiedene Techniken vorhanden.
+</p>
+<h3><span class="mw-headline" id=".NET_und_JavaFX">.NET und JavaFX</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=3" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: .NET und JavaFX">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=3" title="Abschnitt bearbeiten: .NET und JavaFX">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>In Bezug auf <a href="https://de.wikipedia.org/wiki/Windows_Presentation_Foundation" title="Windows Presentation Foundation">WPF</a> und <a href="https://de.wikipedia.org/wiki/Silverlight" class="mw-redirect" title="Silverlight">Silverlight</a> bedeutet MVVM, dass die View aus rein deklarativem <a href="https://de.wikipedia.org/wiki/XAML" class="mw-redirect" title="XAML">XAML</a>-Markup besteht. Sie kann von UI-Designern etwa mittels <a href="https://de.wikipedia.org/wiki/Microsoft_Expression_Blend" title="Microsoft Expression Blend">Expression Blend</a> entworfen werden, wobei lediglich Datenbindungen zum ViewModel erzeugt werden müssen, aber kein Code-Behind. Die Logik wird in einer Programmiersprache wie <a href="https://de.wikipedia.org/wiki/C-Sharp" title="C-Sharp">C#</a> oder <a href="https://de.wikipedia.org/wiki/Visual_Basic_.NET" title="Visual Basic .NET">VB.NET</a> implementiert. Die Abhängigkeiten zwischen Markup und Code werden minimiert.
+Gleiches gilt für JavaFX. Hier kann die View mittels <a href="https://de.wikipedia.org/w/index.php?title=FXML&amp;action=edit&amp;redlink=1" class="new" title="FXML (Seite nicht vorhanden)">FXML</a> und beispielsweise SceneBuilder entwickelt und dann im ViewModel per Property Binding uni- oder bidirektional mit der Geschäftslogik verbunden werden.
+</p>
+<h3><span id="JavaScript.2FHTML"></span><span class="mw-headline" id="JavaScript/HTML">JavaScript/HTML</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=4" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: JavaScript/HTML">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=4" title="Abschnitt bearbeiten: JavaScript/HTML">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Das MVVM-Muster bzw. der hierzu benötigte Datenbindungsmechanismus wurden im Jahr 2010 von dem Microsoft-Entwickler <i>Steve Sanderson</i> nach <a href="https://de.wikipedia.org/wiki/JavaScript" title="JavaScript">JavaScript</a> portiert. Die entstandene JavaScript-Bibliothek trägt den Namen <a href="https://de.wikipedia.org/wiki/Knockout.js" title="Knockout.js">Knockout.js</a>. Mittlerweile findet das MVVM-Muster ebenfalls Einsatz in anderen JavaScript-Frameworks, wie z. B. <a href="https://de.wikipedia.org/wiki/AngularJS" title="AngularJS">AngularJS</a>. Durch die Verwendung des MVVM-Muster bei client-lastigen <a href="https://de.wikipedia.org/wiki/Webanwendung" title="Webanwendung">Webanwendungen</a> wird der Implementierungsaufwand reduziert, da sonst übliche manuelle <a href="https://de.wikipedia.org/wiki/Document_Object_Model" title="Document Object Model">DOM</a>-Zugriffe durch die Datenbindung stark reduziert werden können. Die Beschreibung der Datenbindung erfolgt ebenfalls deklarativ, wie bei <a href="https://de.wikipedia.org/wiki/Extensible_Application_Markup_Language" title="Extensible Application Markup Language">XAML</a>-basierten Microsoft-Produkten.
+</p>
+<h3><span class="mw-headline" id="Android">Android</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=5" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Android">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=5" title="Abschnitt bearbeiten: Android">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Das MVVM-Muster und die Datenbindung kann ebenfalls bei der Implementierung mobiler <a href="https://de.wikipedia.org/wiki/Android_(Betriebssystem)" title="Android (Betriebssystem)">Android</a>-Anwendungen verwendet werden.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3">[3]</a></sup>
+</p>
+<h2><span class="mw-headline" id="Vor-_und_Nachteile">Vor- und Nachteile</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=6" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Vor- und Nachteile">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=6" title="Abschnitt bearbeiten: Vor- und Nachteile">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<h3><span class="mw-headline" id="Vorteile">Vorteile</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=7" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Vorteile">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=7" title="Abschnitt bearbeiten: Vorteile">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<ul><li> Die <a href="https://de.wikipedia.org/wiki/Gesch%C3%A4ftslogik" title="Geschäftslogik">Geschäftslogik</a> kann unabhängig von der Darstellung bearbeitet werden. MVVM „erbt“ die leichtere Austauschbarkeit der View vom <a href="https://de.wikipedia.org/wiki/Model_View_Controller" title="Model View Controller">MVC</a>-Muster. </li>
+<li> Die Testbarkeit verbessert sich, da die ViewModel die UI-Logiken enthalten und unabhängig von der View instanziiert werden können. Hierdurch sind keine (in der Regel manuellen) UI-Tests nötig. Stattdessen genügen codebasierte <a href="https://de.wikipedia.org/wiki/Modultest" title="Modultest">Modultests</a> des ViewModel. </li>
+<li> Die Menge von <a href="https://de.wikipedia.org/wiki/Glue_Code" title="Glue Code">Glue Code</a> zwischen Model und View wird durch den Verzicht von Controller-Instanzen gegenüber dem MVC-Muster reduziert.<sup id="cite_ref-4" class="reference"><a href="#cite_note-4">[4]</a></sup></li>
+<li> Views können von reinen UI-Designern gestaltet werden während Entwickler unabhängig davon die Models und ViewModels implementieren.</li>
+<li> Es können unterschiedliche Views erstellt werden, die alle an dasselbe ViewModel gebunden werden, ohne dass dort Änderungen an der Programmierung vorgenommen werden müssen.</li></ul>
+<h3><span class="mw-headline" id="Nachteile">Nachteile</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=8" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Nachteile">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=8" title="Abschnitt bearbeiten: Nachteile">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<ul><li> Als Nachteil kann der höhere Rechenaufwand aufgrund des enthaltenen bi-direktionalen <a href="https://de.wikipedia.org/wiki/Beobachter_(Entwurfsmuster)" title="Beobachter (Entwurfsmuster)">Beobachters</a> gewertet werden.</li>
+<li> Der generische Datenbindungsmechanismus erspart die Implementierung von verschiedenen Controllern. Allerdings ist dieser Mechanismus zur Umsetzung des MVVM-Muster zwingend erforderlich.</li></ul>
+<h2><span class="mw-headline" id="MVVM-Frameworks">MVVM-Frameworks</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=9" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: MVVM-Frameworks">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=9" title="Abschnitt bearbeiten: MVVM-Frameworks">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Es existieren Frameworks, die dazu dienen, den Aufwand für die Implementierung des MVVM-Musters zu verringern. Dazu gehören
+</p>
+<ul><li> Prism</li>
+<li> Crosslight (kommerzielles Framework von der Firma Intersoft Solutions)</li>
+<li> MVVM Light</li>
+<li> Caliburn.Micro</li></ul>
+<p>und viele andere.
+</p>
+<h2><span class="mw-headline" id="Siehe_auch">Siehe auch</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=10" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Siehe auch">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=10" title="Abschnitt bearbeiten: Siehe auch">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul><li> <a href="https://de.wikipedia.org/wiki/Model_View_Controller" title="Model View Controller">Model View Controller</a></li>
+<li> <a href="https://de.wikipedia.org/wiki/Knockout.js" title="Knockout.js">Knockout.js</a> - MVVM in Javascript</li>
+<li> <a href="https://de.wikipedia.org/wiki/Smart_UI" title="Smart UI">Smart UI</a></li></ul>
+<h2><span class="mw-headline" id="Literatur">Literatur</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=11" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Literatur">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=11" title="Abschnitt bearbeiten: Literatur">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul><li> Raffaele Garofalo: <i>Building Enterprise Applications with Windows Presentation Foundation and the Model View ViewModel Pattern</i>, Microsoft Press 2011, <a href="https://de.wikipedia.org/wiki/Spezial:ISBN-Suche/9780735650923" class="internal mw-magiclink-isbn">ISBN 978-0735650923</a></li></ul>
+<h2><span class="mw-headline" id="Weblinks">Weblinks</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=12" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Weblinks">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=12" title="Abschnitt bearbeiten: Weblinks">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://openbook.rheinwerk-verlag.de/visual_csharp_2012/1997_28_005.html">Visual C# 2012: Das MVVM-Pattern</a> – Buchkapitel bei <a href="https://de.wikipedia.org/wiki/Rheinwerk_Verlag" title="Rheinwerk Verlag">Rheinwerk Verlag</a></li>
+<li> <a rel="nofollow" class="external text" href="http://www.norberteder.com/model-view-viewmodel-die-serie/">Norbert Eder: Model-View-ViewModel Die Serie</a> – Codebeispiel</li>
+<li> <a rel="nofollow" class="external text" href="http://nugetmusthaves.com/Tag/MVVM">NuGet-Pakete</a> für MVVM-Frameworks</li></ul>
+<h2><span class="mw-headline" id="Einzelnachweise">Einzelnachweise</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit&amp;section=13" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Einzelnachweise">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit&amp;section=13" title="Abschnitt bearbeiten: Einzelnachweise">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><a href="#cite_ref-1"><span class="cite-accessibility-label">Hochspringen </span>↑</a></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://martinfowler.com/eaaDev/PresentationModel.html">Presentation Model</a></span>
+</li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><a href="#cite_ref-2"><span class="cite-accessibility-label">Hochspringen </span>↑</a></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://books.zkoss.org/zk-mvvm-book/8.0/data_binding/binder.html">Binder-Definition aus dem ZK-Framework</a></span>
+</li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><a href="#cite_ref-3"><span class="cite-accessibility-label">Hochspringen </span>↑</a></span> <span class="reference-text"><a rel="nofollow" class="external text" href="http://developer.android.com/tools/data-binding/guide.html">Android Data Binding Guide</a> (englisch)</span>
+</li>
+<li id="cite_note-4"><span class="mw-cite-backlink"><a href="#cite_ref-4"><span class="cite-accessibility-label">Hochspringen </span>↑</a></span> <span class="reference-text">John Gossman: <cite><a rel="nofollow" class="external text" href="http://blogs.msdn.com/johngossman/archive/2006/03/04/543695.aspx">Tales from the Smart Client: Advantages and disadvantages of M-V-VM.</a></cite>. Abgerufen am 28.&nbsp;Mai 2012.</span>
+</li>
+</ol>
+<div class="NavFrame"><a href="#" class="NavToggle">Einklappen</a><div class="NavHead" style="background: rgb(239, 239, 239) none repeat ; 0%;"><a href="https://de.wikipedia.org/wiki/Entwurfsmuster" title="Entwurfsmuster">Entwurfsmuster</a></div><div class="NavContent" style="clear: left; display: block;">
+<table class="wikitable zebra" style="width: 100%; margin: 0.1em 0px 0em; text-align: left; font-size: 95%;">
+
+
+<tbody><tr style="display: none;">
+<td>
+</td>
+<td>
+</td>
+<td>
+</td></tr>
+<tr>
+<td style="white-space: nowrap; text-align: right; background: rgb(221, 229, 238) none repeat ; 0%; border-width: 1px 1px 2px; border-style: solid; border-color: rgb(255, 255, 255) transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; padding: 0px 1em;"><b><a href="https://de.wikipedia.org/wiki/Entwurfsmuster_(Buch)" title="Entwurfsmuster (Buch)">Viererbande</a></b>
+</td>
+<td class="hlist" style="text-align: left; border-left: 2px solid rgb(253, 253, 253); width: 100%; margin: 0.4em 0px; border-color: rgb(253, 253, 253); padding: 0px 0.25em;"> 
+<div class="Broken-NavContent">
+<table class="wikitable zebra" style="width: 100%; margin: 0.1em 0px; text-align: left; border-collapse: collapse;">
+<tbody><tr>
+<td style="white-space: nowrap; text-align: right; background: rgb(221, 229, 238) none repeat ; 0%; border-width: 1px 1px 2px; border-style: solid; border-color: rgb(255, 255, 255) transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; padding: 0px 1em;"><b><a href="https://de.wikipedia.org/wiki/Erzeugungsmuster" title="Erzeugungsmuster">Erzeugungsmuster</a></b>
+</td>
+<td class="hlist" style="text-align: left; border-left: 2px solid rgb(253, 253, 253); width: 100%; margin: 0.4em 0px; border-color: rgb(253, 253, 253); padding: 0px 0.25em;"> 
+<p><a href="https://de.wikipedia.org/wiki/Abstrakte_Fabrik" title="Abstrakte Fabrik">Abstrakte Fabrik</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Erbauer_(Entwurfsmuster)" title="Erbauer (Entwurfsmuster)">Erbauer</a>&nbsp;| <i><a href="https://de.wikipedia.org/wiki/Fabrikmethode" title="Fabrikmethode">Fabrikmethode</a></i>&nbsp;| <a href="https://de.wikipedia.org/wiki/Prototyp_(Entwurfsmuster)" title="Prototyp (Entwurfsmuster)">Prototyp</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Singleton_(Entwurfsmuster)" title="Singleton (Entwurfsmuster)">Singleton</a>
+</p>
+</td></tr>
+<tr>
+<td style="white-space: nowrap; text-align: right; background: rgb(221, 229, 238) none repeat ; 0%; border-width: 1px 1px 2px; border-style: solid; border-color: rgb(255, 255, 255) transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; padding: 0px 1em;"><b><a href="https://de.wikipedia.org/wiki/Strukturmuster" title="Strukturmuster">Strukturmuster</a></b>
+</td>
+<td class="hlist" style="text-align: left; border-left: 2px solid rgb(253, 253, 253); width: 100%; margin: 0.4em 0px; border-color: rgb(253, 253, 253); padding: 0px 0.25em;"> 
+<p><i><a href="https://de.wikipedia.org/wiki/Adapter_(Entwurfsmuster)" title="Adapter (Entwurfsmuster)">Adapter</a></i>&nbsp;| <a href="https://de.wikipedia.org/wiki/Br%C3%BCcke_(Entwurfsmuster)" title="Brücke (Entwurfsmuster)">Brücke</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Decorator" title="Decorator">Decorator</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Fassade_(Entwurfsmuster)" title="Fassade (Entwurfsmuster)">Fassade</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Fliegengewicht_(Entwurfsmuster)" title="Fliegengewicht (Entwurfsmuster)">Fliegengewicht</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Kompositum_(Entwurfsmuster)" title="Kompositum (Entwurfsmuster)">Kompositum</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Stellvertreter_(Entwurfsmuster)" title="Stellvertreter (Entwurfsmuster)">Stellvertreter</a>
+</p>
+</td></tr>
+<tr>
+<td style="white-space: nowrap; text-align: right; background: rgb(221, 229, 238) none repeat ; 0%; border-width: 1px; border-style: solid; border-color: rgb(255, 255, 255) transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; padding: 0px 1em;"><b><a href="https://de.wikipedia.org/wiki/Verhaltensmuster_(Software)" title="Verhaltensmuster (Software)">Verhaltensmuster</a></b>
+</td>
+<td class="hlist" style="text-align: left; border-left: 2px solid rgb(253, 253, 253); width: 100%; margin: 0.4em 0px; border-color: rgb(253, 253, 253); padding: 0px 0.25em;"> 
+<p><a href="https://de.wikipedia.org/wiki/Beobachter_(Entwurfsmuster)" title="Beobachter (Entwurfsmuster)">Beobachter</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Besucher_(Entwurfsmuster)" title="Besucher (Entwurfsmuster)">Besucher</a>&nbsp;| <i><a href="https://de.wikipedia.org/wiki/Interpreter_(Entwurfsmuster)" title="Interpreter (Entwurfsmuster)">Interpreter</a></i>&nbsp;| <a href="https://de.wikipedia.org/wiki/Iterator_(Entwurfsmuster)" title="Iterator (Entwurfsmuster)">Iterator</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Kommando_(Entwurfsmuster)" title="Kommando (Entwurfsmuster)">Kommando</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Memento_(Entwurfsmuster)" title="Memento (Entwurfsmuster)">Memento</a>&nbsp;| <i><a href="https://de.wikipedia.org/wiki/Schablonenmethode" title="Schablonenmethode">Schablonenmethode</a></i>&nbsp;| <a href="https://de.wikipedia.org/wiki/Strategie_(Entwurfsmuster)" title="Strategie (Entwurfsmuster)">Strategie</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Vermittler_(Entwurfsmuster)" title="Vermittler (Entwurfsmuster)">Vermittler</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Zustand_(Entwurfsmuster)" title="Zustand (Entwurfsmuster)">Zustand</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Zust%C3%A4ndigkeitskette" title="Zuständigkeitskette">Zuständigkeitskette</a>
+</p>
+</td></tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tbody></table></div>
+</td></tr>
+<tr>
+<td style="white-space: nowrap; text-align: right; background: rgb(221, 229, 238) none repeat ; 0%; border-width: 1px; border-style: solid; border-color: rgb(255, 255, 255) transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; padding: 0px 1em;"><b>Weitere<br>Standardmuster</b>
+</td>
+<td class="hlist" style="text-align: left; border-left: 2px solid rgb(253, 253, 253); width: 100%; margin: 0.4em 0px; border-color: rgb(253, 253, 253); padding: 0px 0.25em;"> 
+<div class="Broken-NavContent">
+<table class="wikitable zebra" style="width: 100%; margin: 0.1em 0px; text-align: left; border-collapse: collapse;">
+<tbody><tr>
+<td style="white-space: nowrap; text-align: right; background: rgb(221, 229, 238) none repeat ; 0%; border-width: 1px; border-style: solid; border-color: rgb(255, 255, 255) transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; padding: 0px 1em;"><b><a href="https://de.wikipedia.org/wiki/Erzeugungsmuster" title="Erzeugungsmuster">Erzeugungsmuster</a></b>
+</td>
+<td class="hlist" style="text-align: left; border-left: 2px solid rgb(253, 253, 253); width: 100%; margin: 0.4em 0px; border-color: rgb(253, 253, 253); padding: 0px 0.25em;"> 
+<p><a href="https://de.wikipedia.org/wiki/Multiton" title="Multiton">Multiton</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Objektpool" title="Objektpool">Objektpool</a>
+</p>
+</td></tr>
+
+
+<tr>
+<td style="white-space: nowrap; text-align: right; background: rgb(221, 229, 238) none repeat ; 0%; border-width: 1px 1px 2px; border-style: solid; border-color: rgb(255, 255, 255) transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; padding: 0px 1em;"><b><a href="https://de.wikipedia.org/wiki/Verhaltensmuster_(Software)" title="Verhaltensmuster (Software)">Verhaltensmuster</a></b>
+</td>
+<td class="hlist" style="text-align: left; border-left: 2px solid rgb(253, 253, 253); width: 100%; margin: 0.4em 0px; border-color: rgb(253, 253, 253); padding: 0px 0.25em;"> 
+<p><a href="https://de.wikipedia.org/wiki/Interceptor_(Entwurfsmuster)" title="Interceptor (Entwurfsmuster)">Interceptor</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Nullobjekt_(Entwurfsmuster)" title="Nullobjekt (Entwurfsmuster)">Nullobjekt</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Protokollstapel" title="Protokollstapel">Protokollstapel</a>
+</p>
+</td></tr>
+<tr>
+<td style="white-space: nowrap; text-align: right; background: rgb(221, 229, 238) none repeat ; 0%; border-width: 1px; border-style: solid; border-color: rgb(255, 255, 255) transparent; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; padding: 0px 1em;"><b>Andere</b>
+</td>
+<td class="hlist" style="text-align: left; border-left: 2px solid rgb(253, 253, 253); width: 100%; margin: 0.4em 0px; border-color: rgb(253, 253, 253); padding: 0px 0.25em;"> 
+<p><a href="https://de.wikipedia.org/wiki/Business_Delegate" title="Business Delegate">Business Delegate</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Repository_(Entwurfsmuster)" title="Repository (Entwurfsmuster)">Repository</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Data_Access_Object" title="Data Access Object">Data Access Object</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Transferobjekt" title="Transferobjekt">Transferobjekt</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Dependency_Injection" title="Dependency Injection">Dependency Injection</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Extension_Interface" title="Extension Interface">Extension Interface</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Fluent_Interface" title="Fluent Interface">Fluent Interface</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Inversion_of_Control" title="Inversion of Control">Inversion of Control</a> (IoC)&nbsp;| <a href="https://de.wikipedia.org/wiki/Model_View_Controller" title="Model View Controller">Model View Controller</a> (MVC)&nbsp;| <a href="https://de.wikipedia.org/wiki/Model_View_Presenter" class="mw-redirect" title="Model View Presenter">Model View Presenter</a> (MVP)&nbsp;| <a class="mw-selflink selflink">Model View ViewModel</a> (MVVM)&nbsp;| <a href="https://de.wikipedia.org/w/index.php?title=Threadpool&amp;action=edit&amp;redlink=1" class="new" title="Threadpool (Seite nicht vorhanden)">Threadpool</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Service_Locator" class="mw-redirect" title="Service Locator">Service Locator</a>&nbsp;| <a href="https://de.wikipedia.org/wiki/Registry_(Entwurfsmuster)" title="Registry (Entwurfsmuster)">Registry</a>
+</p>
+</td></tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tbody></table></div>
+</td></tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tbody></table></div></div>
+
+<!-- 
+NewPP limit report
+Parsed by mw1337
+Cached time: 20180202052324
+Cache expiry: 1900800
+Dynamic content: false
+CPU time usage: 0.124 seconds
+Real time usage: 0.162 seconds
+Preprocessor visited node count: 1986/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 42668/2097152 bytes
+Template argument size: 21722/2097152 bytes
+Highest expansion depth: 15/40
+Expensive parser function count: 0/500
+Lua time usage: 0.006/10.000 seconds
+Lua memory usage: 647 KB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  105.768      1 -total
+ 63.37%   67.029      1 Vorlage:Navigationsleiste_Entwurfsmuster
+ 61.53%   65.075      1 Vorlage:Erweiterte_Navigationsleiste
+ 36.25%   38.342     72 Vorlage:Erweiterte_Navigationsleiste/Kern
+ 34.12%   36.083      1 Vorlage:Cite_web
+ 24.56%   25.975      1 Vorlage:FormatDate
+ 21.06%   22.274      2 Vorlage:Erweiterte_Navigationsleiste/Untergruppe
+ 19.62%   20.749      1 Vorlage:Navigationsleiste_Entwurfsmuster/Viererbande
+  8.47%    8.963      1 Vorlage:Str_left
+  5.16%    5.462      1 Vorlage:Navigationsleiste_Entwurfsmuster/Weitere
+-->
+</div>
+<!-- Saved in parser cache with key dewiki:pcache:idhash:6827135-0!canonical and timestamp 20180202052324 and revision id 168867092
+ -->
+<noscript><img src="//de.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+
+						Abgerufen von „<a dir="ltr" href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;oldid=168867092">https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;oldid=168867092</a>“					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://de.wikipedia.org/wiki/Wikipedia:Kategorien" title="Wikipedia:Kategorien">Kategorien</a>: <ul><li><a href="https://de.wikipedia.org/wiki/Kategorie:Entwurfsmuster" title="Kategorie:Entwurfsmuster">Entwurfsmuster</a></li><li><a href="https://de.wikipedia.org/wiki/Kategorie:Softwarearchitektur" title="Kategorie:Softwarearchitektur">Softwarearchitektur</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigationsmenü</h2>
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Meine Werkzeuge</h3>
+						<ul>
+							<li id="pt-anonuserpage">Nicht angemeldet</li><li id="pt-anontalk"><a href="https://de.wikipedia.org/wiki/Spezial:Meine_Diskussionsseite" title="Diskussion über Änderungen von dieser IP-Adresse [Alt+Shift+n]" accesskey="n">Diskussionsseite</a></li><li id="pt-anoncontribs"><a href="https://de.wikipedia.org/wiki/Spezial:Meine_Beitr%C3%A4ge" title="Eine Liste der Bearbeitungen, die von dieser IP-Adresse gemacht wurden [Alt+Shift+y]" accesskey="y">Beiträge</a></li><li id="pt-createaccount"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:Benutzerkonto_anlegen&amp;returnto=Model+View+ViewModel&amp;returntoquery=oldid%3D168867092" title="Wir ermutigen dich dazu, ein Benutzerkonto zu erstellen und dich anzumelden. Es ist jedoch nicht zwingend erforderlich.">Benutzerkonto erstellen</a></li><li id="pt-login"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:Anmelden&amp;returnto=Model+View+ViewModel&amp;returntoquery=oldid%3D168867092" title="Anmelden ist zwar keine Pflicht, wird aber gerne gesehen. [Alt+Shift+o]" accesskey="o">Anmelden</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namensräume</h3>
+						<ul>
+							<li id="ca-nstab-main" class="selected"><span><a href="https://de.wikipedia.org/wiki/Model_View_ViewModel" title="Seiteninhalt anzeigen [Alt+Shift+c]" accesskey="c">Artikel</a></span></li><li id="ca-talk"><span><a href="https://de.wikipedia.org/wiki/Diskussion:Model_View_ViewModel" rel="discussion" title="Diskussion zum Seiteninhalt [Alt+Shift+t]" accesskey="t">Diskussion</a></span></li>						</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 tabindex="0" id="p-variants-label">
+							<span>Varianten</span>
+						</h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Ansichten</h3>
+						<ul>
+							<li id="ca-view" class="collapsible selected"><span><a href="https://de.wikipedia.org/wiki/Model_View_ViewModel">Lesen</a></span></li><li id="ca-ve-edit" class="collapsible"><span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;veaction=edit" title="Diese Seite mit dem VisualEditor bearbeiten [Alt+Shift+v]" accesskey="v">Bearbeiten</a></span></li><li id="ca-edit" class="collapsible"><span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=edit" title="Diese Seite bearbeiten [Alt+Shift+e]" accesskey="e">Quelltext bearbeiten</a></span></li><li id="ca-history" class="collapsible"><span><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=history" title="Frühere Versionen dieser Seite [Alt+Shift+h]" accesskey="h">Versionsgeschichte</a></span></li>						</ul>
+					</div>
+										<div style="" id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 tabindex="0" id="p-cactions-label"><span>Mehr</span></h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Suche</label>
+						</h3>
+						<form action="https://de.wikipedia.org/w/index.php" id="searchform">
+							<div id="simpleSearch">
+								<input tabindex="1" name="search" placeholder="Wikipedia durchsuchen" title="Durchsuche die Wikipedia [Alt+Shift+f]" accesskey="f" id="searchInput" type="search"><input value="Spezial:Suche" name="title" type="hidden"><input name="fulltext" value="Suchen" title="Suche nach Seiten, die diesen Text enthalten" id="mw-searchButton" class="searchButton mw-fallbackSearchButton" type="submit"><input name="go" value="Artikel" title="Gehe direkt zu der Seite mit genau diesem Namen, falls sie vorhanden ist." id="searchButton" class="searchButton" type="submit">							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="https://de.wikipedia.org/wiki/Wikipedia:Hauptseite" title="Hauptseite"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+			<div class="body">
+								<ul>
+					<li id="n-mainpage-description"><a href="https://de.wikipedia.org/wiki/Wikipedia:Hauptseite" title="Hauptseite besuchen [Alt+Shift+z]" accesskey="z">Hauptseite</a></li><li id="n-topics"><a href="https://de.wikipedia.org/wiki/Portal:Wikipedia_nach_Themen">Themenportale</a></li><li id="n-alphindex"><a href="https://de.wikipedia.org/wiki/Spezial:Alle_Seiten">Von A bis Z</a></li><li id="n-randompage"><a href="https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite" title="Zufällige Seite aufrufen [Alt+Shift+x]" accesskey="x">Zufälliger Artikel</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-Mitmachen" aria-labelledby="p-Mitmachen-label">
+			<h3 id="p-Mitmachen-label">Mitmachen</h3>
+			<div class="body">
+								<ul>
+					<li id="n-Artikel-verbessern"><a href="https://de.wikipedia.org/wiki/Wikipedia:Beteiligen">Artikel verbessern</a></li><li id="n-Neuerartikel"><a href="https://de.wikipedia.org/wiki/Hilfe:Neuen_Artikel_anlegen">Neuen Artikel anlegen</a></li><li id="n-portal"><a href="https://de.wikipedia.org/wiki/Wikipedia:Autorenportal" title="Info-Zentrum über Beteiligungsmöglichkeiten">Autorenportal</a></li><li id="n-help"><a href="https://de.wikipedia.org/wiki/Hilfe:%C3%9Cbersicht" title="Hilfeseite anzeigen">Hilfe</a></li><li id="n-recentchanges"><a href="https://de.wikipedia.org/wiki/Spezial:Letzte_%C3%84nderungen" title="Liste der letzten Änderungen in Wikipedia [Alt+Shift+r]" accesskey="r">Letzte Änderungen</a></li><li id="n-contact"><a href="https://de.wikipedia.org/wiki/Wikipedia:Kontakt">Kontakt</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_de.wikipedia.org&amp;uselang=de" title="Unterstütze uns">Spenden</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Werkzeuge</h3>
+			<div class="body">
+								<ul>
+					<li id="t-whatlinkshere"><a href="https://de.wikipedia.org/wiki/Spezial:Linkliste/Model_View_ViewModel" title="Liste aller Seiten, die hierher verlinken [Alt+Shift+j]" accesskey="j">Links auf diese Seite</a></li><li id="t-recentchangeslinked"><a href="https://de.wikipedia.org/wiki/Spezial:%C3%84nderungen_an_verlinkten_Seiten/Model_View_ViewModel" rel="nofollow" title="Letzte Änderungen an Seiten, die von hier verlinkt sind [Alt+Shift+k]" accesskey="k">Änderungen an verlinkten Seiten</a></li><li id="t-specialpages"><a href="https://de.wikipedia.org/wiki/Spezial:Spezialseiten" title="Liste aller Spezialseiten [Alt+Shift+q]" accesskey="q">Spezialseiten</a></li><li id="t-permalink"><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;oldid=168867092" title="Dauerhafter Link zu dieser Seitenversion">Permanenter Link</a></li><li id="t-info"><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;action=info" title="Weitere Informationen über diese Seite">Seiten­informationen</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q1247905" title="Link zum verbundenen Objekt im Datenrepositorium [Alt+Shift+g]" accesskey="g">Wikidata-Datenobjekt</a></li><li id="t-cite"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:Zitierhilfe&amp;page=Model_View_ViewModel&amp;id=168867092" title="Hinweise, wie diese Seite zitiert werden kann">Artikel zitieren</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-coll-print_export" aria-labelledby="p-coll-print_export-label">
+			<h3 id="p-coll-print_export-label">Drucken/­exportieren</h3>
+			<div class="body">
+								<ul>
+					<li id="coll-create_a_book"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:Buch&amp;bookcmd=book_creator&amp;referer=Model+View+ViewModel">Buch erstellen</a></li><li id="coll-download-as-rdf2latex"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:ElectronPdf&amp;page=Model+View+ViewModel&amp;action=show-download-screen">Als PDF herunterladen</a></li><li id="t-print"><a href="https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;printable=yes" title="Druckansicht dieser Seite [Alt+Shift+p]" accesskey="p">Druckversion</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-lang" aria-labelledby="p-lang-label">
+			<h3 id="p-lang-label">In anderen Sprachen</h3>
+			<div class="body">
+								<ul>
+					<li class="interlanguage-link interwiki-ca"><a href="https://ca.wikipedia.org/wiki/Model-vista-vista_model" title="Model-vista-vista model – Katalanisch" hreflang="ca" class="interlanguage-link-target" lang="ca">Català</a></li><li class="interlanguage-link interwiki-en"><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel" title="Model–view–viewmodel – Englisch" hreflang="en" class="interlanguage-link-target" lang="en">English</a></li><li class="interlanguage-link interwiki-es"><a href="https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93modelo_de_vista" title="Modelo–vista–modelo de vista – Spanisch" hreflang="es" class="interlanguage-link-target" lang="es">Español</a></li><li class="interlanguage-link interwiki-fr"><a href="https://fr.wikipedia.org/wiki/Mod%C3%A8le-vue-vue_mod%C3%A8le" title="Modèle-vue-vue modèle – Französisch" hreflang="fr" class="interlanguage-link-target" lang="fr">Français</a></li><li class="interlanguage-link interwiki-he"><a href="https://he.wikipedia.org/wiki/MVVM" title="MVVM – Hebräisch" hreflang="he" class="interlanguage-link-target" lang="he">עברית</a></li><li class="interlanguage-link interwiki-hu"><a href="https://hu.wikipedia.org/wiki/Modell-n%C3%A9zet-n%C3%A9zetmodell" title="Modell-nézet-nézetmodell – Ungarisch" hreflang="hu" class="interlanguage-link-target" lang="hu">Magyar</a></li><li class="interlanguage-link interwiki-it"><a href="https://it.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel" title="Model–view–viewmodel – Italienisch" hreflang="it" class="interlanguage-link-target" lang="it">Italiano</a></li><li class="interlanguage-link interwiki-ja"><a href="https://ja.wikipedia.org/wiki/Model_View_ViewModel" title="Model View ViewModel – Japanisch" hreflang="ja" class="interlanguage-link-target" lang="ja">日本語</a></li><li class="interlanguage-link interwiki-ru"><a href="https://ru.wikipedia.org/wiki/Model-View-ViewModel" title="Model-View-ViewModel – Russisch" hreflang="ru" class="interlanguage-link-target" lang="ru">Русский</a></li><li class="interlanguage-link interwiki-uk"><a href="https://uk.wikipedia.org/wiki/Model-View-ViewModel" title="Model-View-ViewModel – Ukrainisch" hreflang="uk" class="interlanguage-link-target" lang="uk">Українська</a></li><li class="interlanguage-link interwiki-zh"><a href="https://zh.wikipedia.org/wiki/MVVM" title="MVVM – Chinesisch" hreflang="zh" class="interlanguage-link-target" lang="zh">中文</a></li>				</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q1247905#sitelinks-wikipedia" title="Links auf Artikel in anderen Sprachen bearbeiten" class="wbc-editpage">Links bearbeiten</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+				<div id="footer" role="contentinfo">
+						<ul id="footer-info">
+								<li id="footer-info-lastmod"> Diese Seite wurde zuletzt am 7. September 2017 um 13:26 Uhr bearbeitet.</li>
+								<li id="footer-info-copyright"><div id="footer-info-copyright-stats"><a class="external" href="https://tools.wmflabs.org/pageviews?pages=Model_View_ViewModel&amp;project=de.wikipedia.org" rel="nofollow">Abrufstatistik</a></div><div id="footer-info-copyright-separator"><br></div><div id="footer-info-copyright-info">
+
+Der Text ist unter der Lizenz <a class="internal" href="https://de.wikipedia.org/wiki/Wikipedia:Lizenzbestimmungen_Commons_Attribution-ShareAlike_3.0_Unported">„Creative Commons Attribution/Share Alike“</a> verfügbar; Informationen zu den Urhebern und zum Lizenzstatus eingebundener Mediendateien (etwa Bilder oder Videos) können im Regelfall durch Anklicken dieser abgerufen werden. Möglicherweise unterliegen die Inhalte jeweils zusätzlichen Bedingungen. Durch die Nutzung dieser Website erklären Sie sich mit den <a class="internal" href="https://wikimediafoundation.org/wiki/Nutzungsbedingungen">Nutzungsbedingungen</a> und der <a class="internal" href="https://de.wikipedia.org/wiki/Wikipedia:Datenschutz">Datenschutzrichtlinie</a> einverstanden.<br>
+Wikipedia® ist eine eingetragene Marke der Wikimedia Foundation Inc.</div></li>
+							</ul>
+						<ul id="footer-places">
+								<li id="footer-places-privacy"><a href="https://meta.wikimedia.org/wiki/Privacy_policy/de" class="extiw" title="m:Privacy policy/de">Datenschutz</a></li>
+								<li id="footer-places-about"><a href="https://de.wikipedia.org/wiki/Wikipedia:%C3%9Cber_Wikipedia" title="Wikipedia:Über Wikipedia">Über Wikipedia</a></li>
+								<li id="footer-places-disclaimer"><a href="https://de.wikipedia.org/wiki/Wikipedia:Impressum" title="Wikipedia:Impressum">Impressum</a></li>
+								<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Entwickler</a></li>
+								<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Stellungnahme zu Cookies</a></li>
+								<li id="footer-places-mobileview"><a href="https://de.m.wikipedia.org/w/index.php?title=Model_View_ViewModel&amp;oldid=168867092&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile Ansicht</a></li>
+							</ul>
+										<ul id="footer-icons" class="noprint">
+										<li id="footer-copyrightico">
+						<a href="https://wikimediafoundation.org/"><img src="wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" alt="Wikimedia Foundation" height="31" width="88"></a>					</li>
+										<li id="footer-poweredbyico">
+						<a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" height="31" width="88"></a>					</li>
+									</ul>
+						<div style="clear: both;"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.124","walltime":"0.162","ppvisitednodes":{"value":1986,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":42668,"limit":2097152},"templateargumentsize":{"value":21722,"limit":2097152},"expansiondepth":{"value":15,"limit":40},"expensivefunctioncount":{"value":0,"limit":500},"entityaccesscount":{"value":0,"limit":400},"timingprofile":["100.00%  105.768      1 -total"," 63.37%   67.029      1 Vorlage:Navigationsleiste_Entwurfsmuster"," 61.53%   65.075      1 Vorlage:Erweiterte_Navigationsleiste"," 36.25%   38.342     72 Vorlage:Erweiterte_Navigationsleiste/Kern"," 34.12%   36.083      1 Vorlage:Cite_web"," 24.56%   25.975      1 Vorlage:FormatDate"," 21.06%   22.274      2 Vorlage:Erweiterte_Navigationsleiste/Untergruppe"," 19.62%   20.749      1 Vorlage:Navigationsleiste_Entwurfsmuster/Viererbande","  8.47%    8.963      1 Vorlage:Str_left","  5.16%    5.462      1 Vorlage:Navigationsleiste_Entwurfsmuster/Weitere"]},"scribunto":{"limitreport-timeusage":{"value":"0.006","limit":"10.000"},"limitreport-memusage":{"value":662536,"limit":52428800}},"cachereport":{"origin":"mw1337","timestamp":"20180202052324","ttl":1900800,"transientcontent":false}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":100,"wgHostname":"mw1331"});});</script>
+	
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+Jump to navigation Jump to main content
+
+GemBox ®
+Menu
+
+    Products
+        GemBox.Bundle
+        GemBox.Spreadsheet
+        GemBox.Document
+        GemBox.Presentation
+        GemBox.Email
+        GemBox.Pdf
+    Support
+        Bugs and Features
+        Knowledgebase
+        Feedback
+        Articles
+    Purchase
+        Purchase
+        Free Trials
+        EULA
+    Company
+        Contact
+        About Us
+        Customers
+        Blog
+        Privacy Policy
+        Terms of Service
+
+Microsoft Office Interop (Word Automation) in C# and VB.NET
+
+Microsoft Office Interop Word is an option when creating/reading Word files (DOC, DOCX, RTF) from C# or VB.NET application, but it has many drawbacks.
+
+Issues when using Microsoft Office Interop (Word Automation) from C# or VB.NET are:
+
+    Requires a license for Microsoft Office on every client machine.
+    Requires that all client machines have the same version of Microsoft Word installed.
+    When using Interop, Microsoft Word is loaded in the background , taking computer resources and loading a large number of files and DLLs.
+    Microsoft Office applications (including Word) were designed as UI applications and because of that API is very slow. Generating a simple document with 30 paragraphs takes 10.2 seconds on our test machine.
+    Microsoft doesn’t recommend using Word Automation (or any Office Interop) on the server: https://support.microsoft.com/en-us/kb/257757
+
+We are proud that our Word .NET library is one of the best alternatives for Microsoft Office Interop (Word Automation) .
+
+GemBox.Document Free is free of charge while GemBox.Document Professional is a commercial version licensed per developer. Find more information about supported features .
+
+ 
+Better than Word Automation
+
+With Microsoft Office installed on most business desktops it is tempting to use Microsoft Word Interop. Look at the following table for good reasons not to do so:
+Microsoft Word automation 	GemBox.Document component
+Requires a license for Microsoft Word on every client machine. 	Requires that only the developer using our component has one GemBox.Document developer license, even if the developed application is to be installed on thousands of client machines.
+Requires that all client machines have the same version of Microsoft Word installed. 	Files generated with GemBox.Document are compatible with Word 2007, Word 2010, Word 2013, OpenOffice and LibreOffice, so any of these products can (but don’t have to) be installed on a client machine.
+When using automation, Word is loaded in the background , taking few MB and loading a large number of files and DLLs. 	GemBox.Document is a single component taking around 2 MB. An additional memory is allocated only when needed to perform certain operations.
+Microsoft Word was designed as UI application and because of that API is very slow. Generating simple document with 30 paragraphs takes 10.2 seconds on our test machine. 	GemBox.Document is designed for processing large numbers of Word files. The same test took 0.12 seconds on our test machine ( 85 times faster than Microsoft Word).
+Microsoft Word API is exposed as COM object. This results in the same disadvantages as with calling any COM object from the managed code (type conversions, need for COM wrapper, poor integration with .NET Framework etc.). 	GemBox.Document is a pure .NET component , designed and developed to conform to Microsoft standards for .NET libraries.
+
+ 
+Outperforming competition
+
+When comparing and evaluating different document reading / reporting products, don’t forget the following considerations:
+Plain and fair licensing
+
+We don’t charge additional server licenses. You canuse our component for unlimited number of projects (you don’t need to purchaseadditional “OEM licenses”). Also, we don’t force you to purchase subscriptionpackages.
+Our licensing is very simple; every developer working with our component needs to be covered by a developer license. We don’t care if it is a Windows or web application, how many servers you use or if you have just one or millions of customers.
+Performance
+
+In the case of desktop application, youdon’t want your user to wait 20seconds for every single report. In the case of web application, you want your serverto simultaneously support as many users as possible. On our test machine GemBox.Document needs 0.1 seconds to read and write single DOCX file of 2 pages (30 paragraphs, 900 words with various formatting).
+
+Performance example is included in the GemBox.Document Examples , so you are free to do the test yourself and see how our component performs with the data you require.
+Clean and easy to use API
+
+GemBox.Document is designed and developed to conform to Microsoft standards for .NET libraries. It also enables you to access document elements in a more natural way. For example, the same task of adding a formatted paragraph with GemBox.Document looks like this:
+
+ Run  boldRun =  new   Run (doc,  "This text is bold." );
+boldRun.CharacterFormat.Bold =  true ;
+Run  normalRun =  new   Run (doc,  " This text is not bold." );
+section.Blocks.Add( new   Paragraph (doc, boldRun, normalRun));
+
+and like this with automation:
+
+ Paragraph  para = doc.Content.Paragraphs.Add( ref  oMissing);
+string  boldText =  "This text is bold." ;
+para.Range.Text = boldText +  " This text is not bold." ;
+Range  range = para.Range;
+object  unit =  WdUnits .wdCharacter;
+object  count = -(para.Range.Text.Length - boldText.Length);
+range.MoveEnd( ref  unit,  ref  count);
+range.Bold = 1;
+
+100% managed code
+
+Some similar products (and actually Microsoft Word object) areold COM components with .NET RCW (Runtime Callable Wrapper). This may bring many performance and interoperability disadvantages as every method call you make goesthrough the wrapper until it reaches C++ code. On the other hand, ourGemBox.Document component is 100% managed, written entirely in C# and designed to support bothVisual Basic .NET and C# in equal manner.
+GemBox.Document
+
+    Examples
+    Free version
+    Support
+    Pricelist
+
+    Sitemap
+    Terms of Service
+    Privacy Policy
+    Contact
+
+    Twitter
+    Facebook
+    Google+
+
+Return to Top
+
+© GemBox Ltd — All rights reserved.

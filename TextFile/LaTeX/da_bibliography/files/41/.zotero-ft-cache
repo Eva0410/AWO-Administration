@@ -1,0 +1,532 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+Learn, Share, Build
+
+Each month, over 50 million developers come to Stack Overflow to learn, share their knowledge, and build their careers.
+
+Join the world’s largest developer community.
+Google
+Facebook
+or
+Display name
+Email address
+Password
+By registering, you agree to the privacy policy and terms of service .
+Firing a double click event from a WPF ListView item using MVVM
+Ask Question
+up vote 90 down vote favorite
+37
+	
+
+In a WPF application using MVVM, I have a usercontrol with a listview item. In run time, it will use databinding to fill the listview with a collection of objects.
+
+What is the correct way to attach a double click event to the items in the listview so that when an item in the list view is doubleclicked, A corresponding event in the view model is fired and has a reference to the item clicked?
+
+How can it be done in a clean MVVM way i.e. no code behind in the View?
+wpf mvvm
+share | improve this question
+	
+asked Jun 23 '09 at 20:35
+Emad
+1,600 4 26 45
+	
+	
+add a comment  | 
+8 Answers 8
+active oldest votes
+up vote 72 down vote
+	
+
+Please, code behind is not a bad thing at all. Unfortunately, quite a lot people in the WPF community got this wrong.
+
+MVVM is not a pattern to eliminate the code behind. It is to separate the view part (appearance, animations, etc.) from the logic part (workflow). Furthermore, you are able to unit test the logic part.
+
+I know enough scenarios where you have to write code behind because data binding is not a solution to everything. In your scenario I would handle the DoubleClick event in the code behind file and delegate this call to the ViewModel.
+
+Sample applications that use code behind and still fulfill the MVVM separation can be found here:
+
+WPF Application Framework (WAF) - http://waf.codeplex.com
+share | improve this answer
+	
+answered Oct 2 '09 at 16:25
+jbe
+5,914 1 32 31
+	
+4 	 
+	
+Well said, I refuse to use all that code and an extra DLL just to do a double-click! –  Eduardo Molteni Oct 30 '09 at 1:51
+4 	 
+	
+This only use Binding thing is giving me a real headache. It's like being asked to code with 1 arm, 1 eye on an eye patch, and standing on 1 leg. Double click should be simple, and I don't see how all this additional code is worth it. –  Echiban Apr 25 '10 at 6:31
+1 	 
+	
+I'm afraid I do not totally agree with you. If you say 'code behind is not bad', then I have a question about that: Why don't we delegate the click event for button but often using the binding (using Command property) instead? –  Nam G VU Jul 18 '10 at 8:15
+21 	 
+	
+@Nam Gi VU: I would always prefer a Command Binding when it is supported by the WPF Control. A Command Binding does more than just relaying the ‘Click’ event to the ViewModel (e.g. CanExecute). But Commands are only available for the most common scenarios. For other scenarios we can use the code-behind file and there we delegate non-UI related concerns to the ViewModel or the Model. –  jbe Jul 18 '10 at 20:14
+2 	 
+	
+Now I understand you more! Nice discussion with you! –  Nam G VU Jul 19 '10 at 3:55
+ |  show 1 more comment
+up vote 48 down vote
+	
+
+I am able to get this to work with .NET 4.5. Seems straight forward and no third party or code behind needed.
+
+ <ListView ItemsSource = "{Binding Data}" > <ListView.ItemsPanel> <ItemsPanelTemplate> <StackPanel Orientation = "Horizontal" /> </ItemsPanelTemplate> </ListView.ItemsPanel> <ListView.ItemTemplate> <DataTemplate> <Grid Margin = "2" > <Grid.InputBindings> <MouseBinding Gesture = "LeftDoubleClick" Command = "{Binding ShowDetailCommand}" /> </Grid.InputBindings> <Grid.RowDefinitions> <RowDefinition/> <RowDefinition/> </Grid.RowDefinitions> <Image Source = "..\images\48.png" Width = "48" Height = "48" /> <TextBlock Grid . Row = "1" Text = "{Binding Name}" /> </Grid> </DataTemplate> </ListView.ItemTemplate> </ListView>  
+
+share | improve this answer
+	
+answered Nov 22 '13 at 6:57
+Rushui Guan
+1,655 1 14 20
+	
+4 	 
+	
++1 for InputBindings. –  System.Cats.Lol Feb 19 '14 at 21:33
+1 	 
+	
+Doesn't seem to work for the entire area, e.g. I do this on a dock panel and it only works where there is something within the dock panel (e.g. textblock, image) but not the blank space. –  Stephen Drew Jun 16 '14 at 11:41
+3 	 
+	
+OK - this old chestnut again...need to set the background to transparent to receive mouse events, as per stackoverflow.com/questions/7991314/… –  Stephen Drew Jun 16 '14 at 11:44
+1 	 
+	
+PS this is the best answer here... –  Stephen Drew Jun 16 '14 at 11:45
+3 	 
+	
+I was scratching my head trying to figure out why it was working for all of you and not for me. I suddenly realised that within the context of the item template the data context is the current item from the itemssource and not the main window's view model. So I used the following to get it working <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Path=DataContext.EditBandCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/> In my case the EditBandCommand is the command on the page's viewmodel not on the bound entity. –  naskew Jan 6 '15 at 9:20
+ |  show 3 more comments
+up vote 44 down vote
+	
+
+I like to use Attached Command Behaviors and Commands. Marlon Grech has a very good implementation of the Attached Command Behaviors. Using these, we could then assign a style to the ListView's ItemContainerStyle property that will set the command for each ListViewItem.
+
+Here we set the command to be fired on the MouseDoubleClick event, and the CommandParameter, will be the data object that we click on. Here I'm traveling up the visual tree to get the command that I'm using, but you could just as easily create application wide commands.
+
+ <Style x:Key = "Local_OpenEntityStyle" TargetType = "{x:Type ListViewItem}" > < Setter Property = "acb:CommandBehavior.Event" Value = "MouseDoubleClick" /> < Setter Property = "acb:CommandBehavior.Command" Value = "{Binding ElementName=uiEntityListDisplay, Path=DataContext.OpenEntityCommand}" /> < Setter Property = "acb:CommandBehavior.CommandParameter" Value = "{Binding}" /> </Style>  
+
+For the commands, you can either implement an ICommand directly, or use some of the helpers like those that come in the MVVM Toolkit .
+share | improve this answer
+	
+answered Jun 23 '09 at 20:52
+rmoore
+12.8k 2 50 52
+	
+1 	 
+	
++1 I've found this to be my preferred solution when working with Composite Application Guidance for WPF (Prism). –  Travis Heseman Feb 1 '10 at 18:26
+1 	 
+	
+What does the namespace 'acb:' stand for in your code sampleabove? –  Nam G VU Jul 18 '10 at 8:44
+   	 
+	
+@NamGiVU acb: = AttachedCommandBehavior. The code can be found in the first link in the answer –  Rachel Oct 14 '11 at 11:58
+   	 
+	
+i tried just that and getting null pointer exception from class CommandBehaviorBinding line 99. variable "strategy" is null. whats wrong? –  etwas77 Jul 10 '14 at 8:12
+   	 
+	
+@etwas77 same problem here did you solve somehow? –  sam Jan 28 '16 at 10:33
+add a comment  | 
+up vote 12 down vote
+	
+
+I have found a very easy and clean way to do this with the Blend SDK Event triggers. Clean MVVM, reusable and no code-behind.
+
+You probably already have something like this:
+
+ <Style x:Key = "MyListStyle" TargetType = "{x:Type ListViewItem}" >  
+
+Now include a ControlTemplate for the ListViewItem like this if you don't already use one:
+
+ <Setter Property = "Template" > <Setter.Value> <ControlTemplate TargetType = "{x:Type ListViewItem}" > <GridViewRowPresenter Content = "{TemplateBinding Content}" Columns = "{TemplateBinding GridView.ColumnCollection}" /> </ControlTemplate> </Setter.Value> </Setter>  
+
+The GridViewRowPresenter will be the visual root of all elements "inside" making up a list row element. Now we could insert a trigger there to look for MouseDoubleClick routed events and call a command via InvokeCommandAction like this:
+
+ <Setter Property = "Template" > <Setter.Value> <ControlTemplate TargetType = "{x:Type ListViewItem}" > <GridViewRowPresenter Content = "{TemplateBinding Content}" Columns = "{TemplateBinding GridView.ColumnCollection}" > <i:Interaction.Triggers> <i:EventTrigger EventName = "MouseDoubleClick" > <i:InvokeCommandAction Command = "{Binding DoubleClickCommand}" /> </i:EventTrigger> </i:Interaction.Triggers> </GridViewRowPresenter> </ControlTemplate> </Setter.Value> </Setter>  
+
+If you have visual elements "above" the GridRowPresenter (probalby starting with a grid) you can also put the Trigger there.
+
+Unfortunately MouseDoubleClick events are not generated from every visual element (they are from Controls, but not from FrameworkElements for example). A workaround is to derive a class from EventTrigger and look for MouseButtonEventArgs with a ClickCount of 2. This effectively filters out all non-MouseButtonEvents and all MoseButtonEvents with a ClickCount != 2.
+
+ class DoubleClickEventTrigger : EventTrigger { protected override void OnEvent(EventArgs eventArgs) { var e = eventArgs as MouseButtonEventArgs; if (e == null) { return; } if (e.ClickCount == 2) { base.OnEvent(eventArgs); } } }  
+
+Now we can write this ('h' is the Namespace of the helper class above):
+
+ <Setter Property = "Template" > <Setter.Value> <ControlTemplate TargetType = "{x:Type ListViewItem}" > <GridViewRowPresenter Content = "{TemplateBinding Content}" Columns = "{TemplateBinding GridView.ColumnCollection}" > <i:Interaction.Triggers> <h:DoubleClickEventTrigger EventName = "MouseDown" > <i:InvokeCommandAction Command = "{Binding DoubleClickCommand}" /> </h:DoubleClickEventTrigger> </i:Interaction.Triggers> </GridViewRowPresenter> </ControlTemplate> </Setter.Value> </Setter>  
+
+share | improve this answer
+	
+edited Jun 10 '11 at 7:03
+	
+answered Jun 9 '11 at 16:33
+Gunter
+249 3 6
+	
+   	 
+	
+As i found out if you put the Trigger directly on the GridViewRowPresenter there could be a problem. The empty spaces between the colums probably don't receive mouse events at all (probably a workaround would be to style them with alignment stretch). –  Gunter Jun 9 '11 at 16:39
+   	 
+	
+In this case it is probably better to put an empty grid around the GridViewRowPresenter and put the trigger there. This seems to work. –  Gunter Jun 9 '11 at 16:40
+1 	 
+	
+Note that you lose the default style for the ListViewItem if you replace the template like this. It didn't matter for the application i was working on as it was using a heavily customized styling anyway. –  Gunter Jun 10 '11 at 7:01
+add a comment  | 
+up vote 5 down vote
+	
+
+I realize that this discussion is a year old, but with .NET 4, are there any thoughts on this solution? I absolutely agree that the point of MVVM is NOT to eliminate a code behind file. I also feel very strongly that just because something is complicated, doesn't mean it's better. Here is what I put in the code behind:
+
+ private void ButtonClick(object sender, RoutedEventArgs e) { dynamic viewModel = DataContext; viewModel.ButtonClick(sender, e); }  
+
+share | improve this answer
+	
+answered Sep 9 '10 at 3:40
+Aaron
+51 1 1
+	
+11 	 
+	
+You should viewmodel should have names representing the actions you can perform in your domain. What is a "ButtonClick" action in your domain? ViewModel represents the logic of the domain in a view-friendly context, its not just a helper to the view. So: ButtonClick should never be on the viewmodel, use viewModel.DeleteSelectedCustomer or whatever this action actually represents instead. –  Marius Nov 18 '10 at 8:01
+add a comment  | 
+up vote 4 down vote
+	
+
+You can use Caliburn 's Action feature to map events to methods on your ViewModel. Assuming you have an ItemActivated method on your ViewModel , then corresponding XAML would look like:
+
+ <ListView x:Name = "list" Message . Attach = "[Event MouseDoubleClick] = [Action ItemActivated(list.SelectedItem)]" >  
+
+For further details you can examine Caliburn's documentation and samples.
+share | improve this answer
+	
+answered Jun 24 '09 at 6:16
+idursun
+5,194 1 27 45
+	
+	
+add a comment  | 
+up vote 4 down vote
+	
+
+I am finding it simpler to link the command when the view is created:
+
+ var r = new MyView(); r.MouseDoubleClick += (s, ev) => ViewModel.MyCommand.Execute(null); BindAndShow(r, ViewModel);  
+
+In my case BindAndShow looks like this (updatecontrols+avalondock):
+
+ private void BindAndShow(DockableContent view, object viewModel) { view.DataContext = ForView.Wrap(viewModel); view.ShowAsDocument(dockManager); view.Focus(); }  
+
+Though the approach should work with whatever method you have of opening new views.
+share | improve this answer
+	
+edited Jan 8 '13 at 8:52
+Default
+7,199 7 44 81
+	
+answered May 22 '11 at 20:00
+Timothy Pratley
+8,083 2 23 51
+	
+   	 
+	
+It seems to me that this is the simplest solution, rather than trying to make it work in XAML only. –  Mas Jul 12 '11 at 14:12
+add a comment  | 
+up vote 0 down vote
+	
+
+I saw the solution from rushui with the InuptBindings but I was still unable to hit the area of the ListViewItem where there was no text - even after setting the background to transparent, so I solved it by using different templates.
+
+This template is for when the ListViewItem has been selected and is active:
+
+ <ControlTemplate x:Key = "SelectedActiveTemplate" TargetType = "{x:Type ListViewItem}" > <Border Background = "LightBlue" HorizontalAlignment = "Stretch" > <!-- Bind the double click to a command in the parent view model --> <Border.InputBindings> <MouseBinding Gesture = "LeftDoubleClick" Command = "{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemSelectedCommand}" CommandParameter = "{Binding}" /> </Border.InputBindings> <TextBlock Text = "{Binding TextToShow}" /> </Border> </ControlTemplate>  
+
+This template is for when the ListViewItem has been selected and is inactive:
+
+ <ControlTemplate x:Key = "SelectedInactiveTemplate" TargetType = "{x:Type ListViewItem}" > <Border Background = "Lavender" HorizontalAlignment = "Stretch" > <TextBlock Text = "{Binding TextToShow}" /> </Border> </ControlTemplate>  
+
+This is the Default style used for the ListViewItem:
+
+ <Style TargetType = "{x:Type ListViewItem}" > < Setter Property = "Template" > < Setter . Value > < ControlTemplate > < Border HorizontalAlignment = "Stretch" > < TextBlock Text = "{Binding TextToShow}" /> </ Border > </ ControlTemplate > </ Setter . Value > </ Setter > < Style . Triggers > < MultiTrigger > < MultiTrigger . Conditions > < Condition Property = "IsSelected" Value = "True" /> < Condition Property = "Selector.IsSelectionActive" Value = "True" /> </ MultiTrigger . Conditions > < Setter Property = "Template" Value = "{StaticResource SelectedActiveTemplate}" /> </ MultiTrigger > < MultiTrigger > < MultiTrigger . Conditions > < Condition Property = "IsSelected" Value = "True" /> < Condition Property = "Selector.IsSelectionActive" Value = "False" /> </ MultiTrigger . Conditions > < Setter Property = "Template" Value = "{StaticResource SelectedInactiveTemplate}" /> </ MultiTrigger > </Style.Triggers> </Style>  
+
+What I don't like is the repetition of the TextBlock and its text binding, I don't know I I can get around declaring that in just the one location.
+
+I hope this helps someone!
+share | improve this answer
+	
+answered Feb 24 '15 at 13:31
+user3235445
+67 7
+	
+	
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged wpf mvvm or ask your own question .
+
+asked
+	
+
+8 years, 4 months ago
+
+viewed
+	
+
+64,331 times
+
+active
+	
+
+2 years, 8 months ago
+Linked
+40
+Double Click a ListBox item to open a browser
+25
+WPF/MVVM - how to handle double-click on TreeViewItems in the ViewModel?
+22
+WPF ListBoxItem double-click?
+22
+WPF: How to bind a command to the ListBoxItem using MVVM?
+9
+Mouse event on transparent background
+12
+WPF - Handling events from user control in View Model
+6
+How to fire a command on double-click listbox item using MVVM?
+8
+Attached Behavior to execute command for ListViewItem
+1
+MVVM C# WPF binding mouse double click
+3
+Adding MouseBindings to Items in a databound WPF ListView
+see more linked questions…
+Related
+215
+Handling Dialogs in WPF with MVVM
+20
+WPF MVVM Correct way to fire event on view from ViewModel
+243
+MVVM: Tutorial from start to finish?
+1
+MVVM question, Event fire in the View
+2
+WPF ListView double click
+25
+WPF/MVVM - how to handle double-click on TreeViewItems in the ViewModel?
+1
+Double Click on a WPF ListView - how to fire a command and not use an event handler
+0
+In WPF MVVM, how do you transfer an item from one listbox to another using a double-click?
+2
+Selected items of listview checkbox in MVVM WPF
+1
+using Attached Commands to fire a double click event for listview - MVVM
+Hot Network Questions
+
+    Can I get a public key from an RSA private key?
+    What does it mean to suspect that two conjectures are logically equivalent?
+    Is it possible to accurately measure airspeed without pitot tube?
+    Does misspelling words for the sake of bad English improve the immersion or distract the reader?
+    How much pressure should you apply when rolling on paint?
+    What was the first gift given by Harry Potter?
+    What do primitive NPCs do with treasure and gold?
+    Why do the majority of people on an ebike ride at a fairly low cadence?
+    Letters in foreach
+    Are there any good alternates to iron?
+    What are the advantages of towbarless pushback tugs?
+    Sum of negative and positive consective numbers
+    Our instructor threw together freely available YouTube videos and Wikipedia articles instead of lectures. What should I do?
+    How many genies are there in Disney's Aladdin canon?
+    Co-tenants set up an inflatable pool outside my window. It's now breeding bugs. What can I do?
+    How long would it take to travel approximately 170 miles by foot?
+    How do I politely tell a stranger to stop making annoying noises I can't name?
+    Why can I have an indoor pizza/wood oven, but not a BBQ or smoker? (or can I...?)
+    How can I get honesty in Succubox?
+    Took airline plane blanket by accident; didn't realize it was forbidden. What should I do?
+    When did people decide that all caps means the writer is shouting?
+    How to change the distance between toprule and midrule in a table
+    is ./ a command?
+    Is this animated gif an accurate representation of EM waves?
+
+question feed
+lang-xml
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Salary Calculator
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Stack Overflow em Português
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+
+    Magento
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Stack Overflow на русском
+    Programming Puzzles & Code Golf
+
+    Stack Overflow en español
+    Ethereum
+    Data Science
+    Arduino
+    Bitcoin
+    more (26)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (16)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.10.27.27587
+Stack Overflow works best with JavaScript enabled

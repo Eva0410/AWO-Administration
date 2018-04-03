@@ -1,0 +1,1400 @@
+<html class="js no-flexbox flexbox-legacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head id="Head1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f">
+<meta name="wpd_url" content="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f">
+<meta name="wpd_date" content="2017-11-09T17:35Z">
+
+
+
+
+
+
+
+
+
+    <meta name="description" content="Sorting a ListView by clicking on the header in WPF is not a function that is already existing. So it have to implemented by yourself. There are several ways to do this. This sample shows how to do this using a GridView as View of the ListView. This sample
+ is build up on the 
+">
+    <meta name="Search.BRAND" content="Msdn">
+    <meta name="Search.IROOT" content="windows/desktop">
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <meta name="CommunityInfo" content=" B=Msdn;A=Samples;L=en-US;"><meta name="ms.puidhash" content="">
+    <script src="jquery-1.11.0.min.js" type="text/javascript" language="javascript"></script>
+    <script src="jquery-migrate-1.2.1.min.js" type="text/javascript" language="javascript"></script>
+    <script src="bcf1109574ef81ca844b303577cea32a-74bb8d583b7b303ea8b434638ed453ae-RequestReducedScript.js" type="text/javascript"></script>    
+    <title>Windows Sorting a WPF ListView by clicking on the header (2) - Sort Direction Indicators sample in C#, XAML for Visual Studio 2012</title> 
+        <link href="https://code.msdn.microsoft.com/windowsdesktop/site/feeds/searchRss" rel="Alternate" type="application/rss+xml" title="Windows Desktop code samples and examples in C#, VB.NET, C++, F#">
+    <link rel="P3Pv1" href="https://code.msdn.microsoft.com/W3C/p3p.xml">
+    
+    
+            <link rel="canonical" href="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f">
+    
+    <meta name="ContentLanguage" content="L=en-US;">
+
+
+<!--
+Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use â€“ http://www.asp.net/ajaxlibrary/CDN.ashx.
+-->
+    <script type="text/javascript">
+
+        function addAsyncScript(src) {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = src;
+            return script;
+        };
+    </script>
+    
+        <script type="text/javascript" language="javascript">
+
+            jQuery(window).load(function () {
+                window.appInsights = {
+                    queue: [],
+                    start: function (n) {
+                        function r(n, t) {
+                            n[t] = function () {
+                                var i = arguments;
+                                n.queue.push(function () { n[t].apply(n, i); });
+                            };
+                        }
+                        var t, i;
+                        this.applicationInsightsId = n;
+                        this.accountId = null;
+                        this.appUserId = null;
+                        r(this, "logEvent");
+                        r(this, "logPageView");
+                    }
+                };
+                window.appInsights.start("da4169d5-ce7e-4d99-b383-f5de813a9516");
+                window.appInsights.logPageView();
+            });
+        </script>
+    <script src="ai.0.js"></script><script type="text/javascript" id="cosymantecbfw_removeToolbar">(function () {				var toolbarElement = {},					parent = {},					interval = 0,					retryCount = 0,					isRemoved = false;				if (window.location.protocol === 'file:') {					interval = window.setInterval(function () {						toolbarElement = document.getElementById('coFrameDiv');						if (toolbarElement) {							parent = toolbarElement.parentNode;							if (parent) {								parent.removeChild(toolbarElement);								isRemoved = true;								if (document.body && document.body.style) {									document.body.style.setProperty('margin-top', '0px', 'important');								}							}						}						retryCount += 1;						if (retryCount > 10 || isRemoved) {							window.clearInterval(interval);						}					}, 10);				}			})();</script><script type="text/javascript" async="" src="loader.js"></script><script type="text/javascript" async="" src="broker.js"></script><script type="text/javascript" src="jsll-4.2.1.js"></script><script type="text/javascript" src="ms.js"></script><meta name="ms.Center" content="windows desktop"><meta name="ms.Section" content="windows desktop: samples"><meta name="ms.TOC" content="windows desktop: samples"><script async="" src="t.js"></script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script><script type="text/javascript" src="jquery.tmpl.min.js"></script><script type="text/javascript" src="jquery.timeago.js"></script><script type="text/javascript" src="jquery.textfill.js"></script><script type="text/javascript" src="widgets.js"></script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script><script src="jquery.tmpl.min.js" type="text/javascript"></script><script src="jquery.timeago.js" type="text/javascript"></script><script src="jquery.textfill.js" type="text/javascript"></script><script src="widgets.js" type="text/javascript"></script><script src="ai.0.js"></script><script src="jsll-4.2.1.js" type="text/javascript"></script><meta content="windows desktop" name="ms.Center"><meta content="windows desktop: samples" name="ms.Section"><meta content="windows desktop: samples" name="ms.TOC"><script src="ms.js" type="text/javascript"></script><script src="t_001.js" async=""></script>
+<link rel="stylesheet" type="text/css" href="Sorting-a-WPF-ListView-by-5769086f.css" media="all">
+</head>
+<body class="Chrome en-us Samples " dir="ltr" style="overflow-y: auto;">
+    <div data-chameleon-template="megablade"></div>
+    
+
+<div data-chameleon-template="epxheader"></div>
+<div data-chameleon-template="header">
+
+        
+    <div id="uhf-header-wrapper">
+        <script src="8f75885cfe229fcc2c61674ce5e2b779-6c039d9880c1a779c905578e7833814e-RequestReducedScript.js" type="text/javascript"></script><script data-requires="jQuery" data-provides="uhfHeader" src="meversion"></script><script src="226fb6e91933cf5ee0f2c8b70d6774bf-4575db404796601d81f7a927898924ef-RequestReducedScript.js" type="text/javascript"></script>    <section id="headerArea" data-m="{&quot;cN&quot;:&quot;headerArea&quot;,&quot;cT&quot;:&quot;Area_coreuiArea&quot;,&quot;id&quot;:&quot;a1Body&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;Body&quot;}">
+                    <div id="headerRegion" data-region-key="headerregion" data-m="{&quot;cN&quot;:&quot;headerRegion&quot;,&quot;cT&quot;:&quot;Region_coreui-region&quot;,&quot;id&quot;:&quot;r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;a1&quot;}">
+
+    <div id="headerUniversalHeader" data-m="{&quot;cN&quot;:&quot;headerUniversalHeader&quot;,&quot;cT&quot;:&quot;Module_coreui-universalheader&quot;,&quot;id&quot;:&quot;m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;r1a1&quot;}" data-module-id="Category|headerRegion|headerRegion|headerUniversalHeader|coreui-universalheader">
+        
+
+
+
+        <div id="epb" class="x-hidden-vp1 x-hidden-vp2 uhfc-universal-context context-uhf" data-m="{&quot;cN&quot;:&quot;epb_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;m1r1a1&quot;}">
+
+
+
+<div class="c-uhfh-alert f-information epb-container epb-default-color" role="alert" data-m="{&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c1c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c1m1r1a1&quot;}">
+    <div>        
+        <p class="c-paragraph">
+                <img alt="Microsoft Edge" src="REZlo1">
+
+            <span class="c-text-group">
+                <span class="epb-launch">Try Microsoft Edge</span>
+                <span class="epb-text">A fast and secure browser that's designed for Windows 10</span>
+            </span>
+            <span class="c-group">
+                <button id="close-epb" class="c-action-trigger c-action-cancel glyph-cancel" data-m="{&quot;cN&quot;:&quot;EPB-dismiss_nonnav&quot;,&quot;id&quot;:&quot;nn1c1c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c1c1m1r1a1&quot;}" aria-label="No thanks">No thanks</button>
+                <a id="epbTryNow" aria-label="A fast and secure browser that's designed for Windows 10" class="epb-launch c-action-trigger c-action-open" data-m="{&quot;cN&quot;:&quot;EPB-launch_nav&quot;,&quot;id&quot;:&quot;n2c1c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c1c1m1r1a1&quot;}" href="microsoft-edge:https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f?epb=1">Get started</a>
+            </span>
+
+        </p>
+    </div>
+</div>
+
+            
+        </div>
+
+        <div data-m="{&quot;cN&quot;:&quot;cookiebanner_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c1m1r1a1&quot;}">
+
+<div id="uhfCookieAlert">
+    <div id="msccBanner" dir="ltr" data-site-name="Microsoft.OneRenderFramework.Core" data-mscc-version="0.3.6" data-nver="aspnet-2.0.7" data-sver="0.1.2" class="cc-banner active" role="alert"><div class="cc-container"><svg class="cc-icon cc-v-center" x="0px" y="0px" viewBox="0 0 44 44" height="30px" fill="none" stroke="currentColor"><circle cx="22" cy="22" r="20" stroke-width="2"></circle><line x1="22" x2="22" y1="18" y2="33" stroke-width="3"></line><line x1="22" x2="22" y1="12" y2="15" stroke-width="3"></line></svg> <span class="cc-v-center cc-text">This site uses cookies for analytics, personalized content and ads. By continuing to browse this site, you agree to this use.</span> <a href="https://go.microsoft.com/fwlink/?linkid=845480" aria-label="Learn more about Microsoft's Cookie Policy" id="msccLearnMore" class="cc-link cc-v-center cc-float-right" data-mscc-ic="false">Learn more</a></div></div>
+</div>
+
+            
+        </div>
+
+
+
+<header role="banner" class="c-uhfh context-uhf js" itemscope="itemscope" data-header-footprint="en-us/DEV_Windows/windowsdesktop-header" itemtype="http://schema.org/Organization">
+    <div class="theme-light js-global-head f-closed " data-m="{&quot;cN&quot;:&quot;Universal Header_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c1m1r1a1&quot;}">
+        <div class="c-uhfh-gcontainer">
+            <button class="c-action-trigger c-glyph glyph-global-nav-button" aria-label="Header navigation menu" aria-expanded="false" data-m="{&quot;cN&quot;:&quot;Mobile menu button_nonnav&quot;,&quot;id&quot;:&quot;nn1c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}"></button>
+            <button class="c-action-trigger c-glyph glyph-arrow-htmllegacy" aria-label="Close search" aria-expanded="false" data-m="{&quot;cN&quot;:&quot;Close Search_nonnav&quot;,&quot;id&quot;:&quot;nn2c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}"></button>
+                    <a data-m="{&quot;pid&quot;:&quot;h:32f2fa12&quot;,&quot;id&quot;:&quot;n3c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}" id="uhfLogo" class="c-logo" itemprop="url" href="https://www.microsoft.com/" aria-label="Microsoft">
+                        <img itemprop="logo" itemscope="itemscope" class="c-image" alt="Microsoft" src="microsoft-gray.png">
+                        <span>Microsoft</span>
+                    </a>
+            <div class="f-mobile-title">
+                <button class="c-action-trigger c-glyph glyph-chevron-left" aria-label="See more menu options" data-m="{&quot;cN&quot;:&quot;Mobile back button_nonnav&quot;,&quot;id&quot;:&quot;nn5c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}"></button>
+                <span data-global-title="Microsoft home" class="js-mobile-title">Windows Dev Center</span>
+                <button class="c-action-trigger c-glyph glyph-chevron-right" aria-label="See more menu options" data-m="{&quot;cN&quot;:&quot;Mobile forward button_nonnav&quot;,&quot;id&quot;:&quot;nn6c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}"></button>
+            </div>
+
+            
+            <button class="c-action-trigger c-glyph glyph-chevron-left js-primary-paddle" data-m="{&quot;cN&quot;:&quot;Previous_nonnav&quot;,&quot;id&quot;:&quot;nn7c3c1m1r1a1&quot;,&quot;sN&quot;:7,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}" aria-label="Show previous" tabindex="-1" style="display: none;"></button>
+            
+                    <nav id="uhf-g-nav" class="c-uhfh-gnav" aria-labelledby="uhfLogo" role="navigation" data-m="{&quot;cN&quot;:&quot;Global nav_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c8c3c1m1r1a1&quot;,&quot;sN&quot;:8,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}">
+            <ul class="js-paddle-items"><li style="transition: margin 0.667s cubic-bezier(0.16, 1, 0.29, 0.99) 0s;">
+                        <a id="shellmenu_0" class="c-uhf-nav-link" href="https://www.microsoft.com/en-us/microsoft-365" data-m="{&quot;cN&quot;:&quot;GlobalNav_Microsoft 365_nav&quot;,&quot;id&quot;:&quot;n1c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c8c3c1m1r1a1&quot;}">Microsoft 365</a>
+                    </li><li>
+                        <a id="shellmenu_1" class="c-uhf-nav-link" href="https://azure.microsoft.com/" data-m="{&quot;cN&quot;:&quot;GlobalNav_Azure_nav&quot;,&quot;id&quot;:&quot;n2c8c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c8c3c1m1r1a1&quot;}">Azure</a>
+                    </li><li>
+                        <a id="shellmenu_2" class="c-uhf-nav-link" href="https://products.office.com/en-us/business/office" data-m="{&quot;cN&quot;:&quot;GlobalNav_Office 365_nav&quot;,&quot;id&quot;:&quot;n3c8c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c8c3c1m1r1a1&quot;}">Office 365</a>
+                    </li><li>
+                        <a id="shellmenu_3" class="c-uhf-nav-link" href="https://dynamics.microsoft.com/en-us/" data-m="{&quot;cN&quot;:&quot;GlobalNav_Dynamics 365_nav&quot;,&quot;id&quot;:&quot;n4c8c3c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c8c3c1m1r1a1&quot;}">Dynamics 365</a>
+                    </li><li>
+                        <a id="shellmenu_4" class="c-uhf-nav-link" href="https://www.microsoft.com/sql-server/" data-m="{&quot;cN&quot;:&quot;GlobalNav_SQL_nav&quot;,&quot;id&quot;:&quot;n5c8c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c8c3c1m1r1a1&quot;}">SQL</a>
+                    </li><li>
+                        <a id="shellmenu_5" class="c-uhf-nav-link" href="https://www.microsoft.com/en-us/windowsforbusiness" data-m="{&quot;cN&quot;:&quot;GlobalNav_Windows 10_nav&quot;,&quot;id&quot;:&quot;n6c8c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c8c3c1m1r1a1&quot;}">Windows 10</a>
+                    </li><li>
+                            <div class="c-uhf-menu js-nav-menu">
+
+                                <button id="More-navigation" aria-expanded="false" aria-haspopup="true" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_nonnav&quot;,&quot;id&quot;:&quot;nn7c8c3c1m1r1a1&quot;,&quot;sN&quot;:7,&quot;aN&quot;:&quot;c8c3c1m1r1a1&quot;}" style="white-space: nowrap;">More</button>
+                                <ul class="f-multi-column f-multi-column-6" aria-labelledby="More-navigation" aria-hidden="true" data-m="{&quot;cN&quot;:&quot;More_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:8,&quot;aN&quot;:&quot;c8c3c1m1r1a1&quot;}" style="">
+    <li class="f-sub-menu js-nav-menu" data-m="{&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c8c8c3c1m1r1a1&quot;}">
+
+        <button id="Products&amp;Services-navigation" aria-expanded="true" data-m="{&quot;id&quot;:&quot;nn1c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c1c8c8c3c1m1r1a1&quot;}" tabindex="-1">Products &amp; Services</button>
+        <ul aria-labelledby="Products&amp;Services-navigation" aria-hidden="false" style="">
+    <li data-m="{&quot;cN&quot;:&quot;More_ProductsandServices_WindowsServer_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c1c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_8" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/cloud-platform/windows-server" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_ProductsandServices_WindowsServer_nav&quot;,&quot;id&quot;:&quot;n1c2c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c2c1c8c8c3c1m1r1a1&quot;}">Windows Server</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_ProductsandServices_EnterpriseMobilityandSecurity_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c1c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_9" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/cloud-platform/enterprise-mobility-security" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_ProductsandServices_EnterpriseMobilityandSecurity_nav&quot;,&quot;id&quot;:&quot;n1c3c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c1c8c8c3c1m1r1a1&quot;}">Enterprise Mobility + Security</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_ProductsandServices_PowerBI_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c1c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_10" class="js-subm-uhf-nav-link" href="https://powerbi.microsoft.com/en-us/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_ProductsandServices_PowerBI_nav&quot;,&quot;id&quot;:&quot;n1c4c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c1c8c8c3c1m1r1a1&quot;}">Power BI</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_ProductsandServices_Teams_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c5c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c1c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_11" class="js-subm-uhf-nav-link" href="https://products.office.com/en-us/microsoft-teams/group-chat-software" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_ProductsandServices_Teams_nav&quot;,&quot;id&quot;:&quot;n1c5c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c5c1c8c8c3c1m1r1a1&quot;}">Teams</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;DeveloperAndIT_VisualStudio_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c6c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c1c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_12" class="js-subm-uhf-nav-link" href="https://www.visualstudio.com/" data-m="{&quot;cN&quot;:&quot;GlobalNav_DeveloperAndIT_VisualStudio_nav&quot;,&quot;id&quot;:&quot;n1c6c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c6c1c8c8c3c1m1r1a1&quot;}">Visual Studio</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_ProductsandServices_SurfaceforBusiness_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c7c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:7,&quot;aN&quot;:&quot;c1c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_13" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/en-us/surface/business/overview" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_ProductsandServices_SurfaceforBusiness_nav&quot;,&quot;id&quot;:&quot;n1c7c1c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c7c1c8c8c3c1m1r1a1&quot;}">Surface for Business</a>
+        
+    </li>
+        </ul>
+        
+    </li>   
+    <li class="f-sub-menu js-nav-menu" data-m="{&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c8c8c3c1m1r1a1&quot;}">
+
+        <button id="EmergingTechnologies-navigation" aria-expanded="true" data-m="{&quot;id&quot;:&quot;nn1c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c2c8c8c3c1m1r1a1&quot;}" tabindex="-1">Emerging Technologies</button>
+        <ul aria-labelledby="EmergingTechnologies-navigation" aria-hidden="false">
+    <li data-m="{&quot;cN&quot;:&quot;More_EmergingTechnologies_AI_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c2c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_15" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/ai/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_EmergingTechnologies_AI_nav&quot;,&quot;id&quot;:&quot;n1c2c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c2c2c8c8c3c1m1r1a1&quot;}">AI</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_EmergingTechnologies_InternetofThings_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c2c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_16" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/internet-of-things" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_EmergingTechnologies_InternetofThings_nav&quot;,&quot;id&quot;:&quot;n1c3c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c2c8c8c3c1m1r1a1&quot;}">Internet of Things</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_EmergingTechnologies_AzureCognitiveServices_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c2c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_17" class="js-subm-uhf-nav-link" href="https://azure.microsoft.com/services/cognitive-services/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_EmergingTechnologies_AzureCognitiveServices_nav&quot;,&quot;id&quot;:&quot;n1c4c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c2c8c8c3c1m1r1a1&quot;}">Azure Cognitive Services</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_EmergingTechnologies_Quantum_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c5c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c2c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_18" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/quantum/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_EmergingTechnologies_Quantum_nav&quot;,&quot;id&quot;:&quot;n1c5c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c5c2c8c8c3c1m1r1a1&quot;}">Quantum</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_EmergingTechnologies_Research_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c6c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c2c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_19" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/research/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_EmergingTechnologies_Research_nav&quot;,&quot;id&quot;:&quot;n1c6c2c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c6c2c8c8c3c1m1r1a1&quot;}">Research</a>
+        
+    </li>
+        </ul>
+        
+    </li>   
+    <li class="f-sub-menu js-nav-menu" data-m="{&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c8c8c3c1m1r1a1&quot;}">
+
+        <button id="Developer&amp;IT-navigation" aria-expanded="true" data-m="{&quot;id&quot;:&quot;nn1c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c8c8c3c1m1r1a1&quot;}" tabindex="-1">Developer &amp; IT</button>
+        <ul aria-labelledby="Developer&amp;IT-navigation" aria-hidden="false">
+    <li data-m="{&quot;cN&quot;:&quot;More_DeveloperAndIT_Docs.microsoft.com_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c3c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_21" class="js-subm-uhf-nav-link" href="https://docs.microsoft.com/en-us/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_DeveloperAndIT_Docs.microsoft.com_nav&quot;,&quot;id&quot;:&quot;n1c2c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c2c3c8c8c3c1m1r1a1&quot;}">Docs</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_DeveloperAndIT_TechNet_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c3c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_22" class="js-subm-uhf-nav-link" href="https://technet.microsoft.com/en-us/ms376608.aspx" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_DeveloperAndIT_TechNet_nav&quot;,&quot;id&quot;:&quot;n1c3c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c3c8c8c3c1m1r1a1&quot;}">TechNet</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;Footer_Developer_MicrosoftDeveloperNetwork_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c3c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_23" class="js-subm-uhf-nav-link" href="https://msdn.microsoft.com/en-us" data-m="{&quot;cN&quot;:&quot;GlobalNav_Footer_Developer_MicrosoftDeveloperNetwork_nav&quot;,&quot;id&quot;:&quot;n1c4c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c3c8c8c3c1m1r1a1&quot;}">Developer Network</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_DeveloperAndIT_WindowsDevCenter_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c5c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c3c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_24" class="js-subm-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_DeveloperAndIT_WindowsDevCenter_nav&quot;,&quot;id&quot;:&quot;n1c5c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c5c3c8c8c3c1m1r1a1&quot;}">Windows Dev Center</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_DeveloperAndIT_Windows_IT_Pro_Center_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c6c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c3c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_25" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/en-us/itpro/windows" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_DeveloperAndIT_Windows_IT_Pro_Center_nav&quot;,&quot;id&quot;:&quot;n1c6c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c6c3c8c8c3c1m1r1a1&quot;}">Windows IT Pro Center</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_DeveloperAndIT_FastTrack_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c7c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:7,&quot;aN&quot;:&quot;c3c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_26" class="js-subm-uhf-nav-link" href="https://fasttrack.microsoft.com/office" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_DeveloperAndIT_FastTrack_nav&quot;,&quot;id&quot;:&quot;n1c7c3c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c7c3c8c8c3c1m1r1a1&quot;}">FastTrack</a>
+        
+    </li>
+        </ul>
+        
+    </li>   
+    <li class="f-sub-menu js-nav-menu" data-m="{&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c8c8c3c1m1r1a1&quot;}">
+
+        <button id="Partner-navigation" aria-expanded="true" data-m="{&quot;id&quot;:&quot;nn1c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c8c8c3c1m1r1a1&quot;}" tabindex="-1">Partner</button>
+        <ul aria-labelledby="Partner-navigation" aria-hidden="false">
+    <li data-m="{&quot;cN&quot;:&quot;More_Partner_PartnerNetwork_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c4c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_28" class="js-subm-uhf-nav-link" href="https://partner.microsoft.com/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Partner_PartnerNetwork_nav&quot;,&quot;id&quot;:&quot;n1c2c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c2c4c8c8c3c1m1r1a1&quot;}">Partner Network</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Partner_SolutionProviders_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c4c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_29" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/solution-providers/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Partner_SolutionProviders_nav&quot;,&quot;id&quot;:&quot;n1c3c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c4c8c8c3c1m1r1a1&quot;}">Solution Providers</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Partner_PartnerCenter_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c4c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_30" class="js-subm-uhf-nav-link" href="https://partnercenter.microsoft.com/partner/home" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Partner_PartnerCenter_nav&quot;,&quot;id&quot;:&quot;n1c4c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c4c8c8c3c1m1r1a1&quot;}">Partner Center</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Partner_CloudHosting_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c5c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c4c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_31" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/en-us/cloudandhosting" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Partner_CloudHosting_nav&quot;,&quot;id&quot;:&quot;n1c5c4c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c5c4c8c8c3c1m1r1a1&quot;}">Cloud Hosting</a>
+        
+    </li>
+        </ul>
+        
+    </li>   
+    <li class="f-sub-menu js-nav-menu" data-m="{&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c8c8c3c1m1r1a1&quot;}">
+
+        <button id="Industries-navigation" aria-expanded="true" data-m="{&quot;id&quot;:&quot;nn1c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c5c8c8c3c1m1r1a1&quot;}" tabindex="-1">Industries</button>
+        <ul aria-labelledby="Industries-navigation" aria-hidden="false">
+    <li data-m="{&quot;cN&quot;:&quot;Products_ForStudentsAndEducators_Education_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c5c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_33" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/en-us/education" data-m="{&quot;cN&quot;:&quot;GlobalNav_Products_ForStudentsAndEducators_Education_nav&quot;,&quot;id&quot;:&quot;n1c2c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c2c5c8c8c3c1m1r1a1&quot;}">Education</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;Footer_Enterprise_FinanciaServices_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c5c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_34" class="js-subm-uhf-nav-link" href="https://enterprise.microsoft.com/en-us" data-m="{&quot;cN&quot;:&quot;GlobalNav_Footer_Enterprise_FinanciaServices_nav&quot;,&quot;id&quot;:&quot;n1c3c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c5c8c8c3c1m1r1a1&quot;}">Financial services</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Industries_Government_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c5c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_35" class="js-subm-uhf-nav-link" href="https://enterprise.microsoft.com/en-us/industries/government/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Industries_Government_nav&quot;,&quot;id&quot;:&quot;n1c4c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c5c8c8c3c1m1r1a1&quot;}">Government</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Industries_Health_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c5c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c5c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_36" class="js-subm-uhf-nav-link" href="https://enterprise.microsoft.com/en-us/industries/health/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Industries_Health_nav&quot;,&quot;id&quot;:&quot;n1c5c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c5c5c8c8c3c1m1r1a1&quot;}">Health</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;Footer_Enterprise_ManufacturingAndResources_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c6c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c5c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_37" class="js-subm-uhf-nav-link" href="https://enterprise.microsoft.com/en-us/industries/discrete-manufacturing/" data-m="{&quot;cN&quot;:&quot;GlobalNav_Footer_Enterprise_ManufacturingAndResources_nav&quot;,&quot;id&quot;:&quot;n1c6c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c6c5c8c8c3c1m1r1a1&quot;}">Manufacturing &amp; resources</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Industries_Retail_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c7c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:7,&quot;aN&quot;:&quot;c5c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_38" class="js-subm-uhf-nav-link" href="https://enterprise.microsoft.com/en-us/industries/retail-and-consumer-goods/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Industries_Retail_nav&quot;,&quot;id&quot;:&quot;n1c7c5c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c7c5c8c8c3c1m1r1a1&quot;}">Retail</a>
+        
+    </li>
+        </ul>
+        
+    </li>   
+    <li class="f-sub-menu js-nav-menu" data-m="{&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c8c8c3c1m1r1a1&quot;}">
+
+        <button id="Other-navigation" aria-expanded="true" data-m="{&quot;id&quot;:&quot;nn1c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c6c8c8c3c1m1r1a1&quot;}" tabindex="-1">Other</button>
+        <ul aria-labelledby="Other-navigation" aria-hidden="false">
+    <li data-m="{&quot;cN&quot;:&quot;More_Other_Security_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c6c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_40" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/security/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Other_Security_nav&quot;,&quot;id&quot;:&quot;n1c2c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c2c6c8c8c3c1m1r1a1&quot;}">Security</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Other_TrustCenter_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c6c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_41" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/TrustCenter/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Other_TrustCenter_nav&quot;,&quot;id&quot;:&quot;n1c3c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c6c8c8c3c1m1r1a1&quot;}">Trust Center</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Other_Licensing_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c6c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_42" class="js-subm-uhf-nav-link" href="https://www.microsoft.com/licensing/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Other_Licensing_nav&quot;,&quot;id&quot;:&quot;n1c4c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c6c8c8c3c1m1r1a1&quot;}">Licensing</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Other_AppSource_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c5c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c6c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_43" class="js-subm-uhf-nav-link" href="https://appsource.microsoft.com/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Other_AppSource_nav&quot;,&quot;id&quot;:&quot;n1c5c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c5c6c8c8c3c1m1r1a1&quot;}">AppSource</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Other_AzureMarketplace_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c6c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c6c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_44" class="js-subm-uhf-nav-link" href="https://azuremarketplace.microsoft.com/marketplace/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Other_AzureMarketplace_nav&quot;,&quot;id&quot;:&quot;n1c6c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c6c6c8c8c3c1m1r1a1&quot;}">Azure Marketplace</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;More_Other_Events_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c7c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:7,&quot;aN&quot;:&quot;c6c8c8c3c1m1r1a1&quot;}">
+        <a id="shellmenu_45" class="js-subm-uhf-nav-link" href="https://events.microsoft.com/" data-m="{&quot;cN&quot;:&quot;GlobalNav_More_Other_Events_nav&quot;,&quot;id&quot;:&quot;n1c7c6c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c7c6c8c8c3c1m1r1a1&quot;}">Events</a>
+        
+    </li>
+        </ul>
+        
+    </li>   
+                                    
+                                        <li class="f-multi-column-info"><a data-m="{&quot;cN&quot;:&quot;View all_nav&quot;,&quot;id&quot;:&quot;n7c8c8c3c1m1r1a1&quot;,&quot;sN&quot;:7,&quot;aN&quot;:&quot;c8c8c3c1m1r1a1&quot;}" href="https://www.microsoft.com/en-us/sitemap.aspx" aria-label="View all" class="c-glyph">View all</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </li>            </ul>
+            
+        </nav>
+
+            
+            <button class="c-action-trigger c-glyph glyph-chevron-right js-secondary-paddle" data-m="{&quot;cN&quot;:&quot;Next_nonnav&quot;,&quot;id&quot;:&quot;nn9c3c1m1r1a1&quot;,&quot;sN&quot;:9,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}" aria-label="Show next" tabindex="-1" style="display: none;"></button>
+
+                <div class="c-uhfh-actions" data-m="{&quot;cN&quot;:&quot;Header actions_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c10c3c1m1r1a1&quot;,&quot;sN&quot;:10,&quot;aN&quot;:&quot;c3c1m1r1a1&quot;}">
+                            <form class="c-search" autocomplete="off" id="searchForm" name="searchForm" role="search" action="https://social.msdn.microsoft.com/search/windows" method="GET" data-seautosuggest="" data-seautosuggestapi="https://www.microsoft.com/services/api/v3/suggest" data-m="{&quot;cN&quot;:&quot;GlobalNav_Search_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c1c10c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c10c3c1m1r1a1&quot;}" aria-expanded="false">
+            <input data-m="{&quot;cN&quot;:&quot;cli_shellHeaderSearchInput&quot;,&quot;pid&quot;:&quot;query&quot;,&quot;id&quot;:&quot;nn1c1c10c3c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c1c10c3c1m1r1a1&quot;}" id="cli_shellHeaderSearchInput" aria-label="Search Dev Center" role="combobox" aria-autocomplete="list" aria-controls="universal-header-search-auto-suggest-transparent" aria-owns="universal-header-search-auto-suggest-ul" name="query" placeholder="Search Dev Center" type="search"><div aria-live="assertive" class="x-screen-reader"></div><div class="x-screen-reader" aria-live="assertive"></div>
+                <input data-m="{&quot;pid&quot;:&quot;Refinement&quot;,&quot;id&quot;:&quot;nn3c1c10c3c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c1c10c3c1m1r1a1&quot;}" name="Refinement" value="183" type="hidden">
+            <button id="search" aria-label="Search" class="c-glyph" data-m="{&quot;cN&quot;:&quot;Search_nav&quot;,&quot;id&quot;:&quot;n5c1c10c3c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c1c10c3c1m1r1a1&quot;}" data-bi-dnt="true"></button>
+            <div class="m-auto-suggest" id="universal-header-search-auto-suggest-transparent" role="group">
+                <ul class="c-menu" id="universal-header-search-auto-suggest-ul" aria-hidden="true" data-bi-dnt="true" data-js-auto-suggest-position="default" role="listbox" data-tel="jsll" data-m="{&quot;cN&quot;:&quot;search suggestions_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c6c1c10c3c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c1c10c3c1m1r1a1&quot;}"></ul>
+                <ul class="c-menu f-auto-suggest-no-results" aria-hidden="true" data-js-auto-suggest-postion="default" data-js-auto-suggest-position="default" tabindex="0">
+                    <li class="c-menu-item"> <span tabindex="-1">No results</span></li>
+                </ul>
+            </div>
+            
+        </form>
+
+                    
+                    
+                            <div id="meControl" class="c-me" data-signinsettings="{&quot;containerId&quot;:&quot;meControl&quot;,&quot;enabled&quot;:true,&quot;headerHeight&quot;:48,&quot;debug&quot;:false,&quot;extensibleLinks&quot;:[],&quot;userData&quot;:{&quot;idp&quot;:&quot;msa&quot;,&quot;firstName&quot;:&quot;&quot;,&quot;lastName&quot;:&quot;&quot;,&quot;memberName&quot;:&quot;&quot;,&quot;cid&quot;:&quot;&quot;,&quot;authenticatedState&quot;:&quot;3&quot;},&quot;rpData&quot;:{&quot;preferredIdp&quot;:&quot;msa&quot;,&quot;msaInfo&quot;:{&quot;signInUrl&quot;:&quot;/en-us/store/signin&quot;,&quot;signOutUrl&quot;:&quot;/en-us/store/signout&quot;,&quot;meUrl&quot;:&quot;https://login.live.com/me.srf?wa=wsignin1.0&quot;},&quot;aadInfo&quot;:{&quot;signOutUrl&quot;:&quot;/en-us/store/signout&quot;,&quot;appId&quot;:null,&quot;siteUrl&quot;:null,&quot;blockMsaFed&quot;:true}}}" data-m="{&quot;cN&quot;:&quot;GlobalNav_Account_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c10c3c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c10c3c1m1r1a1&quot;}">
+            <div class="msame_Header">
+                <div class="msame_Header_name">Sign in</div>
+            </div>
+            
+        </div>
+
+                    
+                </div>
+        </div>
+        
+        
+    </div>
+            <div class="theme-dark brand-neutral js-cat-head" itemprop="brand" itemscope="itemscope" itemtype="http://schema.org/Brand" data-m="{&quot;cN&quot;:&quot;UHF category nav_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c1m1r1a1&quot;}">
+
+<div>
+        <a id="uhfCatLogo" class="c-logo" href="https://developer.microsoft.com/en-us/windows" aria-label="Windows Dev Center" itemprop="url" data-m="{&quot;cN&quot;:&quot;Windows Dev Center_nav&quot;,&quot;id&quot;:&quot;n1c4c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">
+                <span>Windows Dev Center</span>
+        </a>
+    
+        <a id="dashboard" class="c-uhf-nav-link x-hidden-vp1 x-hidden-vp2" href="https://developer.microsoft.com/dashboard" data-m="{&quot;cN&quot;:&quot;Dashboard_nav&quot;,&quot;id&quot;:&quot;n2c4c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">Dashboard</a>
+    <button class="c-action-trigger c-glyph glyph-chevron-left js-primary-paddle" aria-label="Scroll left" title="Scroll left" data-m="{&quot;cN&quot;:&quot;Previous_nonnav&quot;,&quot;id&quot;:&quot;nn3c4c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}" tabindex="-1" style="display: none;"></button>
+    
+    <button class="c-action-trigger c-glyph glyph-chevron-right js-secondary-paddle" aria-label="Scroll right" title="Scroll right" data-m="{&quot;cN&quot;:&quot;Next_nonnav&quot;,&quot;id&quot;:&quot;nn4c4c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}" tabindex="-1" style="display: none;"></button>
+            <nav id="uhf-c-nav" role="navigation" aria-labelledby="uhfCatLogo" class="js-paddle-items">
+
+<a id="windesktop_windowsdesktop" class="c-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows/desktop" data-m="{&quot;cN&quot;:&quot;CatNav_WinDesktop_WindowsDesktop_nav&quot;,&quot;id&quot;:&quot;n5c4c1m1r1a1&quot;,&quot;sN&quot;:5,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}" style="transition: margin 0.667s cubic-bezier(0.16, 1, 0.29, 0.99) 0s;">Windows desktop</a><a id="windesktop_getstarted" class="c-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows/desktop/getstarted" data-m="{&quot;cN&quot;:&quot;CatNav_WinDesktop_Getstarted_nav&quot;,&quot;id&quot;:&quot;n6c4c1m1r1a1&quot;,&quot;sN&quot;:6,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">Get started</a><a id="windesktop_design" class="c-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows/desktop/design" data-m="{&quot;cN&quot;:&quot;CatNav_WinDesktop_Design_nav&quot;,&quot;id&quot;:&quot;n7c4c1m1r1a1&quot;,&quot;sN&quot;:7,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">Design</a><a id="windesktop_develop" class="c-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows/desktop/develop" data-m="{&quot;cN&quot;:&quot;CatNav_WinDesktop_Develop_nav&quot;,&quot;id&quot;:&quot;n8c4c1m1r1a1&quot;,&quot;sN&quot;:8,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">Develop</a><a id="windesktop_test" class="c-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows/desktop/test-deploy" data-m="{&quot;cN&quot;:&quot;CatNav_WinDesktop_Testdeploy_nav&quot;,&quot;id&quot;:&quot;n9c4c1m1r1a1&quot;,&quot;sN&quot;:9,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">Test &amp; deploy</a><div class="c-uhf-menu js-nav-menu">
+                    <button id="resources_desktop-resources" aria-expanded="false" aria-haspopup="true" data-m="{&quot;cN&quot;:&quot;CatNav_winapps_desktop-resources_nonnav&quot;,&quot;id&quot;:&quot;nn10c4c1m1r1a1&quot;,&quot;sN&quot;:10,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">Resources</button>
+                    <ul class="" aria-labelledby="resources_desktop-resources" aria-hidden="true" data-m="{&quot;cN&quot;:&quot;winapps_desktop-resources_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c11c4c1m1r1a1&quot;,&quot;sN&quot;:11,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">
+    <li data-m="{&quot;cN&quot;:&quot;resources_desktop-api-reference_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c1c11c4c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c11c4c1m1r1a1&quot;}">
+        <a id="resources_desktop-api-reference" class="js-subm-uhf-nav-link" href="https://msdn.microsoft.com/library/windows/desktop/hh920508.aspx" data-m="{&quot;cN&quot;:&quot;CatNav_resources_desktop-api-reference_nav&quot;,&quot;id&quot;:&quot;n1c1c11c4c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c1c11c4c1m1r1a1&quot;}">API reference</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;winapps_downloads_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c2c11c4c1m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c11c4c1m1r1a1&quot;}">
+        <a id="resources_downloads" class="js-subm-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows/downloads" data-m="{&quot;cN&quot;:&quot;CatNav_winapps_downloads_nav&quot;,&quot;id&quot;:&quot;n1c2c11c4c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c2c11c4c1m1r1a1&quot;}">Downloads</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;winapps_samples_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3c11c4c1m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c11c4c1m1r1a1&quot;}">
+        <a id="resources_samples" class="js-subm-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows/samples" data-m="{&quot;cN&quot;:&quot;CatNav_winapps_samples_nav&quot;,&quot;id&quot;:&quot;n1c3c11c4c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3c11c4c1m1r1a1&quot;}">Samples</a>
+        
+    </li>
+    <li data-m="{&quot;cN&quot;:&quot;winapps_support_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c4c11c4c1m1r1a1&quot;,&quot;sN&quot;:4,&quot;aN&quot;:&quot;c11c4c1m1r1a1&quot;}">
+        <a id="resources_support" class="js-subm-uhf-nav-link" href="https://developer.microsoft.com/en-us/windows/support" data-m="{&quot;cN&quot;:&quot;CatNav_winapps_support_nav&quot;,&quot;id&quot;:&quot;n1c4c11c4c1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c4c11c4c1m1r1a1&quot;}">Support</a>
+        
+    </li>
+                        
+                    </ul>
+                </div><a id="mobile-dashboard" class="c-uhf-nav-link x-hidden x-visible-vp1-block x-visible-vp2-block" href="https://developer.microsoft.com/dashboard" data-m="{&quot;cN&quot;:&quot;CatNav_Dashboard_nav&quot;,&quot;id&quot;:&quot;n12c4c1m1r1a1&quot;,&quot;sN&quot;:12,&quot;aN&quot;:&quot;c4c1m1r1a1&quot;}">Dashboard</a>                    </nav>
+
+</div>
+
+
+            
+        </div>
+
+    
+</header>
+
+
+    </div>
+            </div>
+
+    </section>
+
+    </div>
+    <input id="UhfSignInOutLink" value="/windowsdesktop/Account/Login?ReturnUrl=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" type="hidden">
+    <script src="Uhf.js" data-provides="uhf"></script>
+    <script data-provides="uhfHeaderData" data-requires="uhfHeader">
+
+        var isAuthenticated = (false);
+        var aadEnabled= (false);
+
+        var ssoProperties = {
+          signedIn: isAuthenticated,
+          aadEnabled: aadEnabled,
+          signInOutUrl: $("#UhfSignInOutLink").val(),
+        };
+
+        if (isAuthenticated) {
+          ssoProperties.userHasProfile = (false);
+          ssoProperties.profileText = "";
+          ssoProperties.createViewProfileText = "";
+          ssoProperties.createViewProfileLink = "";
+          ssoProperties.MsaMemberName = ":MsaMemberName:";
+          ssoProperties.MsaFirstName = ":MsaFirstName:";
+          ssoProperties.MsaLastName = ":MsaLastName:";
+          ssoProperties.MsaCID = ":MsaCID:";
+          ssoProperties.AadDisplayName = ":AadDisplayName:";
+          ssoProperties.AadMemberName = ":AadMemberName:";
+        }
+    </script>
+    <script src="UhfHeader.js" data-requires="uhf,uhfHeaderData"></script>
+<script src="TocDropDown.js" type="text/javascript" xmlns="http://www.w3.org/1999/xhtml"></script></div>
+    <div id="BodyBackground" class="ltr">
+        <div id="JelloSizer">    
+            <div id="JelloExpander">
+                <div id="JelloWrapper">
+                    <div class="Clear"> </div>
+                    
+                   
+                    
+                    
+                    <div class="Clear"> </div>
+                          
+                    <div class="topleftcorner"></div>           
+                    <div class="toprightcorner"></div>                                
+                    <div class="alley"> <!-- Left Side -->
+                        <div class="wrapper"> <!-- Right Side -->
+                            <div class="inner">  
+                            
+                                                 
+                                <div class="Clear"></div>   
+
+
+                                
+                                
+                                
+                                
+                                <div id="MainContent" class="Msdn">
+                                    
+    
+    
+
+    <script language="javascript" type="text/javascript">
+
+        $(function () { Galleries.cookie.setTimezoneOffsetCookie(); })
+    </script>
+
+    <div id="container">
+        
+            <div id="GalleriesNavigation">
+                
+            </div>            
+        
+        
+            <div id="subHeader">
+                <div id="eyebrow" class="left">
+                    
+
+
+
+
+
+
+
+
+
+
+
+<div class="EyebrowContainer">
+    
+    
+
+    
+<div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="EyebrowElement">
+    <a href="https://msdn.microsoft.com/en-US/windows/desktop/default" itemprop="url">
+        <span itemprop="title">Dev Center - Desktop</span>
+    </a>
+</div>
+<text>&gt;</text>
+
+    
+    
+    
+    <div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="EyebrowElement">
+             <a href="https://code.msdn.microsoft.com/windowsdesktop/" itemprop="url">
+                <span itemprop="title">Samples</span>
+            </a> 
+    </div>
+
+
+
+
+    &gt;
+    <div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="EyebrowElement">
+             <a href="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f" itemprop="url" class="EyebrowLeafLink">
+                <span itemprop="title">Sorting a WPF ListView by clicking on the header (2) - Sort Direction Indicators</span>
+            </a> 
+    </div>
+</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        
+        
+            <div id="siteMessage">
+                
+
+
+
+
+
+
+            </div>
+            <div class="clear"></div>
+        
+        
+
+<div class="subMenu">
+    <script language="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            $('.internav > a').each(function (index, elem) {
+                if ($(elem).attr('href').toUpperCase().indexOf('CODE') != -1) {
+                    $(elem).addClass('active');
+                }
+                if ($(elem).attr('href').toUpperCase().indexOf('SMPGDB') != -1) {
+                    $(elem).addClass('active');
+                }
+
+            });
+        });
+    </script>
+</div>      
+        <div class="clear"></div>
+
+        <div id="bodyContainer">
+            
+    
+    <div id="projectPage">
+        <div class="sidebar">
+            <div data-chameleon-template="actionbox"></div>
+            
+
+
+<div class="section" id="contributeSection">
+<div class="contributeAction">
+    <a href="http://msdn.microsoft.com/windows/desktop/aa904949"><img src="download.png">Get SDK and tools</a>
+</div>
+    <h3>Quick access</h3>
+
+<div id="myContributionsAction">
+    <div>
+        <a id="myContributionsLink" href="https://code.msdn.microsoft.com/windowsdesktop/site/mydashboard">
+
+            My samples
+        </a>
+    </div>
+</div>
+
+<div id="uploadAction">
+    <a id="uploadLink" href="https://code.msdn.microsoft.com/windowsdesktop/site/upload">Upload a sample</a>
+</div>
+
+    <div id="requestAction">
+        <a id="exclamationLink" href="https://code.msdn.microsoft.com/windowsdesktop/site/requests">Browse sample requests</a>
+    </div>
+</div>
+
+
+
+<div id="userCard" class="section">
+    <div class="unified-baseball-card" data-profile-usercard-customlink="{&quot;href&quot;:&quot;/windowsdesktop/site/search?f%5B0%5D.Type=User&amp;f%5B0%5D.Value=chriga&quot;,&quot;text&quot;:&quot;View samples&quot;}" data-profile-userid="92da425b2d7c42e99267028f7ce047ce" data-profile-rendered="true"><div class="baseball-card-header">            <table style="border-collapse: collapse;">            <tbody><tr>                <td style="padding-left: 0px;">                    <div>                                        <a id="baseball-card-userimage" class="crop" href="https://social.msdn.microsoft.com/profile/chriga/">                            <span class="imageHelper"></span>                            <img src="avatar.jpg" alt=" Avatar of chriga " title=" Go to chriga's profile ">                        </a>                    </div>                </td>                <td>                    <div class="baseball-card-summary">                        <div class="baseball-card-point-count">                            <div class="textsize" style="width: 96px; height: 36px; text-align: center;">                                <span style="font-size: 26px;">12,933</span>                            </div>                        </div>                                                    <div class="baseball-card-points-label">Points</div>                                                                            <div class="baseball-card-percentile" style.display="none">Top 0.5</div>                                            </div>                </td>            </tr>            </tbody></table>        </div>        <table class="table" style="width: 100%; table-layout: fixed; border-collapse: collapse;">        <tbody><tr>            <td colspan="2" style="padding-bottom: 0px; padding-left: 0px;">                <a href="https://social.msdn.microsoft.com/profile/chriga/" id="displayName" title="Go to chriga's profile" class="baseball-card-display-name" target="_top">chriga</a>            </td>        </tr>        <tr>            <td style="padding-top: 0px;">                <span class="baseball-card-affiliate-company" title=""></span>            </td>            <td>                <span class="baseball-card-joined">Joined  Jan 2010</span>            </td>        </tr>        <tr>            <td colspan="2" style="padding-bottom: 10px;">                <!--<span _tmplitem="1"  class="baseball-card-recent-activity">Recent Activity:  <span _tmplitem="1"  class="timeago" title="2017-11-02T19:23:03Z">2017-11-02T19:23:03Z</span></span>-->            </td>        </tr>        <tr>            <td>                <div class="baseball-card-medals">                                                                        <span class="baseball-card-gold-img" aria-label="6 gold medals" tabindex="0">                                                    <p>6</p>                        </span>                                                                                        <span class="baseball-card-silver-img" aria-label="11 silver medals" tabindex="0">                                                    <p>11</p>                        </span>                                                                                             <span class="baseball-card-bronze-img" aria-label="20 bronze medals" tabindex="0">                                                    <p>20</p>                        </span>                                         </div>            </td>            <td>                <div style="float: right;">                    <div style="padding-bottom: 9px;">                                            <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=User&amp;f%5B0%5D.Value=chriga" target="_top" title="View samples" class="baseball-card-custom-link">View samples</a>                                        </div>                    <div>                        <a href="https://social.msdn.microsoft.com/profile/chriga/activity" target="_top" class="baseball-card-user-activity"> Show activity</a>                    </div>                </div>            </td>        </tr>        </tbody></table></div>
+</div>
+<script language="javascript" type="text/javascript">
+
+    if (false)
+        Galleries.utility.waitFor(
+            function() { $('#userCard .profile-statline, #userCard .profile-usercard-profileLink').hide(); });
+</script>
+            <div id="moreFromAuthor" class="collapsableSidebar">
+                <div data-url="/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f/AuthorProjects" id="authorProjectContainer">
+<div class="section">
+    <div class="titleBar">
+        <h3>More from chriga</h3>
+    </div>
+    
+        <div class="itemBarRight">
+            <a href="https://code.msdn.microsoft.com/windowsdesktop/Creating-a-simple-plugin-b6174b62">Creating a simple plugin mechanism</a>
+            <div>
+                <span class="Rating" aria-label="4.8 Star"><img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+</span><div style="display: inline-block; width: 0px; height: 0px; overflow: hidden;">4.8 Star</div>(19)
+            </div>
+        </div>
+    
+        <div class="itemBarRight">
+            <a href="https://code.msdn.microsoft.com/windowsdesktop/Creating-a-simple-plugin-b45f1d4e">Creating a simple plugin mechanism (Part 2)</a>
+            <div>
+                <span class="Rating" aria-label="5 Star"><img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+</span><div style="display: inline-block; width: 0px; height: 0px; overflow: hidden;">5 Star</div>(4)
+            </div>
+        </div>
+    
+        <div class="itemBarRight">
+            <a href="https://code.msdn.microsoft.com/windowsdesktop/Binding-of-DataGrid-column-73f80f68">Binding of DataGrid column header</a>
+            <div>
+                <span class="Rating" aria-label="No Star"><img src="trans.gif" class="EmptyRatingStar" aria-hidden="true">
+<img src="trans.gif" class="EmptyRatingStar" aria-hidden="true">
+<img src="trans.gif" class="EmptyRatingStar" aria-hidden="true">
+<img src="trans.gif" class="EmptyRatingStar" aria-hidden="true">
+<img src="trans.gif" class="EmptyRatingStar" aria-hidden="true">
+</span><div style="display: inline-block; width: 0px; height: 0px; overflow: hidden;">No Star</div>(0)
+            </div>
+        </div>
+    
+        <div class="itemBarRight">
+            <a href="https://code.msdn.microsoft.com/windowsdesktop/Reading-and-Writing-Values-85084b6a">Reading and Writing Values from INI Files with C#</a>
+            <div>
+                <span class="Rating" aria-label="5 Star"><img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+<img src="trans.gif" class="FilledRatingStar" aria-hidden="true">
+</span><div style="display: inline-block; width: 0px; height: 0px; overflow: hidden;">5 Star</div>(1)
+            </div>
+        </div>
+    
+        <div class="bottomBar">
+            <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=User&amp;f%5B0%5D.Value=chriga">
+
+            See all</a>
+        </div>
+    
+</div>
+</div>
+            </div>
+        </div>
+
+        <div id="projectDetails">
+            <div>
+                
+
+
+<h1 class="projectTitle">Sorting a WPF ListView by clicking on the header (2) - Sort Direction Indicators</h1>
+<h2 class="projectSummary">Sorting a ListView by clicking on the header in WPF is not a function that is already existing. So it have to implemented by yourself. There are several ways to do this. This sample shows how to do this using a GridView as View of the ListView. This sample
+ is build up on the 
+</h2>
+<div class="clear"></div>
+
+    <div id="Downloads">
+        <div>
+            <label for="Downloads">Download</label>
+        </div>
+        
+                    <a href="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f/file/106062/11/Sorting%20a%20WPF%20ListView%20by%20clicking%20on%20the%20header%20(2)%20-%20Sort%20Direction%20Indicators.zip" data-url="/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f/file/106062/11/Sorting%20a%20WPF%20ListView%20by%20clicking%20on%20the%20header%20(2)%20-%20Sort%20Direction%20Indicators.zip" class="button">C# (40.8 KB)</a>
+        
+    </div>
+
+<div class="clear"></div>
+
+<div class="clear"></div>
+<div id="projectInfo">
+    <div id="sectionLeft" class="section">
+        <div class="itemBar">
+            <label for="ReviewValue">Ratings</label>                   
+            
+    <div id="yourRating" "="">
+        <form action="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f/createreview" id="reviewForm" method="post" name="reviewForm"><input name="__RequestVerificationToken" value="44Sjynbil36vSxfEAFQrMmQ8xyH2gPYbhsUT0XBBzwKtdC3l9UQEmpKtxZzn39HCk+atR9I1XbOTTfSo9zhOkqwjxDN2o8NtCyDP54aJGQFyRFki1/ayj0ylquR6TmLPz+EJZQ==" type="hidden">
+            <input id="Rating" name="Rating" value="" type="hidden">
+            <input id="Text" name="Text" value="" type="hidden">
+        <div class="Rating stackLeft EditStarMode" id="Star_Span" onmouseout="onStarsMouseOut()">
+        
+            <div id="Star_0" tabindex="0" aria-label="Rating 1 Star" class="RatingStar EmptyRatingStar" data-initialstarclass="EmptyRatingStar" onmouseover="onStarMouseOver('Star_0')" onclick="onStarClick(0)" title="1">
+                &nbsp;</div>
+        
+            <div id="Star_1" tabindex="0" aria-label="Rating 2 Star" class="RatingStar EmptyRatingStar" data-initialstarclass="EmptyRatingStar" onmouseover="onStarMouseOver('Star_1')" onclick="onStarClick(1)" title="2">
+                &nbsp;</div>
+        
+            <div id="Star_2" tabindex="0" aria-label="Rating 3 Star" class="RatingStar EmptyRatingStar" data-initialstarclass="EmptyRatingStar" onmouseover="onStarMouseOver('Star_2')" onclick="onStarClick(2)" title="3">
+                &nbsp;</div>
+        
+            <div id="Star_3" tabindex="0" aria-label="Rating 4 Star" class="RatingStar EmptyRatingStar" data-initialstarclass="EmptyRatingStar" onmouseover="onStarMouseOver('Star_3')" onclick="onStarClick(3)" title="4">
+                &nbsp;</div>
+        
+            <div id="Star_4" tabindex="0" aria-label="Rating 5 Star" class="RatingStar EmptyRatingStar" data-initialstarclass="EmptyRatingStar" onmouseover="onStarMouseOver('Star_4')" onclick="onStarClick(4)" title="5">
+                &nbsp;</div>
+        
+        </div>
+        <div style="clear: both;"></div> 
+        </form>
+    </div>
+    
+    <div id="RatingCount">(0)</div>
+    
+
+<script language="javascript">
+
+    function onStarMouseOver(id) {
+        var id_prefix = id.substring(0, id.lastIndexOf('_') + 1);
+        var index = parseInt(id.substring(id.lastIndexOf('_') + 1, id.length));
+
+        for (i = 0; i < 5; i++) {
+            var star = $('#' + id_prefix + i);
+            var initialRatingClass = star.data('initialstarclass');
+            if (i <= index)
+                star.removeClass(initialRatingClass).removeClass('EmptyRatingStar').addClass('FilledRatingStarHover');
+            else
+                star.removeClass(initialRatingClass).removeClass('FilledRatingStarHover').addClass('EmptyRatingStar');
+        }
+        
+    }
+    function onStarsMouseOut() {
+        var stars = $("#RatingStar");
+        var id_prefix = "Star_";
+        var currentRating = 0;
+        
+        for (i = 0; i < 5; i++) {
+            var star = $('#' + id_prefix + i.toString());
+            var initialRatingClass = star.data('initialstarclass');
+            star.removeClass('EmptyRatingStar').removeClass('FilledRatingStarHover').addClass(initialRatingClass);
+        }
+    }
+    
+    function onStarClick(index) {
+        $('#Rating').val(index + 1);
+        document.getElementById("reviewForm").submit();
+    }
+</script>
+
+        </div>
+        
+            <div class="itemBar">
+                <label for="DownloadCount">Downloaded</label>
+                <span id="DownloadCount">1,972 times</span>
+            </div>
+        
+            <div class="itemBar">
+                <label for="Favorites">Favorites</label>
+                
+
+<script language="javascript">
+
+    $(function () { $('a#addFavoriteLink').click(function () { $('form#favoriteform').submit(); }); });
+</script>
+<span id="Collections">
+
+        <a href="https://code.msdn.microsoft.com/windowsdesktop/Account/Login?ReturnUrl=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f">Add to favorites</a>
+
+</span>
+
+            </div>
+        
+
+
+    <div class="itemBarLong">
+        <label for="Requires">Requires</label>
+        <div id="Requires">
+                <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=VisualStudioVersion&amp;f%5B0%5D.Value=11.0&amp;f%5B0%5D.Text=Visual%20Studio%202012">Visual Studio 2012</a>
+
+        </div>
+    </div>
+        
+        
+    </div>
+
+    <div id="sectionRight" class="section">
+        <div class="itemBar">
+            <label for="LastUpdated">
+
+                Updated</label>
+            <span id="LastUpdated">
+
+                1/22/2015</span>
+        </div>
+        
+            <div class="itemBarLong">
+                <label for="License">
+
+                    License</label>
+                <div id="License"><a href="javascript:showEula()">Apache License, Version 2.0</a></div>
+            </div>
+        
+        <div class="itemBar">
+            <label for="LastUpdated">
+
+                Share</label>
+            <span>
+                
+<script language="javascript" type="text/javascript">
+
+    $(function () {
+        $('.shareThisItem > a').WireTrackerForEvent('click', 'https://code.msdn.microsoft.com/windowsdesktop/Content/Common/tracker.gif', 'ShareItClick', 'Sorting-a-WPF-ListView-by-5769086f', true);
+    });
+</script>
+
+<div class="shareThisItem">
+ 
+<a href="mailto:?subject=Sorting%20a%20WPF%20ListView%20by%20clicking%20on%20the%20header%20%282%29%20-%20Sort%20Direction%20Indicators&amp;Body=https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f" target="_top"><img alt="E-mail" src="email.gif"></a>
+
+ 
+<a href="http://twitter.com/home?status=Sorting%20a%20WPF%20ListView%20by%20clicking%20on%20the%20header%20%282%29%20-%20Sort%20Direction%20Indicators%20:%20https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" target="_top"><img alt="Twitter" src="twitter.gif"></a>
+
+ 
+<a href="http://del.icio.us/post?url=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f&amp;title=Sorting%20a%20WPF%20ListView%20by%20clicking%20on%20the%20header%20%282%29%20-%20Sort%20Direction%20Indicators" target="_top"><img alt="del.icio.us" src="delicious.gif"></a>
+
+ 
+<a href="http://digg.com/submit?url=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f&amp;title=Sorting%20a%20WPF%20ListView%20by%20clicking%20on%20the%20header%20%282%29%20-%20Sort%20Direction%20Indicators" target="_top"><img alt="Digg" src="digg.gif"></a>
+
+ 
+<a href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f&amp;t=Sorting%20a%20WPF%20ListView%20by%20clicking%20on%20the%20header%20%282%29%20-%20Sort%20Direction%20Indicators" target="_top"><img alt="Facebook" src="facebook.gif"></a>
+
+
+</div></span>
+        </div>
+        
+        
+    </div>
+    <div class="clear"></div>
+    <div class="section">
+    
+
+
+
+
+    <div class="itemBarLong tagsContainer">
+        <label for="Technologies">Technologies</label>
+        <div id="Technologies">
+            <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Technology&amp;f%5B0%5D.Value=C%23&amp;f%5B0%5D.Text=C%23">C#</a>, <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Technology&amp;f%5B0%5D.Value=WPF&amp;f%5B0%5D.Text=WPF">WPF</a>, <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Technology&amp;f%5B0%5D.Value=XAML&amp;f%5B0%5D.Text=XAML">XAML</a>, <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Technology&amp;f%5B0%5D.Value=.NET%20Framework&amp;f%5B0%5D.Text=.NET%20Framework">.NET Framework</a>, <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Technology&amp;f%5B0%5D.Value=MVVM&amp;f%5B0%5D.Text=MVVM">MVVM</a>
+        </div>
+    </div>
+    <div class="itemBarLong tagsContainer">
+        <label for="Topics">Topics</label>
+        <div id="Topics">
+            <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Topic&amp;f%5B0%5D.Value=GridView&amp;f%5B0%5D.Text=GridView">GridView</a>, <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Topic&amp;f%5B0%5D.Value=ListView&amp;f%5B0%5D.Text=ListView">ListView</a>, <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Topic&amp;f%5B0%5D.Value=Sorting&amp;f%5B0%5D.Text=Sorting">Sorting</a>, <a href="https://code.msdn.microsoft.com/windowsdesktop/site/search?f%5B0%5D.Type=Topic&amp;f%5B0%5D.Value=Sorting%20Direction&amp;f%5B0%5D.Text=Sorting%20Direction">Sorting Direction</a>
+        </div>
+    </div>
+
+
+    <a name="content"></a>
+    <div class="itemBar">
+            <span id="reportAbuse">
+                <a href="https://code.msdn.microsoft.com/windowsdesktop/Account/Login?ReturnUrl=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f%2fview%2fReportAbuse">Report abuse to Microsoft</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<script src="2aba7dfef9dacd78fe9c3a5afd1aea78-7af9a874efbc1f5aa0062aba1a48cd8f-RequestReducedScript.js" type="text/javascript"></script><script type="text/javascript">
+
+
+    $(function () {
+        $('#Downloads input').click(function () {
+            window.location.href = $(this).data('url');
+         });
+    });
+
+    function rateItReviewIt() {
+        displayCreateReview();
+        $('#Reviews_Tab').click();
+    }
+
+    function showEula() {
+        $.get('\x2fwindowsdesktop\x2fsite\x2fSorting-a-WPF-ListView-by-5769086f\x2feulapartial\x3flicenseType\x3dApache', function(data){
+            $.prompt(data, {
+                prefix: 'eulaPage',
+                top: '15%',
+                buttons: { 'Close': true }   
+            });
+        });
+    };
+
+</script>
+
+
+            </div>
+        </div>
+        
+
+
+
+
+
+<div id="projectBody">
+    <div id="projectContent">
+        <div class="tabHeaders">
+            <div id="Details_Tab" class="current"><a href="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f#content">Description</a></div>
+            
+        <div id="SourceCode_Tab" class=""><a href="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f/view/SourceCode#content">Browse code</a></div>
+
+                <div id="Discussions_Tab" class=""><a href="https://code.msdn.microsoft.com/windowsdesktop/Sorting-a-WPF-ListView-by-5769086f/view/Discussions#content">Q and A </a></div>
+        </div>
+        <div class="tabContents">
+                <div id="Details_Content">
+                            <iframe id="longdescIframe" aria-label="detail content" role="tabpanel" scrolling="no" marginwidth="0" marginheight="0" src="Sorting-a-WPF-ListView-by-5769086f_1.html" style="height: 2767px;" frameborder="0" width="100%"></iframe>
+                    
+                </div>
+            
+            
+    
+
+
+        </div>
+    </div>
+</div>    
+    </div>
+    <script language="javascript" type="text/javascript">
+
+
+        $(document).ready(function() {
+	    if (StreamEvents) {
+                window.gTracker = StreamEvents.tracker.create(null, {
+                    beaconUrl: 'setrack.gif',
+                    pageEventType: 'GalleriesPage',
+                    pageActionEventType: 'GalleriesPageAction',
+                    pageEventArg: {
+                        Brand: 'WindowsDesktop',
+                        Page: 'ProjectDetails',
+                        Section: null,
+                        PageContent: 'Sorting-a-WPF-ListView-by-5769086f',
+                        PageContentType: 'Project'
+                    }
+                });
+             }
+
+
+             registerPageView();
+            
+             Galleries.project.getAuthorProjects();
+            
+             loadTabData('Details');
+
+             var reportAbuseFormUrl = '\x2fwindowsdesktop\x2fSorting-a-WPF-ListView-by-5769086f\x2freportabuse';
+             $("#reportAbuse a[href='']").click(function() {
+                    $('#projectContent').load(reportAbuseFormUrl);
+                    return false;
+                });
+            
+             
+        });
+        
+         function loadTabData(tabId) {
+                if ((tabId == 'SourceCode')) {
+                    $('div.collapsableSidebar').addClass('hiddenSidebar');
+                    $('#projectBody .tabContents').addClass('fullProjectBody');
+                    Galleries.utility.waitFor(
+                        function(){ return $("#userCard .profile-statline").length > 0;},
+                        function(){$("#userCard .profile-biography, #userCard .profile-statline, #userCard .profile-footer, #userCard .profile-inline-secondary").addClass('hiddenSidebar'); });
+                    
+                }
+                else {
+                    $('div.collapsableSidebar, #userCard .profile-biography, #userCard .profile-statline, #userCard .profile-footer, #userCard .profile-inline-secondary').removeClass('hiddenSidebar');
+                    $('#projectBody .tabContents').removeClass('fullProjectBody');
+                }
+
+                Galleries.project.resizeDesc();
+        }
+
+        function registerPageView() {
+            $.post('\x2fwindowsdesktop\x2fSorting-a-WPF-ListView-by-5769086f\x2fstats\x2fRegisterPageView');
+        }
+    </script>
+
+
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="advertisment">
+        
+    </div>
+
+                                    <div class="Clear"></div>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="Clearbottom"></div>          
+                    <div class="bottomleftcorner"></div>            
+                    <div class="bottomrightcorner"></div> 
+                    
+                     
+                    
+
+                           
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+<div data-chameleon-template="epxfooter"></div>
+<div data-chameleon-template="footer">
+
+
+
+        
+    <script type="text/javascript" src="UhfFooter.js"></script>
+    <input id="CurrentUrlLocale" value="en-US" type="hidden">
+    <div id="ux-footer" class="ltr">
+        
+        <div id="footerContainer">
+            <div id="baseFooter">
+                    <section id="footerArea" data-m="{&quot;cN&quot;:&quot;footerArea&quot;,&quot;cT&quot;:&quot;Area_coreuiArea&quot;,&quot;id&quot;:&quot;a2Body&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;Body&quot;}">
+                    <div id="footerRegion" data-region-key="footerregion" data-m="{&quot;cN&quot;:&quot;footerRegion&quot;,&quot;cT&quot;:&quot;Region_coreui-region&quot;,&quot;id&quot;:&quot;r1a2&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;a2&quot;}">
+
+    <div id="footerUniversalFooter" data-m="{&quot;cN&quot;:&quot;footerUniversalFooter&quot;,&quot;cT&quot;:&quot;Module_coreui-universalfooter&quot;,&quot;id&quot;:&quot;m1r1a2&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;r1a2&quot;}" data-module-id="Category|footerRegion|footerRegion|footerUniversalFooter|coreui-universalfooter">
+        
+
+<footer id="uhf-footer" class="c-uhff context-uhf" data-uhf-mscc-rq="false" data-footer-footprint="en-us/DEV_Windows/win-dev-center-footer" ms.pgarea="Uhf footer">
+        <nav class="c-uhff-nav" role="navigation" aria-label="Footer" ms.cmpgrp="Footer nav">
+            
+                <div class="c-uhff-nav-row">
+                        <div class="c-uhff-nav-group" ms.cmpnm="What" s="" new'="">
+                            <h6 class="c-heading-4">What's new</h6>
+                            <ul class="c-list f-bare">
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/surface/devices/surface-book-2/overview" ms.title="Footer_WhatsNew_SurfaceBook2">Surface Book 2</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/surface/devices/surface-pro/overview" ms.title="Footer_WhatsNew_NewSurfacePro">New Surface Pro</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.xbox.com/en-us/xbox-one-x" ms.title="Footer_WhatsNew_XboxOneX">Xbox One X</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.xbox.com/en-us/xbox-one-s?xr=shellnav" ms.title="Footer_WhatsNew_XboxOneS">Xbox One S</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/store/b/virtualreality" ms.title="Footer_WhatsNew_VRandMixedReality">VR &amp; mixed reality</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/windows/windows-10-apps" ms.title="Footer_WhatsNew_Windows_10_apps">Windows 10 apps</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://store.office.com/en-us/appshome.aspx?" ms.title="Footer_WhatsNew_OfficeApps">Office apps</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/store/b/12-days-of-deals?icid=gm_fy18_hol_12dd_uhf_footer_L0_whatsnew" ms.title="WhatsNew_12DaysofDeals">12 Days of Deals</a>
+                                        </li>
+
+                            </ul>
+                            
+                        </div>
+                        <div class="c-uhff-nav-group" ms.cmpnm="Store &amp; Support">
+                            <h6 class="c-heading-4">Store &amp; Support</h6>
+                            <ul class="c-list f-bare">
+                                        <li>
+                                            <a class="c-uhff-link" href="https://account.microsoft.com/" ms.title="Footer_StoreandSupport_AccountProfile">Account profile</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/download" ms.title="Footer_StoreandSupport_DownloadCenter">Download Center</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://go.microsoft.com/fwlink/p/?LinkID=824761&amp;clcid=0x409" ms.title="Footer_StoreandSupport_SalesAndSupport">Sales &amp; support</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/store/b/extended-holiday-returns?icid=gm_fy18_hol_uhf_footer_whatsnew_extendedreturns" ms.title="MicrosoftStore_ExtendedHolidayReturns">Extended holiday returns</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://account.microsoft.com/orders" ms.title="Footer_StoreandSupport_OrderTracking">Order tracking</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/store/locations/find-a-store" ms.title="Footer_StoreandSupport_StoreLocations">Store locations</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://support.microsoft.com/en-us" ms.title="Footer_StoreandSupport_Support">Support</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/store/b/buy-online-pick-up-in-store?icid=uhf_footer_bopuis" ms.title="StoreandSupport_BuyOnlinePickUpInStore">Buy online, pick up in store</a>
+                                        </li>
+
+                            </ul>
+                            
+                        </div>
+                        <div class="c-uhff-nav-group" ms.cmpnm="Education">
+                            <h6 class="c-heading-4">Education</h6>
+                            <ul class="c-list f-bare">
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/education" ms.title="Footer_Education_MicrosoftInEducation">Microsoft in education</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/education/products/office/default.aspx" ms.title="Footer_Education_OfficeForStudents">Office for students</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://products.office.com/en-us/academic/compare-office-365-education-plans" ms.title="Footer_Education_Office365ForSchools">Office 365 for schools</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/store/b/student" ms.title="Footer_Education_DealsForStudentsandEducators">Deals for students &amp; educators </a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://azure.microsoft.com/en-us/community/education/" ms.title="Footer_MicrosoftAzureInEducation">Microsoft Azure in education</a>
+                                        </li>
+
+                            </ul>
+                            
+                        </div>
+                </div>
+                <div class="c-uhff-nav-row">
+                        <div class="c-uhff-nav-group" ms.cmpnm="Enterprise">
+                            <h6 class="c-heading-4">Enterprise</h6>
+                            <ul class="c-list f-bare">
+                                        <li>
+                                            <a class="c-uhff-link" href="https://azure.microsoft.com/" ms.title="Footer_Enterprise_MicrosoftAzure ">Microsoft Azure </a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://enterprise.microsoft.com/en-us/" ms.title="Footer_Enterprise_Enterprise">Enterprise</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/sql-server/" ms.title="Footer_Enterprise_DataPlatform">Data platform</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/solution-providers" ms.title="Footer_Enterprise_FindASolutionsProvider">Find a solutions provider</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://partner.microsoft.com/en-us/" ms.title="Footer_Enterprise_MicrosoftPartnerResources">Microsoft partner resources </a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://go.microsoft.com/fwlink/?LinkID=808093" ms.title="Footer_Enterprise_MicrosoftAppSource ">Microsoft AppSource </a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://enterprise.microsoft.com/en-us/industries/discrete-manufacturing/" ms.title="Footer_Enterprise_ManufacturingAndResources">Manufacturing &amp; resources</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://enterprise.microsoft.com/en-us" ms.title="Footer_Enterprise_FinanciaServices">Financial services</a>
+                                        </li>
+
+                            </ul>
+                            
+                        </div>
+                        <div class="c-uhff-nav-group" ms.cmpnm="Developer">
+                            <h6 class="c-heading-4">Developer</h6>
+                            <ul class="c-list f-bare">
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.visualstudio.com/" ms.title="Footer_Developer_MicrosoftVisualStudio">Microsoft Visual Studio</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://developer.microsoft.com/en-us/windows" ms.title="Footer_Developer_WindowsDevCenter">Windows Dev Center</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://msdn.microsoft.com/en-us" ms.title="Footer_Developer_MicrosoftDeveloperNetwork">Developer Network</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://technet.microsoft.com/en-us" ms.title="Footer_Developer_TechNet">TechNet</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://mva.microsoft.com/" ms.title="Footer_Developer_MicrosoftVirtualAcademy">Microsoft Virtual Academy</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://developer.microsoft.com/en-us/store/register" ms.title="Footer_Developer_MicrosoftDeveloperProgram">Microsoft developer program</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://channel9.msdn.com/" ms.title="Footer_Developer_Channel9">Channel 9</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://dev.office.com/" ms.title="Footer_Developer_OfficeDevCenter">Office Dev Center</a>
+                                        </li>
+
+                            </ul>
+                            
+                        </div>
+                        <div class="c-uhff-nav-group" ms.cmpnm="Company">
+                            <h6 class="c-heading-4">Company</h6>
+                            <ul class="c-list f-bare">
+                                        <li>
+                                            <a class="c-uhff-link" href="https://careers.microsoft.com/" ms.title="Footer_Company_Careers">Careers</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/about" ms.title="Footer_Company_AboutMicrosoft">About Microsoft</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://news.microsoft.com/" ms.title="Footer_Company_CompanyNews">Company news</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://privacy.microsoft.com/en-us" ms.title="Footer_Company_PrivacyAtMicrosoft">Privacy at Microsoft</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/investor/default.aspx" ms.title="Footer_Company_Investors">Investors</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/diversity/" ms.title="Footer_Company_DiversityAndInclusion">Diversity and inclusion</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/accessibility/home" ms.title="Footer_Company_Accessibility">Accessibility</a>
+                                        </li>
+                                        <li>
+                                            <a class="c-uhff-link" href="https://www.microsoft.com/en-us/security/default.aspx" ms.title="Footer_Company_Security">Security</a>
+                                        </li>
+
+                            </ul>
+                            
+                        </div>
+                </div>
+        </nav>
+    <div class="c-uhff-base">
+                <a id="locale-picker-link" class="c-uhff-link c-uhff-lang-selector c-glyph glyph-world" href="https://developer.microsoft.com/locale" ms.title="locale_picker(US)">English (United States)</a>
+
+        <ul role="contentinfo" class="c-list f-bare" ms.cmpgrp="Corp links">
+                            <li>
+                    <a class="c-uhff-link" href="https://www.microsoft.com/en-us/sitemap1.aspx" data-mscc-ic="false" ms.title="Footer_Sitemap">Sitemap</a>
+                </li>
+                <li>
+                    <a class="c-uhff-link" href="https://go.microsoft.com/?linkid=2028325" data-mscc-ic="false" ms.title="Footer_ContactUs">Contact us</a>
+                </li>
+                <li>
+                    <a class="c-uhff-link" href="https://go.microsoft.com/fwlink/?LinkId=521839" data-mscc-ic="false" ms.title="Footer_PrivacyandCookies">Privacy &amp; cookies </a>
+                </li>
+                <li>
+                    <a class="c-uhff-link" href="https://go.microsoft.com/fwlink/?LinkID=206977" data-mscc-ic="false" ms.title="Footer_TermsOfUse">Terms of use</a>
+                </li>
+                <li>
+                    <a class="c-uhff-link" href="https://www.microsoft.com/trademarks" data-mscc-ic="false" ms.title="Footer_Trademarks">Trademarks</a>
+                </li>
+                <li>
+                    <a class="c-uhff-link" href="https://choice.microsoft.com/" data-mscc-ic="false" ms.title="Footer_AboutourAds">About our ads</a>
+                </li>
+
+            <li>© Microsoft 2017</li>
+            
+        </ul>
+    </div>
+    
+</footer>
+
+
+
+
+    </div>
+            </div>
+
+    </section>
+
+    <script type="text/javascript" src="SelectLocaleFromPopUp.js"></script>    
+    
+    <span id="selectLocaleFromPopUp">
+        <div class="locale-selector" style="position: relative;">
+            <a class="current-locale" href="javascript:void(0)" aria-label="Change your language" aria-haspopup="true">
+                <span class="text">English</span>
+                <span class="gear"></span>
+            </a>
+            <div class="locale-selection-panel site-flag site-flag-lang" style="top: -245px; display: none;">
+                <div class="content" role="menu">
+                    <table class="all-locales" autogeneratecolumns="false" allowpaging="false" allowsorting="false" style="border-collapse: collapse;" cellspacing="0">
+                        <tbody>
+                            <tr>
+
+
+                                    <td><a title="Deutsch" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=de-de&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">Deutsch</a></td>
+                                    <td><a title="English" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=en-us&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link selected" role="menuitem">English</a></td>
+                                    <td><a title="Español" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=es-es&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">Español</a></td>
+                                    <td><a title="Français" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=fr-fr&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">Français</a></td>
+                                        </tr><tr>
+                                    <td><a title="Italiano" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=it-it&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">Italiano</a></td>
+                                    <td><a title="日本語" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=ja-jp&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">日本語</a></td>
+                                    <td><a title="한국어" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=ko-kr&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">한국어</a></td>
+                                    <td><a title="Português" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=pt-br&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">Português</a></td>
+                                        </tr><tr>
+                                    <td><a title="Pусский" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=ru-ru&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">Pусский</a></td>
+                                    <td><a title="简体中文" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=zh-cn&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">简体中文</a></td>
+                                    <td><a title="繁體中文" href="http://msdn.microsoft.com/en-US/?action=SelectLocale&amp;currentLocale=en-US&amp;newLocale=zh-tw&amp;fromPage=https%3a%2f%2fcode.msdn.microsoft.com%2fwindowsdesktop%2fSorting-a-WPF-ListView-by-5769086f" class="locale-link" role="menuitem">繁體中文</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="arrow">
+                        &nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </span>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+</div>  
+    
+    
+
+    <script type="text/javascript">
+
+        
+            var appInsights = window.appInsights || function (config) {
+                function i(config) {
+                    t[config] = function () {
+                        var i = arguments;
+                        t.queue.push(function () { t[config].apply(t, i) })
+                    }
+                }
+                var t = { config: config }, u = document, e = window, o = "script", s = "AuthenticatedUserContext", h = "start", c = "stop", l = "Track", a = l + "Event", v = l + "Page", y = u.createElement(o), r, f;
+                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                try {
+                    t.cookie = u.cookie
+                } catch (p) {
+                }
+                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function (config, i, u, e, o) {
+                    var s = f && f(config, i, u, e, o);
+                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                }), t
+            }({
+                instrumentationKey: "4782e831-4a9d-41f6-9c37-245029ab8905"
+            });
+            window.appInsights = appInsights;
+            appInsights.trackPageView();
+        
+    </script>
+
+    <script type="text/javascript">
+
+        Galleries.utility.loadJavaScript("https://widgets.membership.s-msft.com/v1/loader.js?brand=Msdn&lang=en-US", true);
+        Galleries.utility.loadJavaScript('https://www.microsoft.com/library/svy/sto/broker.js', true);
+    </script>
+
+    
+    <script src="77a05df404f5f34e044cef7e120077c2-c769c4ecaf33d04f3dea6af4337b9847-RequestReducedScript.js" type="text/javascript"></script>        
+    <script type="text/javascript">
+
+        jQuery(window).load(
+            function () {
+                
+                    document.getElementsByTagName('body')[0].appendChild(addAsyncScript("https://i1.code.msdn.s-msft.com/windowsdesktop/GlobalResources/scripts/omni_rsid_social.js?cver=0001"));
+                    document.getElementsByTagName('body')[0].appendChild(addAsyncScript("https://i1.code.msdn.s-msft.com/windowsdesktop/GlobalResources/scripts/WEDCS.js?cver=0001"));
+                
+                document.getElementsByTagName('body')[0].appendChild(addAsyncScript("https://i1.code.msdn.s-msft.com/windowsdesktop/GlobalResources/scripts/JSLLRecord.js?cver=0001"));
+            });
+        </script>
+        <noscript>&lt;a href="https://www.omniture.com" title="Web Analytics"&gt;
+        &lt;img src="https://msstonojssocial.112.2O7.net/b/ss/msstonojssocial/1/H.20.2--NS/0" height="1" width="1" alt="" /&gt;
+        &lt;/a&gt;</noscript>
+    
+    <script type="text/javascript">
+
+        $(document).ready(function (){
+			$("img.DropDownArrow").attr("src","https://i1.code.msdn.s-msft.com/windowsdesktop/GlobalResources/images/Msdn/DropDownArrow_Gray.png");
+		});
+    </script>
+
+
+<script type="text/javascript" async="" src="omni_rsid_social.js"></script><script type="text/javascript" async="" src="WEDCS.js"></script><script type="text/javascript" async="" src="JSLLRecord.js"></script><script src="broker-config.js"></script><div id="coFrameDiv" style="height: 0px; display: none;"><iframe id="coToolbarFrame" src="Sorting-a-WPF-ListView-by-5769086f_2.html" style="height: 0px; width: 100%; display: none;"></iframe></div><script src="broker-config_001.js"></script></body>
+</html>

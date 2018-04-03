@@ -1,0 +1,382 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+
+Join Stack Overflow to learn, share knowledge, and build your career.
+Email Sign Up or sign in with
+Google
+Facebook
+Interaction Triggers in Style in ResourceDictionary WPF
+Ask Question
+up vote 5 down vote favorite
+3
+	
+
+I have a ComboBox which I need to use in several places in my application, so I set most of the properties of that ComboBox in ResourceDictionary and use that as a Style where ever I need it.
+
+Style for the ComboBox is:
+
+ <Style TargetType = "{x:Type ComboBox}" x:Key = "ComboBoxBranch" > < Setter Property = "ItemsSource" Value = "{Binding Branches}" ></ Setter > < Setter Property = "DisplayMemberPath" Value = "BranchName" ></ Setter > < Setter Property = "SelectedItem" Value = "{Binding SelectedBranch}" ></ Setter > </Style>  
+
+and I am using it like this in my XAML:
+
+ <ComboBox Style = " { StaticResource ComboBoxBranch } " > <i:Interaction.Triggers> <i:EventTrigger EventName = "SelectionChanged" > <i:InvokeCommandAction Command = "{Binding SelectCustomerCommand}" CommandParameter = "{Binding SelectedBranch}" ></i:InvokeCommandAction> </i:EventTrigger> </i:Interaction.Triggers> </ComboBox>  
+
+I want to move the interaction trigger code as well to ResourceDictionary , so I don't need to write it in all my xamls. Is it possible somehow?
+c# wpf xaml combobox resourcedictionary
+share | improve this question
+	
+edited Mar 11 '14 at 14:06
+Anatoliy Nikolaev
+17.1k 12 43 52
+	
+asked Mar 11 '14 at 9:48
+MegaMind
+1,517 11 39 77
+	
+   	 
+	
+stackoverflow.com/questions/14986045/… –  Heena Patil Mar 11 '14 at 10:40
+add a comment  | 
+2 Answers 2
+active oldest votes
+up vote 7 down vote accepted
+	
+
+As far as I know, Interaction.Triggers can not be applied in Style, respectively and in a ResourceDictionary. But you can do so, to determine the ComboBox as a resource with x:Shared="False" and reference it for ContentControl like this:
+
+ <Window.Resources> <ComboBox x:Key = "MyComboBox" x:Shared = "False" ItemsSource = "{Binding Branches}" DisplayMemberPath = "BranchName" SelectedItem = "{Binding SelectedBranch}" > <i:Interaction.Triggers> <i:EventTrigger EventName = "SelectionChanged" > <i:InvokeCommandAction Command = "{Binding SelectCustomerCommand}" /> </i:EventTrigger> </i:Interaction.Triggers> </ComboBox> </Window.Resources> <Grid> <ContentControl Name = "MyComboBox1" Width = "100" Height = "30" HorizontalAlignment = "Left" Content = "{StaticResource MyComboBox}" /> <ContentControl Name = "MyComboBox2" Width = "100" Height = "30" HorizontalAlignment = "Right" Content = "{StaticResource MyComboBox}" /> </Grid>  
+
+When x:Shared="True" by default then one Style is common to all - in this case, the system swears on the duplicate Content . When x:Shared="False" when is created Style for each element whenever it its request. Quote from MSDN :
+
+    When set to false , modifies WPF resource-retrieval behavior so that requests for the attributed resource create a new instance for each request instead of sharing the same instance for all requests.
+
+For more information, please see:
+
+MSDN: x:Shared Attribute
+
+Edit: alternative solution
+
+Here , Mr.Vspivak published a solution that allows you easily set the Interaction.Triggers in Style.
+
+Example:
+
+MainWindow.xaml
+
+ <Window x:Class = "StylesInteractivity.MainWindow" xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ie = "clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:Core = "clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions" xmlns:int = "clr-namespace:System.Windows.Interactivity" xmlns:si = "clr-namespace:StylesInteractivity" Title = "MainWindow" Height = "350" Width = "525" > <Window.Resources> <si:ViewModel x:Key = "Model" /> </Window.Resources> <Grid> <Grid.ColumnDefinitions> <ColumnDefinition /> <ColumnDefinition /> </Grid.ColumnDefinitions> <TextBlock Grid . Column = "1" x:Name = "_tblock" Text = "Default" HorizontalAlignment = "Center" VerticalAlignment = "Center" FontSize = "24" FontWeight = "Bold" /> <ListBox ItemsSource = "{Binding Source={StaticResource Model}, Path=DataSource}" Grid . Column = "0" HorizontalAlignment = "Center" VerticalAlignment = "Center" > <ListBox.ItemContainerStyle> <Style TargetType = "ListBoxItem" > < Setter Property = "FontSize" Value = "24" /> < Setter Property = "FontWeight" Value = "Bold" /> < Setter Property = "int:InteractivityItems.Template" > < Setter . Value > < int : InteractivityTemplate > < int : InteractivityItems > < int : InteractivityItems . Behaviors > < int : FlipOnHover /> </ int : InteractivityItems . Behaviors > < int : InteractivityItems . Triggers > < ie : EventTrigger EventName = "MouseMove" > < Core : ChangePropertyAction PropertyName = "Text" TargetObject = "{Binding ElementName=_tblock}" Value = "{Binding}" /> </ ie : EventTrigger > </ int : InteractivityItems . Triggers > </ int : InteractivityItems > </ int : InteractivityTemplate > </ Setter . Value > </ Setter > </Style> </ListBox.ItemContainerStyle> </ListBox> </Grid> </Window>  
+
+InteractivityHelper.cs
+
+ /// <summary> /// <see cref="FrameworkTemplate"/> for InteractivityElements instance /// <remarks>Subclassed for forward compatibility, perhaps one day <see cref="FrameworkTemplate"/> </remarks> /// <remarks>will not be partially internal</remarks> /// </summary> public class InteractivityTemplate : DataTemplate { } /// <summary> /// Holder for interactivity entries /// </summary> public class InteractivityItems : FrameworkElement { private List < Behavior > _behaviors ; private List < TriggerBase > _triggers ; /// <summary> /// Storage for triggers /// </summary> public List < TriggerBase > Triggers { get { if ( _triggers == null ) _triggers = new List < TriggerBase >(); return _triggers ; } } /// <summary> /// Storage for Behaviors /// </summary> public List < Behavior > Behaviors { get { if ( _behaviors == null ) _behaviors = new List < Behavior >(); return _behaviors ; } } #region Template attached property public static InteractivityTemplate GetTemplate ( DependencyObject obj ) { return ( InteractivityTemplate ) obj . GetValue ( TemplateProperty ); } public static void SetTemplate ( DependencyObject obj , InteractivityTemplate value ) { obj . SetValue ( TemplateProperty , value ); } public static readonly DependencyProperty TemplateProperty = DependencyProperty . RegisterAttached ( "Template" , typeof ( InteractivityTemplate ), typeof ( InteractivityItems ), new PropertyMetadata ( default ( InteractivityTemplate ), OnTemplateChanged )); private static void OnTemplateChanged ( DependencyObject d , DependencyPropertyChangedEventArgs e ) { InteractivityTemplate dt = ( InteractivityTemplate ) e . NewValue ; #if(!SILVERLIGHT) dt . Seal (); #endif InteractivityItems ih = ( InteractivityItems ) dt . LoadContent (); BehaviorCollection bc = Interaction . GetBehaviors ( d ); TriggerCollection tc = Interaction . GetTriggers ( d ); foreach ( Behavior behavior in ih . Behaviors ) bc . Add ( behavior ); foreach ( TriggerBase trigger in ih . Triggers ) tc . Add ( trigger ); } #endregion }  
+
+FlipOnHover.cs
+
+ public class FlipOnHover : Behavior < FrameworkElement > { protected override void OnAttached () { AssociatedObject . MouseEnter += AssociatedObject_MouseEnter ; AssociatedObject . MouseLeave += AssociatedObject_MouseLeave ; Transform t = AssociatedObject . RenderTransform ; AssociatedObject . RenderTransform = new TransformGroup (); (( TransformGroup ) AssociatedObject . RenderTransform ). Children . Add ( t ); (( TransformGroup ) AssociatedObject . RenderTransform ). Children . Add ( new ScaleTransform ()); base . OnAttached (); } void AssociatedObject_MouseLeave ( object sender , System . Windows . Input . MouseEventArgs e ) { (( ScaleTransform )(( TransformGroup ) AssociatedObject . RenderTransform ). Children [ 1 ]). ScaleY = 1 ; } void AssociatedObject_MouseEnter ( object sender , System . Windows . Input . MouseEventArgs e ) { (( ScaleTransform )(( TransformGroup ) AssociatedObject . RenderTransform ). Children [ 1 ]). CenterX = AssociatedObject . ActualWidth / 2 ; (( ScaleTransform )(( TransformGroup ) AssociatedObject . RenderTransform ). Children [ 1 ]). CenterY = AssociatedObject . ActualHeight / 2 ; (( ScaleTransform )(( TransformGroup ) AssociatedObject . RenderTransform ). Children [ 1 ]). ScaleY =- 1 ; } protected override void OnDetaching () { base . OnDetaching (); AssociatedObject . MouseEnter -= AssociatedObject_MouseEnter ; AssociatedObject . MouseLeave -= AssociatedObject_MouseLeave ; } }  
+
+ViewModel.cs
+
+ public class ViewModel { private ObservableCollection < String > _dataSource = new ObservableCollection <string> (); public ViewModel () { _dataSource . Add ( "Cat" ); _dataSource . Add ( "Dog" ); _dataSource . Add ( "Mouse" ); _dataSource . Add ( "Owl" ); _dataSource . Add ( "Rabbit" ); } public IEnumerable <string> DataSource { get { return _dataSource ; } } }  
+
+For more info, see this link:
+
+Using Interactivity Behaviors and Actions in WPF/Silverlight Styles
+share | improve this answer
+	
+edited Apr 7 '14 at 11:09
+	
+answered Mar 11 '14 at 10:19
+Anatoliy Nikolaev
+17.1k 12 43 52
+	
+   	 
+	
+The only way I could get benefit from it if I could use it as Application Resource, window.resources does not make much sense to me here as one Window is having it only once but several windows are going to have this combobox. But I am not able to use it as App.Resources. Please advice. –  MegaMind Mar 11 '14 at 10:29
+   	 
+	
+@MegaMind: Yes, in this case you can define it in the App.xaml . Window.Resources it is the same resource dictionary, and his chosen for demonstration purposes only, just test it. –  Anatoliy Nikolaev Mar 11 '14 at 10:33
+1 	 
+	
+It works. Using content control instead of combobox is very smart move. If possible elaborate the use of ContentControl instead of combobox some more, so it'll help to understand how this thing actually works. Thanks –  MegaMind Mar 11 '14 at 11:29
+   	 
+	
+@AnatoliyNikolaev i am having multiple controls in my wpf window and i wnat to make interactivity trigger common is it possible –  Meer Feb 12 '16 at 5:46
+add a comment  | 
+up vote 1 down vote
+	
+
+I usually work with Silverlight so I'm not sure if the following approach is sensible in WPF: You can pull your xaml into a UserControl , say BranchSelection.xaml for example:
+
+ <UserControl x:Class = "foobar.BranchSelection" > <ComboBox ItemsSource = "{Binding Branches}" DisplayMemberPath = "BranchName" SelectedItem = "{Binding SelectedBranch}" > <i:Interaction.Triggers> <i:EventTrigger EventName = "SelectionChanged" > <i:InvokeCommandAction Command = "{Binding SelectCustomerCommand}" CommandParameter = "{Binding SelectedBranch}" /> </i:EventTrigger> </i:Interaction.Triggers> </ComboBox> </UserControl>  
+
+And use it like this:
+
+ <StackPanel> <BranchSelection x:Name = "CustomerSelector_1" /> <BranchSelection x:Name = "CustomerSelector_2" /> </StackPanel>  
+
+share | improve this answer
+	
+answered Mar 11 '14 at 14:53
+Martin
+3,335 1 7 25
+	
+   	 
+	
+Valuable suggestion, one vote up –  MegaMind Mar 12 '14 at 3:02
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+Sign up using Google
+Sign up using Facebook
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged c# wpf xaml combobox resourcedictionary or ask your own question .
+
+asked
+	
+
+3 years, 10 months ago
+
+viewed
+	
+
+11,730 times
+
+active
+	
+
+3 years, 9 months ago
+Linked
+1
+WPF How to add blend interaction trigger to style resource
+1
+Attach XAML Behavior to all controls of same type
+0
+SelectedItem set after Right Click event on DataGrid
+1
+Handle LostFocus event for TextBox in custom control
+0
+event to command in style
+1
+Handle all SelectionChanges at one Position
+0
+Applying Interaction EventTrigger for every Control of Type in a View
+Related
+220
+Databinding an enum property to a ComboBox in WPF
+146
+Binding WPF ComboBox to a Custom List
+38
+WPF Combobox DisplayMemberPath
+4
+Does my code demonstrate good WPF practice?
+2
+WPF change Button Content on ViewModel.PropertyChanged event
+0
+combo box inside a user control disappears when style is applied in wpf
+4
+WPF Grid.Resources Style breaks ResourceDictionary Style. How to make them coexist?
+0
+Trying to access style info by StaticResource through ResourceDictionary with x:Key
+0
+WPF ComboBox: Text value doesn't affect SelectedItem
+1
+WPF ComboBox SelectedItem dynamic binding
+Hot Network Questions
+
+    How to deal with a developer that has poor skills but with whom I get on well?
+    What are the functional equivalents of imperative break statements and other loop checks?
+    Send daily email alerts of the Bitcoin Price
+    (Why) do lenses increase in value over time?
+    What does "map" mean?
+    Why do we use capacitors and not batteries in defibrillator?
+    How could mankind of ancient times cause significant climate change?
+    Time as money movie
+    return value from eval
+    How to deal with a player who is a bad sport?
+    Why do most drugs (eg: oxycodone) have seemingly arbitrary names?
+    Small SMD components: are they really capable of withstanding high voltages?
+    How can I get the original DEM from a hillshade raster (GeoTiff)?
+    Why did the grip-centered viking shield fall out of use relative to the kite shields?
+    Is there any less if/else implementation in this async method with three internal tasks?
+    Should I ban electronic devices (smartphones, tablets and laptops) from a course?
+    Functional equation: what function is its inverse's inverse?
+    How well would precision guided munitions work against early aircraft?
+    What does Matroska have which WebM doesn't, that made the differentiation necessary?
+    What are the risks of not patching a server or hypervisor for Meltdown?
+    Change color of indices and elements of an array?
+    What does not initiating and not asking questions back mean?
+    Is it probable that a 15VDC device be damaged by a 14-16VDC battery?
+    How can I merge the lines of two files by having common headers?
+
+question feed
+default
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Salary Calculator
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Stack Overflow em Português
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+
+    Magento
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Stack Overflow на русском
+    Programming Puzzles & Code Golf
+
+    Stack Overflow en español
+    Ethereum
+    Data Science
+    Arduino
+    Bitcoin
+    more (26)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (16)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2018 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2018.1.4.28274
+Stack Overflow works best with JavaScript enabled
+ 

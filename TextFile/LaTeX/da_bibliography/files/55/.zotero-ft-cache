@@ -1,0 +1,115 @@
+MessageBird Help Center
+Group 65 Go to MessageBird
+All Collections
+Frequently Asked Questions (FAQs)
+General FAQs
+General FAQs
+Written by Alex Dorweiler
+Updated over a week ago
+Can I receive SMS from my clients?
+
+You can send and receive messages via our platform. To receive messages, you need an inbound receiving point which would be a dedicated Number.
+Will I pay for incoming replies to my outgoing SMS messages?
+
+At MessageBird, you don’t pay for receiving replies.
+Can I send a text message from my company’s name?
+
+Yes! Technically it’s possible to from your company’s name, but keep in mind that this is limited to between 3 and 11 characters and subject to any country restrictions.
+What web browsers are supported by your web interface?
+
+We support all web browsers (Chrome, Firefox, Edge, etc) - besides Internet Explorer 8 and 9, but anything from Internet Explorer 10 and over is. You can find out which version your browser is by going on this link .
+What is your SLA?
+
+You can find our SLA on our Service Level Agreement page .
+Can a third party application be SMS enabled using MessageBird?
+
+Yes! There are numerous CRM and communication platforms available that offer an optional integration of an SMS Gateway. The connection via API would usually be done with either the use of a username/API password combination or the use of an access key, both of which you can directly generate from within your MessageBird Dashboard in the ‘Developers’ section.
+Why does MessageBird need my mobile phone number?
+
+We ask for your mobile number in order to send you a verification code and to register your mobile in your account for free test credits! During your testing phase, you are given 9 free SMS to send messages to yourself, so to whitelist the number that you are going to send to, we verify it in your account when you sign up, this is only 'stored' for your trial period.
+What is the activation code I received via SMS for and how do I use it?
+
+This is the code that we use to verify your phone number to claim your free test credits. When you enter your phone number and hit ‘request code’, a popup will appear with a box for you to enter the code. Type in the code received and hit enter!
+My activation code has not come through, what do I do?
+
+Sometimes if the verification SMS doesn’t get through there might be an issue with the phone receiving SMS at that moment. Try switching the phone off completely, removing the battery and restarting it. Then request another message to test, and let us know if this number is still not receiving. If this still does not work then please let us know; send us the number in question to support@messagebird.com and we'll be happy to get your account ready for testing!
+I’ve lost my username and/or password. How can I log in?
+
+If you have an account, but don’t remember or have access to your username, there is an option when you go to login to our webpage to recover these. If you have the email address to which the account is attached, click ‘ forgotten my username ’, enter your email and your username will be sent to your inbox. If you have forgotten your password, you can reset your password using your username and clicking on ‘ Forgotten my password ’! If you don’t know which email address is attached to your account, you can send us some previous contact from us, like an invoice or email, to support@messagebird.com
+How can I change my password?
+
+You can change your password by requesting a Password reset and then clicking on the link sent to your email. Or, you can change the password from within your MessageBird account by going to Account>General and enter your new password in there!
+How do I update personal details on my account?
+
+You can add and update your details by clicking on your username in the top right, and going to Account>Details . You can also add multiple contacts details by going to Account>Contacts !
+Can I upload all my contacts? Are my contacts secure?
+
+You can import contacts in bulk using an excel or CSV file. There is a step by step guide here on importing contacts. We take our security very seriously, we do not pass on your data to any third parties unless in compliance with legal obligations. You can check our privacy policy in full here .
+Can I put my contacts into groups?
+
+Yes, you can create and manage groups in your contacts here under Contact>Groups . There is also an article here on creating a group and adding contacts to a group .
+How many contacts can I store?
+
+The sky’s the limit! Feel free to upload and save as many as you like. If you're uploading an .xls(x) file with more than 25.000 rows, then is a good idea to split it into separate files and upload them individually.
+How can people opt in and opt out from my lists?
+
+If you do not have your contacts database set up yet, then you can automate Opt in and Opt outs using a Virtual Number !
+
+There is no limit to how many contacts can send you opt in or opt out responses.
+Can I send a text message to a specific group of contacts?
+
+Yes you can easily send out an SMS to a given group of contacts! You can see how to send a group message here .
+Do you provide global SMS coverage?
+
+Yes, we cover all networks worldwide. We are a licensed carrier with over 900 direct or 1-hop connections! Start sending, make an account here .
+How do you protect my privacy?
+
+We take our security very seriously, we do not pass on your data to any third parties unless in compliance with legal obligations. Your information is protected by our company's security architecture and infrastructure. You can check our full privacy policy .
+Where is my data stored?
+
+The MessageBird platform is build to be secure from the ground up, through all application layers. We have put in place best practices from several industry standards to help reduce and mitigate risks. MessageBird’s communication platform is hosted at secure data centers that comply with leading security policies and frameworks, including ISO 27001 and NEN 7510.
+How do I receive support?
+
+We’ve got a Help Center with all sorts of articles that might be able to answer your questions. If you can’t find what you’re looking for, our support team are more than happy to help.
+
+You can contact us via the contact forms on our website, the web chat in the bottom right hand corner of your screen. You can also give us a ring or drop us an email at support@messagebird.com .
+Are there any other costs involved when using MessageBird?
+
+The account is completely free, for sending SMS all you need is prepaid credit and the charge is just per SMS that you send out.
+
+In some countries, depending on local restrictions, you may need a Virtual Number to send with, and to receive replies. These are paid via a subscription from your balance.
+Who pays for any incoming SMS messages (i.e. replies to the SMS messages I send out)?
+
+If the end user is sending a reply to your Virtual Number, their provider will charge them their standard network rate to send an SMS. If you are receiving Premium SMS on a Keyword , then the end user is charged the premium rate that you have sent on your Keyword. You can find out more about that here. There is no cost to you to receive replies.
+Does MessageBird offer discounted messaging?
+
+We like to keep our pricing as competitive as possible so everyone can benefit! However, if you are planning to send more than the volumes stated on our pricing page, then you can always talk to Sales !
+Is there a daily or monthly minimum quota for sending SMS?
+
+No, there is no minimum send. You can send as few or as many SMS, over as long or short a period as you like!
+Do MessageBird credits expire?
+
+No, your credits and balance do not expire. If you do not log in for a continuous period of 12 months then your account will be deactivated. If, after your account has been deactivated you wish to reactivate it, we can reactivate your account and restore the previous balance.
+Who pays for failed messages?
+
+We deduct the balance for all SMS sent from the account. We will send every SMS that you submit to us, whether it is sent to an active or an invalid number, on to the operator, who then in turn will try to deliver the SMS. We are charged by the operator, which is why we in turn charge you. If you have an API connection, you can check the validity of your number database using our HLR service .
+How can I add sub-accounts and share my MessageBird credit with other team members?
+
+You can add subaccounts by going to your username in the top right and clicking on ‘ subaccounts ’. You can share credit in two ways:
+
+    Share balance with the main account, all the balance on the main account is available for the subaccounts to use.
+    Allocate credit to the subaccounts, you can give a fixed amount to the subaccount(s) for their use. Once this has been used, the subaccount will see their balance has reached zero, and further credit must be added from the main account.
+
+Learn more about subaccounts here.
+Can you forward an invoice to my accountant email address when I make a payment?
+
+Yes, you can add multiple contacts, such as a financial contact to receive invoices or balance warnings by going to Account>Contacts .
+Can I set up important alerts and monthly reports to be sent to me via email?
+
+You can request balance warnings and auto invoices to be sent to your email in your Financial>Preferences . You cannot receive your monthly usage via email, but you can download all sent and received SMS from the preceding 90 days in a file. You do this directly from within your account here, under Overview>Export. 
+How do I buy SMS credits?
+
+You can buy credits in your account! Just go to ‘top up balance’ in the top left hand corner of your dashboard , or go straight to your Financial section . Please note that payment methods may vary by region.
+Did this answer your question?
+MessageBird Help Center
+Intercom We run on Intercom

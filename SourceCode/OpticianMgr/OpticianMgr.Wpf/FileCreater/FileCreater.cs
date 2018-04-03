@@ -15,7 +15,7 @@ namespace OpticianMgr.Wpf.FileCreater
     public static class FileCreater
     {
         public static string Path = "C:\\Users\\Eva\\Desktop\\";
-        public static string OrderConfirmationPath = "Programmdokumente\\Auftragsbestaetigungen\\Auftragsbestaetingung_Template.dotx";
+        public static string OrderConfirmationPath = "Programmdokumente\\Auftragsbestaetigungen\\Auftragsbestaetigung_Template.dotx";
         public static string BillPath = "Programmdokumente\\Rechnungen\\Rechnung_Template.dotx";
 
         public static string CreateFileName(string docType, int orderId, string lastName)

@@ -24,5 +24,7 @@ namespace OpticiatnMgr.Core.Contracts
         void Save();
 
         void DeleteDatabase();
+
+        int GetStatisticOfMonth(int month, int year, string orderType);
     }
 }

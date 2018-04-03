@@ -1,0 +1,359 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+Learn, Share, Build
+
+Each month, over 50 million developers come to Stack Overflow to learn, share their knowledge, and build their careers.
+
+Join the world’s largest developer community.
+Google
+Facebook
+or
+Display name
+Email address
+Password
+By registering, you agree to the privacy policy and terms of service .
+MVVM Light and EventToCommand gives Invalid Markup in VS2015
+Ask Question
+up vote 6 down vote favorite
+3
+	
+
+I was just about to start using VS2015 with an existing WPF project including MVVM Light toolkit but found that there is a problem with this regarding the WPF/Xaml designer.
+
+The project includes a few EventToCommand tags in markup like this:
+
+ <i:Interaction.Triggers> <i:EventTrigger EventName="Loaded"> <command:EventToCommand Command="{Binding LoadedCommand}"></command:EventToCommand> </i:EventTrigger> </i:Interaction.Triggers>  
+
+When loading xaml files using the EventToCommand construct the designer fails to load the file and reports "Invalid markup". The error list then shows:
+
+The type 'EventToCommand' from assembly 'GalaSoft.MvvmLight.Platform' is built with an older version of the Blend SDK, and is not supported in a Windows Presentation Framework 4 project.
+
+The project is set to target .NET 4.5 and it works perfectly well i VS2013 without any changes at all. All this looks very similar to the question Where do I find Galasoft.MvvmLight.WPF45 assembly? but the suggested solution there does not help at all in VS2015.
+
+I have tested this in a new project created from MVVM Light template but I get the same error with that new project too. The MVVM Light version is MvvmLightLibs 5.2.0 from NuGet, I have also tested with older v4.x version of MvvmLightLibs.
+visual-studio-2015 mvvm-light
+share | improve this question
+	
+edited May 23 at 12:17
+Community ♦
+1 1
+	
+asked Sep 9 '15 at 10:59
+Per Salmi
+695 1 6 14
+	
+	
+add a comment  | 
+2 Answers 2
+active oldest votes
+up vote 3 down vote
+	
+
+The problem might be due to missing registration of System.Windows.Interactivity.dll in GAC. The below steps would help avoiding the invalid markup error.
+
+    Start Developer Command Prompt for VS2015 as Admin
+
+    Change Directory to Blend SDK:
+    cd C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\
+
+    Register DLL:
+    gacutil -i System.Windows.Interactivity.dll
+
+Reference: https://connect.microsoft.com/VisualStudio/feedback/details/755407/xaml-designer-will-not-display-when-using-blend-sdk-behaviors
+share | improve this answer
+	
+edited Apr 14 at 16:57
+Keith G
+2,413 5 31 42
+	
+answered Jul 19 '16 at 10:04
+Raghuveer
+31 4
+	
+   	 
+	
+This fixed the issue. –  Fer García Oct 2 '16 at 21:39
+   	 
+	
+This connect link doesn't work. Google Cache version : webcache.googleusercontent.com/… –  Simon_Weaver Jun 8 at 21:34
+add a comment  | 
+up vote 1 down vote
+	
+
+Use this version of System.Windows.Interactivity: http://www.microsoft.com/en-us/download/details.aspx?id=10801
+
+You can also install through NuGet Package Manager. Search for System.Windows.Interactivity.WPF
+share | improve this answer
+	
+answered Sep 18 '15 at 15:25
+Trev
+26 5
+	
+   	 
+	
+Tried that but it immediately results in a XamlParseException when starting the application. Error message says: Could not load file or assembly 'System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. –  Per Salmi Sep 21 '15 at 9:18
+   	 
+	
+I also had to drop MVVM Light down to version 5.1.1.0 –  Trev Sep 21 '15 at 14:00
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged visual-studio-2015 mvvm-light or ask your own question .
+
+asked
+	
+
+2 years, 1 month ago
+
+viewed
+	
+
+2,399 times
+
+active
+	
+
+6 months ago
+Blog
+From Power Calculations to P-Values: A/B Testing at Stack Overflow
+
+63 People Chatting
+JavaScript
+35 mins ago - Wietlol
+[Wietlol: 35 mins ago] [Kamil Solecki: 36 mins ago] [Mosho: 1 hour ago] [Traitor: 1 hour ago] [little pootis: 2 hours ago] [Some Guy: 3 hours ago] [Hatter is Mad: 3 hours ago]
+PHP
+25 mins ago - Florian Margaine
+[Gordon: 26 mins ago] [Arto: 27 mins ago] [mohamad mohamad: 41 mins ago] [tereško: 44 mins ago] [Jimbo: 44 mins ago] [Damien Overeem: 45 mins ago] [Fabor: 51 mins ago]
+Linked
+5
+Where do I find Galasoft.MvvmLight.WPF45 assembly?
+1
+Using EventToCommand spoils DesignView in Visual Studio 2015
+Related
+2
+XAML “Invalid Markup” error when using EventToCommand in VS2012
+0
+MVVM Light assembly conflict with Microsoft.Practices.ServiceLocation
+3
+Untangle EventToCommand on two controls with MVVM Light
+0
+MvvM Light Toolkit Certificate Error
+2
+EventToCommand issue when upgrading from vs2013 to vs2015
+0
+EventToCommand missing in Blend
+1
+Cannot Get MVVM Light EventToCommand to Work
+0
+WP 8.1 MVVM light cannot instantiate constructor
+0
+Visual Studio 2015 and MVVM Light
+1
+Issue with UserControl event not being intercepted with MVVM Light EventToCommand
+Hot Network Questions
+
+    Should two quarter rests always be written as half rest?
+    I can't work like this!
+    Alternative to hamburger menu? UI example inside
+    Basic Probability Intuition
+    As a new GM how do I figure out rules quickly?
+    Why is there no symplectic version of spectral geometry?
+    Why would only a specific model of drone be allowed to fly over crowds?
+    Why not use a national ID as username for every website?
+    How to intervene in a random abuse/harassment situation?
+    Where does the expression "no hay tu tía" come from?
+    Is there a low-cost alternative to RJ45 cables for large number of signals?
+    Munge my password
+    Is there a canonical map of Babylon 5?
+    How to explain human life expectancy increase?
+    If everyone believes P ≠ NP, why is everyone sceptical of proof attempts for P ≠ NP?
+    Am I a golfy array?
+    How do I motivate that an interstellar spaceship still requires risky spacewalks?
+    This is fake right? "FACEBOOK USER LOCATION FINDER"
+    Why is the discovery of merging neutron stars important?
+    Upside-Down Number Problem
+    How can I politely tell someone who is ineffectively holding a door open for me, “Thanks, but no thanks.”
+    How did first years obtain wands during Harry's 7th year?
+    Why are there no deep reinforcement learning engines for chess, similar to AlphaGo?
+    How do I ask my dad's friend if he's interested in me?
+
+question feed
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Salary Calculator
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Stack Overflow em Português
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+
+    Magento
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Stack Overflow на русском
+    Programming Puzzles & Code Golf
+
+    Stack Overflow en español
+    Ethereum
+    Data Science
+    Arduino
+    Bitcoin
+    more (26)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (16)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.10.20.27532
+Stack Overflow works best with JavaScript enabled

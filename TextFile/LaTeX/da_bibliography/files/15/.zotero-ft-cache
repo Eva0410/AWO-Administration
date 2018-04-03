@@ -1,0 +1,430 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Documentation beta
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+x Dismiss
+Join the Stack Overflow Community
+Stack Overflow is a community of 7.6 million programmers, just like you, helping each other.
+Join them; it only takes a minute:
+Sign up
+How to get Name by string Value from a .NET resource (RESX) file
+Ask Question
+Ubisoft Montreal
+We have 1 open job ♥
+Imagine yourself at Ubisoft Montreal
+Learn more
+up vote 11 down vote favorite
+1
+	
+
+Here's how my RESX file look like:
+
+ Name Value Comments Rule_seconds seconds seconds Rule_Sound Sound Sound  
+
+What I want is: Name by string Value, something like below:
+
+ public string GetResxNameByValue ( string value ) { // some code to get name value }  
+
+And implement it like below:
+
+ string str = GetResxNameByValue ( "seconds" );  
+
+so that str will return Rule_seconds
+
+Thanks!
+c# .net resx
+share | improve this question
+	
+asked May 3 '13 at 14:46
+Learner
+2,067 4 16 36
+	
+   	 
+	
+it seems this is only achievable if the resource file ensures no duplicate values,otherwise you might get unexpected resource keys returned. i.e. if you have two Names/keys (Time_Second, Sequence_Second), both have the value of 'second'. you might get the name of 'Time_second' when you expect the other one. –  cli Apr 13 at 4:40
+add a comment  | 
+4 Answers 4
+active oldest votes
+up vote 18 down vote accepted
+	
+
+This could work
+
+ private string GetResxNameByValue ( string value ) { System . Resources . ResourceManager rm = new System . Resources . ResourceManager ( "YourNamespace.YourResxFileName" , this . GetType (). Assembly ); var entry = rm . GetResourceSet ( System . Threading . Thread . CurrentThread . CurrentCulture , true , true ) . OfType < DictionaryEntry >() . FirstOrDefault ( e => e . Value . ToString () == value ); var key = entry . Key . ToString (); return key ; }  
+
+With some additional error checking..
+share | improve this answer
+	
+answered May 3 '13 at 15:01
+jure
+3,330 1 11 23
+	
+   	 
+	
+Thanks, and what if the resource file is in assembly and not an actual (RESX) file in the project? –  Learner May 3 '13 at 15:05
+   	 
+	
+You can specify assembly in which the resource is embeded in the ResourceManager constructor. But you still have to know resource base name. If you don't i think you could find out what resources are embeded into assembly by using Assembly.GetMainfestResourceNames –  jure May 3 '13 at 15:08
+   	 
+	
+@jure: Is it possible to return all the key value pairs from the resource? –  Kuldeep Singh Jul 10 '15 at 8:01
+add a comment  | 
+Ubisoft Montreal
+We have 1 open job ♥
+Imagine yourself at Ubisoft Montreal
+Learn more
+up vote 4 down vote
+	
+
+you can access directly by passing key:
+
+ public string gtresource ( string rulename ) { string value = null ; System . Resources . ResourceManager RM = new System . Resources . ResourceManager ( "CodedUITestProject1.Resource1" , this . GetType (). Assembly ); value = RM . GetString ( rulename ). ToString (); if ( value != null && value != "" ) { return value ; } else { return "" ; } }  
+
+share | improve this answer
+	
+answered Nov 6 '13 at 18:38
+Mohan Singh Saini
+64 1
+	
+2 	 
+	
+On 7 lines of code, I see a couple of problems that need to be addressed: First RM.GetString(rulename) already returns a string. There's no need to call ToString() . Second, RM.GetString(rulename) can return null is the resource is not found, which will raise a NullReferenceException . Third, if(value !=null && value !="") will never be reached with a null value because of the NullReferenceException . Finally, you can replace all the if by return RM.GetString(rulename) ?? string.Empty; . –  PhilDulac Jun 9 '14 at 15:46
+1 	 
+	
+This does not address the original question which is the "reverse" of what you are posting as solution. By a specific value they key needs to be retrieved... –  Bernoulli IT Sep 21 '15 at 11:18
+add a comment  | 
+up vote 2 down vote
+	
+
+Just in case it might help anyone. This ResourceHelper is inspired by jure and Mohan Singh Saini .
+
+ using System . Collections ; using System . Linq ; using System . Reflection ; using System . Resources ; using System . Threading ; public class ResourceHelper { /// <summary> /// ResourceHelper /// </summary> /// <param name="resourceName">i.e. "Namespace.ResourceFileName"</param> /// <param name="assembly">i.e. GetType().Assembly if working on the local assembly</param> public ResourceHelper ( string resourceName , Assembly assembly ) { ResourceManager = new ResourceManager ( resourceName , assembly ); } private ResourceManager ResourceManager { get ; set ; } public string GetResourceName ( string value ) { DictionaryEntry entry = ResourceManager . GetResourceSet ( Thread . CurrentThread . CurrentCulture , true , true ). OfType < DictionaryEntry >(). FirstOrDefault ( dictionaryEntry => dictionaryEntry . Value . ToString () == value ); return entry . Key . ToString (); } public string GetResourceValue ( string name ) { string value = ResourceManager . GetString ( name ); return ! string . IsNullOrEmpty ( value ) ? value : null ; } }  
+
+share | improve this answer
+	
+edited May 23 at 11:47
+Community ♦
+1 1
+	
+answered Apr 3 '14 at 21:00
+oloopy
+113 1 4
+	
+   	 
+	
+Any thoughts on how to reference strings resource in a referenced project? I keep getting an exception when attempting to reference it. –  BrianS Aug 19 '14 at 17:20
+   	 
+	
+I found it. For loaded RESX files you can reference the built-in resource manager. See stackoverflow.com/a/22494089/264628 . –  BrianS Aug 19 '14 at 17:49
+   	 
+	
+@BrianS Thanks for the supplement :) –  oloopy Aug 21 '14 at 14:50
+add a comment  | 
+up vote 0 down vote
+	
+
+ public static class ResourceManagerHelper { public static string GetResourceName ( this ResourceManager resourceManager , string value , CultureInfo cultureInfo , bool ignoreCase = false ) { var comparisonType = ignoreCase ? System . StringComparison . OrdinalIgnoreCase : System . StringComparison . Ordinal ; var entry = resourceManager . GetResourceSet ( cultureInfo , true , true ) . OfType < DictionaryEntry >() . FirstOrDefault ( dictionaryEntry => dictionaryEntry . Value . ToString (). Equals ( value , comparisonType )); if ( entry . Key == null ) throw new System . Exception ( "Key and value not found in the resource file" ); return entry . Key . ToString (); } }  
+
+To Call this extension method,
+
+ var key = Resources . ResourceManager . GetResourceName ( value , CultureInfo . InvariantCulture , true );  
+
+In this case, we don't want to pass the resource assembly, rather we can invoke using the particular resource's resourceManager.
+share | improve this answer
+	
+answered Apr 9 '15 at 8:57
+Shyam Sundar
+1 3
+	
+1 	 
+	
+Can you explain a bit more how your answer works? –  Joey Ciechanowicz Apr 9 '15 at 9:04
+1 	 
+	
+ResourceManagerHelper is a common extension for ResourceManager. Every Resource file have Resource Manager, for example: Rule.resx is a resource file. Then to call Rule.ResourceManager.GetResourceName(val, mycultureinfo) –  Shyam Sundar Apr 9 '15 at 11:00
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+
+Sign up using Google
+
+Sign up using Facebook
+
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged c# .net resx or ask your own question .
+
+asked
+	
+
+4 years, 3 months ago
+
+viewed
+	
+
+34,004 times
+
+active
+	
+
+2 years, 4 months ago
+We have 1 open job ♥
+Ubisoft Montreal
+
+Ubisoft Montreal
+
+Montréal, QC, Canada
+Computer Games Public 1-5k people
+
+Our tech stack
+
+    wpf
+    c#
+    mysql
+    c++
+    node.js
+    angularjs
+    python
+    go
+    sql
+    sql-server
+    java
+    docker
+    amazon-web-services
+    azure
+    redis
+    hlsl
+    directx
+
+We offer great benefits
+
+    Summer BBQ, year-end holiday party
+    Paid vacation
+    Flex hours
+    Entourage Program: share a slice of the “Ubi Life” w/ friends & family
+
+Learn more
+Linked
+103
+Loop through all the resources in a .resx file
+61
+read string from .resx file in C#
+0
+load an image from resources in Visual C#, using a string?
+Related
+1730
+How do I get a consistent byte representation of strings in C# without manually specifying an encoding?
+13
+How to load different RESX files based on some parameter
+0
+Getting a string from a resource file in an untyped manner
+-1
+Accessing a text file from a resx file
+3
+Read .resx file names from a referenced assembly
+0
+Resource File name search
+1
+How to turn a resx resource file into a dictionary
+0
+Read key, value and comment from resources in a .resx file
+0
+Get the string presentation of a resource key during runtime programatically
+0
+Get all resource names from .resx - lazy-load values
+Hot Network Questions
+
+    How can I tell people that my girlfriend and I don't want children of our own?
+    Are there any plain-looking women in Tolkien's Middle-earth?
+    The Third String
+    where 1 = 2; SQLdeveloper
+    Alone or by yourself?
+    Difference between weekly and biweekly paychecks
+    Why are people unwilling to share information about their salary?
+    Who is responsible for security on an airplane?
+    How can a creature's physiology involuntary react to whether a child is being raised or not?
+    Automatically calculate height of tallest line in list
+    Letting refrigerator sit after moving...?
+    How does North Korea prevent their ambassadors/diplomats living abroad from defecting?
+    Why is my regression insignificant when I merge data that produced two significant regressions?
+    Probability that product is a perfect square
+    Why is the US president commander-in-chief?
+    Why is it that the last two digits of a perfect square are never both odd?
+    Can sum of a rational number and its reciprocal be an integer?
+    Does the chess challenge in Philosopher's Stone adjust to the player's ability?
+    Determine your language's version
+    Should I avoid telling others that I ask questions on Stack Overflow?
+    If I've been prosecuted for a crime by another country can the US prosecute me for the same crime afterwards?
+    Which of the following sets has the greatest cardinality?(Math subject GRE exam 0568 Q.61 )
+    Diagonal Alphabet To the Input
+    You have 13 minutes to unlock this safe
+
+question feed
+lang-cs
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Documentation
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+    Magento
+
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Programming Puzzles & Code Golf
+    Ethereum
+    Data Science
+
+    Arduino
+    more (26)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (17)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.8.19.26817
+Stack Overflow works best with JavaScript enabled

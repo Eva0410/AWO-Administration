@@ -180,5 +180,9 @@ namespace OpticianMgr.Persistence
             _context.Database.Delete();
         }
 
+        public int GetStatisticOfMonth(int month, int year, string orderType)
+        {
+            return _context.Orders.Count(o => o.PaymentDate != null && o.PaymentDate.Value.Year == year && o.PaymentDate.Value.Month == month && o.PaymentState == "Bezahlt" && o.OrderType == orderType);
+        }
     }
 }

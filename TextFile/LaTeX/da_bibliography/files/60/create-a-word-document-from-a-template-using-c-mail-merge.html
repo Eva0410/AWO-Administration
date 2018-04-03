@@ -1,0 +1,1457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/">
+<meta name="wpd_url" content="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/">
+<meta name="wpd_date" content="2017-11-10T20:44Z">
+
+	
+	<title>Create a Word Document From a Template using c# (Mail Merge) « A day with .Net</title>
+
+	
+	
+	<link rel="pingback" href="https://vivekcek.wordpress.com/xmlrpc.php">
+
+	<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://s.pubmine.com/">
+<link rel="dns-prefetch" href="https://x.bidswitch.net/">
+<link rel="dns-prefetch" href="https://static.criteo.net/">
+<link rel="dns-prefetch" href="https://ib.adnxs.com/">
+<link rel="dns-prefetch" href="https://aax.amazon-adsystem.com/">
+<link rel="dns-prefetch" href="https://bidder.criteo.com/">
+<link rel="dns-prefetch" href="https://cas.criteo.com/">
+<link rel="dns-prefetch" href="https://gum.criteo.com/">
+<link rel="dns-prefetch" href="https://ads.pubmatic.com/">
+<link rel="dns-prefetch" href="https://gads.pubmatic.com/">
+<link rel="dns-prefetch" href="https://tpc.googlesyndication.com/">
+<link rel="dns-prefetch" href="https://ad.doubleclick.net/">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net/">
+<link rel="dns-prefetch" href="https://www.googletagservices.com/">
+<link rel="dns-prefetch" href="https://cdn.switchadhub.com/">
+<link rel="dns-prefetch" href="https://delivery.g.switchadhub.com/">
+<link rel="dns-prefetch" href="https://delivery.swid.switchadhub.com/">
+<link rel="alternate" type="application/rss+xml" title="A day with .Net » Feed" href="https://vivekcek.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="A day with .Net » Comments Feed" href="https://vivekcek.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="A day with .Net » Create a Word Document From a Template using c# (Mail&nbsp;Merge) Comments Feed" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/feed/">
+	<script type="text/javascript">
+
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s2.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1505864856h&ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script defer="" type="text/javascript" src="wp-emoji-release.min.js"></script>
+		
+
+
+
+<script type="text/javascript">
+
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="untitled"></script>
+
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://vivekcek.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Monitor Task Cancellation With&nbsp;Delegate" href="https://vivekcek.wordpress.com/2012/08/21/monitor-task-cancellation-with-delegate/">
+<link rel="next" title="C# Async HelloWorld" href="https://vivekcek.wordpress.com/2012/08/26/c-async-helloworld/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/">
+<link rel="shortlink" href="https://wp.me/pAlEp-6X">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fvivekcek.wordpress.com%2F2012%2F08%2F25%2Fcreate-a-word-document-from-a-template-using-c-mail-merge%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fvivekcek.wordpress.com%2F2012%2F08%2F25%2Fcreate-a-word-document-from-a-template-using-c-mail-merge%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Create a Word Document From a Template using c# (Mail Merge)">
+<meta property="og:url" content="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/">
+<meta property="og:description" content="I want to create a word document from a word template.The advantage of using template is, we can define a structure for the document and decorate the it with dynamic text. Software’s Used &amp;#8…">
+<meta property="article:published_time" content="2012-08-25T05:13:29+00:00">
+<meta property="article:modified_time" content="2012-08-25T05:13:29+00:00">
+<meta property="og:site_name" content="A day with .Net">
+<meta property="og:image" content="https://vivekcek.files.wordpress.com/2012/08/6.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:text:title" content="Create a Word Document From a Template using c# (Mail&nbsp;Merge)">
+<meta name="twitter:image" content="https://vivekcek.files.wordpress.com/2012/08/1.png?w=240">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://vivekcek.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://vivekcek.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://vivekcek.wordpress.com/osd.xml" title="A day with .Net">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		
+		<meta name="application-name" content="A day with .Net"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="My day to day experince in .net"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://vivekcek.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Create a Word Document From a Template using c# (Mail&nbsp;Merge) | A day with .Net on WordPress.com">
+<meta name="description" content="I want to create a word document from a word template.The advantage of using template is, we can define a structure for the document and decorate the it with dynamic text. Software's Used -------------------------------- 1. Word 2007. 2. Visual Studio 2010 Library used ----------------------------- 1. Microsoft Word 12.0 Object Library Steps ---------------------- 1. Create a…">
+		<script type="text/javascript">
+
+		var __ATA_PP = { pt: 1, ht: 0, tn: 'andreas09', amp: false };
+		var __ATA = __ATA || {};
+		__ATA.cmd = __ATA.cmd || [];
+		__ATA.criteo = __ATA.criteo || {};
+		__ATA.criteo.cmd = __ATA.criteo.cmd || [];
+		</script>
+		<script type="text/javascript" src="head.js" async=""></script><link rel="amphtml" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/amp/">
+<script type="text/javascript">
+
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script src="ga.js" async="" type="text/javascript"></script>
+
+<script src="publishertag.js"></script><script src="publishertag.js" charset="UTF-8" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="create-a-word-document-from-a-template-using-c-mail-merge.css" media="all">
+</head>
+<body class="post-template-default single single-post postid-431 single-format-standard mp6 customizer-styles-applied highlander-enabled highlander-light">
+
+<div id="container">
+	<div id="sitename">
+		<h1><a href="https://vivekcek.wordpress.com/">A day with .Net</a></h1>
+		<h2>My day to day experince in .net</h2>
+	</div>
+
+	<div id="mainmenu">
+			<ul class="level1">
+		<li><a href="https://vivekcek.wordpress.com/">Home</a></li>
+		<li class="page_item page-item-226"><a href="https://vivekcek.wordpress.com/azure/">Azure</a></li>
+<li class="page_item page-item-630"><a href="https://vivekcek.wordpress.com/c/">C# and .Net</a></li>
+<li class="page_item page-item-395"><a href="https://vivekcek.wordpress.com/design-patterns/">Design patterns</a></li>
+<li class="page_item page-item-396"><a href="https://vivekcek.wordpress.com/parallel-library/">Parallel Library</a></li>
+<li class="page_item page-item-454"><a href="https://vivekcek.wordpress.com/windows-8/">Windows 8</a></li>
+<li class="page_item page-item-2"><a href="https://vivekcek.wordpress.com/about/">About Vivek</a></li>
+	</ul>
+	</div>
+
+<div id="wrap">
+<div id="leftside">
+
+	<ul>
+
+<li id="categories-4" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-141"><a href="https://vivekcek.wordpress.com/category/ajax/">AJAX</a> (6)
+</li>
+	<li class="cat-item cat-item-2932846"><a href="https://vivekcek.wordpress.com/category/amazon-aws/">Amazon AWS</a> (2)
+</li>
+	<li class="cat-item cat-item-77861082"><a href="https://vivekcek.wordpress.com/category/android-c/">Android c#</a> (1)
+</li>
+	<li class="cat-item cat-item-280373997"><a href="https://vivekcek.wordpress.com/category/angular2/">Angular2</a> (3)
+</li>
+	<li class="cat-item cat-item-94234"><a href="https://vivekcek.wordpress.com/category/asp-net/">Asp.net</a> (11)
+</li>
+	<li class="cat-item cat-item-335778"><a href="https://vivekcek.wordpress.com/category/azure/">Azure</a> (19)
+</li>
+	<li class="cat-item cat-item-64575263"><a href="https://vivekcek.wordpress.com/category/blockchain/">BlockChain</a> (1)
+</li>
+	<li class="cat-item cat-item-17086873"><a href="https://vivekcek.wordpress.com/category/bot-framework/">Bot Framework</a> (1)
+</li>
+	<li class="cat-item cat-item-49277"><a href="https://vivekcek.wordpress.com/category/c-net/">c#.net</a> (26)
+</li>
+	<li class="cat-item cat-item-4884"><a href="https://vivekcek.wordpress.com/category/design-patterns/">Design Patterns</a> (9)
+</li>
+	<li class="cat-item cat-item-441682"><a href="https://vivekcek.wordpress.com/category/dicom/">DICOM</a> (2)
+</li>
+	<li class="cat-item cat-item-1047186"><a href="https://vivekcek.wordpress.com/category/entity-framework/">Entity Framework</a> (4)
+</li>
+	<li class="cat-item cat-item-81819"><a href="https://vivekcek.wordpress.com/category/facebook/">Facebook</a> (1)
+</li>
+	<li class="cat-item cat-item-457"><a href="https://vivekcek.wordpress.com/category/javascript/">javascript</a> (5)
+</li>
+	<li class="cat-item cat-item-203308"><a href="https://vivekcek.wordpress.com/category/jquery/">Jquery</a> (5)
+</li>
+	<li class="cat-item cat-item-114227"><a href="https://vivekcek.wordpress.com/category/linq/">LINQ</a> (4)
+</li>
+	<li class="cat-item cat-item-40978"><a href="https://vivekcek.wordpress.com/category/machine-learning/">Machine Learning</a> (2)
+</li>
+	<li class="cat-item cat-item-21690229"><a href="https://vivekcek.wordpress.com/category/managed-extensibility-framework/">Managed Extensibility Framework</a> (2)
+</li>
+	<li class="cat-item cat-item-23311384"><a href="https://vivekcek.wordpress.com/category/mcts-asp-net-3-5/">MCTS ASP.NET 3.5</a> (3)
+</li>
+	<li class="cat-item cat-item-76825571"><a href="https://vivekcek.wordpress.com/category/mono-net-linux/">Mono .Net Linux</a> (1)
+</li>
+	<li class="cat-item cat-item-36699"><a href="https://vivekcek.wordpress.com/category/mvc/">MVC</a> (32)
+</li>
+	<li class="cat-item cat-item-2621974"><a href="https://vivekcek.wordpress.com/category/ninject/">Ninject</a> (1)
+</li>
+	<li class="cat-item cat-item-647643"><a href="https://vivekcek.wordpress.com/category/parallel-programming/">Parallel Programming</a> (6)
+</li>
+	<li class="cat-item cat-item-37382"><a href="https://vivekcek.wordpress.com/category/sharepoint/">Sharepoint</a> (1)
+</li>
+	<li class="cat-item cat-item-68523697"><a href="https://vivekcek.wordpress.com/category/signalr/">SignalR</a> (4)
+</li>
+	<li class="cat-item cat-item-10346"><a href="https://vivekcek.wordpress.com/category/sql/">SQL</a> (1)
+</li>
+	<li class="cat-item cat-item-417619185"><a href="https://vivekcek.wordpress.com/category/tensorflow/">Tensorflow</a> (4)
+</li>
+	<li class="cat-item cat-item-93566809"><a href="https://vivekcek.wordpress.com/category/tfs-2012/">TFS 2012</a> (1)
+</li>
+	<li class="cat-item cat-item-6691540"><a href="https://vivekcek.wordpress.com/category/ui-automation/">UI Automation</a> (4)
+</li>
+	<li class="cat-item cat-item-585893823"><a href="https://vivekcek.wordpress.com/category/uipathrobotic-process-automation/">UiPath(Robotic Process Automation)</a> (1)
+</li>
+	<li class="cat-item cat-item-46648"><a href="https://vivekcek.wordpress.com/category/wcf/">WCF</a> (7)
+</li>
+	<li class="cat-item cat-item-427095"><a href="https://vivekcek.wordpress.com/category/web-api/">Web API</a> (2)
+</li>
+	<li class="cat-item cat-item-4502980"><a href="https://vivekcek.wordpress.com/category/windows-8/">Windows 8</a> (3)
+</li>
+	<li class="cat-item cat-item-123689118"><a href="https://vivekcek.wordpress.com/category/windows-server-appfabric-caching/">Windows Server AppFabric Caching</a> (5)
+</li>
+	<li class="cat-item cat-item-46652"><a href="https://vivekcek.wordpress.com/category/wpf/">WPF</a> (1)
+</li>
+		</ul>
+</li>
+<li id="archives-5" class="widget widget_archive"><h2 class="widgettitle">Archives</h2>
+		<ul>
+			<li><a href="https://vivekcek.wordpress.com/2017/09/">September 2017</a>&nbsp;(4)</li>
+	<li><a href="https://vivekcek.wordpress.com/2017/08/">August 2017</a>&nbsp;(2)</li>
+	<li><a href="https://vivekcek.wordpress.com/2017/07/">July 2017</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2017/06/">June 2017</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2017/03/">March 2017</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2017/01/">January 2017</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2016/11/">November 2016</a>&nbsp;(2)</li>
+	<li><a href="https://vivekcek.wordpress.com/2016/10/">October 2016</a>&nbsp;(4)</li>
+	<li><a href="https://vivekcek.wordpress.com/2016/07/">July 2016</a>&nbsp;(2)</li>
+	<li><a href="https://vivekcek.wordpress.com/2016/06/">June 2016</a>&nbsp;(5)</li>
+	<li><a href="https://vivekcek.wordpress.com/2016/05/">May 2016</a>&nbsp;(3)</li>
+	<li><a href="https://vivekcek.wordpress.com/2015/07/">July 2015</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2015/06/">June 2015</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2015/05/">May 2015</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2015/04/">April 2015</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2015/02/">February 2015</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2015/01/">January 2015</a>&nbsp;(4)</li>
+	<li><a href="https://vivekcek.wordpress.com/2014/12/">December 2014</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2014/11/">November 2014</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2014/06/">June 2014</a>&nbsp;(4)</li>
+	<li><a href="https://vivekcek.wordpress.com/2014/05/">May 2014</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2014/04/">April 2014</a>&nbsp;(2)</li>
+	<li><a href="https://vivekcek.wordpress.com/2014/03/">March 2014</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2014/02/">February 2014</a>&nbsp;(3)</li>
+	<li><a href="https://vivekcek.wordpress.com/2013/09/">September 2013</a>&nbsp;(4)</li>
+	<li><a href="https://vivekcek.wordpress.com/2013/06/">June 2013</a>&nbsp;(4)</li>
+	<li><a href="https://vivekcek.wordpress.com/2013/05/">May 2013</a>&nbsp;(14)</li>
+	<li><a href="https://vivekcek.wordpress.com/2013/04/">April 2013</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2013/03/">March 2013</a>&nbsp;(2)</li>
+	<li><a href="https://vivekcek.wordpress.com/2013/01/">January 2013</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/12/">December 2012</a>&nbsp;(6)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/11/">November 2012</a>&nbsp;(9)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/10/">October 2012</a>&nbsp;(6)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/09/">September 2012</a>&nbsp;(9)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/08/">August 2012</a>&nbsp;(8)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/07/">July 2012</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/06/">June 2012</a>&nbsp;(2)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/05/">May 2012</a>&nbsp;(4)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/04/">April 2012</a>&nbsp;(13)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/03/">March 2012</a>&nbsp;(4)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/02/">February 2012</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2012/01/">January 2012</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2011/12/">December 2011</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2011/11/">November 2011</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2011/07/">July 2011</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2011/06/">June 2011</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2011/05/">May 2011</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2011/04/">April 2011</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2011/03/">March 2011</a>&nbsp;(3)</li>
+	<li><a href="https://vivekcek.wordpress.com/2011/01/">January 2011</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2009/10/">October 2009</a>&nbsp;(1)</li>
+	<li><a href="https://vivekcek.wordpress.com/2009/08/">August 2009</a>&nbsp;(3)</li>
+	<li><a href="https://vivekcek.wordpress.com/2009/07/">July 2009</a>&nbsp;(16)</li>
+		</ul>
+		</li>
+<li id="top-posts-5" class="widget widget_top-posts"><h2 class="widgettitle">Top Posts &amp; Pages</h2>
+<ul>				<li>
+										<a href="https://vivekcek.wordpress.com/2017/03/25/installing-tensorflow-in-windows-and-visual-studio-deep-learning/" class="bump-view" data-bump-view="tp">
+
+						Installing Tensorflow in Windows and Visual Studio - Deep learning.					</a>
+									</li>
+							<li>
+										<a href="https://vivekcek.wordpress.com/2016/06/26/return-json-from-a-web-api-via-httpresponsemessage/" class="bump-view" data-bump-view="tp">
+
+						Return Json from a Web Api via HttpResponseMessage					</a>
+									</li>
+							<li>
+										<a href="https://vivekcek.wordpress.com/2014/06/24/using-automapper-with-wcf/" class="bump-view" data-bump-view="tp">
+
+						Using AutoMapper with WCF					</a>
+									</li>
+							<li>
+										<a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/" class="bump-view" data-bump-view="tp">
+
+						Create a Word Document From a Template using c# (Mail Merge)					</a>
+									</li>
+							<li>
+										<a href="https://vivekcek.wordpress.com/2013/03/17/simple-factory-vs-factory-method-vs-abstract-factory-by-example/" class="bump-view" data-bump-view="tp">
+
+						Simple Factory Vs Factory Method Vs Abstract Factory by Example					</a>
+									</li>
+							<li>
+										<a href="https://vivekcek.wordpress.com/2009/10/22/how-to-get-cpu-and-memory-usage-c-net/" class="bump-view" data-bump-view="tp">
+
+						How to Get CPU and Memory usage C#.Net					</a>
+									</li>
+							<li>
+										<a href="https://vivekcek.wordpress.com/2013/05/27/implement-a-search-box-using-mvc-4/" class="bump-view" data-bump-view="tp">
+
+						Implement a search box using MVC 4					</a>
+									</li>
+							<li>
+										<a href="https://vivekcek.wordpress.com/2011/06/14/pop3-client-using-c/" class="bump-view" data-bump-view="tp">
+
+						POP3 client using c#					</a>
+									</li>
+							<li>
+										<a href="https://vivekcek.wordpress.com/2011/07/14/face-capture-and-face-detection-in-c-using-webcam-part-1/" class="bump-view" data-bump-view="tp">
+
+						Face Capture and Face Detection in c# using webcam PART 1					</a>
+									</li>
+			</ul></li>
+	</ul>
+</div>
+<!-- Right Sidebar Template -->
+<div id="rightside">
+	<ul>
+	<li id="blog-stats-5" class="widget widget_blog-stats"><h2 class="widgettitle">Blog Stats</h2>
+		<ul>
+			<li>312,258 hits</li>
+		</ul>
+		</li>
+<li id="media_image-2" class="widget widget_media_image"><div style="max-width: 182px;" class="wp-caption alignnone"><img class="image " src="28c1570d8a361afdcb3050b82b9f35a6.png" alt="Live Users" height="120" width="172"><p class="wp-caption-text">Live Users</p></div></li>
+<li id="linkcat-1356" class="widget widget_links"><h2 class="widgettitle">Blogroll</h2>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://kidoos.net/">.net kidoos blog</a></li>
+<li><a href="http://www.dotnetthoughts.net/" rel="contact" target="_top">Anurajs .Net thoughts</a></li>
+<li><a href="http://www.csharpstar.com/" title="Csharp">Csharpstar</a></li>
+<li><a href="http://anuraj.wordpress.com/">dot net thoughts</a></li>
+<li><a href="http://jinaldesai.net/">Jinal Desai</a></li>
+<li><a href="http://joymonscode.blogspot.in/" rel="friend" target="_top">JoyMons Blog</a></li>
+<li><a href="http://www.dotnet-tricks.com/" target="_top">MVC Reference</a></li>
+<li><a href="http://blog.ninethsense.com/" rel="friend" target="_top">ninethsense Praveen's blog</a></li>
+<li><a href="http://ramcrishna.blogspot.com/" rel="friend" target="_top">Ramkys Asp.net Blog</a></li>
+<li><a href="http://www.techiehome.com/">Renjith Ramachandrans blog</a></li>
+<li><a href="http://sankarsan.wordpress.com/" target="_top">SankarSan Blog .NET</a></li>
+<li><a href="http://computerauthor.blogspot.in/" title="Shivprasad Koirala’s Blog" target="_top">Shivprasad Koirala's Blog</a></li>
+<li><a href="http://crankup.net/">Shoban's blog</a></li>
+<li><a href="http://talkingdotnet.com/" title="talkingdotnet">talkingdotnet</a></li>
+<li><a href="http://technoparktbi.wordpress.com/">Technopark TBI\’s Blog</a></li>
+
+	</ul>
+</li>
+
+		</ul>
+	</div>
+	
+<div id="content">
+		<div class="navigation">
+		<div class="alignleft">« <a href="https://vivekcek.wordpress.com/2012/08/21/monitor-task-cancellation-with-delegate/" rel="prev">Monitor Task Cancellation With&nbsp;Delegate</a></div>
+		<div class="alignright"><a href="https://vivekcek.wordpress.com/2012/08/26/c-async-helloworld/" rel="next">C# Async HelloWorld</a> »</div>
+	</div>
+	<div class="post-431 post type-post status-publish format-standard hentry category-c-net tag-interop-word-c tag-interop-word-template tag-word-template-c" id="post-431">
+		<h2>Create a Word Document From a Template using c# (Mail&nbsp;Merge)</h2>
+
+		<p class="date">Posted by vivekcek on August 25, 2012</p>
+
+		<div class="entrytext">
+			<p>I want to create a word document from a word template.The advantage of using template is, we can define a structure for the document and decorate the it with dynamic text.</p>
+<p><strong>Software’s Used</strong><br>
+——————————–</p>
+<p>1. Word 2007.</p>
+<p>2. Visual Studio 2010</p>
+<p><strong>Library used</strong><br>
+—————————–</p>
+<p>1. Microsoft Word 12.0 Object Library</p>
+<p><strong>Steps</strong><br>
+———————-</p>
+<p>1. Create a Word Template.</p>
+<p>2. Create a console application using VS 2010.</p>
+<p>3. Add reference to Microsoft Word 12.0 Object Library.</p>
+<p>4. Enjoy 🙂</p>
+<p><strong>1. Create a Word Template.</strong><br>
+——————————————-</p>
+<p>Word templates are created using MergeField’s in word.</p>
+<p>a. Open a new Word 2007 </p>
+<p>b. Type “Name:”, Where ‘Name:’ is just a label.</p>
+<p>c. Now we need to insert a MergeField right to our label ‘Name:’</p>
+<p>d. Place cursor on the right of our label.</p>
+<p>e. Select insert tab in word.</p>
+<p>f. Select Quick Parts. Then Field.</p>
+<p><a href="https://vivekcek.files.wordpress.com/2012/08/1.png"><img data-attachment-id="432" data-permalink="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/1-5/" data-orig-file="https://vivekcek.files.wordpress.com/2012/08/1.png?w=1007&amp;h=316" data-orig-size="1007,316" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="1" data-image-description="" data-medium-file="https://vivekcek.files.wordpress.com/2012/08/1.png?w=1007&amp;h=316?w=300" data-large-file="https://vivekcek.files.wordpress.com/2012/08/1.png?w=1007&amp;h=316?w=1007" src="1.png" alt="" title="1" class="alignnone size-full wp-image-432" srcset="https://vivekcek.files.wordpress.com/2012/08/1.png 1007w, https://vivekcek.files.wordpress.com/2012/08/1.png?w=150&amp;h=47 150w, https://vivekcek.files.wordpress.com/2012/08/1.png?w=300&amp;h=94 300w, https://vivekcek.files.wordpress.com/2012/08/1.png?w=768&amp;h=241 768w" sizes="(max-width: 1007px) 100vw, 1007px" height="316" width="1007"></a></p>
+<p>g. Select field category as MergeField. Give the MergeField name as ‘Name’.</p>
+<p><a href="https://vivekcek.files.wordpress.com/2012/08/2.png"><img data-attachment-id="433" data-permalink="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/2-5/" data-orig-file="https://vivekcek.files.wordpress.com/2012/08/2.png?w=688&amp;h=449" data-orig-size="688,449" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="2" data-image-description="" data-medium-file="https://vivekcek.files.wordpress.com/2012/08/2.png?w=688&amp;h=449?w=300" data-large-file="https://vivekcek.files.wordpress.com/2012/08/2.png?w=688&amp;h=449?w=688" src="2.png" alt="" title="2" class="alignnone size-full wp-image-433" srcset="https://vivekcek.files.wordpress.com/2012/08/2.png 688w, https://vivekcek.files.wordpress.com/2012/08/2.png?w=150&amp;h=98 150w, https://vivekcek.files.wordpress.com/2012/08/2.png?w=300&amp;h=196 300w" sizes="(max-width: 688px) 100vw, 688px" height="449" width="688"></a></p>
+<p>h. Save the document as WordTemplate.</p>
+<p><a href="https://vivekcek.files.wordpress.com/2012/08/4.png"><img data-attachment-id="434" data-permalink="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/4-3/" data-orig-file="https://vivekcek.files.wordpress.com/2012/08/4.png?w=429&amp;h=470" data-orig-size="429,470" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="4" data-image-description="" data-medium-file="https://vivekcek.files.wordpress.com/2012/08/4.png?w=429&amp;h=470?w=274" data-large-file="https://vivekcek.files.wordpress.com/2012/08/4.png?w=429&amp;h=470?w=429" src="4.png" alt="" title="4" class="alignnone size-full wp-image-434" srcset="https://vivekcek.files.wordpress.com/2012/08/4.png 429w, https://vivekcek.files.wordpress.com/2012/08/4.png?w=137&amp;h=150 137w, https://vivekcek.files.wordpress.com/2012/08/4.png?w=274&amp;h=300 274w" sizes="(max-width: 429px) 100vw, 429px" height="470" width="429"></a></p>
+<p>Now our Template contains.</p>
+<p>Name: «Name»</p>
+<p>The field inside &lt;&gt; is our merge Field. We will replace that field through code to create a new word document.</p>
+<p>* Note the extension of out template will be .dotx(MyTemplate.dotx)</p>
+<p><a href="https://vivekcek.files.wordpress.com/2012/08/3.png"><img data-attachment-id="435" data-permalink="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/3-4/" data-orig-file="https://vivekcek.files.wordpress.com/2012/08/3.png?w=583&amp;h=329" data-orig-size="583,329" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="3" data-image-description="" data-medium-file="https://vivekcek.files.wordpress.com/2012/08/3.png?w=583&amp;h=329?w=300" data-large-file="https://vivekcek.files.wordpress.com/2012/08/3.png?w=583&amp;h=329?w=583" src="3.png" alt="" title="3" class="alignnone size-full wp-image-435" srcset="https://vivekcek.files.wordpress.com/2012/08/3.png 583w, https://vivekcek.files.wordpress.com/2012/08/3.png?w=150&amp;h=85 150w, https://vivekcek.files.wordpress.com/2012/08/3.png?w=300&amp;h=169 300w" sizes="(max-width: 583px) 100vw, 583px" height="329" width="583"></a></p>
+<p><strong>2. Create a console application using VS 2010.</strong><br>
+—————————————————————<br>
+a. Create a console application.</p>
+<p>b. Add refrence to Microsoft Word 12.0 Object Library.</p>
+<p><a href="https://vivekcek.files.wordpress.com/2012/08/6.png"><img data-attachment-id="436" data-permalink="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/6-4/" data-orig-file="https://vivekcek.files.wordpress.com/2012/08/6.png?w=409&amp;h=400" data-orig-size="409,400" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="6" data-image-description="" data-medium-file="https://vivekcek.files.wordpress.com/2012/08/6.png?w=409&amp;h=400?w=300" data-large-file="https://vivekcek.files.wordpress.com/2012/08/6.png?w=409&amp;h=400?w=409" src="6.png" alt="" title="6" class="alignnone size-full wp-image-436" srcset="https://vivekcek.files.wordpress.com/2012/08/6.png 409w, https://vivekcek.files.wordpress.com/2012/08/6.png?w=150&amp;h=147 150w, https://vivekcek.files.wordpress.com/2012/08/6.png?w=300&amp;h=293 300w" sizes="(max-width: 409px) 100vw, 409px" height="400" width="409"></a></p>
+<p>c. Add NameSpace “using Microsoft.Office.Interop.Word;”.</p>
+<p>d. The Final document will be save in MyDocuments.</p>
+<pre class="brush: css; title: ; notranslate" title="">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Office.Interop.Word;
+namespace WordAuto
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //OBJECT OF MISSING "NULL VALUE"
+
+            Object oMissing = System.Reflection.Missing.Value;
+
+            Object oTemplatePath = "D:\\MyTemplate.dotx";
+
+            
+            Application wordApp = new Application();
+            Document wordDoc = new Document();
+
+            wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref oMissing, ref oMissing, ref oMissing);
+
+            foreach (Field myMergeField in wordDoc.Fields)
+            {
+
+                
+                Range rngFieldCode = myMergeField.Code;
+
+                String fieldText = rngFieldCode.Text;
+
+
+
+                // ONLY GETTING THE MAILMERGE FIELDS
+
+                if (fieldText.StartsWith(" MERGEFIELD"))
+                {
+
+                    // THE TEXT COMES IN THE FORMAT OF
+
+                    // MERGEFIELD  MyFieldName  \\* MERGEFORMAT
+
+                    // THIS HAS TO BE EDITED TO GET ONLY THE FIELDNAME "MyFieldName"
+
+                    Int32 endMerge = fieldText.IndexOf("\\");
+
+                    Int32 fieldNameLength = fieldText.Length - endMerge;
+
+                    String fieldName = fieldText.Substring(11, endMerge - 11);
+
+                    // GIVES THE FIELDNAMES AS THE USER HAD ENTERED IN .dot FILE
+
+                    fieldName = fieldName.Trim();
+
+                    // **** FIELD REPLACEMENT IMPLEMENTATION GOES HERE ****//
+
+                    // THE PROGRAMMER CAN HAVE HIS OWN IMPLEMENTATIONS HERE
+
+                    if (fieldName == "Name")
+                    {
+
+                        myMergeField.Select();
+
+                        wordApp.Selection.TypeText("Vivek");
+
+                    }
+
+                }
+
+            }
+            wordDoc.SaveAs("myfile.doc");
+            wordApp.Documents.Open("myFile.doc");
+            wordApp.Application.Quit();
+        }
+    }
+}
+</pre>
+<p><strong>DOWNLOAD SOURCE</strong></p>
+<p><a href="http://sdrv.ms/NQmKeD" title="http://sdrv.ms/NQmKeD" target="_top">http://sdrv.ms/NQmKeD</a></p>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">		<div style="padding-bottom: 15px; width: 300px; height: 250px; float: left; margin-right: 5px; margin-top: 0px;">
+		<div id="atatags-26942">
+			<script type="text/javascript">
+
+			__ATA.cmd.push(function() {
+				__ATA.initSlot('atatags-26942',  {
+					collapseEmpty: 'before',
+					sectionId: '26942',
+					width: 300,
+					height: 250
+				});
+			});
+			</script>
+		</div></div>		<div style="padding-bottom: 15px; width: 300px; height: 250px; float: left; margin-top: 0px;">
+		<div id="atatags-114160">
+			<script type="text/javascript">
+
+			__ATA.cmd.push(function() {
+				__ATA.initSlot('atatags-114160',  {
+					collapseEmpty: 'before',
+					sectionId: '114160',
+					width: 300,
+					height: 250
+				});
+			});
+			</script>
+		</div></div></div>
+						<div id="crt-183245404" style="width: 300px; height: 250px; display: none ! important;"></div>
+		<script type="text/javascript">
+
+(function(){var c=function(){var a=document.getElementById("crt-183245404");window.Criteo?(a.parentNode.style.setProperty("display","inline-block","important"),a.style.setProperty("display","block","important"),window.Criteo.DisplayAcceptableAdIfAdblocked({zoneid:388248,containerid:"crt-183245404",collapseContainerIfNotAdblocked:!0,callifnotadblocked:function(){a.style.setProperty("display","none","important");a.style.setProperty("visbility","hidden","important")}})):(a.style.setProperty("display","none","important"),a.style.setProperty("visibility","hidden","important"))};if(window.Criteo)c();else{if(!__ATA.criteo.script){var b=document.createElement("script");b.src="//static.criteo.net/js/ld/publishertag.js";b.onload=function(){for(var a=0;a<__ATA.criteo.cmd.length;a++){var b=__ATA.criteo.cmd[a];"function"===typeof b&&b()}};(document.head||document.getElementsByTagName("head")[0]).appendChild(b);__ATA.criteo.script=b}__ATA.criteo.cmd.push(c)}})();
+		</script>		<div id="crt-1133993374" style="width: 300px; height: 250px; display: none ! important;"></div>
+		<script type="text/javascript">
+
+(function(){var c=function(){var a=document.getElementById("crt-1133993374");window.Criteo?(a.parentNode.style.setProperty("display","inline-block","important"),a.style.setProperty("display","block","important"),window.Criteo.DisplayAcceptableAdIfAdblocked({zoneid:837497,containerid:"crt-1133993374",collapseContainerIfNotAdblocked:!0,callifnotadblocked:function(){a.style.setProperty("display","none","important");a.style.setProperty("visbility","hidden","important")}})):(a.style.setProperty("display","none","important"),a.style.setProperty("visibility","hidden","important"))};if(window.Criteo)c();else{if(!__ATA.criteo.script){var b=document.createElement("script");b.src="//static.criteo.net/js/ld/publishertag.js";b.onload=function(){for(var a=0;a<__ATA.criteo.cmd.length;a++){var b=__ATA.criteo.cmd[a];"function"===typeof b&&b()}};(document.head||document.getElementsByTagName("head")[0]).appendChild(b);__ATA.criteo.script=b}__ATA.criteo.cmd.push(c)}})();
+		</script>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled">
+<div style="display: block;" id="jp-relatedposts" class="jp-relatedposts">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="393" data-post-format="false"><span class="jp-relatedposts-post-title"><a data-position="0" data-origin="431" rel="nofollow" title="Synchronizing SQL Server Databases using Microsoft Sync Framework
+
+Source code Download http://sdrv.ms/PKZNd9 Problem Statement --------------------------------- I am designing an inventory application. Which have server side application and client side application. Through server application we can add products, can create orders etc. The server side application use a sql server database. The client side applications are used by marketing…" href="https://vivekcek.wordpress.com/2012/07/08/synchronizing-sql-server-databases-using-microsoft-sync-framework/" class="jp-relatedposts-post-a">Synchronizing SQL Server Databases using Microsoft Sync Framework</a></span><span class="jp-relatedposts-post-context">In "c#.net"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="182" data-post-format="false"><span class="jp-relatedposts-post-title"><a data-position="1" data-origin="431" rel="nofollow" title="Android development with c#
+
+Software Requirements --------------------- 1. Visual studio 2010 2. If you have previous installation of android SDK manger update it latest version. 3. You must have API LEVEL 14 and its ARM image file installed in android SDK. 4. Go to http://xamarin.com/monoforandroid and download evaluation version of 'mono for android' for…" href="https://vivekcek.wordpress.com/2012/02/05/android-development-with-c/" class="jp-relatedposts-post-a">Android development with c#</a></span><span class="jp-relatedposts-post-context">In "Android c#"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="705" data-post-format="false"><span class="jp-relatedposts-post-title"><a data-position="2" data-origin="431" rel="nofollow" title="Custom  Form Authentication in MVC 4 with Custom Authorize Attribute and Session Variable.
+
+Good afternoon dears, Today i am going to write about how you can implement a custom authentication in MVC. 1. Create an Empty MVC 4 project. Why we use Empty Project Template? because we don't want to add default LoginControllers in MVC. 2. Create a new model class 'User'. Place…" href="https://vivekcek.wordpress.com/2013/06/29/custom-form-authentication-in-mvc-4-with-custom-authorize-attribute-and-session-variable/" class="jp-relatedposts-post-a">Custom  Form Authentication in MVC 4 with Custom Authorize Attribute and Session Variable.</a></span><span class="jp-relatedposts-post-context">In "MVC"</span></p></div></div></div></div>
+
+						<p class="postmetadata">
+
+				 		This entry was posted on August 25, 2012 at 5:13 am						and is filed under <a href="https://vivekcek.wordpress.com/category/c-net/" rel="category tag">c#.net</a>.
+						Tagged: <a href="https://vivekcek.wordpress.com/tag/interop-word-c/" rel="tag">Interop word c#</a>, <a href="https://vivekcek.wordpress.com/tag/interop-word-template/" rel="tag">Interop word template</a>, <a href="https://vivekcek.wordpress.com/tag/word-template-c/" rel="tag">Word Template c#</a>. 						You can follow any responses to this entry through the <a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/feed/">RSS 2.0</a> feed.
+
+													You can <a href="#respond">leave a response</a>, or <a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/trackback/" rel="trackback">trackback</a> from your own site.
+
+									</p>
+
+	</div>
+
+	<h3 id="comments">30 Responses to “Create a Word Document From a Template using c# (Mail&nbsp;Merge)”</h3>
+
+<ol class="commentlist">
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-216">
+	<div class="comment-author vcard">
+	<img id="grav-cc47c27d60b032a3952f9b5f6dd879c4-0" alt="" src="cc47c27d60b032a3952f9b5f6dd879c4" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Umair</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-216">
+
+	October 1, 2012 at 11:54 am</a> </small>
+
+	<p>thanks</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=216#respond" onclick="return addComment.moveForm( &quot;comment-216&quot;, &quot;216&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Umair">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-titasix odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-248">
+	<div class="comment-author vcard">
+	<img id="grav-a71e6a995545ccc5260fc6c470bab27e-0" alt="" src="a71e6a995545ccc5260fc6c470bab27e" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">titasix</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-248">
+
+	November 1, 2012 at 4:03 pm</a> </small>
+
+	<p>Simple but amazing. Thx</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=248#respond" onclick="return addComment.moveForm( &quot;comment-248&quot;, &quot;248&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to titasix">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-304">
+	<div class="comment-author vcard">
+	<img id="grav-9d8444f793f0baacf6c942e101993ae7-0" alt="" src="9d8444f793f0baacf6c942e101993ae7" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Amit</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-304">
+
+	December 3, 2012 at 10:00 am</a> </small>
+
+	<p>It worked but when i put IF conditions on Merge field its not working as expected, can you suggest any solution for this?</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=304#respond" onclick="return addComment.moveForm( &quot;comment-304&quot;, &quot;304&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Amit">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-509">
+	<div class="comment-author vcard">
+	<img id="grav-d33344a8cc0f110a74f76100b532cdbc-0" alt="" src="d33344a8cc0f110a74f76100b532cdbc" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">WIBI KURNIAWAN</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-509">
+
+	March 31, 2013 at 4:50 pm</a> </small>
+
+	<p>THIS IS WHAT I NEED !!!, THANK YOU</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=509#respond" onclick="return addComment.moveForm( &quot;comment-509&quot;, &quot;509&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to WIBI KURNIAWAN">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-562">
+	<div class="comment-author vcard">
+	<img id="grav-f73dbc2daa205a38fd89f4a3c899ce57-0" alt="" src="f73dbc2daa205a38fd89f4a3c899ce57" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">dinesh kumar</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-562">
+
+	May 9, 2013 at 12:39 pm</a> </small>
+
+	<p>Thanks……………………..</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=562#respond" onclick="return addComment.moveForm( &quot;comment-562&quot;, &quot;562&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to dinesh kumar">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-580">
+	<div class="comment-author vcard">
+	<img id="grav-2288d28bb8721efaa57584c7b1363ca2-0" alt="" src="2288d28bb8721efaa57584c7b1363ca2" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">shubhangi</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-580">
+
+	May 22, 2013 at 6:26 am</a> </small>
+
+	<p>hi this is amazing stuff what u have posted but i wnat number of copies of the letter for different number of agent…how do i perform this with you code plz sugggest</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=580#respond" onclick="return addComment.moveForm( &quot;comment-580&quot;, &quot;580&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to shubhangi">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-599">
+	<div class="comment-author vcard">
+	<img id="grav-53c149385a7bea2b33d9177e0028bf69-0" alt="" src="53c149385a7bea2b33d9177e0028bf69" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Sam Chang</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-599">
+
+	June 6, 2013 at 2:16 am</a> </small>
+
+	<p>Many thanks, this is exactly what I need!</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=599#respond" onclick="return addComment.moveForm( &quot;comment-599&quot;, &quot;599&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Sam Chang">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 parent highlander-comment" id="comment-666">
+	<div class="comment-author vcard">
+	<img id="grav-739e9412531d9e229dfa909193bbed98-0" alt="" src="739e9412531d9e229dfa909193bbed98" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">A user</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-666">
+
+	July 4, 2013 at 5:08 am</a> </small>
+
+	<p>Hi, thanks you. May i know how to set path for below two? i try out this two line code save the file in different path…<br>
+wordDoc.SaveAs(“myfile.doc”);<br>
+wordApp.Documents.Open(“myFile.doc”);</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=666#respond" onclick="return addComment.moveForm( &quot;comment-666&quot;, &quot;666&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to A user">Reply</a>	</div>
+<ul class="children">
+	<li class="comment even depth-2 highlander-comment" id="comment-3520">
+	<div class="comment-author vcard">
+	<img id="grav-ddbc166e44bd0a879558a4d0fd0adad9-0" alt="" src="ddbc166e44bd0a879558a4d0fd0adad9" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">robert</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-3520">
+
+	November 4, 2014 at 4:02 pm</a> </small>
+
+	<p>string fileName = @”C:\Users\yourUSR\Desktop\myfile.doc”;<br>
+wordDoc.SaveAs(fileName);<br>
+            Process.Start(“WINWORD.EXE”, fileName);</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=3520#respond" onclick="return addComment.moveForm( &quot;comment-3520&quot;, &quot;3520&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to robert">Reply</a>	</div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="comment-687">
+	<div class="comment-author vcard">
+	<img id="grav-5c90276977c10bc53d16b0080f5ac9ce-0" alt="" src="5c90276977c10bc53d16b0080f5ac9ce" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Peter J.</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-687">
+
+	July 16, 2013 at 1:51 pm</a> </small>
+
+	<p>If you use COM on server side (e.g. ASP.NET) you would probably have problems like this: <a href="http://support.microsoft.com/kb/257757" rel="nofollow">http://support.microsoft.com/kb/257757</a>.</p>
+<p>You can try out this library <a href="http://flexdoc.codeplex.com/" rel="nofollow">http://flexdoc.codeplex.com/</a> which is free or some good but affordable third party like <a href="http://www.docentric.com/" rel="nofollow">http://www.docentric.com</a>.</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=687#respond" onclick="return addComment.moveForm( &quot;comment-687&quot;, &quot;687&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Peter J.">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="comment-700">
+	<div class="comment-author vcard">
+	<img id="grav-910af12865a8357fd755706b057ce2f9-0" alt="" src="910af12865a8357fd755706b057ce2f9" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Arnold Wiersma</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-700">
+
+	August 6, 2013 at 10:23 am</a> </small>
+
+	<p>Thanks, this works great for the body of the document. Does anyone here know how to access the fields in the header and footer for office 2010?</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=700#respond" onclick="return addComment.moveForm( &quot;comment-700&quot;, &quot;700&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Arnold Wiersma">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="comment-703">
+	<div class="comment-author vcard">
+	<img id="grav-cecf4c77709d09d270bad4ac36226e2c-0" alt="" src="cecf4c77709d09d270bad4ac36226e2c" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Murugavel S</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-703">
+
+	August 7, 2013 at 9:44 am</a> </small>
+
+	<p>hi,<br>
+Excellent.</p>
+<p>But how to be configured the Field names are get from DB.<br>
+please help me</p>
+<p>Murugavel S</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=703#respond" onclick="return addComment.moveForm( &quot;comment-703&quot;, &quot;703&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Murugavel S">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="comment-704">
+	<div class="comment-author vcard">
+	<img alt="" src="picture" class="avatar avatar-32" height="32" width="32">	<h3 class="commenttitle"><cite class="fn"><a href="https://www.facebook.com/eduubessa" rel="external nofollow" class="url">Eduardo Bessa</a></cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-704">
+
+	August 7, 2013 at 6:34 pm</a> </small>
+
+	<p>And to fill in various fields?<br>
+Help me please</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=704#respond" onclick="return addComment.moveForm( &quot;comment-704&quot;, &quot;704&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Eduardo Bessa">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1 parent highlander-comment" id="comment-1105">
+	<div class="comment-author vcard">
+	<img id="grav-0dc71756ee99d380197ae72e777b8790-0" alt="" src="0dc71756ee99d380197ae72e777b8790" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Aravind</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-1105">
+
+	November 8, 2013 at 7:27 am</a> </small>
+
+	<p>Its very good for one or two fields,but I need to get a bunch of data merged by connecting to the sql server please help</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=1105#respond" onclick="return addComment.moveForm( &quot;comment-1105&quot;, &quot;1105&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Aravind">Reply</a>	</div>
+<ul class="children">
+	<li class="comment even depth-2 highlander-comment" id="comment-3995">
+	<div class="comment-author vcard">
+	<img id="grav-3393d8473dcde3dd7d69ea81af0061cc-0" alt="" src="3393d8473dcde3dd7d69ea81af0061cc" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Rutvij Thakar</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-3995">
+
+	March 31, 2015 at 6:01 am</a> </small>
+
+	<p>Hi,<br>
+its a nice stuff<br>
+i done it through sql data..</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=3995#respond" onclick="return addComment.moveForm( &quot;comment-3995&quot;, &quot;3995&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Rutvij Thakar">Reply</a>	</div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-1125">
+	<div class="comment-author vcard">
+	<img id="grav-7e6a0afe56fca3e231c976293f7605b6-0" alt="" src="7e6a0afe56fca3e231c976293f7605b6" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">hossein</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-1125">
+
+	November 12, 2013 at 12:48 pm</a> </small>
+
+	<p>similiar job with image possible?</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=1125#respond" onclick="return addComment.moveForm( &quot;comment-1125&quot;, &quot;1125&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to hossein">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-1568">
+	<div class="comment-author vcard">
+	<img id="grav-0c1b18bb3e84787217795f7db5cfc88c-0" alt="" src="0c1b18bb3e84787217795f7db5cfc88c" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Momo</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-1568">
+
+	February 17, 2014 at 8:06 am</a> </small>
+
+	<p>Thank you very much!!!!! Very easy to learn!!</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=1568#respond" onclick="return addComment.moveForm( &quot;comment-1568&quot;, &quot;1568&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Momo">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-3439">
+	<div class="comment-author vcard">
+	<img id="grav-97a14aefa61c4a01a13b91ebeaefb418-0" alt="" src="97a14aefa61c4a01a13b91ebeaefb418" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Dhananjay</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-3439">
+
+	October 13, 2014 at 12:34 pm</a> </small>
+
+	<p>Thank u but this code not working on server when i am hosting my web application on server, So please suggest me ??? what can i do???</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=3439#respond" onclick="return addComment.moveForm( &quot;comment-3439&quot;, &quot;3439&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Dhananjay">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-3479">
+	<div class="comment-author vcard">
+	<img id="grav-6d5f9cfbcee68ca2e8d1d50fd7eab18e-0" alt="" src="6d5f9cfbcee68ca2e8d1d50fd7eab18e" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Rajesh</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-3479">
+
+	October 22, 2014 at 10:12 am</a> </small>
+
+	<p>great great great … simply amazing !!! Just one query can i use this in table view  ?</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=3479#respond" onclick="return addComment.moveForm( &quot;comment-3479&quot;, &quot;3479&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Rajesh">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-3582">
+	<div class="comment-author vcard">
+	<img id="grav-552831d142074537cc27d6514b097b28-0" alt="" src="552831d142074537cc27d6514b097b28" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">pradeep</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-3582">
+
+	November 19, 2014 at 4:37 am</a> </small>
+
+	<p>Hi all, If the fieldname consits of “\”value name \”” ..? then. What is the solution please help me.</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=3582#respond" onclick="return addComment.moveForm( &quot;comment-3582&quot;, &quot;3582&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to pradeep">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-3902">
+	<div class="comment-author vcard">
+	<img id="grav-e6d5cc4ea9a5f250f1b18dc338a0bfc8-0" alt="" src="e6d5cc4ea9a5f250f1b18dc338a0bfc8" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">mmc</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-3902">
+
+	January 27, 2015 at 9:43 pm</a> </small>
+
+	<p>I want to do the same for bulk . i.e. letters should open in bulk for different values for the same mergefield in one document and data in there should come from the SQL server database.</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=3902#respond" onclick="return addComment.moveForm( &quot;comment-3902&quot;, &quot;3902&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to mmc">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-3907">
+	<div class="comment-author vcard">
+	<img id="grav-baad2dc2775e42b687137eced298f971-0" alt="" src="baad2dc2775e42b687137eced298f971" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">PS</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-3907">
+
+	January 29, 2015 at 10:35 am</a> </small>
+
+	<p>Thank you. It  helps me over dificully</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=3907#respond" onclick="return addComment.moveForm( &quot;comment-3907&quot;, &quot;3907&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to PS">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-4477">
+	<div class="comment-author vcard">
+	<img id="grav-22af17a84839af125111a05962460c0e-0" alt="" src="22af17a84839af125111a05962460c0e" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Sangeetha</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-4477">
+
+	April 25, 2016 at 10:27 am</a> </small>
+
+	<p>@dhananjay,<br>
+if it is not working after getting deployed to server that’s mainly because some .dll might be missing. check for msvcp…..</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=4477#respond" onclick="return addComment.moveForm( &quot;comment-4477&quot;, &quot;4477&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Sangeetha">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-4478">
+	<div class="comment-author vcard">
+	<img id="grav-22af17a84839af125111a05962460c0e-1" alt="" src="22af17a84839af125111a05962460c0e" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Sangeetha</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-4478">
+
+	April 25, 2016 at 10:29 am</a> </small>
+
+	<p>@dhananjay,<br>
+if its not working after getting deployed in server that’s because  some dll might be missing check for msvcp…………</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=4478#respond" onclick="return addComment.moveForm( &quot;comment-4478&quot;, &quot;4478&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Sangeetha">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="comment-4522">
+	<div class="comment-author vcard">
+	<img id="grav-ef6dc748cdf3b7c52d5237fdcb8522bd-0" alt="" src="ef6dc748cdf3b7c52d5237fdcb8522bd" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">Hugh</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-4522">
+
+	June 21, 2016 at 8:17 pm</a> </small>
+
+	<p>How can you go about merging mailing labels which required to loop through a set of records (from Linq var List)? which is more a like real world problem?<br>
+Thanks</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=4522#respond" onclick="return addComment.moveForm( &quot;comment-4522&quot;, &quot;4522&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to Hugh">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-4524">
+	<div class="comment-author vcard">
+	<img id="grav-5f5b4facc2988fd547541d2200099fdc-0" alt="" src="5f5b4facc2988fd547541d2200099fdc" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">raja</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-4524">
+
+	June 27, 2016 at 1:15 pm</a> </small>
+
+	<p>showing error in  </p>
+<p>wordDoc.SaveAs(“myfile.doc”);<br>
+wordApp.Documents.Open(“myFile.doc”);<br>
+wordApp.Application.Quit(); </p>
+<p>in these lines</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=4524#respond" onclick="return addComment.moveForm( &quot;comment-4524&quot;, &quot;4524&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to raja">Reply</a>	</div>
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 parent highlander-comment" id="comment-4938">
+	<div class="comment-author vcard">
+	<img id="grav-409b2371362ab00f480d92d07c6f4362-0" alt="" src="409b2371362ab00f480d92d07c6f4362" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">vibhusha</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-4938">
+
+	September 26, 2017 at 7:50 am</a> </small>
+
+	<p>is it works on web application ?</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=4938#respond" onclick="return addComment.moveForm( &quot;comment-4938&quot;, &quot;4938&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to vibhusha">Reply</a>	</div>
+<ul class="children">
+	<li class="comment byuser comment-author-vivekcek bypostauthor odd alt depth-2 parent highlander-comment" id="comment-4940">
+	<div class="comment-author vcard">
+	<img id="grav-6f063817c71f0c18ea5098afdb05079c-0" alt="" src="6f063817c71f0c18ea5098afdb05079c" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">vivekcek</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-4940">
+
+	September 27, 2017 at 3:56 pm</a> </small>
+
+	<p>Nop try openxml</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=4940#respond" onclick="return addComment.moveForm( &quot;comment-4940&quot;, &quot;4940&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to vivekcek">Reply</a>	</div>
+<ul class="children">
+	<li class="comment even depth-3 highlander-comment" id="comment-4988">
+	<div class="comment-author vcard">
+	<img id="grav-409b2371362ab00f480d92d07c6f4362-1" alt="" src="409b2371362ab00f480d92d07c6f4362" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">vibhusha</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-4988">
+
+	November 6, 2017 at 10:51 am</a> </small>
+
+	<p>i’ts working fine , thank you so much vivekcek.</p>
+<p>now my question is,<br>
+how to set multiple values on word, the value is getting from database.</p>
+
+	<div class="reply">
+		</div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-4987">
+	<div class="comment-author vcard">
+	<img id="grav-409b2371362ab00f480d92d07c6f4362-2" alt="" src="409b2371362ab00f480d92d07c6f4362" class="avatar avatar-32 grav-hashed grav-hijack" height="32" width="32">	<h3 class="commenttitle"><cite class="fn">vibhusha</cite> <span class="says">said</span></h3>
+	</div>
+
+	<small class="comment-meta commentmetadata"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#comment-4987">
+
+	November 6, 2017 at 10:50 am</a> </small>
+
+	<p>i’ts working fine , thank you so much vivekcek.</p>
+<p>now my question is,<br>
+how to set multiple values on word, the value is getting from database.</p>
+
+	<div class="reply">
+	<a rel="nofollow" class="comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/?replytocom=4987#respond" onclick="return addComment.moveForm( &quot;comment-4987&quot;, &quot;4987&quot;, &quot;respond&quot;, &quot;431&quot; )" aria-label="Reply to vibhusha">Reply</a>	</div>
+</li><!-- #comment-## -->
+</ol>
+
+<div class="navigation">
+<div class="alignleft"></div>
+<div class="alignright"></div>
+</div>
+
+		<div id="respond" class="comment-respond js">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#respond" style="display: none;">Cancel reply</a></small></h3>			<form action="https://vivekcek.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<input id="highlander_comment_nonce" name="highlander_comment_nonce" value="c09f5bcede" type="hidden"><input name="_wp_http_referer" value="/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/" type="hidden">
+<input name="hc_post_as" id="hc_post_as" value="guest" type="hidden">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea class="autosizejs " tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px none; padding: 0px; box-sizing: content-box; word-wrap: break-word; height: 0px ! important; min-height: 0px ! important; overflow: hidden; transition: none 0s ease 0s ; font-family: Arial,Helvetica,Tahoma,Verdana,sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: 17px; width: 1136px;"></textarea><textarea style="height: 37px; overflow: hidden; word-wrap: break-word; resize: none;" placeholder="Enter your comment here..." id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div style="display: none;" id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display: none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="create-a-word-document-from-a-template-using-c-mail-merge_1.html" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0" height="24" width="24"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_top">				<img src="ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" class="no-grav" width="25">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" value="" type="email"></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" value="" type="text"></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" value="" type="url"></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="ad516503a11cd5ca435acc9bb6523536" alt="WordPress.com Logo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" type="hidden">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'wordpress'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="ad516503a11cd5ca435acc9bb6523536" alt="Twitter picture" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" type="hidden">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'twitter'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="ad516503a11cd5ca435acc9bb6523536" alt="Facebook photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" type="hidden">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'facebook'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="ad516503a11cd5ca435acc9bb6523536" alt="Google+ photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" type="hidden">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'googleplus'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div style="display: none;" id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" type="checkbox"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p style="display: none;" class="form-submit"><input name="submit" id="comment-submit" class="submit" value="Post Comment" type="submit"> <input name="comment_post_ID" value="431" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+</p><p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="ac0e427759" type="hidden"></p>
+<input name="genseq" value="1512938689" type="hidden">
+<p style="display: none;"></p>			<input id="ak_js" name="ak_js" value="1512938691193" type="hidden"></form>
+			</div><!-- #respond -->
+	<div style="clear: both;"></div><div class="bottomnavigation">
+			<div class="alignleft">« <a href="https://vivekcek.wordpress.com/2012/08/21/monitor-task-cancellation-with-delegate/" rel="prev">Monitor Task Cancellation With&nbsp;Delegate</a></div>
+			<div class="alignright"><a href="https://vivekcek.wordpress.com/2012/08/26/c-async-helloworld/" rel="next">C# Async HelloWorld</a> »</div>
+		</div>
+	
+</div>
+
+</div>
+<div class="clearingdiv">&nbsp;</div>
+</div>
+
+<div id="footer">
+<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a></div>
+
+<!--  -->
+<script type="text/javascript" src="gprofiles.js"></script>
+<script type="text/javascript">
+
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="wpgroho.js"></script>
+
+	<script>
+
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display: none;">
+	<div class="grofile-hash-map-cc47c27d60b032a3952f9b5f6dd879c4">
+	</div>
+	<div class="grofile-hash-map-a71e6a995545ccc5260fc6c470bab27e">
+	</div>
+	<div class="grofile-hash-map-9d8444f793f0baacf6c942e101993ae7">
+	</div>
+	<div class="grofile-hash-map-d33344a8cc0f110a74f76100b532cdbc">
+	</div>
+	<div class="grofile-hash-map-f73dbc2daa205a38fd89f4a3c899ce57">
+	</div>
+	<div class="grofile-hash-map-2288d28bb8721efaa57584c7b1363ca2">
+	</div>
+	<div class="grofile-hash-map-53c149385a7bea2b33d9177e0028bf69">
+	</div>
+	<div class="grofile-hash-map-739e9412531d9e229dfa909193bbed98">
+	</div>
+	<div class="grofile-hash-map-ddbc166e44bd0a879558a4d0fd0adad9">
+	</div>
+	<div class="grofile-hash-map-5c90276977c10bc53d16b0080f5ac9ce">
+	</div>
+	<div class="grofile-hash-map-910af12865a8357fd755706b057ce2f9">
+	</div>
+	<div class="grofile-hash-map-cecf4c77709d09d270bad4ac36226e2c">
+	</div>
+	<div class="grofile-hash-map-a4840ac90d72c21314d84f305884dabe">
+	</div>
+	<div class="grofile-hash-map-0dc71756ee99d380197ae72e777b8790">
+	</div>
+	<div class="grofile-hash-map-3393d8473dcde3dd7d69ea81af0061cc">
+	</div>
+	<div class="grofile-hash-map-7e6a0afe56fca3e231c976293f7605b6">
+	</div>
+	<div class="grofile-hash-map-0c1b18bb3e84787217795f7db5cfc88c">
+	</div>
+	<div class="grofile-hash-map-97a14aefa61c4a01a13b91ebeaefb418">
+	</div>
+	<div class="grofile-hash-map-6d5f9cfbcee68ca2e8d1d50fd7eab18e">
+	</div>
+	<div class="grofile-hash-map-552831d142074537cc27d6514b097b28">
+	</div>
+	<div class="grofile-hash-map-e6d5cc4ea9a5f250f1b18dc338a0bfc8">
+	</div>
+	<div class="grofile-hash-map-baad2dc2775e42b687137eced298f971">
+	</div>
+	<div class="grofile-hash-map-22af17a84839af125111a05962460c0e">
+	</div>
+	<div class="grofile-hash-map-ef6dc748cdf3b7c52d5237fdcb8522bd">
+	</div>
+	<div class="grofile-hash-map-5f5b4facc2988fd547541d2200099fdc">
+	</div>
+	<div class="grofile-hash-map-409b2371362ab00f480d92d07c6f4362">
+	</div>
+	<div class="grofile-hash-map-6f063817c71f0c18ea5098afdb05079c">
+	</div>
+	</div>
+<script type="text/javascript">
+
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/vivekcek.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/vivekcek.wordpress.com\/wp-login.php?action=logout&_wpnonce=a40eee58d7","homeURL":"https:\/\/vivekcek.wordpress.com\/","postID":"431","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="untitled_001.dat"></script>
+
+	<div id="carousel-reblog-box">
+		<form action="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="#" class="cancel">Cancel</a></span>
+				<input name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post" type="submit">
+				<input id="carousel-reblog-blog-id" value="8663037" type="hidden">
+				<input id="carousel-reblog-blog-url" value="https://vivekcek.wordpress.com" type="hidden">
+				<input id="carousel-reblog-blog-title" value="A day with .Net" type="hidden">
+				<input id="carousel-reblog-post-url" value="" type="hidden">
+				<input id="carousel-reblog-post-title" value="" type="hidden">
+			</div>
+
+			<input id="_wpnonce" name="_wpnonce" value="02a17f1c57" type="hidden"><input name="_wp_http_referer" value="/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/" type="hidden">		</form>
+
+		<div class="arrow"></div>
+	</div>
+<script type="text/javascript" src="untitled_002.dat"></script>
+<script type="text/javascript">
+
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://s0.wp.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?m=1363304414h&amp;ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+// Infinite scroll support
+jQuery( function( $ ) {
+	$( document.body ).on( 'post-load', function() {
+		SyntaxHighlighter.highlight();
+	} );
+} );
+</script>
+
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript">
+
+/* <![CDATA[ */
+var actionbardata = {"siteID":"8663037","siteName":"A day with .Net","siteURL":"http:\/\/vivekcek.wordpress.com","icon":"<img alt='' src='https:\/\/s1.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/andreas09","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/vivekcek.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fvivekcek.wordpress.com%2F2012%2F08%2F25%2Fcreate-a-word-document-from-a-template-using-c-mail-merge%2F","themeURL":"","xhrURL":"https:\/\/vivekcek.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"d208fb4f03","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"b46b8e49ef\" \/>","referer":"https:\/\/vivekcek.wordpress.com\/2012\/08\/25\/create-a-word-document-from-a-template-using-c-mail-merge\/","canFollow":"1","feedID":"906498","statusMessage":"","customizeLink":"https:\/\/vivekcek.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fvivekcek.wordpress.com%2F2012%2F08%2F25%2Fcreate-a-word-document-from-a-template-using-c-mail-merge%2F","postID":"431","shortlink":"https:\/\/wp.me\/pAlEp-6X","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/vivekcek.wordpress.com\/431","statsLink":"https:\/\/wordpress.com\/stats\/post\/431\/vivekcek.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Andreas09","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 429 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/vivekcek.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fvivekcek.wordpress.com%2F2012%2F08%2F25%2Fcreate-a-word-document-from-a-template-using-c-mail-merge%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/vivekcek.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"54f11ca2dc","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/vivekcek.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fvivekcek.wordpress.com%2F2012%2F08%2F25%2Fcreate-a-word-document-from-a-template-using-c-mail-merge%2F","blog_id":"8663037","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=8663037&v=wpcom&tz=0&user_id=0&subd=vivekcek","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="untitled_003.dat"></script><div class="actnbr-pub-andreas09 actnbr-has-follow" id="actionbar"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename"><a href="http://vivekcek.wordpress.com/"><img alt="" src="wpcom-gray-white.png" class="avatar avatar-50" height="50" width="50"> A day with .Net</a></li> 				   	<li class="actnbr-folded-customize"><a href="https://vivekcek.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Fvivekcek.wordpress.com%2F2012%2F08%2F25%2Fcreate-a-word-document-from-a-template-using-c-mail-merge%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow"><a class="actnbr-action actnbr-actn-follow" href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/"><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login"><a href="https://vivekcek.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fvivekcek.wordpress.com%2F2012%2F08%2F25%2Fcreate-a-word-document-from-a-template-using-c-mail-merge%2F">Log in</a></li> 				     				    <li class="actnbr-shortlink"><a href="https://wp.me/pAlEp-6X">Copy shortlink</a></li> 				    <li class="flb-report"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold"><a href="https://vivekcek.wordpress.com/2012/08/25/create-a-word-document-from-a-template-using-c-mail-merge/">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script><script src="w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'8663037','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'8663037','v':'wpcom','tz':'0','user_id':'0','post':'431','subd':'vivekcek'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRVlArYjIuSnFPfDlnbEJOeXlUQ2RIVT9tNGslY1ZLdTdXMi5WYiZXVm1saFBUU19QSWxrdDdCNj1Remo0eUljLiwlNFpOVyxCTEhlcHZQYjN3K0hrMTFsdnJRK1ExQSszRT11bUhBdmcxSHhNWjZLU01LYWhiWm4sXTAmdHhrUGJsMDBhZn51OHhdOU5mTndzYkhDPUZLTk1ncTEmL3lrT3lFMmktTlh8OG5bcFJkX3l6al0ldCxdMyt3WzRMZXFzbTd6cjQzaE11c0xsd3VKU2kxdkhsY0xCQnksRVtvUDdSS1VRcmVtPw=='}]);
+_stq.push([ 'clickTrackerInit', '8663037', '431' ]);
+	</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+
+
+<img id="wpstats" alt=":)" src="g.gif"></body>
+</html>

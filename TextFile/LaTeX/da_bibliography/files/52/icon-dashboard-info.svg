@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-dashboard-info</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-dashboard-info">
+            <g id="Page-1-Copy-13" transform="translate(1.000000, 1.000000)">
+                <path d="M24.5,12.5 C24.5,19.127 19.127,24.5 12.5,24.5 C5.873,24.5 0.5,19.127 0.5,12.5 C0.5,5.873 5.873,0.5 12.5,0.5 C19.127,0.5 24.5,5.873 24.5,12.5 Z" id="Stroke-1" stroke="#2481D7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12.5,17.0928 L12.5,11.9755144" id="Stroke-3" stroke="#2481D7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12.5,6.8745 C11.8321023,6.8745 11.2915,7.415908 11.2915,8.083 C11.2915,8.75089767 11.8321023,9.2915 12.5,9.2915 C13.1678977,9.2915 13.7085,8.75089767 13.7085,8.083 C13.7085,7.415908 13.1678977,6.8745 12.5,6.8745 Z" id="Fill-5" fill="#2481D7"></path>
+            </g>
+        </g>
+    </g>
+</svg>

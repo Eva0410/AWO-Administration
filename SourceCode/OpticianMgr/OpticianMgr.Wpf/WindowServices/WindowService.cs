@@ -88,6 +88,61 @@ namespace OpticianMgr.Wpf
             SentMessagesWindow newWindow = new SentMessagesWindow();
             this.ShowWindow(viewModel, newWindow);
         }
+        public void ShowEditTownsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            EditTownWindow newWindow = new EditTownWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowTownDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            TownDetailsWindow newWindow = new TownDetailsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowEditCountriesWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            EditCountriesWindow newWindow = new EditCountriesWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowCountryDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            CountryDetailsWindow newWindow = new CountryDetailsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowAddGlasstypeWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            AddGlasstypeWindow newWindow = new AddGlasstypeWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowEditGlasstypesWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            EditGlasstypesWindow newWindow = new EditGlasstypesWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowGlasstypeDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            GlasstypeDetailsWindow newWindow = new GlasstypeDetailsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowAddContactLensTypeWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            AddContactLensTypeWindow newWindow = new AddContactLensTypeWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowContactLensTypeDetailsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            ContactLensTypeDetailsWindow newWindow = new ContactLensTypeDetailsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowEditContactLensTypesWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            EditContactLensTypesWindow newWindow = new EditContactLensTypesWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
+        public void ShowEditStaticStringsWindow<TViewModel>(TViewModel viewModel) where TViewModel : IRequestClose
+        {
+            EditStaticStringsWindow newWindow = new EditStaticStringsWindow();
+            this.ShowWindow(viewModel, newWindow);
+        }
         public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
         {
             EventHandler<EventArgs> closeHandler = null;

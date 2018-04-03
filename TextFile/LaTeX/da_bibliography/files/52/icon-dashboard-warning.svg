@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="26px" height="24px" viewBox="0 0 26 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-dashboard-warning</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-dashboard-warning">
+            <g id="Page-1-Copy-11" transform="translate(1.000000, 1.000000)">
+                <path d="M11.288125,1.09416667 L0.657916667,19.7972917 C0.264166667,20.4920833 0.765208333,21.3535417 1.56416667,21.3535417 L22.9839583,21.3535417 C23.7829167,21.3535417 24.2839583,20.4920833 23.8891667,19.7972917 L13.26,1.09416667 C12.825625,0.329583333 11.7225,0.329583333 11.288125,1.09416667 Z" id="Stroke-1" stroke="#FFDB6C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12.2738542,8.91583333 L12.2738542,13" id="Stroke-3" stroke="#FFDB6C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M13.4181771,16.226875 C13.4181771,16.8585412 12.9062833,17.3711979 12.2738542,17.3711979 C11.641425,17.3711979 11.1295312,16.8585412 11.1295312,16.226875 C11.1295312,15.5952087 11.641425,15.0825521 12.2738542,15.0825521 C12.9062833,15.0825521 13.4181771,15.5952087 13.4181771,16.226875" id="Fill-5" fill="#FFDB6C"></path>
+            </g>
+        </g>
+    </g>
+</svg>

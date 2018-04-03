@@ -1,3 +1,34 @@
+\BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Ist-Situation}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Zielsetzung}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Aufgabenstellung}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Verwendete Technologien}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Entity Framework}{chapter.2}% 6
+\BOOKMARK [2][-]{subsection.2.1.1}{Linq}{section.2.1}% 7
+\BOOKMARK [1][-]{section.2.2}{UnitOfWork-Pattern}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.3}{WPF}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.4}{MVVM}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.5}{MVVM-Light}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.6}{Microsoft Office Interop}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.7}{WPF-Toolkit}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.8}{MessageBird}{chapter.2}% 14
+\BOOKMARK [0][-]{chapter.3}{Implementierung}{}% 15
+\BOOKMARK [1][-]{section.3.1}{Administration}{chapter.3}% 16
+\BOOKMARK [2][-]{subsection.3.1.1}{Kundenverwaltung}{section.3.1}% 17
+\BOOKMARK [2][-]{subsection.3.1.2}{Auftragsverwaltung}{section.3.1}% 18
+\BOOKMARK [2][-]{subsection.3.1.3}{Lieferantenverwaltung}{section.3.1}% 19
+\BOOKMARK [2][-]{subsection.3.1.4}{Verwaltung der lagernden Brillenfassungen}{section.3.1}% 20
+\BOOKMARK [2][-]{subsection.3.1.5}{E-Mail und SMS}{section.3.1}% 21
+\BOOKMARK [2][-]{subsection.3.1.6}{Statistiken}{section.3.1}% 22
+\BOOKMARK [2][-]{subsection.3.1.7}{Sonstiges}{section.3.1}% 23
+\BOOKMARK [2][-]{subsection.3.1.8}{Filtern und Sortieren}{section.3.1}% 24
+\BOOKMARK [1][-]{section.3.2}{Datenmodell}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.3}{Projektarchitektur}{chapter.3}% 26
+\BOOKMARK [0][-]{chapter.4}{Selbstevaluation}{}% 27
+\BOOKMARK [1][-]{section.4.1}{Probleme bei der Entwicklung}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.1.1}{Event-Handling mit MVVM-Light}{section.4.1}% 29
+\BOOKMARK [2][-]{subsection.4.1.2}{UnitOfWork-Instanzen}{section.4.1}% 30
+\BOOKMARK [0][-]{appendix.A}{Generierte Dokumente des Verwaltungsprogrammes}{}% 31
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.1.1}{Ist-Situation}{chapter.1}% 2
 \BOOKMARK [1][-]{section.1.2}{Zielsetzung}{chapter.1}% 3

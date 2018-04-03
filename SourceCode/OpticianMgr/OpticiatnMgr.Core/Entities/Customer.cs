@@ -49,6 +49,7 @@ namespace OpticiatnMgr.Core.Entities
         [Column(TypeName = "datetime2")]
         public DateTime? DateOfBirth { get; set; }
         public bool NewsLetter { get; set; }
+        public bool Deleted { get; set; }
 
     }
 }
