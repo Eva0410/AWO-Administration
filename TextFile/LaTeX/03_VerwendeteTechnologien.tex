@@ -15,7 +15,7 @@ Um eine Datenbank zu verwenden, gibt es drei Möglichkeiten:
 \item Model First: Im Gegensatz zu Code First werden hier zuerst die Entitäten der Datenbank mit Hilfe eines grafischen Tools modelliert und darauf basierend wird ein Datenbankschema erstellt.
 \item Database First: Es wird eine bestehende Datenbank verwendet.
 \end{itemize}
-Zum Verwenden der Datenbank wird im Programm eine Klasse erzeugt, die von der Klasse ''DbContext'' abgeleitet wird. Diese Klasse enthält DbSets aller Entitätsklassen und gibt mittels des Connectionstrings an, welche Datenbankverbindung verwendet werden soll. Das ist sehr nützlich, weil damit die Datenbank sehr einfach ausgetauscht werden kann. Ein DbSet ist eine Klasse, die die entsprechenden Methoden für Entitätstypen anbietet (Zum Beispiel 'Add' oder 'Remove'). \newline Beispielsweise werden so alle Kunden der Datenbank verwaltet: 
+Zum Verwenden der Datenbank wird im Programm eine Klasse erzeugt, die von der Klasse ''DbContext'' abgeleitet wird. Diese Klasse enthält DbSets aller Entitätenklassen und gibt mittels des Connectionstrings an, welche Datenbankverbindung verwendet werden soll. Das ist sehr nützlich, weil damit die Datenbank sehr einfach ausgetauscht werden kann. Ein DbSet ist eine Klasse, die die entsprechenden Methoden für Entitätentypen anbietet (Zum Beispiel 'Add' oder 'Remove'). \newline Beispielsweise werden so alle Kunden der Datenbank verwaltet: 
 \begin{lstlisting}
 public DbSet<Customer> Customers { get; set; }
 \end{lstlisting}
