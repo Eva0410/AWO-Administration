@@ -1,40 +1,39 @@
 \select@language {german}
 \select@language {german}
-\select@language {english}
+\select@language {german}
 \select@language {german}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Einsatz des Entity Frameworks in einer Applikation}}{5}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Einfaches WPF-Fenster}}{9}{figure.2.2}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Einsatz des Entity Frameworks in einer Applikation}}{6}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Einfaches WPF-Fenster}}{10}{figure.2.2}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces MVVM-Konzept}}{10}{figure.2.3}
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Model-View-Controller Konzept}}{6}{figure.2.1}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Model-View-Controller Konzept}}{15}{figure.2.4}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Screenshot der Kundenverwaltung}}{16}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Screenshot Neuen Kunden anlegen}}{17}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Screenshot der Kundendetails}}{18}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Screenshot der Auftragsverwaltung}}{19}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Screenshot eines Brillenauftrags}}{20}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Screenshot der Lieferantenverwaltung}}{23}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Screenshot der lagernden Brillenfassungen}}{24}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Screenshot der Massen E-Mails}}{25}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Screenshot der Massen SMS}}{26}{figure.3.9}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Screenshot der einzelnen Nachricht}}{27}{figure.3.10}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Screenshot der versendeten Nachrichten}}{28}{figure.3.11}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Screenshot der Statistiken}}{29}{figure.3.12}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Screenshot der L\"ander}}{30}{figure.3.13}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Land bearbeiten}}{30}{figure.3.14}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Vorgegebene Texte bearbeiten}}{31}{figure.3.15}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Screenshot des Filters}}{33}{figure.3.16}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Screenshot des Sortierens}}{36}{figure.3.17}
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Datenmodell}}{41}{figure.3.18}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Brillenkategorien}}{9}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Model-View-Controller Konzept}}{10}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Model-View-Controller Konzept}}{12}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Model-View-Controller Konzept}}{14}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Model-View-Controller Konzept}}{15}{figure.3.5}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Screenshot der Kundenverwaltung}}{20}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Screenshot Neuen Kunden anlegen}}{21}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Screenshot der Kundendetails}}{22}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Screenshot der Auftragsverwaltung}}{23}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Screenshot eines Brillenauftrags}}{24}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Screenshot der Lieferantenverwaltung}}{27}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Screenshot der lagernden Brillenfassungen}}{28}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Screenshot der Massen E-Mails}}{29}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Screenshot der Massen SMS}}{30}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Screenshot der einzelnen Nachricht}}{31}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Screenshot der versendeten Nachrichten}}{32}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Screenshot der Statistiken}}{33}{figure.3.12}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Screenshot der L\"ander}}{34}{figure.3.13}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Land bearbeiten}}{34}{figure.3.14}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Vorgegebene Texte bearbeiten}}{35}{figure.3.15}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Screenshot des Filters}}{37}{figure.3.16}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Screenshot des Sortierens}}{40}{figure.3.17}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Brillenkategorien}}{45}{figure.3.18}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Model-View-Controller Konzept}}{46}{figure.3.19}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Model-View-Controller Konzept}}{48}{figure.3.20}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Model-View-Controller Konzept}}{50}{figure.3.21}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Model-View-Controller Konzept}}{51}{figure.3.22}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Datenmodell}}{52}{figure.3.23}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Screenshot eines DataGrids}}{57}{figure.4.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Screenshot eines DataGrids}}{45}{figure.4.1}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Generierte Auftragsbest\"atigung}}{51}{figure.A.1}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Generierte Rechnung}}{52}{figure.A.2}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Generierte Auftragsbest\"atigung}}{63}{figure.A.1}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Generierte Rechnung}}{64}{figure.A.2}
