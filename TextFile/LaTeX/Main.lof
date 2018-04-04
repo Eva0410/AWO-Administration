@@ -1,6 +1,8 @@
 \select@language {german}
 \select@language {german}
-\contentsline {figure}{\numberline {1}{\ignorespaces Screenshot des Verwaltungsprogrammes}}{2}{figure.0.1}
+\contentsline {figure}{\numberline {1}{\ignorespaces Screenshot des Verwaltungsprogrammes}}{1}{figure.0.1}
+\select@language {english}
+\select@language {german}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Einsatz des Entity Frameworks in einer Applikation}}{7}{figure.2.1}

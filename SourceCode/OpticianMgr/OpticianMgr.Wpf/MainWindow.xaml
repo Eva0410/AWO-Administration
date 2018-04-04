@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:vm="clr-namespace:OpticianMgr.Wpf.ViewModel"
         Title="Augenoptik Aigner - Verwaltungsprogramm"
-        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" MinHeight="600" MinWidth="500">
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" MinHeight="600" MinWidth="1200">
     <DockPanel>
         <DockPanel.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
