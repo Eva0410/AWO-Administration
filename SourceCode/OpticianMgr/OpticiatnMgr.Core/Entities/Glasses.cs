@@ -23,5 +23,7 @@ namespace OpticiatnMgr.Core.Entities
 
         [Required(ErrorMessage = "Bitte geben Sie eine Kategorie ein."), Display(Name = "Kategorie")]
         public String Category { get; set; }
+        public bool Wish { get; set; }
+        public int Kaufinteresse { get; set; }
     }
 }

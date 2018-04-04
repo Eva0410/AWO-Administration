@@ -5,28 +5,26 @@
 <body style="background-color:#F9F9F9">
 
     <h1 style="font-size:55px;" align="center">Herrenbrillen</h1>
-
-    <div id="blackFilter1">
-        <h3 id="h3filterFach">Sortieren:</h3>
-        <select>
-            <option>Preis aufsteigend</option>
-            <option>Preis absteigend</option>
-        </select><br /><br />
-        <input class="btn btn-default" style="margin-bottom:5px; margin-top:5px; padding: 0px 5px 0px 5px;" type="submit" value="Sortieren" />
-    </div>
-
-    @foreach (var item in @Model.GlassModel.Where(c => c.Category == "Herrenbrille"))
-    {
-        <div class="col-md-3 col-sm-3" id="greyBox">
-            <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
-            <label style="font-size:30px; margin-left:35%;">@item.Name</label>
-            <p align="center">Modische Brille von: @item.Marke</p>
-            <p align="center">Kategorie: @item.Category</p>
-            <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price</p>
-            <button style="margin-bottom:5px; float:right;" class="col-md-6 col-sm-6 btn btn-default"> Edit</button>
-            <button style="margin-bottom:5px; float:right;" class="col-md-6 col-sm-6 btn btn-default"> Delete</button>
+    <form asp-action="Herrenbrillen">
+        <div id="blackFilter1">
+            <h3 id="h3filterFach">Sortieren:</h3>
+            <select asp-for="@Model.SelectedSortProperty" asp-items="@Model.SortList"></select><br /><br />
+            <input class="btn btn-default" style="margin-bottom:5px; margin-top:5px; padding: 0px 5px 0px 5px;" type="submit" value="Sortieren" />
         </div>
-    }
+    </form>
+        @foreach (var item in @Model.GlassModel.Where(c => c.Category == "Herrenbrille"))
+        {
+            <div class="col-md-3 col-sm-3" id="greyBox">
+                <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
+                <label style="font-size:30px; margin-left:35%;">@item.Name</label>
+                <p align="center">Modische Brille von: @item.Marke</p>
+                <p align="center">Kategorie: @item.Category</p>
+                <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
+                <form asp-route-id="@item.Id" asp-action="Wunschzettel">
+                    <input style="margin-bottom:5px;" type="submit" value="Wunschzettel" class="col-md-6 col-sm-6 btn btn-default" onclick="return confirm('Wollen Sie die Brille zum Wunschzettel hinzufügen?');" />
+                </form>
+            </div>
+        }
 </body>
 
 

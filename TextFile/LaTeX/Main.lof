@@ -7,34 +7,43 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Einsatz des Entity Frameworks in einer Applikation}}{7}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Einfaches WPF-Fenster}}{11}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces MVVM-Konzept}}{11}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Model-View-Controller Konzept}}{15}{figure.2.4}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces MVVM-Konzept}}{12}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Model-View-Controller Konzept}}{16}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Hello World Beispiel Html}}{16}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Hello World Beispiel Html mit Css}}{17}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Hello World Beispiel Html mit Css}}{18}{figure.2.7}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Bootstrap Grid breit}}{19}{figure.2.8}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Bootstrap Grid schmal}}{19}{figure.2.9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Screenshot der Kundenverwaltung}}{20}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Screenshot Neuen Kunden anlegen}}{21}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Screenshot der Kundendetails}}{22}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Screenshot der Auftragsverwaltung}}{24}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Screenshot eines Brillenauftrags}}{24}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Screenshot der Lieferantenverwaltung}}{28}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Screenshot der lagernden Brillenfassungen}}{28}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Screenshot der Massen-E-Mails}}{29}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Screenshot der Massen-SMS}}{31}{figure.3.9}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Screenshot der einzelnen Nachricht}}{32}{figure.3.10}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Screenshot der versendeten Nachrichten}}{33}{figure.3.11}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Screenshot der Statistiken}}{33}{figure.3.12}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Screenshot der L\"ander}}{35}{figure.3.13}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Land bearbeiten}}{35}{figure.3.14}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Vorgegebene Texte bearbeiten}}{36}{figure.3.15}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Screenshot des Filters}}{37}{figure.3.16}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Screenshot des Sortierens}}{41}{figure.3.17}
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Brillenkategorien}}{46}{figure.3.18}
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Model-View-Controller Konzept}}{47}{figure.3.19}
-\contentsline {figure}{\numberline {3.20}{\ignorespaces Model-View-Controller Konzept}}{49}{figure.3.20}
-\contentsline {figure}{\numberline {3.21}{\ignorespaces Model-View-Controller Konzept}}{51}{figure.3.21}
-\contentsline {figure}{\numberline {3.22}{\ignorespaces Model-View-Controller Konzept}}{52}{figure.3.22}
-\contentsline {figure}{\numberline {3.23}{\ignorespaces Datenmodell}}{53}{figure.3.23}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Screenshot der Kundenverwaltung}}{23}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Screenshot Neuen Kunden anlegen}}{24}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Screenshot der Kundendetails}}{25}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Screenshot der Auftragsverwaltung}}{26}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Screenshot eines Brillenauftrags}}{27}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Screenshot der Lieferantenverwaltung}}{30}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Screenshot der lagernden Brillenfassungen}}{31}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Screenshot der Massen E-Mails}}{32}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Screenshot der Massen SMS}}{33}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Screenshot der einzelnen Nachricht}}{34}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Screenshot der versendeten Nachrichten}}{35}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Screenshot der Statistiken}}{36}{figure.3.12}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Screenshot der L\"ander}}{37}{figure.3.13}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Land bearbeiten}}{37}{figure.3.14}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Vorgegebene Texte bearbeiten}}{38}{figure.3.15}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Screenshot des Filters}}{40}{figure.3.16}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Screenshot des Sortierens}}{43}{figure.3.17}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Screenshot der Brillenkategorien Seite}}{49}{figure.3.18}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Screenshot der Hauptseite des Administrationsbereich}}{50}{figure.3.19}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Screenshot der Brillen Seite im Administrationsbereich}}{51}{figure.3.20}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Screenshot der Neue Brille erstellen Seite}}{54}{figure.3.21}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Screenshot der Herrenbrille Seite}}{58}{figure.3.22}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Screenshot der Wunschzettel Seite}}{59}{figure.3.23}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces Screenshot der Kaufinteresse Seite im Administrationsbereich}}{60}{figure.3.24}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Screenshot der About Seite}}{62}{figure.3.25}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces Screenshot der Contact Seite}}{64}{figure.3.26}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Datenmodell}}{65}{figure.3.27}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Screenshot eines DataGrids}}{57}{figure.4.1}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Screenshot eines DataGrids}}{70}{figure.4.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Generierte Auftragsbest\"atigung}}{64}{figure.A.1}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Generierte Rechnung}}{65}{figure.A.2}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Generierte Auftragsbest\"atigung}}{77}{figure.A.1}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Generierte Rechnung}}{78}{figure.A.2}

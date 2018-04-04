@@ -10,6 +10,10 @@ textarea {
     max-width: 280px;
 }
 
+.adminEditBtn {
+    margin-bottom:5px; 
+    float:right;
+}
 
 #greyBox3 {
     background-color: #F9F9F9;

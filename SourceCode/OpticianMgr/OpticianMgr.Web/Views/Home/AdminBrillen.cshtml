@@ -14,10 +14,9 @@
         <label style="font-size:30px; margin-left:35%;">@item.Name</label>
         <p align="center">Modische Brille von: @item.Marke</p>
         <p align="center">Kategorie: @item.Category</p>
-        <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price</p>
-        <button style="margin-bottom:5px; float:right;" class="col-md-6 col-sm-6 btn btn-default"> Edit</button>
+        <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
         <form asp-route-id="@item.Id" asp-action="DeleteGlasses">
-            <input style="margin-bottom:5px;" type="submit" value="Delete" class="col-md-6 col-sm-6 btn btn-default" onclick="return confirm('Wollen Sie die Brille wirklich löschen?');" />
+            <input style="margin-bottom:5px;" type="submit" value="Delete" class="col-md-6 col-sm-6 btn btn-default" onclick="return confirm('Wollen Sie die Brille wirklich l&ouml;schen?');" />
         </form>
     </div>
     }

@@ -30,6 +30,7 @@ namespace OpticianMgr.WebIdentity.Controllers
             sim = _sm;
         }
 
+
         public IActionResult Index()
         {
             return View();
@@ -49,6 +50,56 @@ namespace OpticianMgr.WebIdentity.Controllers
             ViewData["Message"] = "Your contact page.";
 
             return View();
+        }
+
+        public IActionResult Wunschzettel()
+        {
+            GlassesModel model = new GlassesModel();
+            model.FillGlasses(uow);
+            return View(model);
+        }
+
+        public IActionResult Kaufinteresse()
+        {
+            GlassesModel model = new GlassesModel();
+            model.FillGlasses(uow);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> KaufinteresseMit(int id)
+        {
+            var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+            if (g == null)
+                return NotFound();
+            g.Wish = false;
+            g.Kaufinteresse++;
+            uow.GlassesRepository.Update(g);
+            uow.Save();
+            return RedirectToAction("Wunschzettel");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Wunschzettel(int id)
+        {
+            var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+            if (g == null)
+                return NotFound();
+            g.Wish = true;
+            uow.GlassesRepository.Update(g);
+            uow.Save();
+            return RedirectToAction("Wunschzettel");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteWish(int id)
+        {
+            var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+            if (g == null)
+                return NotFound();
+            g.Wish = false;
+            uow.GlassesRepository.Update(g);
+            uow.Save();
+            return RedirectToAction("Wunschzettel");
         }
 
         public IActionResult AdminBrillen()
@@ -129,9 +180,17 @@ namespace OpticianMgr.WebIdentity.Controllers
         
 
 
-        public IActionResult Herrenbrillen()
+        public IActionResult Herrenbrillen(string sort)
         {
             GlassesModel model = new GlassesModel();
+            model.SelectedSortProperty = sort;
+            model.FillGlasses(uow);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Herrenbrillen(GlassesModel model)
+        {
+            ModelState.Clear();
             model.FillGlasses(uow);
             return View(model);
         }
@@ -141,9 +200,23 @@ namespace OpticianMgr.WebIdentity.Controllers
             model.FillGlasses(uow);
             return View(model);
         }
+        [HttpPost]
+        public IActionResult Frauenbrillen(GlassesModel model)
+        {
+            ModelState.Clear();
+            model.FillGlasses(uow);
+            return View(model);
+        }
         public IActionResult Kinderbrillen()
         {
             GlassesModel model = new GlassesModel();
+            model.FillGlasses(uow);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Kinderbrillen(GlassesModel model)
+        {
+            ModelState.Clear();
             model.FillGlasses(uow);
             return View(model);
         }
@@ -157,18 +230,7 @@ namespace OpticianMgr.WebIdentity.Controllers
         public async Task<IActionResult> NewGlasses(NewGlasses model, int id)
         {
 
-            //preview
-            if (id == 0)
-            {
-                if (ModelState.Where(k => k.Key == nameof(model.ImageFileName)).Count() == 0 || ModelState.Where(k => k.Key == nameof(model.ImageFileName)).FirstOrDefault().Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
-                {
-                    //save the filename of the picture, and the image as base64 string
-                    model.ImageAsString = ConvertImage(model.Image, model.ImageAsString);
-                }
-                await model.FillList();
-                return View(model);
-            }
-            else if (id == 1)
+            if (id == 1)
             {
                 if (ModelState.IsValid)
                 {
@@ -199,6 +261,7 @@ namespace OpticianMgr.WebIdentity.Controllers
             return NotFound();
         }
 
+
         public string ConvertImage(IFormFile Image, string ImageAsString)
         {
             if (Image != null && Image.Length > 0)
@@ -213,6 +276,7 @@ namespace OpticianMgr.WebIdentity.Controllers
             return ImageAsString;
         }
 
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteGlasses(int id)
@@ -222,6 +286,14 @@ namespace OpticianMgr.WebIdentity.Controllers
                 return NotFound();
             uow.GlassesRepository.Delete(g);
             uow.Save();
+            return RedirectToAction("AdminBrillen");
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditGlasses(int id)
+        {
+            var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+
             return RedirectToAction("AdminBrillen");
         }
 
@@ -236,27 +308,34 @@ namespace OpticianMgr.WebIdentity.Controllers
         {
             if (ModelState.IsValid)
             {
-                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-                var message = new MailMessage();
-                message.To.Add(new MailAddress("orascanin.99@gmail.com"));
-                message.From = new MailAddress("diplomarbeitdanijal@gmail.com");
-                message.Subject = "Anfrage!";
-                message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
-                message.IsBodyHtml = true;
-
-                using (var smtp = new SmtpClient())
+                try
                 {
-                    var credential = new NetworkCredential
+                    var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                    var message = new MailMessage();
+                    message.To.Add(new MailAddress("orascanin.99@gmail.com"));
+                    message.From = new MailAddress("diplomarbeitdanijal@gmail.com");
+                    message.Subject = "Anfrage!";
+                    message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
+                    message.IsBodyHtml = true;
+
+                    using (var smtp = new SmtpClient())
                     {
-                        UserName = "diplomarbeitdanijal@gmail.com",
-                        Password = ".di,wx,01,21"
-                    };
-                    smtp.Credentials = credential;
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-                    await smtp.SendMailAsync(message);
-                    return RedirectToAction("Sent");
+                        var credential = new NetworkCredential
+                        {
+                            UserName = "diplomarbeitdanijal@gmail.com",
+                            Password = ".di,wx,01,21"
+                        };
+                        smtp.Credentials = credential;
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+                        await smtp.SendMailAsync(message);
+                        return RedirectToAction("Sent");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Error", "Ein Fehler ist aufgetreten! Tipp: Haben Sie Ihre Verbindung zum Internet überprüft?");
                 }
             }
             return View(model);
