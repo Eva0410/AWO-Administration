@@ -14,9 +14,9 @@
 \contentsline {section}{\numberline {2.4}UnitOfWork-Pattern}{9}{section.2.4}
 \contentsline {section}{\numberline {2.5}WPF}{10}{section.2.5}
 \contentsline {section}{\numberline {2.6}MVVM}{11}{section.2.6}
-\contentsline {section}{\numberline {2.7}MVVM-Light}{13}{section.2.7}
+\contentsline {section}{\numberline {2.7}MVVM-Light}{12}{section.2.7}
 \contentsline {section}{\numberline {2.8}MVC}{14}{section.2.8}
-\contentsline {section}{\numberline {2.9}HTML}{17}{section.2.9}
+\contentsline {section}{\numberline {2.9}HTML}{16}{section.2.9}
 \contentsline {section}{\numberline {2.10}CSS}{18}{section.2.10}
 \contentsline {subsection}{\numberline {2.10.1}Media Query}{19}{subsection.2.10.1}
 \contentsline {section}{\numberline {2.11}Bootstrap}{19}{section.2.11}
