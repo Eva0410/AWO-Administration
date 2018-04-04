@@ -11,7 +11,7 @@ namespace OpticianMgr.WebIdentity.Models.ViewModels
     {
         public List<String> Admins { get; set; }
         public string NewAdmin { get; set; }
-        public async Task GetAdmins(UserManager<ApplicationUser> um/*, IUnitOfWork uow*/)
+        public async Task GetAdmins(UserManager<ApplicationUser> um)
         {
             var admins = await um.GetUsersInRoleAsync("Admin");
             this.Admins = admins.Select(u => u.UserName).ToList();

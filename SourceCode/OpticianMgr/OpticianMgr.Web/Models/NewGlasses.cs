@@ -15,7 +15,7 @@ namespace OpticianMgr.Web.Models
     public class NewGlasses
     {
         public IFormFile Image { get; set; }
-        [FileExtensions(Extensions = "jpg", ErrorMessage = "Bild darf nur im jpg-Format hochgeladen werden!")]
+        [Required(ErrorMessage = "Bitte fügen Sie einen Bild ein."), FileExtensions(Extensions = "jpg", ErrorMessage = "Bild darf nur im jpg-Format hochgeladen werden!")]
         public string ImageFileName
         {
             get

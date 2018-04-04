@@ -1,8 +1,11 @@
 \chapter{Verwendete Technologien}\label{cha:theoretical-background}
 
 \section{Visual Studio}
-Visual Studio ist eine Entwicklungsumgebung von Microsoft. Sie wird verwendet um Computerprogramme sowie Webseiten, Webapps, Webservices und mobile Apps herzustellen. Die aktuellste Version des Programmes unterstützt eine vielzahl von Programmiersprachen: Visual Basic, .NET, C, C++, C++/CLI, C++/CX, C\#, F\#, SQL Server, TypeScript, Python, HTML, JavaScript und CSS.
-Weiters verfügt Visual Studio über einen Code editor mit IntelliSense(unterstützt den Programmierer mittels Vervollständigung des Codes).
+Visual Studio ist eine Entwicklungsumgebung von Microsoft. Sie wird verwendet um Computerprogramme sowie Webseiten, Webapps, Webservices und mobile Apps herzustellen. Die aktuellste Version des Programmes unterstützt eine vielzahl von Programmiersprachen.
+Weiters verfügt Visual Studio über einen Code editor mit IntelliSense(unterstützt den Programmierer mittels Vervollständigung des Codes). Es ermöglicht das entwickeln von Apps für iOS, Mac, Android, Windows das Web und die Cloud
+Visual Studio ermöglicht es genau und effizient zu Schreiben, ohne den aktuellen Dateikontext zu verlieren. Es gibt außerdem die Funktionen für Refactoring, Identifikation und zum Beheben von Codeproblemen nutzen.
+Der Visual Studio-Debugger kann sprachübergreifend, lokal oder remote Programmfehler mit Verlaufsdaten Ihres Codes ermitteln und debuggen.
+Man kann seinen Quellcode in Git-Repositorys verwalten, die von beliebigen Anbietern (einschließlich GitHub) gehostet werden. Außerdem bietet es Visual Studio Team Services, um Code zusammen mit Programmfehlern und Arbeitsaufgaben für ein gesamtes Projekt zu verwalten.
 
 \section{C-Sharp}
 C\# ist eine objektorientierte Programmiersprache. Sie wurde von Microsoft entwickelt ist jedoch mittlerweile Plattform unabhängig. Sie unterstützt zahlreiche Funktionen wie Lambda Expressions, Delegates, Enumerationen und auch einem direkten Speicherzugriff. Außerdem werden generische Methoden und Typen von C\# unterstützt.
@@ -220,31 +223,70 @@ Dadurch ist es ebenso möglich einen Teil der Anwendung zu verändern, ohne eine
 
 \section{HTML}
 Hypertext Markup Language oder auch HTML ist die Standardsprache für das erstellen von Webseiten und Web Applikationen. Gemeinsam mit CSS und Javascript gehört HTML zu den Eckpfeiler Technologien vom World Wide Web.
-Die meisten HTML-Elemente starten und enden jeweils mit einem Tag. Der Starttag beginnt immer mit dem Zeichen <. Nach dem < folgt der Elementname und dann wird der Starttag mit dem > Zeichen geschlossen. Nach dem Elementnamen können auch noch Attribute eingefügt werden.
-Der Endtag startet immer mit den Zeichen </, dann dem Elementnamen und endet mit einem > Zeichen.
+Die meisten HTML-Elemente starten und enden jeweils mit einem Tag. Der Starttag beginnt immer mit dem Zeichen $<$. Nach dem $<$ folgt der Elementname und dann wird der Starttag mit dem $>$ Zeichen geschlossen. Nach dem Elementnamen können auch noch Attribute eingefügt werden.
+Der Endtag startet immer mit den Zeichen $</$, dann dem Elementnamen und endet mit einem $>$ Zeichen.
+
+\begin{lstlisting}
+<h1> Hello World </h1>
+\end{lstlisting}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/html.png}
+\end{center}
+	\caption{Hello World Beispiel Html}
+	\label{fig:sample}
+\end{figure}
+\pagebreak 
+
 
 \section{CSS}
 Cascading Style Sheets ist eine style sheet Sprache welche gemeinsam mit HTML und DOM zu den Kernsprachen des World Wide Web gehört.
 Sie wird meist verwendet um einen visuellen Stilauf Webseiten festzulegen.
+Css bringt die Kontrolle über das Layout vieler Webseiten aus einer einzigen Style-Sheet-Datei heraus, präzisere Kontrolle über das Layout, verschiedene Layouts für verschiedene Medientypen (Bildschirmanzeige, Handy etc.) und eine Vielzahl von fortgeschrittenen und anspruchsvolle Techniken.
+Ein einfaches Beispiel:
+\begin{lstlisting}
+<h1 class="design"> Hello World </h1>
 
+.design{
+background-color: yellow;
+}
+\end{lstlisting}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/Css.png}
+\end{center}
+	\caption{Hello World Beispiel Html mit Css}
+	\label{fig:sample}
+\end{figure}
+\pagebreak 
 \subsection{Media Query}
 Media Query ist eine Technik die es seit CSS3 gibt.
-Sie verwendet die @media Regel um einen bestimmt Block von Css Eigenschaften zu verwenden, wenn eine bestimmte Bedingung erfüllt wurde.
+Sie verwendet die @media Regel um einen bestimmten Block von Css Eigenschaften zu verwenden, wenn eine bestimmte Bedingung erfüllt wurde. Im Beispiel wird der Hintergrund der Hello World Überschrift grün gefärbt wenn das Fenster kleiner wie 600px ist.
 
 \begin{lstlisting}
 @media only screen and (max-width: 600px) {
     body {
-        background-color: black;
+        background-color: green;
     }
 }
 \end{lstlisting}
 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/media.png}
+\end{center}
+	\caption{Hello World Beispiel Html mit Css}
+	\label{fig:sample}
+\end{figure}
+
 \section{Bootstrap}
 Bootstrap ist ein freies web framework für das designen von Webseiten und Webapps. Es enthält HTML- und CSS basierte Design Vorlagen für Typografie, Buttons, Tabellen, Grid-Systeme, Formulare, Navigations- und andere Elemente. Außerdem kann man optional auch JavaScript Erweiterungen verwenden.
 
+
 \subsection{Grid-Systeme}
 Die Bootstrap Grid-Systeme sind mobile responsive was bedeutet das sie ihr Layout auf die größe des Gerätes anpassen. Würde man das unten angefürte Beispiel auf dem Computer aufrufen würden 3 gleich große nebeinander gestellte Spalten angezeigt werden, am Handy würde sich dies platztechnisch nicht ausgehen deshalb werden diese 3 Spalten automatisch untereinander gestellt.
-
 \begin{lstlisting}
 <div class="row">
   <div class="col-sm-4">
@@ -258,6 +300,22 @@ Die Bootstrap Grid-Systeme sind mobile responsive was bedeutet das sie ihr Layou
   </div>
 </div>
 \end{lstlisting}
+Wird das Codebeispiel nun auf normaler Monitorbreite angezeigt so sind alle 3 Spalten nebeneinander.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/bootstrap1.png}
+\end{center}
+	\caption{Bootstrap Grid breit}
+	\label{fig:sample}
+\end{figure}
+Wenn aber das Fenster zu klein wird schreibt die Bootstrap-Klasse die Spalten untereinander.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/bootstrap2.png}
+\end{center}
+	\caption{Bootstrap Grid schmal}
+	\label{fig:sample}
+\end{figure}
 
 
 \section{Microsoft Office Interop}
@@ -319,7 +377,7 @@ Im Vergleich zum Versand von E-Mails, gibt es keine Möglichkeit kostenfrei und 
 
 
 \section{SMTP}
-Simple Mail Transfer Protocol ist ein standard Internetprotokoll zur Übertragung von emails. SMTP wird vorrangig für das versenden von Mails benutzt, da zum Empfang von Mails andere Protokolle wie zum Beispiel POP3 oder IMAP verwendet werden.
+Simple Mail Transfer Protocol ist ein standard Internetprotokoll zur Übertragung von emails. Wie jedes Netzwerkprotokoll hat es eine Regelsammlung für die Übertragung von Daten. Es legt Rahmenbedingungen fest, unter denen Daten zwischen zwei oder mehr Servern ausgetauscht werden. SMTP wird vorrangig für das versenden von Mails benutzt, da zum Empfang von Mails andere Protokolle wie zum Beispiel POP3 oder IMAP verwendet werden.
 
 \section{Base64}
 Base64 ist eine Gruppe ähnlicher Binär zu Text Codierungsschemas, die Binärdaten in einem ASCII-Zeichenfolgenformat darstellen, indem sie in eine Radix-64-Darstellung übersetzt werden.

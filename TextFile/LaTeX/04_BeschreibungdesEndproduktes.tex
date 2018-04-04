@@ -551,82 +551,401 @@ if (View.SortDescriptions.Count >= 1)
 	SortHeaders.Add(columnHeader);
 }
 \end{lstlisting}
-
+\pagebreak 
 
 \section{Website}
 \subsection{Brillenkategorien}
 Über den Menüpunkt "Home" gelangt man zu einer Übersicht aller Brillenkategorien. Dies ist gleichzeitig die Hauptseite der Webseite. Wird eine der 3 Kategorie (Herrenbrillen, Damenbrillen und Kinderbrillen) ausgewählt so werden die dazugehörigen Brillen auf einer neuen Seite angezeigt.
+Die Kategorien werden als Tabelle dargestellt mit einem Foto und einer kurzen Beschreibung wie im Codebeispiel:
+\begin{lstlisting}
+<div id="firstgreyBox3">
+    <table width="100%">
+        <tr>
+            <td>
+                 <a asp-area="" asp-controller="Home" asp-action="Herrenbrillen"><img class="indexImg" src="~/images/mann.jpg" /></a> 
+            </td>
+            <td style="text-align:center">
+                <h4>Modische Herrenbrillen.</h4>
+            </td>
+        </tr>
+    </table>
+</div>
+\end{lstlisting}
+Wenn der Administrator auf der Seite eingeloggt ist sieht er auf dieser Seite links oben einen Button Adminstrationsbereich über diesesn gelangt er zu auf die Administrationsseite. Um diesesn Button nur für den Administrator sichtbar zu machen wurde dem Administrator die "Admin" Rolle zugewiesen und der Button wird nur dann angezeigt wenn der aktuelle User diese Rolle besitzt.
+
+\begin{lstlisting}
+@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+{
+    <a class=" btn btn-default" asp-action="AdministrationArea">Administrationsbereich</a>
+}
+\end{lstlisting}
+
 
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.2]{images/Index.png}
 \end{center}
-	\caption{Brillenkategorien}
+	\caption{Screenshot der Brillenkategorien Seite}
 	\label{fig:sample}
 \end{figure}
-\pagebreak
-\subsubsection{Brillenmodelle}
-Die Brillenmodelle sind in drei Kategorien untergliedert "Herrenbrillen" , "Frauenbrillen" und "Kinderbrillen" auf jeder der Unterseiten werden die dazugehörigen Brillen mit einem Foto, dem Titel und dem Preis dargestellt. Jede Brille kann dann einzeln mittels eines Buttons auf den Wunshzettel gesetzt werden.
-Die Brillenmodelle werden nach der Kategorie gefiltert. Auf der "Home" Seite wird eine Kategorie ausgewählt alle Brillenmodelle die diese Kategorie haben werden angezeigt.
-Jedes Brillenmodell hat einen Preis nach belieben können die Brillen nach dem Preis auf- oder absteigend sortiert werden. 
 
+\subsection{Administration}
+
+\subsubsection{Administratoren}
+Befindet man sich auf der Hauptseite findet man rechts oben einen $"$Einloggen" Button wird dieser gedrückt wird man weitergeleitet auf eine Login Seite auf der sich der Administrator mittels seiner E-Mail Adresse und dem Passwort einlogen kann. Wurden die korrekten Daten vom Administrator eingegeben wird er dann wieder auf die Hauptseite zurückgeleitet dort erscheint nun ein Button $"$Administrationsbereich". In diesem bekommt man eine Übersicht aller Administratoren man kann hier dann neue hinzufügen und aktuelle Administratoren löschen. Beim hinzufügen eines Administrators wird dem User die Rolle $"$Admin" zugewiesen.
+\begin{lstlisting}
+public async Task GetAdmins(UserManager<ApplicationUser> um)
+        {
+            var admins = await um.GetUsersInRoleAsync("Admin");
+            this.Admins = admins.Select(u => u.UserName).ToList();
+        }
+\end{lstlisting} 
+Außerdem befindet sich auf der Seite auch noch ein Button $"$Brille" über diesen gelangt man zu einer Übersicht aller Brillen.   
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/Admin.png}
+\end{center}
+	\caption{Screenshot der Hauptseite des Administrationsbereich}
+	\label{fig:sample}
+\end{figure}
+
+
+\subsubsection{Brillen}
+Der Administrator erhält eine Übersicht aller Brillen und hat die Möglichkeit Brillen zu löschen oder neue hinzuzufügen.
+\begin{lstlisting}
+@foreach (var item in @Model.GlassModel)
+    {
+    <div class="col-md-3 col-sm-3" id="greyBox">
+        <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
+        <label style="font-size:30px; margin-left:35%;">@item.Name</label>
+        <p align="center">Modische Brille von: @item.Marke</p>
+        <p align="center">Kategorie: @item.Category</p>
+        <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
+    </div>
+    }
+\end{lstlisting}
+
+Beim klicken des Buttons $"$Neue Brille" wird man auf die Seite $"$Brille hinzufügen" weitergeleitet. Neben jeder Brille befinden sich 2 Buttons $"$Edit" und $"$Delete". Beim drücken des $"$Delete" Buttons wird das Brillenmodell gelöscht und eine aktualisierte Liste dargestellt.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/AdminBrillen.png}
+\end{center}
+	\caption{ Screenshot der Brillen Seite im Administrationsbereich}
+	\label{fig:sample}
+\end{figure}
+ 
+
+\begin{itemize}
+\item Brille hinzufügen
+Auf dieser Seite kann der Administrator neue Brillenmodelle einfügen dazu muss er den Name, den Preis und die Kategorie eingeben und ein Foto der Brille einfügen, dann kann er auf $"$Einreichen" drücken. Dies führt dazu, dass die Brille in der Datenbank eingefügt wird und dass er auf die Seite $"$Brillen" zurückkehrt wo die aktualisierte Liste der Brillen zu sehen ist.
+Technischer Hintergrund:
+\begin{lstlisting}
+<form method="post" enctype="multipart/form-data" accept-charset="UTF-8" asp-action="NewGlasses">
+            <input type="hidden" asp-for="ImageAsString" value="@Model.ImageAsString" />
+            <div>
+                <div class="form-group">
+                    <div>
+                        <p>Bilder nur im Format .jpg:</p>
+                        <input style="margin-bottom:10px;" asp-for="@Model.Image" accept="image/*" type="file" />
+                        <span asp-validation-for="@Model.ImageFileName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Name"></label>
+                    <input type="text" placeholder="Name*" class="form-control" asp-for="@Model.Glasses.Name">
+                    <span asp-validation-for="@Model.Glasses.Name" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Marke"></label>
+                    <input type="text" placeholder="Marke*" class="form-control" asp-for="@Model.Glasses.Marke">
+                    <span asp-validation-for="@Model.Glasses.Marke" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Price"></label>
+                    <input type="number" placeholder="Preis*" class="form-control" asp-for="@Model.Glasses.Price">
+                    <span asp-validation-for="@Model.Glasses.Price" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Category"></label>
+                    <select asp-items="@Model.Kategorie" asp-for="@Model.Glasses.Category"></select>
+                </div>
+
+                <footer>
+                    <input type="hidden" id="idField" name="id" value="0" />
+                    <input type="submit" class="myButton" value="Einreichen" onclick="document.getElementById('idField').value = '1'";/>
+                    <a class="myButton" asp-action="Index">Zur&uuml;ck</a>
+                </footer>
+
+            </div>
+        </div>
+    </form>
+\end{lstlisting}   
+Die Eingegeben Daten werden dann über den HomeController ind die Datenbank gespeichert.
+\begin{lstlisting}
+public async Task<IActionResult> NewGlasses()
+        {
+            NewGlasses model = new NewGlasses();
+            await model.Init();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> NewGlasses(NewGlasses model, int id)
+        {
+
+            if (id == 1)
+            {
+                if (ModelState.IsValid)
+                {
+                    //Save image
+                    model.Glasses.Image = ConvertImage(model.Image, model.ImageAsString);
+
+
+                    this.uow.GlassesRepository.Insert(model.Glasses);
+                    this.uow.Save();
+
+                    return RedirectToAction("AdminBrillen");
+
+                }
+                else
+                {
+                    await model.FillList();
+                    //save image as string
+                    model.ImageAsString = ConvertImage(model.Image, model.ImageAsString);
+                    return View(model);
+                }
+            }
+            else if (id == 2)
+            {
+                await model.FillList();
+                model.ImageAsString = string.Empty;
+                return View(model);
+            }
+            return NotFound();
+        }
+
+\end{lstlisting}
+Das hochgeladene Foto wird zuerst in einen String konvertiert und, dann in der Datenbank abgespeichert
+\begin{lstlisting}
+if (Image != null && Image.Length > 0)
+{
+	using (var ms = new MemoryStream())
+	{
+		Image.CopyTo(ms);
+		var fileBytes = ms.ToArray();
+		return Convert.ToBase64String(fileBytes);
+	}
+}
+return ImageAsString;
+\end{lstlisting}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/NeueBrille.png}
+\end{center}
+	\caption{Screenshot der Neue Brille erstellen Seite}
+	\label{fig:sample}
+\end{figure}
+
+
+\pagebreak 
+
+\item Brille löschen
+Falls der Administrator ein Brillenmodell von seiner Website nehmen will beziehungsweise aus der Datenbank löschen kann er dies einfach über den $"$Delete" Button.
+Nach b etätigen des Buttons wird er nur noch einmal gefragt ob er sich sicher ist das er diese Brille löschen möchte bestätigt er dies wird das Brillenmodell aus der Datenbank gelöscht.
+\begin{lstlisting}
+var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+            if (g == null)
+                return NotFound();
+            uow.GlassesRepository.Delete(g);
+            uow.Save();
+            return RedirectToAction("AdminBrillen");
+\end{lstlisting}
+
+
+\end{itemize}
+
+
+\pagebreak
+\subsection{Brillenmodelle}
+Die Brillenmodelle sind in drei Kategorien untergliedert $"$Herrenbrillen" , $"$Frauenbrillen" und $"$Kinderbrillen" auf jeder der Unterseiten werden die dazugehörigen Brillen mit einem Foto, dem Titel und dem Preis dargestellt. Jede Brille kann dann einzeln mittels eines Buttons auf den Wunshzettel gesetzt werden.
+Die Brillenmodelle werden nach der Kategorie gefiltert. Auf der $"$Home" Seite wird eine Kategorie ausgewählt alle Brillenmodelle die diese Kategorie haben werden angezeigt.
+Es werden alle Brillenmodelle durchgegangen und nur diese, welche zur jeweiligen Kategorie passen werden dann angezeigt wie das Codebeispiel zeigt.
+\begin{lstlisting}
+  @foreach (var item in @Model.GlassModel.Where(c => c.Category == "Herrenbrille"))
+    {
+        <div class="col-md-3 col-sm-3" id="greyBox">
+            <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
+            <label style="font-size:30px; margin-left:35%;">@item.Name</label>
+            <p align="center">Modische Brille von: @item.Marke</p>
+            <p align="center">Kategorie: @item.Category</p>
+            <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
+            <button style="margin-bottom:5px; float:right;" class="col-md-6 col-sm-6 btn btn-default"> Wunschzettel</button>
+        </div>
+    }
+\end{lstlisting}
+Jedes Brillenmodell hat einen Preis nach belieben können die Brillen nach dem Preis auf- oder absteigend oder nach dem Namen sortiert werden.
+Technischer Hintergrund:
+\begin{lstlisting} 
+<form asp-action="Herrenbrillen">
+        <div id="blackFilter1">
+            <h3 id="h3filterFach">Sortieren:</h3>
+            <select asp-for="@Model.SelectedSortProperty" asp-items="@Model.SortList"></select><br /><br />
+            <input class="btn btn-default" style="margin-bottom:5px; margin-top:5px; padding: 0px 5px 0px 5px;" type="submit" value="Sortieren" />
+        </div>
+    </form>
+\end{lstlisting}
+Wird ein Sortierkriterium ausgewählt und der Sortier button gedrückt so wird im Controller eine HttpPost Action aufgerufen.
+\begin{lstlisting}
+[HttpPost]
+        public IActionResult Herrenbrillen(GlassesModel model)
+        {
+            ModelState.Clear();
+            model.FillGlasses(uow);
+            return View(model);
+        }
+\end{lstlisting}
+In der $"$FillGlasses" Methode wird abgefragt welches Suchkreterium ausgewählt wurde und dann wird nach diesem Kriterium sortiert.
+\begin{lstlisting}
+public void FillGlasses(IUnitOfWork uow)
+        {
+            //defaul sort property
+            this.SelectedSortProperty = SelectedSortProperty == null ? "Name" : this.SelectedSortProperty;
+            //fill sort selectlist
+            var sortprops = new List<String>() { "Name", "Preis - aufsteigend", "Preis - absteigend" };
+            this.SortList = new SelectList(sortprops, this.SelectedSortProperty);
+
+            if(this.SelectedSortProperty == "Preis - aufsteigend")
+            {
+                this.GlassModel = uow.GlassesRepository.Get(orderBy: ord => ord.OrderBy(s => s.Price)).ToList();
+            }
+            else if (this.SelectedSortProperty == "Preis - absteigend")
+            {
+                this.GlassModel = uow.GlassesRepository.Get(orderBy: ord => ord.OrderByDescending(s => s.Price)).ToList();
+            }
+            else
+                this.GlassModel = uow.GlassesRepository.Get(orderBy: ord => ord.OrderBy(s => s.Name)).ToList();
+        }
+\end{lstlisting}
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.2]{images/Brillen.png}
 \end{center}
-	\caption{Model-View-Controller Konzept}
+	\caption{Screenshot der Herrenbrille Seite}
 	\label{fig:sample}
 \end{figure}
 
 
 \subsection{Wunschzettel}
 Unter dem Punkt "Wunschzettel" auf der Navigation bar findet man alle Brillenmodelle die man zuvor zu diesem hinzugefügt hat. Hier kann man einzelne Produkte wieder vom Wunschzettel entfernen. Außerdem kann man den Verkäufer über seine Wunschobjekte informieren.
-
-\subsubsection{Kaufinteresse}
-Über den Wunschzettel kann man dem Verkäufer sein Kaufinteresse mitteilen.Hierzu muss man zuerst seinen Namen eingeben und dann bestätigen, dass man dem Verkäufer sein Interesse über die ausgewählten Modelle mitteilen möchte. Wird dies bestätigt wird ein neuer Eintrag in einer Tabelle erstellt, in welcher alle Brillenmodelle gelistet sind an denen Kunden interesiert sind. Außerdem verschickt man durch das Bestätigen auch eine E-mail an den Verkäufer welche in darüber Benachrichtigt das neue Modelle in die Tabelle eingetragen wurden.
-
-
-\subsection{Administration}
-
-\subsubsection{Administratoren}
-Befindet man sich auf der Hauptseite findet man rechts oben einen "Einloggen" Button wird dieser gedrückt wird man weitergeleitet auf eine Login Seite auf der sich der Administrator mittels seiner E-Mail Adresse und dem Passwort einlogen kann. Wurden die korrekten Daten vom Administrator eingegeben wird er dann wieder auf die Hauptseite zurückgeleitet dort ist erscheint nun ein Button "Administrationsbereich". In diesem bekommt man eine Übersicht aller Administratoren man kann hier dann neue hinzufügen und aktuelle Administratoren löschen. Außerdem befindet sich auf der Seite auch noch ein Button "Brille" über diesen gelangt man zu einer Übersicht aller Brillen.
-
-\subsubsection{Brillen}
-Der Administrator erhält eine Übersicht aller Brillen und hat die Möglichkeit Brillen zu löschen, zu bearbeiten oder neue hinzuzufügen. Beim klicken des Buttons "Neue Brille hinzufügen" wird man auf die Seite "Brille hinzufügen" weitergeleitet. Neben jeder Brille befinden sich 2 Buttons "Löschen" und "Bearbeiten". Beim drücken des "Löschen" Buttons wird das Brillenmodell gelöscht und eine aktualisierte Liste dargestellt. Beim betätigen des "Bearbeiten" Buttons wird man auf die Seite "Brille bearbeiten" weitergeleitet.
-
 \begin{figure}[H]
 \begin{center}
-	\includegraphics[scale=.2]{images/AdminBrillen.png}
+	\includegraphics[scale=.2]{images/Wunschzettel.png}
 \end{center}
-	\caption{Model-View-Controller Konzept}
+	\caption{Screenshot der Wunschzettel Seite}
 	\label{fig:sample}
 \end{figure}
 
-\subsubsection{Brille hinzufügen}
-Auf dieser Seite kann der Administrator neue Brillenmodelle einfügen dazu muss er den Titel und den Preis eingeben und ein Foto der Brille einfügen, dann kann er auf "Brille hinzufügen" drücken. Dies führt dazu, dass die Brille in der Datenbank eingefügt wird und dass er auf die Seite "Brillen" zurückkehrt wo die aktualisierte Liste der Brillen zu sehen ist.
+\subsubsection{Kaufinteresse}
+Über den Wunschzettel kann man dem Verkäufer sein Kaufinteresse mitteilen.Hierzu muss man nur auf dem Brillenmodell, über welches man den Verkäufer sein Interesse mitteilen möchte, auf Kaufinteresse drücken und, dann bestätigen dass man dem Verkäufer sein Interesse über die ausgewählten Modelle mitteilen möchte. Wird dies bestätigt wird ein neuer Eintrag in einer Tabelle erstellt, in welcher alle Brillenmodelle gelistet sind und dabei steht wie viele Kunden an dem Modell interesiert sind. Jedes Brillenmodell das auf dem Wunschzettel ist wird automatisch vom Wunschzettel entfernt, wenn man dem Verkäufer sein Kaufinteresse über dieses Modell mitteilt.
+\begin{lstlisting}
+[HttpPost]
+        public async Task<IActionResult> KaufinteresseMit(int id)
+        {
+            var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+            if (g == null)
+                return NotFound();
+            g.Wish = false;
+            g.Kaufinteresse++;
+            uow.GlassesRepository.Update(g);
+            uow.Save();
+            return RedirectToAction("Wunschzettel");
+        } 
+\end{lstlisting}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/Wunschzettel.png}
+\end{center}
+	\caption{Screenshot der Kaufinteresse Seite im Administrationsbereich}
+	\label{fig:sample}
+\end{figure}
+\pagebreak 
 
-\subsubsection{Brille bearbeiten}
-Auf dieser Seite kann der Administrator den eingegebenen Titel, den Preis oder auch das Bild einer bereits vorhandenen Brille ändern. Nachdem die Änderungen vorgenommen wurden und er diese mit dem "Brille bearbeiten" Button bestätigt wird der Administrator automatisch auf die Seite "Brillen" zurückkehren wo die aktualisierte Liste aller Brillen zu sehen ist.
+
 
 \subsection{Allgemeine Informationen}
 Um allgemeinen Informationen über das Unternehmen zu erhalten, gibt es einen Menüpunkt "About", hier werden alle Informationen wie die Öffnungszeiten, Fax-, Mobil- und die Telefonnummer angezeigt, außerdem wird der Standort des Unternehmens auf einer eingebunden Google Maps Karte dargestellt.
+Die Karte wurde über Google Maps ausgewählt und dann eingebunden wie im Code dargestellt.
+\begin{lstlisting}
+<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCUhrwOtdImM9ZYKeGKIltSf4ZzyV7hDeA'></script><div style='overflow:hidden;height:300px;width:100%;'><div id='gmap_canvas' style='height:300px;width:100%;'></div>
+<style>
+    #gmap_canvas img {
+        max-width: none !important;
+        background: none !important;
+    }
+</style></div>
+<script type='text/javascript'>function init_map(){var myOptions = {zoom:15,center:new google.maps.LatLng(48.1600674,14.025288000000046),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(48.1600674,14.025288000000046)});infowindow = new google.maps.InfoWindow({content:'<strong>Augenoptik Aigner</strong><br>Kaiser josef platz 3<br>4060 Wels<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+\end{lstlisting}
 
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.2]{images/About.png}
 \end{center}
-	\caption{Model-View-Controller Konzept}
+	\caption{Screenshot der About Seite}
 	\label{fig:sample}
 \end{figure}
 
 \subsection{Kontakt}
-Bei Fragen über die Website, das Unternehmen, die Brillenmodelle und allem anderen kann der Verkäufer mittels eines Formulars kontaktiert werden. Um zum Kontaktformular zu gelangen gibt es in der Navigation bar den Punkt "Kontakt". Dort gibt man seinen Namen, die eigene E-mail Adresse und die Nachricht ein und das Formular kann dann gesendet werden. Die eingegeben Nachricht wird dann über einen SMTP Server an die E-Mail Adresse des Verkäufers gesendet. Die Mail beinhaltet die Nachricht sowie den eingegebenen Namen und auch die E-Mail Adresse somit kann der Verkäufer auf die erhaltene Nachricht antworten.
+Bei Fragen über die Website, das Unternehmen, die Brillenmodelle und allem anderen kann der Verkäufer mittels eines Formulars kontaktiert werden. Um zum Kontaktformular zu gelangen gibt es in der Navigation bar den Punkt "Kontakt". Dort gibt man seinen Namen, die eigene E-mail Adresse und die Nachricht ein und das Formular kann dann gesendet werden. Die eingegeben Nachricht wird dann über einen SMTP Server an die E-Mail Adresse des Verkäufers gesendet. Die Mail beinhaltet die Nachricht sowie den eingegebenen Namen und auch die E-Mail Adresse somit kann der Verkäufer auf die erhaltene Nachricht antworten. Wurden alle Felder des Formulares korrekt ausgefüllt und danach auf "Send" gedrückt wird die Mail versendet und der User kommt auf eine Seite wo drauf steht das seine Nachricht erfolgreich verschickt wurde.
+Technischer Hintergrund:
+Im Objekt werden Attribute wie die Nachricht, der Empfänger, der Absender, und der Betreff, gesetzt und diese werden mittels eines SMTP-Clients versendet.
+Im Smtp Client werden der Host, Port und die E-Mail-Adresse, von der die E-Mail weggeschickt werden soll, sowie das Passwort für die E-Mail-Adresse eingetragen.
+\begin{lstlisting}
+[HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Contact(EmailFormModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("orascanin.99@gmail.com"));
+                message.From = new MailAddress("diplomarbeitdanijal@gmail.com");
+                message.Subject = "Anfrage!";
+                message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
+                message.IsBodyHtml = true;
 
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "diplomarbeitdanijal@gmail.com",
+                        Password = ".di,wx,01,21"
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("Sent");
+                }
+            }
+            return View(model);
+        }
+\end{lstlisting}
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.2]{images/Contact.png}
 \end{center}
-	\caption{Model-View-Controller Konzept}
+	\caption{Screenshot der Contact Seite}
 	\label{fig:sample}
 \end{figure}
 
@@ -686,5 +1005,7 @@ public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where
 }
 \end{lstlisting}
 Wichtig ist dabei, dass das ViewModel vom Interface IRequestClose ableitet, damit das ViewModel das Event CloseRequested enthält. Dieses dient dazu, dass das ViewModel, welches ein weiteres Fenster öffnet, auf das Schließen des neuen Fensters reagieren kann. 
-\item 'OpticianMgr.Web': TODO
+\item 'OpticianMgr.Web': Dieses Projekt führt die Website der Diplomarbeit. Darunter fallen alle Views (Alle einzeilnen Seiten wie zum Beispiel: Herrenbrillen, Kinderbrillen, Administrationsbereich etc.) der Webseite und die dazugehörigen Style Sheets (Css).
+Außerdem die verschiedenen Controller die für die Interaktion des Benutzers mit der Anwendung und für die Steuerung der Verarbeitung zwischen Model und View sind und zuletzt noch die einzelnen Models, welche die darzustellenden Daten enthalten.
+
 \end{itemize} 
