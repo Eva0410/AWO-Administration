@@ -14,52 +14,52 @@
 \contentsline {section}{\numberline {2.4}UnitOfWork-Pattern}{9}{section.2.4}
 \contentsline {section}{\numberline {2.5}WPF}{10}{section.2.5}
 \contentsline {section}{\numberline {2.6}MVVM}{11}{section.2.6}
-\contentsline {section}{\numberline {2.7}MVVM-Light}{12}{section.2.7}
+\contentsline {section}{\numberline {2.7}MVVM-Light}{13}{section.2.7}
 \contentsline {section}{\numberline {2.8}MVC}{14}{section.2.8}
-\contentsline {section}{\numberline {2.9}HTML}{15}{section.2.9}
-\contentsline {section}{\numberline {2.10}CSS}{17}{section.2.10}
-\contentsline {subsection}{\numberline {2.10.1}Media Query}{18}{subsection.2.10.1}
-\contentsline {section}{\numberline {2.11}Bootstrap}{18}{section.2.11}
-\contentsline {subsection}{\numberline {2.11.1}Grid-Systeme}{18}{subsection.2.11.1}
-\contentsline {section}{\numberline {2.12}Microsoft Office Interop}{19}{section.2.12}
-\contentsline {section}{\numberline {2.13}WPF-Toolkit}{20}{section.2.13}
-\contentsline {section}{\numberline {2.14}MessageBird}{21}{section.2.14}
-\contentsline {subsubsection}{Andere M\IeC {\"o}glichkeiten}{22}{section*.4}
-\contentsline {section}{\numberline {2.15}SMTP}{22}{section.2.15}
-\contentsline {section}{\numberline {2.16}Base64}{22}{section.2.16}
-\contentsline {chapter}{\numberline {3}Implementierung}{23}{chapter.3}
-\contentsline {section}{\numberline {3.1}Administrationprogramm}{23}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Kundenverwaltung}{23}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Auftragsverwaltung}{26}{subsection.3.1.2}
-\contentsline {subsubsection}{Dokumente erstellen}{28}{section*.5}
-\contentsline {subsection}{\numberline {3.1.3}Lieferantenverwaltung}{30}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Verwaltung der lagernden Brillenfassungen}{31}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}E-Mail und SMS}{32}{subsection.3.1.5}
-\contentsline {subsubsection}{Massennachrichten}{32}{section*.6}
-\contentsline {subsubsection}{E-Mail}{32}{section*.7}
-\contentsline {subsubsection}{SMS}{33}{section*.8}
-\contentsline {subsubsection}{Einzelne Nachrichten}{34}{section*.9}
-\contentsline {subsubsection}{Versendete Nachrichten}{35}{section*.10}
-\contentsline {subsection}{\numberline {3.1.6}Statistiken}{36}{subsection.3.1.6}
-\contentsline {subsection}{\numberline {3.1.7}Sonstiges}{37}{subsection.3.1.7}
-\contentsline {subsubsection}{Vorgegebene Texte bearbeiten}{38}{section*.11}
-\contentsline {subsection}{\numberline {3.1.8}Filtern und Sortieren}{40}{subsection.3.1.8}
-\contentsline {subsubsection}{Filtern}{40}{section*.12}
-\contentsline {subsubsection}{Sortieren}{43}{section*.13}
-\contentsline {section}{\numberline {3.2}Website}{49}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Brillenkategorien}{49}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Administration}{50}{subsection.3.2.2}
-\contentsline {subsubsection}{Administratoren}{50}{section*.14}
-\contentsline {subsubsection}{Brillen}{51}{section*.15}
-\contentsline {subsection}{\numberline {3.2.3}Brillenmodelle}{57}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Wunschzettel}{59}{subsection.3.2.4}
-\contentsline {subsubsection}{Kaufinteresse}{60}{section*.16}
-\contentsline {subsection}{\numberline {3.2.5}Allgemeine Informationen}{62}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}Kontakt}{63}{subsection.3.2.6}
-\contentsline {section}{\numberline {3.3}Datenmodell}{66}{section.3.3}
-\contentsline {section}{\numberline {3.4}Projektarchitektur}{67}{section.3.4}
-\contentsline {chapter}{\numberline {4}Selbstevaluation}{71}{chapter.4}
-\contentsline {section}{\numberline {4.1}Probleme bei der Entwicklung}{71}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Event-Handling mit MVVM-Light}{71}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}UnitOfWork-Instanzen}{72}{subsection.4.1.2}
-\contentsline {chapter}{\numberline {A}Generierte Dokumente des Verwaltungsprogrammes}{77}{appendix.A}
+\contentsline {section}{\numberline {2.9}HTML}{17}{section.2.9}
+\contentsline {section}{\numberline {2.10}CSS}{18}{section.2.10}
+\contentsline {subsection}{\numberline {2.10.1}Media Query}{19}{subsection.2.10.1}
+\contentsline {section}{\numberline {2.11}Bootstrap}{19}{section.2.11}
+\contentsline {subsection}{\numberline {2.11.1}Grid-Systeme}{19}{subsection.2.11.1}
+\contentsline {section}{\numberline {2.12}Microsoft Office Interop}{20}{section.2.12}
+\contentsline {section}{\numberline {2.13}WPF-Toolkit}{21}{section.2.13}
+\contentsline {section}{\numberline {2.14}MessageBird}{22}{section.2.14}
+\contentsline {subsubsection}{Andere M\IeC {\"o}glichkeiten}{23}{section*.4}
+\contentsline {section}{\numberline {2.15}SMTP}{23}{section.2.15}
+\contentsline {section}{\numberline {2.16}Base64}{23}{section.2.16}
+\contentsline {chapter}{\numberline {3}Implementierung}{24}{chapter.3}
+\contentsline {section}{\numberline {3.1}Administrationprogramm}{24}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Kundenverwaltung}{24}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Auftragsverwaltung}{27}{subsection.3.1.2}
+\contentsline {subsubsection}{Dokumente erstellen}{29}{section*.5}
+\contentsline {subsection}{\numberline {3.1.3}Lieferantenverwaltung}{31}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Verwaltung der lagernden Brillenfassungen}{32}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}E-Mail und SMS}{33}{subsection.3.1.5}
+\contentsline {subsubsection}{Massennachrichten}{33}{section*.6}
+\contentsline {subsubsection}{E-Mail}{33}{section*.7}
+\contentsline {subsubsection}{SMS}{34}{section*.8}
+\contentsline {subsubsection}{Einzelne Nachrichten}{35}{section*.9}
+\contentsline {subsubsection}{Versendete Nachrichten}{36}{section*.10}
+\contentsline {subsection}{\numberline {3.1.6}Statistiken}{37}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}Sonstiges}{38}{subsection.3.1.7}
+\contentsline {subsubsection}{Vorgegebene Texte bearbeiten}{39}{section*.11}
+\contentsline {subsection}{\numberline {3.1.8}Filtern und Sortieren}{41}{subsection.3.1.8}
+\contentsline {subsubsection}{Filtern}{41}{section*.12}
+\contentsline {subsubsection}{Sortieren}{44}{section*.13}
+\contentsline {section}{\numberline {3.2}Website}{50}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Brillenkategorien}{50}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Administration}{51}{subsection.3.2.2}
+\contentsline {subsubsection}{Administratoren}{51}{section*.14}
+\contentsline {subsubsection}{Brillen}{52}{section*.15}
+\contentsline {subsection}{\numberline {3.2.3}Brillenmodelle}{58}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Wunschzettel}{60}{subsection.3.2.4}
+\contentsline {subsubsection}{Kaufinteresse}{61}{section*.16}
+\contentsline {subsection}{\numberline {3.2.5}Allgemeine Informationen}{63}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Kontakt}{64}{subsection.3.2.6}
+\contentsline {section}{\numberline {3.3}Datenmodell}{67}{section.3.3}
+\contentsline {section}{\numberline {3.4}Projektarchitektur}{68}{section.3.4}
+\contentsline {chapter}{\numberline {4}Selbstevaluation}{72}{chapter.4}
+\contentsline {section}{\numberline {4.1}Probleme bei der Entwicklung}{72}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Event-Handling mit MVVM-Light}{72}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}UnitOfWork-Instanzen}{73}{subsection.4.1.2}
+\contentsline {chapter}{\numberline {A}Generierte Dokumente des Verwaltungsprogrammes}{78}{appendix.A}

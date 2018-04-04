@@ -562,8 +562,8 @@ if (View.SortDescriptions.Count >= 1)
 
 \section{Website}
 \subsection{Brillenkategorien}
-Über den Menüpunkt "Home" gelangt man zu einer Übersicht aller Brillenkategorien. Dies ist gleichzeitig die Hauptseite der Webseite. Wird eine der 3 Kategorie (Herrenbrillen, Damenbrillen und Kinderbrillen) ausgewählt so werden die dazugehörigen Brillen auf einer neuen Seite angezeigt.
-Die Kategorien werden als Tabelle dargestellt mit einem Foto und einer kurzen Beschreibung wie im Codebeispiel:
+Über den Menüpunkt "Home" gelangt man zu einer Übersicht aller Brillenkategorien. Dies ist gleichzeitig die Hauptseite der Webseite. Wird eine der 3 Kategorien (Herrenbrillen, Damenbrillen und Kinderbrillen) ausgewählt, so werden die dazugehörigen Brillen auf einer neuen Seite angezeigt.
+Die Kategorien werden als Tabelle mit einem Foto und einer kurzen Beschreibung wie im Codebeispiel dargestellt:
 \begin{lstlisting}
 <div id="firstgreyBox3">
     <table width="100%">
@@ -578,7 +578,7 @@ Die Kategorien werden als Tabelle dargestellt mit einem Foto und einer kurzen Be
     </table>
 </div>
 \end{lstlisting}
-Wenn der Administrator auf der Seite eingeloggt ist sieht er auf dieser Seite links oben einen Button Adminstrationsbereich über diesesn gelangt er zu auf die Administrationsseite. Um diesesn Button nur für den Administrator sichtbar zu machen wurde dem Administrator die "Admin" Rolle zugewiesen und der Button wird nur dann angezeigt wenn der aktuelle User diese Rolle besitzt.
+Wenn der Administrator auf der Seite eingeloggt ist, sieht er auf dieser Seite links oben einen Button, welcher Adminstrationsbereich genannt wird. Mit einem Klick auf diesen Button gelangt er auf die Administrationsseite. Um diesen Button nur für den Administrator sichtbar zu machen, wurde dem Administrator die "Admin" Rolle zugewiesen und der Button wird nur dann angezeigt wenn der aktuelle User diese Rolle besitzt.
 
 \begin{lstlisting}
 @if (ViewContext.HttpContext.User.IsInRole("Admin"))

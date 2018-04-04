@@ -3,14 +3,14 @@
 \section{Visual Studio}
 Visual Studio ist eine Entwicklungsumgebung von Microsoft. Sie wird verwendet um Computerprogramme sowie Webseiten, Webapps, Webservices und mobile Apps herzustellen. Die aktuellste Version des Programmes unterstützt eine vielzahl von Programmiersprachen.
 Weiters verfügt Visual Studio über einen Code editor mit IntelliSense(unterstützt den Programmierer mittels Vervollständigung des Codes). Es ermöglicht das entwickeln von Apps für iOS, Mac, Android, Windows das Web und die Cloud
-Visual Studio ermöglicht es genau und effizient zu Schreiben, ohne den aktuellen Dateikontext zu verlieren. Es gibt außerdem die Funktionen für Refactoring, Identifikation und zum Beheben von Codeproblemen nutzen.
+Visual Studio ermöglicht es genau und effizient zu Schreiben, ohne den aktuellen Dateikontext zu verlieren. Es gibt außerdem die Funktionen für Refactoring, Identifikation und zum Beheben von Codeproblemen.
 Der Visual Studio-Debugger kann sprachübergreifend, lokal oder remote Programmfehler mit Verlaufsdaten Ihres Codes ermitteln und debuggen.
 Man kann seinen Quellcode in Git-Repositorys verwalten, die von beliebigen Anbietern (einschließlich GitHub) gehostet werden. Außerdem bietet es Visual Studio Team Services, um Code zusammen mit Programmfehlern und Arbeitsaufgaben für ein gesamtes Projekt zu verwalten.
-Quellen: \cite{webster_visual_????}
+Quellen: \cite{webster_visual_????} 
 
 \section{C-Sharp}
 C\# ist eine objektorientierte Programmiersprache. Sie wurde von Microsoft entwickelt ist jedoch mittlerweile Plattform unabhängig. Sie unterstützt zahlreiche Funktionen wie Lambda Expressions, Delegates, Enumerationen und auch einem direkten Speicherzugriff. Außerdem werden generische Methoden und Typen von C\# unterstützt.
-
+Quellen: \cite{_c-sharp_2018}
 
 \section{Entity Framework}
 Zum Nutzen einer Datenbank in Programmen gibt es das von Microsoft entwickelte Entity Framework. Dabei handelt es sich um ein Framework zur Erstellung von objekt\-relationalen Abbildungen auf .NET-Objektstrukturen. Das wird auch als ORM (object relational mapping) bezeichnet. Es ermöglicht Programmierern in der Applikation mit Objekten zu arbeiten, anstatt sich auf die wirkliche Datenbank mit ihren Tabellen und den Zugriff darauf konzentrieren zu müssen. Ein solches Framework wird benötigt, weil objektorientierte Programmiersprachen wie .NET Daten in Objekten speichern und relationale Datenbanken Daten in Tabellen ablegen. Diese beiden Arten der Speicherung sind grundlegend verschieden. Deshalb wird ein Framework gebraucht, um diese miteinander verwenden zu können.
@@ -195,18 +195,53 @@ Eine weiteres Feature von MVVM-Light ist der Messenger. Diese Klasse erlaubt den
 
 \section{MVC}
 Model-View-Controller ist ein Design-Muster für die Trennung einer Software in 3 miteinander verbundene Teile. Das MVC-Muster wurde entwickelt um eine Wiederverwendung von Objektcode zu ermöglichen. Das Muster soll die Entwicklungszeit von Anwendungen mit Benutzeroberflächen stark  reduzieren. 
-Die 3 Hauptkomponenten die bei hier verwendet werden sollen stecken schon im Namen und zwar: 
+Die 3 Hauptkomponenten die hier verwendet werden sollen stecken schon im Namen und zwar sind diese: 
 \begin{itemize}
 
 \item Model: Ein Model ist eine simple Klasse und stellt das einfachste Element in MVC dar. Das Modell enthält die darzustellenden Daten. Es ist von View und Controller unabhängig. Es bedarf keiner Ableitung oder anderer Implementierung und ist im Prinzip ein Datencontainer. Die Models befinden sich in dem Order /Models. Wobei die Klassen ohne weiteres in eine Klassenbibliothek ausgelagert werden können. In einem Model befinden sich nichts anderes als Properties – Properties, die das Element bzw. die Daten darstellen, die für die Präsentation bestimmt sind. Ebenfalls kann beim Senden von Daten (POST) von einer View zum Controller eine Model-Klasse verwendet werden. Dabei wird der Controller-Action das Model als Parameter übergeben. Das Mappen zwischen POST-Parametern und Model findet über das Model-Binding statt.
+\begin{lstlisting}
+public class GlassesModel
+    {
+        public List<Glasses> GlassModel { get; set; }
+        public SelectList SortList { get; set; }
+        public string SelectedSortProperty { get; set; }
+
+        public void FillGlasses(IUnitOfWork uow)
+        {
+            //defaul sort property
+            this.SelectedSortProperty = SelectedSortProperty == null ? "Name" : this.SelectedSortProperty;
+        }
+     }
+\end{lstlisting}
 
 \item View: Sie kennt sowohl ihren Controller als auch das Model, dessen Daten sie präsentiert, ist aber nicht für die Weiterverarbeitung der vom Benutzer übergebenen Daten zuständig. Im Regelfall wird die View über Änderungen von Daten im Model mithilfe des Observers unterrichtet und kann daraufhin die aktualisierten Daten abrufen. Die View kann sich selbst aktualisieren, kennt das Model und ist dort registriert.
 Es gibt außerdem noch spezielle Views, die von allen Controllern bzw. allen Views verwendet werden können, die sogenannten Partial Views.
+\begin{lstlisting}
+@foreach (var item in @Model.GlassModel.Where(c => c.Category == "Herrenbrille"))
+        {
+            <div class="col-md-3 col-sm-3" id="greyBox">
+                <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
+                <label style="font-size:30px; margin-left:35%;">@item.Name</label>
+                <p align="center">Modische Brille von: @item.Marke</p>
+                <p align="center">Kategorie: @item.Category</p>
+                <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
+            </div>
+        }
+\end{lstlisting}
 
-\item Controller: Der Controller ist Verantwortlich für die Interaktion des Benutzers mit der Anwendung und für die Steuerung der Verarbeitung zwischen Model und View (Ablauf, Datenverarbeitung, entscheidet welche Views aufgerufen werden)
+\item Controller: Der Controller ist verantwortlich für die Interaktion des Benutzers mit der Anwendung und für die Steuerung der Verarbeitung zwischen Model und View (Ablauf, Datenverarbeitung, entscheidet welche Views aufgerufen werden).
 Er kann den Kontext für verschiedene Models und Views darstellen und bestimmt die Möglichkeiten, mit denen die Benutzungsschnitstelle auf Benutzereingaben reagieren kann.
 Er ist nichts anderes als eine Klasse, die sich von System.Mvc.Controller ableitet. 
 Eine Controller besteht meist aus mehreren Aktionen, die HTTP-Methoden, wie GET und POST, darstellen. Im einfachsten Falle übernimmt der Controller die Aufgabe des Business Layers und verarbeitet Daten. Dies kann ein Serviceaufruf, eine Datenbankabfrage, Dateihandling oder einfach auch nur ein Verarbeiten von Strings oder Zahlen sein.
+\begin{lstlisting}
+public IActionResult Herrenbrillen(string sort)
+        {
+            GlassesModel model = new GlassesModel();
+            model.SelectedSortProperty = sort;
+            model.FillGlasses(uow);
+            return View(model);
+        }
+\end{lstlisting}
 \end{itemize}
 Es verwandelt eine Webanwendung in eine wartbare, modulare und effizient entwickelte Anwendung. 
 Anwendungsaufgaben in Models, Views und Controllers zu teilen macht Deine Anwendung sehr schlank. 
@@ -214,6 +249,7 @@ Neue Features sind einfach hinzugefügt, alte Features schnell in einer neuen Ob
 Die modular und unterteilte Logik erlaubt Entwicklern und Designern gleichzeitig an der Anwendung zu arbeiten. 
 Dies beinhaltet ebenso die schnelle Entwicklung eines ersten Prototyps. 
 Dadurch ist es ebenso möglich einen Teil der Anwendung zu verändern, ohne einen anderen Teil zu beeinflussen.
+Quellen: \cite{_model_2018} \cite{_model-view-controller_????}
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=.4]{images/MVC.png}
@@ -222,11 +258,13 @@ Dadurch ist es ebenso möglich einen Teil der Anwendung zu verändern, ohne eine
 	\label{fig:sample}
 \end{figure}
 
+
+
 \section{HTML}
 Hypertext Markup Language oder auch HTML ist die Standardsprache für das erstellen von Webseiten und Web Applikationen. Gemeinsam mit CSS und Javascript gehört HTML zu den Eckpfeiler Technologien vom World Wide Web.
 Die meisten HTML-Elemente starten und enden jeweils mit einem Tag. Der Starttag beginnt immer mit dem Zeichen $<$. Nach dem $<$ folgt der Elementname und dann wird der Starttag mit dem $>$ Zeichen geschlossen. Nach dem Elementnamen können auch noch Attribute eingefügt werden.
 Der Endtag startet immer mit den Zeichen $</$, dann dem Elementnamen und endet mit einem $>$ Zeichen.
-
+Quellen: \cite{_hypertext_2018}
 \begin{lstlisting}
 <h1> Hello World </h1>
 \end{lstlisting}
@@ -238,13 +276,15 @@ Der Endtag startet immer mit den Zeichen $</$, dann dem Elementnamen und endet m
 	\caption{Hello World Beispiel Html}
 	\label{fig:sample}
 \end{figure}
+
 \pagebreak 
 
 
 \section{CSS}
 Cascading Style Sheets ist eine style sheet Sprache welche gemeinsam mit HTML und DOM zu den Kernsprachen des World Wide Web gehört.
-Sie wird meist verwendet um einen visuellen Stilauf Webseiten festzulegen.
-Css bringt die Kontrolle über das Layout vieler Webseiten aus einer einzigen Style-Sheet-Datei heraus, präzisere Kontrolle über das Layout, verschiedene Layouts für verschiedene Medientypen (Bildschirmanzeige, Handy etc.) und eine Vielzahl von fortgeschrittenen und anspruchsvolle Techniken.
+Sie wird meist verwendet um einen visuellen Stil auf Webseiten festzulegen.
+Css bringt die Kontrolle über das Layout vieler Webseiten aus einer einzigen Style-Sheet-Datei heraus, präzisere Kontrolle über das Layout, verschiedene Layouts für verschiedene Medientypen (Bildschirmanzeige, Handy etc.) und eine Vielzahl von fortgeschrittenen und anspruchsvollen Techniken.
+Quellen: \cite{_lesson_????}
 Ein einfaches Beispiel:
 \begin{lstlisting}
 <h1 class="design"> Hello World </h1>
@@ -261,6 +301,8 @@ background-color: yellow;
 	\caption{Hello World Beispiel Html mit Css}
 	\label{fig:sample}
 \end{figure}
+
+
 \pagebreak 
 \subsection{Media Query}
 Media Query ist eine Technik die es seit CSS3 gibt.
@@ -281,13 +323,17 @@ Sie verwendet die @media Regel um einen bestimmten Block von Css Eigenschaften z
 	\caption{Hello World Beispiel Html mit Css}
 	\label{fig:sample}
 \end{figure}
+Quellen: \cite{webster_visual_????}
 
 \section{Bootstrap}
 Bootstrap ist ein freies web framework für das designen von Webseiten und Webapps. Es enthält HTML- und CSS basierte Design Vorlagen für Typografie, Buttons, Tabellen, Grid-Systeme, Formulare, Navigations- und andere Elemente. Außerdem kann man optional auch JavaScript Erweiterungen verwenden.
-
+Bootstrap ist relativ einfach aufgebaut. Sein Kern besteht aus verschiedenen Stylesheets, welche die im Framework vorhandenen Komponenten einbeziehen.
+Durch den klaren Leitfaden sparen die Entwickler wie auch die Gestalter  Zeit und haben einen gemeinsamen Nenner für die Gestaltung der Oberfläche.
+Bootstrap bringt von Haus aus Elemente wie Icons, Boxen, Buttons und PullDown Menüs bereits mit.
+Quellen: \cite{mirko_was_2013}
 
 \subsection{Grid-Systeme}
-Die Bootstrap Grid-Systeme sind mobile responsive was bedeutet das sie ihr Layout auf die größe des Gerätes anpassen. Würde man das unten angefürte Beispiel auf dem Computer aufrufen würden 3 gleich große nebeinander gestellte Spalten angezeigt werden, am Handy würde sich dies platztechnisch nicht ausgehen deshalb werden diese 3 Spalten automatisch untereinander gestellt.
+Die Bootstrap Grid-Systeme sind mobile responsive. Das bedeutet, dass sie ihr Layout auf die Größe des Geräts anpassen. Würde man das unten angefürte Beispiel auf dem Computer aufrufen,  würden 3 gleich große nebeinander gestellte Spalten angezeigt werden. Am Handy würde sich dies platztechnisch nicht ausgehen, deshalb werden diese 3 Spalten automatisch untereinander gestellt.
 \begin{lstlisting}
 <div class="row">
   <div class="col-sm-4">
@@ -317,7 +363,6 @@ Wenn aber das Fenster zu klein wird schreibt die Bootstrap-Klasse die Spalten un
 	\caption{Bootstrap Grid schmal}
 	\label{fig:sample}
 \end{figure}
-
 
 \section{Microsoft Office Interop}
 Um aus einem Programm Word-Dokumente zu erstellen, gibt es das Assembly Microsoft.Office.Interop.Word auf welches eine Referenz hinzugefügt wurde. Damit kann der Benutzer im Programm Word-Dokumente bearbeiten oder Informationen aus diesem herauslesen. Zur Nutzung benötigt der Computer allerdings eine gültige Microsoft Office Lizenz.  Außerdem lädt Interop das Word-Dokument im Hintergrund, wenn es bearbeitet wird, was den ganzen Vorgang etwas langsam macht.
@@ -378,7 +423,8 @@ Im Gegensatz zum Versand von E-Mails, gibt es keine Möglichkeit kostenfrei und 
 
 
 \section{SMTP}
-Simple Mail Transfer Protocol ist ein standard Internetprotokoll zur Übertragung von emails. Wie jedes Netzwerkprotokoll hat es eine Regelsammlung für die Übertragung von Daten. Es legt Rahmenbedingungen fest, unter denen Daten zwischen zwei oder mehr Servern ausgetauscht werden. SMTP wird vorrangig für das versenden von Mails benutzt, da zum Empfang von Mails andere Protokolle wie zum Beispiel POP3 oder IMAP verwendet werden.
-
+Simple Mail Transfer Protocol ist ein standard Internetprotokoll zur Übertragung von E-Mails. Wie jedes Netzwerkprotokoll hat es eine Regelsammlung für die Übertragung von Daten. Es legt Rahmenbedingungen fest unter denen Daten zwischen zwei oder mehreren Servern ausgetauscht werden. SMTP wird vorrangig für das versenden von Mails benutzt, da zum Empfang von Mails andere Protokolle wie zum Beispiel POP3 oder IMAP verwendet werden.
+Quellen: \cite{_smtp:_????}
 \section{Base64}
 Base64 ist eine Gruppe ähnlicher Binär zu Text Codierungsschemas, die Binärdaten in einem ASCII-Zeichenfolgenformat darstellen, indem sie in eine Radix-64-Darstellung übersetzt werden.
+Quellen: \cite{_base64_2018}
