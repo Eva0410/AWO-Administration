@@ -49,7 +49,7 @@ namespace OpticianMgr.Wpf.ViewModel
             {
                 return new UnitOfWork();
             });
-            SimpleIoc.Default.Register<IUnitOfWork, UnitOfWork>();
+            SimpleIoc.Default.Register<IUnitOfWork>(() => new UnitOfWork());
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SupplierViewModel>();
             SimpleIoc.Default.Register<AddSupplierViewModel>();
