@@ -140,15 +140,18 @@ namespace OpticianMgr.Persistence
 
 
         //TODO due to prefered constructor in viewmodellocator (only one constructor can exist)
-        public UnitOfWork(string connectionString)
-        {
-            _context = new ApplicationDbContext(connectionString);
-        }
-        public UnitOfWork() : this("name=DefaultConnection")
-        {
+        //public UnitOfWork(string connectionString)
+        //{
+        //    _context = new ApplicationDbContext(connectionString);
+        //}
+        //public UnitOfWork() : this("name=DefaultConnection")
+        //{
 
+        //}
+        public UnitOfWork()
+        {
+            _context = new ApplicationDbContext("DefaultConnection");
         }
-
         /// <summary>
         ///     Repository-übergreifendes Speichern der Änderungen
         /// </summary>
