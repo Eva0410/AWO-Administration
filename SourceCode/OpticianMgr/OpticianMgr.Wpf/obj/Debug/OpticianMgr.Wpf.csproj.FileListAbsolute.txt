@@ -44,3 +44,4 @@ C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\Optician
 C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Wpf\obj\Debug\Pages\StatisticsPage.baml
 C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Wpf\obj\Debug\Pages\StockPage.baml
 C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Wpf\obj\Debug\Pages\SupplierPage.baml
+C:\Users\Eva\Documents\GitHub\AWO-Administration\SourceCode\OpticianMgr\OpticianMgr.Wpf\obj\Debug\OpticianMgr.Wpf.csproj.CoreCompileInputs.cache
