@@ -1,0 +1,505 @@
+<html>
+<head id="ctl00_Head1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.entityframeworktutorial.net/what-is-entityframework.aspx">
+<meta name="wpd_url" content="http://www.entityframeworktutorial.net/what-is-entityframework.aspx">
+<meta name="wpd_date" content="2018-02-30T20:43Z">
+<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=EDGE;chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>
+
+	What is Entity Framework?
+</title>
+
+    <!--[if lt IE 9]>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="ca-pub-7448309248176309.js"></script><script src="cse.js" async="" type="text/javascript"></script><script src="ga.js" async="" type="text/javascript"></script><script async="" src="async-ads.js"></script><script type="text/javascript" async="" src="cse.js"></script><script type="text/javascript" async="" src="ga.js"></script><script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta id="ctl00_head_metaKeyword" name="keywords" content="Entity Framework Tutorial, what is entity framework?">
+    <meta name="description" content="What is entity framework? entity framework is an ORM that enables developers to work with relational data as domain-specific objects">
+
+    
+    <script async="async" src="gpt.js"></script>
+    <script>
+
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+
+    <script>
+
+        googletag.cmd.push(function () {
+
+            var mapLeader = googletag.sizeMapping().
+                addSize([320, 400], [300, 50]).
+                addSize([320, 700], [300, 50]).
+                addSize([480, 200], [305, 50]).
+                addSize([768, 200], [728, 90]).
+                addSize([1000, 200], [728, 90]).
+                build();
+
+            window.LeaderSlot = googletag.defineSlot('/73863230/EFT-TOP-ALL', [[300, 50], [728, 90]], 'div-gpt-ad-1485930018929-0')
+                                .defineSizeMapping(mapLeader)
+                                .addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    
+
+    <script type="text/javascript">
+
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-33844821-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <script type="text/javascript">
+
+        var appInsights = window.appInsights || function (a) {
+            function b(a) { c[a] = function () { var b = arguments; c.queue.push(function () { c[a].apply(c, b) }) } } var c = { config: a }, d = document, e = window; setTimeout(function () { var b = d.createElement("script"); b.src = a.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js", d.getElementsByTagName("script")[0].parentNode.appendChild(b) }); try { c.cookie = d.cookie } catch (a) { } c.queue = []; for (var f = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; f.length;)b("track" + f.pop()); if (b("setAuthenticatedUserContext"), b("clearAuthenticatedUserContext"), b("startTrackEvent"), b("stopTrackEvent"), b("startTrackPage"), b("stopTrackPage"), b("flush"), !a.disableExceptionTracking) { f = "onerror", b("_" + f); var g = e[f]; e[f] = function (a, b, d, e, h) { var i = g && g(a, b, d, e, h); return !0 !== i && c["_" + f](a, b, d, e, h), i } } return c
+        }({
+            instrumentationKey: "0a3943dc-8b5d-44e3-b460-9f4159c22d5a"
+        });
+
+        window.appInsights = appInsights, appInsights.queue && 0 === appInsights.queue.length && appInsights.trackPageView();
+</script>
+<script src="ai.0.js"></script><script type="text/javascript" async="" src="a.min.js"></script><link rel="preload" href="https://adservice.google.at/adsid/integrator.js?domain=www.entityframeworktutorial.net" as="script"><script type="text/javascript" src="integrator.js"></script><script src="ai.0.js"></script><link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.entityframeworktutorial.net" as="script"><script type="text/javascript" src="integrator_001.js"></script><link href="https://adservice.google.at/adsid/integrator.js?domain=www.entityframeworktutorial.net" rel="preload"><script src="integrator.js" type="text/javascript"></script><link href="https://adservice.google.com/adsid/integrator.js?domain=www.entityframeworktutorial.net" rel="preload"><script src="integrator_001.js" type="text/javascript"></script><script async="" src="pubads_impl_192.js"></script><script src="pubads_impl_191.js" async=""></script><script type="text/javascript" id="cosymantecbfw_removeToolbar">(function () {				var toolbarElement = {},					parent = {},					interval = 0,					retryCount = 0,					isRemoved = false;				if (window.location.protocol === 'file:') {					interval = window.setInterval(function () {						toolbarElement = document.getElementById('coFrameDiv');						if (toolbarElement) {							parent = toolbarElement.parentNode;							if (parent) {								parent.removeChild(toolbarElement);								isRemoved = true;								if (document.body && document.body.style) {									document.body.style.setProperty('margin-top', '0px', 'important');								}							}						}						retryCount += 1;						if (retryCount > 10 || isRemoved) {							window.clearInterval(interval);						}					}, 10);				}			})();</script><script src="jsapi" type="text/javascript"></script><script type="text/javascript" src="default+en.I.js"></script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script><script type="text/javascript" async="" src="a.min_001.js"></script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script><script src="a.min.js" async="" type="text/javascript"></script><script type="text/javascript" src="jsapi"></script>
+<link rel="stylesheet" type="text/css" href="what-is-entityframework.css" media="all">
+</head>
+<body class="container-fluid">
+    <form name="aspnetForm" method="post" action="http://www.entityframeworktutorial.net/what-is-entityframework.aspx" id="aspnetForm">
+<div>
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE5MTQ5NTc0ODIPZBYCZg9kFgICAw9kFggCAw8PFgQeBFRleHQFBEhvbWUeC05hdmlnYXRlVXJsBSZodHRwOi8vd3d3LmVudGl0eWZyYW1ld29ya3R1dG9yaWFsLm5ldGRkAgUPDxYCHwEFLy9iYXNpY3MvYmFzaWMtd29ya2Zsb3ctaW4tZW50aXR5LWZyYW1ld29yay5hc3B4ZGQCCQ8PFgQfAAUESG9tZR8BBSZodHRwOi8vd3d3LmVudGl0eWZyYW1ld29ya3R1dG9yaWFsLm5ldGRkAgsPDxYCHwEFLy9iYXNpY3MvYmFzaWMtd29ya2Zsb3ctaW4tZW50aXR5LWZyYW1ld29yay5hc3B4ZGRkdEeLe1a177/gVyAPXPfEE/4FDuit3lddyW4OZZZdcyc=" type="hidden">
+</div>
+
+<div>
+
+	<input name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A7222A43" type="hidden">
+</div>
+        <header class="row">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header" id="header">
+
+                    <div class="col-xs-12 col-sm-7 ">
+                        <a href="http://www.entityframeworktutorial.net/" class="navbar-brand ">
+                            <img src="logo.png" alt="Entity Framework Tutorial"></a>
+                    </div>
+                    <div class="col-sm-5 col-md-3 pull-right hidden-xs vbottom">
+                        
+                        <script>
+
+                            (function () {
+                                var cx = 'partner-pub-7448309248176309:8374077199';
+                                var gcse = document.createElement('script');
+                                gcse.type = 'text/javascript';
+                                gcse.async = true;
+                                gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                                    '//www.google.com/cse/cse.js?cx=' + cx;
+                                var s = document.getElementsByTagName('script')[0];
+                                s.parentNode.insertBefore(gcse, s);
+                            })();
+                        </script>
+                        <div id="___gcse_0"><div class="gsc-control-searchbox-only gsc-control-searchbox-only-en" dir="ltr"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id1"><table id="gs_id50" class="gstl_50 " style="width: 100%; padding: 0px;" cellpadding="0" cellspacing="0"><tbody><tr><td id="gs_tti50" class="gsib_a"><input autocomplete="off" size="10" class="gsc-input" name="search" title="search" id="gsc-i-id1" style="width: 100%; padding: 0px; border: medium none; margin: 0px; height: auto; outline: medium none; background: rgb(255, 255, 255) url('googlelogo_lightgrey_46x16dp.png') no-repeat scroll left center; text-indent: 48px;" dir="ltr" spellcheck="false" placeholder="Custom Search" type="text"></td><td class="gsib_b"><div class="gsst_b" id="gs_st50" dir="ltr"><a class="gsst_a" href="javascript:void(0)" style="display: none;"><span class="gscb_a" id="gs_cb50">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><button class="gsc-search-button gsc-search-button-v2" title="search"><svg width="13" height="13" viewBox="0 0 13 13"><path d="m4.8495 7.8226c0.82666 0 1.5262-0.29146 2.0985-0.87438 0.57232-0.58292 0.86378-1.2877 0.87438-2.1144 0.010599-0.82666-0.28086-1.5262-0.87438-2.0985-0.59352-0.57232-1.293-0.86378-2.0985-0.87438-0.8055-0.010599-1.5103 0.28086-2.1144 0.87438-0.60414 0.59352-0.8956 1.293-0.87438 2.0985 0.021197 0.8055 0.31266 1.5103 0.87438 2.1144 0.56172 0.60414 1.2665 0.8956 2.1144 0.87438zm4.4695 0.2115 3.681 3.6819-1.259 1.284-3.6817-3.7 0.0019784-0.69479-0.090043-0.098846c-0.87973 0.76087-1.92 1.1413-3.1207 1.1413-1.3553 0-2.5025-0.46363-3.4417-1.3909s-1.4088-2.0686-1.4088-3.4239c0-1.3553 0.4696-2.4966 1.4088-3.4239 0.9392-0.92727 2.0864-1.3969 3.4417-1.4088 1.3553-0.011889 2.4906 0.45771 3.406 1.4088 0.9154 0.95107 1.379 2.0924 1.3909 3.4239 0 1.2126-0.38043 2.2588-1.1413 3.1385l0.098834 0.090049z"></path></svg></button></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table></div></div>
+                    </div>
+                </div>
+
+                <div id="menuContainer" class="affix-top">
+                    <button type="button" class="navbar-toggle navbar-toggle-2 collapsed" data-toggle="collapse" data-target="#left-menu" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topMenu" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="collapse navbar-collapse" id="topMenu">
+                        <ul class="nav navbar-nav ">
+                            <li><a href="http://www.entityframeworktutorial.net/" id="Home"><i class="glyphicon glyphicon-home"></i></a></li>
+                            <li class="active"><a href="http://www.entityframeworktutorial.net/what-is-entityframework.aspx">EF Basics</a></li>
+                            <li><a href="http://www.entityframeworktutorial.net/entityframework6/introduction.aspx">EF 6 DB-First</a></li>
+                        <li><a href="http://www.entityframeworktutorial.net/code-first/what-is-code-first.aspx">EF 6 Code-First </a></li>
+                            <li><a href="http://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx">EF Core</a></li>
+                            <li><a href="http://www.entityframeworktutorial.net/Articles/entityframework-articles.aspx">Articles</a></li>
+                            <li><a href="http://www.entityframeworktutorial.net/entity-framework-quiz.aspx">Quiz</a></li>
+                            <li><a href="http://www.entityframeworktutorial.net/entity-framework-cheat-sheet.aspx">Cheat Sheet</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <script>
+
+                //to fix the menu at top on scrolling
+                $('#menuContainer').affix({
+                    offset: {
+                        top: $('#header').height()
+                    }
+                });
+
+            </script>
+        </header></form>
+        <div class="row">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+        </div>
+        <!-- /.navbar-collapse -->
+        <div class="row middle-content">
+            <aside class="col-sm-2 no-padding-column">
+
+                
+
+                <div class="collapse navbar-nav navbar-collapse navbar-collapse-2 left-menu " id="left-menu">
+                    <ul class="level1 nav nav-list primary">
+                        <li><a href="http://www.entityframeworktutorial.net/what-is-entityframework.aspx" class="active">What is Entity Framework?</a></li>
+                        <li><a href="http://www.entityframeworktutorial.net/basics/basic-workflow-in-entity-framework.aspx">Basic Workflow</a></li>
+                        <li><a href="http://www.entityframeworktutorial.net/basics/how-entity-framework-works.aspx">How EF Works?</a></li>
+                        <li><a href="http://www.entityframeworktutorial.net/EntityFramework-Architecture.aspx">EF Architecture</a></li>
+                        <li><a href="http://www.entityframeworktutorial.net/basics/context-class-in-entity-framework.aspx">Context</a></li>
+                        <li><a href="http://www.entityframeworktutorial.net/basics/what-is-entity-in-entityframework.aspx">Entity</a></li>
+                        <li>
+                            <ul>
+                                <li><a href="http://www.entityframeworktutorial.net/Types-of-Entities.aspx">Types of Entity</a></li>
+                                <li><a href="http://www.entityframeworktutorial.net/basics/entity-states.aspx">Entity States</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="http://www.entityframeworktutorial.net/choosing-development-approach-with-entity-framework.aspx">Development Approaches</a></li>
+
+                        <li><a href="http://www.entityframeworktutorial.net/EntityFramework4.3/persistence-in-entity-framework.aspx">Persistence Scenarios</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="col-sm-7 ">
+                <div class="adblock">
+                    
+                    <a href="http://entityframework-extensions.net/?z=eft" target="_top" rel="nofollow" onclick="_gaq.push(['_trackEvent', 'ef_extensions_ad', 'click', 'AD CLICK', 1, true]);">
+                        <img src="ef-ext-lb.jpg" style="border: 1px solid black;"></a>
+                    
+
+                    
+                    
+                </div>
+                <hr class="adSeperator">
+
+                <ul class="pager">
+                    <li class="pervious" id="divPrev1">
+                        <a id="ctl00_lnkPrev1" href="http://www.entityframeworktutorial.net/">Home</a></li>
+                    <li class="next" id="divNext1">
+                        <a id="ctl00_lnkNext1" href="http://www.entityframeworktutorial.net/basics/basic-workflow-in-entity-framework.aspx">Next</a></li>
+                </ul>
+                
+    <h1>What is Entity Framework?</h1>
+
+    <p>
+
+        Prior to .NET 3.5, we (developers) often used to write ADO.NET code or Enterprise Data Access Block to save or retrieve application data from the underlying database. 
+        We used to open a connection to the database, create a DataSet to fetch or submit the data to the database, convert data from the DataSet to .NET objects or vice-versa to apply business rules. This was a cumbersome and error prone process. Microsoft has provided a framework called "Entity Framework" to automate all these database related activities for your application.
+    </p>
+
+    <p>
+
+        Entity Framework is an open-source <a href="http://en.wikipedia.org/wiki/Object-relational_mapping" target="_top" title="Object-relational Mapping">ORM framework</a> for .NET applications supported by Microsoft. 
+        It enables developers to work with data using objects of domain specific classes without focusing on the underlying database tables and columns where this data is stored. With the Entity Framework, developers can work at a higher level of abstraction when they deal with data, and can create and maintain data-oriented applications with less code compared with traditional applications.
+    </p>
+
+    <p>
+
+        Official Definition: “Entity Framework is an object-relational mapper (O/RM) that enables .NET developers to work with a database using .NET objects. It eliminates the need for most of the data-access code that developers usually need to write.”
+    </p>
+
+    <p>
+
+        The following figure illustrates where the Entity Framework fits into your application.
+    </p>
+
+    <figure class="thumbnail center-block">
+        <a href="http://www.entityframeworktutorial.net/images/basics/ef-in-app-architecture.png" target="_top">
+            <img alt="" src="ef-in-app-architecture.png"></a>
+    </figure>
+    <p>
+
+        As per the above figure, Entity Framework fits between the business entities (domain classes) and the database. It saves data stored in the properties of business entities and also retrieves data from the database and converts it to business entities objects automatically.
+    </p>
+
+    <p>
+    </p>
+
+    <h2>Entity Framework Features:</h2>
+
+    <ul class="list">
+        <li><b>Cross-platform:</b> EF Core is a cross-platform framework which can run on Windows, Linux and Mac.
+        </li>
+        <li><b>Modelling:</b> EF (Entity Framework) creates an EDM (Entity Data Model) based on POCO (Plain Old CLR Object) entities with get/set properties of different data types. It uses this model when querying or saving entity data to the underlying database.
+        </li>
+        <li><b>Querying:</b> EF allows us to use LINQ queries (C#/VB.NET) to retrieve data from the underlying database. The database provider will translate this LINQ queries to the database-specific query language (e.g. SQL for a relational database). EF also allows us to execute raw SQL queries directly to the database.
+        </li>
+        <li><b>Change Tracking:</b> EF keeps track of changes occurred to instances of your entities (Property values) which need to be submitted to the database. 
+        </li>
+        <li><b>Saving:</b> EF executes INSERT, UPDATE, and DELETE commands to the database based on the changes occurred to your entities when you call the <code>SaveChanges()</code> method. EF also provides the asynchronous <code>SaveChangesAsync()</code> method.
+        </li>
+        <li><b>Concurrency:</b> EF uses Optimistic Concurrency by default to protect overwriting changes made by another user since data was fetched from the database.
+        </li>
+        <li><b>Transactions:</b> EF performs automatic transaction management while querying or saving data. It also provides options to customize transaction management. 
+        </li>
+        <li><b>Caching:</b> EF includes first level of caching out of the box. So, repeated querying will return data from the cache instead of hitting the database. 
+        </li>
+        <li><b>Built-in Conventions:</b> EF follows conventions over the configuration programming pattern, and includes a set of default rules which automatically configure the EF model.  
+        </li>
+        <li><b>Configurations:</b> EF allows us to configure the EF model by using data annotation attributes or Fluent API to override default conventions.  
+        </li>
+        <li><b>Migrations:</b> EF provides a set of migration commands that can be executed on the NuGet Package Manager Console or the Command Line Interface to create or manage underlying database Schema. 
+        </li>
+    </ul>
+
+    <h2>Entity Framework Latest Versions:</h2>
+
+    <p>
+
+        Microsoft introduced Entity Framework in 2008 with .NET Framework 3.5. Since then, it released many versions of Entity Framework. Currently, there are two latest versions of Entity Framework: EF 6 and EF Core. 
+        The following table lists important difference between EF 6 and EF Core.
+    </p>
+
+    <figure class="thumbnail center-block">
+        <a href="http://www.entityframeworktutorial.net/images/basics/ef6-vs-efcore.png" target="_top">
+            <img alt="" src="ef6-vs-efcore.png"></a>
+    </figure>
+    <h3>EF 6 Version History:</h3>
+     <div class="table-responsive">
+        <table class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th class="col-xs-4">EF Version
+                    </th>
+                    <th class="col-xs-4">Release Year
+                    </th>
+                    <th class="col-xs-4">.NET Framework
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EF 6
+                    </td>
+                    <td>2013
+                    </td>
+                    <td>.NET 4.0 &amp; .NET 4.5, VS 2012</td>
+                </tr>
+                <tr>
+                    <td>EF 5
+                    </td>
+                    <td>2012
+                    </td>
+                    <td>.NET 4.0, VS 2012</td>
+                </tr>
+                <tr>
+                    <td>EF 4.3
+                    </td>
+                    <td>2011
+                    </td>
+                    <td>.NET 4.0, VS 2012</td>
+                </tr>
+                <tr>
+                    <td>EF 4.0
+                    </td>
+                    <td>2010
+                    </td>
+                    <td>.NET 4.0, VS 2010</td>
+                </tr>
+                <tr>
+                    <td>EF 1.0 (or 3.5)
+                    </td>
+                    <td>2008
+                    </td>
+                    <td>.NET 3.5 SP1,
+                        VS 2008
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Learn more about EF 6 versions history and its features <a href="https://msdn.microsoft.com/en-us/data/jj574253.aspx" target="_top">here</a>.</p>
+    <h3>EF Core Version History:</h3>
+     <div class="table-responsive">
+        <table class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th class="col-xs-4">EF Core Version
+                    </th>
+                    <th class="col-xs-4">Release Date
+                    </th>
+                    <th class="col-xs-4">.NET Framework
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EF Core 2.0
+                    </td>
+                    <td>August 2017
+                    </td>
+                    <td>.NET Core 2.0, VS 2017</td>
+                </tr>
+                <tr>
+                    <td>EF Core 1.1
+                    </td>
+                    <td>November 2016
+                    </td>
+                    <td>
+
+                        .NET Core 1.1
+                    </td>
+                </tr>
+                <tr>
+                    <td>EF Core 1.0
+                    </td>
+                    <td>June 2016
+                    </td>
+                    <td>
+
+                        .NET Core 1.0
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Learn about the basic workflow while working with Entity Framework in the next chapter.</p>
+
+                
+                <script async="" src="adsbygoogle.js"></script>
+                <ins data-adsbygoogle-status="done" class="adsbygoogle" style="display: block; text-align: center; height: 200px;" data-ad-format="fluid" data-ad-layout="in-article" data-ad-client="ca-pub-7448309248176309" data-ad-slot="5463413352"><ins id="aswift_0_expand" style="display: inline-table; border: medium none; height: 200px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 903px; background-color: transparent;"><ins id="aswift_0_anchor" style="display: block; border: medium none; height: 200px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 903px; background-color: transparent;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left: 0px; position: absolute; top: 0px; width: 903px; height: 200px;" frameborder="0" height="200" width="903"></iframe></ins></ins></ins>
+                <script>
+
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <hr class="adSeperator">
+                
+                <ul class="pager">
+                    <li class="pervious" id="divPrev2">
+                        <a id="ctl00_lnkPrev2" href="http://www.entityframeworktutorial.net/">Home</a></li>
+                    <li class="next" id="divNext2">
+                        <a id="ctl00_lnkNext2" href="http://www.entityframeworktutorial.net/basics/basic-workflow-in-entity-framework.aspx">Next</a></li>
+                </ul>
+
+
+                
+            </div>
+            <aside class="col-sm-3 right-panel hidden-xs">
+                
+                <div class="panel panel-default right-links-panel">
+                    <div class="panel-heading padding-5">Useful Resources</div>
+                    <div class="list-group">
+                        <div class="list-group-item padding-5"><a href="http://entityframework-extensions.net/fastest-way-to-insert?z=eft-tl" onclick="_gaq.push(['_trackEvent', 'ef_ext_tl', 'click', 'LINK CLICK', 1, true]);" target="_top" rel="nofollow" title="Improve EF performance using Entity Framework Extension">Fastest Way to Insert using EF Extensions</a></div>
+                        <div class="list-group-item padding-5"><a href="http://www.tutorialsteacher.com/" target="_top" rel="nofollow" title="C#, ASP.NET MVC, LINQ, JavaScript, jQuery, AngularJS, Node.js Tutorials">Learn C#, ASP.NET MVC, LINQ, JavaScript, jQuery, AngularJS, Node.js</a></div>
+                        <div class="list-group-item padding-5"><a href="http://www.entityframeworktutorial.net/entity-framework-resources.aspx" onclick="_gaq.push(['_trackEvent', 'ef_ext_tl', 'click', 'LINK CLICK', 1, true]);">Entity Framework Resources</a></div>
+                        <div class="list-group-item padding-5"><a target="_top" rel="nofollow" href="http://pluralsight.pxf.io/c/407808/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fsearch%3Fq%3Dentity%2520framework">Entity Framework Courses on Pluralsight</a></div>
+                    </div>
+                </div>
+                <div class="right-links-panel-hd-tab">
+                    
+                    
+                    <script async="" src="adsbygoogle.js"></script>
+                    <!-- EFT-squre ad 1-->
+                    <ins class="adsbygoogle eft-ad-squre1" data-ad-client="ca-pub-7448309248176309" data-ad-slot="7705054394"></ins>
+                    <script>
+
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    
+                </div>
+                
+                <div class="right-links-panel">
+                    
+                    <script async="" src="adsbygoogle.js"></script>
+                    <!-- EFT-Medium-Rectangle-Responsive -->
+                    <ins class="adsbygoogle eft-ad-squre2" data-ad-client="ca-pub-7448309248176309" data-ad-slot="9541714392"></ins>
+                    <script>
+
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </aside>
+        </div>
+
+        <div class="row">
+            <footer class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3 no-padding-column">
+                        <a href="http://www.entityframeworktutorial.net/">
+                            <img src="logo.png" alt="Entity Framework Tutorial" style="width: 200px;"></a>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <nav class="pull-right">
+                                    <ul class="list-inline">
+                                        <li><a href="http://www.entityframeworktutorial.net/" id="A1"><i class="glyphicon glyphicon-home"></i></a></li>
+                                        <li>|</li>
+                                        <li><a target="_top" href="http://www.entityframeworktutorial.net/entity-framework-cheat-sheet.aspx">Subscribe with us</a></li>
+                                        <li>|</li>
+                                        <li><a target="_top" href="http://buysellads.com/buy/detail/194839" rel="nofollow">Advertise</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p>
+
+                                    Send your feedback to feedback@entityframeworktutorial.net az
+                                </p>
+                                <p>
+
+                                    Copyright © 2018 by EntityFrameworkTutorial.net. All Rights Reserved.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </footer>
+        </div>
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var path = $(location).attr('pathname');
+            $('#left-menu ul li a[href="' + path + '"]').addClass('active');
+        });
+    </script>
+    <!-- fancybar start-->
+    <script async="" type="text/javascript" src="fancybar.js" id="_fancybar_js"></script>
+    <!-- fancybar end-->
+    <!-- DM start-->
+    <script type="text/javascript">
+
+        function _dmBootstrap(file) {
+            var _dma = document.createElement('script');
+            _dma.type = 'text/javascript';
+            _dma.async = true;
+            _dma.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + file;
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(_dma);
+        }
+        function _dmFollowup(file) { if (typeof DMAds === 'undefined') _dmBootstrap('cdn2.DeveloperMedia.com/a.min.js'); }
+        (function () { _dmBootstrap('cdn1.DeveloperMedia.com/a.min.js'); setTimeout(_dmFollowup, 2000); })();
+    </script>
+
+
+<table class="gstl_50 gssb_c" style="width: 248px; display: none; top: 95px; left: 1202px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table><div id="coFrameDiv" style="height: 0px; display: none;"><iframe id="coToolbarFrame" src="what-is-entityframework_2.html" style="height: 0px; width: 100%; display: none;"></iframe></div></body>
+</html>

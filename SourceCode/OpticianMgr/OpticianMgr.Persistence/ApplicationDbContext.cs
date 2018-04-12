@@ -10,8 +10,17 @@ namespace OpticianMgr.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
-        //TODO add further DBSets
-        public DbSet<TestEntity> Test { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Town> Towns { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Glasstype> GlassTypes { get; set; }
+        public DbSet<ContactLensType> ContactLensTypes { get; set; }
+        public DbSet<EyeGlassFrame> EyeGlassFrames { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<CustomMessage> Messages { get; set; }
+        public DbSet<Glasses> Glasses2 { get; set; }
 
 
         public ApplicationDbContext() : base("name=DefaultConnection")

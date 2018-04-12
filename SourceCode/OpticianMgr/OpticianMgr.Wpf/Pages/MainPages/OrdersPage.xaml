@@ -1,0 +1,334 @@
+﻿<Page x:Class="OpticianMgr.Wpf.OrdersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OpticianMgr.Wpf"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+      mc:Ignorable="d" 
+      DataContext="{Binding OrdersViewModel, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0">
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Brillen</Label>
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="0">
+                    <TextBlock>Filtern nach:</TextBlock>
+                    <ComboBox ItemsSource="{Binding GlassesPropertiesList}" SelectedValue="{Binding FilterGlassesProperty}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox Style="{StaticResource FilterTextBox}" Text="{Binding FilterGlassesText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding FilterAndSortG}" Key="Return"></KeyBinding>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Button Command="{Binding FilterAndSortG}">Filtern</Button>
+                    <Button Command="{Binding DeleteFilterG}">Filter zurücksetzen</Button>
+                </StackPanel>
+            </Grid>
+
+
+            <ListView ItemsSource="{Binding GlassesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedGlasses}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Id">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="Id" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Nachname">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="Customer.LastName" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Bearbeitungsstatus">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="ProcessingState" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Zahlungsstatus">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="PaymentState" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Bruttopreis">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="GrossPrice" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:dd.MM.yyyy}}">
+                            <GridViewColumnHeader Content="Bestelldatum">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="OrderDate" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding GlassType.GlasstypeDescription, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Glastypbezeichnung">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="GlassType.GlasstypeDescription" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Doktorname">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="Docotor.DoctorName" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="EyeGlassFrame.ModelDescription" />
+                                                <Binding Path="EyeGlassFrame.Brand" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumnHeader Content="Brillenfassung">
+                                    <GridViewColumnHeader.InputBindings>
+                                        <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftG}" CommandParameter="EyeGlassFrame.ModelDescription" ></MouseBinding>
+                                    </GridViewColumnHeader.InputBindings>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDown">
+                                            <cmd:EventToCommand Command="{Binding SortCommandG}"
+                                        PassEventArgsToCommand="True" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </GridViewColumnHeader>
+                            </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <cmd:EventToCommand Command="{Binding OpenGlasses}"></cmd:EventToCommand>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Loaded">
+                        <cmd:EventToCommand Command="{Binding InitializedG}"
+                                        PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
+    </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Kontaktlinsen</Label>
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Style="{StaticResource FilterAndSortStackPanel}" Grid.Row="0">
+                    <TextBlock>Filtern nach:</TextBlock>
+                    <ComboBox ItemsSource="{Binding LensesPropertiesList}" SelectedValue="{Binding FilterLensesProperty}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox Style="{StaticResource FilterTextBox}" Text="{Binding FilterLensesText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding FilterAndSortC}" Key="Return"></KeyBinding>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Button Command="{Binding FilterAndSortC}" >Filtern</Button>
+                    <Button Command="{Binding DeleteFilterC}" >Filter zurücksetzen</Button>
+                </StackPanel>
+            </Grid>
+
+
+            <ListView ItemsSource="{Binding ContactLensesView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top" SelectedItem="{Binding SelectedLenses}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Id">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftC}" CommandParameter="Id" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandC}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Customer.LastName, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Nachname">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftC}" CommandParameter="Customer.LastName" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandC}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding ProcessingState, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Bearbeitungsstatus">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftC}" CommandParameter="ProcessingState" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandC}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding PaymentState, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Zahlungsstatus">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftC}" CommandParameter="PaymentState" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandC}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding GrossPrice, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}">
+                            <GridViewColumnHeader Content="Bruttopreis">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftC}" CommandParameter="GrossPrice" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandC}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy}}">
+                            <GridViewColumnHeader Content="Bestelldatum">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftC}" CommandParameter="OrderDate" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandC}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding ContactLensTyp.ContactLensTypeDescription, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Kontaktlinsentypbeschreibung">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftC}" CommandParameter="ContactLensType.ContactLensTypeDescription" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandC}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Doctor.DoctorName, UpdateSourceTrigger=PropertyChanged}">
+                            <GridViewColumnHeader Content="Doktorname">
+                                <GridViewColumnHeader.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShiftC}" CommandParameter="Doctor.DoctorName" ></MouseBinding>
+                                </GridViewColumnHeader.InputBindings>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <cmd:EventToCommand Command="{Binding SortCommandC}"
+                                        PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <cmd:EventToCommand Command="{Binding OpenLenses}"></cmd:EventToCommand>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Loaded">
+                        <cmd:EventToCommand Command="{Binding InitializedC}"
+                                        PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
+        </DockPanel>
+    </Grid>
+</Page>

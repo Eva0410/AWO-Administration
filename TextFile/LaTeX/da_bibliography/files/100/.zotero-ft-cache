@@ -1,0 +1,126 @@
+Heise-Foren: Einloggen | Registrieren
+
+        News
+        heise Developer
+        heise Netze
+        heise Open Source
+        heise Security
+        c't
+        iX
+        Technology Review
+        c't Fotografie
+        Mac & i
+        Make
+        Telepolis
+        heise Autos
+        TechStage
+        tipps+tricks
+        heise Download
+        Preisvergleich
+        Whitepapers
+        Webcasts
+        Stellenmarkt
+        Gutscheine
+        IT-Markt
+        Tarifrechner
+        Netzwerk-Tools
+        Spielen bei Heise
+        heise shop
+        heise Select
+        Artikel-Archiv
+        Zeitschriften-Abo
+        Veranstaltungen
+        Arbeiten bei Heise
+        Mediadaten
+
+Foren Kontakt
+
+    News
+        7-Tage-News
+        News-Archiv
+    Rubriken
+        Sprachen
+        Architektur/Methoden
+        Werkzeuge
+        Know-how
+        Standards
+        Literatur
+        Videos
+        Veranstaltungsberichte
+    Blogs
+        Babel-Bulletin
+        Der Dotnet-Doktor
+        the next big thing
+        Neuigkeiten von der Insel
+        Tales from the Web side
+        Continuous Architecture
+        Der Pragmatische Architekt
+        ÜberKreuz
+        Modernes C++
+        colspan
+    Podcast
+    Videos
+    Konferenzen
+    Termine
+
+    heise Developer
+    Rubriken
+    Werkzeuge
+    Vor- und Nachteile
+
+.NET-Oberflächen mit Windows Forms oder WPF?
+Vor- und Nachteile
+Inhaltsverzeichnis
+
+    .NET-Oberflächen mit Windows Forms oder WPF?
+    Code und Layout getrennt
+    Vor- und Nachteile
+    Nur wenige WPF-Tools
+    Zukunft und Fazit
+
+Anzeige
+Viel Licht und viel Schatten
+
+Bei so viel Licht ist auch ein großer Schatten nicht weit. Das erste K.O.-Kriterium ist für viele Softwareentwickler die Betriebssystemanforderung, da WPF nur ab Windows XP läuft. Wer noch Windows 2000 oder gar Windows 98/ME unterstützen muss, kann sofort aufhören, sich mit WPF zu beschäftigen. Das Framework braucht bei Hardware unbedingt eine moderne Grafikkarte mit Unterstützung ab Direct3D 9. Außerdem sollte man deutlich mehr RAM haben als Microsoft in den Mindestanforderungen des jeweiligen Betriebssystems angibt. WPF läuft auf jeden Fall in Leistungsprobleme, wenn man viele Elemente in einer Oberfläche verwendet, selbst wenn diese gerade gar nicht sichtbar sind. Während in Windows Forms die Anzeige von ein paar Hunderttausend Datensätzen in einer Tabelle mit jeweils nur 20 sichtbaren Zeilen kein Problem ist, macht WPF dabei schnell schlapp.
+
+Der RAM-Hunger verursacht gerade beim Einsatz in Terminal Services Probleme. Auch belasten die grafischen Effekte von WPF das Netz deutlich mehr, was sich an einem Beispiel verdeutlichen lässt: Ein Farbverlauf lässt sich bei der Übertragung so optimieren wie eine einfarbige Fläche. Erst in Windows 7 in Verbindung mit einem Terminal Server auf Basis von Windows Server 2008 Release 2 gibt es eine Optimierung für die Übertragung der WPF-Effekte, bei der die Grafikkarte des Clients stärker zur Mithilfe herangezogen wird.
+
+Kritik fordert WPF auch hinsichtlich der verfügbaren Steuerelemente heraus. Es besitzt weder in .NET 3.0 noch in .NET 3.5 Steuerelemente zur Darstellung von Daten in Tabellen (Datagrid) oder ein Auswahlfeld für Datum/Uhrzeit (Date-Time-Picker). Sie musste man entweder selbst entwickeln oder von Drittanbietern hinzukaufen. Erst seit Oktober 2008 bietet Microsoft auf seinem Quellcodeportal Codeplex solche Steuerelemente als Zusatz an ( WPF Toolkit ). Dass es dazu in den ersten zwei Jahren nach dem Erscheinen von WPF überhaupt keine Lösung von Microsoft gab, zeigt deutlich, dass der Hersteller bei der Entwicklung von WPF die typischen Geschäftsanwendungen völlig vernachlässigt hat.
+Vorherige 1 2 3 4 5 Nächste
+Anzeige
+
+    Wer ist wer? Digital-Identität einfach schützen
+    Messenger? Ja! Sicherheit? Selbstverständlich!
+    Karrieresprung einfach sicher - Cyber Security
+    EIZO-Monitor-Test: Das Urteil der heise-Leser
+    Arbeitgeber Bewerbungen: Heise Karriere-Netzwerk
+
+    teilen 0
+    tweet
+    teilen
+    mail
+    Info
+
+https://www.heise.de/-228136 Drucken
+Anzeige
+Anzeige
+
+    News 7-Tage-News News-Archiv
+    Rubriken Sprachen Architektur/Methoden Werkzeuge Know-how Standards Literatur Videos Veranstaltungsberichte
+    Blogs Babel-Bulletin Der Dotnet-Doktor the next big thing Neuigkeiten von der Insel Tales from the Web side Continuous Architecture Der Pragmatische Architekt ÜberKreuz Modernes C++ colspan
+    Podcast
+    Videos
+    Konferenzen
+    Termine
+
+    Datenschutzhinweis
+    Impressum
+    Kontakt
+    Mediadaten
+    224688
+    Content Management by Inter Red
+    Copyright © 2018 Heise Medien
+
+×
+ 
+ 

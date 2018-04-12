@@ -1,0 +1,31 @@
+﻿<Window x:Class="OpticianMgr.Wpf.Pages.AddTownWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
+        mc:Ignorable="d"
+        Title="Neuer Ort" Height="210" Width="591.227"  ResizeMode="NoResize">
+    <StackPanel Style="{StaticResource StackPanelBackground}">
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Neuer Ort</Label>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"></ColumnDefinition>
+                <ColumnDefinition Width="201"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Postleitzahl:</Label>
+            <Label Grid.Column="0" Grid.Row="1">Ortsname:</Label>
+            <TextBox Text="{Binding Town.ZipCode, Mode=OneWayToSource}"  Grid.Column="1" Grid.Row="0"></TextBox>
+            <TextBox Text="{Binding Town.TownName, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1"></TextBox>
+        </Grid>
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
+            <Button Command="{Binding Cancel}">Abbrechen</Button>
+            <Button Command="{Binding Submit}">Anlegen</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

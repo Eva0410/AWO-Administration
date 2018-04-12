@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,298 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Bill" xml:space="preserve">
+    <value>Rechnung</value>
+  </data>
+  <data name="Brand" xml:space="preserve">
+    <value>Marke</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Farbe</value>
+  </data>
+  <data name="ContactLensOthers1" xml:space="preserve">
+    <value>Kontaktlinsesnsonstiges1</value>
+  </data>
+  <data name="ContactLensOthers2" xml:space="preserve">
+    <value>Kontaktlinsensonstiges2</value>
+  </data>
+  <data name="ContactLensType" xml:space="preserve">
+    <value>Kontaktlinsentyp</value>
+  </data>
+  <data name="ContactPerson" xml:space="preserve">
+    <value>Kontaktperson</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="CountryName" xml:space="preserve">
+    <value>Landname</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Kunde</value>
+  </data>
+  <data name="CustomerId" xml:space="preserve">
+    <value>Kundennummer</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Geburtstag</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>Rabatt</value>
+  </data>
+  <data name="Doctor" xml:space="preserve">
+    <value>Doktor</value>
+  </data>
+  <data name="DoctorName" xml:space="preserve">
+    <value>Doktorname</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EyeGlassFrame" xml:space="preserve">
+    <value>Brillenfassung</value>
+  </data>
+  <data name="FAX" xml:space="preserve">
+    <value>FAX</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="GlassOthers" xml:space="preserve">
+    <value>Glassonstiges</value>
+  </data>
+  <data name="GlassPriceLeft" xml:space="preserve">
+    <value>Linker Glaspreis</value>
+  </data>
+  <data name="GlassPriceRight" xml:space="preserve">
+    <value>Rechter Glaspreis</value>
+  </data>
+  <data name="GlassTypeOthers" xml:space="preserve">
+    <value>Glastypsonstiges</value>
+  </data>
+  <data name="Glass_FWS" xml:space="preserve">
+    <value>Glas_FWS</value>
+  </data>
+  <data name="Glass_F_L_Axis" xml:space="preserve">
+    <value>Glas_F_L_Achse</value>
+  </data>
+  <data name="Glass_F_L_cyl" xml:space="preserve">
+    <value>Glas_F_L_cyl</value>
+  </data>
+  <data name="Glass_F_L_PD_NTH" xml:space="preserve">
+    <value>Glas_F_L_PD_NTH</value>
+  </data>
+  <data name="Glass_F_L_Prism" xml:space="preserve">
+    <value>Glas_F_L_Prisma</value>
+  </data>
+  <data name="Glass_F_L_sph" xml:space="preserve">
+    <value>Glas_F_L_sph</value>
+  </data>
+  <data name="Glass_F_R_Axis" xml:space="preserve">
+    <value>Glas_F_R_Achse</value>
+  </data>
+  <data name="Glass_F_R_cyl" xml:space="preserve">
+    <value>Glas_F_R_cyl</value>
+  </data>
+  <data name="Glass_F_R_PD_NTH" xml:space="preserve">
+    <value>Glas_F_R_PD_NTH</value>
+  </data>
+  <data name="Glass_F_R_Prism" xml:space="preserve">
+    <value>Glas_F_R_Prisma</value>
+  </data>
+  <data name="Glass_F_R_sph" xml:space="preserve">
+    <value>Glas_F_R_sph</value>
+  </data>
+  <data name="Glass_HSA" xml:space="preserve">
+    <value>Glas_HSA</value>
+  </data>
+  <data name="Glass_Ink" xml:space="preserve">
+    <value>Glas_Ink</value>
+  </data>
+  <data name="Glass_N_L_Axis" xml:space="preserve">
+    <value>Glas_N_L_Achse</value>
+  </data>
+  <data name="Glass_N_L_cyl" xml:space="preserve">
+    <value>Glas_N_L_cyl</value>
+  </data>
+  <data name="Glass_N_L_PD_NTH" xml:space="preserve">
+    <value>Glas_N_L_PD_NTH</value>
+  </data>
+  <data name="Glass_N_L_Prism" xml:space="preserve">
+    <value>Glas_N_L_Prisma</value>
+  </data>
+  <data name="Glass_N_L_sph" xml:space="preserve">
+    <value>Glas_N_L_sph</value>
+  </data>
+  <data name="Glass_N_R_Axis" xml:space="preserve">
+    <value>Glas_N_R_Achse</value>
+  </data>
+  <data name="Glass_N_R_cyl" xml:space="preserve">
+    <value>Glas_N_R_cyl</value>
+  </data>
+  <data name="Glass_N_R_PD_NTH" xml:space="preserve">
+    <value>Glas_N_R_PD_NTH</value>
+  </data>
+  <data name="Glass_N_R_Prism" xml:space="preserve">
+    <value>Glas_N_R_Prisma</value>
+  </data>
+  <data name="Glass_N_R_sph" xml:space="preserve">
+    <value>Glas_N_R_sph</value>
+  </data>
+  <data name="GrossPrice" xml:space="preserve">
+    <value>Bruttopreis</value>
+  </data>
+  <data name="Hobbies" xml:space="preserve">
+    <value>Hobbies</value>
+  </data>
+  <data name="HouseNumber" xml:space="preserve">
+    <value>Hausnummer</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Insurance" xml:space="preserve">
+    <value>Krankenkassa</value>
+  </data>
+  <data name="InsurancePolicyNumber" xml:space="preserve">
+    <value>Versicherungsnummer</value>
+  </data>
+  <data name="InsurancePrice" xml:space="preserve">
+    <value>Versicherungspreis</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="ModelDescription" xml:space="preserve">
+    <value>Modell</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NetPrice" xml:space="preserve">
+    <value>Nettopreis</value>
+  </data>
+  <data name="OrderDate" xml:space="preserve">
+    <value>Bestelldatum</value>
+  </data>
+  <data name="Others" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
+  <data name="Others1" xml:space="preserve">
+    <value>Sonstiges1</value>
+  </data>
+  <data name="Others2" xml:space="preserve">
+    <value>Sonstiges2</value>
+  </data>
+  <data name="OthersPrice" xml:space="preserve">
+    <value>Sonstiger Preis</value>
+  </data>
+  <data name="PatientsContribution" xml:space="preserve">
+    <value>Selbstbehalt</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Zahlungsdatum</value>
+  </data>
+  <data name="PaymentState" xml:space="preserve">
+    <value>Zahlungsstatus</value>
+  </data>
+  <data name="ProcessingState" xml:space="preserve">
+    <value>Bearbeitungsstatus</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Produkte</value>
+  </data>
+  <data name="PurchaseDate" xml:space="preserve">
+    <value>Einkaufsdatum</value>
+  </data>
+  <data name="PurchasePrice" xml:space="preserve">
+    <value>Einkaufspreis</value>
+  </data>
+  <data name="SaleDate" xml:space="preserve">
+    <value>Verkaufsdatum</value>
+  </data>
+  <data name="SalePrice" xml:space="preserve">
+    <value>Verkaufspreis</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Lieferant</value>
+  </data>
+  <data name="SupplierComment" xml:space="preserve">
+    <value>Lieferantenbemerkung</value>
+  </data>
+  <data name="Telephone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Telephone1" xml:space="preserve">
+    <value>Telefon1</value>
+  </data>
+  <data name="Telephone2" xml:space="preserve">
+    <value>Telefon2</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Town" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="TownName" xml:space="preserve">
+    <value>Ortsname</value>
+  </data>
+  <data name="ZipCode" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="GlasstypeDescription" xml:space="preserve">
+    <value>Glastypbezeichnung</value>
+  </data>
+  <data name="GlassType" xml:space="preserve">
+    <value>Glastyp</value>
+  </data>
+  <data name="ContactLensTypeDescription" xml:space="preserve">
+    <value>Kontaktlinsentypbeschreibung</value>
+  </data>
+  <data name="BettermentTax" xml:space="preserve">
+    <value>Mehrwertsteuer</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DownOne" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DownOne.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DownTwo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DownTwo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UpOne" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\UpOne.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UpTwo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\UpTwo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SingleEmailSubjectGlassesOrder" xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -1,0 +1,430 @@
+\chapter{Verwendete Technologien}\label{cha:theoretical-background}
+
+\section{Visual Studio}
+Visual Studio ist eine Entwicklungsumgebung von Microsoft. Sie wird verwendet um Computerprogramme sowie Webseiten, Webapps, Webservices und mobile Apps herzustellen. Die aktuellste Version des Programmes unterstützt eine vielzahl von Programmiersprachen.
+Weiters verfügt Visual Studio über einen Code editor mit IntelliSense(unterstützt den Programmierer mittels Vervollständigung des Codes). Es ermöglicht das entwickeln von Apps für iOS, Mac, Android, Windows das Web und die Cloud
+Visual Studio ermöglicht es genau und effizient zu Schreiben, ohne den aktuellen Dateikontext zu verlieren. Es gibt außerdem die Funktionen für Refactoring, Identifikation und zum Beheben von Codeproblemen.
+Der Visual Studio-Debugger kann sprachübergreifend, lokal oder remote Programmfehler mit Verlaufsdaten Ihres Codes ermitteln und debuggen.
+Man kann seinen Quellcode in Git-Repositorys verwalten, die von beliebigen Anbietern (einschließlich GitHub) gehostet werden. Außerdem bietet es Visual Studio Team Services, um Code zusammen mit Programmfehlern und Arbeitsaufgaben für ein gesamtes Projekt zu verwalten.
+Quellen: \cite{webster_visual_????} $https://www.visualstudio.com/de/vs/$
+
+\section{C-Sharp}
+C\# ist eine objektorientierte Programmiersprache. Sie wurde von Microsoft entwickelt ist jedoch mittlerweile Plattform unabhängig. Sie unterstützt zahlreiche Funktionen wie Lambda Expressions, Delegates, Enumerationen und auch einem direkten Speicherzugriff. Außerdem werden generische Methoden und Typen von C\# unterstützt.
+Quellen: \cite{_c-sharp_2018} \url{https://de.wikipedia.org/w/index.php?title=C-Sharp&oldid=174182278}
+
+\section{Entity Framework}
+Zum Nutzen einer Datenbank in Programmen gibt es das von Microsoft entwickelte Entity Framework. Dabei handelt es sich um ein Framework zur Erstellung von objekt\-relationalen Abbildungen auf .NET-Objektstrukturen. Das wird auch als ORM (object relational mapping) bezeichnet. Es ermöglicht Programmierern in der Applikation mit Objekten zu arbeiten, anstatt sich auf die wirkliche Datenbank mit ihren Tabellen und den Zugriff darauf konzentrieren zu müssen. Ein solches Framework wird benötigt, weil objektorientierte Programmiersprachen wie .NET Daten in Objekten speichern und relationale Datenbanken Daten in Tabellen ablegen. Diese beiden Arten der Speicherung sind grundlegend verschieden. Deshalb wird ein Framework gebraucht, um diese miteinander verwenden zu können.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.65]{images/ef.png}
+\end{center}
+	\caption{Einsatz des Entity Frameworks in einer Applikation}
+	\label{fig:sample}
+\end{figure}
+\noindent Wie man in der obenstehenden Grafik erkennen kann, verbindet das Entity Framework die Objekte im Programm mit der Datenbank. Dabei kann es Daten von Properties in  Objekten in die Datenbank speichern und umgekehrt Daten von der Datenbank in Objekte verwandeln. \newline
+Um eine Datenbank zu verwenden, gibt es drei Möglichkeiten:
+\begin{itemize}
+\item Code First: Dabei werden die benötigten Klassen im Programm zuerst definiert und darauf basierend wird vom DbContext die Datenbank erzeugt. Diese Methode wurde gewählt, um die Datenbank dieser Arbeit zu erstellen.
+\item Model First: Im Gegensatz zu Code First werden hier zuerst die Entitäten der Datenbank mit Hilfe eines grafischen Tools modelliert und darauf basierend wird ein Datenbankschema erstellt.
+\item Database First: Es wird eine bestehende Datenbank verwendet.
+\end{itemize}
+Zum Verwenden der Datenbank wird im Programm eine Klasse erzeugt, die von der Klasse ''DbContext'' abgeleitet wird. Diese Klasse enthält DbSets aller Entitätenklassen und gibt mittels des Connectionstrings an, welche Datenbankverbindung verwendet werden soll. Das ist sehr nützlich, weil damit die Datenbank sehr einfach ausgetauscht werden kann. Ein DbSet ist eine Klasse, die die entsprechenden Methoden für Entitätentypen anbietet (Zum Beispiel 'Add' oder 'Remove'). \newline Beispielsweise werden so alle Kunden der Datenbank verwaltet: 
+\begin{lstlisting}
+public DbSet<Customer> Customers { get; set; }
+\end{lstlisting}
+Mit dieser Property kann nun im Programm gearbeitet werden. Das heißt, dass alles was in diesem DbSet geändert wird, mit der Methode ''SaveChanges'' (aufgerufen vom  DbContext) auch in die entsprechende Tabelle in der Datenbank übertragen wird. Wenn zum Beispiel ein Objekt Customer an das DbSet Customers angehängt wird und dann ''SaveChanges'' aufgerufen wird, wird auch in der Datenbank ein neuer Datensatz erstellt. Somit lässt das Entity Framework zu, dass Insert-, Update- oder Delete-Statements auf der Datenbank ausgeführt werden.
+Zum Holen von Daten aus der Datenbank kann der Programmierer die Abfragesprache Linq benutzen. Dabei übersetzt das Entity Framework das jeweilige Linq-Statement in die Abfragesprache der verwendeten Datenbank (z.B. SQL). Über sogenannte ''DataAnnotations'' können mittels des Entity Frameworks auch Bedienungen festgelegt werden, welche gewisse Spalten von Entitäten in der Datenbank erfüllen müssen. Zum Beispiel wird mittels der Data-Annotation ''MaxLength'' festgelegt, dass der Name eines Ortes nicht länger als 100 Zeichen sein darf:
+\begin{lstlisting}
+[MaxLength(100)]
+public string TownName { get; set; }
+\end{lstlisting}
+Quellen: \cite{wikipedia_entity_2017}, \cite{entityframework_tutorial_what_2018}, \cite{wikipedia_objektrelationale_2016}, \cite{microsoft_entity_connections_2018}, \cite{microsoft_entity_2018}
+\subsection{Linq}
+Linq steht abgekürzt für Language Integrated Query und ermöglicht den Zugriff auf Daten aus einem Programm. Mit dieser Abfragesprache kann der Benutzer auf lokale Listen im Programm zugreifen, auf Daten aus der Datenbank, auf XML-Inhalte und vieles mehr. In dieser Arbeit wird nur Linq to Objects und Linq to Entities verwendet. Linq to Entites ermöglicht dem Programmierer im Code direkt Abfragen an das konzeptionelle Modell des Entity Frameworks zu stellen. Diese Abfragen werden dann in Befehlsstrukturen umgewandelt und gegen den Objektkontext ausgeführt.
+\newline Linq hat die Eigenschaft, dass die gegebenen Ausdrücke nicht bei ihrer Definition ausgeführt werden, sondern erst wenn der Wert tatsächlich gebraucht wird (Lazy Evaluation). Das hat den Vorteil, dass Abfragen öfter verwendet werden können. Falls der Benutzer das nicht möchte, muss er vortäuschen, die Ergebnismenge sofort zu benötigen (zum Beispiel kann nach der Query ein .ToList() angehängt werden).
+\newline Mit der nachfolgenden Codezeile werden beispielsweise alle Kontaktlinsenaufträge gewählt, die schon bezahlt wurden.
+\begin{lstlisting}
+List<Order> paidContactLenses = this.ContactLenses.Where(c => c.PaymentState == "Bezahlt").ToList();
+\end{lstlisting}
+Ein anderes Beispiel wäre alle Kunden zu zählen, deren Vorname mit 'E' beginnt:
+\begin{lstlisting}
+int customersStartingFirstNameWithE = this.Customers.Count(c => c.FirstName.StartsWith("E"));
+\end{lstlisting}
+Quellen: \cite{wikipedia_linq_2018}, \cite{microsoft_linq_2018}
+\section{UnitOfWork-Pattern}
+Das UnitOfWork-Pattern ist eines von vielen Design Patterns in .NET. Design Patterns sind allgemeine Lösungen für Software Design Probleme, die immer wieder vorkommen. Das UnitOfWork-Pattern beschreibt einen Weg der Projektarchitektur um mit Datenbanken arbeiten zu können. Es verwaltet Transaktionen, führt Updates geregelt durch und schafft damit Concurrency-Probleme aus der Welt. Dadurch arbeitet man im Code nicht direkt mit den DbSets sondern mit der Klasse UnitOfWork. \newline Der Programmierer muss zuerst das Repository-Pattern implementieren, um das UnitOf\-Work-Pattern umzusetzen zu können. Dabei geht es darum, für jede Entität eine Klasse zu erschaffen (Repository), die alle Operationen für diese Entität beinhaltet. In einem Repository für die Klasse Kunde sollten zum Beispiel die CRUD Methoden (Create, Read, Update, Delete) enthalten sein. In dieser Arbeit wurde das Pattern umgesetzt, indem eine generische Klasse ''GenericRepository'' für alle Entitäten gestaltet wurde (siehe Data-Access-Layer). 
+\newline Mit dem Repository-Pattern alleine (ohne UnitOfWork-Pattern) enthält jedes Repository einen eigenen DbContext, welche nicht aufeinander abgestimmt sind. Das würde allerdings zu Problemen führen, besonders wenn zwei verschiedene Repositories eingesetzt werden und beide gleichzeitig Transaktionen abschließen. Jedes Repository hätte dann seine eigene Version von eventuell geänderten Datensätzen, die sich vielleicht unterscheiden würden. Das würde letztendlich zur Datenbankinkonsistenz führen.
+\newline Um dieses Problem zu vermeiden, wird das UnitOfWork-Pattern eingesetzt. Dabei wird eine Klasse ''UnitOfWork'' erstellt, die eine Instanz von allen Repositories enthält und einen zentralen DbContext, der an die einzelnen Repositories weitergegeben wird. Damit können nun Datenbankänderungen, in denen mehrere Repositories benötigt werden, gesammelt in 
+einer Transaktion auf einem zentralen DbContext ausgeführt werden.
+\newline
+\newline
+\underline{Data-Access-Layer:}
+In dieser Arbeit wurde das Repository Pattern und das UnitOfWork-Pattern mit folgenden Klassen implementiert:
+\begin{itemize}
+\item EntityObject: Dies ist eine Klasse, von der später alle Entitäten abgeleitet werden. Sie gibt den Entitäten eine Id und einen Timestamp, um später Concurrency-Probleme zu lösen.
+\item IGenericRepository: Ein Interface für alle Repositories, welches die Standardmethoden wie Get, Insert oder Delete vorschreibt.
+\item IUnitOfWork: Ein Interface, welches die Definitionen für alle IGenericRepositories, die Save-Methode sowie andere Methodenköpfe, die später selbst implementiert werden, enthält.
+\item GenericRepository: Eine Klasse, die für jede Entität erstellt wird und die von IGenericRepository ableitet. Sie enthält den Context sowie das DbSet der gewünschten Entität. Zusätzlich implementiert sie alle Standardmethoden (Get, GetById, Insert, Update, Delete, Count...).
+\item UnitOfWork: Eine Klasse, die von IUnitOfWork ableitet und alle Methoden implementiert. Mit dieser Klasse wird später im Programm gearbeitet. 
+\end{itemize}
+Zum Beispiel wird mit diesem Befehl ein Kunde mittels der Id gesucht. Das globale, private Feld ''uow'' wird zuvor mittels Dependency Injection im Konstruktor initialisiert.
+\begin{lstlisting}
+Customer c = uow.CustomerRepository.GetById(id);
+\end{lstlisting}
+Es wird also zuerst auf die UnitOfWork zugegriffen und von dort aus auf das spezielle Repository. CustomerRepository ist vom Typ GenericRepository \textless Customer\textgreater{} und damit kann man auf die im GenericRepository definierten Methoden (hier GetById) zugreifen.
+\newline
+Ein anderes Beispiel wäre das Einfügen eines neuen Datensatzes in die Datenbank. Dazu muss unbedingt die Save-Methode danach aufgerufen werden, ansonsten werden die Änderungen nicht in die Datenbank übertragen.
+\begin{lstlisting}
+uow.CustomerRepository.Insert(this.Customer);
+uow.Save();
+\end{lstlisting}
+Die Klasse ''UnitOfWork'' beinhaltet auch eine Methode namens ''Dispose'', welche auf jeden Fall aufgerufen werden muss, um den DbContext zu schließen.
+\newline Quellen: \cite{codeproject_unit_2018}, \cite{dofactory_.net_2018}, \cite{c-sharpcorner_unit_2018}
+\section{WPF}
+WPF (Windows Presentation Foundation) ist eine von Microsoft entwickelte Klassenbibliothek zur Erstellung von grafischen Oberflächen. Mit WPF werden häufig Desktop\-anwendungen erstellt, allerdings gibt es auch die Möglichkeit 3D-Grafiken, Dokumente oder Videos zu erstellen. Als Vorgängerversion kann man Windows Forms bezeichnen, denn WPF beinhaltet weitaus mehr Möglichkeiten des Designs als Windows Forms.
+Um eine WPF-Anwendung erstellen zu können, benötigt man die Definitionssprache XAML. Dies ist abgekürzt und steht für Extensible Application Markup Language. Diese Sprache basiert auf XML und beinhaltet zusätzlich WPF-spezifische Elemente. \newline Beispiel eines XAML-Codes und dessen Erscheinen: 
+\begin{lstlisting}
+<Window x:Class="OpticianMgr.Wpf.Pages.AddCountryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
+        mc:Ignorable="d"
+        Title="Neues Land" Height="179.589" Width="576.437">
+    <StackPanel Style="{StaticResource StackPanelBackground}">
+        <Label Style="{StaticResource HeadingStyle}">Neues Land</Label>
+    </StackPanel>
+</Window>
+\end{lstlisting}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.5]{images/Wpf.png}
+\end{center}
+	\caption{Einfaches WPF-Fenster}
+	\label{fig:sample}
+\end{figure}
+Dennoch hat WPF auch manche Nachteile:
+\begin{itemize}
+\item WPF benötigt ein jüngeres Betriebssystem als Windows XP.
+\item Es kommt zu Leistungsproblemen, wenn mehrere Fenster im Einsatz sind und außerdem hat WPF einen hohen RAM-Bedarf.
+\end{itemize}
+Quellen: \cite{it-visions_was_2018}, \cite{schwichtenberg_vor-_2018}
+\section{MVVM}
+MVVM ist eine Abkürzung und steht für Model-View-ViewModel. Dies ist ein Entwurfsmuster, wie man Projekte designen kann und dient zur Trennung der Logik und der Darstellung der Benutzerschnittstelle. Es ist speziell geeignet für WPF. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/MVVMPattern.png}
+\end{center}
+	\caption{MVVM-Konzept}
+	\label{fig:sample}
+\end{figure}
+\noindent In der obenstehenden Grafik kann man leicht erkennen, wie MVVM funktioniert. Die View kommuniziert ausschließlich mit dem ViewModel und zwar über DataBindings. Das ViewModel beinhaltet die Logik und verändert gegebenenfalls das Model (Datenbank).
+\newline
+DataBindings von dem ViewModel zur View funktionieren mit Hilfe des Events ''PropertyChangedEventHandler''. 
+\begin {lstlisting}
+public event PropertyChangedEventHandler PropertyChanged;
+\end{lstlisting}
+Mit der Methode ''Invoke'' wird das Event ausgelöst. Es benachrichtigt die View, dass sich der Wert der Property mit dem Namen ''propertyName'' geändert hat. Im ersten Parameter wird der Sender des Events übermittelt. In diesem Fall ist der Sender das ViewModel (this), in dem das Event ausgelöst wird.
+\begin{lstlisting}
+PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+\end{lstlisting}
+Im Gegenzug kann die View folgendermaßen auf eine Property im ViewModel binden:
+\begin{lstlisting}
+<ListView ItemsSource="{Binding CustomersView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+\end{lstlisting}
+Vorteile von MVVM:
+\begin{itemize}
+\item Logik sowie Darstellung können unabhängig voneinander bearbeitet werden. Dadurch kann die Darstellung von Designern und die Logik von Entwicklern erstellt werden.
+\item Durch die Trennung ergibt sich eine bessere Testbarkeit der Logik.
+\end{itemize}
+Quellen: \cite{wikipedia_model_2017}
+\section{MVVM-Light}
+MVVM-Light ist ein Framework, welches dazu dient, den Aufwand der Implementierung des MVVM-Musters zu verringern. Neben MVVM-Light gibt es auch noch andere solcher Frameworks, wie zum Beispiel Prism. \newline Zur Verwendung müssen die Packages MVVMLight (Version 5.3.0) und MVVMLightLibs (Version 5.3.0) über den NuGet-Package-Manager installiert werden. \newline Beim Einbinden von MVVM-Light werden zwei wesentliche Klassen erstellt:
+\begin{itemize}
+\item MainViewModel: Das ViewModel der Hauptseite, abgeleitet von der Klasse ''ViewModelBase''.
+\item ViewModelLocator: Beinhaltet statische Referenzen für alle anderen ViewModels. Außerdem bietet diese Klasse einen einfachen IOC-Container.
+\end{itemize}
+Alle ViewModels, die später erstellt werden, sollten von der Klasse ''ViewModelBase'' abgeleitet werden. Damit hat der Programmierer unter anderem die Möglichkeit die Methode ''RaisePropertyChanged'' zu verwenden. Diese ermöglicht dem ViewModel die View zu benachrichtigen, dass sich Werte von Properties verändert haben und somit kann die View die entsprechenden Daten aktualisieren. \newline
+Hier werden die Werte der Kundenübersicht vom ViewModel aus aktualisiert.
+\begin{lstlisting}
+this.RaisePropertyChanged(() => this.CustomersView);
+\end{lstlisting}
+MVVM-Light bietet die vorgefertigte Klasse ''RelayCommand'', welche die Implementierung des Interfaces ''ICommand'' für MVVM-Light darstellt. Der Konstruktor der Klasse hat zwei Parameter. Der erste beschreibt die Aktivität, die ausgeführt werden soll, sobald das RelayCommand aufgerufen wird (Lambda-Expression oder Delegate für Methode). Der zweite Parameter ist optional und erwartet ein Delegate für eine Methode oder eine Lambda-Expression, die ein ''bool'' zurückgibt. Dieser  beschreibt, ob das RelayCommand zur Zeit ausgeführt werden darf oder nicht.
+\newline 
+Im nachfolgenden Beispiel wird ein RelayCommand aufgerufen, sobald ein Button gedrückt wird.
+\newline In der View wird der Name des RelayCommands im Button angegeben.
+\begin{lstlisting}
+<Button Command="{Binding DeleteFilter}">Filter zuruecksetzen</Button>
+\end{lstlisting}
+\noindent Im ViewModel wird das gewünschte RelayCommand so initialisiert:
+\begin{lstlisting}
+DeleteFilter = new RelayCommand(DeleteF);
+\end{lstlisting}
+DeleteF ist dabei die Methode, die ausgeführt wird, sobald der Button gedrückt wird. \newline Ein weiteres Feature von MVVM-Light heißt ''EventToCommand''. Dabei können alle beliebigen Events aus der View an das ViewModel in RelayCommands weitergegeben werden und dort bearbeitet werden. Zusätzlich können auch die Parameter des Events in das ViewModel übertragen werden. Das geschieht, indem der Programmierer ''PassEventArgsToCommand'' auf ''true'' setzt. Zur Implementierung müssen in der View zwei Namespaces deklariert werden:
+\begin{lstlisting}
+xmlns:i="clr-namespace:System.Windows.Interactivity;
+assembly=System.Windows.Interactivity"
+xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;
+assembly=GalaSoft.MvvmLight.Platform"
+\end{lstlisting}
+Im nachfolgenden Codeabschnitt wird das Event ''Loaded'' vom RelayCommand ''Initialized'' abonniert.
+\begin{lstlisting}
+<i:Interaction.Triggers>
+	<i:EventTrigger EventName="Loaded">
+		<cmd:EventToCommand Command="{Binding Initialized}" PassEventArgsToCommand="True"></cmd:EventToCommand>
+	</i:EventTrigger>
+</i:Interaction.Triggers>
+\end{lstlisting}
+Im ViewModel kann dann auf das Event und dessen Parameter reagiert werden:
+\begin{lstlisting}
+public ICommand Initialized { get; set; }
+
+public CustomerViewModel()
+{
+	Initialized = new RelayCommand<RoutedEventArgs>(Init);
+}
+private void Init(RoutedEventArgs p)
+{
+	//do something
+}
+\end{lstlisting}
+Eine weiteres Feature von MVVM-Light ist der Messenger. Diese Klasse erlaubt den Austausch von Nachrichten zwischen zwei ViewModels. Die ViewModels müssen dabei keine spezielle Verbindung zueinander haben.
+\newline Quellen: \cite{dotnetcurry_using_2018}, \cite{dotnetpattern_mvvm_2018}, \cite{microsoft_mvvm_2018}
+
+
+\section{MVC}
+Model-View-Controller ist ein Design-Muster für die Trennung einer Software in 3 miteinander verbundene Teile. Das MVC-Muster wurde entwickelt um eine Wiederverwendung von Objektcode zu ermöglichen. Das Muster soll die Entwicklungszeit von Anwendungen mit Benutzeroberflächen stark  reduzieren. 
+Die 3 Hauptkomponenten die hier verwendet werden sollen stecken schon im Namen und zwar sind diese: 
+\begin{itemize}
+
+\item Model: Ein Model ist eine simple Klasse und stellt das einfachste Element in MVC dar. Das Modell enthält die darzustellenden Daten. Es ist von View und Controller unabhängig. Es bedarf keiner Ableitung oder anderer Implementierung und ist im Prinzip ein Datencontainer. Die Models befinden sich in dem Order /Models. Wobei die Klassen ohne weiteres in eine Klassenbibliothek ausgelagert werden können. In einem Model befinden sich nichts anderes als Properties – Properties, die das Element bzw. die Daten darstellen, die für die Präsentation bestimmt sind. Ebenfalls kann beim Senden von Daten (POST) von einer View zum Controller eine Model-Klasse verwendet werden. Dabei wird der Controller-Action das Model als Parameter übergeben. Das Mappen zwischen POST-Parametern und Model findet über das Model-Binding statt.
+\begin{lstlisting}
+public class GlassesModel
+    {
+        public List<Glasses> GlassModel { get; set; }
+        public SelectList SortList { get; set; }
+        public string SelectedSortProperty { get; set; }
+
+        public void FillGlasses(IUnitOfWork uow)
+        {
+            //defaul sort property
+            this.SelectedSortProperty = SelectedSortProperty == null ? "Name" : this.SelectedSortProperty;
+        }
+     }
+\end{lstlisting}
+
+\item View: Sie kennt sowohl ihren Controller als auch das Model, dessen Daten sie präsentiert, ist aber nicht für die Weiterverarbeitung der vom Benutzer übergebenen Daten zuständig. Im Regelfall wird die View über Änderungen von Daten im Model mithilfe des Observers unterrichtet und kann daraufhin die aktualisierten Daten abrufen. Die View kann sich selbst aktualisieren, kennt das Model und ist dort registriert.
+Es gibt außerdem noch spezielle Views, die von allen Controllern bzw. allen Views verwendet werden können, die sogenannten Partial Views.
+\begin{lstlisting}
+@foreach (var item in @Model.GlassModel.Where(c => c.Category == "Herrenbrille"))
+        {
+            <div class="col-md-3 col-sm-3" id="greyBox">
+                <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
+                <label style="font-size:30px; margin-left:35%;">@item.Name</label>
+                <p align="center">Modische Brille von: @item.Marke</p>
+                <p align="center">Kategorie: @item.Category</p>
+                <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
+            </div>
+        }
+\end{lstlisting}
+
+\item Controller: Der Controller ist verantwortlich für die Interaktion des Benutzers mit der Anwendung und für die Steuerung der Verarbeitung zwischen Model und View (Ablauf, Datenverarbeitung, entscheidet welche Views aufgerufen werden).
+Er kann den Kontext für verschiedene Models und Views darstellen und bestimmt die Möglichkeiten, mit denen die Benutzungsschnitstelle auf Benutzereingaben reagieren kann.
+Er ist nichts anderes als eine Klasse, die sich von System.Mvc.Controller ableitet. 
+Eine Controller besteht meist aus mehreren Aktionen, die HTTP-Methoden, wie GET und POST, darstellen. Im einfachsten Falle übernimmt der Controller die Aufgabe des Business Layers und verarbeitet Daten. Dies kann ein Serviceaufruf, eine Datenbankabfrage, Dateihandling oder einfach auch nur ein Verarbeiten von Strings oder Zahlen sein.
+\begin{lstlisting}
+public IActionResult Herrenbrillen(string sort)
+        {
+            GlassesModel model = new GlassesModel();
+            model.SelectedSortProperty = sort;
+            model.FillGlasses(uow);
+            return View(model);
+        }
+\end{lstlisting}
+\end{itemize}
+Es verwandelt eine Webanwendung in eine wartbare, modulare und effizient entwickelte Anwendung. 
+Anwendungsaufgaben in Models, Views und Controllers zu teilen macht Deine Anwendung sehr schlank. 
+Neue Features sind einfach hinzugefügt, alte Features schnell in einer neuen Oberfläche verpackt. 
+Die modular und unterteilte Logik erlaubt Entwicklern und Designern gleichzeitig an der Anwendung zu arbeiten. 
+Dies beinhaltet ebenso die schnelle Entwicklung eines ersten Prototyps. 
+Dadurch ist es ebenso möglich einen Teil der Anwendung zu verändern, ohne einen anderen Teil zu beeinflussen.
+Quellen: \cite{_model_2018} \cite{_model-view-controller_????} \url{https://de.wikipedia.org/w/index.php?title=Model_View_Controller&oldid=175298831$ $http://www.medien.ifi.lmu.de/fileadmin/mimuc/mmi_ws0405/uebung/essays/simon.acker.v2/MVC.htm}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.4]{images/MVC.png}
+\end{center}
+	\caption{Model-View-Controller Konzept}
+	\label{fig:sample}
+\end{figure}
+
+
+
+\section{HTML}
+Hypertext Markup Language oder auch HTML ist die Standardsprache für das erstellen von Webseiten und Web Applikationen. Gemeinsam mit CSS und Javascript gehört HTML zu den Eckpfeiler Technologien vom World Wide Web.
+Die meisten HTML-Elemente starten und enden jeweils mit einem Tag. Der Starttag beginnt immer mit dem Zeichen $<$. Nach dem $<$ folgt der Elementname und dann wird der Starttag mit dem $>$ Zeichen geschlossen. Nach dem Elementnamen können auch noch Attribute eingefügt werden.
+Der Endtag startet immer mit den Zeichen $</$, dann dem Elementnamen und endet mit einem $>$ Zeichen.
+Quellen: \cite{_hypertext_2018} \url{https://de.wikipedia.org/w/index.php?title=Hypertext_Markup_Language&oldid=174149464}
+\begin{lstlisting}
+<h1> Hello World </h1>
+\end{lstlisting}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/html.png}
+\end{center}
+	\caption{Hello World Beispiel Html}
+	\label{fig:sample}
+\end{figure}
+
+\pagebreak 
+
+
+\section{CSS}
+Cascading Style Sheets ist eine style sheet Sprache welche gemeinsam mit HTML und DOM zu den Kernsprachen des World Wide Web gehört.
+Sie wird meist verwendet um einen visuellen Stil auf Webseiten festzulegen.
+Css bringt die Kontrolle über das Layout vieler Webseiten aus einer einzigen Style-Sheet-Datei heraus, präzisere Kontrolle über das Layout, verschiedene Layouts für verschiedene Medientypen (Bildschirmanzeige, Handy etc.) und eine Vielzahl von fortgeschrittenen und anspruchsvollen Techniken.
+Quellen: \cite{_lesson_????}
+Ein einfaches Beispiel:
+\begin{lstlisting}
+<h1 class="design"> Hello World </h1>
+
+.design{
+background-color: yellow;
+}
+\end{lstlisting}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/Css.png}
+\end{center}
+	\caption{Hello World Beispiel Html mit Css}
+	\label{fig:sample}
+\end{figure}
+
+
+\pagebreak 
+\subsection{Media Query}
+Media Query ist eine Technik die es seit CSS3 gibt.
+Sie verwendet die @media Regel um einen bestimmten Block von Css Eigenschaften zu verwenden, wenn eine bestimmte Bedingung erfüllt wurde. Im Beispiel wird der Hintergrund der Hello World Überschrift grün gefärbt wenn das Fenster kleiner wie 600px ist.
+
+\begin{lstlisting}
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: green;
+    }
+}
+\end{lstlisting}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/media.png}
+\end{center}
+	\caption{Hello World Beispiel Html mit Css}
+	\label{fig:sample}
+\end{figure}
+Quellen: \cite{webster_visual_????} $http://de.html.net/tutorials/css/lesson1.php$
+
+\section{Bootstrap}
+Bootstrap ist ein freies web framework für das designen von Webseiten und Webapps. Es enthält HTML- und CSS basierte Design Vorlagen für Typografie, Buttons, Tabellen, Grid-Systeme, Formulare, Navigations- und andere Elemente. Außerdem kann man optional auch JavaScript Erweiterungen verwenden.
+Bootstrap ist relativ einfach aufgebaut. Sein Kern besteht aus verschiedenen Stylesheets, welche die im Framework vorhandenen Komponenten einbeziehen.
+Durch den klaren Leitfaden sparen die Entwickler wie auch die Gestalter  Zeit und haben einen gemeinsamen Nenner für die Gestaltung der Oberfläche.
+Bootstrap bringt von Haus aus Elemente wie Icons, Boxen, Buttons und PullDown Menüs bereits mit.
+Quellen: \cite{mirko_was_2013} $http://www.le-dot.com/de/blog/was-ist-bootstrap$
+
+\subsection{Grid-Systeme}
+Die Bootstrap Grid-Systeme sind mobile responsive. Das bedeutet, dass sie ihr Layout auf die Größe des Geräts anpassen. Würde man das unten angefürte Beispiel auf dem Computer aufrufen,  würden 3 gleich große nebeinander gestellte Spalten angezeigt werden. Am Handy würde sich dies platztechnisch nicht ausgehen, deshalb werden diese 3 Spalten automatisch untereinander gestellt.
+\begin{lstlisting}
+<div class="row">
+  <div class="col-sm-4">
+  	Spalte 1
+  </div>
+  <div class="col-sm-4">
+  	Spalte 2
+  </div>
+  <div class="col-sm-4">
+  	Spalte 3
+  </div>
+</div>
+\end{lstlisting}
+Wird das Codebeispiel nun auf normaler Monitorbreite angezeigt so sind alle 3 Spalten nebeneinander.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/bootstrap1.png}
+\end{center}
+	\caption{Bootstrap Grid breit}
+	\label{fig:sample}
+\end{figure}
+Wenn aber das Fenster zu klein wird schreibt die Bootstrap-Klasse die Spalten untereinander.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/bootstrap2.png}
+\end{center}
+	\caption{Bootstrap Grid schmal}
+	\label{fig:sample}
+\end{figure}
+
+\section{Microsoft Office Interop}
+Um aus einem Programm Word-Dokumente zu erstellen, gibt es das Assembly Microsoft.Office.Interop.Word auf welches eine Referenz hinzugefügt wurde. Damit kann der Benutzer im Programm Word-Dokumente bearbeiten oder Informationen aus diesem herauslesen. Zur Nutzung benötigt der Computer allerdings eine gültige Microsoft Office Lizenz.  Außerdem lädt Interop das Word-Dokument im Hintergrund, wenn es bearbeitet wird, was den ganzen Vorgang etwas langsam macht.
+Dennoch bietet sich der Gebrauch von Interop an, weil es die einfachste Variante ist, auf Word-Dokumente zuzugreifen.
+Im folgenden Abschnitt wird erklärt, wie aus einer Vorlage ein individuelles Word-Dokument erstellt werden kann.
+\begin{lstlisting}
+Application wordApp = new Application();
+Document wordDoc = new Document();
+
+Object oMissing = System.Reflection.Missing.Value;
+wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref oMissing, ref oMissing, ref oMissing);
+foreach (Field myMergeField in wordDoc.Fields)
+{
+	Range rngFieldCode = myMergeField.Code;
+	String fieldText = rngFieldCode.Text;
+
+	//only mergefields should be edited
+	if (fieldText.StartsWith(" MERGEFIELD"))
+	{
+		myMergeField.Select();
+		wordApp.Selection.TypeText("Test");
+	}
+}
+wordDoc.SaveAs(completePath);
+wordDoc.Close();
+wordApp.Quit();
+\end{lstlisting}
+Über den String ''oTemplatePath'' wird der Pfad des gewünschten Templates übergeben. Danach werden alle MergeFields der Vorlage (diese kann man beim Erstellen der Vorlage einfügen: Einfügen -\textgreater Schnellbaustein -\textgreater Mergefield) mit der Zeichenkette ''Test'' ersetzt. Im Endeffekt simuliert Interop einen Klick auf das Feld und mit der Methode TypeText(''Test'') wird der Text eingefügt. Zum Abschluss wird das Dokument unter einem angegeben Pfad abgespeichert (completePath) und die geöffnete Vorlage sowie die Applikation geschlossen. \newline
+Quellen: \cite{gembox_microsoft_2018}
+\section{WPF-Toolkit}
+Zur grafischen Darstellung der Statistiken wurde ebenfalls ein eigenes Assembly installiert:  System.Windows.Controls.DataVisualization.Toolkit (Version 4.0.0). Dieses Assembly kann einfach über den NuGetPackage-Manager heruntergeladen werden. Es ermöglicht verschiedene Diagramme wie zum Beispiel Linien-, Torten- oder Balkendiagramme zu veranschaulichen. Zur Verwendung muss der Benutzer den Namespace in der View definieren.
+\begin{lstlisting}
+xmlns:toolkitCharting="clr-namespace:System.Windows.Controls.DataVisualization
+.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+\end{lstlisting}
+Im folgenden Code wird ein Liniendiagramm mit einer Linie erstellt:
+\begin{lstlisting}
+<toolkitCharting:Chart Title="{Binding Title}">
+            <toolkitCharting:LineSeries Title="{Binding LineTitle}"  DependentValueBinding="{Binding Value}" IndependentValueBinding="{Binding Key}" ItemsSource="{Binding DataValues}"/>
+</toolkitCharting:Chart>
+\end{lstlisting}
+In der Property ''Title'' wird der Titel des Diagramms übergeben und ''LineTitle'' beschriftet die Linie mit dem gewünschten Text. ''DataValues'' (Typ ''ObservableCollection\textless KeyValuePair\textless string, int\textgreater \textgreater'') beinhaltet die Daten, welche im Diagramm dargestellt werden sollen. ''DependentValueBinding=''\{Binding Value\}'''' beschreibt, dass die abhängigen Werte des Diagramms jeweils vom ''Value'' bezogen werden. In ''DataValues'' ist das der int. \newline
+Quellen: \cite{c-sharpcorner_charting_2017}
+\section{MessageBird}
+MessageBird ist ein Unternehmen, das einen Online-Dienst anbietet mit dem  Unternehmen oder auch einzelne Personen, kostenpflichtig SMS aus einem Programm versenden können. Dazu meldet sich der Benutzer auf der Website ''https://www.messagebird.com'' an und sucht sich das passende Angebot. Danach kann man sein Guthaben aufladen und bekommt im Gegenzug einen AccessKey, über den man Nachrichten versenden kann. Dabei kann jeder Benutzer von MessageBird mehrere AccessKeys haben, beispielsweise einen für Test-Nachrichten, die nicht wirklich versendet werden, oder einen AccessKey, mit dem dann echte SMS versendet werden. Für Nachrichten, die nach Österreich gesendet werden, muss der Benutzer derzeit 4,6 Cent (Stand März 2018) bezahlen. Sobald die SMS versendet wurde, wird der Betrag automatisch vom Guthaben des Benutzers abgezogen. Wenn das Guthaben aufgebraucht ist, versendet MessageBird keine SMS mehr und der Benutzer kann sein Guthaben gegebenenfalls wieder aufladen. Auf der Website hat man einen Überblick über die versendeten SMS, verschiedene angelegte Nummern und vieles mehr. \newline Über den NuGet-Manager kann man das Package ''MessageBird'' installieren und im Code dann so verwenden:
+\begin{lstlisting}
+IProxyConfigurationInjector proxyConfigurationInjector = null; // for no web proxies, or web proxies not requiring authentication
+
+Client client = Client.CreateDefault(AccessKey, proxyConfigurationInjector);
+
+MessageBird.Objects.Message message = client.SendMessage("OptikAigner", this.Message, new[] { Convert.ToInt64(this.To) });
+\end{lstlisting}
+''AccessKey'' im zweiten Befehl ist der String, den man von der Website bekommt, über den abgerechnet wird. ''OptikAigner'' wird als Sendernamen angegeben. Der zweite Parameter des letzten Befehls, gibt den Text der Nachricht an. Der letzte Parameter ist ein ''long''-Array mit einem Wert, nämlich der Telefonnummer, an die die SMS versendet werden soll.
+
+\subsubsection{Andere Möglichkeiten}
+Im Gegensatz zum Versand von E-Mails, gibt es keine Möglichkeit kostenfrei und ohne Anbieter SMS zu versenden. Als Alternative hätte sich das Unternehmen ''Twilio'' angeboten, allerdings hätte dort eine SMS ca. 9 Cent gekostet. Aus Kostengründen und aus Benutzerfreundlichkeit ist die Wahl des Anbieters auf MessageBird gefallen.
+\newline Quellen: \cite{messagebird_sms_2018}, \cite{messagebird_preise_2018}, \cite{twilio_sms_2018}
+
+
+\section{SMTP}
+Simple Mail Transfer Protocol ist ein standard Internetprotokoll zur Übertragung von E-Mails. Wie jedes Netzwerkprotokoll hat es eine Regelsammlung für die Übertragung von Daten. Es legt Rahmenbedingungen fest unter denen Daten zwischen zwei oder mehreren Servern ausgetauscht werden. SMTP wird vorrangig für das versenden von Mails benutzt, da zum Empfang von Mails andere Protokolle wie zum Beispiel POP3 oder IMAP verwendet werden.
+Quellen: \cite{_smtp:_????} $https://praxistipps.chip.de/smtp-was-ist-das_41780$
+\section{Base64}
+Base64 ist eine Gruppe ähnlicher Binär zu Text Codierungsschemas, die Binärdaten in einem ASCII-Zeichenfolgenformat darstellen, indem sie in eine Radix-64-Darstellung übersetzt werden.
+Quellen: \cite{_base64_2018} \url{https://de.wikipedia.org/w/index.php?title=Base64&oldid=174833344}

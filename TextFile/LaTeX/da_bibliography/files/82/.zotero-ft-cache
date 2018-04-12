@@ -1,0 +1,219 @@
+Model View ViewModel
+aus Wikipedia, der freien Enzyklopädie
+Dies ist die aktuelle Version dieser Seite, zuletzt bearbeitet am 7. September 2017 um 13:26 Uhr durch 213.182.139.42 ( Diskussion ) ( → ‎ Beschreibung ) .
+( Unterschied ) ← Nächstältere Version | Aktuelle Version (Unterschied) | Nächstjüngere Version → (Unterschied)
+Wechseln zu: Navigation , Suche
+Eine markierte Version dieser Seite, die am 7. September 2017 freigegeben wurde, basiert auf dieser Version.
+MVVM-Konzept: Die Datenbindung (Data Binding) ermöglicht die Trennung von View (z. B. XAML-Markup oder HTML) und Model für die Darstellung.
+
+Model View ViewModel ( MVVM ) ist ein Entwurfsmuster und eine Variante des Model-View-Controller -Musters (MVC). Es dient zur Trennung von Darstellung und Logik der Benutzerschnittstelle (UI). Es zielt auf moderne UI-Plattformen wie Windows Presentation Foundation (WPF), JavaFX , Silverlight und HTML5 ab, da ein Datenbindungsmechanismus erforderlich ist. Gegenüber dem MVC-Muster kann die Testbarkeit verbessert und der Implementierungsaufwand reduziert werden, da keine separaten Controller-Instanzen erforderlich sind. MVVM erlaubt eine Rollentrennung von UI-Designern und Entwicklern, wodurch Anwendungsschichten von verschiedenen Arbeitsgruppen entwickelt werden können. Designer können einen Fokus auf User Experience setzen und Entwickler die UI- und Geschäftslogik schreiben.
+Inhaltsverzeichnis
+ [ Verbergen ] 
+
+    1 Geschichte
+    2 Beschreibung
+        2.1 .NET und JavaFX
+        2.2 JavaScript/HTML
+        2.3 Android
+    3 Vor- und Nachteile
+        3.1 Vorteile
+        3.2 Nachteile
+    4 MVVM-Frameworks
+    5 Siehe auch
+    6 Literatur
+    7 Weblinks
+    8 Einzelnachweise
+
+Geschichte [ Bearbeiten | Quelltext bearbeiten ]
+
+Das MVVM wurde 2005 von Microsoft MVP John Gossman veröffentlicht. Es ist eine Spezialisierung des Presentation Model von Martin Fowler [1] und ist mit diesem insofern identisch, als beide Muster Zustand und Verhalten der View in ein separates UI-Model (Presentation bzw. View Model) verschieben. Das Presentation Model ermöglicht allerdings das Erzeugen einer View unabhängig von der UI-Plattform, wohingegen das MVVM ursprünglich auf UIs mittels WPF abzielt. Es findet allerdings inzwischen auch in anderen Bereichen Anwendung, ähnlich wie bei MVC.
+Beschreibung [ Bearbeiten | Quelltext bearbeiten ]
+
+Das MVVM nutzt die funktionale Trennung des MVC-Musters von Model und View. Zum Erreichen einer losen Kopplung zwischen diesen Komponenten wird ein Datenbindungsmechanismus verwendet. Das MVVM-Muster enthält folgende drei Komponenten:
+
+    Model: Datenzugriffsschicht für die Inhalte, die dem Benutzer angezeigt und von ihm manipuliert werden. Dazu benachrichtigt es über Datenänderungen und führt eine Validierung der vom Benutzer übergebenen Daten durch. Es enthält die gesamte Geschäftslogik und ist für sich alleine durch Unit Tests überprüfbar.
+
+    View: Alle durch die grafische Benutzeroberfläche ( GUI ) angezeigten Elemente. Es bindet sich an Eigenschaften des ViewModel, um Inhalte darzustellen und zu manipulieren sowie Benutzereingaben weiterzuleiten. Durch die Datenbindung ist die View einfach austauschbar und ihr Code-Behind gering.
+
+    ViewModel: Enthält die UI-Logik (Model der View) und dient als Bindeglied zwischen View und obigem Model. Einerseits tauscht es Information mit dem Model aus, ruft also Methoden oder Dienste auf. Andererseits stellt es der View öffentliche Eigenschaften und Befehle zur Verfügung. Diese werden von der View an Steuerelemente gebunden, um Inhalte auszugeben bzw. UI-Ereignisse weiterzuleiten. Das ViewModel darf dabei keinerlei Kenntnis der View besitzen.
+
+Das MVVM-Muster kann als technologie-spezifisch bezeichnet werden, da für die Verknüpfung von View und ViewModel ein Datenbindungsmechanismus benötigt wird. Diese Infrastruktur wird häufig als Binder bezeichnet [2] . Im Detail handelt es sich hierbei um einen bidirektionalen Einsatz des Beobachter-Musters . Binder , welche eine Datenbindung auf Basis von deklarativen Angaben etablieren können, sind für verschiedene Techniken vorhanden.
+.NET und JavaFX [ Bearbeiten | Quelltext bearbeiten ]
+
+In Bezug auf WPF und Silverlight bedeutet MVVM, dass die View aus rein deklarativem XAML -Markup besteht. Sie kann von UI-Designern etwa mittels Expression Blend entworfen werden, wobei lediglich Datenbindungen zum ViewModel erzeugt werden müssen, aber kein Code-Behind. Die Logik wird in einer Programmiersprache wie C# oder VB.NET implementiert. Die Abhängigkeiten zwischen Markup und Code werden minimiert. Gleiches gilt für JavaFX. Hier kann die View mittels FXML und beispielsweise SceneBuilder entwickelt und dann im ViewModel per Property Binding uni- oder bidirektional mit der Geschäftslogik verbunden werden.
+JavaScript/HTML [ Bearbeiten | Quelltext bearbeiten ]
+
+Das MVVM-Muster bzw. der hierzu benötigte Datenbindungsmechanismus wurden im Jahr 2010 von dem Microsoft-Entwickler Steve Sanderson nach JavaScript portiert. Die entstandene JavaScript-Bibliothek trägt den Namen Knockout.js . Mittlerweile findet das MVVM-Muster ebenfalls Einsatz in anderen JavaScript-Frameworks, wie z. B. AngularJS . Durch die Verwendung des MVVM-Muster bei client-lastigen Webanwendungen wird der Implementierungsaufwand reduziert, da sonst übliche manuelle DOM -Zugriffe durch die Datenbindung stark reduziert werden können. Die Beschreibung der Datenbindung erfolgt ebenfalls deklarativ, wie bei XAML -basierten Microsoft-Produkten.
+Android [ Bearbeiten | Quelltext bearbeiten ]
+
+Das MVVM-Muster und die Datenbindung kann ebenfalls bei der Implementierung mobiler Android -Anwendungen verwendet werden. [3]
+Vor- und Nachteile [ Bearbeiten | Quelltext bearbeiten ]
+Vorteile [ Bearbeiten | Quelltext bearbeiten ]
+
+    Die Geschäftslogik kann unabhängig von der Darstellung bearbeitet werden. MVVM „erbt“ die leichtere Austauschbarkeit der View vom MVC -Muster.
+    Die Testbarkeit verbessert sich, da die ViewModel die UI-Logiken enthalten und unabhängig von der View instanziiert werden können. Hierdurch sind keine (in der Regel manuellen) UI-Tests nötig. Stattdessen genügen codebasierte Modultests des ViewModel.
+    Die Menge von Glue Code zwischen Model und View wird durch den Verzicht von Controller-Instanzen gegenüber dem MVC-Muster reduziert. [4]
+    Views können von reinen UI-Designern gestaltet werden während Entwickler unabhängig davon die Models und ViewModels implementieren.
+    Es können unterschiedliche Views erstellt werden, die alle an dasselbe ViewModel gebunden werden, ohne dass dort Änderungen an der Programmierung vorgenommen werden müssen.
+
+Nachteile [ Bearbeiten | Quelltext bearbeiten ]
+
+    Als Nachteil kann der höhere Rechenaufwand aufgrund des enthaltenen bi-direktionalen Beobachters gewertet werden.
+    Der generische Datenbindungsmechanismus erspart die Implementierung von verschiedenen Controllern. Allerdings ist dieser Mechanismus zur Umsetzung des MVVM-Muster zwingend erforderlich.
+
+MVVM-Frameworks [ Bearbeiten | Quelltext bearbeiten ]
+
+Es existieren Frameworks, die dazu dienen, den Aufwand für die Implementierung des MVVM-Musters zu verringern. Dazu gehören
+
+    Prism
+    Crosslight (kommerzielles Framework von der Firma Intersoft Solutions)
+    MVVM Light
+    Caliburn.Micro
+
+und viele andere.
+Siehe auch [ Bearbeiten | Quelltext bearbeiten ]
+
+    Model View Controller
+    Knockout.js - MVVM in Javascript
+    Smart UI
+
+Literatur [ Bearbeiten | Quelltext bearbeiten ]
+
+    Raffaele Garofalo: Building Enterprise Applications with Windows Presentation Foundation and the Model View ViewModel Pattern , Microsoft Press 2011, ISBN 978-0735650923
+
+Weblinks [ Bearbeiten | Quelltext bearbeiten ]
+
+    Visual C# 2012: Das MVVM-Pattern – Buchkapitel bei Rheinwerk Verlag
+    Norbert Eder: Model-View-ViewModel Die Serie – Codebeispiel
+    NuGet-Pakete für MVVM-Frameworks
+
+Einzelnachweise [ Bearbeiten | Quelltext bearbeiten ]
+
+    Hochspringen ↑ Presentation Model
+    Hochspringen ↑ Binder-Definition aus dem ZK-Framework
+    Hochspringen ↑ Android Data Binding Guide (englisch)
+    Hochspringen ↑ John Gossman: Tales from the Smart Client: Advantages and disadvantages of M-V-VM. . Abgerufen am 28. Mai 2012.
+
+Einklappen
+Entwurfsmuster
+		
+Viererbande 	
+Erzeugungsmuster 	
+
+Abstrakte Fabrik  | Erbauer  | Fabrikmethode  | Prototyp  | Singleton
+Strukturmuster 	
+
+Adapter  | Brücke  | Decorator  | Fassade  | Fliegengewicht  | Kompositum  | Stellvertreter
+Verhaltensmuster 	
+
+Beobachter  | Besucher  | Interpreter  | Iterator  | Kommando  | Memento  | Schablonenmethode  | Strategie  | Vermittler  | Zustand  | Zuständigkeitskette
+Weitere
+Standardmuster 	
+Erzeugungsmuster 	
+
+Multiton  | Objektpool
+Verhaltensmuster 	
+
+Interceptor  | Nullobjekt  | Protokollstapel
+Andere 	
+
+Business Delegate  | Repository  | Data Access Object  | Transferobjekt  | Dependency Injection  | Extension Interface  | Fluent Interface  | Inversion of Control (IoC) | Model View Controller (MVC) | Model View Presenter (MVP) | Model View ViewModel (MVVM) | Threadpool  | Service Locator  | Registry
+Abgerufen von „ https://de.wikipedia.org/w/index.php?title=Model_View_ViewModel&oldid=168867092 “
+Kategorien :
+
+    Entwurfsmuster
+    Softwarearchitektur
+
+Navigationsmenü
+Meine Werkzeuge
+
+    Nicht angemeldet
+    Diskussionsseite
+    Beiträge
+    Benutzerkonto erstellen
+    Anmelden
+
+Namensräume
+
+    Artikel
+    Diskussion
+
+Varianten
+
+Ansichten
+
+    Lesen
+    Bearbeiten
+    Quelltext bearbeiten
+    Versionsgeschichte
+
+Mehr
+
+Suche
+Navigation
+
+    Hauptseite
+    Themenportale
+    Von A bis Z
+    Zufälliger Artikel
+
+Mitmachen
+
+    Artikel verbessern
+    Neuen Artikel anlegen
+    Autorenportal
+    Hilfe
+    Letzte Änderungen
+    Kontakt
+    Spenden
+
+Werkzeuge
+
+    Links auf diese Seite
+    Änderungen an verlinkten Seiten
+    Spezialseiten
+    Permanenter Link
+    Seiten­informationen
+    Wikidata-Datenobjekt
+    Artikel zitieren
+
+Drucken/­exportieren
+
+    Buch erstellen
+    Als PDF herunterladen
+    Druckversion
+
+In anderen Sprachen
+
+    Català
+    English
+    Español
+    Français
+    עברית
+    Magyar
+    Italiano
+    日本語
+    Русский
+    Українська
+    中文
+    4 weitere 
+
+Links bearbeiten
+
+    Diese Seite wurde zuletzt am 7. September 2017 um 13:26 Uhr bearbeitet.
+    Abrufstatistik
+
+    Der Text ist unter der Lizenz „Creative Commons Attribution/Share Alike“ verfügbar; Informationen zu den Urhebern und zum Lizenzstatus eingebundener Mediendateien (etwa Bilder oder Videos) können im Regelfall durch Anklicken dieser abgerufen werden. Möglicherweise unterliegen die Inhalte jeweils zusätzlichen Bedingungen. Durch die Nutzung dieser Website erklären Sie sich mit den Nutzungsbedingungen und der Datenschutzrichtlinie einverstanden.
+    Wikipedia® ist eine eingetragene Marke der Wikimedia Foundation Inc.
+
+    Datenschutz
+    Über Wikipedia
+    Impressum
+    Entwickler
+    Stellungnahme zu Cookies
+    Mobile Ansicht
+    Vorschau aktivieren
+
+    Wikimedia Foundation
+    Powered by MediaWiki
+

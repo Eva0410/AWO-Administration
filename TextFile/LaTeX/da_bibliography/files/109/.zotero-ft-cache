@@ -1,0 +1,378 @@
+Skip to main content
+Microsoft
+.NET
+
+    Technologies
+        .NET
+        Windows
+            Apps
+            Internet of Things
+            Mixed Reality
+            Microsoft Edge
+            Hardware
+            IT Center
+        Microsoft Azure
+            What is Azure
+            Products
+            Solutions
+            Pricing
+            Create a free account
+        Visual Studio
+            Visual Studio
+            Visual Studio IDE
+            Visual Studio Team Services
+            Visual Studio Code
+            Xamarin
+            Visual Studio Dev Essentials
+            Subscriptions
+        Office
+            Office Dev Center
+            Office 365 for IT pros
+        Microsoft Graph
+        Services
+            Store
+            Cortana
+            Bing
+            Application Insights
+    Documentation
+        Platforms
+            .NET
+            Microsoft Azure
+            Microsoft Graph
+            Visual Studio
+            Visual Studio Team Services
+            Windows
+            Office
+            All Developer Centers
+        TechNet
+        Microsoft Developer Network
+        IT TechCenters
+            Windows IT Center
+            Office 365 for IT Pros
+            All IT TechCenters
+        Downloads
+            Microsoft Download Center
+            Microsoft Azure
+            Visual Studio
+            SDKs
+            Windows
+        Code samples
+            Office
+            Microsoft Graph
+            MSDN
+            Azure
+            Windows
+        PowerShell scripts
+    Resources
+        Blogs
+            Microsoft Azure
+            Visual Studio
+            Visual Studio Team Services
+            Developer tools
+            Office Dev Blog
+            Server & management
+            Windows
+        Community & Forums
+            Developers
+            TechNet
+            Microsoft Tech Community
+        Subscriptions
+            Visual Studio (MSDN) subscriptions
+            Microsoft Cloud Essentials
+        Training
+            Microsoft Virtual Academy
+            IT Pro Career Center
+        Microsoft Evaluation Center
+        Channel 9
+
+.NET
+.NET
+APIs .NET Core .NET Framework ASP.NET Xamarin Azure
+
+    Docs
+    .NET
+    .NET Framework
+    Data and Modeling in the .NET Framework
+    ADO. NET
+    ADO. NET Entity Framework
+    Entity SQL Language Reference
+
+LINQ to Entities
+
+    03/30/2017
+    5 minutes to read
+    Contributors
+        Douglas Laudenschlager
+        Craig Guyer
+        Mike Jones
+        Matt Hoffman
+        Maira Wenzel
+        all
+
+In this article
+
+    Constructing an ObjectQuery Instance
+    Composing the Queries
+    Query Conversion
+    Query Execution
+    Materialization
+    In This Section
+    See Also
+
+LINQ to Entities provides Language-Integrated Query (LINQ) support that enables developers to write queries against the Entity Framework conceptual model using Visual Basic or Visual C#. Queries against the Entity Framework are represented by command tree queries, which execute against the object context. LINQ to Entities converts Language-Integrated Queries (LINQ) queries to command tree queries, executes the queries against the Entity Framework, and returns objects that can be used by both the Entity Framework and LINQ. The following is the process for creating and executing a LINQ to Entities query:
+
+    Construct an ObjectQuery<T> instance from ObjectContext .
+
+    Compose a LINQ to Entities query in C# or Visual Basic by using the ObjectQuery<T> instance.
+
+    Convert LINQ standard query operators and expressions to command trees.
+
+    Execute the query, in command tree representation, against the data source. Any exceptions thrown on the data source during execution are passed directly up to the client.
+
+    Return query results back to the client.
+
+Constructing an ObjectQuery Instance
+
+The ObjectQuery<T> generic class represents a query that returns a collection of zero or more typed entities. An object query is typically constructed from an existing object context, instead of being manually constructed, and always belongs to that object context. This context provides the connection and metadata information that is required to compose and execute the query. The ObjectQuery<T> generic class implements the IQueryable<T> generic interface, whose builder methods enable LINQ queries to be incrementally built. You can also let the compiler infer the type of entities by using the C# var keyword ( Dim in Visual Basic, with local type inference enabled).
+Composing the Queries
+
+Instances of the ObjectQuery<T> generic class, which implements the generic IQueryable<T> interface, serve as the data source for LINQ to Entities queries. In a query, you specify exactly the information that you want to retrieve from the data source. A query can also specify how that information should be sorted, grouped, and shaped before it is returned. In LINQ, a query is stored in a variable. This query variable takes no action and returns no data; it only stores the query information. After you create a query you must execute that query to retrieve any data.
+
+LINQ to Entities queries can be composed in two different syntaxes: query expression syntax and method-based query syntax. Query expression syntax and method-based query syntax are new in C# 3.0 and Visual Basic 9.0.
+
+For more information, see Queries in LINQ to Entities .
+Query Conversion
+
+To execute a LINQ to Entities query against the Entity Framework, the LINQ query must be converted to a command tree representation that can be executed against the Entity Framework.
+
+LINQ to Entities queries are comprised of LINQ standard query operators (such as Select , Where , and GroupBy ) and expressions (x > 10, Contact.LastName, and so on). LINQ operators are not defined by a class, but rather are methods on a class. In LINQ, expressions can contain anything allowed by types within the System.Linq.Expressions namespace and, by extension, anything that can be represented in a lambda function. This is a superset of the expressions that are allowed by the Entity Framework, which are by definition restricted to operations allowed on the database, and supported by ObjectQuery<T> .
+
+In the Entity Framework, both operators and expressions are represented by a single type hierarchy, which are then placed in a command tree. The command tree is used by the Entity Framework to execute the query. If the LINQ query cannot be expressed as a command tree, an exception will be thrown when the query is being converted. The conversion of LINQ to Entities queries involves two sub-conversions: the conversion of the standard query operators, and the conversion of the expressions.
+
+There are a number of LINQ standard query operators that do not have a valid translation in LINQ to Entities. Attempts to use these operators will result in an exception at query translation time. For a list of supported LINQ to Entities operators, see Supported and Unsupported LINQ Methods (LINQ to Entities) .
+
+For more information about using the standard query operators in LINQ to Entities, see Standard Query Operators in LINQ to Entities Queries .
+
+In general, expressions in LINQ to Entities are evaluated on the server, so the behavior of the expression should not be expected to follow CLR semantics. For more information, see Expressions in LINQ to Entities Queries .
+
+For information about how CLR method calls are mapped to canonical functions in the data source, see CLR Method to Canonical Function Mapping .
+
+For information about how to call canonical, database, and custom functions from within LINQ to Entities queries, see Calling Functions in LINQ to Entities Queries .
+Query Execution
+
+After the LINQ query is created by the user, it is converted to a representation that is compatible with the Entity Framework (in the form of command trees), which is then executed against the data source. At query execution time, all query expressions (or components of the query) are evaluated on the client or on the server. This includes expressions that are used in result materialization or entity projections. For more information, see Query Execution . For information on how to improve performance by compiling a query once and then executing it several times with different parameters, see Compiled Queries (LINQ to Entities) .
+Materialization
+
+Materialization is the process of returning query results back to the client as CLR types. In LINQ to Entities, query results data records are never returned; there is always a backing CLR type, defined by the user or by the Entity Framework, or generated by the compiler (anonymous types). All object materialization is performed by the Entity Framework. Any errors that result from an inability to map between the Entity Framework and the CLR will cause exceptions to be thrown during object materialization.
+
+Query results are usually returned as one of the following:
+
+    A collection of zero or more typed entity objects or a projection of complex types defined in the conceptual model.
+
+    CLR types that are supported by the Entity Framework.
+
+    Inline collections.
+
+    Anonymous types.
+
+For more information, see Query Results .
+In This Section
+
+Queries in LINQ to Entities
+
+Expressions in LINQ to Entities Queries
+
+Calling Functions in LINQ to Entities Queries
+
+Compiled Queries (LINQ to Entities)
+
+Query Execution
+
+Query Results
+
+Standard Query Operators in LINQ to Entities Queries
+
+CLR Method to Canonical Function Mapping
+
+Supported and Unsupported LINQ Methods (LINQ to Entities)
+
+Known Issues and Considerations in LINQ to Entities
+See Also
+
+Known Issues and Considerations in LINQ to Entities
+LINQ (Language-Integrated Query)
+LINQ and ADO.NET
+ADO.NET Entity Framework
+
+Note
+
+The feedback system for this content will be changing soon. Old comments will not be carried over. If content within a comment thread is important to you, please save a copy. For more information on the upcoming change, we invite you to read our blog post .
+
+    Feedback
+    Edit
+    Share
+        Twitter
+        LinkedIn
+        Facebook
+        Email
+    |
+    Theme
+
+In this article
+
+    Constructing an ObjectQuery Instance
+    Composing the Queries
+    Query Conversion
+    Query Execution
+    Materialization
+    In This Section
+    See Also
+
+Clear Filter
+No results
+
+    Language Reference
+        CSDL, SSDL, and MSL Specifications
+            CSDL Specification
+            SSDL Specification
+            MSL Specification
+        LINQ to Entities
+            Queries in LINQ to Entities
+                Method-Based Query Syntax Examples: Projection
+                Method-Based Query Syntax Examples: Filtering
+                Method-Based Query Syntax Examples: Ordering
+                Method-Based Query Syntax Examples: Aggregate Operators
+                Method-Based Query Syntax Examples: Partitioning
+                Method-Based Query Syntax Examples: Conversion
+                Method-Based Query Syntax Examples: Join Operators
+                Method-Based Query Syntax Examples: Element Operators
+                Method-Based Query Syntax Examples: Grouping
+                Method-Based Query Syntax Examples: Navigating Relationships
+                Query Expression Syntax Examples: Projection
+                Query Expression Syntax Examples: Filtering
+                Query Expression Syntax Examples: Ordering
+                Query Expression Syntax Examples: Aggregate Operators
+                Query Expression Syntax Examples: Partitioning
+                Query Expression Syntax Examples: Join Operators
+                Query Expression Syntax Examples: Element Operators
+                Query Expression Syntax Examples: Grouping
+                Query Expression Syntax Examples: Navigating Relationships
+            Expressions in LINQ to Entities Queries
+                Constant Expressions
+                Comparison Expressions
+                Null Comparisons
+                Initialization Expressions
+            Calling Functions in LINQ to Entities Queries
+                How to: Call Canonical Functions
+                How to: Call Database Functions
+                How to: Call Custom Database Functions
+                How to: Call Model-Defined Functions in Queries
+                How to: Call Model-Defined Functions as Object Methods
+            Compiled Queries (LINQ to Entities)
+            Query Execution
+            Query Results
+            Standard Query Operators in LINQ to Entities Queries
+            CLR Method to Canonical Function Mapping
+            Supported and Unsupported LINQ Methods (LINQ to Entities)
+            Known Issues and Considerations in LINQ to Entities
+        Entity SQL Language
+            Entity SQL Overview
+                How Entity SQL Differs from Transact-SQL
+                Entity SQL Quick Reference
+                Type System
+                Type Definitions
+                Constructing Types
+                Query Plan Caching
+                Namespaces
+                Identifiers
+                Parameters
+                Variables
+                Unsupported Expressions
+                Literals
+                Null Literals and Type Inference
+                Input Character Set
+                Query Expressions
+                Functions
+                    User-Defined Functions
+                    Function Overload Resolution
+                    Aggregate Functions
+                Operator Precedence
+                Paging
+                Comparison Semantics
+                Composing Nested Entity SQL Queries
+                Nullable Structured Types
+            Entity SQL Reference
+                + (Add)
+                + (String Concatenation)
+                - (Negative)
+                - (Subtract)
+                * (Multiply)
+                / (Divide)
+                Percent (Modulo)
+                && (AND)
+                || (OR)
+                ! (NOT)
+                = (Equals)
+                > (Greater Than)
+                >= (Greater Than or Equal To)
+                < (Less Than)
+                <= (Less Than or Equal To)
+                != (Not Equal To)
+                . (Member Access)
+                -- (Comment)
+                ANYELEMENT
+                BETWEEN
+                CASE
+                CAST
+                COLLECTION
+                CREATEREF
+                DEREF
+                EXCEPT
+                EXISTS
+                FLATTEN
+                FROM
+                FUNCTION
+                GROUP BY
+                GROUPPARTITION
+                HAVING
+                KEY
+                IN
+                INTERSECT
+                ISNULL
+                ISOF
+                LIKE
+                LIMIT
+                MULTISET
+                Named Type Constructor
+                NAVIGATE
+                OFTYPE
+                ORDER BY
+                OVERLAPS
+                REF
+                ROW
+                SELECT
+                SET
+                SKIP
+                THEN
+                TOP
+                TREAT
+                UNION
+                USING
+                WHERE
+        Canonical Functions
+            Aggregate Canonical Functions
+            Math Canonical Functions
+            String Canonical Functions
+            Date and Time Canonical Functions
+            Bitwise Canonical Functions
+            Spatial Functions
+            Other Canonical Functions
+
+Download PDF
+English (United States)
+
+    Privacy & Cookies
+    Terms of Use
+    Feedback
+    Trademarks
+

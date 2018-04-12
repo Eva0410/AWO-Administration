@@ -1,0 +1,1018 @@
+\chapter{Implementierung}\label{cha:theoretical-background}
+\section{Administrationprogramm}
+\subsection{Kundenverwaltung}
+Um dem Benutzer eine kompakte Übersicht über seine Kunden zu geben, gibt es die Kundenverwaltung, bei der alle Kunden in einer Liste dargestellt werden. Angezeigt werden Id, Titel, Vorname, Nachname, Straße, PLZ, Ort, Telefon-1 und das Land des Kunden. Diese Liste kann man filtern und sortieren (siehe Kapitel 3.1.8). Zusätzlich zu dem normalen Filter kann man bei der Kundenverwaltung ebenso gelöschte Kunden ein- oder ausblenden. Der Grund dafür wird später noch näher erklärt.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.77]{images/Kunden.png}
+\end{center}
+	\caption{Screenshot der Kundenverwaltung}
+	\label{fig:sample}
+\end{figure}
+\noindent Beim Klick des Buttons ''Neuen Kunden hinzufügen'' erscheint ein neues Fenster, welches einen neuen Kunden erstellt. Hier kann der Benutzer weitere Daten eingeben, wie beispielsweise Hobbys, Job oder den Geburtstag. Außerdem kann der Benutzer den Ort und das Land aus einer Drop-Down-List auswählen. Falls der Ort bzw. das Land noch nicht vorhanden ist, kann der Benutzer auf den danebenliegenden Knopf drücken und einen neuen Ort/Land anlegen. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/NeuerKunde.png}
+\end{center}
+	\caption{Screenshot Neuen Kunden anlegen}
+	\label{fig:sample}
+\end{figure}
+\noindent Falls der Benutzer nach dem Anlegen des Kunden noch Änderungen vornehmen möchte, kann er dies auf der Startseite durch einen Doppelklick auf den gewünschten Kunden erledigen. Dadurch erscheint ein neues Fenster, auf welchem der Benutzer alle Daten des Kunden bearbeiten kann und zusätzlich alle Bestellungen des Kunden sieht. Außerdem besteht hier die Möglichkeit den Kunden zu löschen. Damit ist allerdings aus datenbanktechnischen Gründen gemeint, den Kunden nicht mehr bearbeitbar zu machen. Der Benutzer kann keinen Kunden wirklich löschen. Der Grund dafür ist, dass jede Bestellung in der Datenbank auf einen Kunden verweisen muss und wenn ein Kunde bereits mehrere Bestellungen getätigt hat und der Benutzer danach den Kunden löschen möchte, würden alle seine Bestellungen auch gelöscht werden. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.5]{images/KundenDetails.png}
+\end{center}
+	\caption{Screenshot der Kundendetails}
+	\label{fig:sample}
+\end{figure}
+\noindent \underline{Technischer Hintergrund:}
+Damit die Kunden auf der Startseite angezeigt werden können, müssen sie zuerst aus der Datenbank in eine ObservableCollection vom Typ Customer geladen werden. 
+Danach wird auf Basis der Datensätze eine ICollectionView erstellt, welche die Daten anzeigt. Im Vergleich zur ObservableCollection bietet die ICollectionView beim Anzeigen viele Vorteile (siehe Kapitel 3.1.8). 
+Um einen Kunden zu bearbeiten, muss das Objekt zuerst lokal kopiert werden.
+\begin{lstlisting}
+private Customer CopyCustomer(Customer item)
+{
+	Customer customer = new Customer();
+	GenericRepository<Customer>.CopyProperties(customer, item);
+	if (item.Town_Id != null)
+	{
+		Town town = new Town(); //Referenced town must be copied as well
+		GenericRepository<Town>.CopyProperties(town, 	uow.TownRepository.GetById(item.Town_Id));
+		customer.Town = town;
+	}
+	if (item.Country_Id != null)
+	{
+		Country country = new Country();
+		GenericRepository<Country>.CopyProperties(country, uow.CountryRepository.GetById(item.Country_Id));
+		customer.Country = country;
+	}
+	return customer;
+}
+\end{lstlisting}
+Der Grund dafür ist, dass immer dieselbe Instanz von ''UnitOfWork'' verwendet wird. Wenn nur eine Referenz auf das Objekt erstellt werden würde, könnten die Änderungen nie rückgängig macht werden, weil sie ja immer sofort in die UnitOfWork-Instanz \newline übertragen werden würden (siehe Kapitel 4.1.2).
+\begin{lstlisting}
+Customer cus = uow.CustomerRepository.GetById(1);
+\end{lstlisting}
+Damit ein Kunde gelöscht werden kann, enthält die Klasse Kunde eine Property namens 'Deleted', welche angibt, ob der Kunde gelöscht wurde. Wenn diese auf 'true' gesetzt wird, kann der Benutzer den Kunden durch die Checkbox auf der Startseite ausblenden. Falls er dies nicht tut, wird der Kunde auf der Startseite angezeigt, allerdings erscheint eine Fehlermeldung, wenn der Benutzer versucht, die Detailseite des Kunden zu öffnen. Dadurch ist es auch unmöglich neue Bestellungen für diesen Kunden anzulegen oder die Daten des Kunden zu bearbeiten. Die Bestellungen des gelöschten Kunden werden trotzdem normal angezeigt.
+\subsection{Auftragsverwaltung}
+Grundsätzlich gibt es zwei Arten von Aufträgen: Brillen- und Kontaktlinsenaufträge. Beide Arten haben dieselben Eigenschaften, der Brillenauftrag verweist auf eine Brillenfassung, der Kontaktlinsenauftrag hingegen nicht. Außerdem hat ein Brillenauftrag einen Brillentyp und ein Kontaktlinsenauftrag einen Kontaktlinsentyp. Damit kann der Benutzer bei Brillenaufträgen beispielsweise unterscheiden, ob es sich um eine Fern- oder Nahbrille handelt. Generell wird streng zwischen Brillen- und Kontaktlinsenaufträgen unterschieden, deshalb werden unter dem Menüpunkt ''Aufträge'' auch zwei verschiedene Listen angezeigt. Jeder dieser Aufträge beinhaltet nur eine Brillen- oder Kontaktlinsenbestellung. Wie gewohnt kann man diese Listen wieder filtern und sortieren. Um neue Aufträge zu erfassen, muss der Benutzer in der Kundenverwaltung zuerst einen Kunden auswählen. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/Auftraege.png}
+\end{center}
+	\caption{Screenshot der Auftragsverwaltung}
+	\label{fig:sample}
+\end{figure}
+\noindent Wenn der Benutzer doppelt auf einen Auftrag klickt, erscheint entweder ein Detailfenster eines Brillen- oder Kontaktlinsenauftrags. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/Brillenauftrag.png}
+\end{center}
+	\caption{Screenshot eines Brillenauftrags}
+	\label{fig:sample}
+\end{figure} \noindent Im rechten Bereich des Fensters kann der Benutzer die einzelnen Preise der Komponenten angeben. Das Programm rechnet alle Preise  brutto und gibt zum Schluss die darin enthaltene Mehrwertsteuer an. \newline Es wird nach folgender Formel gerechnet: Zuerst werden linker und rechter Glaspreis, Preis von Sonstigem und wenn vorhanden der Verkaufspreis der Brillenfassung addiert. Davon wird das Krankenkassengeld abgezogen, der Selbstbehalt hinzugezählt und der Rabatt (dieser wird in Euro angegeben) wieder subtrahiert. Zwanzig Prozent davon sind schlussendlich die Mehrwertsteuer. \newline
+Im unteren Bereich des Fensters kann der Benutzer Details zur Glasverarbeitung angeben. Wenn der Benutzer den Bearbeitungsstatus auf ''Abgeholt'' setzt, wird auch der Status der Brillenfassung in der Brillenfassungsverwaltung auf ''Verkauft'' gesetzt. \newline Der Benutzer hat die Möglichkeit zu jedem Auftrag einen Augenarzt zu vermerken. Von diesem Arzt wird allerdings nur der Name gespeichert. Der Benutzer kann nur aus einer Liste von Ärzten auswählen, welche er  selbst mittels dem Button 'Neuer Doktor' angelegt hat.
+\subsubsection{Dokumente erstellen}
+Unter den Angaben der Details zu den Gläsern kann der Benutzer eine Auftragsbestätigung oder eine Rechnung erstellen. Die Dokumente werden als Word-Dokumente in einem Ordner abgespeichert. Das hat den Vorteil, dass der Benutzer selbst entscheiden kann, ob er noch etwas nachträglich ändern will oder das generierte Dokument gleich ausdruckt oder versendet. Gleichzeitig hat das Benutzen eines Word-Dokuments auch einen großen Nachteil, denn wenn der Benutzer nachträglich etwas ändert, wird diese Information nicht in das System weitergeleitet und somit könnten die erstellten Dokumente und der Auftrag selbst nicht dieselben Informationen beinhalten. Außerdem wird in der Datenbank immer nur der Pfad der zuletzt erstellten Rechnung/Auftragsbestätigung gespeichert. Das bedeutet, dass der Benutzer auch mehrere Dokumente zum selben Auftrag erstellen kann. Diese könnten sich auch voneinander unterscheiden, worüber das Programm ebenfalls keine Kontrolle hat. In diesem Fall wird nur ein Hinweis mit dem abgespeicherten Dokumentnamen angezeigt und gefragt, ob wirklich ein neues Dokument erstellt werden soll.
+\newline Damit das automatische Erstellen der Word-Dokumente funktioniert, muss der Benutzer  eine Word-Vorlage erstellen, die Felder enthält (MergeFields), welche das Programm ersetzen kann. Der Dokumentname der generierten Datei besteht immer aus der Bestell-Id, dem Dokumenttyp (Rechnung oder Auftragsbestätigung), dem Nachnamen des Kunden und dem aktuellen Datum. 
+\newline Eine generierte Auftragsbestätigung könnte aussehen, wie Abbildung A.1 im Anhang.
+\newline
+\noindent \underline{Technischer Hintergrund}: \linebreak
+Zum Erstellen von Word-Dokumenten wird Interop verwendet (siehe Kapitel 2.6). Die Methode ''CreateDocument'' benutzt eine vom Benutzer erstellte Wordvorlage und ersetzt die darin enthaltenen Mergefields. Der erste Parameter ''orderId'' gibt die Id der gewählten Bestellung an. Mit Hilfe dieser Nummer können aus der Datenbank die restlichen Daten geladen werden. Der Parameter ''oTemplatePath'' beschreibt den Pfad der Wordvorlage und der String ''path'' den Namen, unter dem das Dokument abgespeichert werden soll. Der Code unterhalb ist ein Ausschnitt der Methode. \newpage
+\begin{lstlisting}
+private static bool CreateDocument(int orderId, Object oTemplatePath, string path)
+{
+	Application wordApp = new Application();
+	Document wordDoc = new Document();
+	try
+	{
+		Order order;
+		Customer cus;
+		
+		//Ausgeschnitten: Hier werden Order und Customer Werte aus der Datenbank zugewiesen 
+		Object oMissing = System.Reflection.Missing.Value;
+		wordDoc = wordApp.Documents.Add(ref oTemplatePath, ref oMissing, ref oMissing, ref oMissing);
+		foreach (Field myMergeField in wordDoc.Fields)
+		{
+			Range rngFieldCode = myMergeField.Code;
+		 	String fieldText = rngFieldCode.Text;
+		 	
+		 	//Nur Mergefields werden bearbeitet
+		 	if (fieldText.StartsWith(" MERGEFIELD") 
+		 	{
+		 		string translatedFieldName;
+		 		
+		 		//Ausgeschnitten: Hier wird der Name der Property aus dem fieldText herausgeholt und auf Englisch uebersetzt
+		 		string value = String.Empty;
+		 		
+		 		//Ausgeschnitten: Die Property wird in den Klassen gesucht und der Wert gespeichert z.B: Properties der Klasse Customer:
+		 		if (typeof(Customer).GetProperty(translatedFieldName) != null)
+		 		{
+		 			value = cus.GetType().GetProperty(translatedFieldName).GetValue(cus, null)?.ToString();
+		 		}
+		 		myMergeField.Select();
+		 		wordApp.Selection.TypeText(value);
+		 	}
+		 }
+		 int idx = oTemplatePath.ToString().LastIndexOf("\\");
+		 string p = oTemplatePath.ToString().Substring(0, idx + 1);
+		 string completePath = p + path + ".docx";
+		 wordDoc.SaveAs(completePath);
+		 wordDoc.Close();
+		 wordApp.Quit();
+		 return true;
+	}
+	catch (Exception e)
+	{
+		Console.WriteLine(e);
+		wordApp.Quit();
+		wordDoc.Close();
+		return false;
+	}
+}
+\end{lstlisting}
+Zuerst werden eine neue Applikation und ein neues Dokument erstellt. Nachdem der Auftrag und der Kunde aus der Datenbank geladen worden sind, wird die Vorlage für das Dokument geladen. Dabei ist nur der erste Parameter (''oTemplatePath'') von Bedeutung. \newline Danach werden in einer Foreach-Schleife alle Felder des Dokumentes durchgegangen. Dabei werden nur jene bearbeitet, bei denen der Text des Feldes mit ''MERGEFIELD'' beginnt (es gibt auch andere Arten von Feldern in Word, jedoch sind in der Vorlage alle zu bearbeitenden Felder sogenannte Mergefields). \newline Dann wird die gesuchte Property (Code ausgeschnitten) mit Hilfe der Variable ''fieldText'' ermittelt. ''fieldText'' muss zuerst auf englisch übersetzt werden, da die Namen der Felder in der Vorlage deutsch sind, die Properties der Klassen aber englisch. Der übersetzte Name der Property wird in der Variable ''translatedFieldName'' gespeichert. Anschließend werden allen Klassen nach dem Propertynamen durchsucht. Wenn die richtige Klasse gefunden wurde, wird der Wert der Property des Objekts in der Variable ''val'' gespeichert. Danach wird an Stelle des Mergefields in der Vorlage der ermittelte Wert eingetragen. Zum Schluss wird noch der gewünschte Pfad ermittelt und das Dokument unter diesem Pfad gespeichert. \newline
+Genau die selbe Methode wird benutzt, wenn eine Rechnung erstellt wird, die aussehen könnte wie Abbildung A.2 im Anhang.\newline
+\subsection{Lieferantenverwaltung}
+Ebenso wie für die Kunden, gibt es auch eine Verwaltung für die Lieferanten des Benutzers. Auch die Lieferanten lassen sich filtern und sortieren. Lieferanten haben folgende Attribute: Name, Ort, Land, Adresse, FAX, Telefon, E-Mail, Kundennummer (damit ist die Id des Benutzers beim jeweiligen Lieferanten gemeint), Kontaktperson, Produkte und Sonstiges. \newline Einen neuen Lieferanten kann man mittels dem Button links oben anlegen und Lieferanten bearbeiten und löschen kann der Benutzer durch einen Doppelklick auf den gewünschten Lieferanten.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.75]{images/Lieferanten.png}
+\end{center}
+	\caption{Screenshot der Lieferantenverwaltung}
+	\label{fig:sample}
+\end{figure}
+\subsection{Verwaltung der lagernden Brillenfassungen}
+Genau wie bei der Verwaltung der Kunden und der Lieferanten gibt es auch eine Verwaltung der lagernden Brillenfassungen. Jede Brille, die der Optiker verkauft, hat eine eigene Fassung, welche hier erfasst wird. Dabei hat jede Brillenfassung folgende Attribute: Modell, Marke, Farbe, Größe, Status (bestellt, lagernd oder verkauft), Einkaufspreis, Einkaufsdatum, Verkaufspreis, Verkaufsdatum und der Lieferant. Die Liste kann wie gewohnt gefiltert und sortiert werden. Um eine neue Brillenfassung zu erfassen, kann der Benutzer auf den Button links oben klicken und um eine bestehende Brillenfassung zu bearbeiten oder zu löschen, muss der Benutzer einen Doppelklick auf die gewünschte Brillenfassung tätigen.
+\newline Eigentlich würde man erwarten, dass zu den Brillenfassungen auch die Anzahl an lagernden Stück abgespeichert wird. Allerdings wurde dieses Feature nach Absprache mit dem Auftraggeber nicht implementiert, da jede Brillenfassung für jeden Auftrag einzeln bestellt wird. Deswegen wird auch der Status der Brillenfassung gespeichert. \bigskip
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.75]{images/Brillenfassungen.png}
+\end{center}
+	\caption{Screenshot der lagernden Brillenfassungen}
+	\label{fig:sample}
+\end{figure}
+\bigskip
+\subsection{E-Mail und SMS} \medskip
+\subsubsection{Massennachrichten}
+Um regelmäßige Info- und Werbenachrichten auszusenden, bietet das Programm die Möglichkeit Nachrichten an alle Kunden zu versenden. Die Nachrichten können entweder als E-Mails oder SMS versendet werden. Für den Fall, dass ein Kunde diese Nachrichten nicht mehr erhalten möchte, kann das der Benutzer bei einzelnen Kunden auf der Detailseite eintragen.
+\subsubsection{E-Mail}
+Wenn der Benutzer eine Massenmail versenden möchte, kann er einen Betreff und eine Nachricht eingeben, die nachher an alle Kunden gesendet wird. Als E-Mail-Adresse wird die abgespeicherte E-Mail-Adresse des Kunden verwendet. Falls keine E-Mail-Adresse angegeben wurde, wird eine entsprechende Fehlermeldung angezeigt.
+\newline
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.7]{images/Massenemail.png}
+\end{center}
+	\caption{Screenshot der Massen-E-Mails}
+	\label{fig:sample}
+\end{figure}
+\noindent\underline{Technischer Hintergrund:}
+\linebreak
+Es wird für jeden Kunden die gleiche Mail erstellt (Klasse MailMessage vom Namespace System.Net.Mail). Diesem Objekt werden Attribute wie Sender, Empfänger, Betreff, Nachricht usw. gesetzt und mittels eines SMTP-Clients versendet (Klasse SmtpClient ebenfalls vom Namespace System.Net.Mail). Der Smtp-Client bekommt noch Informationen wie Host, Port und natürlich die E-Mail-Adresse, von der die E-Mail weggeschickt werden soll, sowie das Passwort für die E-Mail-Adresse. In diesem Fall wurde eine Gmail-Adresse verwendet, die extra für diesen Zweck erstellt wurde.
+\begin{lstlisting}
+var message = new MailMessage();
+message.To.Add(new MailAddress(item.Email));
+message.From = new MailAddress("infodienst.augenoptikaigner@gmail.com");
+message.Subject = this.Subject;
+message.Body = this.Message;
+this.Recipients.Add(new CustomRecipient() { Customer = item, Address = item.Email });
+
+using (var smtp = new SmtpClient())
+{
+	var credential = new NetworkCredential
+	{
+		UserName = "infodienst.augenoptikaigner@gmail.com",
+		Password = //not shown here
+	};
+	
+	smtp.Credentials = credential;
+	smtp.Host = "smtp.gmail.com";
+	smtp.Port = 587;
+	smtp.EnableSsl = true;
+	
+	await smtp.SendMailAsync(message);
+}       
+\end{lstlisting}
+\medskip
+Danach wird die gesendete Nachricht noch in der Datenbank abgespeichert, damit der Benutzer später einen Überblick über alle gesendeten Nachrichten hat. \newline
+\subsubsection{SMS}
+Zum Versenden der SMS wird der SMS-Dienst MessageBird verwendet (siehe Kapitel 2.8). Ähnlich wie beim Versenden einer E-Mail gibt der Benutzer wieder eine Nachricht ein, allerdings kann er keinen Betreff einfügen.
+\noindent \newline Diese Nachricht wird dann an alle Kunden gesendet, außer an jene, bei denen eingetragen worden ist, dass sie keine Massennachricht mehr erhalten wollen. \newline Als Telefonnummer wird standardmäßig die Telefonnummer 1 gewählt, außer diese ist nicht vorhanden, dann wird die Telefonnummer 2 gewählt. Die ausgewählte Nummer sollte eine mobile Telefonnummer (kein Festnetz) sein, sonst kann die Nachricht nicht versendet werden.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.7]{images/Massensms.png}
+\end{center}
+	\caption{Screenshot der Massen-SMS}
+	\label{fig:sample}
+\end{figure}
+\medskip
+\subsubsection{Einzelne Nachrichten}
+\smallskip
+Dieselben Vorgänge werden verwendet um einzelne Nachrichten zu versenden. Dazu muss der Benutzer auf die Detailseite einer Bestellung klicken und dann auf ''Nachricht senden'' drücken. Dort kann er wieder zwischen SMS und E-Mail auswählen. \newline Diese einzelnen Nachrichten sind in erster Linie dazu gedacht, um dem Kunden mitzuteilen, dass seine Brillen- oder Kontaktlinsenbestellung abholbereit ist. Deshalb wird auch standardmäßig ein Text (und bei einer E-Mail auch ein Betreff) eingefügt, der dem Kunden mitteilt, dass seine Bestellung abholbereit ist. Falls der Benutzer diesen Standardtext einmal verändern möchte, ist das unter dem Menüpunkt ''Sonstiges'' möglich (siehe Kapitel 3.1.7). \newline Wenn der Benutzer aus einem ganz anderen Grund eine Nachricht versenden möchte, kann der Text natürlich individuell anpasst werden.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.6]{images/EinzelneNachricht.png}
+\end{center}
+	\caption{Screenshot der einzelnen Nachricht}
+	\label{fig:sample}
+\end{figure}
+\subsubsection{Versendete Nachrichten}
+Außerdem ist es möglich, alle Nachrichten, die vom System gesendet worden sind, anzuzeigen. Um nur Nachrichten anzuzeigen, die an einen bestimmten Kunden gesendet worden sind, muss der Benutzer auf die Detailseite eines Kunden klicken und dann die „Versendeten Nachrichten“ anzeigen. Falls der Benutzer alle Nachrichten sehen will, die er versendet hat, kann er diese unter dem Menüpunkt „Massen SMS/E-Mails verschicken“ sehen.\\
+Dazu wurden in der Datenbank extra die Tabellen ''CustomMessage'' und ''CustomRecipient'' angelegt, um alle Nachrichten und deren Empfänger abspeichern zu können. Hier wird beispielsweise eine Massen-SMS gespeichert:
+\begin{lstlisting}
+var m = new CustomMessage();
+m.Date = DateTime.Now;
+m.MessageText = this.Message;
+m.MessageType = OpticiatnMgr.Core.Entities.MessageType.SMS;
+m.Recipients = new List<CustomRecipient>();
+var numbers = GetPhoneNumbers();
+for (int i = 0; i < this.Customers.Count; i++)
+{
+	m.Recipients.Add(new CustomRecipient() { Customer = this.Customers[i], Address = numbers[i].ToString() });
+}
+uow.MessageRepository.Insert(m);
+uow.Save();
+\end{lstlisting}\bigskip
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.65]{images/VersendeteNachrichten.png}
+\end{center}
+	\caption{Screenshot der versendeten Nachrichten}
+	\label{fig:sample}
+\end{figure}
+\subsection{Statistiken}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.65]{images/Statistiken.png}
+\end{center}
+	\caption{Screenshot der Statistiken}
+	\label{fig:sample}
+\end{figure}
+Unter dem Menüpunkt ''Statistiken'' erhält der Benutzer eine Übersicht über die Anzahl der verkauften Brillen oder Kontaktlinsen. Das kann er mittels den beiden Buttons im oberen Teil der Seite festlegen. Darunter wird zum Vergleichen der Verkaufszahlen ein Liniendiagramm der verkauften Brillen/Kontaktlinsen von dem aktuellen Jahr und dem Jahr davor angezeigt. Die Werte der Statistik sind in Monate aufgegliedert.\newline Damit ein Brillen/Kontaktlinsenauftrag in der Statistik mitberücksichtigt wird, muss ein Zahlungsdatum angegeben werden und der Bezahlungsstatus muss auf ''Bezahlt'' gesetzt werden.\newline
+\underline{Technischer Hintergrund:}
+Zur Darstellung wurde das Wpf-Toolkit verwendet (Kapitel 2.7). \newline
+Um ein Liniendiagramm zu erzeugen ist folgender Code nötig:
+\begin{lstlisting}
+<toolkitCharting:Chart Title="{Binding Title}">
+            <toolkitCharting:LineSeries Title="{Binding NewYear}"  DependentValueBinding="{Binding Value}" IndependentValueBinding="{Binding Key}" ItemsSource="{Binding NewValues}"/>
+            <toolkitCharting:LineSeries Title="{Binding OldYear}"  DependentValueBinding="{Binding Value}" IndependentValueBinding="{Binding Key}" ItemsSource="{Binding OldValues}"/>
+</toolkitCharting:Chart>
+\end{lstlisting}
+''NewValues'' und ''OldValues'' sind so deklariert: 
+\begin{lstlisting}
+public ObservableCollection<KeyValuePair<string, int>> NewValues { get; set; }
+public ObservableCollection<KeyValuePair<string, int>> OldValues { get; set; }
+\end{lstlisting}
+Die Daten werden mittels Linq (Kapitel 2.1.1) erfasst.
+\subsection{Sonstiges}
+Unter dem Menüpunkt ''Sonstiges'' erscheinen fünf Unterpunkte:
+\begin{itemize}
+\item Orte bearbeiten
+\item Länder bearbeiten
+\item Brillentypen bearbeiten
+\item Kontaktlinsentypen bearbeiten
+\item Vorgegebene Texte bearbeiten
+\end{itemize}
+Wie die Überschriften schon vermuten lassen, öffnen die vier oberen Buttons jeweils ein eigenes Fenster, welches eine Übersicht über alle vorhandenen Objekte zeigt. Am Beispiel ''Länder'' wird nun die Verwendung gezeigt:
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.75]{images/Laender.png}
+\end{center}
+	\caption{Screenshot der L\"ander}
+	\label{fig:sample}
+\end{figure} 
+\noindent Im oberen Bereich können die Länder nach Name oder Id gefiltert werden. Allerdings funktioniert das Sortieren hier anders als bei den Übersichtslisten. Der Benutzer kann auswählen, nach was er gerne sortieren möchte und danach sortiert das Programm aufsteigend nur nach dieser einen Property. Mit einem Doppelklick kann ein Land bearbeitet/gelöscht werden und rechts oben kann ein neues Land hinzugefügt werden.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.65]{images/LandBearbeiten.png}
+\end{center}
+	\caption{Land bearbeiten}
+	\label{fig:sample}
+\end{figure} 
+\subsubsection{Vorgegebene Texte bearbeiten}
+Unter diesem Menüpunkt können Texte, die standardmäßig im Programm vorgeschlagen werden, bearbeitet werden. Dazu gehören sämtliche Texte und bei E-Mails auch Betreffe, die beim Versenden einer einzelnen Nachricht vorgeschlagen werden. Außerdem kann auch der Name bearbeitet werden, der Kunden angezeigt wird, wenn sie eine SMS vom Programm erhalten. \newline Bei allen Texten außer dem Sendernamen von SMS hat der Benutzer die Möglichkeit die Nachrichten zu personalisieren. Dazu muss er nur an der Stelle, an dem zum Beispiel der Nachname des Kunden eingefügt werden soll, ''\{3\}'' schreiben. Außerdem kann der Benutzer auch Zeilenumbrüche einfügen, damit beispielsweise in einer E-Mail nicht nur eine einzige Zeile Text steht.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.7]{images/VorgegebeneTexteBearbeiten.png}
+\end{center}
+	\caption{Vorgegebene Texte bearbeiten}
+	\label{fig:sample}
+\end{figure} 
+\noindent \underline{Technischer Hintergrund}: \linebreak Um diese Informationen zu speichern, werden sogenannte User-Settings verwendet. Diese sind in den Properties des Projektes unter dem Punkt ''Settings'' eingetragen und haben die Eigenschaft, dass sie nicht zurückgesetzt werden, sobald das Programm beendet wird. In diesen ''Settings'' kann der Name der Einstellung, der Typ (in dieser Arbeit wird nur der Typ ''string'' benötigt), der Geltungsbereich und der Wert  eingetragen werden. Der Geltungsbereich kann entweder ''Application'' oder ''User'' sein. Der Unterschied besteht darin, dass ''Application''-Einstellungen zur Laufzeit nicht verändert werden können und ''User''-Einstellungen schon. Deshalb sind alle Einstellungen dieser Arbeit ''User''-Einstellungen.
+\newline Im Code des ViewModels sind Properties zu den zu bearbeitenden Texten vorhanden, welche im Getter nur die passende Einstellung zurückliefern und im Setter diesen Text speichern. \newline Die nachfolgende Property beschreibt den Text im Betreff, der angezeigt wird, wenn eine einzelne E-Mail an einen Kunden mit einem Brillenauftrag versendet wird. \newpage
+\begin{lstlisting}
+public string SingleEmailSubjectGlassesOrder 
+{
+	get 
+	{ 
+		return Properties.Settings.Default.SingleEmailSubjectGlassesOrder; 
+	} 
+	set 
+	{ 
+		Properties.Settings.Default.SingleEmailSubjectGlassesOrder = value; 
+	} 
+}
+\end{lstlisting}
+Bevor das Fenster mit ''Speichern'' geschlossen wird, muss unbedingt folgende Methode aufgerufen werden. Ansonsten werden die Änderungen nicht gespeichert und beim nächsten Programmstart werden wieder die alten Texte angezeigt.
+\begin{lstlisting}
+Properties.Settings.Default.Save();
+\end{lstlisting}
+Falls der Benutzer die Änderungen nicht speichern möchte kann er den ''Abbrechen''-Button betätigen. Dann muss allerdings nachfolgende Methode aufgerufen werden, ansonsten bleiben die Änderungen bis zum Schließen des Programms erhalten. Erst beim nächsten Programmstart werden sie wieder zurückgesetzt.
+\begin{lstlisting}
+Properties.Settings.Default.Reload();
+\end{lstlisting}
+\subsection{Filtern und Sortieren}
+\subsubsection{Filtern}
+Auf allen Hauptseiten der Applikation (Kunden, Aufträge, Lieferanten, Lagernde Brillenfassungen) sowie auf den Seiten unter dem Menüpunkt „Sonstiges“ (Orte, Länder, Brillen- und Kontaktlinsentypen) ist es möglich, die Datensätze zu filtern. 
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.75]{images/filter.png}
+\end{center}
+	\caption{Screenshot des Filters}
+	\label{fig:sample}
+\end{figure}
+\noindent Dies passiert immer nach demselben Schema, dennoch ist diese Funktion für jede dieser Seiten einzeln implementiert. \newline
+Dazu muss der Benutzer das Feld aussuchen, nach welchem er gerne filtern möchte, danach einen Text eingeben und dann auf „Filtern“ klicken oder die Tas\-te „Enter“ drücken. Das Programm gibt nun nur jene Datensätze aus, bei denen das gewünschte Feld den eingegebenen Text enthält. Neben dem „Filtern“-Button befindet sich ein „Filter löschen“-Button, der wieder alle Datensätze zum Vorschein bringt.
+\noindent \newline Im nachfolgenden Beispiel wird anhand der „Lagernden Brillenfassungen“ erklärt wie der Filter funktioniert: \newline
+Im ViewModel gibt es ein Feld, welches ''PropertiesList'' heißt (vom Typ ObservableCollection\textless string\textgreater). In diesem werden alle Felder der jeweiligen Klasse aufgezählt. Davor werden noch Felder, nach denen der Benutzer später nicht filtern sollte, herausgestrichen. Bei Referenzen auf andere Objekte, zum Beispiel bei der Brillenfassung der Lieferant, wird die ''Supplier\_Id'' entfernt, der String ''Supplier'' bleibt allerdings in der Liste. Später beim Übersetzen ins Englische wird überprüft, ob nach einem Fremdschlüssel gefiltert wird. In diesem Fall wird der Name des Fremdschlüssels (hier ''Supplier'') zu dem Hauptnamen in der Property umgewandelt (''SupplierName''). Das bedeutet, dass wenn der Lieferant als Filterfeld ausgewählt wird, in Wirklichkeit nur nach einem Feld (hier dem Namen des Lieferanten) gefiltert wird.
+\newline Nachdem aller Felder ausgewählt wurden, wird jedes Feld ins Deutsche übersetzt. Dies geschieht mittels einem kleinen Wörterbuch (Klasse ResourceManager), welches eine Übersetzung für jedes Feld bereithält. Die Wörter, die im ResourceManager stehen, müssen selbst eingefügt werden und werden in einem File namens ''Resources.resx'' unter den Properties des Projektes abgespeichert. Neben einfachen Wörtern könnten hier auch Bilder, Dateien oder Ähnliches verwaltet werden. \newline Hier wird die Liste der Felder aus denen der Benutzer später sein „Filterfeld“ auswählen kann erstellt:
+\begin{lstlisting}
+public ObservableCollection<String> PropertiesList { get; }
+
+private ResourceManager manager = Properties.Resources.ResourceManager;
+
+private ObservableCollection<string> GetAllProperties()
+{
+	ObservableCollection<string> props = new 							ObservableCollection<string>(typeof(EyeGlassFrame).GetProperties()
+.Select(p => p.Name).ToList());
+	ObservableCollection<string> newList = new ObservableCollection<string>();
+	props.Remove("Timestamp"); //Shouldnt be able to filter by timestamp
+   props.Remove("Supplier_Id"); //Shouldnt be able to filter by supplier_id
+   foreach (var item in props)
+   {
+   		var germanItem = manager.GetString(item);
+   		if (germanItem != null)
+             newList.Add(germanItem);
+   }
+   return newList;
+}
+\end{lstlisting}
+Wenn der Benutzer einen Text eingibt und danach „Filtern“ drückt, wird das Feld, das er gewählt hat zuerst mit Hilfe des ResourceManagers ins Englische übersetzt.  Danach wird die Methode Filter() aufgerufen, die den passenden Filter setzt, falls der Benutzer einen Text eingegeben hat.
+\begin{lstlisting}
+public void Filter()
+{
+	try
+	{
+		if (!String.IsNullOrEmpty(this.FilterText))
+		{
+			this.EyeGlassFramesView.Filter = new Predicate<object>(Contains);
+		}
+		else
+			this.EyeGlassFramesView.Filter = null;
+	}
+	catch (Exception e)
+	{
+		Console.WriteLine(e.StackTrace);
+	}
+}
+\end{lstlisting}
+Dabei muss man wissen, dass EyeGlassFramesView vom Typ ICollectionView ist. Diese Property wird im Konstruktor aus der Liste der wirklichen Brillenfassungen erzeugt (EyeGlassFrames). Der Typ ICollectionView ist als Anzeigeelement für Listen gedacht, weshalb es auch ein Feld namens „Filter“ gibt (mehr dazu: \cite{microsoft_collectionview.filter-eigenschaft_2017}). Durch die Methode „Contains“ wird dieser auch gesetzt. Der folgende Code stammt aus dem ViewModel der lagernden Brillenfassungen.
+\newline Properties:
+\begin{lstlisting}
+public ObservableCollection<EyeGlassFrame> EyeGlassFrames { get; set; }
+public ICollectionView EyeGlassFramesView { get; set; }
+public string TranslatedFilterProperty { get; set; }
+public string FilterText { get; set; }
+\end{lstlisting}
+Im Konstruktor wird EyeGlassFramesView initialisiert.
+\begin{lstlisting}
+this.EyeGlassFramesView = CollectionViewSource.GetDefaultView(EyeGlassFrames);
+\end{lstlisting}
+Die Methode Contains gibt zurück, ob das Objekt „f“ dem angegebenen Filter entspricht. Dazu wird zunächst überprüft, ob die Klasse EyeGlassFrame die Property enthält, nach der der Benutzer filtert. Wenn ja, gibt die Methode zurück, ob in dieser Property die Zeichenkette vorkommt, nach der der Benutzer sucht. Danach überprüft das Programm ob die gesuchte Eigenschaft eine Eigenschaft der Klasse Supplier ist. Das passiert, weil jede lagernde Brillenfassung einen Lieferanten hat. Deswegen kann es sein, dass der Benutzer nach einer Eigenschaft filtert, die gar nicht in der Klasse EyeGlassFrame enthalten ist, sondern nur in der Klasse Supplier. Wenn die Property in keiner Klasse gefunden wird, was nicht vorkommen sollte, wird eine Fehlermeldung zurückgegeben.
+\begin{lstlisting}
+private bool Contains(object f)
+{
+	EyeGlassFrame frame = f as EyeGlassFrame;
+	if (typeof(EyeGlassFrame).GetProperty(TranslatedFilterProperty) != null)
+	{
+		return frame.GetType().GetProperty(this.TranslatedFilterProperty)
+		.GetValue(frame, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+	}
+	else if (typeof(Supplier).GetProperty(TranslatedFilterProperty) != null) //Does the user filter by suppliername?
+	{
+		return frame.Supplier?.GetType()
+		.GetProperty(this.TranslatedFilterProperty)
+		.GetValue(frame.Supplier, null)?.ToString().ToUpper().IndexOf(this.FilterText.ToUpper()) >= 0;
+	}
+	else
+	{
+		MessageBox.Show("Beim Filtern ist ein Fehler aufgetreten!");
+		return false;
+	}
+}
+\end{lstlisting}
+\subsubsection{Sortieren}
+Bei allen Hauptseiten, auf denen Daten angezeigt werden, ist eine dynamische Sortierung implementiert. Diese macht es dem Benutzer möglich, nach drei Spalten gleichzeitig auf- oder absteigend zu sortieren. \newline Dazu muss der Benutzer auf eine beliebige Spaltenüberschrift klicken. Das ist dann die Spalte, nach der zuerst aufsteigend sortiert wird. Drückt der Benutzer erneut auf dieselbe Spaltenüberschrift, werden die Datensätze nach dieser Spalte absteigend sortiert. Wenn der Benutzer nach einer zweiten Spalte sortieren möchte, muss er zusätzlich die Shift-Taste drücken, während er eine weitere Spaltenüberschrift auswählt. Wiederum muss der Benutzer ein zweites Mal mit der Shift-Taste die gleiche Spaltenüberschrift anklicken, um absteigend zu sortieren. Dasselbe gilt für die dritte Spalte. Um die Sortierung wieder zurücksetzen zu können, kann der Benutzer eine andere Spaltenüberschrift mit einem normalen Klick wieder sortieren. \newline Im nachfolgenden Bild hat der Benutzer zuerst nach dem Vornamen aufsteigend, dann nach der Postleitzahl absteigend und zum Schluss nach Nachnamen aufsteigend sortiert. Zur besseren Übersichtlichkeit zeigt das Programm einen normalen Pfeil oder einen Pfeil mit einem oder zwei Punkten an, je nachdem in welcher Reihenfolge die Spalten sortiert wurden.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.9]{images/Sortieren.png}
+\end{center}
+	\caption{Screenshot des Sortierens}
+	\label{fig:sample}
+\end{figure}
+\noindent \underline{Technischer Hintergrund:} \linebreak
+Als Grundlage zur Implementierung war ein Beispiel von Microsoft sehr hilfreich \linebreak (\cite{microsoft_windows_2017}). \newline Es gibt eine Klasse SortManager, die die Sortierung für alle Hauptseiten regelt.
+\begin{lstlisting}
+public SortManager SortManager { get; set; }
+\end{lstlisting} 
+Dazu wird im Konstruktor jedes ViewModels ein neuer SortManager initialisiert.
+\begin{lstlisting}
+SortManager = new SortManager();
+\end{lstlisting}
+Zusätzlich werden drei Events von der View abonniert. \newline Das erste Event ''Initialized'' wird von der ListView bereitgestellt:
+\begin{lstlisting}
+<i:Interaction.Triggers>
+	<i:EventTrigger EventName="Loaded">
+		<cmd:EventToCommand Command="{Binding Initialized}"
+                                        PassEventArgsToCommand="True" />
+	</i:EventTrigger>
+</i:Interaction.Triggers>
+\end{lstlisting}
+In jedem ListViewHeader werden noch Shift+LeftClick und MouseDown durch MouseBindings abonniert. Als Beispiel wurde die Spalte der Vornamen in der Kundenübersicht gewählt.
+\begin{lstlisting}
+<GridViewColumn DisplayMemberBinding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}">
+	<GridViewColumnHeader Content="Vorname">
+		<GridViewColumnHeader.InputBindings>
+			<MouseBinding Gesture="Shift+LeftClick" Command="{Binding SortShift}" CommandParameter="FirstName" >
+			</MouseBinding>
+		</GridViewColumnHeader.InputBindings>
+		<i:Interaction.Triggers>
+			<i:EventTrigger EventName="MouseDown">
+				<cmd:EventToCommand Command="{Binding SortCommand}"
+                                        PassEventArgsToCommand="True" />
+			</i:EventTrigger>
+		</i:Interaction.Triggers>
+	</GridViewColumnHeader>
+</GridViewColumn>
+\end{lstlisting}
+Im ViewModel gibt es die zugehörigen ICommands:
+\begin{lstlisting}
+public ICommand SortCommand { get; set; }
+public ICommand SortShift { get; set; }
+public ICommand Initialized { get; set; }
+\end{lstlisting}
+Diese werden im Konstruktor initialisiert:
+\begin{lstlisting}
+SortCommand = new RelayCommand<RoutedEventArgs>(SortS);
+SortShift = new RelayCommand<object>(SortSh);
+Initialized = new RelayCommand<RoutedEventArgs>(Init);
+\end{lstlisting}
+Im ViewModel werden dann folgende Methoden aufgerufen:
+\begin{lstlisting}
+private void Init(RoutedEventArgs p)
+{
+	SortManager.Init(p);
+}
+//Click without shift key
+private void SortS(RoutedEventArgs e)
+{
+	var tmp = this.CustomersView;
+	SortManager.SortNormal(e, ref tmp);
+}
+//Click with shift
+private void SortSh(object p)
+{
+	var tmp = CustomersView;
+	SortManager.SortShift(p, ref tmp);
+}
+\end{lstlisting}
+In der Methode SortManager.Init(RoutedEventArgs p) werden durch die Variable p alle GridViewColumnHeaders abgespeichert. Der Grund dafür ist, dass bei dem Event SortShift keine EventArgs mitgegeben werden können, weil es sich um ein MouseBinding handelt und nicht um ein normales Event. Dadurch kann die Methode SortShift(object p, ref ICollectionView View) nicht wissen, welche Spaltenüberschrift gedrückt wurde und daher müssen am Anfang einmal alle GridViewColumnHeaders abgespeichert werden. \newline
+Wenn die Methode SortNormal(RoutedEventArgs e, ref ICollectionView View) aufgerufen wird, wird zunächst überprüft, ob die Spaltenüberschrift schon einmal gedrückt wurde (dann soll nämlich die Sortierrichtung geändert werden). Wenn ja, werden die Suchrichtung sowie die Richtung des Pfeils neben der Spaltenüberschrift geändert. Ansonsten werden alle Pfeile neben den Überschriften gelöscht, die Suchrichtung auf aufsteigend gesetzt und ein neuer Pfeil angezeigt. \newline Ein Auszug der SortNormal-Methode:
+\begin{lstlisting}
+//Same column pressed?
+if (SortHeaders.Count == 1 && SortHeaders[0] == columnHeader)
+{
+	//Change sort direction
+	dir = View.SortDescriptions[0].Direction;
+	dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+	header = ChangeArrow(columnHeader, dir, 0);
+}
+else
+{
+	//Remove arrow from old column header
+	if (SortHeaders.Count > 0)
+	{
+		foreach (var item in SortHeaders)
+		{
+			item.Column.HeaderTemplate = null;
+			item.Column.Width = item.ActualWidth - 20;
+		}
+	}
+	SortHeaders.Clear();
+	SortHeaders.Add(columnHeader);
+	dir = ListSortDirection.Ascending; //default sort direction is ascending
+	header = SetNewArrow(columnHeader, dir, 0);
+}
+View.SortDescriptions.Clear();
+View.SortDescriptions.Add(new SortDescription(header, dir));
+\end{lstlisting}
+SortHeaders ist eine globale Variable vom Typ List\textless GridViewColumnHeader\textgreater , der die Spalten enthält, nach welchen aktuell sortiert wird. Die lokale Variable ''dir'' bezeichnet die gewünschte Sortierrichtung und ist vom Typ ListSortDirection. Der String ''header'' enthält die Property, auf die der GridViewColumnHeader bindet. Diese ist natürlich englisch und stellt wieder ein Übersetzungsproblem dar. \newline Wie schon weiter oben erwähnt, ist der Typ ICollectionView extra für das Darstellen von Listen gemacht, deshalb enthält er auch eine Eigenschaft namens SortDescriptions, in welche man beliebig viele SortDescriptions einfügen kann und nach welchen die Liste dann automatisch sortiert wird. In den Methoden ChangeArrow und SetNewArrow wird die Spalte entsprechend breiter gemacht und das passende vorgefertigte Template gesetzt. Dieses enthält selbst designete Bilder von Pfeilen, die unter den Ressourcen des Projektes abgespeichert sind. \newpage
+\begin{lstlisting}
+column.Column.HeaderTemplate = Application.Current.FindResource("ArrowUp") as DataTemplate;
+\end{lstlisting}
+In diesem Beispiel wird dem GridViewColumnHeader ''column'' ein Pfeil, der nach oben ausgerichtet ist, beigefügt. \newline
+In der Methode SortShift(object p, ref ICollectionView View) wird mittels dem Parameter ''p'' der Name der Property übergeben, auf die die Spalte bindet. Dieser wird händisch in der View übergeben (siehe oben) und ist englisch, weshalb er zuerst übersetzt werden muss. Danach wird der passende GridViewColumnHeader nach der Überschrift in der am Anfang angelegten Liste von GridViewColumnHeaders gesucht.
+\begin{lstlisting}
+var columnHeader = AllHeaders.Where(h => String.Equals(h.Content.ToString(), germanColumnName)).ToList().FirstOrDefault();
+\end{lstlisting}
+Dann wird wieder überprüft, ob dieselbe Spalte zweimal hintereinander ausgewählt wurde, sodass dann die Sortierrichtung gewechselt werden kann. Ansonsten wird überprüft, ob schon drei Spalten ausgewählt wurden und wenn nicht wird eine neue Spalte zu den Sortierspalten hinzugefügt.
+Auszug der SortShift-Methode:
+
+\begin{lstlisting}
+if (View.SortDescriptions.Count >= 1)
+{
+	ListSortDirection dir;
+	int index = View.SortDescriptions.Count - 1;
+	
+	//Change sorting direction
+	if (View.SortDescriptions.Count == index + 1 && View.SortDescriptions[index].PropertyName == columnName)
+	{
+		dir = View.SortDescriptions[index].Direction;
+		dir = dir == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+		View.SortDescriptions.RemoveAt(index);
+		View.SortDescriptions.Insert(index, new SortDescription(columnName, dir));
+		ChangeArrow(columnHeader, dir, index);
+		SortHeaders.Add(columnHeader);
+	}
+	else if (View.SortDescriptions.Count(s => s.PropertyName == columnName) == 0)
+	{
+		if (View.SortDescriptions.Count >= 3)
+		{
+			MessageBox.Show("Sie koennen maximal nach drei Spalten sortieren!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+			return;
+		}
+		
+	dir = ListSortDirection.Ascending;
+	SetNewArrow(columnHeader, dir, index+1);
+	View.SortDescriptions.Add(new SortDescription(columnName, dir));
+	SortHeaders.Add(columnHeader);
+}
+\end{lstlisting}
+\pagebreak 
+
+\section{Website}
+\subsection{Brillenkategorien}
+Über den Menüpunkt "Home" gelangt man zu einer Übersicht aller Brillenkategorien. Dies ist gleichzeitig die Hauptseite der Webseite. Wird eine der 3 Kategorien (Herrenbrillen, Damenbrillen und Kinderbrillen) ausgewählt, so werden die dazugehörigen Brillen auf einer neuen Seite angezeigt.
+Die Kategorien werden als Tabelle mit einem Foto und einer kurzen Beschreibung wie im Codebeispiel dargestellt:
+\begin{lstlisting}
+<div id="firstgreyBox3">
+    <table width="100%">
+        <tr>
+            <td>
+                 <a asp-area="" asp-controller="Home" asp-action="Herrenbrillen"><img class="indexImg" src="~/images/mann.jpg" /></a> 
+            </td>
+            <td style="text-align:center">
+                <h4>Modische Herrenbrillen.</h4>
+            </td>
+        </tr>
+    </table>
+</div>
+\end{lstlisting}
+Wenn der Administrator auf der Seite eingeloggt ist, sieht er auf dieser Seite links oben einen Button, welcher Adminstrationsbereich genannt wird. Mit einem Klick auf diesen Button gelangt er auf die Administrationsseite. Um diesen Button nur für den Administrator sichtbar zu machen, wurde dem Administrator die "Admin" Rolle zugewiesen und der Button wird nur dann angezeigt wenn der aktuelle User diese Rolle besitzt.
+
+\begin{lstlisting}
+@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+{
+    <a class=" btn btn-default" asp-action="AdministrationArea">Administrationsbereich</a>
+}
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/Index.png}
+\end{center}
+	\caption{Screenshot der Brillenkategorien Seite}
+	\label{fig:sample}
+\end{figure}
+
+\subsection{Administration}
+
+\subsubsection{Administratoren}
+Befindet man sich auf der Hauptseite findet man rechts oben einen $"$Einloggen" Button wird dieser gedrückt wird man weitergeleitet auf eine Login Seite auf der sich der Administrator mittels seiner E-Mail Adresse und dem Passwort einlogen kann. Wurden die korrekten Daten vom Administrator eingegeben wird er dann wieder auf die Hauptseite zurückgeleitet dort erscheint nun ein Button $"$Administrationsbereich". In diesem bekommt man eine Übersicht aller Administratoren man kann hier dann neue hinzufügen und aktuelle Administratoren löschen. Beim hinzufügen eines Administrators wird dem User die Rolle $"$Admin" zugewiesen.
+\begin{lstlisting}
+public async Task GetAdmins(UserManager<ApplicationUser> um)
+        {
+            var admins = await um.GetUsersInRoleAsync("Admin");
+            this.Admins = admins.Select(u => u.UserName).ToList();
+        }
+\end{lstlisting} 
+Außerdem befindet sich auf der Seite auch noch ein Button $"$Brille" über diesen gelangt man zu einer Übersicht aller Brillen.   
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/Admin.png}
+\end{center}
+	\caption{Screenshot der Hauptseite des Administrationsbereich}
+	\label{fig:sample}
+\end{figure}
+
+
+\subsubsection{Brillen}
+Der Administrator erhält eine Übersicht aller Brillen und hat die Möglichkeit Brillen zu löschen oder neue hinzuzufügen.
+\begin{lstlisting}
+@foreach (var item in @Model.GlassModel)
+    {
+    <div class="col-md-3 col-sm-3" id="greyBox">
+        <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
+        <label style="font-size:30px; margin-left:35%;">@item.Name</label>
+        <p align="center">Modische Brille von: @item.Marke</p>
+        <p align="center">Kategorie: @item.Category</p>
+        <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
+    </div>
+    }
+\end{lstlisting}
+
+Beim klicken des Buttons $"$Neue Brille" wird man auf die Seite $"$Brille hinzufügen" weitergeleitet. Neben jeder Brille befinden sich 2 Buttons $"$Edit" und $"$Delete". Beim drücken des $"$Delete" Buttons wird das Brillenmodell gelöscht und eine aktualisierte Liste dargestellt.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/AdminBrillen.png}
+\end{center}
+	\caption{ Screenshot der Brillen Seite im Administrationsbereich}
+	\label{fig:sample}
+\end{figure}
+ 
+
+\begin{itemize}
+\item Brille hinzufügen
+Auf dieser Seite kann der Administrator neue Brillenmodelle einfügen dazu muss er den Name, den Preis und die Kategorie eingeben und ein Foto der Brille einfügen, dann kann er auf $"$Einreichen" drücken. Dies führt dazu, dass die Brille in der Datenbank eingefügt wird und dass er auf die Seite $"$Brillen" zurückkehrt wo die aktualisierte Liste der Brillen zu sehen ist.
+Technischer Hintergrund:
+\begin{lstlisting}
+<form method="post" enctype="multipart/form-data" accept-charset="UTF-8" asp-action="NewGlasses">
+            <input type="hidden" asp-for="ImageAsString" value="@Model.ImageAsString" />
+            <div>
+                <div class="form-group">
+                    <div>
+                        <p>Bilder nur im Format .jpg:</p>
+                        <input style="margin-bottom:10px;" asp-for="@Model.Image" accept="image/*" type="file" />
+                        <span asp-validation-for="@Model.ImageFileName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Name"></label>
+                    <input type="text" placeholder="Name*" class="form-control" asp-for="@Model.Glasses.Name">
+                    <span asp-validation-for="@Model.Glasses.Name" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Marke"></label>
+                    <input type="text" placeholder="Marke*" class="form-control" asp-for="@Model.Glasses.Marke">
+                    <span asp-validation-for="@Model.Glasses.Marke" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Price"></label>
+                    <input type="number" placeholder="Preis*" class="form-control" asp-for="@Model.Glasses.Price">
+                    <span asp-validation-for="@Model.Glasses.Price" class="text-danger"></span>
+                    <br />
+                </div>
+
+                <div style="width:7.5cm">
+                    <label asp-for="@Model.Glasses.Category"></label>
+                    <select asp-items="@Model.Kategorie" asp-for="@Model.Glasses.Category"></select>
+                </div>
+
+                <footer>
+                    <input type="hidden" id="idField" name="id" value="0" />
+                    <input type="submit" class="myButton" value="Einreichen" onclick="document.getElementById('idField').value = '1'";/>
+                    <a class="myButton" asp-action="Index">Zur&uuml;ck</a>
+                </footer>
+
+            </div>
+        </div>
+    </form>
+\end{lstlisting}   
+Die Eingegeben Daten werden dann über den HomeController ind die Datenbank gespeichert.
+\begin{lstlisting}
+public async Task<IActionResult> NewGlasses()
+        {
+            NewGlasses model = new NewGlasses();
+            await model.Init();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> NewGlasses(NewGlasses model, int id)
+        {
+
+            if (id == 1)
+            {
+                if (ModelState.IsValid)
+                {
+                    //Save image
+                    model.Glasses.Image = ConvertImage(model.Image, model.ImageAsString);
+
+
+                    this.uow.GlassesRepository.Insert(model.Glasses);
+                    this.uow.Save();
+
+                    return RedirectToAction("AdminBrillen");
+
+                }
+                else
+                {
+                    await model.FillList();
+                    //save image as string
+                    model.ImageAsString = ConvertImage(model.Image, model.ImageAsString);
+                    return View(model);
+                }
+            }
+            else if (id == 2)
+            {
+                await model.FillList();
+                model.ImageAsString = string.Empty;
+                return View(model);
+            }
+            return NotFound();
+        }
+
+\end{lstlisting}
+Das hochgeladene Foto wird zuerst in einen String konvertiert und, dann in der Datenbank abgespeichert
+\begin{lstlisting}
+if (Image != null && Image.Length > 0)
+{
+	using (var ms = new MemoryStream())
+	{
+		Image.CopyTo(ms);
+		var fileBytes = ms.ToArray();
+		return Convert.ToBase64String(fileBytes);
+	}
+}
+return ImageAsString;
+\end{lstlisting}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/NeueBrille.png}
+\end{center}
+	\caption{Screenshot der Neue Brille erstellen Seite}
+	\label{fig:sample}
+\end{figure}
+
+
+\pagebreak 
+
+\item Brille löschen
+Falls der Administrator ein Brillenmodell von seiner Website nehmen will beziehungsweise aus der Datenbank löschen kann er dies einfach über den $"$Delete" Button.
+Nach b etätigen des Buttons wird er nur noch einmal gefragt ob er sich sicher ist das er diese Brille löschen möchte bestätigt er dies wird das Brillenmodell aus der Datenbank gelöscht.
+\begin{lstlisting}
+var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+            if (g == null)
+                return NotFound();
+            uow.GlassesRepository.Delete(g);
+            uow.Save();
+            return RedirectToAction("AdminBrillen");
+\end{lstlisting}
+
+
+\end{itemize}
+
+
+\pagebreak
+\subsection{Brillenmodelle}
+Die Brillenmodelle sind in drei Kategorien untergliedert $"$Herrenbrillen" , $"$Frauenbrillen" und $"$Kinderbrillen" auf jeder der Unterseiten werden die dazugehörigen Brillen mit einem Foto, dem Titel und dem Preis dargestellt. Jede Brille kann dann einzeln mittels eines Buttons auf den Wunshzettel gesetzt werden.
+Die Brillenmodelle werden nach der Kategorie gefiltert. Auf der $"$Home" Seite wird eine Kategorie ausgewählt alle Brillenmodelle die diese Kategorie haben werden angezeigt.
+Es werden alle Brillenmodelle durchgegangen und nur diese, welche zur jeweiligen Kategorie passen werden dann angezeigt wie das Codebeispiel zeigt.
+\begin{lstlisting}
+  @foreach (var item in @Model.GlassModel.Where(c => c.Category == "Herrenbrille"))
+    {
+        <div class="col-md-3 col-sm-3" id="greyBox">
+            <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
+            <label style="font-size:30px; margin-left:35%;">@item.Name</label>
+            <p align="center">Modische Brille von: @item.Marke</p>
+            <p align="center">Kategorie: @item.Category</p>
+            <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
+            <button style="margin-bottom:5px; float:right;" class="col-md-6 col-sm-6 btn btn-default"> Wunschzettel</button>
+        </div>
+    }
+\end{lstlisting}
+Jedes Brillenmodell hat einen Preis nach belieben können die Brillen nach dem Preis auf- oder absteigend oder nach dem Namen sortiert werden.
+Technischer Hintergrund:
+\begin{lstlisting} 
+<form asp-action="Herrenbrillen">
+        <div id="blackFilter1">
+            <h3 id="h3filterFach">Sortieren:</h3>
+            <select asp-for="@Model.SelectedSortProperty" asp-items="@Model.SortList"></select><br /><br />
+            <input class="btn btn-default" style="margin-bottom:5px; margin-top:5px; padding: 0px 5px 0px 5px;" type="submit" value="Sortieren" />
+        </div>
+    </form>
+\end{lstlisting}
+Wird ein Sortierkriterium ausgewählt und der Sortier button gedrückt so wird im Controller eine HttpPost Action aufgerufen.
+\begin{lstlisting}
+[HttpPost]
+        public IActionResult Herrenbrillen(GlassesModel model)
+        {
+            ModelState.Clear();
+            model.FillGlasses(uow);
+            return View(model);
+        }
+\end{lstlisting}
+In der $"$FillGlasses" Methode wird abgefragt welches Suchkreterium ausgewählt wurde und dann wird nach diesem Kriterium sortiert.
+\begin{lstlisting}
+public void FillGlasses(IUnitOfWork uow)
+        {
+            //defaul sort property
+            this.SelectedSortProperty = SelectedSortProperty == null ? "Name" : this.SelectedSortProperty;
+            //fill sort selectlist
+            var sortprops = new List<String>() { "Name", "Preis - aufsteigend", "Preis - absteigend" };
+            this.SortList = new SelectList(sortprops, this.SelectedSortProperty);
+
+            if(this.SelectedSortProperty == "Preis - aufsteigend")
+            {
+                this.GlassModel = uow.GlassesRepository.Get(orderBy: ord => ord.OrderBy(s => s.Price)).ToList();
+            }
+            else if (this.SelectedSortProperty == "Preis - absteigend")
+            {
+                this.GlassModel = uow.GlassesRepository.Get(orderBy: ord => ord.OrderByDescending(s => s.Price)).ToList();
+            }
+            else
+                this.GlassModel = uow.GlassesRepository.Get(orderBy: ord => ord.OrderBy(s => s.Name)).ToList();
+        }
+\end{lstlisting}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/Brillen.png}
+\end{center}
+	\caption{Screenshot der Herrenbrille Seite}
+	\label{fig:sample}
+\end{figure}
+
+
+\subsection{Wunschzettel}
+Unter dem Punkt "Wunschzettel" auf der Navigation bar findet man alle Brillenmodelle die man zuvor zu diesem hinzugefügt hat. Hier kann man einzelne Produkte wieder vom Wunschzettel entfernen. Außerdem kann man den Verkäufer über seine Wunschobjekte informieren.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/Wunschzettel.png}
+\end{center}
+	\caption{Screenshot der Wunschzettel Seite}
+	\label{fig:sample}
+\end{figure}
+
+\subsubsection{Kaufinteresse}
+Über den Wunschzettel kann man dem Verkäufer sein Kaufinteresse mitteilen.Hierzu muss man nur auf dem Brillenmodell, über welches man den Verkäufer sein Interesse mitteilen möchte, auf Kaufinteresse drücken und, dann bestätigen dass man dem Verkäufer sein Interesse über die ausgewählten Modelle mitteilen möchte. Wird dies bestätigt wird ein neuer Eintrag in einer Tabelle erstellt, in welcher alle Brillenmodelle gelistet sind und dabei steht wie viele Kunden an dem Modell interesiert sind. Jedes Brillenmodell das auf dem Wunschzettel ist wird automatisch vom Wunschzettel entfernt, wenn man dem Verkäufer sein Kaufinteresse über dieses Modell mitteilt.
+\begin{lstlisting}
+[HttpPost]
+        public async Task<IActionResult> KaufinteresseMit(int id)
+        {
+            var g = uow.GlassesRepository.Get(gl => gl.Id == id).FirstOrDefault();
+            if (g == null)
+                return NotFound();
+            g.Wish = false;
+            g.Kaufinteresse++;
+            uow.GlassesRepository.Update(g);
+            uow.Save();
+            return RedirectToAction("Wunschzettel");
+        } 
+\end{lstlisting}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/Wunschzettel.png}
+\end{center}
+	\caption{Screenshot der Kaufinteresse Seite im Administrationsbereich}
+	\label{fig:sample}
+\end{figure}
+\pagebreak 
+
+
+
+\subsection{Allgemeine Informationen}
+Um allgemeinen Informationen über das Unternehmen zu erhalten, gibt es einen Menüpunkt "About", hier werden alle Informationen wie die Öffnungszeiten, Fax-, Mobil- und die Telefonnummer angezeigt, außerdem wird der Standort des Unternehmens auf einer eingebunden Google Maps Karte dargestellt.
+Die Karte wurde über Google Maps ausgewählt und dann eingebunden wie im Code dargestellt.
+\begin{lstlisting}
+<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCUhrwOtdImM9ZYKeGKIltSf4ZzyV7hDeA'></script><div style='overflow:hidden;height:300px;width:100%;'><div id='gmap_canvas' style='height:300px;width:100%;'></div>
+<style>
+    #gmap_canvas img {
+        max-width: none !important;
+        background: none !important;
+    }
+</style></div>
+<script type='text/javascript'>function init_map(){var myOptions = {zoom:15,center:new google.maps.LatLng(48.1600674,14.025288000000046),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(48.1600674,14.025288000000046)});infowindow = new google.maps.InfoWindow({content:'<strong>Augenoptik Aigner</strong><br>Kaiser josef platz 3<br>4060 Wels<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+\end{lstlisting}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/About.png}
+\end{center}
+	\caption{Screenshot der About Seite}
+	\label{fig:sample}
+\end{figure}
+
+\subsection{Kontakt}
+Bei Fragen über die Website, das Unternehmen, die Brillenmodelle und allem anderen kann der Verkäufer mittels eines Formulars kontaktiert werden. Um zum Kontaktformular zu gelangen gibt es in der Navigation bar den Punkt "Kontakt". Dort gibt man seinen Namen, die eigene E-mail Adresse und die Nachricht ein und das Formular kann dann gesendet werden. Die eingegeben Nachricht wird dann über einen SMTP Server an die E-Mail Adresse des Verkäufers gesendet. Die Mail beinhaltet die Nachricht sowie den eingegebenen Namen und auch die E-Mail Adresse somit kann der Verkäufer auf die erhaltene Nachricht antworten. Wurden alle Felder des Formulares korrekt ausgefüllt und danach auf "Send" gedrückt wird die Mail versendet und der User kommt auf eine Seite wo drauf steht das seine Nachricht erfolgreich verschickt wurde.
+Technischer Hintergrund:
+Im Objekt werden Attribute wie die Nachricht, der Empfänger, der Absender, und der Betreff, gesetzt und diese werden mittels eines SMTP-Clients versendet.
+Im Smtp Client werden der Host, Port und die E-Mail-Adresse, von der die E-Mail weggeschickt werden soll, sowie das Passwort für die E-Mail-Adresse eingetragen.
+\begin{lstlisting}
+[HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Contact(EmailFormModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("orascanin.99@gmail.com"));
+                message.From = new MailAddress("diplomarbeitdanijal@gmail.com");
+                message.Subject = "Anfrage!";
+                message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "diplomarbeitdanijal@gmail.com",
+                        Password = ".di,wx,01,21"
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("Sent");
+                }
+            }
+            return View(model);
+        }
+\end{lstlisting}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=.2]{images/Contact.png}
+\end{center}
+	\caption{Screenshot der Contact Seite}
+	\label{fig:sample}
+\end{figure}
+
+
+\section{Datenmodell}
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=1.05]{images/db_kurz.png}
+\end{center}
+	\caption{Datenmodell}
+	\label{fig:sample}
+\end{figure}
+Wie auch der Rest der Diplomarbeit, wurde auch das Datenmodell des Administrationsprogramms und das der Website strikt getrennt. Dabei gehört die Tabelle ''Glasses'' der Website an und der Rest der Tabellen dem Administrationsprogramm. \newline Auf Grund der großen Menge an Attributen, sind diese nicht in der Abbildung dargestellt. \newline Die Tabelle, die die meisten Felder enthält ist die Tabelle der Aufträge (Order). In einem Datensatz dieser Tabelle kann entweder ein Brillenauftrag oder ein Kontaktlinsenauftrag enthalten sein,  was mit dem Attribut 'OrderType' gekennzeichnet ist. Falls es sich um einen Brillenauftrag handelt, nimmt 'OrderType' den Wert 'B' an, ansonsten 'K'. Je nach dem, um welchen Auftrag es sich handelt, kann ein Glas- bzw. Kontaktlinsentyp mit dem Auftrag verknüpft werden. In jeder der beiden Tabellen wird nur der Name des Glastyps/Kontaktlinsentyps gespeichert. Mit dem Glastyp kann beispielsweise angegeben werden, ob es sich um eine Nah- oder Fernbrille handelt. Werte in der Tabelle Kontaktlinsentyp könnten 'Weich 6 Monate' oder 'Formstabil 12 Monate' sein. \newline Falls der Auftrag ein Brillenauftrag ist, kann zusätzlich auch eine Brillenfassung vermerkt werden. In der Tabelle werden auch sämtliche Werte der Gläser gespeichert, welche die meisten Attribute der Tabelle in Anspruch nehmen. Unter dem Attribut 'BillPath' bzw. 'OrderConfirmationPath' wird jeweils der Pfad zur letzten erstellten Rechnung/Auftragsbestätigung gespeichert. Falls der Benutzer den Auftrag mit einem Augenarzt ('Doctor') in Verbindung bringen möchte, ist das ebenfalls möglich. \newline Jeder Auftrag muss einem Kunden zugewiesen werden. Die Tabelle Kunde enthält alle Grunddaten des Kunden, wobei Ort und Land in eigene Tabellen ausgelagert sind. Zusätzlich ist auch vermerkt, ob der Kunde Massennachrichten erhalten soll ('Newsletter') und ob der Kunde gelöscht wurde ('Deleted', siehe Kapitel 3.1.1).\newline Weiters gibt es noch die Tabellen Lieferant ('Supplier'), in der alle Informationen über einen Lieferanten gespeichert werden, wobei Ort und Land wieder in eigene Tabellen ausgelagert sind, und die Tabelle der Brillenfassungen ('EyeGlassFrame'). Diese enthält alle Informationen zu jeder lagernden Brillenfassung. \newline Damit alle versendeten Nachrichten nach dem Versenden noch einmal angezeigt werden können, gibt es die Tabellen 'CustomMessage' und 'CustomRecipient'. In der Tabelle 'CustomMessage' wird das Datum sowie die Uhrzeit der Nachricht, der Text, der Typ der Nachricht (SMS oder E-Mail), der Betreff (falls es sich um eine E-Mail handelt) und die Id des Auftrages (falls es eine einzelne Nachricht ist) gespeichert. Eine solche Nachricht kann beliebig viele Empfänger haben. Die Empfänger der Nachricht müssen gesichert werden, da sonst im Nachhinein unklar ist, wer die Nachricht erhalten hat und an welche Telefonnummer bzw. E-Mail Adresse die Mitteilung versendet worden ist. Diese könnte ja seit dem Versenden der Nachricht verändert worden sein. Jeder der gespeicherten  Empfänger muss einem Kunden in der Datenbank zugeordnet sein.
+\section{Projektarchitektur}
+Um die Diplomarbeit so übersichtlich wie möglich zu halten, wurden fünf Projekte kombiniert.
+\begin{itemize}
+\item 'OpticianMgr.FillDb': Es handelt sich um eine Konsolenapplikation, welche den Connectionstring zur Datenbank enthält. Beim Start dieses Projektes wird der Inhalt der gesamten Datenbank gelöscht und mit Testdatensätzen gefüllt. Diese Daten werden zuvor in CSV-Files abgespeichert. Für jede Tabelle in der Datenbank gibt es ein CSV-File, welches eben solche selbst geschriebenen Testdatensätze beinhaltet. Ein Testdatensatz für einen Kunden könnte beispielsweise so aussehen: \newline ''Mag.;Susi;Sonne;Sonnenstraße;3;4020;Österreich;0650789456123;07242456123789; susi@gmail.com;Gebietskrankenkasse;Polizistin;Fußball;Arbeitet in Wels;Hat vormittags keine Zeit;7789031098;03.10.1998'' \newline Die einzelnen Werte der Attribute werden durch Strichpunkte getrennt. Die Reihenfolge der Werte muss für alle Datensätze dieselbe sein, deshalb wird sie am Beginn des Files angeführt.
+\item 'OpticianMgr.Core': Dieses Projekt enthält alle Entitäten der Datenbank, einige Interfaces sowie eine Klasse, die das Einlesen und Einfügen der Testdatensätze in die Datenbank übernimmt. \newline In dem Unterordner ''Entities'' sind die Entitäten der Datenbank sowie die Klasse ''EntityObject'' enthalten. Wie im Kapitel 2.2 schon beschrieben, erben alle Entitäten von dieser Basisklasse, sodass jede Entität eine Id und einen Timestamp besitzt. Die Klasse ''Town'' wurde beispielsweise so implementiert:
+\begin{lstlisting}
+namespace OpticiatnMgr.Core.Entities
+{
+    public class Town : EntityObject
+    {
+        [Required(ErrorMessage ="Bitte geben Sie einen Ortsnamen an!"), MaxLength(100, ErrorMessage ="Der Name des Ortes ist zu lange!")]
+        public string TownName { get; set; }
+        [Required(ErrorMessage = "Bitte geben Sie eine Postleitzahl an!"), MaxLength(15, ErrorMessage = "Die Postleitzahl ist zu lange!")]
+        public string ZipCode { get; set; }
+    }
+}
+\end{lstlisting}
+Dieser Code gibt an, dass jeder Ort obligatorisch eine Bezeichnung und eine Postleitzahl haben muss. Außerdem darf die Ortsbezeichnung maximal 100 Zeichen haben und die Postleitzahl nur 15. Das ist für Fälle außerhalb von Österreich gedacht. \newline Zusätzlich beinhaltet dieses Projekt auch noch die Interfaces ''IGenericRepository'' und ''IUnitOfWork''. Deren Aufgaben wurden allerdings schon im Kapitel 2.2 beschrieben. \newline Zuletzt enthält das 'Core'-Projekt auch noch eine Klasse namens 'OpticianController'. Diese implementiert wiederum eine Methode 'FillDatabaseFromCsv()', welche die Testdatensätze der CSV-Files einliest, per Linq konvertiert und in der Datenbank abspeichert. Um beispielsweise Testdatensätze für Orte einzulesen wird folgende Methode verwendet: 
+\begin{lstlisting} 
+private List<Town> GetTowns()
+{
+	return GetStringMatrix("TestOrte.csv").Select(o =>
+	new Town()
+	{
+		TownName = o[1],
+		ZipCode = o[0]
+	}
+).ToList();
+}\end{lstlisting} Die Methode 'GetStringMatrix' sucht im Projektverzeichnis nach einem File mit dem übergebenen Namen und gibt ein zweidimensionales String-Array mit den Daten zurück. Mittels Linq wird jede Zeile dieses Arrays dann in einen Ort verwandelt, dessen Postleitzahl die erste Spalte des Arrays ist und die Bezeichnung die Zweite.
+\item 'OpticianMgr.Persistence': Dieses Projekt beinhaltet die Klassen 'ApplicationDbContext', 'GenericRepository' und 'UnitOfWork'. Die beiden letzteren sind wesentliche Bestandteile des Data-Access-Layers des UnitOfWork-Patterns und deshalb im Kapitel 2.2 gut beschrieben. Die Klasse 'ApplicationDbContext' beinhaltet alle DbSets der Entitäten und den Connectionstring (Kapitel 2.1).
+\item 'OpticianMgr.Wpf': Dieses Projekt führt das Administrationsprogramm der Diplomarbeit aus. Zu den dazu notwendigen Klassen zählen in erster Linie alle Views, also alle Fenster, die der Benutzer sieht, sobald er das Programm startet. Zu jeder dieser Views wurde ein ViewModel erstellt, welches den logischen Code zur View enthält. Neben den vielen ViewModels gehören dem Projekt auch alle Ressourcen und Einstellungen an, welche zur Ausführung der WPF-Applikation notwendig sind (siehe Kapitel 3.1.7 Vorgegebene Texte bearbeiten - User-Settings, Kapitel 3.1.8 Filtern-'ResourceManager', Kapitel 3.1.8 Sortieren - Bilder der Pfeile). \newline Weiters enthält das Projekt Klassen wie den 'VieModelLocator', welcher Referenzen zu allen ViewModels zur Verfügung stellt (Kapitel 2.5).  Außerdem gibt es noch den 'SortManager', der die Sortierung der Daten übernimmt (Kapitel 3.1.8) und den 'FileCreater', welcher zur Erstellung von Word-Dokumenten notwendig ist (Kapitel 3.1.2). \newline Um neue Fenster anzuzeigen und wieder zu schließen, wurden die Klasse 'WindowService' sowie die Interfaces 'IRequestClose' und 'IWindowService' benötigt. Der WindowService enthält für jedes Fenster, das man aus dem Programm öffnen können soll, eine Methode, welche dann wiederum die generische Methode 'ShowWindow' aufruft.
+\begin{lstlisting}
+public void ShowWindow<TViewModel>(TViewModel viewModel, Window newWindow) where TViewModel : IRequestClose
+{
+	EventHandler<EventArgs> closeHandler = null;
+	closeHandler = (sender, e) =>
+	{
+		viewModel.CloseRequested -= closeHandler;
+		newWindow.Close();
+	};
+	viewModel.CloseRequested += closeHandler;
+	newWindow.DataContext = viewModel;
+	newWindow.ShowDialog();
+}
+\end{lstlisting}
+Wichtig ist dabei, dass das ViewModel vom Interface IRequestClose ableitet, damit das ViewModel das Event CloseRequested enthält. Dieses dient dazu, dass das ViewModel, welches ein weiteres Fenster öffnet, auf das Schließen des neuen Fensters reagieren kann. 
+\item 'OpticianMgr.Web': Dieses Projekt führt die Website der Diplomarbeit. Darunter fallen alle Views (Alle einzeilnen Seiten wie zum Beispiel: Herrenbrillen, Kinderbrillen, Administrationsbereich etc.) der Webseite und die dazugehörigen Style Sheets (Css).
+Außerdem die verschiedenen Controller die für die Interaktion des Benutzers mit der Anwendung und für die Steuerung der Verarbeitung zwischen Model und View sind und zuletzt noch die einzelnen Models, welche die darzustellenden Daten enthalten.
+
+\end{itemize} 

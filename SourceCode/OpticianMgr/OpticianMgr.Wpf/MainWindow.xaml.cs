@@ -24,10 +24,5 @@ namespace OpticianMgr.Wpf
         {
             InitializeComponent();
         }
-
-        private void Kunden_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new CustomerPage();
-        }
     }
 }

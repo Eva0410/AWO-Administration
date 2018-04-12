@@ -1,0 +1,88 @@
+﻿<Window x:Class="OpticianMgr.Wpf.Pages.SupplierDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:local="clr-namespace:OpticianMgr.Wpf.ViewModel"
+        Title="Lieferant " Height="650" Width="606"  ResizeMode="NoResize">
+    <StackPanel Style="{StaticResource StackPanelBackground}">
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Lieferant bearbeiten</Label>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="201"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Name:</Label>
+            <Label Grid.Column="0" Grid.Row="1">Straße:</Label>
+            <Label Grid.Column="0" Grid.Row="2">Hausnummer:</Label>
+            <Label Grid.Column="0" Grid.Row="3">Ort:</Label>
+            <Label Grid.Column="0" Grid.Row="4">Land:</Label>
+            <Label Grid.Column="0" Grid.Row="5">FAX:</Label>
+            <Label Grid.Column="0" Grid.Row="6">Telefon:</Label>
+            <Label Grid.Column="0" Grid.Row="7">Email:</Label>
+            <Label Grid.Column="0" Grid.Row="8">Kundennummer:</Label>
+            <Label Grid.Column="0" Grid.Row="9">Kontaktperson:</Label>
+            <Label Grid.Column="0" Grid.Row="10">Produkte:</Label>
+            <Label Grid.Column="0" Grid.Row="11" Grid.RowSpan="2">Sonstiges:</Label>
+            <TextBox Text="{Binding Supplier.Name, Mode=TwoWay}"  Grid.Column="1" Grid.Row="0"></TextBox>
+            <TextBox Text="{Binding Supplier.Street, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"></TextBox>
+            <TextBox Text="{Binding Supplier.HouseNumber, Mode=TwoWay}" Grid.Column="1" Grid.Row="2"></TextBox>
+            <ComboBox ItemsSource="{Binding Towns, Mode=TwoWay}" SelectedValue="{Binding Supplier.Town,Mode=TwoWay}" Grid.Column="1" Grid.Row="3">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="ZipCode" />
+                                    <Binding Path="TownName" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox ItemsSource="{Binding Countries, Mode=TwoWay}" SelectedValue="{Binding Supplier.Country, Mode=TwoWay}" Grid.Column="1" Grid.Row="4">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding CountryName, Mode=TwoWay}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox Text="{Binding Supplier.FAX, Mode=TwoWay}" Grid.Column="1" Grid.Row="5"></TextBox>
+            <TextBox Text="{Binding Supplier.Telephone, Mode=TwoWay}" Grid.Column="1" Grid.Row="6"></TextBox>
+            <TextBox Text="{Binding Supplier.Email, Mode=TwoWay}" Grid.Column="1" Grid.Row="7"></TextBox>
+            <TextBox Text="{Binding Supplier.CustomerId, Mode=TwoWay}" Grid.Column="1" Grid.Row="8"></TextBox>
+            <TextBox Text="{Binding Supplier.ContactPerson, Mode=TwoWay}" Grid.Column="1" Grid.Row="9"></TextBox>
+            <ScrollViewer Grid.Column="1" Grid.Row="10">
+                <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Supplier.Products, Mode=TwoWay}"></TextBox>
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="1" Grid.Row="11">
+                <TextBox Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding Supplier.Others, Mode=TwoWay}"></TextBox>
+            </ScrollViewer>
+            <Button Command="{Binding AddTown}" Grid.Column="2" Grid.Row="3">Neuen Ort hinzufügen</Button>
+            <Button Command="{Binding AddCountry}" Grid.Column="2" Grid.Row="4">Neues Land hinzufügen</Button>
+        </Grid>
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
+            <Button Command="{Binding Delete}">Lieferant löschen</Button>
+            <Button Command="{Binding Cancel}">Abbrechen</Button>
+            <Button Command="{Binding Submit}" >Speichern</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

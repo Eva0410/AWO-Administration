@@ -9,12 +9,22 @@ namespace OpticiatnMgr.Core.Contracts
 {
     public interface IUnitOfWork : IDisposable
     {
-        //TODO  add further repositories
-
-        IGenericRepository<TestEntity> TestRepository { get; }
+        IGenericRepository<Supplier> SupplierRepository { get; }
+        IGenericRepository<Town> TownRepository { get; }
+        IGenericRepository<Doctor> DoctorRepository { get; }
+        IGenericRepository<Order> OrderRepository { get; }
+        IGenericRepository<Glasstype> GlassTypeRepository { get; }
+        IGenericRepository<ContactLensType> ContactLensTypeRepository { get; }
+        IGenericRepository<Customer> CustomerRepository { get; }
+        IGenericRepository<EyeGlassFrame> EyeGlassFrameRepository { get; }
+        IGenericRepository<Country> CountryRepository { get; }
+        IGenericRepository<CustomMessage> MessageRepository { get; }
+        IGenericRepository<Glasses> GlassesRepository { get; }
 
         void Save();
 
         void DeleteDatabase();
+
+        int GetStatisticOfMonth(int month, int year, string orderType);
     }
 }

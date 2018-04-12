@@ -1,0 +1,438 @@
+Entity Framework
+aus Wikipedia, der freien Enzyklopädie
+Dies ist die aktuelle Version dieser Seite, zuletzt bearbeitet am 8. November 2017 um 14:04 Uhr durch Enix79 ( Diskussion | Beiträge ) (Neue Version laut Visual Studio) .
+( Unterschied ) ← Nächstältere Version | Aktuelle Version (Unterschied) | Nächstjüngere Version → (Unterschied)
+Wechseln zu: Navigation , Suche
+Eine markierte Version dieser Seite, die am 4. Dezember 2017 freigegeben wurde, basiert auf dieser Version.
+ADO.NET Entity Framework
+(bis ca. 2012) ,
+Entity Framework
+Maintainer 	GitHub
+Entwickler 	Microsoft (ursprünglich)
+Erscheinungsjahr 	2008
+Aktuelle  Version 	6.2
+(26. Oktober 2017)
+Kategorie 	ORM -Framework
+Lizenz 	Apache 2.0
+GitHub
+Entity Framework Core
+auch: EF Core
+Maintainer 	GitHub
+Entwickler 	Microsoft
+Aktuelle  Version 	1.1 [1]
+(16. November 2016 [1] )
+Kategorie 	ORM -Framework
+GitHub
+
+Entity Framework , kurz auch EF , ist ein Framework für objektrelationale Abbildung (ORM). Es wurde von Microsoft entwickelt und dient dem ORM auf .NET -Objektstrukturen. Seine erste finale Version erschien als Teil des .NET Framework 3.5 (Service Pack 1) im Jahr 2008. Damals gehörte es noch zu ADO.NET und trug den Namen ADO.NET Entity Framework . Für die folgende Version, die die Nummer 4.0 trägt und 2010 als Teil des .NET Framework 4.0 erschien, wurde das Framework deutlich erweitert. Ab der Version 4.1 wird das Framework unabhängig vom .NET Framework entwickelt. Etwa seit dem Jahr 2012, in dem die Version 5.0 erschien und Microsoft das Framework quelloffen verfügbar machte, heißt es Entity Framework . Ab der Version 6.0, die 2013 erschien, gehört das Framework nicht mehr zum .NET Framework. [2] [3]
+
+Einhergehend mit .NET Core gibt es seit 2016 das separate Framework Entity Framework Core , das auch EF Core genannt wird.
+Inhaltsverzeichnis
+ [ Verbergen ] 
+
+    1 Modellieransätze
+    2 Architektur
+    3 Verwendung
+        3.1 Erstellen eines Mappings mit CodeFirst
+        3.2 Datenbank-Initialisierung
+        3.3 Hinzufügen von Entities
+        3.4 Abfrage von Daten
+            3.4.1 Lazy, Eager und Explicit Loading
+        3.5 Delete Entities
+        3.6 Vorkompilierte Abfragen
+        3.7 Transaktionen
+        3.8 Code First Migrations
+    4 Literatur
+    5 Weblinks
+    6 Referenzen
+
+Modellieransätze [ Bearbeiten | Quelltext bearbeiten ]
+Entity Framework Modellieransätze   	Code First 	Model First
+Keine Datenbank vorhanden 	Bestehende Klassen werden mit Annotationen ( Table , Column ) ausgezeichnet, welche die Abbildung auf eine Datenbank steuern. Darauf aufbauend werden vom DbContext die Datenbank und die Datenbank-Tabellen modelliert und beim Aufruf der SaveChanges() -Methode erstellt. 	Die Entity-Klassen werden mit einem grafischen Designer modelliert. Das Modell wird einerseits mit Hilfe des Text Template Transformation Toolkit (T4) und der zugehörigen T4-Skriptsprache in Entity-Klassen umgewandelt. Zudem erlaubt es der Designer, ein SQL-Skript zu erstellen, mit dem die Datenbank erstellt wird.
+Verwendung einer bestehenden Datenbank 	Die Entity-Klassen können entsprechend der vorgegebenen Datenbank manuell erstellt, modelliert und ausgezeichnet werden. Dies ist jedoch sehr arbeitsintensiv. 	Mit Hilfe eines Assistenten wird die Datenbank abgefragt und entsprechend der Datenbankstruktur ein passendes Modell erstellt. Dieses wird mit einem T4-Skript in die entsprechenden Klassen umgewandelt.
+Architektur [ Bearbeiten | Quelltext bearbeiten ]
+Prinzipielle Funktionsweise des ADO.NET Entity Framework
+Überblick über wichtige ADO.NET Entity Framework Objekte DbContext API [EF4 1] (EF5) 	EF4 	Aufgabe
+DbContext 	ObjectContext 	Stellt eine Verbindung mit der Datenbank dar. Stellt Methoden für Abfragen ( Query ), Änderungsverfolgung ( Tracking ) und Speichern ( Save ) bereit.
+DbQuery 	ObjectQuery 	Stellt Methoden für das Hinzufügen ( Add ), Anhängen ( Attach ) und Entfernen ( Remove ) von Entitäten bereit.
+DbSet 	ObjectSet 	Erbt von DbQuery/ObjectQuery und stellt die entsprechenden Methoden für Entity-Typen bereit.
+Change Tracker API 	ObjectContext.ObjectStateManager 	Bietet Methoden, um Änderungen verfolgen zu können. Hierzu gehört das Abfragen des ursprünglichen und des derzeitigen Zustands von Entitäten.
+Validation API 	— 	Automatische Validierung der Daten im DataLayer.
+Code First Model Building 	— 	Reflektiert über Code-basierte Klassen, um für diese passende Datenbankobjekte und die zugehörigen Metadaten im Arbeitsspeicher und der Datenbank zu erstellen.
+
+    Hochspringen ↑ Während das EF5 standardmäßig die Db-Klassen verwendet, wird im EF4 ein entsprechendes T4-Template (EF4.x DbContext Generator) benötigt.
+
+Verwendung [ Bearbeiten | Quelltext bearbeiten ]
+Erstellen eines Mappings mit CodeFirst [ Bearbeiten | Quelltext bearbeiten ]
+
+  public  class  MyDbEntities  :  DbContext 
+{ 
+   public  IDbSet < Person >  Persons  {  get ;  set ;  } 
+
+   // Fluent Configurations 
+   protected  override  void  OnModelCreating ( DbModelBuilder  modelBuilder ) 
+   { 
+      modelBuilder . Entity < Person >(). ToTable ( "People" ); 
+      modelBuilder . Entity < Person >(). Property ( p  =>  p . FirstName ). IsRequired (); 
+      // ... 
+   } 
+} 
+
+
+[Table("People")] 
+public  class  Person 
+{ 
+[Key] 
+[Column("PersonId")] 
+   public  int  Id  {  get ;  set ;  } 
+
+[Required] 
+[MaxLength(255)] 
+   public  string  FirstName  {  get ;  set ;  } 
+
+[Required] 
+[MaxLength(255)] 
+   public  string  LastName  {  get ;  set ;  } 
+
+   // ... 
+} 
+
+Datenbank-Initialisierung [ Bearbeiten | Quelltext bearbeiten ]
+
+Die Datenbank wird im Entity Framework durch einen Initializer angelegt. Dieser wird ausgeführt, wenn das erste Entity dem Datenbankkontext hinzugefügt wird. [4]
+
+  // setze initialisierer 
+Database . SetInitializer ( new  DropCreateDatabaseAlways < MyDbEntities >()); 
+
+using ( var  context  =  new  MyDbEntities ()) 
+{ 
+    var  person  =  new  Person (){ 
+        FirstName  =  "William" , 
+        LastName  =  "Adama" , 
+        DateOfBirth  =  DateTime . Now 
+    }; 
+
+   context . Persons . Add ( person );  // Datenbank-Initialisierer wird ausgeführt 
+   context . SaveChanges (); 
+} 
+
+In ASP.NET MVC Projekten kann das InitializeSimpleMembership -Attribut eingesetzt werden, um eine Initialisierung der Datenbank zu gewährleisten. [5]
+Hinzufügen von Entities [ Bearbeiten | Quelltext bearbeiten ]
+
+  using ( var  context  =  new  MyDbEntities ()) 
+{ 
+    // Erstelle zwei Personen-Entities 
+    var  person1  =  new  Person (){ 
+        FirstName  =  "William" , 
+        LastName  =  "Adama" , 
+        DateOfBirth  =  DateTime . Now 
+    }; 
+    var  person2  =  new  Person (){ 
+        FirstName  =  "Laura" , 
+        LastName  =  "Roslin" , 
+        DateOfBirth  =  DateTime . Now 
+    }; 
+    // Erstelle ein Adressen-Entity 
+    var  address  =  new  Address (){ 
+        Street  =  "Market Street 70" , 
+        City  =  "Philadelphia" , 
+        State  =  "PA" , 
+        Zip  =  "12345" 
+    }; 
+
+    // Erste Variante 
+    context . Persons . Add ( person1 ); 
+
+    // Zweite Variante 
+    // mit dem Kontext verlinken und als hinzugefügt markieren. 
+    context . Entry ( person2 ). State  =  EntityState . Added ; 
+
+    // Dritte Variante 
+    // Das Entity wird an ein bereits vom Kontext beobachtetes Entity gehängt 
+    person1 . Address . Add ( address ); 
+
+    // Speichere Änderungen am Kontext in der Datenbank 
+    context . SaveChanges (); 
+} 
+
+Abfrage von Daten [ Bearbeiten | Quelltext bearbeiten ]
+
+Abfragen aller Daten aus einem Datensatz:
+
+  using ( var  context  =  new  MyDbEntities ()) 
+{ 
+    foreach ( var  person  in  context . Persons )  // entspricht SELECT * FROM [Persons] 
+    { 
+       // führt zusätzliche SQL-Abfragen an die Adresses-Tabelle 
+       // mit einem entsprechenden JOIN aus 
+       foreach ( var  address  in  person . Adresses ) 
+       { 
+           // ... 
+       } 
+    } 
+} 
+
+Um zu verhindern, dass dieselbe Datenbankabfrage mehrfach ausgeführt wird, kann die ToList() -Methode verwendet werden:
+
+  using ( var  context  =  new  MyDbEntities ()) 
+{ 
+    var  persons  =  context . Persons ; 
+
+    // Datenbankabfrage wird ausgeführt und als Liste zurückgegeben 
+    var  allPersons  =  persons . ToList (); 
+
+    // Keine weitere Datenbankabfragen durch Verwendung der Liste 
+    foreach ( var  person  in  allPersons )  {  /* ... */  } 
+    foreach ( var  person  in  allPersons )  {  /* ... */  } 
+} 
+
+Sucht ein bestimmtes Objekt in der Datenbank:
+
+  var  person  =  context . Persons . SingleOrDefault ( p  =>  p . PersonId  ==  personId ); 
+
+oder in Comprehension Syntax:
+
+  var  person  =  ( from  p  in  context . Persons 
+              where  p . PersonId  ==  personId 
+              select  p ). SingleOrDefault (); 
+
+LINQ Selectors Methode 	Ergebnis
+Single() 	Gibt das eine Element zurück, welches die Anfrage liefert. Wirft eine Exception, falls keine oder mehrere Ergebnisse zurückgeliefert werden.
+SingleOrDefault() 	Gibt das eine Element zurück, welches die Anfrage liefert. Gibt null zurück, falls keine Ergebnisse geliefert werden. Wirft eine Exception, falls mehrere Ergebnisse zurückgeliefert werden.
+First() 	Gibt das erste Element zurück, falls die Anfrage ein oder mehrere Ergebnisse liefert. Wirft eine Exception, falls keine Ergebnisse zurückgeliefert werden.
+FirstOrDefault() 	Gibt das erste Element zurück, falls die Anfrage ein oder mehrere Ergebnisse liefert. Gibt null zurück, falls keine Ergebnisse zurückgeliefert werden.
+
+Bei Db-Objekten steht zudem die Find() -Methode bereit. Diese sucht das Objekt zuerst im Arbeitsspeicher und macht eine Datenbankabfrage, falls das Objekt nicht im Speicher gefunden wird:
+
+  var  person  =  context . Persons . Find ( personId ); 
+
+Lazy, Eager und Explicit Loading [ Bearbeiten | Quelltext bearbeiten ]
+
+Das Entity Framework verwendet im Normalfall das lazy loading , bei dem Daten aus der Datenbank dann geladen werden, wenn die Daten abgefragt werden:
+
+  // lazy loading 
+// nur die Personen werden abgefragt und geladen 
+var  persons  =  context . Peoples ; 
+
+Falls weitere Daten mit geladen werden müssen, wird das eager loading verwendet:
+
+  // eager loading 
+// Adressen werden bereits bei der Abfrage der Personen geladen 
+var  persons  =  context . Peoples . Include ( "Addresses" ); 
+
+  // LINQ-to-Entities Beispiel für eager loading 
+var  persons  =  context . Peoples . Include ( "Addresses" ). Where ( p  =>  p . FirstName  ==  fname ); 
+
+oder typsicher ab EF5:
+
+  // LINQ-to-Entities Beispiel für eager loading 
+var  persons  =  context . Peoples . Include ( p  =>  p . Addresses ). Where ( p  =>  p . FirstName  ==  fname ); 
+
+Das explizite Laden ( explicit loading ) der Daten ist ähnlich dem lazy loading , erlaubt jedoch das Laden der Navigationseigenschaften ( navigation properties ).
+
+  // explicit loading 
+var  persons  =  context . Peoples ;  // wie lazy loading; Adressen werden nicht mitgeladen 
+foreach ( var  person  in  persons ) 
+{ 
+    person . Addresses . Load ();  // explicit loading; navigation properties für Adressen werden geladen 
+    foreach ( var  address  in  person . Addresses ) 
+    { 
+        // ... 
+    } 
+} 
+
+Delete Entities [ Bearbeiten | Quelltext bearbeiten ]
+
+Löschen eines Entities im Entity Framework 4:
+
+  using ( var  context  =  new  MyDbEntities ()) 
+{ 
+    // Abfrage eines Entities aus der Datenbank 
+    var  person  =  context . Persons . SingleOrDefault ( p  =>  p . Id  ==  id ); 
+    if ( person  ==  null ) 
+       return ; 
+
+    context . Persons . DeleteObject ( person ); 
+    context . SaveChanges (); 
+} 
+
+Löschen eines Entities im Entity Framework 5:
+
+  using ( var  context  =  new  MyDbEntities ()) 
+{ 
+    // Abfrage eines Entities aus der Datenbank 
+    var  person  =  ( for  p  in  context . Persons . SingleOrDefault ( p  =>  p . Id  ==  id ); 
+
+    if ( person  ==  null ) 
+        return ; 
+
+    context . Entry ( person ). State  =  EntityState . Deleted ;  // Entity zur Löschung markieren 
+    context . SaveChanges ();  // Entity in der Datenbank löschen 
+} 
+
+Vorkompilierte Abfragen [ Bearbeiten | Quelltext bearbeiten ]
+
+Datenbankanfragen werden vom Entity Framework in für die Datenbankschnittstelle passende Anfragen kompiliert. Dieser Vorgang kostet jedoch Zeit, weshalb kompilierte Anfragen – sofern diese erneut benötigt werden – nicht verworfen, sondern in einem Objekt gespeichert und später wiederverwendet werden sollten.
+
+Um bei der ersten Verwendung einer Abfrage mit dem Entity Framework 4 Zeit zu sparen, können Abfragen vorkompiliert werden.
+
+  static  Func < MyDbEntities ,  int ,  ObjectQuery < Person >>  QueryContactById  =  
+    CompiledQuery . Compile < MyDbEntities ,  int ,  IQueryable < Person >>(  ( context ,  personId )  =>  context . Persons . Select ( p  =>  p . Id  ==  personId )  ); 
+
+Im Entity Framework 5 werden Abfragen automatisch bei der Erstellung vorkompiliert.
+Transaktionen [ Bearbeiten | Quelltext bearbeiten ]
+
+  using  ( var  context  =  new  MyDbEntities ()) 
+{ 
+    using  ( var  scope  =  new  TransactionScope ()) 
+    { 
+        // Der TransactionScope sucht den neuesten Context auf dem 
+        // Stacktrace und verlinkt sich automatisch mit diesem 
+        try 
+        { 
+            // Bearbeitung von Entities 
+
+            context . SaveChanges ();  // speichern der Änderungen in der Datenbank 
+            scope . Complete ();  // Transaktion wird abgeschlossen 
+        } 
+        catch  ( InvalidOperationException  e ) 
+        { 
+            // Transaktion fehlgeschlagen 
+        } 
+    }  // scope.Dispose() 
+}  // context.Dispose() 
+
+Code First Migrations [ Bearbeiten | Quelltext bearbeiten ]
+
+Code First Migrations ist eine Reihe von Powershell - Skripten , welche die Datenbankmigration erleichtern.
+
+    Enable-Migrations
+
+        erstellt ein Migrations-Skript
+
+    Add-Migration
+
+        Erstelle ein Skript zur Herstellung der aktuellen Datenbankstruktur
+
+    Update-Database
+
+        Bringt die Datenbankstruktur auf einen bestimmten Zustand. Standardmäßig wird das neueste Migrationsskript verwendet.
+
+
+Literatur [ Bearbeiten | Quelltext bearbeiten ]
+
+    Andrew Troelsen: Pro C# 5.0 and the .Net 4.5 Framework . Springer, 2012, ISBN 978-1-4302-4233-8 , S.   1560.  
+    Julia Lerman, Rowan Miller: Programming Entity Framework: DbContext; Querying, Changing, and Validating Your Data with Entity Framework . O’Reilly Media , 2012, ISBN 978-1-4493-1296-1 , S.   258.  
+    Julia Lerman, Rowan Miller: Programming Entity Framework: Code First; Creating and Configuring Data Models from Your Classes . O’Reilly Media, 2012, ISBN 978-1-4493-1294-7 , S.   194.  
+
+Weblinks [ Bearbeiten | Quelltext bearbeiten ]
+
+    Microsoft .NET Entity Framework. In: CodePlex. Microsoft; abgerufen am 12. März 2015 (englisch, Projektseite mit Quellcode des Entity Frameworks).  
+    Entity Framework Tutorial. Abgerufen am 12. März 2015 (englisch).  
+    Entity Framework Grundlagen Video. Abgerufen am 15. März 2015 .  
+    Performance Considerations for Entity Framework 5. Abgerufen am 11. November 2012 (englisch).  
+    Get Started with Entity Framework (EF). In: Data Developer Center. Microsoft ; abgerufen am 12. November 2012 (englisch).  
+    Entity Framework Power Tools. In: Data Developer Center. Microsoft; abgerufen am 30. März 2013 (englisch).  
+
+Referenzen [ Bearbeiten | Quelltext bearbeiten ]
+
+    ↑ Hochspringen nach: a b Announcing Entity Framework Core 1.1 , abgerufen am 21. Nov. 2016
+    Hochspringen ↑ Holger Schwichtenberg: Microsoft stellt OR-Mapper von .NET quelloffen zur Verfügung , in: heise online vom 19. Juli 2012, abgerufen am 7. Dez. 2015
+    Hochspringen ↑ Holger Schwichtenberg: Asynchrone Datenbankzugriffe mit Microsofts Entity Framework 6.0 , in: heise online vom 18. Okt. 2013, abgerufen am 7. Dez. 2015
+    Hochspringen ↑ Bipin Joshi: Understanding Database Initializers in Entity Framework Code First. 10. Februar 2012; abgerufen am 10. Juni 2014 (englisch).  
+    Hochspringen ↑ Rick Anderson: InitializeSimpleMembership Attribute and SimpleMembership Exceptions. In: MSDN Blog. Microsoft, 15. August 2012; abgerufen am 10. Juni 2014 (englisch).  
+
+Abgerufen von „ https://de.wikipedia.org/w/index.php?title=Entity_Framework&oldid=170788827 “
+Kategorien :
+
+    .NET
+    Datenbankschnittstelle
+
+Navigationsmenü
+Meine Werkzeuge
+
+    Nicht angemeldet
+    Diskussionsseite
+    Beiträge
+    Benutzerkonto erstellen
+    Anmelden
+
+Namensräume
+
+    Artikel
+    Diskussion
+
+Varianten
+
+Ansichten
+
+    Lesen
+    Bearbeiten
+    Quelltext bearbeiten
+    Versionsgeschichte
+
+Mehr
+
+Suche
+Navigation
+
+    Hauptseite
+    Themenportale
+    Von A bis Z
+    Zufälliger Artikel
+
+Mitmachen
+
+    Artikel verbessern
+    Neuen Artikel anlegen
+    Autorenportal
+    Hilfe
+    Letzte Änderungen
+    Kontakt
+    Spenden
+
+Werkzeuge
+
+    Links auf diese Seite
+    Änderungen an verlinkten Seiten
+    Spezialseiten
+    Permanenter Link
+    Seiten­informationen
+    Wikidata-Datenobjekt
+    Artikel zitieren
+
+Drucken/­exportieren
+
+    Buch erstellen
+    Als PDF herunterladen
+    Druckversion
+
+In anderen Sprachen
+
+    English
+    Español
+    فارسی
+    Magyar
+    日本語
+    Português
+    Русский
+    中文
+
+Links bearbeiten
+
+    Diese Seite wurde zuletzt am 8. November 2017 um 14:04 Uhr bearbeitet.
+    Abrufstatistik
+
+    Der Text ist unter der Lizenz „Creative Commons Attribution/Share Alike“ verfügbar; Informationen zu den Urhebern und zum Lizenzstatus eingebundener Mediendateien (etwa Bilder oder Videos) können im Regelfall durch Anklicken dieser abgerufen werden. Möglicherweise unterliegen die Inhalte jeweils zusätzlichen Bedingungen. Durch die Nutzung dieser Website erklären Sie sich mit den Nutzungsbedingungen und der Datenschutzrichtlinie einverstanden.
+    Wikipedia® ist eine eingetragene Marke der Wikimedia Foundation Inc.
+
+    Datenschutz
+    Über Wikipedia
+    Impressum
+    Entwickler
+    Stellungnahme zu Cookies
+    Mobile Ansicht
+
+    Wikimedia Foundation
+    Powered by MediaWiki
+

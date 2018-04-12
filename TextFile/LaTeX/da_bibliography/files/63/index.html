@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr" class="client-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;oldid=170788827">
+<meta name="wpd_url" content="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;oldid=170788827">
+<meta name="wpd_date" content="2017-11-30T11:16Z">
+
+<meta charset="UTF-8">
+<title>Entity Framework – Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Entity_Framework","wgTitle":"Entity Framework","wgCurRevisionId":170788827,"wgRevisionId":170788827,"wgArticleId":7368974,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[".NET","Datenbankschnittstelle"],"wgBreakFrames":false,"wgPageContentLanguage":"de","wgPageContentModel":"wikitext","wgSeparatorTransformTable":[",\t.",".\t,"],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],"wgMonthNamesShort":["","Jan.","Feb.","Mär.","Apr.","Mai","Jun.","Jul.","Aug.","Sep.","Okt.","Nov.","Dez."],"wgRelevantPageName":"Entity_Framework","wgRelevantArticleId":7368974,"wgRequestId":"Wkd1bApAICoAALWQiBUAAACJ","wgIsProbablyEditable":true,"wgRelevantPageIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{"accuracy":{"levels":1,"quality":2,"pristine":4}}},"wgStableRevisionId":170788827,"wgWikiEditorEnabledModules":{"toolbar":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgPopupsShouldSendModuleToUser":true,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"de","pageLanguageDir":"ltr","pageVariantFallbacks":"de","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"de","wgMFExpandAllSectionsUserOption":false,"wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"Deutsch","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q851939","wgCentralAuthMobileDomain":false,"wgCodeMirrorEnabled":false,"wgVisualEditorToolbarScrollOffset":0,"wgVisualEditorUnsupportedEditParams":["undo","undoafter","veswitched"],"wgEditSubmitButtonLabelPublish":true});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.math.styles":"ready","ext.cite.styles":"ready","ext.pygments":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","ext.flaggedRevs.basic":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@18yzhtg",function($,jQuery,require,module){mw.user.options.set({"variant":"de"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/
+
+});mw.loader.load(["ext.math.scripts","ext.cite.a11y","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.gadget.WikiMiniAtlas","ext.gadget.OpenStreetMap","ext.gadget.CommonsDirekt","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.popups","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.compactlinks","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","ext.flaggedRevs.advanced","skins.vector.js"]);});</script>
+
+<script async="" src="load.php"></script>
+<meta name="ResourceLoaderDynamicStyles" content="">
+
+<meta name="generator" content="MediaWiki 1.31.0-wmf.12">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="robots" content="noindex,nofollow">
+<link rel="alternate" type="application/x-wiki" title="Seite bearbeiten" href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit">
+<link rel="edit" title="Seite bearbeiten" href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit">
+<link rel="apple-touch-icon" href="https://de.wikipedia.org/static/apple-touch/wikipedia.png">
+<link rel="shortcut icon" href="wikipedia.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://de.wikipedia.org/w/opensearch_desc.php" title="Wikipedia (de)">
+<link rel="EditURI" type="application/rsd+xml" href="https://de.wikipedia.org/w/api.php?action=rsd">
+<link rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">
+<link rel="alternate" type="application/atom+xml" title="Atom-Feed für „Wikipedia“" href="https://de.wikipedia.org/w/index.php?title=Spezial:Letzte_%C3%84nderungen&amp;feed=atom">
+<link rel="canonical" href="https://de.wikipedia.org/wiki/Entity_Framework">
+<link rel="dns-prefetch" href="https://login.wikimedia.org/">
+<link rel="dns-prefetch" href="https://meta.wikimedia.org/">
+<!--[if lt IE 9]><script src="/w/load.php?debug=false&amp;lang=de&amp;modules=html5shiv&amp;only=scripts&amp;skin=vector&amp;sync=1"></script><![endif]-->
+<script src="load_001.php"></script>
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body class="mediawiki ltr sitedir-ltr capitalize-all-nouns mw-hide-empty-elt ns-0 ns-subject page-Entity_Framework rootpage-Entity_Framework skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="siteNotice" class="mw-body-content"><!-- CentralNotice --></div><div class="mw-indicators mw-body-content">
+</div>
+<h1 id="firstHeading" class="firstHeading" lang="de">Entity Framework</h1>			<div id="bodyContent" class="mw-body-content">
+				<div id="siteSub" class="noprint">aus Wikipedia, der freien Enzyklopädie</div>				<div id="contentSub"><div class="mw-revision"><div id="mw-revision-info-current">Dies ist die <a href="https://de.wikipedia.org/wiki/Hilfe:Versionen" title="Hilfe:Versionen">aktuelle Version</a> dieser Seite, zuletzt bearbeitet am 8. November 2017 um 14:04 Uhr durch <a href="https://de.wikipedia.org/w/index.php?title=Benutzer:Enix79&amp;action=edit&amp;redlink=1" class="new mw-userlink" title="Benutzer:Enix79 (Seite nicht vorhanden)"><bdi>Enix79</bdi></a> <span class="mw-usertoollinks">(<a href="https://de.wikipedia.org/w/index.php?title=Benutzer_Diskussion:Enix79&amp;action=edit&amp;redlink=1" class="new mw-usertoollinks-talk" title="Benutzer Diskussion:Enix79 (Seite nicht vorhanden)">Diskussion</a> | <a href="https://de.wikipedia.org/wiki/Spezial:Beitr%C3%A4ge/Enix79" class="mw-usertoollinks-contribs" title="Spezial:Beiträge/Enix79">Beiträge</a>)</span> <span class="comment">(Neue Version laut Visual Studio)</span>.</div><div id="mw-revision-nav">(<a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;diff=prev&amp;oldid=170788827" title="Entity Framework">Unterschied</a>) <a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;direction=prev&amp;oldid=170788827" title="Entity Framework">← Nächstältere Version</a> | Aktuelle Version (Unterschied) | Nächstjüngere Version → (Unterschied)</div></div></div>
+								<div id="jump-to-nav" class="mw-jump">
+
+					Wechseln zu:					<a href="#mw-head">Navigation</a>, 					<a href="#p-search">Suche</a>
+				</div>
+				<div id="mw-content-text" dir="ltr" class="mw-content-ltr" lang="de"><div id="mw-fr-revisiontag-old" class="flaggedrevs_notice plainlinks noprint">Eine <a class="external text" href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;stableid=170788827">markierte Version</a> dieser Seite, die am <i>4. Dezember 2017</i> <a class="external text" href="https://de.wikipedia.org/w/index.php?title=Spezial:Logbuch&amp;type=review&amp;page=Entity_Framework">freigegeben</a> wurde, basiert auf dieser Version.</div><div class="mw-parser-output"><table class="float-right infobox toccolours toptextcells" style="border-spacing: 5px; font-size: 90%; text-align: left; width: 21em;">
+
+<tbody><tr>
+<th class="hintergrundfarbe6" colspan="2" style="font-size: 105%; text-align: center;"> ADO.NET Entity Framework<br><small>(bis ca. 2012)</small>,<br>Entity Framework
+</th></tr>
+
+
+
+
+<tr>
+<td> <b><a href="https://de.wikipedia.org/wiki/Maintainer" title="Maintainer">Maintainer</a></b>
+</td>
+<td> <a href="https://de.wikipedia.org/wiki/GitHub" title="GitHub">GitHub</a>
+</td></tr>
+<tr>
+<td> <b><a href="https://de.wikipedia.org/wiki/Softwareentwickler" title="Softwareentwickler">Entwickler</a></b>
+</td>
+<td> <a href="https://de.wikipedia.org/wiki/Microsoft" title="Microsoft">Microsoft</a> <small>(ursprünglich)</small>
+</td></tr>
+<tr>
+<td> <b>Erscheinungsjahr</b>
+</td>
+<td> 2008
+</td></tr>
+<tr>
+<td> <b>Aktuelle&nbsp;<a href="https://de.wikipedia.org/wiki/Version_(Software)" title="Version (Software)">Version</a></b>
+</td>
+<td> 6.2 <br>(26. Oktober 2017)
+</td></tr>
+
+
+
+
+
+
+<tr>
+<td> <b>Kategorie</b>
+</td>
+<td> <a href="https://de.wikipedia.org/wiki/Objektrelationale_Abbildung" title="Objektrelationale Abbildung">ORM</a>-Framework
+</td></tr>
+<tr>
+<td> <b>Lizenz</b>
+</td>
+<td> <a href="https://de.wikipedia.org/wiki/Apache-Lizenz" title="Apache-Lizenz">Apache 2.0</a>
+</td></tr>
+
+
+
+
+<tr>
+<td class="hintergrundfarbe5" colspan="2" style="text-align: center;"> <a rel="nofollow" class="external text" href="https://github.com/aspnet/EntityFramework6">GitHub</a>
+</td></tr>
+
+</tbody></table>
+<table class="float-right infobox toccolours toptextcells" style="border-spacing: 5px; font-size: 90%; text-align: left; width: 21em;">
+
+<tbody><tr>
+<th class="hintergrundfarbe6" colspan="2" style="font-size: 105%; text-align: center;"> Entity Framework Core<br><small>auch:</small> EF Core
+</th></tr>
+
+
+
+
+<tr>
+<td> <b><a href="https://de.wikipedia.org/wiki/Maintainer" title="Maintainer">Maintainer</a></b>
+</td>
+<td> <a href="https://de.wikipedia.org/wiki/GitHub" title="GitHub">GitHub</a>
+</td></tr>
+<tr>
+<td> <b><a href="https://de.wikipedia.org/wiki/Softwareentwickler" title="Softwareentwickler">Entwickler</a></b>
+</td>
+<td> <a href="https://de.wikipedia.org/wiki/Microsoft" title="Microsoft">Microsoft</a>
+</td></tr>
+
+
+<tr>
+<td> <b>Aktuelle&nbsp;<a href="https://de.wikipedia.org/wiki/Version_(Software)" title="Version (Software)">Version</a></b>
+</td>
+<td> 1.1<sup id="cite_ref-efcore11_1-0" class="reference"><a href="#cite_note-efcore11-1">[1]</a></sup> <br>(16.&nbsp;November 2016<sup id="cite_ref-efcore11_1-1" class="reference"><a href="#cite_note-efcore11-1">[1]</a></sup>)
+</td></tr>
+
+
+
+
+
+
+<tr>
+<td> <b>Kategorie</b>
+</td>
+<td> <a href="https://de.wikipedia.org/wiki/Objektrelationale_Abbildung" title="Objektrelationale Abbildung">ORM</a>-Framework
+</td></tr>
+
+
+
+
+
+
+<tr>
+<td class="hintergrundfarbe5" colspan="2" style="text-align: center;"> <a rel="nofollow" class="external text" href="https://github.com/aspnet/EntityFramework">GitHub</a>
+</td></tr>
+
+</tbody></table>
+<p><b>Entity Framework</b>, kurz auch <b>EF</b>, ist ein <a href="https://de.wikipedia.org/wiki/Framework" title="Framework">Framework</a> für <a href="https://de.wikipedia.org/wiki/Objektrelationale_Abbildung" title="Objektrelationale Abbildung">objektrelationale Abbildung</a> (ORM). Es wurde von <a href="https://de.wikipedia.org/wiki/Microsoft" title="Microsoft">Microsoft</a> entwickelt und dient dem ORM auf <a href="https://de.wikipedia.org/wiki/.NET" title=".NET">.NET</a>-Objektstrukturen. Seine erste finale Version erschien als Teil des <a href="https://de.wikipedia.org/wiki/.NET_Framework" title=".NET Framework">.NET Framework</a> 3.5 (Service Pack 1) im Jahr 2008. Damals gehörte es noch zu <a href="https://de.wikipedia.org/wiki/ADO.NET" title="ADO.NET">ADO.NET</a> und trug den Namen <b>ADO.NET Entity Framework</b>. Für die folgende Version, die die Nummer 4.0 trägt und 2010 als Teil des .NET Framework 4.0 erschien, wurde das Framework deutlich erweitert. Ab der Version 4.1 wird das Framework unabhängig vom .NET Framework entwickelt. Etwa seit dem Jahr 2012, in dem die Version 5.0 erschien und Microsoft das Framework <a href="https://de.wikipedia.org/wiki/Quelloffen" class="mw-redirect" title="Quelloffen">quelloffen</a> verfügbar machte, heißt es <i>Entity Framework</i>. Ab der Version 6.0, die 2013 erschien, gehört das Framework nicht mehr zum .NET Framework.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[2]</a></sup><sup id="cite_ref-3" class="reference"><a href="#cite_note-3">[3]</a></sup>
+</p><p>Einhergehend mit <a href="https://de.wikipedia.org/wiki/.NET_Core" title=".NET Core">.NET Core</a> gibt es seit 2016 das separate Framework <b>Entity Framework Core</b>, das auch <b>EF Core</b> genannt wird.
+</p>
+<div id="toc" class="toc"><div class="toctitle"><h2>Inhaltsverzeichnis</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Modellieransätze"><span class="tocnumber">1</span> <span class="toctext">Modellieransätze</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Architektur"><span class="tocnumber">2</span> <span class="toctext">Architektur</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Verwendung"><span class="tocnumber">3</span> <span class="toctext">Verwendung</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Erstellen_eines_Mappings_mit_CodeFirst"><span class="tocnumber">3.1</span> <span class="toctext">Erstellen eines Mappings mit CodeFirst</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Datenbank-Initialisierung"><span class="tocnumber">3.2</span> <span class="toctext">Datenbank-Initialisierung</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Hinzufügen_von_Entities"><span class="tocnumber">3.3</span> <span class="toctext">Hinzufügen von Entities</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Abfrage_von_Daten"><span class="tocnumber">3.4</span> <span class="toctext">Abfrage von Daten</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="#Lazy,_Eager_und_Explicit_Loading"><span class="tocnumber">3.4.1</span> <span class="toctext">Lazy, Eager und Explicit Loading</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-9"><a href="#Delete_Entities"><span class="tocnumber">3.5</span> <span class="toctext">Delete Entities</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Vorkompilierte_Abfragen"><span class="tocnumber">3.6</span> <span class="toctext">Vorkompilierte Abfragen</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#Transaktionen"><span class="tocnumber">3.7</span> <span class="toctext">Transaktionen</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Code_First_Migrations"><span class="tocnumber">3.8</span> <span class="toctext">Code First Migrations</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-13"><a href="#Literatur"><span class="tocnumber">4</span> <span class="toctext">Literatur</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="#Weblinks"><span class="tocnumber">5</span> <span class="toctext">Weblinks</span></a></li>
+<li class="toclevel-1 tocsection-15"><a href="#Referenzen"><span class="tocnumber">6</span> <span class="toctext">Referenzen</span></a></li>
+</ul>
+</div>
+
+<h2><span id="Modellierans.C3.A4tze"></span><span class="mw-headline" id="Modellieransätze">Modellieransätze</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=1" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Modellieransätze">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=1" title="Abschnitt bearbeiten: Modellieransätze">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table class="wikitable">
+<caption> Entity Framework Modellieransätze
+</caption>
+<tbody><tr>
+<th> &nbsp; </th>
+<th> Code First </th>
+<th> Model First
+</th></tr>
+<tr>
+<th> Keine Datenbank vorhanden
+</th>
+<td> Bestehende Klassen werden mit Annotationen (<code>Table</code>, <code>Column</code>) ausgezeichnet, welche die Abbildung auf eine Datenbank steuern. Darauf aufbauend werden vom DbContext die Datenbank und die Datenbank-Tabellen modelliert und beim Aufruf der <code>SaveChanges()</code>-Methode erstellt.
+</td>
+<td> Die Entity-Klassen werden mit einem grafischen Designer modelliert. Das Modell wird einerseits mit Hilfe des <i><span lang="en">Text Template Transformation Toolkit</span></i> (T4) und der zugehörigen T4-Skriptsprache in Entity-Klassen umgewandelt. Zudem erlaubt es der Designer, ein SQL-Skript zu erstellen, mit dem die Datenbank erstellt wird.
+</td></tr>
+<tr>
+<th> Verwendung einer bestehenden Datenbank
+</th>
+<td> Die Entity-Klassen können entsprechend der vorgegebenen Datenbank manuell erstellt, modelliert und ausgezeichnet werden. Dies ist jedoch sehr arbeitsintensiv.
+</td>
+<td> Mit Hilfe eines Assistenten wird die Datenbank abgefragt und entsprechend der Datenbankstruktur ein passendes Modell erstellt. Dieses wird mit einem T4-Skript in die entsprechenden Klassen umgewandelt.
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Architektur">Architektur</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=2" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Architektur">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=2" title="Abschnitt bearbeiten: Architektur">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="thumb tright"><div class="thumbinner" style="width: 402px;"><a href="https://de.wikipedia.org/wiki/Datei:ADO.NET_EF.svg" class="image"><img alt="" src="400px-ADO.NET_EF.svg.png" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/57/ADO.NET_EF.svg/600px-ADO.NET_EF.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/5/57/ADO.NET_EF.svg/800px-ADO.NET_EF.svg.png 2x" data-file-width="762" data-file-height="425" height="223" width="400"></a>  <div class="thumbcaption"><div class="magnify"><a href="https://de.wikipedia.org/wiki/Datei:ADO.NET_EF.svg" class="internal" title="vergrößern und Informationen zum Bild anzeigen"></a></div>Prinzipielle Funktionsweise des ADO.NET Entity Framework</div></div></div>
+<table class="wikitable">
+<caption> Überblick über wichtige ADO.NET Entity Framework Objekte
+</caption>
+<tbody><tr>
+<th> DbContext API<sup id="cite_ref-4" class="reference"><a href="#cite_note-4">[EF4 1]</a></sup> (EF5) </th>
+<th> EF4 </th>
+<th> Aufgabe
+</th></tr>
+<tr>
+<td> DbContext </td>
+<td> ObjectContext </td>
+<td> Stellt eine Verbindung mit der Datenbank dar. Stellt Methoden für Abfragen (<span lang="en">Query</span>), Änderungsverfolgung (<span lang="en">Tracking</span>) und Speichern (<span lang="en">Save</span>) bereit.
+</td></tr>
+<tr>
+<td> DbQuery </td>
+<td> ObjectQuery </td>
+<td> Stellt Methoden für das Hinzufügen (<span lang="en">Add</span>), Anhängen (<span lang="en">Attach</span>) und Entfernen (<span lang="en">Remove</span>) von Entitäten bereit.
+</td></tr>
+<tr>
+<td> DbSet </td>
+<td> ObjectSet </td>
+<td> Erbt von DbQuery/ObjectQuery und stellt die entsprechenden Methoden für Entity-Typen bereit.
+</td></tr>
+<tr>
+<td> Change Tracker API </td>
+<td> ObjectContext.ObjectStateManager </td>
+<td> Bietet Methoden, um Änderungen verfolgen zu können. Hierzu gehört das Abfragen des ursprünglichen und des derzeitigen Zustands von Entitäten.
+</td></tr>
+<tr>
+<td> Validation API </td>
+<td> — </td>
+<td> Automatische Validierung der Daten im DataLayer.
+</td></tr>
+<tr>
+<td> Code First Model Building </td>
+<td> — </td>
+<td> Reflektiert über Code-basierte Klassen, um für diese passende Datenbankobjekte und die zugehörigen Metadaten im Arbeitsspeicher und der Datenbank zu erstellen.
+</td></tr>
+<tr>
+<td colspan="3">
+<ol class="references">
+<li id="cite_note-4"><span class="mw-cite-backlink"><a href="#cite_ref-4">↑</a></span> <span class="reference-text">Während das EF5 standardmäßig die Db-Klassen verwendet, wird im EF4 ein entsprechendes T4-Template (EF4.x DbContext Generator) benötigt.</span>
+</li>
+</ol>
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Verwendung">Verwendung</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=3" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Verwendung">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=3" title="Abschnitt bearbeiten: Verwendung">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<h3><span class="mw-headline" id="Erstellen_eines_Mappings_mit_CodeFirst">Erstellen eines Mappings mit CodeFirst</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=4" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Erstellen eines Mappings mit CodeFirst">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=4" title="Abschnitt bearbeiten: Erstellen eines Mappings mit CodeFirst">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">MyDbEntities</span> <span class="p">:</span> <span class="n">DbContext</span>
+<span class="p">{</span>
+   <span class="k">public</span> <span class="n">IDbSet</span><span class="p">&lt;</span><span class="n">Person</span><span class="p">&gt;</span> <span class="n">Persons</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+   <span class="c1">// Fluent Configurations</span>
+   <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnModelCreating</span><span class="p">(</span><span class="n">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">Person</span><span class="p">&gt;().</span><span class="n">ToTable</span><span class="p">(</span><span class="s">"People"</span><span class="p">);</span>
+      <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">Person</span><span class="p">&gt;().</span><span class="n">Property</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">FirstName</span><span class="p">).</span><span class="n">IsRequired</span><span class="p">();</span>
+      <span class="c1">// ...</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="na">[Table("People")]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+<span class="na">   [Key]</span>
+<span class="na">   [Column("PersonId")]</span>
+   <span class="k">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="na">   [Required]</span>
+<span class="na">   [MaxLength(255)]</span>
+   <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="na">   [Required]</span>
+<span class="na">   [MaxLength(255)]</span>
+   <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+   <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+<h3><span class="mw-headline" id="Datenbank-Initialisierung">Datenbank-Initialisierung</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=5" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Datenbank-Initialisierung">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=5" title="Abschnitt bearbeiten: Datenbank-Initialisierung">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Die Datenbank wird im Entity Framework durch einen Initializer angelegt. Dieser wird ausgeführt, wenn das erste Entity dem Datenbankkontext hinzugefügt wird.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5">[4]</a></sup>
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">// setze initialisierer</span>
+<span class="n">Database</span><span class="p">.</span><span class="n">SetInitializer</span><span class="p">(</span><span class="k">new</span> <span class="n">DropCreateDatabaseAlways</span><span class="p">&lt;</span><span class="n">MyDbEntities</span><span class="p">&gt;());</span>
+
+<span class="n">using</span><span class="p">(</span><span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyDbEntities</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">(){</span>
+        <span class="n">FirstName</span> <span class="p">=</span> <span class="s">"William"</span><span class="p">,</span>
+        <span class="n">LastName</span> <span class="p">=</span> <span class="s">"Adama"</span><span class="p">,</span>
+        <span class="n">DateOfBirth</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span>
+    <span class="p">};</span>
+
+   <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">person</span><span class="p">);</span> <span class="c1">// Datenbank-Initialisierer wird ausgeführt</span>
+   <span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+<p>In ASP.NET MVC Projekten kann das <code>InitializeSimpleMembership</code>-Attribut eingesetzt werden, um eine Initialisierung der Datenbank zu gewährleisten.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6">[5]</a></sup>
+</p>
+<h3><span id="Hinzuf.C3.BCgen_von_Entities"></span><span class="mw-headline" id="Hinzufügen_von_Entities">Hinzufügen von Entities</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=6" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Hinzufügen von Entities">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=6" title="Abschnitt bearbeiten: Hinzufügen von Entities">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="n">using</span><span class="p">(</span><span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyDbEntities</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="c1">// Erstelle zwei Personen-Entities</span>
+    <span class="kt">var</span> <span class="n">person1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">(){</span>
+        <span class="n">FirstName</span> <span class="p">=</span> <span class="s">"William"</span><span class="p">,</span>
+        <span class="n">LastName</span> <span class="p">=</span> <span class="s">"Adama"</span><span class="p">,</span>
+        <span class="n">DateOfBirth</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span>
+    <span class="p">};</span>
+    <span class="kt">var</span> <span class="n">person2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">(){</span>
+        <span class="n">FirstName</span> <span class="p">=</span> <span class="s">"Laura"</span><span class="p">,</span>
+        <span class="n">LastName</span> <span class="p">=</span> <span class="s">"Roslin"</span><span class="p">,</span>
+        <span class="n">DateOfBirth</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span>
+    <span class="p">};</span>
+    <span class="c1">// Erstelle ein Adressen-Entity</span>
+    <span class="kt">var</span> <span class="n">address</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Address</span><span class="p">(){</span>
+        <span class="n">Street</span> <span class="p">=</span> <span class="s">"Market Street 70"</span><span class="p">,</span>
+        <span class="n">City</span> <span class="p">=</span> <span class="s">"Philadelphia"</span><span class="p">,</span>
+        <span class="n">State</span> <span class="p">=</span> <span class="s">"PA"</span><span class="p">,</span>
+        <span class="n">Zip</span> <span class="p">=</span> <span class="s">"12345"</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Erste Variante</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">person1</span><span class="p">);</span>
+
+    <span class="c1">// Zweite Variante</span>
+    <span class="c1">// mit dem Kontext verlinken und als hinzugefügt markieren.</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">person2</span><span class="p">).</span><span class="n">State</span> <span class="p">=</span> <span class="n">EntityState</span><span class="p">.</span><span class="n">Added</span><span class="p">;</span>
+
+    <span class="c1">// Dritte Variante</span>
+    <span class="c1">// Das Entity wird an ein bereits vom Kontext beobachtetes Entity gehängt</span>
+    <span class="n">person1</span><span class="p">.</span><span class="n">Address</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+
+    <span class="c1">// Speichere Änderungen am Kontext in der Datenbank</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+<h3><span class="mw-headline" id="Abfrage_von_Daten">Abfrage von Daten</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=7" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Abfrage von Daten">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=7" title="Abschnitt bearbeiten: Abfrage von Daten">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Abfragen aller Daten aus einem Datensatz:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="n">using</span><span class="p">(</span><span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyDbEntities</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">)</span> <span class="c1">// entspricht SELECT * FROM [Persons]</span>
+    <span class="p">{</span>
+       <span class="c1">// führt zusätzliche SQL-Abfragen an die Adresses-Tabelle</span>
+       <span class="c1">// mit einem entsprechenden JOIN aus</span>
+       <span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">address</span> <span class="k">in</span> <span class="n">person</span><span class="p">.</span><span class="n">Adresses</span><span class="p">)</span>
+       <span class="p">{</span>
+           <span class="c1">// ...</span>
+       <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>Um zu verhindern, dass dieselbe Datenbankabfrage mehrfach ausgeführt wird, kann die <code>ToList()</code>-Methode verwendet werden:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="n">using</span><span class="p">(</span><span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyDbEntities</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">persons</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">;</span>
+
+    <span class="c1">// Datenbankabfrage wird ausgeführt und als Liste zurückgegeben</span>
+    <span class="kt">var</span> <span class="n">allPersons</span> <span class="p">=</span> <span class="n">persons</span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="c1">// Keine weitere Datenbankabfragen durch Verwendung der Liste</span>
+    <span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">allPersons</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+    <span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">allPersons</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>Sucht ein bestimmtes Objekt in der Datenbank:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">PersonId</span> <span class="p">==</span> <span class="n">personId</span><span class="p">);</span>
+</pre></div>
+<p>oder in Comprehension Syntax:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="p">(</span><span class="k">from</span> <span class="n">p</span> <span class="k">in</span> <span class="n">context</span><span class="p">.</span><span class="n">Persons</span>
+              <span class="k">where</span> <span class="n">p</span><span class="p">.</span><span class="n">PersonId</span> <span class="p">==</span> <span class="n">personId</span>
+              <span class="k">select</span> <span class="n">p</span><span class="p">).</span><span class="n">SingleOrDefault</span><span class="p">();</span>
+</pre></div>
+<table class="wikitable">
+<caption> <a href="https://de.wikipedia.org/wiki/LINQ" title="LINQ">LINQ</a> Selectors
+</caption>
+<tbody><tr>
+<th> Methode </th>
+<th> Ergebnis
+</th></tr>
+<tr>
+<td> <code>Single()</code> </td>
+<td> Gibt das eine Element zurück, welches die Anfrage liefert. Wirft eine Exception, falls keine oder mehrere Ergebnisse zurückgeliefert werden.
+</td></tr>
+<tr>
+<td> <code>SingleOrDefault()</code> </td>
+<td> Gibt das eine Element zurück, welches die Anfrage liefert. Gibt null zurück, falls keine Ergebnisse geliefert werden. Wirft eine Exception, falls mehrere Ergebnisse zurückgeliefert werden.
+</td></tr>
+<tr>
+<td> <code>First()</code> </td>
+<td> Gibt das erste Element zurück, falls die Anfrage ein oder mehrere Ergebnisse liefert. Wirft eine Exception, falls keine Ergebnisse zurückgeliefert werden.
+</td></tr>
+<tr>
+<td> <code>FirstOrDefault()</code> </td>
+<td> Gibt das erste Element zurück, falls die Anfrage ein oder mehrere Ergebnisse liefert. Gibt <code>null</code> zurück, falls keine Ergebnisse zurückgeliefert werden.
+</td></tr></tbody></table>
+<p>Bei Db-Objekten steht zudem die <code>Find()</code>-Methode bereit. Diese sucht das Objekt zuerst im Arbeitsspeicher und macht eine Datenbankabfrage, falls das Objekt nicht im Speicher gefunden wird:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="n">personId</span><span class="p">);</span>
+</pre></div>
+<h4><span id="Lazy.2C_Eager_und_Explicit_Loading"></span><span class="mw-headline" id="Lazy,_Eager_und_Explicit_Loading">Lazy, Eager und Explicit Loading</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=8" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Lazy, Eager und Explicit Loading">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=8" title="Abschnitt bearbeiten: Lazy, Eager und Explicit Loading">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h4>
+<p>Das Entity Framework verwendet im Normalfall das <i><span lang="en">lazy loading</span></i>, bei dem Daten aus der Datenbank dann geladen werden, wenn die Daten abgefragt werden:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">// lazy loading</span>
+<span class="c1">// nur die Personen werden abgefragt und geladen</span>
+<span class="kt">var</span> <span class="n">persons</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Peoples</span><span class="p">;</span>
+</pre></div>
+<p>Falls weitere Daten mit geladen werden müssen, wird das <i><span lang="en">eager loading</span></i> verwendet:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">// eager loading</span>
+<span class="c1">// Adressen werden bereits bei der Abfrage der Personen geladen</span>
+<span class="kt">var</span> <span class="n">persons</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Peoples</span><span class="p">.</span><span class="n">Include</span><span class="p">(</span><span class="s">"Addresses"</span><span class="p">);</span>
+</pre></div>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">// LINQ-to-Entities Beispiel für eager loading</span>
+<span class="kt">var</span> <span class="n">persons</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Peoples</span><span class="p">.</span><span class="n">Include</span><span class="p">(</span><span class="s">"Addresses"</span><span class="p">).</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">FirstName</span> <span class="p">==</span> <span class="n">fname</span><span class="p">);</span>
+</pre></div>
+<p>oder typsicher ab EF5:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">// LINQ-to-Entities Beispiel für eager loading</span>
+<span class="kt">var</span> <span class="n">persons</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Peoples</span><span class="p">.</span><span class="n">Include</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Addresses</span><span class="p">).</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">FirstName</span> <span class="p">==</span> <span class="n">fname</span><span class="p">);</span>
+</pre></div>
+<p>Das explizite Laden (<i><span lang="en">explicit loading</span></i>) der Daten ist ähnlich dem <span lang="en">lazy loading</span>, erlaubt jedoch das Laden der Navigationseigenschaften (<i><span lang="en">navigation properties</span></i>).
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">// explicit loading</span>
+<span class="kt">var</span> <span class="n">persons</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Peoples</span><span class="p">;</span> <span class="c1">// wie lazy loading; Adressen werden nicht mitgeladen</span>
+<span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">persons</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">person</span><span class="p">.</span><span class="n">Addresses</span><span class="p">.</span><span class="n">Load</span><span class="p">();</span> <span class="c1">// explicit loading; navigation properties für Adressen werden geladen</span>
+    <span class="k">foreach</span><span class="p">(</span><span class="kt">var</span> <span class="n">address</span> <span class="k">in</span> <span class="n">person</span><span class="p">.</span><span class="n">Addresses</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<h3><span class="mw-headline" id="Delete_Entities">Delete Entities</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=9" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Delete Entities">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=9" title="Abschnitt bearbeiten: Delete Entities">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Löschen eines Entities im Entity Framework 4:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="n">using</span><span class="p">(</span><span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyDbEntities</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="c1">// Abfrage eines Entities aus der Datenbank</span>
+    <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Id</span> <span class="p">==</span> <span class="n">id</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">person</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+       <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">.</span><span class="n">DeleteObject</span><span class="p">(</span><span class="n">person</span><span class="p">);</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+<p>Löschen eines Entities im Entity Framework 5:
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="n">using</span><span class="p">(</span><span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyDbEntities</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="c1">// Abfrage eines Entities aus der Datenbank</span>
+    <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="p">(</span><span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Id</span> <span class="p">==</span> <span class="n">id</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">person</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">context</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">person</span><span class="p">).</span><span class="n">State</span> <span class="p">=</span> <span class="n">EntityState</span><span class="p">.</span><span class="n">Deleted</span><span class="p">;</span> <span class="c1">// Entity zur Löschung markieren</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span> <span class="c1">// Entity in der Datenbank löschen</span>
+<span class="p">}</span>
+</pre></div>
+<h3><span class="mw-headline" id="Vorkompilierte_Abfragen">Vorkompilierte Abfragen</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=10" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Vorkompilierte Abfragen">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=10" title="Abschnitt bearbeiten: Vorkompilierte Abfragen">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Datenbankanfragen werden vom Entity Framework in für die Datenbankschnittstelle passende Anfragen kompiliert. Dieser Vorgang kostet jedoch Zeit, weshalb kompilierte Anfragen – sofern diese erneut benötigt werden – nicht verworfen, sondern in einem Objekt gespeichert und später wiederverwendet werden sollten.
+</p><p>Um bei der ersten Verwendung einer Abfrage mit dem Entity Framework 4 Zeit zu sparen, können Abfragen vorkompiliert werden.
+</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="k">static</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">MyDbEntities</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="n">ObjectQuery</span><span class="p">&lt;</span><span class="n">Person</span><span class="p">&gt;&gt;</span> <span class="n">QueryContactById</span> <span class="p">=</span> 
+    <span class="n">CompiledQuery</span><span class="p">.</span><span class="n">Compile</span><span class="p">&lt;</span><span class="n">MyDbEntities</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Person</span><span class="p">&gt;&gt;(</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">personId</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">context</span><span class="p">.</span><span class="n">Persons</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Id</span> <span class="p">==</span> <span class="n">personId</span><span class="p">)</span> <span class="p">);</span>
+</pre></div>
+<p>Im Entity Framework 5 werden Abfragen automatisch bei der Erstellung vorkompiliert.
+</p>
+<h3><span class="mw-headline" id="Transaktionen">Transaktionen</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=11" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Transaktionen">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=11" title="Abschnitt bearbeiten: Transaktionen">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<div class="mw-highlight mw-content-ltr" dir="ltr"><pre><span></span><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyDbEntities</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">scope</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TransactionScope</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="c1">// Der TransactionScope sucht den neuesten Context auf dem</span>
+        <span class="c1">// Stacktrace und verlinkt sich automatisch mit diesem</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="c1">// Bearbeitung von Entities</span>
+
+            <span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span> <span class="c1">// speichern der Änderungen in der Datenbank</span>
+            <span class="n">scope</span><span class="p">.</span><span class="n">Complete</span><span class="p">();</span> <span class="c1">// Transaktion wird abgeschlossen</span>
+        <span class="p">}</span>
+        <span class="k">catch</span> <span class="p">(</span><span class="n">InvalidOperationException</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Transaktion fehlgeschlagen</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="c1">// scope.Dispose()</span>
+<span class="p">}</span> <span class="c1">// context.Dispose()</span>
+</pre></div>
+<h3><span class="mw-headline" id="Code_First_Migrations">Code First Migrations</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=12" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Code First Migrations">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=12" title="Abschnitt bearbeiten: Code First Migrations">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p><i><span lang="en">Code First Migrations</span></i> ist eine Reihe von <a href="https://de.wikipedia.org/wiki/Windows_PowerShell" class="mw-redirect" title="Windows PowerShell">Powershell</a>-<a href="https://de.wikipedia.org/wiki/Skriptsprache" title="Skriptsprache">Skripten</a>, welche die Datenbankmigration erleichtern.
+</p>
+<ul><li> Enable-Migrations
+<dl><dd> erstellt ein Migrations-Skript</dd></dl></li>
+<li> Add-Migration
+<dl><dd> Erstelle ein Skript zur Herstellung der aktuellen Datenbankstruktur</dd></dl></li>
+<li> Update-Database
+<dl><dd> Bringt die Datenbankstruktur auf einen bestimmten Zustand. Standardmäßig wird das neueste Migrationsskript verwendet.</dd></dl></li></ul>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="Literatur">Literatur</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=13" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Literatur">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=13" title="Abschnitt bearbeiten: Literatur">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul><li> Andrew Troelsen: <cite style="font-style: italic;">Pro C# 5.0 and the .Net 4.5 Framework</cite>. Springer, 2012, <a href="https://de.wikipedia.org/wiki/Spezial:ISBN-Suche/9781430242338" class="internal mw-magiclink-isbn">ISBN 978-1-4302-4233-8</a>, S.<span style="display: inline-block; width: 0.25em;">&nbsp;</span>1560.<span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rfr_id=info:sid/de.wikipedia.org:Entity+Framework&amp;rft.au=Andrew+Troelsen&amp;rft.btitle=Pro+C%23+5.0+and+the+.Net+4.5+Framework&amp;rft.date=2012&amp;rft.genre=book&amp;rft.isbn=9781430242338&amp;rft.pages=1560&amp;rft.pub=Springer" style="display: none;">&nbsp;</span></li>
+<li> Julia Lerman, Rowan Miller: <cite style="font-style: italic;">Programming Entity Framework: DbContext; Querying, Changing, and Validating Your Data with Entity Framework</cite>. <a href="https://de.wikipedia.org/wiki/O%E2%80%99Reilly_Verlag" title="O’Reilly Verlag">O’Reilly Media</a>, 2012, <a href="https://de.wikipedia.org/wiki/Spezial:ISBN-Suche/9781449312961" class="internal mw-magiclink-isbn">ISBN 978-1-4493-1296-1</a>, S.<span style="display: inline-block; width: 0.25em;">&nbsp;</span>258.<span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rfr_id=info:sid/de.wikipedia.org:Entity+Framework&amp;rft.au=Julia+Lerman%2C+Rowan+Miller&amp;rft.btitle=Programming+Entity+Framework%3A+DbContext%3B+Querying%2C+Changing%2C+and+Validating+Your+Data+with+Entity+Framework&amp;rft.date=2012&amp;rft.genre=book&amp;rft.isbn=9781449312961&amp;rft.pages=258&amp;rft.pub=O%E2%80%99Reilly+Media" style="display: none;">&nbsp;</span></li>
+<li> Julia Lerman, Rowan Miller: <cite style="font-style: italic;">Programming Entity Framework: Code First; Creating and Configuring Data Models from Your Classes</cite>. O’Reilly Media, 2012, <a href="https://de.wikipedia.org/wiki/Spezial:ISBN-Suche/9781449312947" class="internal mw-magiclink-isbn">ISBN 978-1-4493-1294-7</a>, S.<span style="display: inline-block; width: 0.25em;">&nbsp;</span>194.<span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rfr_id=info:sid/de.wikipedia.org:Entity+Framework&amp;rft.au=Julia+Lerman%2C+Rowan+Miller&amp;rft.btitle=Programming+Entity+Framework%3A+Code+First%3B+Creating+and+Configuring+Data+Models+from+Your+Classes&amp;rft.date=2012&amp;rft.genre=book&amp;rft.isbn=9781449312947&amp;rft.pages=194&amp;rft.pub=O%E2%80%99Reilly+Media" style="display: none;">&nbsp;</span></li></ul>
+<h2><span class="mw-headline" id="Weblinks">Weblinks</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=14" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Weblinks">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=14" title="Abschnitt bearbeiten: Weblinks">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul><li> <span class="cite"><a rel="nofollow" class="external text" href="http://entityframework.codeplex.com/"><i>Microsoft .NET Entity Framework.</i></a> In: <i>CodePlex.</i> Microsoft;<span class="Abrufdatum"> abgerufen am 12.&nbsp;März 2015</span> (englisch, Projektseite mit <a href="https://de.wikipedia.org/wiki/Quellcode" class="mw-redirect" title="Quellcode">Quellcode</a> des Entity Frameworks).</span><span style="display: none;" class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rfr_id=info%3Asid%2Fde.wikipedia.org%3AEntity+Framework&amp;rft.title=Microsoft+.NET+Entity+Framework&amp;rft.description=Microsoft+.NET+Entity+Framework&amp;rft.identifier=http%3A%2F%2Fentityframework.codeplex.com%2F&amp;rft.publisher=Microsoft&amp;rft.language=en">&nbsp;</span></li>
+<li> <span class="cite"><a rel="nofollow" class="external text" href="http://www.entityframeworktutorial.net/"><i>Entity Framework Tutorial.</i></a><span class="Abrufdatum"> Abgerufen am 12.&nbsp;März 2015</span> (englisch).</span><span style="display: none;" class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rfr_id=info%3Asid%2Fde.wikipedia.org%3AEntity+Framework&amp;rft.title=Entity+Framework+Tutorial&amp;rft.description=Entity+Framework+Tutorial&amp;rft.identifier=http%3A%2F%2Fwww.entityframeworktutorial.net%2F&amp;rft.language=en">&nbsp;</span></li>
+<li> <span class="cite"><a rel="nofollow" class="external text" href="http://devcouch.de/?p=64"><i>Entity Framework Grundlagen Video.</i></a><span class="Abrufdatum"> Abgerufen am 15.&nbsp;März 2015</span>.</span><span style="display: none;" class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rfr_id=info%3Asid%2Fde.wikipedia.org%3AEntity+Framework&amp;rft.title=Entity+Framework+Grundlagen+Video&amp;rft.description=Entity+Framework+Grundlagen+Video&amp;rft.identifier=http%3A%2F%2Fdevcouch.de%2F%3Fp%3D64&amp;rft.language=de">&nbsp;</span></li>
+<li> <span class="cite"><a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/data/hh949853.aspx"><i>Performance Considerations for Entity Framework 5.</i></a><span class="Abrufdatum"> Abgerufen am 11.&nbsp;November 2012</span> (englisch).</span><span style="display: none;" class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rfr_id=info%3Asid%2Fde.wikipedia.org%3AEntity+Framework&amp;rft.title=Performance+Considerations+for+Entity+Framework+5&amp;rft.description=Performance+Considerations+for+Entity+Framework+5&amp;rft.identifier=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Fdata%2Fhh949853.aspx&amp;rft.language=en">&nbsp;</span></li>
+<li> <span class="cite"><a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/data/ee712907"><i>Get Started with Entity Framework (EF).</i></a> In: <i>Data Developer Center.</i> <a href="https://de.wikipedia.org/wiki/Microsoft" title="Microsoft">Microsoft</a>;<span class="Abrufdatum"> abgerufen am 12.&nbsp;November 2012</span> (englisch).</span><span style="display: none;" class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rfr_id=info%3Asid%2Fde.wikipedia.org%3AEntity+Framework&amp;rft.title=Get+Started+with+Entity+Framework+%28EF%29&amp;rft.description=Get+Started+with+Entity+Framework+%28EF%29&amp;rft.identifier=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Fdata%2Fee712907&amp;rft.publisher=%5B%5BMicrosoft%5D%5D&amp;rft.language=en">&nbsp;</span></li>
+<li> <span class="cite"><a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/data/jj593170.aspx"><i>Entity Framework Power Tools.</i></a> In: <i>Data Developer Center.</i> Microsoft;<span class="Abrufdatum"> abgerufen am 30.&nbsp;März 2013</span> (englisch).</span><span style="display: none;" class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rfr_id=info%3Asid%2Fde.wikipedia.org%3AEntity+Framework&amp;rft.title=Entity+Framework+Power+Tools&amp;rft.description=Entity+Framework+Power+Tools&amp;rft.identifier=http%3A%2F%2Fmsdn.microsoft.com%2Fen-us%2Fdata%2Fjj593170.aspx&amp;rft.publisher=Microsoft&amp;rft.language=en">&nbsp;</span></li></ul>
+<h2><span class="mw-headline" id="Referenzen">Referenzen</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit&amp;section=15" class="mw-editsection-visualeditor" title="Abschnitt bearbeiten: Referenzen">Bearbeiten</a><span class="mw-editsection-divider"> | </span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit&amp;section=15" title="Abschnitt bearbeiten: Referenzen">Quelltext bearbeiten</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ol class="references">
+<li id="cite_note-efcore11-1"><span class="mw-cite-backlink">↑ <sup><a href="#cite_ref-efcore11_1-0">a</a></sup> <sup><a href="#cite_ref-efcore11_1-1">b</a></sup></span> <span class="reference-text"><a rel="nofollow" class="external text" href="https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-entity-framework-core-1-1/"><i>Announcing Entity Framework Core 1.1</i></a>, abgerufen am 21. Nov. 2016</span>
+</li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><a href="#cite_ref-2">↑</a></span> <span class="reference-text">Holger Schwichtenberg: <a rel="nofollow" class="external text" href="https://www.heise.de/newsticker/meldung/Microsoft-stellt-OR-Mapper-von-NET-quelloffen-zur-Verfuegung-1647266.html"><i>Microsoft stellt OR-Mapper von .NET quelloffen zur Verfügung</i></a>, in: <a href="https://de.wikipedia.org/wiki/Heise_online" title="Heise online">heise online</a> vom 19. Juli 2012, abgerufen am 7. Dez. 2015</span>
+</li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><a href="#cite_ref-3">↑</a></span> <span class="reference-text">Holger Schwichtenberg: <a rel="nofollow" class="external text" href="https://www.heise.de/newsticker/meldung/Asynchrone-Datenbankzugriffe-mit-Microsofts-Entity-Framework-6-0-1981569.html"><i>Asynchrone Datenbankzugriffe mit Microsofts Entity Framework 6.0</i></a>, in: <a href="https://de.wikipedia.org/wiki/Heise_online" title="Heise online">heise online</a> vom 18. Okt. 2013, abgerufen am 7. Dez. 2015</span>
+</li>
+<li id="cite_note-5"><span class="mw-cite-backlink"><a href="#cite_ref-5">↑</a></span> <span class="reference-text"><span class="cite">Bipin Joshi: <a rel="nofollow" class="external text" href="http://www.codeguru.com/csharp/article.php/c19999/Understanding-Database-Initializers-in-Entity-Framework-Code-First.htm"><i>Understanding Database Initializers in Entity Framework Code First.</i></a> 10.&nbsp;Februar 2012;<span class="Abrufdatum"> abgerufen am 10.&nbsp;Juni 2014</span> (englisch).</span><span style="display: none;" class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rfr_id=info%3Asid%2Fde.wikipedia.org%3AEntity+Framework&amp;rft.title=Understanding+Database+Initializers+in+Entity+Framework+Code+First&amp;rft.description=Understanding+Database+Initializers+in+Entity+Framework+Code+First&amp;rft.identifier=http%3A%2F%2Fwww.codeguru.com%2Fcsharp%2Farticle.php%2Fc19999%2FUnderstanding-Database-Initializers-in-Entity-Framework-Code-First.htm&amp;rft.creator=Bipin+Joshi&amp;rft.date=2012-02-10&amp;rft.language=en">&nbsp;</span></span>
+</li>
+<li id="cite_note-6"><span class="mw-cite-backlink"><a href="#cite_ref-6">↑</a></span> <span class="reference-text"><span class="cite">Rick Anderson: <a rel="nofollow" class="external text" href="http://blogs.msdn.com/b/rickandy/archive/2012/08/15/initializesimplemembership-attribute-and-simplemembership-exceptions.aspx"><i>InitializeSimpleMembership Attribute and SimpleMembership Exceptions.</i></a> In: <i>MSDN Blog.</i> Microsoft, 15.&nbsp;August 2012;<span class="Abrufdatum"> abgerufen am 10.&nbsp;Juni 2014</span> (englisch).</span><span style="display: none;" class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rfr_id=info%3Asid%2Fde.wikipedia.org%3AEntity+Framework&amp;rft.title=InitializeSimpleMembership+Attribute+and+SimpleMembership+Exceptions&amp;rft.description=InitializeSimpleMembership+Attribute+and+SimpleMembership+Exceptions&amp;rft.identifier=http%3A%2F%2Fblogs.msdn.com%2Fb%2Frickandy%2Farchive%2F2012%2F08%2F15%2Finitializesimplemembership-attribute-and-simplemembership-exceptions.aspx&amp;rft.creator=Rick+Anderson&amp;rft.publisher=Microsoft&amp;rft.date=2012-08-15&amp;rft.language=en">&nbsp;</span></span>
+</li>
+</ol>
+
+<!-- 
+NewPP limit report
+Parsed by mw1321
+Cached time: 20171230111557
+Cache expiry: 1900800
+Dynamic content: false
+CPU time usage: 0.300 seconds
+Real time usage: 0.338 seconds
+Preprocessor visited node count: 2622/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 23567/2097152 bytes
+Template argument size: 4915/2097152 bytes
+Highest expansion depth: 8/40
+Expensive parser function count: 0/500
+Lua time usage: 0.161/10.000 seconds
+Lua memory usage: 5.04 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  273.439      1 -total
+ 52.39%  143.268      8 Vorlage:Internetquelle
+ 17.95%   49.084      3 Vorlage:Literatur
+ 16.22%   44.351      2 Vorlage:Infobox_Software
+  7.97%   21.786     13 Vorlage:Lang
+  2.05%    5.602      1 Vorlage:Datum
+-->
+</div>
+<!-- Saved in parser cache with key dewiki:pcache:idhash:7368974-0!canonical and timestamp 20171230111556 and revision id 170788827
+ -->
+<noscript><img src="//de.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+
+						Abgerufen von „<a dir="ltr" href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;oldid=170788827">https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;oldid=170788827</a>“					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://de.wikipedia.org/wiki/Wikipedia:Kategorien" title="Wikipedia:Kategorien">Kategorien</a>: <ul><li><a href="https://de.wikipedia.org/wiki/Kategorie:.NET" title="Kategorie:.NET">.NET</a></li><li><a href="https://de.wikipedia.org/wiki/Kategorie:Datenbankschnittstelle" title="Kategorie:Datenbankschnittstelle">Datenbankschnittstelle</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigationsmenü</h2>
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Meine Werkzeuge</h3>
+						<ul>
+							<li id="pt-anonuserpage">Nicht angemeldet</li><li id="pt-anontalk"><a href="https://de.wikipedia.org/wiki/Spezial:Meine_Diskussionsseite" title="Diskussion über Änderungen von dieser IP-Adresse [Alt+Shift+n]" accesskey="n">Diskussionsseite</a></li><li id="pt-anoncontribs"><a href="https://de.wikipedia.org/wiki/Spezial:Meine_Beitr%C3%A4ge" title="Eine Liste der Bearbeitungen, die von dieser IP-Adresse gemacht wurden [Alt+Shift+y]" accesskey="y">Beiträge</a></li><li id="pt-createaccount"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:Benutzerkonto_anlegen&amp;returnto=Entity+Framework&amp;returntoquery=oldid%3D170788827" title="Wir ermutigen dich dazu, ein Benutzerkonto zu erstellen und dich anzumelden. Es ist jedoch nicht zwingend erforderlich.">Benutzerkonto erstellen</a></li><li id="pt-login"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:Anmelden&amp;returnto=Entity+Framework&amp;returntoquery=oldid%3D170788827" title="Anmelden ist zwar keine Pflicht, wird aber gerne gesehen. [Alt+Shift+o]" accesskey="o">Anmelden</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namensräume</h3>
+						<ul>
+							<li id="ca-nstab-main" class="selected"><span><a href="https://de.wikipedia.org/wiki/Entity_Framework" title="Seiteninhalt anzeigen [Alt+Shift+c]" accesskey="c">Artikel</a></span></li><li id="ca-talk" class="new"><span><a href="https://de.wikipedia.org/w/index.php?title=Diskussion:Entity_Framework&amp;action=edit&amp;redlink=1&amp;section=new" rel="discussion" title="Diskussion zum Seiteninhalt [Alt+Shift+t]" accesskey="t">Diskussion</a></span></li>						</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 tabindex="0" id="p-variants-label">
+							<span>Varianten</span>
+						</h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Ansichten</h3>
+						<ul>
+							<li id="ca-view" class="collapsible selected"><span><a href="https://de.wikipedia.org/wiki/Entity_Framework">Lesen</a></span></li><li id="ca-ve-edit" class="collapsible"><span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;veaction=edit" title="Diese Seite mit dem VisualEditor bearbeiten [Alt+Shift+v]" accesskey="v">Bearbeiten</a></span></li><li id="ca-edit" class="collapsible"><span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=edit" title="Diese Seite bearbeiten [Alt+Shift+e]" accesskey="e">Quelltext bearbeiten</a></span></li><li id="ca-history" class="collapsible"><span><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=history" title="Frühere Versionen dieser Seite [Alt+Shift+h]" accesskey="h">Versionsgeschichte</a></span></li>						</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 tabindex="0" id="p-cactions-label"><span>Mehr</span></h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Suche</label>
+						</h3>
+						<form action="https://de.wikipedia.org/w/index.php" id="searchform">
+							<div id="simpleSearch">
+								<input tabindex="1" name="search" placeholder="Wikipedia durchsuchen" title="Durchsuche die Wikipedia [Alt+Shift+f]" accesskey="f" id="searchInput" type="search"><input value="Spezial:Suche" name="title" type="hidden"><input name="fulltext" value="Suchen" title="Suche nach Seiten, die diesen Text enthalten" id="mw-searchButton" class="searchButton mw-fallbackSearchButton" type="submit"><input name="go" value="Artikel" title="Gehe direkt zu der Seite mit genau diesem Namen, falls sie vorhanden ist." id="searchButton" class="searchButton" type="submit">							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="https://de.wikipedia.org/wiki/Wikipedia:Hauptseite" title="Hauptseite"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+			<div class="body">
+								<ul>
+					<li id="n-mainpage-description"><a href="https://de.wikipedia.org/wiki/Wikipedia:Hauptseite" title="Hauptseite besuchen [Alt+Shift+z]" accesskey="z">Hauptseite</a></li><li id="n-topics"><a href="https://de.wikipedia.org/wiki/Portal:Wikipedia_nach_Themen">Themenportale</a></li><li id="n-alphindex"><a href="https://de.wikipedia.org/wiki/Spezial:Alle_Seiten">Von A bis Z</a></li><li id="n-randompage"><a href="https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite" title="Zufällige Seite aufrufen [Alt+Shift+x]" accesskey="x">Zufälliger Artikel</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-Mitmachen" aria-labelledby="p-Mitmachen-label">
+			<h3 id="p-Mitmachen-label">Mitmachen</h3>
+			<div class="body">
+								<ul>
+					<li id="n-Artikel-verbessern"><a href="https://de.wikipedia.org/wiki/Wikipedia:Beteiligen">Artikel verbessern</a></li><li id="n-Neuerartikel"><a href="https://de.wikipedia.org/wiki/Hilfe:Neuen_Artikel_anlegen">Neuen Artikel anlegen</a></li><li id="n-portal"><a href="https://de.wikipedia.org/wiki/Wikipedia:Autorenportal" title="Info-Zentrum über Beteiligungsmöglichkeiten">Autorenportal</a></li><li id="n-help"><a href="https://de.wikipedia.org/wiki/Hilfe:%C3%9Cbersicht" title="Hilfeseite anzeigen">Hilfe</a></li><li id="n-recentchanges"><a href="https://de.wikipedia.org/wiki/Spezial:Letzte_%C3%84nderungen" title="Liste der letzten Änderungen in Wikipedia [Alt+Shift+r]" accesskey="r">Letzte Änderungen</a></li><li id="n-contact"><a href="https://de.wikipedia.org/wiki/Wikipedia:Kontakt">Kontakt</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_de.wikipedia.org&amp;uselang=de" title="Unterstütze uns">Spenden</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Werkzeuge</h3>
+			<div class="body">
+								<ul>
+					<li id="t-whatlinkshere"><a href="https://de.wikipedia.org/wiki/Spezial:Linkliste/Entity_Framework" title="Liste aller Seiten, die hierher verlinken [Alt+Shift+j]" accesskey="j">Links auf diese Seite</a></li><li id="t-recentchangeslinked"><a href="https://de.wikipedia.org/wiki/Spezial:%C3%84nderungen_an_verlinkten_Seiten/Entity_Framework" rel="nofollow" title="Letzte Änderungen an Seiten, die von hier verlinkt sind [Alt+Shift+k]" accesskey="k">Änderungen an verlinkten Seiten</a></li><li id="t-specialpages"><a href="https://de.wikipedia.org/wiki/Spezial:Spezialseiten" title="Liste aller Spezialseiten [Alt+Shift+q]" accesskey="q">Spezialseiten</a></li><li id="t-permalink"><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;oldid=170788827" title="Dauerhafter Link zu dieser Seitenversion">Permanenter Link</a></li><li id="t-info"><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;action=info" title="Weitere Informationen über diese Seite">Seiten­informationen</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q851939" title="Link zum verbundenen Objekt im Datenrepositorium [Alt+Shift+g]" accesskey="g">Wikidata-Datenobjekt</a></li><li id="t-cite"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:Zitierhilfe&amp;page=Entity_Framework&amp;id=170788827" title="Hinweise, wie diese Seite zitiert werden kann">Artikel zitieren</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-coll-print_export" aria-labelledby="p-coll-print_export-label">
+			<h3 id="p-coll-print_export-label">Drucken/­exportieren</h3>
+			<div class="body">
+								<ul>
+					<li id="coll-create_a_book"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:Buch&amp;bookcmd=book_creator&amp;referer=Entity+Framework">Buch erstellen</a></li><li id="coll-download-as-rdf2latex"><a href="https://de.wikipedia.org/w/index.php?title=Spezial:ElectronPdf&amp;page=Entity+Framework&amp;action=show-download-screen">Als PDF herunterladen</a></li><li id="t-print"><a href="https://de.wikipedia.org/w/index.php?title=Entity_Framework&amp;printable=yes" title="Druckansicht dieser Seite [Alt+Shift+p]" accesskey="p">Druckversion</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-lang" aria-labelledby="p-lang-label">
+			<h3 id="p-lang-label">In anderen Sprachen</h3>
+			<div class="body">
+								<ul>
+					<li class="interlanguage-link interwiki-en"><a href="https://en.wikipedia.org/wiki/Entity_Framework" title="Entity Framework – Englisch" hreflang="en" class="interlanguage-link-target" lang="en">English</a></li><li class="interlanguage-link interwiki-es"><a href="https://es.wikipedia.org/wiki/ADO.NET_Entity_Framework" title="ADO.NET Entity Framework – Spanisch" hreflang="es" class="interlanguage-link-target" lang="es">Español</a></li><li class="interlanguage-link interwiki-fa"><a href="https://fa.wikipedia.org/wiki/%D8%A7%D9%86%D8%AA%DB%8C%D8%AA%DB%8C_%D9%81%D8%B1%DB%8C%D9%85_%D9%88%D8%B1%DA%A9" title="انتیتی فریم ورک – Persisch" hreflang="fa" class="interlanguage-link-target" lang="fa">فارسی</a></li><li class="interlanguage-link interwiki-hu"><a href="https://hu.wikipedia.org/wiki/Entity_Framework" title="Entity Framework – Ungarisch" hreflang="hu" class="interlanguage-link-target" lang="hu">Magyar</a></li><li class="interlanguage-link interwiki-ja"><a href="https://ja.wikipedia.org/wiki/Entity_Framework" title="Entity Framework – Japanisch" hreflang="ja" class="interlanguage-link-target" lang="ja">日本語</a></li><li class="interlanguage-link interwiki-pt"><a href="https://pt.wikipedia.org/wiki/ADO.NET_Entity_Framework" title="ADO.NET Entity Framework – Portugiesisch" hreflang="pt" class="interlanguage-link-target" lang="pt">Português</a></li><li class="interlanguage-link interwiki-ru"><a href="https://ru.wikipedia.org/wiki/ADO.NET_Entity_Framework" title="ADO.NET Entity Framework – Russisch" hreflang="ru" class="interlanguage-link-target" lang="ru">Русский</a></li><li class="interlanguage-link interwiki-zh"><a href="https://zh.wikipedia.org/wiki/Entity_Framework" title="Entity Framework – Chinesisch" hreflang="zh" class="interlanguage-link-target" lang="zh">中文</a></li>				</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q851939#sitelinks-wikipedia" title="Links auf Artikel in anderen Sprachen bearbeiten" class="wbc-editpage">Links bearbeiten</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+				<div id="footer" role="contentinfo">
+						<ul id="footer-info">
+								<li id="footer-info-lastmod"> Diese Seite wurde zuletzt am 8. November 2017 um 14:04 Uhr bearbeitet.</li>
+								<li id="footer-info-copyright"><div id="footer-info-copyright-stats"><a class="external" href="https://tools.wmflabs.org/pageviews?pages=Entity_Framework&amp;project=de.wikipedia.org" rel="nofollow">Abrufstatistik</a></div><div id="footer-info-copyright-separator"><br></div><div id="footer-info-copyright-info">
+
+Der Text ist unter der Lizenz <a class="internal" href="https://de.wikipedia.org/wiki/Wikipedia:Lizenzbestimmungen_Commons_Attribution-ShareAlike_3.0_Unported">„Creative Commons Attribution/Share Alike“</a> verfügbar; Informationen zu den Urhebern und zum Lizenzstatus eingebundener Mediendateien (etwa Bilder oder Videos) können im Regelfall durch Anklicken dieser abgerufen werden. Möglicherweise unterliegen die Inhalte jeweils zusätzlichen Bedingungen. Durch die Nutzung dieser Website erklären Sie sich mit den <a class="internal" href="https://wikimediafoundation.org/wiki/Nutzungsbedingungen">Nutzungsbedingungen</a> und der <a class="internal" href="https://de.wikipedia.org/wiki/Wikipedia:Datenschutz">Datenschutzrichtlinie</a> einverstanden.<br>
+Wikipedia® ist eine eingetragene Marke der Wikimedia Foundation Inc.</div></li>
+							</ul>
+						<ul id="footer-places">
+								<li id="footer-places-privacy"><a href="https://meta.wikimedia.org/wiki/Privacy_policy/de" class="extiw" title="m:Privacy policy/de">Datenschutz</a></li>
+								<li id="footer-places-about"><a href="https://de.wikipedia.org/wiki/Wikipedia:%C3%9Cber_Wikipedia" title="Wikipedia:Über Wikipedia">Über Wikipedia</a></li>
+								<li id="footer-places-disclaimer"><a href="https://de.wikipedia.org/wiki/Wikipedia:Impressum" title="Wikipedia:Impressum">Impressum</a></li>
+								<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Entwickler</a></li>
+								<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Stellungnahme zu Cookies</a></li>
+								<li id="footer-places-mobileview"><a href="https://de.m.wikipedia.org/w/index.php?title=Entity_Framework&amp;oldid=170788827&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile Ansicht</a></li>
+							</ul>
+										<ul id="footer-icons" class="noprint">
+										<li id="footer-copyrightico">
+						<a href="https://wikimediafoundation.org/"><img src="wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" alt="Wikimedia Foundation" height="31" width="88"></a>					</li>
+										<li id="footer-poweredbyico">
+						<a href="https://www.mediawiki.org/"><img src="poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" height="31" width="88"></a>					</li>
+									</ul>
+						<div style="clear: both;"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.300","walltime":"0.338","ppvisitednodes":{"value":2622,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":23567,"limit":2097152},"templateargumentsize":{"value":4915,"limit":2097152},"expansiondepth":{"value":8,"limit":40},"expensivefunctioncount":{"value":0,"limit":500},"entityaccesscount":{"value":1,"limit":400},"timingprofile":["100.00%  273.439      1 -total"," 52.39%  143.268      8 Vorlage:Internetquelle"," 17.95%   49.084      3 Vorlage:Literatur"," 16.22%   44.351      2 Vorlage:Infobox_Software","  7.97%   21.786     13 Vorlage:Lang","  2.05%    5.602      1 Vorlage:Datum"]},"scribunto":{"limitreport-timeusage":{"value":"0.161","limit":"10.000"},"limitreport-memusage":{"value":5280966,"limit":52428800}},"cachereport":{"origin":"mw1321","timestamp":"20171230111557","ttl":1900800,"transientcontent":false}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":450,"wgHostname":"mw1321"});});</script>
+	
+
+</body>
+</html>

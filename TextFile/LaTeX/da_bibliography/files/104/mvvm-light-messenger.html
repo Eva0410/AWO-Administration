@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html style="" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://dotnetpattern.com/mvvm-light-messenger">
+<meta name="wpd_url" content="http://dotnetpattern.com/mvvm-light-messenger">
+<meta name="wpd_date" content="2018-02-10T15:19Z">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVVM Light Messenger</title>
+    <meta name="description" content="MVVM Light Messenger is a class that allows exchange messages between objects. Messenger class is mainly used for sending messages between viewmodels.">
+    <meta http-equiv="content-language" content="en-us">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    
+    <link rel="canonical" href="http://dotnetpattern.com/mvvm-light-messenger">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="MVVM Light Messenger">
+    <meta property="og:description" content="MVVM Light Messenger is a class that allows exchange messages between objects. Messenger class is mainly used for sending messages between viewmodels.">
+    <meta property="og:url" content="http://dotnetpattern.com/mvvm-light-messenger">
+    
+    <meta property="og:site_name" content="DotNetPattern.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="MVVM Light Messenger is a class that allows exchange messages between objects. Messenger class is mainly used for sending messages between viewmodels.">
+    <meta name="twitter:title" content="MVVM Light Messenger">
+    <meta name="twitter:site" content="@DotNetPattern">
+    <meta name="twitter:creator" content="@DotNetPattern">
+        <meta property="article:section" content="WPF">
+        <meta property="article:section" content="MVVM">
+
+        <meta property="article:tag" content="wpf">
+        <meta property="article:tag" content="mvvm">
+        <meta property="article:tag" content="mvvm light">
+
+
+    <link rel="alternate" type="application/rss+xml" title="DotNetPattern.com » Feed" href="http://dotnetpattern.com/feed">
+
+    
+
+    <script src="analytics.js" async=""></script><script src="ca-pub-6100748065458927.js"></script><script src="modernizr"></script>
+
+
+
+
+    
+    <script async="" src="adsbygoogle.js"></script>
+    <script>
+
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6100748065458927",
+            enable_page_level_ads: true
+        });
+    </script>
+<script data-timestamp="1520695183833" src="embed.js"></script><link href="https://adservice.google.at/adsid/integrator.js?domain=dotnetpattern.com" rel="preload"><script src="integrator.js" type="text/javascript"></script><link href="https://adservice.google.com/adsid/integrator.js?domain=dotnetpattern.com" rel="preload"><script src="integrator_001.js" type="text/javascript"></script><script src="js" async="" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="mvvm-light-messenger.css" media="all">
+</head>
+<body>
+
+    <!-- Start Menu Area -->
+    <div class="menu-area hidden-xs hidden-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 hidden-xs hidden-sm leftPaddingZero rightPaddingZero">
+                    <div class="main-menu">
+                        <nav>
+                            <ul>
+    <li class="active custom-menu">
+        <a href="http://dotnetpattern.com/">Home</a>
+
+    </li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/category/csharp">C#</a>
+        <ul class="dropdown">
+            <li><a href="http://dotnetpattern.com/csharp-versions-features">Versions and Features</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-params">C# Params</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-arraylist">C# Array List</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-using-statement">C# Using Statement</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-hashtable">C# Hashtable</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-generics">C# Generics</a></li>
+            <li><a href="http://dotnetpattern.com/reflection-introduction">C# Reflection</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-action-delegate">C# Action Delegate</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-func-delegates">C# Func Delegate</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-predicate-delegate">C# Predicate Delegate</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-interface">C# Interface</a></li>
+
+        </ul>
+    </li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/threading-synchronization">.Net Threading</a>
+        <ul class="dropdown">
+            <li> <a href="http://dotnetpattern.com/threading-synchronization"> Threading Tutorial</a></li>
+            <li> <a href="http://dotnetpattern.com/multi-threading-interview-questions">Interview Questions</a></li>
+        </ul>
+    </li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/category/wpf">WPF</a>
+        <ul class="dropdown">
+            <li> <a href="http://dotnetpattern.com/wpf-architecture">Architecture</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-dispatcher">WPF Dispatcher</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-mvvm-introduction">MVVM Light Toolkit</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-listview-gridview-bindings-itemtemplate-examples">WPF ListView</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-datagrid-introduction">WPF DataGrid</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-tabcontrol-introduction">WPF TabControl</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-backgroundworker">Background Worker</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-label">WPF Label</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-gridsplitter">Grid Splitter</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-interview-questions-for-beginners-advanced-part-1">Interview Questions</a></li>
+        </ul>
+    </li>
+    <li><a href="http://dotnetpattern.com/introduction-to-design-patterns">Design Patterns</a></li>
+    <li><a href="http://dotnetpattern.com/LINQ-tutorials">LINQ</a></li>
+    <li><a href="http://dotnetpattern.com/introduction-angularjs">AngularJS</a></li>
+    <li><a href="http://dotnetpattern.com/typescript-tutorial">TypeScript</a></li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/category/Unit-Testing-Frameworks">Testing </a>
+        <ul class="dropdown">
+            <li> <a href="http://dotnetpattern.com/nunit-introduction">NUnit Tutorial</a></li>
+            <li> <a href="http://dotnetpattern.com/Rhino-Mocks-Tutorial">Rhino Mocks Tutorial</a></li>
+        </ul>
+    </li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/category/interview-questions">Interview Questions</a>
+        <ul class="dropdown">
+            <li> <a href="http://dotnetpattern.com/top-linq-interview-questions">LINQ Questions</a></li>
+            <li> <a href="http://dotnetpattern.com/csharp-oops-interview-questions-top-10">C# OOPS Questions</a></li>
+            <li> <a href="http://dotnetpattern.com/multi-threading-interview-questions">MultiThreading</a></li>
+            <li> <a href="http://dotnetpattern.com/sql-server-interview-questions-series-part1">SQL Questions</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-interview-questions-for-beginners-advanced-part-1">WPF Questions</a></li>
+            <li> <a href="http://dotnetpattern.com/threading-interview-questions-series-part-1">Threading Questions</a></li>
+        </ul>
+    </li>
+</ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Menu Area -->
+    <!-- Start Mobile Menu -->
+    <div class="mobile-menu hidden-md hidden-lg">
+        <nav style="display: block;">
+            <span class="mobile-menu-title">MENU</span>
+            <ul>
+    <li class="active custom-menu">
+        <a href="http://dotnetpattern.com/">Home</a>
+
+    </li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/category/csharp">C#</a>
+        <ul class="dropdown">
+            <li><a href="http://dotnetpattern.com/csharp-versions-features">Versions and Features</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-params">C# Params</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-arraylist">C# Array List</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-using-statement">C# Using Statement</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-hashtable">C# Hashtable</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-generics">C# Generics</a></li>
+            <li><a href="http://dotnetpattern.com/reflection-introduction">C# Reflection</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-action-delegate">C# Action Delegate</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-func-delegates">C# Func Delegate</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-predicate-delegate">C# Predicate Delegate</a></li>
+            <li><a href="http://dotnetpattern.com/csharp-interface">C# Interface</a></li>
+
+        </ul>
+    </li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/threading-synchronization">.Net Threading</a>
+        <ul class="dropdown">
+            <li> <a href="http://dotnetpattern.com/threading-synchronization"> Threading Tutorial</a></li>
+            <li> <a href="http://dotnetpattern.com/multi-threading-interview-questions">Interview Questions</a></li>
+        </ul>
+    </li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/category/wpf">WPF</a>
+        <ul class="dropdown">
+            <li> <a href="http://dotnetpattern.com/wpf-architecture">Architecture</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-dispatcher">WPF Dispatcher</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-mvvm-introduction">MVVM Light Toolkit</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-listview-gridview-bindings-itemtemplate-examples">WPF ListView</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-datagrid-introduction">WPF DataGrid</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-tabcontrol-introduction">WPF TabControl</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-backgroundworker">Background Worker</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-label">WPF Label</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-gridsplitter">Grid Splitter</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-interview-questions-for-beginners-advanced-part-1">Interview Questions</a></li>
+        </ul>
+    </li>
+    <li><a href="http://dotnetpattern.com/introduction-to-design-patterns">Design Patterns</a></li>
+    <li><a href="http://dotnetpattern.com/LINQ-tutorials">LINQ</a></li>
+    <li><a href="http://dotnetpattern.com/introduction-angularjs">AngularJS</a></li>
+    <li><a href="http://dotnetpattern.com/typescript-tutorial">TypeScript</a></li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/category/Unit-Testing-Frameworks">Testing </a>
+        <ul class="dropdown">
+            <li> <a href="http://dotnetpattern.com/nunit-introduction">NUnit Tutorial</a></li>
+            <li> <a href="http://dotnetpattern.com/Rhino-Mocks-Tutorial">Rhino Mocks Tutorial</a></li>
+        </ul>
+    </li>
+    <li class="custom-menu">
+        <a href="http://dotnetpattern.com/category/interview-questions">Interview Questions</a>
+        <ul class="dropdown">
+            <li> <a href="http://dotnetpattern.com/top-linq-interview-questions">LINQ Questions</a></li>
+            <li> <a href="http://dotnetpattern.com/csharp-oops-interview-questions-top-10">C# OOPS Questions</a></li>
+            <li> <a href="http://dotnetpattern.com/multi-threading-interview-questions">MultiThreading</a></li>
+            <li> <a href="http://dotnetpattern.com/sql-server-interview-questions-series-part1">SQL Questions</a></li>
+            <li> <a href="http://dotnetpattern.com/wpf-interview-questions-for-beginners-advanced-part-1">WPF Questions</a></li>
+            <li> <a href="http://dotnetpattern.com/threading-interview-questions-series-part-1">Threading Questions</a></li>
+        </ul>
+    </li>
+</ul>
+        </nav>
+    </div>
+    <!-- End Mobile Menu --> 
+
+    <div class="container my-container my-container-outer">
+        
+        <div class="body-content">
+            <div class="row">
+                <div class="col-md-2 hidden-sm hidden-xs leftPaddingZero rightPaddingZero">
+                    
+
+            <div class="col-xs-12 leftPaddingZero rightPaddingZero">
+                <h5 class="sidebarHeader">MVVM</h5>
+                <ul class="sidebar-list">
+                            <li><a class="leftPaddingFive" title="WPF MVVM Introduction" href="http://dotnetpattern.com/wpf-mvvm-introduction">Introduction</a></li>
+                            <li><a class="leftPaddingFive" title="Start with MVVM Light Toolkit" href="http://dotnetpattern.com/mvvm-light-introduction">MVVM Light Toolkit Introduction</a></li>
+                            <li><a class="leftPaddingFive" title="MVVM Light Toolkit Example" href="http://dotnetpattern.com/mvvm-light-toolkit-example">Examples</a></li>
+                            <li class="liselected"><a class="leftPaddingFive aselected" title="MVVM Light Messenger" href="http://dotnetpattern.com/mvvm-light-messenger"><b>Messenger</b></a></li>
+                </ul>
+            </div>
+
+                    <div class="col-xs-12 leftPaddingZero">
+                        <h5 class="sidebarHeader">Tags</h5>
+                        <div class="tagCloud topMargin">
+                                <a href="http://dotnetpattern.com/tag/wpf" title="wpf">wpf</a>
+                                <a href="http://dotnetpattern.com/tag/CSharp" title="C#">C#</a>
+                                <a href="http://dotnetpattern.com/tag/interview" title="interview">interview</a>
+                                <a href="http://dotnetpattern.com/tag/reflection" title="reflection">reflection</a>
+                                <a href="http://dotnetpattern.com/tag/mvvm" title="mvvm">mvvm</a>
+                                <a href="http://dotnetpattern.com/tag/mvvm-light" title="mvvm light">mvvm light</a>
+                                <a href="http://dotnetpattern.com/tag/interface" title="interface">interface</a>
+                                <a href="http://dotnetpattern.com/tag/generics" title="generics">generics</a>
+                                <a href="http://dotnetpattern.com/tag/arraylist" title="arraylist">arraylist</a>
+                                <a href="http://dotnetpattern.com/tag/hashtable" title="hashtable">hashtable</a>
+                                <a href="http://dotnetpattern.com/tag/using" title="using">using</a>
+                                <a href="http://dotnetpattern.com/tag/design-patterns" title="design patterns">design patterns</a>
+                                <a href="http://dotnetpattern.com/tag/visitor" title="visitor">visitor</a>
+                                <a href="http://dotnetpattern.com/tag/template" title="template">template</a>
+                                <a href="http://dotnetpattern.com/tag/flyweight" title="flyweight">flyweight</a>
+                                <a href="http://dotnetpattern.com/tag/strategy" title="strategy">strategy</a>
+                                <a href="http://dotnetpattern.com/tag/memento" title="memento">memento</a>
+                                <a href="http://dotnetpattern.com/tag/mediator" title="mediator">mediator</a>
+                                <a href="http://dotnetpattern.com/tag/command" title="command">command</a>
+                                <a href="http://dotnetpattern.com/tag/wcf" title="wcf">wcf</a>
+                                <a href="http://dotnetpattern.com/tag/instance-management" title="instance management">instance management</a>
+                                <a href="http://dotnetpattern.com/tag/application" title="application">application</a>
+                                <a href="http://dotnetpattern.com/tag/architecture" title="architecture">architecture</a>
+                                <a href="http://dotnetpattern.com/tag/ajax" title="ajax">ajax</a>
+                                <a href="http://dotnetpattern.com/tag/angularjs" title="angularjs">angularjs</a>
+                                <a href="http://dotnetpattern.com/tag/forms" title="forms">forms</a>
+                                <a href="http://dotnetpattern.com/tag/validations" title="validations">validations</a>
+                                <a href="http://dotnetpattern.com/tag/nested-forms" title="nested forms">nested forms</a>
+                                <a href="http://dotnetpattern.com/tag/filters" title="filters">filters</a>
+                                <a href="http://dotnetpattern.com/tag/controllers" title="controllers">controllers</a>
+                                <a href="http://dotnetpattern.com/tag/directives" title="directives">directives</a>
+                                <a href="http://dotnetpattern.com/tag/bindings" title="bindings">bindings</a>
+                                <a href="http://dotnetpattern.com/tag/expressions" title="expressions">expressions</a>
+                                <a href="http://dotnetpattern.com/tag/ng-app" title="ng-app">ng-app</a>
+                                <a href="http://dotnetpattern.com/tag/ng-model" title="ng-model">ng-model</a>
+                                <a href="http://dotnetpattern.com/tag/environment-setup" title="environment setup">environment setup</a>
+                                <a href="http://dotnetpattern.com/tag/threading" title="threading">threading</a>
+                                <a href="http://dotnetpattern.com/tag/synchronization" title="synchronization">synchronization</a>
+                                <a href="http://dotnetpattern.com/tag/entity-framework" title="entity framework">entity framework</a>
+                                <a href="http://dotnetpattern.com/tag/rhino" title="rhino">rhino</a>
+                                <a href="http://dotnetpattern.com/tag/mocks" title="mocks">mocks</a>
+                                <a href="http://dotnetpattern.com/tag/test-doubles" title="test doubles">test doubles</a>
+                                <a href="http://dotnetpattern.com/tag/oops" title="oops">oops</a>
+                                <a href="http://dotnetpattern.com/tag/app" title="app">app</a>
+                                <a href="http://dotnetpattern.com/tag/android" title="android">android</a>
+                                <a href="http://dotnetpattern.com/tag/linq" title="linq">linq</a>
+                                <a href="http://dotnetpattern.com/tag/testing" title="testing">testing</a>
+                                <a href="http://dotnetpattern.com/tag/nunit" title="nunit">nunit</a>
+                                <a href="http://dotnetpattern.com/tag/testcase" title="testcase">testcase</a>
+                                <a href="http://dotnetpattern.com/tag/typescript" title="typescript">typescript</a>
+                                <a href="http://dotnetpattern.com/tag/javascript" title="javascript">javascript</a>
+                                <a href="http://dotnetpattern.com/tag/abstract" title="abstract">abstract</a>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-7 col-xs-12 leftPaddingFive rightPaddingFive">
+                    
+
+
+
+
+
+
+
+
+<div id="myContent">
+    <article class="articleLoop pageContent">
+        <header>
+            <h1>MVVM Light Messenger</h1>
+            <div class="metaContent">
+                <span class="metaCategory">
+                        <i class="fa fa-folder-open-o"></i> <a href="http://dotnetpattern.com/category/wpf">WPF</a><span>&nbsp;</span>
+                        <i class="fa fa-folder-open-o"></i> <a href="http://dotnetpattern.com/category/mvvm">MVVM</a><span>&nbsp;</span>
+                </span>
+                <span class="metaTags">
+                        <i class="fa fa-tags"></i> <a href="http://dotnetpattern.com/tag/wpf">wpf</a><span>&nbsp;</span>
+                        <i class="fa fa-tags"></i> <a href="http://dotnetpattern.com/tag/mvvm">mvvm</a><span>&nbsp;</span>
+                        <i class="fa fa-tags"></i> <a href="http://dotnetpattern.com/tag/mvvm-light">mvvm light</a><span>&nbsp;</span>
+
+                </span>
+            </div>
+            
+        </header>
+        
+        <div class="entryContent clearfix">
+            <p>MVVM Light Messenger&nbsp;is a class that allows exchange messages between objects. Messenger class is mainly used for sending messages between viewmodels. Messenger class decreases coupling between viewmodels. Every viewmodel can communicate with another viewmodel without any association between them.</p>
+
+<p style="text-align: justify;"><img alt="MVVM-Light-Messenger-Message-Flow" src="MVVM-Light-Messenger-Message-Flow.png"></p>
+
+<p style="text-align: justify;">Messenger is an implementation of Mediator pattern in MVVM Light toolkit. You can know more about Mediator pattern <a href="http://en.wikipedia.org/wiki/Mediator_pattern" target="_top">here</a>.</p>
+
+<p style="text-align: justify;"></p><div class="col-xs-12 topMarginTwentyFive"> <script async="" src="adsbygoogle.js"></script><!-- DotNetPattern_PostAfterHeading --><ins data-adsbygoogle-status="done" class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-6100748065458927" data-ad-slot="9084697743" data-ad-format="auto"><ins id="aswift_1_expand" style="display: inline-table; border: medium none; height: 90px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 864px; background-color: transparent;"><ins id="aswift_1_anchor" style="display: block; border: medium none; height: 90px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 864px; background-color: transparent;"><iframe src="mvvm-light-messenger_1.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left: 0px; position: absolute; top: 0px; width: 864px; height: 90px;" frameborder="0" height="90" width="864"></iframe></ins></ins></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div><p></p>
+
+<h2>Messenger classes in MVVM Light Toolkit</h2>
+
+<ol>
+	<li style="text-align: justify;">
+	<p><span style="font-size: 13px;"><strong>IMessenger</strong><br>
+	Interface which all the Messenger classes must inherit. Some methods are Register, Send, and Unregister.</span></p>
+	</li>
+	<li style="text-align: justify;">
+	<p><span style="font-size: 13px;"><strong>Messenger</strong><br>
+	Messenger class is the implementation of IMessenger interface. This class is used for send and receive messages between objects.&nbsp;</span></p>
+	</li>
+</ol>
+
+<h3><strong>Messenger Class Important Properties and Methods</strong></h3>
+
+<ol>
+	<li style="text-align: justify;">
+	<p><strong>Default (static) : IMessenger</strong><br>
+	<span style="font-size: 13px;">Provides default instance of Messenger, allowing registering and sending messages in a static manner.</span></p>
+	</li>
+	<li style="text-align: justify;">
+	<p><strong><span style="font-size: 13px;">Reset (static) : void</span></strong><br>
+	<span style="font-size: 13px;">Delete the default instance of Messenger. When you again use Default property of Messenger, it creates new Messenger class.</span></p>
+	</li>
+	<li style="text-align: justify;">
+	<p><span style="font-size: 13px;"><strong>Register&lt;TMessage&gt;(object recipient, object token, bool receiveDerivedMessagesToo, Action&lt;TMessage&gt; action) : void</strong><br>
+	This method&nbsp;</span><span style="font-size: 13px;">registers a recipient for a type of message TMessage. TMessage can be anything like int, string or custom class. MVVM Light toolkit also provides some classes which can be used for sending the message like NotificationMessage, PropertyChangedMessage&lt;T&gt; etc. I described these classes later in this section.&nbsp;</span>?<br>
+	All four parameters usage are:</p>
+
+	<ul style="margin-left: 40px;">
+		<li style="text-align: justify;">
+		<p><span style="font-size: 13px;"><em>object recipient</em> :&nbsp;</span>?The object which will receive the message. You can use "this" for registering current object for receiving messages or you can specify other objects.</p>
+		</li>
+		<li style="text-align: justify;">
+		<p><span style="font-size: 13px;"><em>object token</em> :&nbsp;</span>Token is a keyword for sending the message to those objects who register with that particular keyword. For example, if two recipients register with the "ViewModelA" token and "ViewModelB" token and message is send using "ViewModelA" token then only that object got the message that register with "ViewModelA" token.</p>
+		</li>
+		<li style="text-align: justify;">
+		<p><span style="font-size: 13px;"><em>bool receiveDerivedMessagesToo</em> :&nbsp;</span>If we set this flag to "true", then the recipient also gets message types which inherit from &lt;TMessage&gt;. For example, if bike and car both implement the interface IAutomobile, then registering with the type &lt;IAutomobile&gt; and set the receiveDerivedMessagesToo flag to true, allows recipient to get bike and car messages too.</p>
+		</li>
+		<li style="text-align: justify;">
+		<p><span style="font-size: 13px;"><em>Action&lt;TMessage&gt; action</em> :&nbsp;</span>The action delegate will be executed when message of &lt;TMessage&gt; is sent from the Send message.</p>
+		</li>
+	</ul>
+	</li>
+	<li style="text-align: justify;">
+	<p><strong><span style="font-size: 13px;">Unregister&lt;TMessage&gt;(object recipient, object token, Action&lt;TMessage&gt; action): void</span></strong><br>
+	<span style="font-size: 13px;">This method un-register a recipient for a type of message TMessage.</span></p>
+	</li>
+	<li style="text-align: justify;">
+	<p><strong><span style="font-size: 13px;">Send&lt;TMessage&gt;(TMessage message, object token) : void</span></strong><br>
+	This method sends messages to registered recipients. Only those recipients will receive messages that register for that particular &lt;TMessage&gt;.?<br>
+	<span style="font-size: 13px;">All two parameters usage are: </span></p>
+
+	<ul style="margin-left: 40px;">
+		<li style="text-align: justify;"><em>TMessage message</em> : Message parameter is an instance of type TMessage.</li>
+		<li style="text-align: justify;"><em>object token</em> : Token as explained earlier is a keyword for sending the messages to only those recipients that register for that particular keyword.?</li>
+	</ul>
+	</li>
+	<li style="text-align: justify;">
+	<p><strong><span style="font-size: 13px;">Cleanup : void&nbsp;</span></strong><br>
+	<span style="font-size: 13px;">This method scans the recipients list for the dead recipients. All recipients are stores as&nbsp;</span><a href="http://msdn.microsoft.com/en-us/library/system.weakreference(v=vs.110).aspx" style="font-size: 13px; text-align: justify;" target="_top">WeakReferences</a><span style="font-size: 13px;">, they can be claimed during the garbage collection process. Cleanup method removes those recipients that are collected by garbage collector.</span></p>
+	</li>
+</ol>
+
+<p style="text-align: justify;"></p>
+
+<h2 style="text-align: justify;">Messages Classes in MVVM Light Toolkit</h2>
+
+<ol>
+	<li style="text-align: justify;">
+	<p><strong><span style="font-size: 13px;">MessageBase</span></strong><br>
+	<span style="font-size: 13px;">Base class for all messages types used by the Messenger for sending messages. There are only two properties exists in this class Sender and Target. You can only set both properties in the constructor. Both properties are of type object. Setting both properties are not necessary. These exist only for sending indications to recipients.</span></p>
+	</li>
+	<li>
+	<p><strong><span style="font-size: 13px;">NotificationMessage</span></strong><br>
+	<span style="font-size: 13px;">Use for sending "string" message notification to recipient(s).</span></p>
+	</li>
+	<li>
+	<p><strong><span style="font-size: 13px;">NotificationMessage&lt;T&gt;</span></strong><br>
+	<span style="font-size: 13px;">Use for sending "string" message notification and a generic value &lt;T&gt; to recipient(s).</span></p>
+	</li>
+	<li style="text-align: justify;">
+	<p><strong><span style="font-size: 13px;">NotificationMessageAction</span></strong><br>
+	<span style="font-size: 13px;">Use for sending "string" message notification with a callback Action. When the recipient processed the message, it can execute the callback Action.</span></p>
+	</li>
+	<li style="text-align: justify;">
+	<p><strong><span style="font-size: 13px;">NotificationMessageAction&lt;TCallbackParameter&gt;</span></strong><br>
+	<span style="font-size: 13px;">Use for sending "string" message notification with a callback Action with one &lt;TCallbackParamter&gt; parameter. When the recipient processed with message, it can execute the callback Action with one parameter.</span></p>
+	</li>
+	<li>
+	<p><strong><span style="font-size: 13px;">PropertyChangedMessage&lt;T&gt;</span></strong><br>
+	<span style="font-size: 13px;">Use for sending the property name along with its old value and new value.</span></p>
+	</li>
+	<li style="text-align: justify;">
+	<p><strong><span style="font-size: 13px;">DialogMessage&nbsp;</span><em>[deprecated]</em></strong><br>
+	<span style="font-size: 13px;">Use for requesting to display the messagebox. This class also provides a callback Action. This callback is used for notify the sender about the user's choice in the message box.</span></p>
+	</li>
+	<li>
+	<p><strong><span style="font-size: 13px;">GenericMessage&lt;T&gt;</span></strong><br>
+	<span style="font-size: 13px;">Use for sending generic value to a recipient. Recipient can access the generic value using Content property.</span></p>
+	</li>
+</ol>
+
+<p><strong>You can create your own custom messages classes by inherit from the MessageBase class.</strong></p>
+
+<h2>ViewModel support for Messenger</h2>
+
+<p style="text-align: justify;">Every viewmodel inherits from ViewModelBase in MVVM Light Toolkit. ViewModelBase provides a MessengerInstance property which by default returns the default instance of Messenger.</p>
+
+<pre class="brush:csharp;">protected IMessenger MessengerInstance
+{
+	get
+	{
+		return this._messengerInstance ?? Messenger.Default;
+	}
+	set
+	{
+		this._messengerInstance = value;
+	}
+}</pre>
+
+<p style="text-align: justify;">If you don't want to use default instance of Messenger and want to create your own messenger then you can pass that your custom messenger class in the constructor of ViewModelBase class.</p>
+
+<pre class="brush:csharp;">public class CustomMessengerForModuelAandB : Messenger
+{
+}
+
+ public class ViewModelLocator
+{
+	public ViewModelLocator()
+	{
+		ServiceLocator.SetLocatorProvider(() =&gt; SimpleIoc.Default);
+
+		SimpleIoc.Default.Register&lt;SearchViewModel&gt;();
+		SimpleIoc.Default.Register&lt;CustomMessengerForModuelAandB&gt;();
+
+		SimpleIoc.Default.Register&lt;MainViewModel&gt;();
+	}
+	
+	public MainViewModel MainViewModel
+	{
+		get
+		{
+			return ServiceLocator.Current.GetInstance&lt;MainViewModel&gt;();
+		}
+	}
+}
+	
+ public class SearchViewModel : ViewModelBase
+{
+	
+	public SearchViewModel(CustomMessengerForModuelAandB customMessenger)
+		: base(customMessenger)
+	{
+	}
+	
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send&lt;GenericMessage&lt;int&gt;&gt;(new GenericMessage&lt;int&gt;(99));
+	}
+	...
+}</pre>
+
+<h2><img alt="MVVM-Light-Messenger" src="MVVM-Light-Messenger.jpg"></h2>
+
+<h2>MVVM Light Messenger Classes Usage/Examples</h2>
+
+<h4>NotificationMessage Usage/Example</h4>
+
+<pre class="brush:csharp;">public class ViewModelA : ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send&lt;NotificationMessage&gt;(new NotificationMessage("notification message"));
+	}
+}
+
+public class ViewModelB&nbsp;: ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register&lt;NotificationMessage&gt;(this, NotifyMe);
+	}
+
+	public void NotifyMe(NotificationMessage notificationMessage)
+	{
+		string notification = notificationMessage.Notification;
+		//do your work
+	}
+}</pre>
+
+<h4>NotificationMessage&lt;T&gt; Usage/Example</h4>
+
+<pre class="brush:csharp;">public class ViewModelA&nbsp;: ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send&lt;NotificationMessage&lt;string&gt;&gt;(new NotificationMessage&lt;string&gt;("Generic Value", "notification message"));
+	}
+}
+
+public class ViewModelB&nbsp;: ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register&lt;NotificationMessage&lt;string&gt;&gt;(this, NotifyMe);
+	}
+
+	public void NotifyMe(NotificationMessage notificationMessage)
+	{
+		string notification = notificationMessage.Notification;
+		string genericValue = notificationMessage.Content;
+		//do your work
+	}
+}</pre>
+
+<h4>NotificationMessageAction Usage/Example</h4>
+
+<pre class="brush:csharp;">public class ViewModelA&nbsp;: ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send&lt;NotificationMessageAction&gt;(new NotificationMessageAction("notification message", SenderAction));
+	}
+
+	/// &lt;summary&gt;
+	/// I am callback
+	/// &lt;/summary&gt;
+	public void SenderAction()
+	{
+
+	}
+}
+
+public class ViewModelB&nbsp;: ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register&lt;NotificationMessageAction&gt;(this, NotifyMe);
+	}
+
+	public void NotifyMe(NotificationMessageAction notificationMessageAction)
+	{
+		string notification = notificationMessageAction.Notification;
+		//do your work
+		notificationMessageAction.Execute(); //Execute the callback
+	}
+}</pre>
+
+<h4>NotificationMessageAction&lt;TCallbackParameter&gt; Usage/Example</h4>
+
+<pre class="brush:csharp;">public class ViewModelA&nbsp;: ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send&lt;NotificationMessageAction&lt;string&gt;&gt;(new NotificationMessageAction&lt;string&gt;("notification message", SenderAction));
+	}
+
+	/// &lt;summary&gt;
+	/// I am callback
+	/// &lt;/summary&gt;
+	public void SenderAction(string messageFromRecipient)
+	{
+
+	}
+}
+
+public class ViewModelB&nbsp;: ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register&lt;NotificationMessageAction&lt;string&gt;&gt;(this, NotifyMe);
+	}
+
+	public void NotifyMe(NotificationMessageAction&lt;string&gt; notificationMessageAction)
+	{
+		string notification = notificationMessageAction.Notification;
+		//do your work
+		notificationMessageAction.Execute("callback parameter"); //Execute the callback
+	}
+}</pre>
+
+<h4>PropertyChangedMessage&lt;T&gt; Usage/Example</h4>
+
+<pre class="brush:csharp;">public class ViewModelA&nbsp;: ViewModelBase
+{
+	public string SearchText
+	{
+		get
+		{
+			return searchText;
+		}
+		set
+		{
+			Set&lt;string&gt;(() =&gt; this.SearchText, ref searchText, value);
+		}
+	}
+
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send&lt;PropertyChangedMessage&lt;string&gt;&gt;(new PropertyChangedMessage&lt;string&gt;("", this.SearchText, "SearchText"));
+	}
+}
+
+public class ViewModelB&nbsp;: ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register&lt;PropertyChangedMessage&lt;string&gt;&gt;(this, SearchViewModelChanged);
+	}
+
+	private void SearchViewModelChanged(PropertyChangedMessage&lt;string&gt; propertyDetails)
+	{
+		if (propertyDetails.PropertyName == "SearchText")
+		{
+			LoadEmployees(propertyDetails.NewValue);
+		}
+	}
+}</pre>
+
+<h4>DialogMessage&nbsp;Usage/Example</h4>
+
+<pre class="brush:csharp;">public class ViewModelA&nbsp;: ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send&lt;DialogMessage&gt;(new DialogMessage("Do you want to continue?", DialogResultCallback));
+	}
+
+	public void DialogResultCallback(System.Windows.MessageBoxResult result)
+	{
+		if (result == System.Windows.MessageBoxResult.OK)
+		{
+		}
+	}
+}
+
+public class ViewModelB&nbsp;: ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register&lt;DialogMessage&gt;(this, ShowDialog);
+	}
+
+	public void ShowDialog(DialogMessage dialogMessage)
+	{
+		MessageBox.Show(dialogMessage.Content, dialogMessage.Caption);
+	}
+}</pre>
+
+<h4>GenericMessage&lt;T&gt;&nbsp;Usage/Example</h4>
+
+<pre class="brush:csharp;">public class ViewModelA&nbsp;: ViewModelBase
+{
+	public void SearchCommandMethod()
+	{
+		MessengerInstance.Send&lt;GenericMessage&lt;int&gt;&gt;(new GenericMessage&lt;int&gt;(99));
+	}
+}
+
+public class ViewModelB&nbsp;: ViewModelBase
+{
+	public EmployeeListViewModel()
+	{
+		MessengerInstance.Register&lt;GenericMessage&lt;int&gt;&gt;(this, NotifyMe);
+	}
+
+	public void NotifyMe(GenericMessage&lt;int&gt; genericMessage)
+	{
+		int result = genericMessage.Content;
+		//do your work
+	}
+}
+</pre>
+
+<p></p>
+
+        </div>
+        <div class="col-xs-12 leftPaddingZero rightPaddingZero">
+            <script async="" src="adsbygoogle.js"></script>
+            <!-- DotNetPattern_AfterPost -->
+            <ins data-adsbygoogle-status="done" class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-6100748065458927" data-ad-slot="1561430946" data-ad-format="auto"><ins id="aswift_2_expand" style="display: inline-table; border: medium none; height: 90px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 914px; background-color: transparent;"><ins id="aswift_2_anchor" style="display: block; border: medium none; height: 90px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 914px; background-color: transparent;"><iframe src="mvvm-light-messenger_3.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left: 0px; position: absolute; top: 0px; width: 914px; height: 90px;" frameborder="0" height="90" width="914"></iframe></ins></ins></ins>
+            <script>
+
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+            <div class="col-xs-12 topMarginTwentyFive leftPaddingZero rightPaddingZero">
+                <div class="col-xs-6 text-left leftPaddingZero rightPaddingZero">
+                        <a class="btn btn-success fullWidth tenMarginRight" href="http://dotnetpattern.com/mvvm-light-toolkit-example" title="MVVM Light Toolkit Example">
+                            <span class="hidden-xs"><i class="fa fa-arrow-left"></i>  MVVM Light Toolkit Example</span><span class="visible-xs"><i class="fa fa-arrow-left"></i> Previous</span>
+                        </a>
+                </div>
+                <div class="col-xs-6 text-right leftPaddingZero rightPaddingFive">
+                </div>
+            </div>
+        <div class="col-xs-12 shareThisSidebar">
+            <div class="shareSidebarContent btn-group btn-group-sm pageShare" data-fullurl="http://dotnetpattern.com/mvvm-light-messenger" data-title="MVVM Light Messenger" data-summary="MVVM Light Messenger is a class that allows exchange messages between objects. Messenger class is mainly used for sending messages between viewmodels.">
+                <button type="button" class="btn hidden-sm hidden-xs" style="color: rgb(0, 0, 0); width: auto; background-color: rgb(255, 255, 255); font-family: &quot;Comic Sans MS&quot;;">
+                    <b>SHARE THIS POST</b> <i class="fa fa-bullhorn"></i>&nbsp;
+                </button>
+                <button type="button" class="btn btn-primary btn-group-sm facebook facebookShare"><i class="fa fa-facebook"></i></button>
+                <button type="button" class="btn btn-primary btn-group-sm twitter twitterShare"><i class="fa fa-twitter"></i></button>
+                <button type="button" class="btn btn-primary btn-group-sm googleplus googlePlusShare"><i class="fa fa-google-plus"></i></button>
+                <button type="button" class="btn btn-primary btn-group-sm linkedin linkedInShare"><i class="fa fa-linkedin"></i></button>
+                <button type="button" class="btn btn-primary btn-group-sm stumbleupon stumbleUponShare"><i class="fa fa-stumbleupon"></i></button>
+                <button type="button" class="btn btn-primary btn-group-sm reddit redditShare"><i class="fa fa-reddit"></i></button>
+                <button type="button" class="btn btn-primary btn-group-sm delicious deliciousShare"><i class="fa fa-delicious"></i></button>
+            </div>
+        </div>
+        
+        <div class="col-xs-12">
+            <div id="disqus_thread"></div>
+            <script>
+
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                 */
+                /*
+                var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function () {  // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+
+                    s.src = '//dotnetpattern.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+        
+    </article>
+</div>
+
+
+
+
+                   
+                </div>
+                <div class="col-md-3 leftPaddingZero rightPaddingZero">
+                    <div class="col-xs-12 topMarginTwentyFive leftPaddingZero rightPaddingZero">
+
+                        <div class="col-xs-12 leftPaddingZero fiveBottomMargin">
+                            <div class="input-group">
+                                <input id="searchText" class="form-control" placeholder="Search for..." type="text">
+                                <span class="input-group-btn">
+                                    <button id="searchButton" class="btn btn-primary" type="button">Go!</button>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- DotNetPatternSidebarResLarge -->
+                        <ins data-adsbygoogle-status="done" class="adsbygoogle" style="display: inline-block; width: 300px; height: 600px;" data-ad-client="ca-pub-6100748065458927" data-ad-slot="9350599740"><ins id="aswift_3_expand" style="display: inline-table; border: medium none; height: 600px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 300px; background-color: transparent;"><ins id="aswift_3_anchor" style="display: block; border: medium none; height: 600px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 300px; background-color: transparent;"><iframe src="mvvm-light-messenger_4.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left: 0px; position: absolute; top: 0px; width: 300px; height: 600px;" frameborder="0" height="600" width="300"></iframe></ins></ins></ins>
+                        <script>
+
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        <div id="google-ads-1">
+
+                        </div>
+                        <script type="text/javascript">
+
+
+                            /* Calculate the width of available ad space */
+                            ad = document.getElementById('google-ads-1');
+
+                            if (ad.getBoundingClientRect().width) {
+                                adWidth = ad.getBoundingClientRect().width; // for modern browsers
+                            } else {
+                                adWidth = ad.offsetWidth; // for old IE
+                            }
+
+                            /* Replace ca-pub-XXX with your AdSense Publisher ID */
+                            google_ad_client = "ca-pub-6100748065458927";
+
+                            /* Replace 1234567890 with the AdSense Ad Slot ID */
+                            google_ad_slot = "3528572942";
+
+                            /* Do not change anything after this line */
+                            if (adWidth >= 728)
+                                google_ad_size = ["728", "90"];  /* Leaderboard 728x90 */
+                            else if (adWidth >= 468)
+                                google_ad_size = ["468", "60"];  /* Banner (468 x 60) */
+                            else if (adWidth >= 336)
+                                google_ad_size = ["336", "280"]; /* Large Rectangle (336 x 280) */
+                            else if (adWidth >= 300)
+                                google_ad_size = ["300", "250"]; /* Medium Rectangle (300 x 250) */
+                            else if (adWidth >= 250)
+                                google_ad_size = ["250", "250"]; /* Square (250 x 250) */
+                            else if (adWidth >= 200)
+                                google_ad_size = ["200", "200"]; /* Small Square (200 x 200) */
+                            else if (adWidth >= 180)
+                                google_ad_size = ["180", "150"]; /* Small Rectangle (180 x 150) */
+                            else
+                                google_ad_size = ["125", "125"]; /* Button (125 x 125) */
+
+                            document.write(
+                             '<ins class="adsbygoogle" style="display:inline-block;width:'
+                              + google_ad_size[0] + 'px;height:'
+                              + google_ad_size[1] + 'px" data-ad-client="'
+                              + google_ad_client + '" data-ad-slot="'
+                              + google_ad_slot + '"></ins>'
+                            );
+
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+
+                        </script><ins data-adsbygoogle-status="done" class="adsbygoogle" style="display: inline-block; width: 336px; height: 280px;" data-ad-client="ca-pub-6100748065458927" data-ad-slot="3528572942"><ins id="aswift_4_expand" style="display: inline-table; border: medium none; height: 280px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 336px; background-color: transparent;"><ins id="aswift_4_anchor" style="display: block; border: medium none; height: 280px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 336px; background-color: transparent;"><iframe src="mvvm-light-messenger_5.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_4" name="aswift_4" style="left: 0px; position: absolute; top: 0px; width: 336px; height: 280px;" frameborder="0" height="280" width="336"></iframe></ins></ins></ins>
+
+                        <script async="" src="adsbygoogle.js">
+                        </script>
+
+                        
+                        
+                        <!-- DotNetSidebarResLargeFixedVertical -->
+                        
+                        
+                       
+                    </div>
+                    <div class="col-xs-12 topMarginTwentyFive leftPaddingZero subscriberBox">
+                        <p>Join our newsletter and get an occasional email with a technology and <b>DotNetPattern.com</b> news update.</p>
+                        <div id="subscribeError" class="col-xs-12 alert alert-danger padding10" style="display: none;">
+                            <strong>Error!</strong> Invalid Email
+                        </div>
+                        <div id="subscribeSuccess" class="col-xs-12 alert alert-success padding10" style="display: none;">
+                            <strong>Success!</strong> Successfully subscribed.
+                        </div>
+                        <div id="subscribeAlreadyRegistered" class="col-xs-12 alert alert-danger padding10" style="display: none;">
+                            <strong>Error!</strong> Email already registered.
+                        </div>
+                        <div class="input-group topMargin padding10">
+                            <input id="emailText" class="form-control" placeholder="email id" type="text">
+                            <span class="input-group-btn">
+                                <button id="subscribeButton" class="btn btn-secondary" type="button"><i class="fa fa-envelope"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+            </div>
+        </div>
+        <footer class="my-footer row">
+            <div class="col-md-6 my-footer-widget">
+                <h6 class="my-footer-widget-title">RECENT POSTS</h6>
+                <ul class="my-footer-list">
+        <li><a href="http://dotnetpattern.com/typescript-abstract-class">TypeScript Abstract Class</a></li>
+        <li><a href="http://dotnetpattern.com/typescript-interfaces">TypeScript Interfaces</a></li>
+        <li><a href="http://dotnetpattern.com/typescript-rest-parameters">TypeScript Rest Parameters</a></li>
+        <li><a href="http://dotnetpattern.com/typescript-optional-parameters">Typescript Optional Parameters</a></li>
+        <li><a href="http://dotnetpattern.com/typescript-switch-case">TypeScript Switch Case</a></li>
+</ul>
+            </div>
+            <div class="col-md-6 my-footer-widget">
+                <h6 class="my-footer-widget-title">POPULAR POSTS</h6>
+                <ul class="my-footer-list">
+        <li><a href="http://dotnetpattern.com/mvvm-light-toolkit-example">MVVM Light Toolkit Example</a></li>
+        <li><a href="http://dotnetpattern.com/wpf-dispatcher">WPF Dispatcher - Introduction and How to use?</a></li>
+        <li><a href="http://dotnetpattern.com/threading-interview-questions-series-part-1">.NET Threading Interview Questions Series - Part 1</a></li>
+        <li><a href="http://dotnetpattern.com/threading-manualresetevent">ManualResetEvent</a></li>
+        <li><a href="http://dotnetpattern.com/mvvm-light-messenger">MVVM Light Messenger</a></li>
+</ul>
+            </div>
+            
+            <div class="col-md-6 my-footer-widget">
+                <h6 class="my-footer-widget-title">Archives</h6>
+                <ul class="my-footer-list">
+                        <li><a href="http://dotnetpattern.com/2018/01" title="Archives 1 - 2018">January 2018</a></li>
+                        <li><a href="http://dotnetpattern.com/2017/12" title="Archives 12 - 2017">December 2017</a></li>
+                        <li><a href="http://dotnetpattern.com/2017/11" title="Archives 11 - 2017">November 2017</a></li>
+                        <li><a href="http://dotnetpattern.com/2017/06" title="Archives 6 - 2017">June 2017</a></li>
+                        <li><a href="http://dotnetpattern.com/2017/04" title="Archives 4 - 2017">April 2017</a></li>
+                        <li><a href="http://dotnetpattern.com/2017/03" title="Archives 3 - 2017">March 2017</a></li>
+                        <li><a href="http://dotnetpattern.com/2017/02" title="Archives 2 - 2017">February 2017</a></li>
+                        <li><a href="http://dotnetpattern.com/2016/11" title="Archives 11 - 2016">November 2016</a></li>
+                        <li><a href="http://dotnetpattern.com/2016/08" title="Archives 8 - 2016">August 2016</a></li>
+                        <li><a href="http://dotnetpattern.com/2016/06" title="Archives 6 - 2016">June 2016</a></li>
+                        <li><a href="http://dotnetpattern.com/2016/04" title="Archives 4 - 2016">April 2016</a></li>
+                        <li><a href="http://dotnetpattern.com/2016/03" title="Archives 3 - 2016">March 2016</a></li>
+                        <li><a href="http://dotnetpattern.com/2016/02" title="Archives 2 - 2016">February 2016</a></li>
+                        <li><a href="http://dotnetpattern.com/2016/01" title="Archives 1 - 2016">January 2016</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6 my-footer-widget">
+                <h6 class="my-footer-widget-title">CATEGORIES</h6>
+                <ul class="my-footer-list">
+                            <li><a href="http://dotnetpattern.com/category/csharp/">C#</a></li>
+                            <li><a href="http://dotnetpattern.com/category/wpf/">WPF</a></li>
+                            <li><a href="http://dotnetpattern.com/category/wcf/">WCF</a></li>
+                            <li><a href="http://dotnetpattern.com/category/design-patterns/">Design Patterns</a></li>
+                            <li><a href="http://dotnetpattern.com/category/javascript-frameworks/">Javascript Frameworks</a></li>
+                            <li><a href="http://dotnetpattern.com/category/interview-questions/">Interview Questions</a></li>
+                                <li><a href="http://dotnetpattern.com/category/javascript-frameworks/angularjs/">AngularJS</a></li>
+                                <li><a href="http://dotnetpattern.com/category/wpf/mvvm/">MVVM</a></li>
+                            <li><a href="http://dotnetpattern.com/category/Unit-Testing-Frameworks/">Testing</a></li>
+                                <li><a href="http://dotnetpattern.com/category/Unit-Testing-Frameworks/Rhino-Mocks/">Rhino Mocks</a></li>
+                                <li><a href="http://dotnetpattern.com/category/csharp/apps/">Android and iOS Apps</a></li>
+                            <li><a href="http://dotnetpattern.com/category/LINQ/">LINQ</a></li>
+                                <li><a href="http://dotnetpattern.com/category/Unit-Testing-Frameworks/nunit/">NUnit</a></li>
+                            <li><a href="http://dotnetpattern.com/category/TypeScript/">TypeScript</a></li>
+                </ul>
+            </div>
+
+
+            <div class="col-md-12 my-footer-widget my-footer-menu">
+                <ul>
+                    
+                    <li><a href="http://dotnetpattern.com/TermsConditions">Terms and Conditions</a></li>
+                    <li><a href="http://dotnetpattern.com/PrivacyPolicy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-12 my-footer-widget text-center my-footer-copyright">
+                <p class="text-center">© 2018 - DotNetPattern.com</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="jquery"></script><ins data-adsbygoogle-status="done" style="display: none;" class="adsbygoogle"><ins id="aswift_0_expand" style="display: inline-table; border: medium none; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent;"><ins id="aswift_0_anchor" style="display: block; border: medium none; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent;"><iframe src="mvvm-light-messenger_6.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left: 0px; position: absolute; top: 0px;" frameborder="0"></iframe></ins></ins></ins>
+
+    <script src="bootstrap"></script>
+
+    
+    <script src="Sharer.js"></script>
+    <script type="text/javascript">
+
+        SyntaxHighlighter.defaults['auto-links'] = false;
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+
+        //$(window).scroll(function () {
+        //    $("#shareThisSidebar").stop().animate({ "marginTop": ($(window).scrollTop()) + "px", "marginLeft": ($(window).scrollLeft()) + "px" }, "slow");
+        //});
+    </script>
+
+    <script src="app.js" type="text/javascript"></script>
+    
+    <script>
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-72790040-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+    
+    <script type="text/javascript">
+
+        var clicky_site_ids = clicky_site_ids || [];
+        clicky_site_ids.push(100938046);
+        (function () {
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = '//static.getclicky.com/js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+        })();
+    </script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/100938046ns.gif" /></p></noscript>
+
+    
+
+
+</body>
+</html>

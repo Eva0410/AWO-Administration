@@ -1,0 +1,164 @@
+Objektrelationale Abbildung
+aus Wikipedia, der freien Enzyklopädie
+Dies ist die aktuelle Version dieser Seite, zuletzt bearbeitet am 28. Dezember 2016 um 15:45 Uhr durch Aka ( Diskussion | Beiträge ) (Punkt vor und nach Ref-Tag korrigiert) .
+( Unterschied ) ← Nächstältere Version | Aktuelle Version (Unterschied) | Nächstjüngere Version → (Unterschied)
+Wechseln zu: Navigation , Suche
+Eine markierte Version dieser Seite, die am 28. Dezember 2016 freigegeben wurde, basiert auf dieser Version.
+
+Objektrelationale Abbildung ( englisch object-relational mapping , ORM ) ist eine Technik der Softwareentwicklung , mit der ein in einer objektorientierten Programmiersprache geschriebenes Anwendungsprogramm seine Objekte in einer relationalen Datenbank ablegen kann. Dem Programm erscheint die Datenbank dann als objektorientierte Datenbank , was die Programmierung erleichtert. Implementiert wird diese Technik normalerweise mit Klassenbibliotheken , wie beispielsweise Entity Framework für .NET -Programmiersprachen, Hibernate für die Programmiersprache Java , Doctrine für PHP , SQLAlchemy für Python oder ActiveRecord für Ruby . Für Java gibt es auch eine standardisierte Schnittstelle, die Java Persistence API .
+Inhaltsverzeichnis
+ [ Verbergen ] 
+
+    1 Prinzip
+    2 Grundlegende Techniken
+    3 Abbildung von Vererbungshierarchien
+    4 Literatur
+    5 Einzelnachweise
+
+Prinzip [ Bearbeiten | Quelltext bearbeiten ]
+
+Objektorientierte Programmiersprachen (OOP) kapseln Daten und Verhalten in Objekten, hingegen legen relationale Datenbanken Daten in Tabellen ab. Die beiden Paradigmen sind grundlegend verschieden. So kapseln Objekte ihren Zustand und ihr Verhalten hinter einer Schnittstelle und haben eine eindeutige Identität. Relationale Datenbanken basieren dagegen auf dem mathematischen Konzept der relationalen Algebra . Dieser konzeptionelle Widerspruch wurde in den 1990er Jahren als object-relational impedance mismatch bekannt. [1]
+
+Um den Widerspruch aufzulösen oder zumindest zu mildern, wurden verschiedene Lösungen vorgeschlagen, beispielsweise objektorientierte Datenbanken oder die Erweiterung von Programmiersprachen um relationale Konzepte (z. B. Embedded SQL ). Die direkte objektrelationale Abbildung von Objekten auf Relationen hat den Vorteil, dass einerseits die Programmiersprache selbst nicht erweitert werden muss und andererseits relationale Datenbanken als etablierte Technik in allen Umgebungen als ausgereifte Software verfügbar sind. Nachteil dieses dem OOP-Paradigma entgegenkommenden Ansatzes ist das Nicht-Ausnutzen der Stärken und Fähigkeiten einer relationalen Datenbank, was sich in nicht optimaler Leistung niederschlägt.
+Grundlegende Techniken [ Bearbeiten | Quelltext bearbeiten ]
+
+Im einfachsten Fall werden Klassen auf Tabellen abgebildet, jedes Objekt entspricht einer Tabellenzeile und für jedes Attribut wird eine Tabellenspalte reserviert. Die Identität eines Objekts entspricht dem Primärschlüssel der Tabelle. Hat ein Objekt eine Referenz auf ein anderes Objekt, so kann diese mit einer Fremdschlüssel-Primärschlüssel-Beziehung in der Datenbank dargestellt werden.
+
+Der Begriff Shadow Information („Schatteninformation“) bezeichnet zusätzliche Daten, die ein Objekt benötigt, um persistent abgelegt zu werden. [2] Dazu gehören Primärschlüssel – speziell wenn es sich um Surrogatschlüssel ohne fachliche Bedeutung handelt – sowie Hilfsdaten für die Zugriffssteuerung, beispielsweise Zeitstempel .
+Abbildung von Vererbungshierarchien [ Bearbeiten | Quelltext bearbeiten ]
+Tabelle pro Vererbungshierarchie
+Tabelle pro Unterklasse
+Tabelle pro konkrete Klasse
+
+Es gibt im Wesentlichen drei verschiedene Verfahren, um Vererbungshierarchien auf Datenbanktabellen abzubilden. Einige Frameworks bieten weitere Variationen und Vermischungen dieser drei Grundverfahren. [3]
+
+Tabelle pro Vererbungshierarchie [4]
+    (auch Single Table , einzelne Tabelle ) Bei diesem Verfahren werden alle Attribute der Basisklasse und aller davon abgeleiteten Klassen in einer gemeinsamen Tabelle gespeichert. Zusätzlich wird ein sogenannter „Diskriminator“ in einer weiteren Spalte abgelegt, der festlegt, welcher Klasse das in dieser Zeile gespeicherte Objekt angehört. Attribute von abgeleiteten Klassen dürfen bei diesem Ansatz aber in den meisten Fällen nicht mit einem NOT-NULL- Constraint versehen werden. Außerdem können Beschränkungen der Anzahl erlaubter Spalten pro Tabelle diesen Ansatz bei großen Klassen bzw. Klassenhierarchien vereiteln.
+Tabelle pro Unterklasse [4]
+    (auch Joined oder Class Table ) Bei diesem Verfahren wird eine Tabelle für die Basisklasse angelegt und für jede davon abgeleitete Unterklasse eine weitere Tabelle. Ein Diskriminator wird nicht benötigt, weil die Klasse eines Objekts durch eine 1-zu-1-Beziehung zwischen dem Eintrag in der Tabelle der Basisklasse und einem Eintrag in einer der Tabellen der abgeleiteten Klassen festgelegt ist.
+Tabelle pro konkrete Klasse [4]
+    (auch Table per Class oder Concrete Table ) Hier werden die Attribute der abstrakten Basisklasse in die Tabellen für die konkreten Unterklassen mit aufgenommen. Die Tabelle für die Basisklasse entfällt. Der Nachteil dieses Ansatzes besteht darin, dass es nicht möglich ist, mit einer Abfrage Instanzen verschiedener Klassen zu ermitteln.
+
+Ein weiteres Verfahren ist die Abbildung von Strukturen (Beziehungen, Vererbung) und Daten in generellen Tabellen General Tables . Dabei enthält die gesamte Datenbank genau 5 Tabellen: Eine für Klassen, eine für Beziehungen (einschließlich Vererbungsbeziehungen), eine für Attribute, eine für Instanzen (der Klassen) und eine für Werte (der Attribute). [5] Dieses Verfahren hat allerdings in der Praxis kaum Bedeutung.
+Literatur [ Bearbeiten | Quelltext bearbeiten ]
+
+    Scott W. Ambler: Agile Database Techniques . Wiley & Sons, 2003, ISBN 0-471-20283-5 ( agiledata.org [abgerufen am 22. Oktober 2007]).  
+
+Einzelnachweise [ Bearbeiten | Quelltext bearbeiten ]
+
+    Hochspringen ↑ Ted Neward: The Vietnam of Computer Science . Interoperability Happens. 26. Juni 2006. Abgerufen am 2. Juni 2010.
+    Hochspringen ↑ Scott W. Ambler: Agile Database Techniques . S.   228–229.  
+    Hochspringen ↑ Chapter 10. Inheritance Mapping. In: Hibernate Reference Documentation. Red Hat Middleware, LLC, 2012, abgerufen am 31. Juli 2012 (englisch).  
+    ↑ Hochspringen nach: a b c Martin Fowler: Patterns of Enterprise Application Architecture . Addison-Wesley-Longman, Amsterdam 2002, ISBN 0-321-12742-0 .  
+    Hochspringen ↑ Map Classes To A Generic Table Structure
+
+Abgerufen von „ https://de.wikipedia.org/w/index.php?title=Objektrelationale_Abbildung&oldid=161037938 “
+Kategorien :
+
+    SQL
+    Objektorientierte Programmierung
+
+Navigationsmenü
+Meine Werkzeuge
+
+    Nicht angemeldet
+    Diskussionsseite
+    Beiträge
+    Benutzerkonto erstellen
+    Anmelden
+
+Namensräume
+
+    Artikel
+    Diskussion
+
+Varianten
+
+Ansichten
+
+    Lesen
+    Bearbeiten
+    Quelltext bearbeiten
+    Versionsgeschichte
+
+Mehr
+
+Suche
+Navigation
+
+    Hauptseite
+    Themenportale
+    Von A bis Z
+    Zufälliger Artikel
+
+Mitmachen
+
+    Artikel verbessern
+    Neuen Artikel anlegen
+    Autorenportal
+    Hilfe
+    Letzte Änderungen
+    Kontakt
+    Spenden
+
+Werkzeuge
+
+    Links auf diese Seite
+    Änderungen an verlinkten Seiten
+    Spezialseiten
+    Permanenter Link
+    Seiten­informationen
+    Wikidata-Datenobjekt
+    Artikel zitieren
+
+Drucken/­exportieren
+
+    Buch erstellen
+    Als PDF herunterladen
+    Druckversion
+
+In anderen Sprachen
+
+    Català
+    Čeština
+    Dansk
+    English
+    Español
+    Français
+    עברית
+    Magyar
+    Bahasa Indonesia
+    Italiano
+    日本語
+    Қазақша
+    한국어
+    Latviešu
+    Polski
+    Português
+    Русский
+    Slovenščina
+    Svenska
+    ไทย
+    Türkçe
+    Українська
+    中文
+    14 weitere 
+
+Links bearbeiten
+
+    Diese Seite wurde zuletzt am 28. Dezember 2016 um 15:45 Uhr bearbeitet.
+    Abrufstatistik
+
+    Der Text ist unter der Lizenz „Creative Commons Attribution/Share Alike“ verfügbar; Informationen zu den Urhebern und zum Lizenzstatus eingebundener Mediendateien (etwa Bilder oder Videos) können im Regelfall durch Anklicken dieser abgerufen werden. Möglicherweise unterliegen die Inhalte jeweils zusätzlichen Bedingungen. Durch die Nutzung dieser Website erklären Sie sich mit den Nutzungsbedingungen und der Datenschutzrichtlinie einverstanden.
+    Wikipedia® ist eine eingetragene Marke der Wikimedia Foundation Inc.
+
+    Datenschutz
+    Über Wikipedia
+    Impressum
+    Entwickler
+    Stellungnahme zu Cookies
+    Mobile Ansicht
+
+    Wikimedia Foundation
+    Powered by MediaWiki
+

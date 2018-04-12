@@ -1,0 +1,25 @@
+@model OpticianMgr.WebIdentity.Models.GlassesModel
+@{
+    ViewData["Title"] = "AdminBrillen";
+}
+
+<body style="background-color:#F9F9F9">
+
+    <h1 class="überschrift" style="font-size:55px;" align="center">Brillen</h1>
+        <a class="btn btn-default" style="width:140px; height: 35px; margin-bottom:5px; margin-top:5px; padding: 0px 5px 0px 5px;" asp-action="NewGlasses">Neue Brille</a>
+    @foreach (var item in @Model.GlassModel)
+    {
+        <div class="col-md-3 col-sm-3" id="greyBox">
+            <img style="width: 275px" src="@String.Format("data:image/jpg;base64,{0}", item.Image)" alt="Brille">
+            <label style="font-size:30px; margin-left:35%;">@item.Name</label>
+            <p align="center">Modische Brille von: @item.Marke</p>
+            <p align="center">Kategorie: @item.Category</p>
+            <p style="margin-top:5px;" class="col-md-6 col-sm-6"><label>Preis:</label> @item.Price Euro</p>
+            <form asp-route-id="@item.Id" asp-action="DeleteGlasses">
+                <input style="margin-bottom:5px;" type="submit" value="Delete" class="col-md-6 col-sm-6 btn btn-default" onclick="return confirm('Wollen Sie die Brille wirklich l&ouml;schen?');" />
+            </form>
+        </div>
+    }
+
+
+</body>

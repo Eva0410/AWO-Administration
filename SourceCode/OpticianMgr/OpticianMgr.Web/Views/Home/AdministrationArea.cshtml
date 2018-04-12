@@ -1,0 +1,27 @@
+@model OpticianMgr.WebIdentity.Models.ViewModels.AdministrationsAreaModel
+
+<body>
+    <form asp-action="AdministrationArea">
+        <h1 class="page-header">Wilkommen im Administrationsbereich</h1>
+
+        <h3 style="margin-left:10px;">Aktuelle Administratoren:</h3>
+        <table style="margin-left: 10px;">
+            <tr>
+                <td>Neuen Administrator hinzuf&uuml;gen: (eMail eingeben)</td>
+                <td><input type="text" asp-for="@Model.NewAdmin" /></td>
+                <td><input type="submit" value="Hinzuf&uuml;gen" /></td>
+                <td><span asp-validation-for="@Model.NewAdmin"></span></td>
+            </tr>
+            @foreach (var item in Model.Admins)
+        {
+            <tr>
+                <td>@item</td>
+                <td><a asp-action="AdministrationAreaDelete" asp-route-id="@item" onclick="return confirm('Wollen Sie diesem Benutzer wirklich alle Administrationsrechte entziehen?');">L&ouml;schen</a></td>
+            </tr>
+    }
+        </table>
+        <a style="margin: 10px 10px 10px 10px; width:200px;" class="btn btn-default" asp-action="AdminBrillen">Brillen</a>
+        <a style="margin: 10px 10px 10px 10px; width:200px;" class="btn btn-default" asp-action="Kaufinteresse">Kaufinteresse</a>
+        <a class="btn btn-default" asp-action="Index">Zur&uuml;ck</a>
+    </form>
+</body>

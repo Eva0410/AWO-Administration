@@ -14,6 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,41 +44,451 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageBird, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessageBird.1.3.4\lib\MessageBird.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.1.1.2\lib\netstandard1.1\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.1.1.2\lib\netstandard1.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.1.1.2\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Debug, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Debug.1.1.2\lib\net451\Microsoft.Extensions.Logging.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.1.1.1\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.3.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net46\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net46\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Controls.DataVisualization.Toolkit.4.0.0.0\lib\net40-Client\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit.Design.4.0, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.DataVisualization.Toolkit.Design.4.0.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit.Expression.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.DataVisualization.Toolkit.Expression.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit.VisualStudio.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.DataVisualization.Toolkit.VisualStudio.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Input.Toolkit.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.Input.Toolkit.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Input.Toolkit.VisualStudio.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.Input.Toolkit.VisualStudio.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.Layout.Toolkit.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit.VisualStudio.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\System.Windows.Controls.Layout.Toolkit.VisualStudio.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\WPFToolkit.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit.VisualStudio.Design, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfToolKit\WPFToolkit.VisualStudio.Design.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Pages\StatisticsPage.xaml.cs">
+    <Compile Include="FileCreater\FileCreater.cs" />
+    <Compile Include="Pages\AddObjectWindows\AddContactLensTypeWindow.xaml.cs">
+      <DependentUpon>AddContactLensTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddGlasstypeWindow.xaml.cs">
+      <DependentUpon>AddGlasstypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWindows\EditStaticStringsWindow.xaml.cs">
+      <DependentUpon>EditStaticStringsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWindows\EditContactLensTypesWindow.xaml.cs">
+      <DependentUpon>EditContactLensTypesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWindows\EditGlasstypesWindow.xaml.cs">
+      <DependentUpon>EditGlasstypesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\ContactLensTypeDetailsWindow.xaml.cs">
+      <DependentUpon>ContactLensTypeDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\GlasstypeDetailsWindow.xaml.cs">
+      <DependentUpon>GlasstypeDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\CountryDetailsWindow.xaml.cs">
+      <DependentUpon>CountryDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWindows\EditCountriesWindow.xaml.cs">
+      <DependentUpon>EditCountriesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\TownDetailsWindow.xaml.cs">
+      <DependentUpon>TownDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWindows\EditTownWindow.xaml.cs">
+      <DependentUpon>EditTownWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessagesPagesAndWindows\SentMessagesWindow.xaml.cs">
+      <DependentUpon>SentMessagesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessagesPagesAndWindows\MultipleEMailPage.xaml.cs">
+      <DependentUpon>MultipleEMailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessagesPagesAndWindows\MultipleSMSPage.xaml.cs">
+      <DependentUpon>MultipleSMSPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessagesPagesAndWindows\SingleSMSPage.xaml.cs">
+      <DependentUpon>SingleSMSPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessagesPagesAndWindows\SingleEMailPage.xaml.cs">
+      <DependentUpon>SingleEMailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessagesPagesAndWindows\SingleMessageWindow.xaml.cs">
+      <DependentUpon>SingleMessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddDoctorWindow.xaml.cs">
+      <DependentUpon>AddDoctorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddCountryWindow.xaml.cs">
+      <DependentUpon>AddCountryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddContactLensesOrderWindow.xaml.cs">
+      <DependentUpon>AddContactLensesOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\ContactLensOrderDetailsWindow.xaml.cs">
+      <DependentUpon>ContactLensOrderDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\GlassesOrderDetailsWindow.xaml.cs">
+      <DependentUpon>GlassesOrderDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddGlassesOrderWindow.xaml.cs">
+      <DependentUpon>AddGlassesOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPages\OrdersPage.xaml.cs">
+      <DependentUpon>OrdersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\SupplierDetailsWindow.xaml.cs">
+      <DependentUpon>SupplierDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\EyeGlassFrameDetailsWindow.xaml.cs">
+      <DependentUpon>EyeGlassFrameDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ObjectDetailsWindows\CustomerDetailsWindow.xaml.cs">
+      <DependentUpon>CustomerDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddTownWindow.xaml.cs">
+      <DependentUpon>AddTownWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddCustomerWindow.xaml.cs">
+      <DependentUpon>AddCustomerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddObjectWindows\AddEyeGlassesFrameWindow.xaml.cs">
+      <DependentUpon>AddEyeGlassesFrameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPages\EyeGlassFramesPage.xaml.cs">
+      <DependentUpon>EyeGlassFramesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessagesPagesAndWindows\MultipleMessagesPage.xaml.cs">
+      <DependentUpon>MultipleMessagesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="SortManager.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddContactLensTypeViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddGlasstypeViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddDoctorViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddCountryViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddContactLensesOrderViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\ContactLensOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\ContactLensTypeDetailsViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditStaticStringsModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditContactLensTypesViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditGlasstypesViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\GlassTypeDetailsViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditCountriesViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\CountryDetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\TownDetailsViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModels\EditTownsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\GlassesOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddGlassesOrderViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddTownViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddCustomerViewModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddEyeGlassFrameModel.cs" />
+    <Compile Include="ViewModel\AddObjectViewModels\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\MultipleMessagesViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\MultipleEmailViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\MultipleSMSViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\SingleSMSViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\SingleEmailViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\SingleMessageViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\OrdersViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\SupplierDetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\EyeGlassFramesDetailsViewModel.cs" />
+    <Compile Include="ViewModel\DetailsViewModels\CustomerDetailsViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\StatisticsViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\EyeGlassFramesViewModel.cs" />
+    <Compile Include="ViewModel\MessagesViewModels\SentMessagesViewModel.cs" />
+    <Compile Include="WindowServices\IRequestClose.cs" />
+    <Compile Include="WindowServices\IWindowService.cs" />
+    <Compile Include="Pages\AddObjectWindows\AddSupplierWindow.xaml.cs">
+      <DependentUpon>AddSupplierWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\StockPage.xaml.cs">
-      <DependentUpon>StockPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SupplierPage.xaml.cs">
+    <Compile Include="Pages\MainPages\SupplierPage.xaml.cs">
       <DependentUpon>SupplierPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Pages\CustomerPage.xaml">
+    <Compile Include="ViewModel\MainViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModels\SupplierViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="WindowServices\WindowService.cs" />
+    <Page Include="Pages\AddObjectWindows\AddContactLensTypeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddGlasstypeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditWindows\EditStaticStringsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditWindows\EditContactLensTypesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditWindows\EditGlasstypesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\ContactLensTypeDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\GlasstypeDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\CountryDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditWindows\EditCountriesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\TownDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditWindows\EditTownWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MessagesPagesAndWindows\SentMessagesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MessagesPagesAndWindows\MultipleEMailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MessagesPagesAndWindows\MultipleSMSPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MessagesPagesAndWindows\SingleSMSPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MessagesPagesAndWindows\SingleEMailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MessagesPagesAndWindows\SingleMessageWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddDoctorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddCountryWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddContactLensesOrderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\ContactLensOrderDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\GlassesOrderDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddGlassesOrderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPages\OrdersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\SupplierDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\EyeGlassFrameDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ObjectDetailsWindows\CustomerDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddTownWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddCustomerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddObjectWindows\AddEyeGlassesFrameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\GlassesPage.xaml">
+    <Page Include="Pages\AddObjectWindows\AddSupplierWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPages\CustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,25 +500,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pages\CustomerPage.xaml.cs">
+    <Compile Include="Pages\MainPages\CustomerPage.xaml.cs">
       <DependentUpon>CustomerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\GlassesPage.xaml.cs">
-      <DependentUpon>GlassesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\StatisticsPage.xaml">
+    <Page Include="Pages\MainPages\StatisticsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\StockPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\MainPages\EyeGlassFramesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SupplierPage.xaml">
+    <Page Include="Pages\MessagesPagesAndWindows\MultipleMessagesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPages\SupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,13 +544,75 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpticianMgr.Persistence\OpticianMgr.Persistence.csproj">
+      <Project>{966AE4C0-9863-482A-BA40-B6E14CBAC010}</Project>
+      <Name>OpticianMgr.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpticiatnMgr.Core\OpticiatnMgr.Core.csproj">
+      <Project>{106FE2A8-7A23-499C-BE52-AE300A5C5A75}</Project>
+      <Name>OpticiatnMgr.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DownOne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DownTwo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UpOne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UpTwo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

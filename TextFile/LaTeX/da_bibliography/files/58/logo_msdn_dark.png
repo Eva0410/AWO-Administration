@@ -1,0 +1,88 @@
+#NetworkLink,
+#NetworkTaglineLogo,
+#BrandDisplayText {
+    display: block;
+}
+
+.BrandLogo {
+    background-image: none;
+    height: auto;
+}
+
+
+#NetworkTaglineText {
+    display: none;
+}
+
+.Masthead .NetworkLogo {
+    background: url('logo_msdn_dark.png') no-repeat scroll transparent;
+    height: 21px;
+    width: 79px;
+}
+
+/* BEGIN UX Services */
+
+.SignedOutProfileElement {
+  display: none;
+}
+
+/* END UX Services */
+
+
+
+.ja-jp * {
+    font-family: Meiryo, 'Segoe UI', 'Lucida Grande',Verdana,Arial,Helvetica,sans-serif !important;
+}
+
+/* BEGIN Samples */
+.Samples .srchbox .stxtcell {
+    padding-top: 2px;
+}
+
+.Samples .editorPickedItem .itemBody {
+    padding-left: 15px !important;
+}
+
+.Samples #sideNav .section form input[type="checkbox"] {
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.Samples .ux-actionbox.small span.icon {
+    background-color: white!important;
+}
+
+.Samples #TranslatedIn {
+    text-transform: lowercase;
+}
+
+.Samples #projectPage #projectBody .attachments {
+    padding: 15px 5px 30px 5px !important;
+    background-color: #F8F8F8;
+    margin-top: 35px;
+}
+
+ .Samples #projectPage #projectBody .attachments label {
+        background-image: url('//i1.social.s-msft.com/contentservice/9db2c15c-def4-4087-8349-a0a90128d414/attachment.png');
+        background-repeat: no-repeat;
+        padding-left: 15px;
+        height: 20px;
+    }
+
+.Samples #longdescIframe {
+    padding-top: 10px;
+}
+
+.Samples .requestlistitem .requestInfo {
+    padding: 1.2em 0 0 1.5em !important;
+}
+
+.Samples #myRequestsTab .needvote, #requestsPage .needvote {
+    font-weight: normal;
+}
+
+.Samples #MainContent a, #MainContent .bread a:visited, #MainContent .bread a {
+    font-weight: normal !important;
+}
+/* END Samples */

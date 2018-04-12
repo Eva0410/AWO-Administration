@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="317px" height="397px" viewBox="0 0 317 397" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Page 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="homepage-copy-26" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-198.000000, -372.000000)" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Page-1" transform="translate(200.000000, 373.000000)" stroke-width="3">
+            <g id="Group-7" transform="translate(255.000000, 0.000000)" stroke="#2CE9D3">
+                <polyline id="Stroke-1" points="58.0929 0.6374 20.1769 43.9414 15.7279 20.1524"></polyline>
+                <polyline id="Stroke-3" points="58.0929 0.6374 0.2169 1.4594 15.7279 20.1524"></polyline>
+                <path d="M58.0929,0.6374 L15.7279,20.1524" id="Stroke-5"></path>
+            </g>
+            <polyline id="Stroke-8" stroke="#2CE9D3" points="272 28 262 24.275 265.678568 14"></polyline>
+            <path d="M0,394.023438 L0,259.112766 C0,237.79392 17.3065291,220.512446 38.6562844,220.512446 C60.0060398,220.512446 77.3135694,203.229973 77.3135694,181.911127 L77.3135694,62.60032 C77.3135694,41.2814737 94.6200985,24 115.968853,24 L247,24" id="Stroke-9" stroke="#CEE7F9" stroke-dasharray="0,10"></path>
+        </g>
+    </g>
+</svg>

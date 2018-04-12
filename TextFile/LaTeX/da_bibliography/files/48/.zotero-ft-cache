@@ -1,0 +1,416 @@
+Stack Overflow
+
+    Questions
+    Developer Jobs
+    Tags
+    Users
+
+current community
+
+    help chat
+    Stack Overflow
+    Meta Stack Overflow
+
+your communities
+Sign up or log in to customize your list.
+more stack exchange communities
+company blog
+
+    Tour Start here for a quick overview of the site
+    Help Center Detailed answers to any questions you might have
+    Meta Discuss the workings and policies of this site
+    About Us Learn more about Stack Overflow the company
+    Business Learn more about hiring developers or posting ads with us
+
+Log In Sign Up
+
+Join Stack Overflow to learn, share knowledge, and build your career.
+Email Sign Up or sign in with
+Google
+Facebook
+How to confirm that mail has been delivered or not?
+Ask Question
+up vote 12 down vote favorite
+7
+	
+
+Below is my coding, just have a look at it
+
+ System . Net . Mail . MailMessage oMail = new System . Net . Mail . MailMessage (); System . Net . Mail . SmtpClient smtp = new System . Net . Mail . SmtpClient (); oMail . From = new System . Net . Mail . MailAddress ( "one@gmail.com" ); oMail . To . Add ( TextBox1 . Text . Trim ()); oMail . Subject = "Subject*" ; oMail . Body = "Body*" ; oMail . IsBodyHtml = true ; smtp . Host = "smtp.sendgrid.net" ; System . Net . NetworkCredential cred = new System . Net . NetworkCredential ( "myusername" , "mypassword" ); smtp . UseDefaultCredentials = false ; smtp . Credentials = cred ; smtp . Send ( oMail );  
+
+Here I need to check whether that mail has been delivered or not.
+c# system.net.mail
+share | improve this question
+	
+edited Mar 11 '13 at 9:58
+Michał Powaga
+15.5k 4 40 56
+	
+asked Aug 17 '11 at 15:10
+sankar 2.0
+1,774 8 25 50
+	
+   	 
+	
+then you would need a link in the email that the recipient clicks back to a URL or web service to be sure –  Mitch Wheat Aug 17 '11 at 15:13
+   	 
+	
+What do you mean by being delivered? Get the mail to the host or confirm that receiver read the mail? –  Tae-Sung Shin Aug 17 '11 at 15:13
+add a comment  | 
+6 Answers 6
+active oldest votes
+up vote 19 down vote accepted
+	
+
+You can't. Since you use SMTP, in general case, it's impossible to tell whether delivery succeeded or not. Read SMTP specification. Mail is routed while being delivered, so:
+
+    There's no guarantee your message is sent as soon as you call smtp.Send() .
+    Since SMTP is routed , you can't be sure that some node on the route won't fail with delivery to uplink.
+
+share | improve this answer
+	
+edited Aug 17 '11 at 15:22
+	
+answered Aug 17 '11 at 15:13
+loki2302
+5,110 4 50 98
+	
+	
+add a comment  | 
+up vote 8 down vote
+	
+
+You can set the DeliveryNotificationOptions property of the MailMessage to OnSuccess .
+
+There's more info on this here: http://msdn.microsoft.com/en-us/library/system.net.mail.deliverynotificationoptions.aspx
+
+and here: http://msdn.microsoft.com/en-us/library/system.net.mail.mailmessage.deliverynotificationoptions.aspx
+
+As has been pointed out in the comments, this method is not 100% reliable. It's just one option.
+share | improve this answer
+	
+answered Aug 17 '11 at 15:13
+Jamie Dixon
+34.6k 10 96 137
+	
+4 	 
+	
+It's not 100% reliable. –  loki2302 Aug 17 '11 at 15:14
+2 	 
+	
+More reliable than the other two replies which give absolutely nothing... –  Blindy Aug 17 '11 at 15:15
+   	 
+	
+Blindy: Incorrect. –  Mitch Wheat Aug 17 '11 at 15:16
+   	 
+	
+@Blindy: it's absolutely unreliable since this notification is only sent if recepient allows it (most mail clients act this way). It's the same as sending back an email: "thanks, got it". –  loki2302 Aug 17 '11 at 15:20
+9 	 
+	
+You're still missing the part where it's better than literally nothing. –  Blindy Aug 17 '11 at 15:23
+add a comment  | 
+up vote 1 down vote
+	
+
+Here are some best practices to ensure email deliverability:
+
+    Set up a single no reply address as an actual inbox and then go into the email account using pop3 and look for bounce back messages.
+    Verify the email address is valid before you send it using something like this email validation library:
+
+http://www.kellermansoftware.com/p-37-net-email-validation.aspx
+share | improve this answer
+	
+answered Aug 17 '11 at 15:26
+Greg ''Wildman'' Finzer
+2,723 13 55 89
+	
+	
+add a comment  | 
+up vote 1 down vote
+	
+
+In case somebody stumbles across. Here is my experience on an old Win 2003 server with Exchange. My .Net app uses SMTP to send emails and used a group address as the "From" so any replies would go to the entire group. This is a dispatching operation and we wanted anyone in the group to assist with any replies. We expected any non delivery notices to be sent to the group. It does not happen. I even went into the Message Tracking and saw that Exchange said it sent the notification to the group, but they never got it. Next I went into SMTP Virtual Server Properties and entered the group email address in the "Send copy of Non-Delivery Report to:". Same result, the Message Tracking says it sent it to the group but it was never delivered. Apparently the non delivery notices will only be delivered to an email address of an individual not a group. I changed it to an individual address and it works.
+share | improve this answer
+	
+answered Feb 25 '14 at 19:46
+Rob Keller
+11 2
+	
+	
+add a comment  | 
+up vote 0 down vote
+	
+
+If you don't receive any exceptions in your code or on your SMTP server, you can assume that it has been delivered. That is a problem with e-mail, there is no way to guaranteeing delivery.
+share | improve this answer
+	
+answered Aug 17 '11 at 15:12
+Daniel A. White
+134k 29 265 350
+	
+   	 
+	
+Clearly Incorrect! SMTP is not a guaranteed delivery. As anyone would know that has received a not-deliverable ticket several weeks later... –  Mitch Wheat Aug 17 '11 at 15:12
+   	 
+	
+but, if any emailid bounces it doesn't shows any exception ..i have checked many times...is there any way to get the bounce mailerID –  sankar 2.0 Aug 17 '11 at 15:16
+   	 
+	
+not from this code, no. –  Daniel A. White Aug 17 '11 at 15:18
+   	 
+	
+is der any way to get it thro' smtp mail message itself –  sankar 2.0 Aug 17 '11 at 15:24
+add a comment  | 
+up vote 0 down vote
+	
+
+If you have access to the server containing the SMTP log, depending on the type of server used and the level of detail used, you might be able to get a much better idea as to the actual success of the delivery.
+
+For example if you are using SmarterMail, you could write a simple parser to read the smtp log and report back to your application. Not that this shouldn't be a blocking operation, as if your email is greylisted, it may take many minutes before it is delivered.
+
+Another option is to create a catch all "noreply" email address, and send your emails with an email-id included in the sender ie noreply-bounces-32432@bounces.mydomain.com and use a pop3 reader to check the inbox for returned emails. Using the email id in the "sender" you can work out which email failed to be sent. You could also do some filtering do determine if its a "unable to deliver" or simply an "out of office" type reply.
+
+Lots of options available, just depends how much sweat you want to put into it.
+share | improve this answer
+	
+answered Aug 17 '11 at 15:21
+James Harris
+1,729 8 14
+	
+	
+add a comment  | 
+Your Answer
+
+ 
+draft saved
+draft discarded
+Sign up or log in
+Sign up using Google
+Sign up using Facebook
+Sign up using Email and Password
+Post as a guest
+Name
+Email
+Post as a guest
+Name
+Email
+discard
+
+By posting your answer, you agree to the privacy policy and terms of service .
+Not the answer you're looking for? Browse other questions tagged c# system.net.mail or ask your own question .
+
+asked
+	
+
+6 years, 3 months ago
+
+viewed
+	
+
+39,730 times
+
+active
+	
+
+3 years, 9 months ago
+Linked
+1
+How to check if email was delivered using C# MailMessage
+2
+Email Delivery Message in Asp.net(how to check whether the email sended?)
+-1
+asp.net - How to know when email sent or not sent?
+-2
+Check email delivery failed asp.net c#
+6
+Is it possible to capture the “Message-ID” of an email message sent with SmtpClient?
+1
+How to check MailMessage was delivered in .NET?
+Related
+1245
+How do you give a C# Auto-Property a default value?
+2845
+How do I enumerate an enum?
+1777
+How do I get a consistent byte representation of strings in C# without manually specifying an encoding?
+598
+How do I use Assert to verify that an exception has been thrown?
+943
+How do I remedy the “The breakpoint will not currently be hit. No symbols have been loaded for this document.” warning?
+1224
+How do I generate a random int number in C#?
+1854
+What is a NullReferenceException, and how do I fix it?
+3
+Using Asp.Net to SendAsync emails but Page still waits?
+1
+Error sending mail which states my IP has been blacklisted
+0
+C# :Programmatically generated emails getting delivered in Junk folder based on Subject line
+Hot Network Questions
+
+    How to do the maths on affordability?
+    How can I destroy a great deal of infrastructure without killing many people?
+    If we are behind a firewall, do we still need to patch/fix vulnerabilities?
+    What is the meaning of limit of Fibonacci sequence?
+    Is it wrong if I kill off a black character?
+    "Early bird" squares
+    Why is communism considered as evil (like fascism and nazism) in the United States?
+    How do people peer-review many papers?
+    What "remain friends" mean?
+    Was there ever a situation where a proposal from Worf was accepted?
+    Why does the car I'm currently driving spawn a lot more?
+    Why is it called "roguelike" and "metroidvania"?
+    Why I have to use quadratic equation
+    What are good resources to get fantasy names?
+    Possibility of airless spaceships being used for manned space combat?
+    Which way to turn a knob to increase?
+    Why could only one Terminator be brought back at a time?
+    If the Romans found one working steam engine would they have been able to copy and use it?
+    Did the ancients or other pre-industrial civilisations engage in unsustainable practices?
+    Thanksgiving Feast
+    Can I use all 4 cores of the Raspberry Pi's CPU?
+    Who, or what, is an "Uncle Bob"?
+    Is my Windows 10 machine experiencing DNS poisoning? I keep getting Chinese IP addresses when connecting to a U.S. government domain
+    Does rubber dust become magnetic?
+
+question feed
+lang-cs
+Stack Overflow
+
+    Questions
+    Jobs
+    Developer Jobs Directory
+    Salary Calculator
+    Help
+    Mobile
+
+Stack Overflow
+Business
+
+    Talent
+    Ads
+    Enterprise
+    Insights
+
+Company
+
+    About
+    Press
+    Work Here
+    Legal
+    Privacy Policy
+    Contact Us
+
+Stack Exchange
+Network
+
+    Technology
+    Life / Arts
+    Culture / Recreation
+    Science
+    Other
+
+    Stack Overflow
+    Server Fault
+    Super User
+    Web Applications
+    Ask Ubuntu
+    Webmasters
+    Game Development
+
+    TeX - LaTeX
+    Software Engineering
+    Unix & Linux
+    Ask Different (Apple)
+    WordPress Development
+    Geographic Information Systems
+    Electrical Engineering
+
+    Android Enthusiasts
+    Information Security
+    Database Administrators
+    Drupal Answers
+    SharePoint
+    User Experience
+    Mathematica
+
+    Salesforce
+    ExpressionEngine® Answers
+    Stack Overflow em Português
+    Blender
+    Network Engineering
+    Cryptography
+    Code Review
+
+    Magento
+    Software Recommendations
+    Signal Processing
+    Emacs
+    Raspberry Pi
+    Stack Overflow на русском
+    Programming Puzzles & Code Golf
+
+    Stack Overflow en español
+    Ethereum
+    Data Science
+    Arduino
+    Bitcoin
+    more (26)
+
+    Photography
+    Science Fiction & Fantasy
+    Graphic Design
+    Movies & TV
+    Music: Practice & Theory
+    Worldbuilding
+    Seasoned Advice (cooking)
+
+    Home Improvement
+    Personal Finance & Money
+    Academia
+    Law
+    more (16)
+
+    English Language & Usage
+    Skeptics
+    Mi Yodeya (Judaism)
+    Travel
+    Christianity
+    English Language Learners
+    Japanese Language
+
+    Arqade (gaming)
+    Bicycles
+    Role-playing Games
+    Anime & Manga
+    Puzzling
+    Motor Vehicle Maintenance & Repair
+    more (32)
+
+    MathOverflow
+    Mathematics
+    Cross Validated (stats)
+    Theoretical Computer Science
+    Physics
+    Chemistry
+    Biology
+
+    Computer Science
+    Philosophy
+    more (10)
+
+    Meta Stack Exchange
+    Stack Apps
+    API
+    Data
+    Area 51
+
+    Blog
+    Facebook
+    Twitter
+    LinkedIn
+
+site design / logo © 2017 Stack Exchange Inc; user contributions licensed under cc by-sa 3.0 with attribution required . rev 2017.11.23.27842
+Stack Overflow works best with JavaScript enabled
+ 

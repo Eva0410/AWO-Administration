@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OpticianMgr.Wpf.Properties
-{
-
-
+namespace OpticianMgr.Wpf.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,52 +19,915 @@ namespace OpticianMgr.Wpf.Properties
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OpticianMgr.Wpf.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mehrwertsteuer.
+        /// </summary>
+        internal static string BettermentTax {
+            get {
+                return ResourceManager.GetString("BettermentTax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rechnung.
+        /// </summary>
+        internal static string Bill {
+            get {
+                return ResourceManager.GetString("Bill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marke.
+        /// </summary>
+        internal static string Brand {
+            get {
+                return ResourceManager.GetString("Brand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farbe.
+        /// </summary>
+        internal static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontaktlinsesnsonstiges1.
+        /// </summary>
+        internal static string ContactLensOthers1 {
+            get {
+                return ResourceManager.GetString("ContactLensOthers1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontaktlinsensonstiges2.
+        /// </summary>
+        internal static string ContactLensOthers2 {
+            get {
+                return ResourceManager.GetString("ContactLensOthers2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontaktlinsentyp.
+        /// </summary>
+        internal static string ContactLensType {
+            get {
+                return ResourceManager.GetString("ContactLensType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontaktlinsentypbeschreibung.
+        /// </summary>
+        internal static string ContactLensTypeDescription {
+            get {
+                return ResourceManager.GetString("ContactLensTypeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontaktperson.
+        /// </summary>
+        internal static string ContactPerson {
+            get {
+                return ResourceManager.GetString("ContactPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Land.
+        /// </summary>
+        internal static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Landname.
+        /// </summary>
+        internal static string CountryName {
+            get {
+                return ResourceManager.GetString("CountryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kunde.
+        /// </summary>
+        internal static string Customer {
+            get {
+                return ResourceManager.GetString("Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kundennummer.
+        /// </summary>
+        internal static string CustomerId {
+            get {
+                return ResourceManager.GetString("CustomerId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Geburtstag.
+        /// </summary>
+        internal static string DateOfBirth {
+            get {
+                return ResourceManager.GetString("DateOfBirth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rabatt.
+        /// </summary>
+        internal static string Discount {
+            get {
+                return ResourceManager.GetString("Discount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doktor.
+        /// </summary>
+        internal static string Doctor {
+            get {
+                return ResourceManager.GetString("Doctor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doktorname.
+        /// </summary>
+        internal static string DoctorName {
+            get {
+                return ResourceManager.GetString("DoctorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Down {
+            get {
+                object obj = ResourceManager.GetObject("Down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DownOne {
+            get {
+                object obj = ResourceManager.GetObject("DownOne", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DownTwo {
+            get {
+                object obj = ResourceManager.GetObject("DownTwo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brillenfassung.
+        /// </summary>
+        internal static string EyeGlassFrame {
+            get {
+                return ResourceManager.GetString("EyeGlassFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAX.
+        /// </summary>
+        internal static string FAX {
+            get {
+                return ResourceManager.GetString("FAX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vorname.
+        /// </summary>
+        internal static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_L_Achse.
+        /// </summary>
+        internal static string Glass_F_L_Axis {
+            get {
+                return ResourceManager.GetString("Glass_F_L_Axis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_L_cyl.
+        /// </summary>
+        internal static string Glass_F_L_cyl {
+            get {
+                return ResourceManager.GetString("Glass_F_L_cyl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_L_PD_NTH.
+        /// </summary>
+        internal static string Glass_F_L_PD_NTH {
+            get {
+                return ResourceManager.GetString("Glass_F_L_PD_NTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_L_Prisma.
+        /// </summary>
+        internal static string Glass_F_L_Prism {
+            get {
+                return ResourceManager.GetString("Glass_F_L_Prism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_L_sph.
+        /// </summary>
+        internal static string Glass_F_L_sph {
+            get {
+                return ResourceManager.GetString("Glass_F_L_sph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_R_Achse.
+        /// </summary>
+        internal static string Glass_F_R_Axis {
+            get {
+                return ResourceManager.GetString("Glass_F_R_Axis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_R_cyl.
+        /// </summary>
+        internal static string Glass_F_R_cyl {
+            get {
+                return ResourceManager.GetString("Glass_F_R_cyl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_R_PD_NTH.
+        /// </summary>
+        internal static string Glass_F_R_PD_NTH {
+            get {
+                return ResourceManager.GetString("Glass_F_R_PD_NTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_R_Prisma.
+        /// </summary>
+        internal static string Glass_F_R_Prism {
+            get {
+                return ResourceManager.GetString("Glass_F_R_Prism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_F_R_sph.
+        /// </summary>
+        internal static string Glass_F_R_sph {
+            get {
+                return ResourceManager.GetString("Glass_F_R_sph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_FWS.
+        /// </summary>
+        internal static string Glass_FWS {
+            get {
+                return ResourceManager.GetString("Glass_FWS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_HSA.
+        /// </summary>
+        internal static string Glass_HSA {
+            get {
+                return ResourceManager.GetString("Glass_HSA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_Ink.
+        /// </summary>
+        internal static string Glass_Ink {
+            get {
+                return ResourceManager.GetString("Glass_Ink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_L_Achse.
+        /// </summary>
+        internal static string Glass_N_L_Axis {
+            get {
+                return ResourceManager.GetString("Glass_N_L_Axis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_L_cyl.
+        /// </summary>
+        internal static string Glass_N_L_cyl {
+            get {
+                return ResourceManager.GetString("Glass_N_L_cyl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_L_PD_NTH.
+        /// </summary>
+        internal static string Glass_N_L_PD_NTH {
+            get {
+                return ResourceManager.GetString("Glass_N_L_PD_NTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_L_Prisma.
+        /// </summary>
+        internal static string Glass_N_L_Prism {
+            get {
+                return ResourceManager.GetString("Glass_N_L_Prism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_L_sph.
+        /// </summary>
+        internal static string Glass_N_L_sph {
+            get {
+                return ResourceManager.GetString("Glass_N_L_sph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_R_Achse.
+        /// </summary>
+        internal static string Glass_N_R_Axis {
+            get {
+                return ResourceManager.GetString("Glass_N_R_Axis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_R_cyl.
+        /// </summary>
+        internal static string Glass_N_R_cyl {
+            get {
+                return ResourceManager.GetString("Glass_N_R_cyl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_R_PD_NTH.
+        /// </summary>
+        internal static string Glass_N_R_PD_NTH {
+            get {
+                return ResourceManager.GetString("Glass_N_R_PD_NTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_R_Prisma.
+        /// </summary>
+        internal static string Glass_N_R_Prism {
+            get {
+                return ResourceManager.GetString("Glass_N_R_Prism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glas_N_R_sph.
+        /// </summary>
+        internal static string Glass_N_R_sph {
+            get {
+                return ResourceManager.GetString("Glass_N_R_sph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glassonstiges.
+        /// </summary>
+        internal static string GlassOthers {
+            get {
+                return ResourceManager.GetString("GlassOthers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linker Glaspreis.
+        /// </summary>
+        internal static string GlassPriceLeft {
+            get {
+                return ResourceManager.GetString("GlassPriceLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rechter Glaspreis.
+        /// </summary>
+        internal static string GlassPriceRight {
+            get {
+                return ResourceManager.GetString("GlassPriceRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glastyp.
+        /// </summary>
+        internal static string GlassType {
+            get {
+                return ResourceManager.GetString("GlassType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glastypbezeichnung.
+        /// </summary>
+        internal static string GlasstypeDescription {
+            get {
+                return ResourceManager.GetString("GlasstypeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glastypsonstiges.
+        /// </summary>
+        internal static string GlassTypeOthers {
+            get {
+                return ResourceManager.GetString("GlassTypeOthers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bruttopreis.
+        /// </summary>
+        internal static string GrossPrice {
+            get {
+                return ResourceManager.GetString("GrossPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hobbies.
+        /// </summary>
+        internal static string Hobbies {
+            get {
+                return ResourceManager.GetString("Hobbies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hausnummer.
+        /// </summary>
+        internal static string HouseNumber {
+            get {
+                return ResourceManager.GetString("HouseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        internal static string Id {
+            get {
+                return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Krankenkassa.
+        /// </summary>
+        internal static string Insurance {
+            get {
+                return ResourceManager.GetString("Insurance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Versicherungsnummer.
+        /// </summary>
+        internal static string InsurancePolicyNumber {
+            get {
+                return ResourceManager.GetString("InsurancePolicyNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Versicherungspreis.
+        /// </summary>
+        internal static string InsurancePrice {
+            get {
+                return ResourceManager.GetString("InsurancePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job.
+        /// </summary>
+        internal static string Job {
+            get {
+                return ResourceManager.GetString("Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nachname.
+        /// </summary>
+        internal static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo {
+            get {
+                object obj = ResourceManager.GetObject("Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modell.
+        /// </summary>
+        internal static string ModelDescription {
+            get {
+                return ResourceManager.GetString("ModelDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nettopreis.
+        /// </summary>
+        internal static string NetPrice {
+            get {
+                return ResourceManager.GetString("NetPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestelldatum.
+        /// </summary>
+        internal static string OrderDate {
+            get {
+                return ResourceManager.GetString("OrderDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstiges.
+        /// </summary>
+        internal static string Others {
+            get {
+                return ResourceManager.GetString("Others", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstiges1.
+        /// </summary>
+        internal static string Others1 {
+            get {
+                return ResourceManager.GetString("Others1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstiges2.
+        /// </summary>
+        internal static string Others2 {
+            get {
+                return ResourceManager.GetString("Others2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstiger Preis.
+        /// </summary>
+        internal static string OthersPrice {
+            get {
+                return ResourceManager.GetString("OthersPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selbstbehalt.
+        /// </summary>
+        internal static string PatientsContribution {
+            get {
+                return ResourceManager.GetString("PatientsContribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zahlungsdatum.
+        /// </summary>
+        internal static string PaymentDate {
+            get {
+                return ResourceManager.GetString("PaymentDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zahlungsstatus.
+        /// </summary>
+        internal static string PaymentState {
+            get {
+                return ResourceManager.GetString("PaymentState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bearbeitungsstatus.
+        /// </summary>
+        internal static string ProcessingState {
+            get {
+                return ResourceManager.GetString("ProcessingState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Produkte.
+        /// </summary>
+        internal static string Products {
+            get {
+                return ResourceManager.GetString("Products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Einkaufsdatum.
+        /// </summary>
+        internal static string PurchaseDate {
+            get {
+                return ResourceManager.GetString("PurchaseDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Einkaufspreis.
+        /// </summary>
+        internal static string PurchasePrice {
+            get {
+                return ResourceManager.GetString("PurchasePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verkaufsdatum.
+        /// </summary>
+        internal static string SaleDate {
+            get {
+                return ResourceManager.GetString("SaleDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verkaufspreis.
+        /// </summary>
+        internal static string SalePrice {
+            get {
+                return ResourceManager.GetString("SalePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string SingleEmailSubjectGlassesOrder {
+            get {
+                return ResourceManager.GetString("SingleEmailSubjectGlassesOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Größe.
+        /// </summary>
+        internal static string Size {
+            get {
+                return ResourceManager.GetString("Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string State {
+            get {
+                return ResourceManager.GetString("State", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Straße.
+        /// </summary>
+        internal static string Street {
+            get {
+                return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lieferant.
+        /// </summary>
+        internal static string Supplier {
+            get {
+                return ResourceManager.GetString("Supplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lieferantenbemerkung.
+        /// </summary>
+        internal static string SupplierComment {
+            get {
+                return ResourceManager.GetString("SupplierComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon.
+        /// </summary>
+        internal static string Telephone {
+            get {
+                return ResourceManager.GetString("Telephone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon1.
+        /// </summary>
+        internal static string Telephone1 {
+            get {
+                return ResourceManager.GetString("Telephone1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon2.
+        /// </summary>
+        internal static string Telephone2 {
+            get {
+                return ResourceManager.GetString("Telephone2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Titel.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ort.
+        /// </summary>
+        internal static string Town {
+            get {
+                return ResourceManager.GetString("Town", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ortsname.
+        /// </summary>
+        internal static string TownName {
+            get {
+                return ResourceManager.GetString("TownName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Up {
+            get {
+                object obj = ResourceManager.GetObject("Up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UpOne {
+            get {
+                object obj = ResourceManager.GetObject("UpOne", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UpTwo {
+            get {
+                object obj = ResourceManager.GetObject("UpTwo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PLZ.
+        /// </summary>
+        internal static string ZipCode {
+            get {
+                return ResourceManager.GetString("ZipCode", resourceCulture);
             }
         }
     }

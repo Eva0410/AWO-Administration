@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+{
+    <a class=" btn btn-default" asp-action="AdministrationArea">Administrationsbereich</a>
+}
+
+<div id="firstgreyBox3">
+    <table width="100%">
+        <tr>
+            <td>
+                 <a asp-area="" asp-controller="Home" asp-action="Herrenbrillen"><img class="indexImg" src="~/images/mann.jpg" /></a> 
+            </td>
+            <td style="text-align:center">
+                <h4>Modische Herrenbrillen.</h4>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="whiteBox3">
+    <table width="100%">
+        <tr>
+            <td align="center">
+                <h4>Hier gibt es für jedes Frauengesicht die perfekte Brille.</h4>
+            </td>
+            <td align="right">
+                <a asp-area="" asp-controller="Home" asp-action="Frauenbrillen"><img class="indexImg" src="~/images/frau.jpg" /></a> 
+            </td>
+        </tr>
+    </table>
+</div>
+</tr>
+<tr>
+<div id="greyBox3">
+    <table width="100%">
+        <tr>
+            <td>
+                <a asp-area="" asp-controller="Home" asp-action="Kinderbrillen"><img class="indexImg" src="~/images/kind.jpg" /></a> 
+            </td>
+            <td align="center">
+                <h4>Ich sehe was was du nicht siehst.</h4>
+            </td>
+        </tr>
+    </table>
+</div>
+    

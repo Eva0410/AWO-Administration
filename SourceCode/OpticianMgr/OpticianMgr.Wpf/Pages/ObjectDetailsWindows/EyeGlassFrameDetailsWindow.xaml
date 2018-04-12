@@ -1,0 +1,83 @@
+﻿<Window x:Class="OpticianMgr.Wpf.Pages.EyeGlassFrameDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpticianMgr.Wpf.Pages"
+        mc:Ignorable="d"
+        Title="Brillenfassung" Height="570" Width="543.584"  ResizeMode="NoResize">
+    <StackPanel Style="{StaticResource StackPanelBackground}">
+        <Label DockPanel.Dock="Top" Style="{StaticResource HeadingStyle}">Brillenfassung bearbeiten</Label>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"></ColumnDefinition>
+                <ColumnDefinition Width="201"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Modell:</Label>
+            <Label Grid.Column="0" Grid.Row="1">Marke:</Label>
+            <Label Grid.Column="0" Grid.Row="2">Farbe:</Label>
+            <Label Grid.Column="0" Grid.Row="3">Größe:</Label>
+            <Label Grid.Column="0" Grid.Row="4">Status:</Label>
+            <Label Grid.Column="0" Grid.Row="5">Einkaufspreis:</Label>
+            <Label Grid.Column="0" Grid.Row="6">Einkaufsdatum:</Label>
+            <Label Grid.Column="0" Grid.Row="7">Verkafspreis:</Label>
+            <Label Grid.Column="0" Grid.Row="8">Verkaufsdatum:</Label>
+            <Label Grid.Column="0" Grid.Row="9">Lieferant:</Label>
+            <Label Grid.Column="0" Grid.Row="10">Lieferantenbemerkung:</Label>
+            <TextBox Text="{Binding EyeGlassFrame.ModelDescription, Mode=TwoWay}"  Grid.Column="1" Grid.Row="0"></TextBox>
+            <TextBox Text="{Binding EyeGlassFrame.Brand, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"></TextBox>
+            <TextBox Text="{Binding EyeGlassFrame.Color, Mode=TwoWay}" Grid.Column="1" Grid.Row="2"></TextBox>
+            <TextBox Text="{Binding EyeGlassFrame.Size, Mode=TwoWay}" Grid.Column="1" Grid.Row="3"></TextBox>
+            <ComboBox ItemsSource="{Binding States, Mode=TwoWay}" SelectedValue="{Binding EyeGlassFrame.State}" Grid.Column="1" Grid.Row="4">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox Grid.Column="1" Grid.Row="5">
+                <TextBox.Text>
+                    <Binding Path="EyeGlassFrame.PurchasePrice" Mode="TwoWay" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate="{Binding EyeGlassFrame.PurchaseDate}"/>
+            <TextBox Grid.Column="1" Grid.Row="7">
+                <TextBox.Text>
+                    <Binding Path="EyeGlassFrame.SalePrice" Mode="TwoWay" TargetNullValue=""></Binding>
+                </TextBox.Text>
+            </TextBox>
+            <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding EyeGlassFrame.SaleDate}"/>
+            <TextBox Text="{Binding Supplier.Id, Mode=TwoWay}" Grid.Column="1" Grid.Row="9"></TextBox>
+            <ComboBox ItemsSource="{Binding Suppliers, Mode=TwoWay}" SelectedItem="{Binding EyeGlassFrame.Supplier, Mode=TwoWay}" Grid.Column="1" Grid.Row="9" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ScrollViewer Grid.Column="1" Grid.Row="10">
+                <TextBox  Style="{StaticResource BigTextBoxWithWidth}" Text="{Binding EyeGlassFrame.SupplierComment, Mode=TwoWay}"></TextBox>
+            </ScrollViewer>
+        </Grid>
+        <StackPanel Style="{StaticResource ButtonStackPanel}">
+            <Button Command="{Binding Delete}" >Brillenfassung löschen</Button>
+            <Button Command="{Binding Cancel}" >Abbrechen</Button>
+            <Button Command="{Binding Submit}" >Speichern</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

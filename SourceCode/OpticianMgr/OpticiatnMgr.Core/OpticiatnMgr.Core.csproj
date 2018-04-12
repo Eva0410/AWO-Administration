@@ -11,6 +11,7 @@
     <AssemblyName>OpticiatnMgr.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,11 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IEntityObject.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\CustomMessage.cs" />
+    <Compile Include="Entities\Glasses.cs" />
+    <Compile Include="Properties\IEntityObject.cs" />
     <Compile Include="Contracts\IGenericRepository.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
+    <Compile Include="Entities\Doctor.cs" />
+    <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\EntityObject.cs" />
-    <Compile Include="Entities\TestEntity.cs" />
+    <Compile Include="Entities\Glasstype.cs" />
+    <Compile Include="Entities\ContactLensType.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\EyeGlassFrame.cs" />
+    <Compile Include="Entities\Supplier.cs" />
+    <Compile Include="Entities\Town.cs" />
     <Compile Include="OpticianController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,7 +72,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Entities\CustomRecipient.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

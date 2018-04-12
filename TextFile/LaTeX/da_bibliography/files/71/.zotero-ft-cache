@@ -1,0 +1,246 @@
+Banner logo
+
+Palazzo in Venedig? Restaurant in Krakau? Hotel in Agadir? – Mach mit beim Wikivoyage Bearbeitungs-Marathon und vervollständige unsere Reiseführer!
+Ausblenden
+Windows Presentation Foundation
+aus Wikipedia, der freien Enzyklopädie
+Dies ist die aktuelle Version dieser Seite, zuletzt bearbeitet am 22. November 2017 um 16:22 Uhr durch Girus ( Diskussion | Beiträge ) (Typographische Anführungszeichen korrigiert) .
+( Unterschied ) ← Nächstältere Version | Aktuelle Version (Unterschied) | Nächstjüngere Version → (Unterschied)
+Wechseln zu: Navigation , Suche
+Eine markierte Version dieser Seite, die am 22. November 2017 freigegeben wurde, basiert auf dieser Version.
+Windows Presentation Foundation
+Entwickler 	Microsoft
+Aktuelle  Version 	4.7 [1]
+(April 2017)
+Betriebssystem 	ab Windows XP Service Pack 2
+Kategorie 	GUI-Framework
+Lizenz 	Proprietäre Software
+deutschsprachig 	ja
+Offizielle WPF-Webseite von Microsoft
+
+Windows Presentation Foundation (kurz WPF ), auch bekannt unter dem Codenamen Avalon , ist ein Grafik- Framework und Fenstersystem des .NET Frameworks von Microsoft . Es wird seit Windows Vista mit Windows ausgeliefert und lässt sich auf Windows XP (bis zur Version 4.0) und Windows Server 2003 nachinstallieren.
+
+WPF ist eine 2006 neu eingeführte Klassenbibliothek , die zur Gestaltung von grafischen Benutzeroberflächen und zur Integration von Multimedia -Komponenten und Animationen dient. Sie vereint DirectX, Windows Forms, Adobe Flash, HTML und CSS. [2]
+
+WPF stellt ein umfangreiches Modell für den Programmierer bereit. Dabei werden die Präsentation und die Geschäftslogik getrennt, dies wird vor allem durch die Auszeichnungssprache XAML (basierend auf XML) unterstützt. XAML beschreibt Oberflächen-Hierarchien deklarativ als XML-Code. WPF-Anwendungen können sowohl Desktop- als auch Web-Anwendungen sein und benutzen, wenn möglich, Hardwarebeschleunigung . Das Framework versucht, die verschiedenen Bereiche, die für die Präsentation wichtig sind (Benutzerschnittstelle, Zeichnen und Grafiken, Audio und Video, Dokumente, Typographie), zu vereinen.
+
+Zudem gibt es mit Microsoft Silverlight (ehemals WPF/E ) eine Plattform, die für das Web entwickelt wurde. Silverlight setzt dabei nicht auf das .NET-Framework auf, sondern benutzt eine reduzierte Version dessen. Silverlight kann mit XAML entwickelt werden.
+Beispielanwendung, die WPF benutzt
+Inhaltsverzeichnis
+ [ Verbergen ] 
+
+    1 Aufbau
+    2 Leistungsmerkmale
+        2.1 Eigenschaften und Ereignisse
+        2.2 Grafik
+        2.3 Interoperabilität
+        2.4 Medien und Dokumente
+        2.5 Text und Typographie
+        2.6 Benutzerschnittstelle
+    3 Browseranwendungen
+    4 XAML
+    5 Silverlight
+    6 Entwurfsanwendungen
+    7 Siehe auch
+    8 Literatur
+    9 Einzelnachweise
+    10 Weblinks
+
+Aufbau [ Bearbeiten | Quelltext bearbeiten ]
+
+WPF ist Teil des .NET-Frameworks 3.0 und höher, baut eigentlich auf dem Framework 2.0 auf. Mit dem .NET-Framework als Basis ist eine große objektorientierte Klassenbibliothek verfügbar. Es können verschiedenste Programmiersprachen verwendet werden, um CIL -Zwischencode zu erzeugen, z. B. C# oder VB.NET .
+Leistungsmerkmale [ Bearbeiten | Quelltext bearbeiten ]
+
+WPF stellt darauf aufbauenden Anwendungen eine Reihe von Leistungsmerkmalen zur Verfügung.
+Eigenschaften und Ereignisse [ Bearbeiten | Quelltext bearbeiten ]
+
+Im Gegensatz zu normalen Anwendungen benutzt WPF eine eigene Art von Eigenschaften, dependency properties genannt. Diese sind notwendig, da in WPF einige Eigenschaften von anderen abhängig sein können, beispielsweise die Position eines Bilds während einer Animation. Zudem bieten diese Eigenschaften Unterstützung für Datenbindung und Validierung.
+
+Die Ereignisse unterscheiden sich. In WPF werden routed events benutzt. Dies ergibt sich daraus, dass Elemente andere Elemente enthalten können. Wenn ein Kindelement ein Ereignis auslöst, so wird dieses an das Elternelement geleitet, um nicht jedes einzelne Kindelement zu überwachen. Dies nennt sich bubble event . Umgekehrt kann es sinnvoll sein, ein Ereignis als Elternelement vor dem Kindelement zu empfangen ( tunnel event ).
+
+Dependency properties und routed events können attached sein, also ein Element kann je nach Kontext eine Eigenschaft oder ein Ereignis von einem anderen Element erhalten. Dies ist der Fall, wenn eine Schaltfläche in einem Raster steckt: es werden Eigenschaften für die Positionierung (Spalte und Zeile) zur Verfügung gestellt.
+Eine Schaltfläche mit Effekt, die andere Steuerelemente (Menu, Slider, Checkbox) und ein Rechteck enthält.
+Grafik [ Bearbeiten | Quelltext bearbeiten ]
+
+Alle Grafikelemente (beispielsweise Fenster) werden mit Direct3D gerendert. [3] Dies hat zur Folge, dass einige Aufgaben hardwarebeschleunigt von der GPU der Grafikkarte übernommen werden anstatt von der CPU . Zudem können 3D-Grafiken in 2D-Anwendungen angezeigt werden. Vektorgrafiken werden unterstützt. Bis zur Version 3.5 der WPF werden Bitmap-Effekte angeboten, diese werden allerdings ohne Hardwarebeschleunigung gerendert, [4] weshalb sie in der aktuellen Version 4.0 als veraltet deklariert werden. Anstelle der Bitmap-Effekte sollen nun „normale“ Effekte [5] wie der DropShadowEffect [6] verwendet werden, welche durchgängig die Hardwarebeschleunigung der Grafikkarte verwenden.
+Interoperabilität [ Bearbeiten | Quelltext bearbeiten ]
+
+Windows-Forms -Steuerelemente können in WPF-Anwendungen benutzt werden und umgekehrt können WPF-Elemente in Windows Forms verwendet werden.
+
+Zudem unterstützt WPF Win32 : WPF ist mittels Hosting in Win32-Code benutzbar, und Win32-Code kann in WPF-Anwendungen weiterbenutzt werden.
+Medien und Dokumente [ Bearbeiten | Quelltext bearbeiten ]
+
+WPF stellt 2D- Primitive mit vordefinierten Transformationen , Texturen etc. bereit. Die 3D-Funktionalitäten sind ein Unterteil von Direct3D . Diese Funktionalitäten sind allerdings für Dokumente und Benutzerschnittstellen verfügbar. Auch individuelle Animationen sind möglich. Diese können auch zeitgesteuert ablaufen. Die meisten Grafikformate und Videos im WMV oder MPEG -Format werden unterstützt, wobei hierfür ein installierter Windows Media Player ab Version 9 notwendig ist. Auch Dokumente, insbesondere XPS -Dokumente werden mit vordefinierten Steuerelementen unterstützt.
+Text und Typographie [ Bearbeiten | Quelltext bearbeiten ]
+
+WPF unterstützt viele Features von OpenType , wie Ligaturen , Kapitälchen und Ruby . Es werden OpenType- und TrueType -Schriftarten unterstützt. WPF behandelt Text, da es auf .NET aufsetzt, immer als Unicode unabhängig von der Zeichenkodierung .
+Benutzerschnittstelle [ Bearbeiten | Quelltext bearbeiten ]
+
+WPF enthält schon einige vordefinierte Steuerelemente, wie Menüs , Listen. Zudem wird das Aussehen von der Steuerelementlogik getrennt. Das Aussehen eines Steuerelements kann unabhängig davon mit Styles (Eigenschaften anpassen) und Templates (Festlegung, wie das Steuerelement aufgebaut ist) geändert werden.
+
+Steuerelemente können beliebige andere Steuerelemente oder Inhalte enthalten.
+Browseranwendungen [ Bearbeiten | Quelltext bearbeiten ]
+
+WPF-Anwendungen können in einem Webbrowser laufen. Diese XAML Browser Applications ( XBAP ) laufen zum Schutze vor bösartigen Anwendungen in einer eingeschränkten Sandbox -Umgebung. Unter Verwendung der im Internet üblichen Einschränkungen verfügt eine XBAP nicht über den Funktionsumfang des .NET-Frameworks. Unter Verwendung von Zertifikaten kann dieser Funktionsumfang trotzdem erreicht werden.
+
+Seit dem Release des .NET-Frameworks 3.5 laufen XBAPs mit einem Plugin in Mozilla Firefox . [7]
+XAML [ Bearbeiten | Quelltext bearbeiten ]
+→ Hauptartikel : Extensible Application Markup Language
+
+Die Extensible Application Markup Language ( XAML ), die auf XML basiert, beschreibt Anwendungsoberflächen für WPF deklarativ. Dadurch wird versucht, das Aussehen von der Logik zu trennen.
+Silverlight [ Bearbeiten | Quelltext bearbeiten ]
+→ Hauptartikel : Microsoft Silverlight
+
+Silverlight ist eine plattformunabhängige Erweiterung für Browser, die ein WPF-ähnliches Framework für das Web zur Verfügung stellt. Dazu gehören Video, Vektorgrafik, Animationen. Zurzeit ist Silverlight für Mozilla Firefox, Internet Explorer , Opera und Safari unter Windows und Mac OS X verfügbar. Das Mono-Projekt schuf eine Implementation für GNU/Linux namens Moonlight . Die Weiterentwicklung wurde jedoch eingestellt.
+Entwurfsanwendungen [ Bearbeiten | Quelltext bearbeiten ]
+
+Zum Entwerfen von Anwendungen können Microsoft Visual Studio 2017, 2015, 2013, 2012, 2010, 2008 (2005 mit Erweiterung) und SharpDevelop verwendet werden. WPF wird dort durch einen WYSIWYG -Designer und einen geeigneten XAML-Editor unterstützt.
+
+Zudem gibt es eine neue Serie von gestalterischen Entwicklerwerkzeugen namens Microsoft Expression . Expression Blend bearbeitet Benutzeroberflächen (für Silverlight) und arbeitet mit Visual Studio zusammen.
+Siehe auch [ Bearbeiten | Quelltext bearbeiten ]
+
+    Apache Flex
+    JavaFX
+
+Literatur [ Bearbeiten | Quelltext bearbeiten ]
+
+    Adam Nathan: Windows Presentation Foundation Unleashed. Sams, 2007, ISBN 978-0-672-32891-6 .
+    Charles Petzold: Anwendung = Code + Markup. Microsoft Press, 2006, ISBN 978-3-86645-407-1 .
+    Thomas Claudius Huber: Windows Presentation Foundation. Galileo Computing, Juni 2008, ISBN 978-3-8362-1108-6 .
+    Matthew MacDonald Pro WPF in C# 2008. Windows Presentation Foundation with .Net 3.5. Apress, Februar 2008, ISBN 978-1-59059-955-6 .
+    Dirk Frischalowski: Windows Presentation Foundation. Grafische Oberflächen entwickeln mit .NET 3.0. Addison-Wesley, März 2007, ISBN 978-3-8273-2522-8 .
+    Thomas Theis: Einstieg in WPF 4.5. Grundlagen und Praxis. 2., aktualisierte und erw. Auflage, Galileo Press, Bonn 2013, ISBN 978-3-8362-1967-9 .
+
+Einzelnachweise [ Bearbeiten | Quelltext bearbeiten ]
+
+    Hochspringen ↑ Announcing the .NET Framework 4.7 General Availability , .NET Blog, 2. Mai 2017
+    Hochspringen ↑ Thomas Theis, Einstieg in WPF 4.5. Grundlagen und Praxis. 2. Aufl., Galileo Press, Bonn 2013, S. 15.
+    Hochspringen ↑ MSDN
+    Hochspringen ↑ http://marlongrech.wordpress.com/2008/05/15/effects-in-net-sp1-for-wpf/
+    Hochspringen ↑ Effekte
+    Hochspringen ↑ DropShadowEffect
+    Hochspringen ↑ FirefoxWPFAndXBAP
+
+Weblinks [ Bearbeiten | Quelltext bearbeiten ]
+
+    MSDN Developer Center zur WPF
+    MSDN Library: Windows Presentation Foundation
+    Artikel zum Thema Bitmap-Effekte in WPF
+    Tutorial und Einführung in WPF (englisch)
+    Microsoft Expression
+
+Abgerufen von „ https://de.wikipedia.org/w/index.php?title=Windows_Presentation_Foundation&oldid=171261022 “
+Kategorien :
+
+    Grafikbibliothek
+    GUI-Toolkit
+    .NET
+
+Navigationsmenü
+Meine Werkzeuge
+
+    Nicht angemeldet
+    Diskussionsseite
+    Beiträge
+    Benutzerkonto erstellen
+    Anmelden
+
+Namensräume
+
+    Artikel
+    Diskussion
+
+Varianten
+
+Ansichten
+
+    Lesen
+    Bearbeiten
+    Quelltext bearbeiten
+    Versionsgeschichte
+
+Mehr
+
+Suche
+Navigation
+
+    Hauptseite
+    Themenportale
+    Von A bis Z
+    Zufälliger Artikel
+
+Mitmachen
+
+    Artikel verbessern
+    Neuen Artikel anlegen
+    Autorenportal
+    Hilfe
+    Letzte Änderungen
+    Kontakt
+    Spenden
+
+Werkzeuge
+
+    Links auf diese Seite
+    Änderungen an verlinkten Seiten
+    Spezialseiten
+    Permanenter Link
+    Seiten­informationen
+    Wikidata-Datenobjekt
+    Artikel zitieren
+
+Drucken/­exportieren
+
+    Buch erstellen
+    Als PDF herunterladen
+    Druckversion
+
+In anderen Projekten
+
+    Commons
+
+In anderen Sprachen
+
+    العربية
+    Čeština
+    English
+    Español
+    فارسی
+    Suomi
+    Français
+    עברית
+    Magyar
+    Italiano
+    日本語
+    한국어
+    Nederlands
+    Polski
+    Português
+    Русский
+    Slovenščina
+    Српски / srpski
+    Türkçe
+    Українська
+    Tiếng Việt
+    中文
+    13 weitere 
+
+Links bearbeiten
+
+    Diese Seite wurde zuletzt am 22. November 2017 um 16:22 Uhr bearbeitet.
+    Abrufstatistik
+
+    Der Text ist unter der Lizenz „Creative Commons Attribution/Share Alike“ verfügbar; Informationen zu den Urhebern und zum Lizenzstatus eingebundener Mediendateien (etwa Bilder oder Videos) können im Regelfall durch Anklicken dieser abgerufen werden. Möglicherweise unterliegen die Inhalte jeweils zusätzlichen Bedingungen. Durch die Nutzung dieser Website erklären Sie sich mit den Nutzungsbedingungen und der Datenschutzrichtlinie einverstanden.
+    Wikipedia® ist eine eingetragene Marke der Wikimedia Foundation Inc.
+
+    Datenschutz
+    Über Wikipedia
+    Impressum
+    Entwickler
+    Stellungnahme zu Cookies
+    Mobile Ansicht
+    Vorschau aktivieren
+
+    Wikimedia Foundation
+    Powered by MediaWiki
+
