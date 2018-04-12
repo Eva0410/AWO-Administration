@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Komon Notify property changed</Title>
+			<Shortcut>kproppc</Shortcut>
+			<Description>Code snippet for property and backing field which implements INotifyPropertyChanged</Description>
+			<Author>Codigo</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>type</ID>
+					<ToolTip>Property type</ToolTip>
+					<Default>int</Default>
+				</Literal>
+				<Literal>
+					<ID>property</ID>
+					<ToolTip>Property name</ToolTip>
+					<Default>MyProperty</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="csharp">
+        <![CDATA[#region $property$
+  private $type$ m$property$;
+  /// <summary>
+  /// 
+  /// </summary>
+  public $type$ $property$
+	{
+		get 
+    { 
+      return m$property$;
+    }
+		set 
+    { 
+      m$property$ = value; 
+      FirePropertyChanged(()=>this.$property$);
+    }
+	}
+  #endregion $property$
+	$end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,1980 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Komon.Presentation</name>
+    </assembly>
+    <members>
+        <member name="T:Komon.Util.ComboBoxAllowNull">
+            <summary>
+            Empty selected item from ComboBox
+            </summary>
+        </member>
+        <member name="M:Komon.Util.ComboBoxAllowNull.GetAllowNull(System.Windows.Controls.ComboBox)">
+            <summary>
+            
+            </summary>
+            <param name="combo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Util.ComboBoxAllowNull.SetAllowNull(System.Windows.Controls.ComboBox,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="combo"></param>
+            <param name="value"></param>
+        </member>
+        <member name="F:Komon.Util.ComboBoxAllowNull.AllowNullProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Contract.Client.KomonClientBase`1">
+            <summary>
+            Base class for clients, it has methods for service calls and is used for code generation of different clients.
+            </summary>
+        </member>
+        <member name="M:Komon.Contract.Client.KomonClientBase`1.#ctor(Komon.Contract.Client.ClientContext,System.Boolean)">
+            <summary>
+            Create an instance of the client
+            </summary>
+            <param name="context">The configuration for the client</param>
+            <param name="isAsync">Type of client</param>
+        </member>
+        <member name="P:Komon.Contract.Client.KomonClientBase`1.Client">
+            <summary>
+            A reference to the underlying client.
+            </summary>
+        </member>
+        <member name="M:Komon.Contract.Client.KomonClientBase`1.CallFacade``1(System.Func{``0},System.String,System.String)">
+            <summary>
+            Wrapper for calling a facade function
+            </summary>
+            <typeparam name="TOut">Type that should be returned</typeparam>
+            <param name="serviceCall">Function that should call the facade</param>
+            <param name="contract">name of the contract that gets called</param>
+            <param name="operation">name of the operation that gets called</param>
+            <returns>returns the type that the function returns</returns>
+        </member>
+        <member name="M:Komon.Contract.Client.KomonClientBase`1.CallFacade(System.Action,System.String,System.String)">
+            <summary>
+            Wrapper for calling a facade action
+            </summary>
+            <param name="serviceCall">the action to call a void function in the facade</param>
+            <param name="contract">Name of the contract</param>
+            <param name="operation">name of the operation</param>
+        </member>
+        <member name="M:Komon.Contract.Client.KomonClientBase`1.CallServiceSync(System.Action,System.String,System.String)">
+            <summary>
+            Wrapper for calling a service method sync
+            </summary>
+            <param name="serviceCall">An action that calls the function on the client</param>
+            <param name="contract">name of the contract that gets called</param>
+            <param name="operation">name of the operation that gets called</param>
+        </member>
+        <member name="M:Komon.Contract.Client.KomonClientBase`1.CallServiceSync``1(System.Func{``0},System.String,System.String)">
+            <summary>
+            Wrapper for calling a service method sync
+            </summary>
+            <typeparam name="TOut"></typeparam>
+            <param name="serviceCall">An function that calls the function on the client</param>
+            <param name="contract">name of the contract that gets called</param>
+            <param name="operation">name of the operation that gets called</param>
+            <returns>The object that the service returns</returns>
+        </member>
+        <member name="M:Komon.Contract.Client.KomonClientBase`1.CallServiceAsync``1(System.Func{``0},System.String,System.String)">
+            <summary>
+            A wrapper to call services asyn
+            </summary>
+            <typeparam name="TOut">Type of the task that gets returned</typeparam>
+            <param name="serviceCall">The task that calls the service</param>
+            <param name="contract">name of the contract that gets called</param>
+            <param name="operation">name of the operation that gets called</param>
+            <returns>A Task or a Task of T</returns>
+        </member>
+        <member name="T:Komon.Contract.Security.ClientAuthorizationBehavior">
+            <summary>
+            This class is and endpoint behavior that writes authorization 
+            information to a wcf message.
+            </summary>
+        </member>
+        <member name="P:Komon.Contract.Security.ClientAuthorizationBehavior.MessageInspector">
+            <summary>
+             The message inspector used to edit the soap messages.
+            </summary>
+        </member>
+        <member name="M:Komon.Contract.Security.ClientAuthorizationBehavior.#ctor">
+            <summary>
+            Create the behavior
+            </summary>
+        </member>
+        <member name="T:Komon.Contract.Security.ClientAuthorizationExtension">
+            <summary>
+            A Configuration Behavior Extension for the Komon ClientAuthorizationBehavior Behavior
+            </summary>
+        </member>
+        <member name="P:Komon.Contract.Security.ClientAuthorizationExtension.BehaviorType">
+            <summary>
+            Type of the behavior
+            </summary>
+        </member>
+        <member name="M:Komon.Contract.Security.ClientAuthorizationExtension.CreateBehavior">
+            <summary>
+            Create the behavior
+            </summary>
+            <returns>The behavior extension</returns>
+        </member>
+        <member name="T:Komon.Contract.Security.ClientMessageInspector">
+            <summary>
+            A message inspector that adds system and user id to the header of a soap message.
+            </summary>
+        </member>
+        <member name="P:Komon.Contract.Security.ClientMessageInspector.User">
+            <summary>
+            User that sends the message
+            </summary>
+        </member>
+        <member name="P:Komon.Contract.Security.ClientMessageInspector.System">
+            <summary>
+            Current system that the User work against
+            </summary>
+        </member>
+        <member name="T:Komon.Converter.BoolToStringConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.BoolToStringConverter.TrueText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.BoolToStringConverter.FalseText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.BoolToStringConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.BoolToStringConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.BoolToVisibilityConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.BoolToVisibilityConverter.Opposite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.BoolToVisibilityConverter.ReturnBool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.BoolToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.BoolToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.CollectionToVisibilityConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.CollectionToVisibilityConverter.ReturnOpposite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.CollectionToVisibilityConverter.ReturnVisibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.CollectionToVisibilityConverter.TrueIfSingleItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.CollectionToVisibilityConverter.TrueIfNullOrEmpty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.CollectionToVisibilityConverter.TrueIfMoreThenOne">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.CollectionToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.CollectionToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.BoolToColorConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.BoolToColorConverter.TrueColor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.BoolToColorConverter.FalseColor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.BoolToColorConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.BoolToColorConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.DataBindingDebugConverter">
+            <summary>
+            This converter does nothing except breaking the
+            debugger into the convert method
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.DataBindingDebugConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.DataBindingDebugConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.DateTimePresenter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.DateTimePresenter.IncludeTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.DateTimePresenter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.DateTimePresenter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.DateTimeToIntConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.DateTimeToIntConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.DateTimeToIntConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.DateTimeToShortDateStringConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.DateTimeToShortDateStringConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.DateTimeToShortDateStringConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.EnumBooleanConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.EnumBooleanConverter.ReturnVisibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.EnumBooleanConverter.ReturnOpposite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.EnumBooleanConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.EnumBooleanConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.IntToBoolConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.IntToBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.IntToBoolConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.InvertVisibilityConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.InvertVisibilityConverter.Opposite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.InvertVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.InvertVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.IsGuidEmptyToBoolConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.IsGuidEmptyToBoolConverter.ReturnVisibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.IsGuidEmptyToBoolConverter.TrueIfGuidEmpty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.IsGuidEmptyToBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.IsGuidEmptyToBoolConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.IsObjectNullToBoolConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.IsObjectNullToBoolConverter.ReturnVisibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.IsObjectNullToBoolConverter.TrueIfNull">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.IsObjectNullToBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.IsObjectNullToBoolConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.StringEqualsConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.StringEqualsConverter.ReturnVisibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.StringEqualsConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.StringEqualsConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.IsStringNullOrEmptyConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.IsStringNullOrEmptyConverter.ReturnVisibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.IsStringNullOrEmptyConverter.TrueIfNull">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.IsStringNullOrEmptyConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.IsStringNullOrEmptyConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.LogForegroundConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.LogForegroundConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.LogForegroundConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.MultilineStringToShortString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.MultilineStringToShortString.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.MultilineStringToShortString.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.MultiValueToStringConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.MultiValueToStringConverter.Separator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.MultiValueToStringConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="values"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.MultiValueToStringConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetTypes"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.NullableDateTimeConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.NullableDateTimeConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.NullableDateTimeConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.NullableDateTimeConverter.Validate(System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="cultureInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.ProcessTargetToUiString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.ProcessTargetToUiString.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.ProcessTargetToUiString.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.KomonUserToHasAccessConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.KomonUserToHasAccessConverter.ReturnVisibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.KomonUserToHasAccessConverter.ReturnOpposite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.KomonUserToHasAccessConverter.Action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Converter.KomonUserToHasAccessConverter.Module">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.KomonUserToHasAccessConverter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.KomonUserToHasAccessConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.KomonUserToHasAccessConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.UserToLogOnButtonTextConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.UserToLogOnButtonTextConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.UserToLogOnButtonTextConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Converter.ValidationResponseStringToForegroundColor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Converter.ValidationResponseStringToForegroundColor.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Converter.ValidationResponseStringToForegroundColor.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Framework.KomonCommand`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>      //TODO: Migrate
+        </member>
+        <member name="M:Komon.Framework.KomonCommand`1.#ctor(System.Action{`0},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="execute"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+        </member>
+        <member name="M:Komon.Framework.KomonCommand`1.#ctor(System.Func{`0,System.Threading.Tasks.Task},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="execute"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+        </member>
+        <member name="P:Komon.Framework.KomonCommand`1.IsEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.KomonCommand`1.CanExecute(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Komon.Framework.KomonCommand`1.CanExecuteChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.KomonCommand`1.Execute(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="T:Komon.Framework.KomonCommand">
+            <summary>
+            
+            </summary>                         //TODO: Migrate
+        </member>
+        <member name="M:Komon.Framework.KomonCommand.#ctor(System.Action,System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="execute"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+        </member>
+        <member name="M:Komon.Framework.KomonCommand.#ctor(System.Func{System.Threading.Tasks.Task},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="execute"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+        </member>
+        <member name="P:Komon.Framework.KomonCommand.IsEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.KomonCommand.CanExecute(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Komon.Framework.KomonCommand.CanExecuteChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.KomonCommand.Execute(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="T:Komon.Presentation.KomonApplication">
+            <summary>
+             Base class for WPF Applications, should be created, initialized and 
+             run in an applications Main method. The Main method must have the 
+             STAThread attribute.
+             
+             The application loads modules so the hosting application must reference
+             the assemblies containing the modules that the application should view.
+            </summary>
+        </member>
+        <member name="F:Komon.Presentation.KomonApplication.mApplication">
+            <summary>
+            The application instance
+            </summary>
+        </member>
+        <member name="F:Komon.Presentation.KomonApplication.mMainWindow">
+            <summary>
+            Instance of the main window
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.KomonApplication.ApplicationTitle">
+            <summary>
+            Title of the application, same as the title in the main window
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.KomonApplication.PersistDebugToDb">
+            <summary>
+            Should the application try to write debug information to 
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.KomonApplication.RequireLogOn">
+            <summary>
+            Should the shell require users to login
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.KomonApplication.ApplicationIcon">
+            <summary>
+            Reference to the Icon
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.KomonApplication.ApplicationImage">
+            <summary>
+            Reference to the Image
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.KomonApplication.ThemeUri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.KomonApplication.Initialize">
+            <summary>
+            Initialize, create the application instance, the main window, 
+            hookup event handlers and trace listeners
+            </summary>
+            <returns>True if the initialization is successful</returns>
+        </member>
+        <member name="M:Komon.Presentation.KomonApplication.Run">
+            <summary>
+            Run the application
+            </summary>
+        </member>
+        <member name="T:Komon.Presentation.UserManagement.ChangePasswordUserControl">
+            <summary>
+            Interaction logic for ChangePasswordUserControl.xaml
+            </summary>
+            <summary>
+            ChangePasswordUserControl
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.UserManagement.ChangePasswordUserControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.UserManagement.ChangePasswordUserControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.Presentation.UserManagement.SetSystemUserControl">
+            <summary>
+            Interaction logic for SetSystemUserControl.xaml
+            </summary>
+            <summary>
+            SetSystemUserControl
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.UserManagement.SetSystemUserControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.UserManagement.SetSystemUserControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.Presentation.ViewModel.PresentationViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewModel.PresentationViewModel.CurrentPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewModel.PresentationViewModel.ApplicationImage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewModel.PresentationViewModel.LargeApplicationImage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.ViewModel.PresentationViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.View.ViewProvider.ShowChildWindow(Komon.View.Interfaces.IKomonMainWindow,System.Object,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="window"></param>
+            <param name="content"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="T:Komon.View.UserControls.LogOnUserControl">
+            <summary>
+            Interaction logic for LoginUserControl.xaml
+            </summary>
+            <summary>
+            LogOnUserControl
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.LogOnUserControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.LogOnUserControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.UserControls.UserSettingsControl">
+            <summary>
+            Interaction logic for UserSettingsControl.xaml
+            </summary>
+            <summary>
+            UserSettingsControl
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.UserSettingsControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.UserSettingsControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.UserControls.UserTileControl">
+            <summary>
+            Interaction logic for UserTileControl.xaml
+            </summary>
+            <summary>
+            UserTileControl
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.UserTileControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.UserTileControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.UserControls.ChildWindowUserControl">
+            <summary>
+            Interaction logic for ChildWindowUserControl.xaml
+            </summary>
+            <summary>
+            ChildWindowUserControl
+            </summary>
+        </member>
+        <member name="E:Komon.View.UserControls.ChildWindowUserControl.ClosePressed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.ChildWindowUserControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.UserControls.ChildWindowUserControl.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.ChildWindowUserControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.UserControls.KomonViewManagerControl">
+            <summary>
+            Interaction logic for KomonViewManagerControl.xaml
+            </summary>
+            <summary>
+            KomonViewManagerControl
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.KomonViewManagerControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.KomonViewManagerControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.UserControls.ModuleContainer">
+            <summary>
+            Interaction logic for ModulContainer.xaml
+            </summary>
+            <summary>
+            ModuleContainer
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.ModuleContainer.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.UserControls.ModuleContainer.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.AsyncCollectionPresenter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.AsyncCollectionPresenter.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.AsyncCollectionPresenter.DescriptionProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.AsyncCollectionPresenter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.AsyncCollectionPresenter.Columns">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.AsyncCollectionPresenter.SelectedItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.AsyncCollectionPresenter.SelectedItemProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.KomonDataGrid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonDataGrid.ColumnDefinitions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonDataGrid.ColumnDefinitionsProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.CsvGrid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.CsvGrid.Csv">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.CsvGrid.CsvProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.CsvGrid.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.WebImage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.WebImage.Uri">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.WebImage.UriProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.WebImage.UseCookies">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.WebImage.UseCookiesProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.WebImage.Save(System.String)">
+            <summary>
+            Save the image to file
+            </summary>
+            <param name="fileName">The path and filename</param>
+        </member>
+        <member name="T:Komon.View.Controls.AsyncPropertyPresenter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.AsyncPropertyPresenter.ShowReload">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.AsyncPropertyPresenter.ShowReloadProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.AsyncPropertyPresenter.ShowSearch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.AsyncPropertyPresenter.ShowSearchProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.AsyncPropertyPresenter.Property">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.AsyncPropertyPresenter.PropertyProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.AsyncPropertyPresenter.Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.AsyncPropertyPresenter.HeaderProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.AsyncPropertyPresenter.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.AsyncPropertyPresenter.DataProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.AsyncPropertyPresenter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.ChildWindow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.ChildWindow.ShowMessage(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="P:Komon.View.Controls.ChildWindow.Parent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.ChildWindow.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.ChildWindow.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.ChildWindow.Show">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.ChildWindow.Close">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:Komon.View.Controls.ChildWindow.Closed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.DetailsPresenter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.DetailsPresenter.SelectedItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.DetailsPresenter.SelectedItemProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.DetailsPresenter.Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.DetailsPresenter.HeaderProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.DetailsPresenter.DetailsControl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.DetailsPresenter.DetailsControlProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.DetailsPresenter.HasAccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.DetailsPresenter.HasAccessProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.DetailsPresenter.Action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.DetailsPresenter.ActionProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.KomonCheckBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonCheckBox.Action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonCheckBox.ActionProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonCheckBox.IsEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonCheckBox.IsEnabledProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonCheckBox.IsEditable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonCheckBox.IsEditableProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.KomonCheckBox.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.KomonComboBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonComboBox.IsBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonComboBox.IsBoxProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonComboBox.Action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonComboBox.ActionProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonComboBox.IsEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonComboBox.IsEnabledProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonComboBox.IsEditable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonComboBox.IsEditableProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.KomonComboBox.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.KomonButton">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonButton.Action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonButton.ActionProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.KomonButton.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.KomonMessageBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.KomonMessageBox.Show(System.String,System.String,Komon.View.Interfaces.MessageBoxButton,Komon.View.Interfaces.MessageBoxImage)">
+            <summary>
+            
+            </summary>
+            <param name="text"></param>
+            <param name="caption"></param>
+            <param name="buttons"></param>
+            <param name="image"></param>
+        </member>
+        <member name="M:Komon.View.Controls.KomonMessageBox.ShowGetResult(System.String,System.String,Komon.View.Interfaces.MessageBoxButton,Komon.View.Interfaces.MessageBoxImage)">
+            <summary>
+            
+            </summary>
+            <param name="text"></param>
+            <param name="caption"></param>
+            <param name="buttons"></param>
+            <param name="image"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.View.Controls.KomonTextBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonTextBox.Action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonTextBox.ActionProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonTextBox.IsBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonTextBox.IsBoxProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonTextBox.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonTextBox.TextProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonTextBox.IsEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonTextBox.IsEnabledProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.KomonTextBox.IsEditable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.KomonTextBox.IsEditableProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.KomonTextBox.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.LineDiagramControl">
+            <summary>
+            Interaction logic for LineDiagramControl.xaml
+            </summary>
+            <summary>
+            LineDiagramControl
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.LineDiagramControl.Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.LineDiagramControl.HeaderProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.LineDiagramControl.ValueType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.LineDiagramControl.ValueTypeProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.LineDiagramControl.Series">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.LineDiagramControl.SeriesProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.LineDiagramControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.LineDiagramControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.RangeSlider">
+            <summary>
+            Interaction logic for RangeSlider.xaml
+            </summary>
+            <summary>
+            RangeSlider
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.RangeSlider.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeSlider.Values">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.RangeSlider.ValuesProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.RangeSlider.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.RangeValues`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="E:Komon.View.Controls.RangeValues`1.RangeChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.Lower">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.Upper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.Max">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.Min">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.LowerText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.UpperText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.InternalLower">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.InternalUpper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.InternalMax">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.RangeValues`1.InternalMin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.RangeValues`1.IsInRange(`0)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.View.Controls.SelectFromListControl">
+            <summary>
+            Interaction logic for SelectFromListControl.xaml
+            </summary>
+            <summary>
+            SelectFromListControl
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.SelectFromListControl.ItemSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.SelectFromListControl.ItemSourceProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.SelectFromListControl.DisplayMemberPath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.SelectFromListControl.DisplayMemberPathProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.SelectFromListControl.SearchVisibility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.SelectFromListControl.SearchVisibilityProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.SelectFromListControl.SelectedValues">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.SelectFromListControl.SelectedValuesProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.SelectFromListControl.SelectedValuePath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.SelectFromListControl.SelectedValuePathProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.SelectFromListControl.Action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.SelectFromListControl.ActionProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.SelectFromListControl.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.SelectFromListControl.UpdateSearch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.SelectFromListControl.Update">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.SelectFromListControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.Controls.LinkBinding">
+            <summary>
+            Interaction logic for UserControl1.xaml
+            </summary>
+            <summary>
+            LinkBinding
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.LinkBinding.From">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.LinkBinding.FromProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.LinkBinding.To">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.LinkBinding.ToProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Controls.LinkBinding.SelectedValuePath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Controls.LinkBinding.SelectedValuePathProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.LinkBinding.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Controls.LinkBinding.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Komon.View.Interfaces.ISearchSupportCaseControl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Interfaces.ISearchSupportCaseControl.SelectedPanelists">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Interfaces.ISupportControl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Interfaces.ISupportControl.SearchSupportCase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Windows.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:Komon.View.Windows.MainWindow.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Windows.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

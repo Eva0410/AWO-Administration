@@ -1,0 +1,1367 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Komon.Client</name>
+    </assembly>
+    <members>
+        <member name="T:Komon.Client.ClientConfiguration">
+            <summary>
+            Contains configuration for the logic layer of komon
+            </summary>
+        </member>
+        <member name="T:Komon.Client.ClientConfiguration.RestContextElement">
+            <summary>
+            Configuration for workflows
+            </summary>
+        </member>
+        <member name="P:Komon.Client.ClientConfiguration.RestContextElement.Domain">
+            <summary>
+            The Username for the workflow
+            </summary>
+        </member>
+        <member name="P:Komon.Client.ClientConfiguration.RestContextElement.BuildCookieContainer">
+            <summary>
+            The Username for the workflow
+            </summary>
+        </member>
+        <member name="P:Komon.Client.ClientConfiguration.Context">
+            <summary>
+            Configuration for Service clients
+            </summary>
+        </member>
+        <member name="T:Komon.Client.WebClientContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.Client.WebClientContext.CookieContainer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:Komon.Client.WebClientContext.UnexpectedWebResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Client.RestClientBase`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Komon.Client.RestClientBase`1.#ctor(Komon.Contract.Client.ClientContext)">
+            <summary>
+            Create an instance of the client
+            </summary>
+            <param name="context">The configuration for the client</param>
+        </member>
+        <member name="M:Komon.Client.RestClientBase`1.CallService(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String,System.Threading.CancellationToken,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+            <param name="contract"></param>
+            <param name="operation"></param>
+            <param name="token"></param>
+            <param name="isSeq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Client.RestClientBase`1.CallServiceOld(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String,System.Threading.CancellationToken,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+            <param name="contract"></param>
+            <param name="operation"></param>
+            <param name="token"></param>
+            <param name="isSeq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.Client.RestClientBase`1.ParseResponse(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="response"></param>
+        </member>
+        <member name="M:Komon.Client.RestClientBase`1.ParseResponse``1(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="TR"></typeparam>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.Framework.AsyncCollection`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Komon.Framework.AsyncCollection`2.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.AsyncCollection`2.Finalize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncCollection`2.SearchText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncCollection`2.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.AsyncCollection`2.ValueIsUpdated">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.AsyncCollection`2.Add(`1)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:Komon.Framework.AsyncCollection`2.Remove(`1)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:Komon.Framework.AsyncCollection`2.RefreshItem(`1,`1)">
+            <summary>
+            
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="P:Komon.Framework.AsyncCollection`2.IsChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Framework.IAsyncProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.IAsyncProperty.IsUpdating">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.IAsyncProperty.ErrorMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.IAsyncProperty.HasValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.IAsyncProperty.ClearCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Framework.AsyncPropertyManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.AsyncPropertyManager.Register(Komon.Framework.IAsyncProperty)">
+            <summary>
+            
+            </summary>
+            <param name="prop"></param>
+        </member>
+        <member name="M:Komon.Framework.AsyncPropertyManager.ClearAllCaches">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Framework.AsyncProperty`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:Komon.Framework.AsyncProperty`2.ClearCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.AsyncProperty`2.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.UpdateFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.UpdateTask">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.UseCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.Framework.AsyncProperty`2.mValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.AsyncProperty`2.UpdateValue(`1)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Komon.Framework.AsyncProperty`2.ValueIsUpdated">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.IsUpdating">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.ErrorMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.HasValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:Komon.Framework.AsyncProperty`2.ValueUpdated">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.CurrentKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.AsyncProperty`2.Reload">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.AsyncProperty`2.Update(`0)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="P:Komon.Framework.AsyncProperty`2.ReloadData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Framework.NotifyTuple`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`2.Item1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`2.Item2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Framework.NotifyTuple`3">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`3.Item1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`3.Item2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`3.Item3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Framework.NotifyTuple`4">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+            <typeparam name="T4"></typeparam>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`4.Item1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`4.Item2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`4.Item3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Framework.NotifyTuple`4.Item4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Framework.SimpleCache`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:Komon.Framework.SimpleCache`2.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Framework.SimpleCache`2.Get(System.Func{`0},System.Func{`1})">
+            <summary>
+            
+            </summary>
+            <param name="getKey"></param>
+            <param name="getNewObject"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.ViewModel.UserScreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.UserScreen.Initializing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.UserScreen.Login">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.UserScreen.ChangePassword">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.UserScreen.SetSystem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.UserScreen.EditUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.UserScreen.Application">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.UserScreen.NoAccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.ViewModel.LogOnViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.Systems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.UiSelectedSystem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.SelectedSystem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.Password">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.MaintenanceMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.UserScreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.PromptPasswordChange">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.LogOnViewModel.mUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.User">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.IsUserLoggedIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.UserRoles">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.Screens">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.UserSettings">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:Komon.ViewModel.LogOnViewModel.UserScreenChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:Komon.ViewModel.LogOnViewModel.UserLoggedInChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:Komon.ViewModel.LogOnViewModel.SystemChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.LogOnViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.LogOnViewModel.Initialize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.LogOn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.LogOnViewModel.HandleLogOn(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="password"></param>
+        </member>
+        <member name="M:Komon.ViewModel.LogOnViewModel.HandleChangePassword(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="oldPassword"></param>
+            <param name="newPassword"></param>
+            <param name="confirmPassword"></param>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.SetSystem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.SaveUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.SelectedPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.LogOnViewModel.ChangeScreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.ViewModel.ConfigurationViewModelBase`3">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TObject"></typeparam>
+        </member>
+        <member name="M:Komon.ViewModel.ConfigurationViewModelBase`3.UpdateItems(`1)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.SelectedKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.SelectedItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.ConfigurationViewModelBase`3.UpdateSelectedItem(`2,`2)">
+            <summary>
+            
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.ViewModel.ConfigurationViewModelBase`3.SaveItemTask(`2)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.SaveItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.ConfigurationViewModelBase`3.SaveAllItemsTask(System.Collections.Generic.List{`2})">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.SaveAllItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.ViewModel.ConfigurationViewModelBase`3.mRollbackAllChanges">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.RollbackAllChanges">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.ConfigurationViewModelBase`3.CreateNew">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.AddItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.ConfigurationViewModelBase`3.DeleteItemTask(`2)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.DeleteItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.IsChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.ConfigurationViewModelBase`3.RollbackChanges">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.ConfigurationViewModelBase`3.AcceptChanges">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.ViewModel.KomonViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.KomonViewModel.LogOn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.KomonViewModel.StatusMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.KomonViewModel.ApplicationTitle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.KomonViewModel.IsLoadingSystem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.KomonViewModel.IsSystemMaintenance">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.KomonViewModel.ViewManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.KomonViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.KomonViewModel.Initialize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.ViewModel.SearchFilterItemViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.SearchFilterItemViewModel.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.SearchFilterItemViewModel.IsChecked">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.SearchFilterItemViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.ViewModel.SearchFilterViewModelCollection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.SearchFilterViewModelCollection.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.SearchFilterViewModelCollection.#ctor(System.Collections.Generic.List{System.String})">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="M:Komon.ViewModel.SearchFilterViewModelCollection.IsInFilter(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="filterText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.ViewModel.SearchFilterViewModelCollection.GetEnumerator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.ViewModel.ViewModelBase`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+        </member>
+        <member name="M:Komon.ViewModel.ViewModelBase`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.ViewModelBase`1.DomainModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.ViewModelBase`1.HandlePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}},System.Func{``0,System.Threading.Tasks.Task},System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="expression"></param>
+            <param name="handler"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+        </member>
+        <member name="M:Komon.ViewModel.ViewModelBase`1.HandlePropertyChangedAsync``1(System.Linq.Expressions.Expression{System.Func{``0}},System.Func{``0,System.Threading.Tasks.Task},System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="expression"></param>
+            <param name="handler"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Komon.ViewModel.ViewModelBase`1.IsUpdating">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.ViewModelBase`1.OnActivated(System.Object)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.ViewModel.ViewModelBase`1.OnViewActivation">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.ViewModel.ViewModelBase`1.OnViewActivation(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.ViewModel.IViewActivation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.IViewActivation.OnActivated(System.Object)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.ViewModel.ViewModelFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.ViewModel.ViewModelFactory.MainViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.ViewModel.ViewModelFactory.SetMainViewModel(Komon.ViewModel.KomonViewModel)">
+            <summary>
+            
+            </summary>
+            <param name="wm"></param>
+        </member>
+        <member name="T:Komon.Presentation.ViewModel.KomonViewManagerViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewModel.KomonViewManagerViewModel.ViewDefinition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.ViewModel.KomonViewManagerViewModel.#ctor(System.Collections.Generic.List{Komon.Presentation.ViewModel.ViewDefinition})">
+            <summary>
+            
+            </summary>
+            <param name="views"></param>
+        </member>
+        <member name="P:Komon.Presentation.ViewModel.KomonViewManagerViewModel.ActiveView">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.ViewModel.KomonViewManagerViewModel.SetActive(Komon.Presentation.ViewModel.ViewDefinition,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="view"></param>
+            <param name="input"></param>
+        </member>
+        <member name="T:Komon.Presentation.ViewModel.ViewDefinition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewModel.ViewDefinition.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewModel.ViewDefinition.Definition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Presentation.ViewContainerViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewContainerViewModel.Manager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewContainerViewModel.ViewDefinitions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewContainerViewModel.Views">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewContainerViewModel.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewContainerViewModel.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewContainerViewModel.FontSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewContainerViewModel.Level">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.ViewContainerViewModel.SelectedIndex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.ViewContainerViewModel.SelectPath(System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="path"></param>
+            <param name="input"></param>
+        </member>
+        <member name="T:Komon.Presentation.Views.IInitializeModule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.Presentation.Views.IInitializeModule.Initialize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.Presentation.Views.IViewDefinition">
+            <summary>
+            Interface that defines a view in the komon wpf application shell
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.Views.IViewDefinition.ViewModel">
+            <summary>
+            The ViewModel for the view
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.Views.IViewDefinition.View">
+            <summary>
+            A user control that holds the ui for the view
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.Views.IViewDefinition.Name">
+            <summary>
+            Name for the view, can be grouped with level1/level2/level3
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.Views.IViewDefinition.Action">
+            <summary>
+            The action the user has to have access to to see the view
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.Views.IViewDefinition.IsAvailable">
+            <summary>
+            This property tells if the view is aviable, if the task is null it counts as its available
+            </summary>
+        </member>
+        <member name="P:Komon.Presentation.Views.IViewDefinition.Index">
+            <summary>
+            Sort order for the view
+            </summary>
+        </member>
+        <member name="T:Komon.View.Interfaces.IKomonMainWindow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.Interfaces.IKomonMainWindow.DataContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Interfaces.IKomonMainWindow.Show">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Interfaces.IMessageBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.Interfaces.IMessageBox.Show(System.String,System.String,Komon.View.Interfaces.MessageBoxButton,Komon.View.Interfaces.MessageBoxImage)">
+            <summary>
+            
+            </summary>
+            <param name="text"></param>
+            <param name="caption"></param>
+            <param name="buttons"></param>
+            <param name="image"></param>
+        </member>
+        <member name="M:Komon.View.Interfaces.IMessageBox.ShowGetResult(System.String,System.String,Komon.View.Interfaces.MessageBoxButton,Komon.View.Interfaces.MessageBoxImage)">
+            <summary>
+            
+            </summary>
+            <param name="text"></param>
+            <param name="caption"></param>
+            <param name="buttons"></param>
+            <param name="image"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Komon.View.Interfaces.MessageBoxResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxResult.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxResult.OK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxResult.Cancel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxResult.Yes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxResult.No">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Interfaces.MessageBoxButton">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxButton.OK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxButton.OKCancel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxButton.YesNoCancel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxButton.YesNo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.Interfaces.MessageBoxImage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.Error">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.Hand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.Question">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.Exclamation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.Warning">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.Information">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Komon.View.Interfaces.MessageBoxImage.Asterisk">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.IKomonCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.IKomonCommand.CanExecute(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Komon.View.IKomonCommand.CanExecuteChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.IKomonCommand.Execute(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="parameter"></param>
+        </member>
+        <member name="T:Komon.View.IViewProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.IViewProvider.MainWindow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.IViewProvider.CreateMessageBox">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.IViewProvider.CreateCommand(System.Action,System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.IViewProvider.CreateCommand(System.Func{System.Threading.Tasks.Task},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.IViewProvider.CreateCommand``1(System.Action{``0},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="a"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.IViewProvider.CreateCommand``1(System.Func{``0,System.Threading.Tasks.Task},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="a"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.IViewProvider.ExecuteOnDispatcher(Komon.View.Interfaces.IKomonMainWindow,System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="win"></param>
+            <param name="a"></param>
+        </member>
+        <member name="M:Komon.View.IViewProvider.ExecuteOnDispatcherAsync(Komon.View.Interfaces.IKomonMainWindow,System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="win"></param>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.IViewProvider.SaveItemToStorage``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:Komon.View.IViewProvider.GetItemFromStorage``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.IViewProvider.ShowChildWindow(Komon.View.Interfaces.IKomonMainWindow,System.Object,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="window"></param>
+            <param name="content"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:Komon.View.IViewProvider.RestartApplication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Komon.View.ViewFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.ViewFactory.Provider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.ViewFactory.MainWindow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Komon.View.ViewFactory.MessageBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.View.ViewFactory.CreateCommand(System.Action,System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="handler"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.ViewFactory.CreateCommandWithArgument``1(System.Action{``0},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="handler"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.ViewFactory.CreateAsyncCommand(System.Func{System.Threading.Tasks.Task},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="handler"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.ViewFactory.CreateAsyncCommandWithArgument``1(System.Func{``0,System.Threading.Tasks.Task},System.String,System.Action{System.Exception},System.Action)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="handler"></param>
+            <param name="name"></param>
+            <param name="onError"></param>
+            <param name="onDone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Komon.View.ViewFactory.ExecuteOnDispatcher(System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:Komon.View.ViewFactory.ExecuteOnDispatcherAsync(System.Action)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:Komon.View.ViewFactory.ShowChildWindow(System.Object,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="content"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="T:Komon.KomonPresentation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Komon.KomonPresentation.UpdateStatusMessage(System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Komon.KomonPresentation.UpdateStatusMessage(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Komon.KomonPresentation.SelectView(System.String,System.Object)">
+            <summary>
+            Changes the view that is visible
+            </summary>
+            <param name="path">Path to the view that should be activated, "Configuration/Parameters"</param>
+            <param name="input">An object that could be used in the views viewmodel, OnViewActivation method</param>
+        </member>
+    </members>
+</doc>
